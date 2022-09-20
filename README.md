@@ -2,6 +2,12 @@
 
 In this project, you are tasked with working on an existing application. A significant part of the challenge will be to familiarise yourself with the codebase you've inherited, as you work to **improve and extend** it.
 
+# Treello link 
+
+https://trello.com/b/w0xoTYE5/acebook-ovo
+
+Just a placeholder text 
+
 ## Videos
 
 These videos complement the docs below.
