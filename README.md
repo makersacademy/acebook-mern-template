@@ -6,6 +6,8 @@ In this project, you are tasked with working on an existing application. A signi
 
 https://trello.com/b/w0xoTYE5/acebook-ovo
 
+Just a placeholder text 
+
 ## Videos
 
 These videos complement the docs below.
