@@ -24,7 +24,7 @@ const tokenChecker = (req, res, next) => {
   const authHeader = req.get("Authorization")
 
   if(authHeader) {
-    token = authHeader.slice(7)
+    token = authHeader.slice(7) // Remove 'bearer' and return the actual token
   }
 
   JWT.verify(token, process.env.JWT_SECRET, (err, payload) => {
