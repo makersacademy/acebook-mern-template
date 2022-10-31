@@ -78,7 +78,7 @@ describe("/posts", () => {
   })
 
   describe("GET, when token is present", () => {
-    test("returns every post in the collection", async () => {
+    test("returns every post in the collection in reverse", async () => {
       let post1 = new Post({message: "howdy!"});
       let post2 = new Post({message: "hola!"});
       await post1.save();
@@ -88,7 +88,7 @@ describe("/posts", () => {
         .set("Authorization", `Bearer ${token}`)
         .send({token: token});
       let messages = response.body.posts.map((post) => ( post.message ));
-      expect(messages).toEqual(["howdy!", "hola!"]);
+      expect(messages).toEqual(["hola!", "howdy!"]);
     })
 
     test("the response code is 200", async () => {
