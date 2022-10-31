@@ -1,0 +1,69 @@
+html {
+  background:#Bde0fe;
+}
+body {
+  background: white;
+  width: 500px;
+  height: 275px;
+  margin: auto;
+  margin-top: 20px;
+  padding: 20px;
+  border-radius: 10px;
+  vertical-align: middle;
+  text-align: center;
+  position:relative; left:0px; top:200px;
+  font-family: 'gill sans';
+  font-size: 25px;
+}
+
+#submit {
+  background: #Ffc8dd;
+  border-radius: 4px;
+  width: 30%;
+  padding: 10px 8px;
+  border: 1px solid #444;
+  font-size: 20px;
+  transition-duration: 0.4s;
+  cursor: pointer;
+  position:relative; left:0px; top:20px;
+  font-family: 'gill sans';
+}
+
+#submit:hover {
+  color: white;
+  background: #Cdb4db;
+}
+
+input[type=text] {
+  width: 30%;
+  background: #fefefe;
+  border-radius: 4px;
+  padding: 10px 8px;
+  border: 1px solid #444;
+  font-size: 20px;
+  font-family: 'gill sans';
+}
+
+input[type=password] {
+  width: 30%;
+  background: #fefefe;
+  border-radius: 4px;
+  padding: 10px 8px;
+  border: 1px solid #444;
+  font-size: 20px;
+  position:relative; left:0px; top:10px;
+  font-family: 'gill sans';
+}
+
+.footer {
+  position:fixed;
+  bottom:0;
+  left:0;
+  width:100%;
+  height: 62px;
+  background-color: #Ffc8dd;
+  font-family: 'gill sans';
+  color: black;
+  text-align: center;
+  font-size: 18px;
+}
