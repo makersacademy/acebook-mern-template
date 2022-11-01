@@ -3,6 +3,7 @@ import "./signUpForm.css";
 
 const SignUpForm = ({ navigate }) => {
 
+  const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
@@ -14,7 +15,7 @@ const SignUpForm = ({ navigate }) => {
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({ email: email, password: password })
+      body: JSON.stringify({ email: email, name: name, password: password })
     })
       .then(response => {
         if(response.status === 201) {
@@ -37,6 +38,8 @@ const SignUpForm = ({ navigate }) => {
     return (
       <form onSubmit={handleSubmit}>
         <p>Sign up to Acebook</p>
+        <input placeholder="Name" id="name" type='text' value={ name } onChange={handleEmailChange} />
+          <br />
           <input placeholder="Email" id="email" type='text' value={ email } onChange={handleEmailChange} />
           <br />
           <input placeholder="Password" id="password" type='password' value={ password } onChange={handlePasswordChange} />
