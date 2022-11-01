@@ -1,5 +1,5 @@
-describe ("Making a post", () => {
-  it ("shows posts", () => {
+describe ("Timeline", () => {
+  it ("shows posts in reverse chronological order", () => {
 //sign up
     cy.visit("/signup");
     cy.get("#email").type("someone@example.com");
@@ -17,8 +17,10 @@ describe ("Making a post", () => {
   cy.contains("New post").click();
   cy.get("#new-post-form").find('[type="text"]').type("Hello, world!");
   cy.get("#new-post-form").submit();
-//view the post after
-  cy.get(".posts").should("contain", "Hello, world!")
+  cy.contains("New post").click();
+  cy.get("#new-post-form").find('[type="text"]').type("Second post, should appear first");
+  cy.get("#new-post-form").submit();
+  cy.get("li").first().should("have.text", "Second post, should appear first")
 });
 });
  
