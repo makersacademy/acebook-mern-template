@@ -14,14 +14,25 @@ describe("User model", () => {
     const user = new User({
       email: "someone@example.com",
       password: "password",
+      username: "Ben Smith"
     });
     expect(user.email).toEqual("someone@example.com");
+  });
+
+  it("has an name", () => {
+    const user = new User({
+      email: "someone@example.com",
+      password: "password",
+      username: "Ben Smith"
+    });
+    expect(user.username).toEqual("Ben Smith");
   });
 
   it("has a password", () => {
     const user = new User({
       email: "someone@example.com",
       password: "password",
+      username: "Ben Smith"
     });
     expect(user.password).toEqual("password");
   });
@@ -38,6 +49,7 @@ describe("User model", () => {
     const user = new User({
       email: "someone@example.com",
       password: "password",
+      username: "Ben Smith"
     });
 
     user.save((err) => {
@@ -49,9 +61,19 @@ describe("User model", () => {
         expect(users[0]).toMatchObject({
           email: "someone@example.com",
           password: "password",
+          username: "Ben Smith"
         });
         done();
       });
     });
   });
+
+  // it("", () => {
+  //   const user = new User({
+  //     email: "someone@example.com",
+  //     password: "password",
+  //     username: 12
+  //   });
+  //   expect(user.username).toEqual(1234);
+  // });
 });
