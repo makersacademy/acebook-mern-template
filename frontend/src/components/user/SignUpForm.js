@@ -36,9 +36,16 @@ const SignUpForm = ({ navigate }) => {
 
     return (
       <form onSubmit={handleSubmit}>
+        <p>Sign up to Acebook</p>
           <input placeholder="Email" id="email" type='text' value={ email } onChange={handleEmailChange} />
+          <br />
           <input placeholder="Password" id="password" type='password' value={ password } onChange={handlePasswordChange} />
-        <input id='test' type="submit" value="Submit" />
+          <br />
+          <input id='submit' type="submit" value="Submit" />
+          <br />
+          <div class="footer">
+           <p>Ⓒ The Incredibles</p>
+          </div>
       </form>
     );
 
