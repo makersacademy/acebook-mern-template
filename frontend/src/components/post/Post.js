@@ -1,8 +1,9 @@
 import React from 'react';
+import './Post.css';
 
 const Post = ({post}) => {
   return(
-    <article data-cy="post" key={ post._id }>{ post.message }</article>
+    <article id='singlePost' data-cy="post" key={ post._id }>{ post.message }</article>
   )
 }
 
