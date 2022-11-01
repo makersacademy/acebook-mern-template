@@ -38,7 +38,7 @@ const SignUpForm = ({ navigate }) => {
       <form onSubmit={handleSubmit}>
           <input placeholder="Email" id="email" type='text' value={ email } onChange={handleEmailChange} />
           <input placeholder="Password" id="password" type='password' value={ password } onChange={handlePasswordChange} />
-        <input id='test' type="submit" value="Submit" />
+        <input id='sumbit' type="submit" value="Submit" />
       </form>
     );
 
