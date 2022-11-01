@@ -8,18 +8,18 @@ describe("/users", () => {
     await User.deleteMany({});
   });
 
-  describe("POST, when email and password are provided", () => {
+  describe("POST, when email, username & password are provided", () => {
     test("the response code is 201", async () => {
       let response = await request(app)
         .post("/users")
-        .send({email: "poppy@email.com", password: "1234"})
+        .send({email: "poppy@email.com", password: "1234", username: "Ben Smith"})
       expect(response.statusCode).toBe(201)
     })
 
     test("a user is created", async () => {
       await request(app)
         .post("/users")
-        .send({email: "scarlett@email.com", password: "1234"})
+        .send({email: "scarlett@email.com", password: "1234", username: "Ben Smith"})
       let users = await User.find()
       let newUser = users[users.length - 1]
       expect(newUser.email).toEqual("scarlett@email.com")
@@ -55,6 +55,23 @@ describe("/users", () => {
       await request(app)
         .post("/users")
         .send({password: "1234"})
+      let users = await User.find()
+      expect(users.length).toEqual(0)
+    });
+  })
+
+  describe("POST, when username is missing", () => {
+    test("response code is 400", async () => {
+      let response = await request(app)
+        .post("/users")
+        .send({username: "Ben Smith"})
+      expect(response.statusCode).toBe(400)
+    });
+
+    test("does not create a username", async () => {
+      await request(app)
+        .post("/users")
+        .send({username: "Ben Smith"})
       let users = await User.find()
       expect(users.length).toEqual(0)
     });
