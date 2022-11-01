@@ -34,7 +34,6 @@ const SignUpForm = ({ navigate }) => {
     setPassword(event.target.value)
   }
 
-
     return (
       <form onSubmit={handleSubmit}>
         <p>Sign up to Acebook</p>
