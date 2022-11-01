@@ -1,0 +1,51 @@
+
+html {
+background:#fbe3e8
+}
+
+body {
+background: #Ffc8dd;
+height: 150px;
+width: 600px;
+margin: auto;
+margin-top: 450px;
+padding: 20px;
+border-radius: 50px;
+}
+
+/* form {
+  height: auto;
+  position: top
+  top:5000%;
+} */
+
+#email {
+width: 80%;
+margin-top: 15px;
+margin-left: 20px;
+background: #Bde0fe;
+border-radius: 12px;
+padding: 10px 8px;
+border: 1px solid #444;
+font-size: 20px;
+}
+
+#password {
+  width: 80%;
+  background: #Bde0fe;
+  margin-top: 30px;
+  margin-left: 20px;
+  margin-right: 20px;
+  border-radius: 12px;
+  padding: 10px 8px;
+  border: 1px solid #444;
+  font-size: 20px;
+  }
+
+#test {
+  /* width:20000000%;
+  height: auto; */
+  margin-top: 45000px;
+  font-size: 1800px;
+  cursor: pointer;
+}
