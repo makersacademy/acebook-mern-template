@@ -35,6 +35,17 @@
     position:relative; left:0px; top:10px;
     font-family: 'gill sans';
     }
+
+    #name {
+      width: 30%;
+      background: #fefefe;
+      border-radius: 4px;
+      padding: 10px 8px;
+      border: 1px solid #444;
+      font-size: 20px;
+      position:relative; left:0px; top:10px;
+      font-family: 'gill sans';
+      }
   
   #submit {
     background: #Ffc8dd;
