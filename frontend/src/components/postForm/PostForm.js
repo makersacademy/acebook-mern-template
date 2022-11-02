@@ -29,7 +29,7 @@ export default function PostForm () {
         <input
           type="text"
           className="text-box"
-          onChange={(event) => setMessage(event.title.value)}
+          onChange={(event) => setMessage(event.type.value)}
           value={message}
           />
         <button>Add</button>
