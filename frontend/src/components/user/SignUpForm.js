@@ -53,5 +53,4 @@ const SignUpForm = ({ navigate }) => {
 
     
 }
-
 export default SignUpForm;
