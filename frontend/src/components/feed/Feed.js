@@ -4,9 +4,10 @@ import Post from '../post/Post'
 const Feed = ({ navigate }) => {
   const [posts, setPosts] = useState([]);
   const [token, setToken] = useState(window.localStorage.getItem("token"));
-
+  console.log(token)
   useEffect(() => {
     if(token) {
+      console.log('fetch request now:')
       fetch("/posts", {
         headers: {
           'Authorization': `Bearer ${token}`
