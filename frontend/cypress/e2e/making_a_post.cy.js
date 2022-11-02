@@ -9,11 +9,13 @@ describe("making a post", () => {
     cy.get("#email").type("user@email.com");
     cy.get("#password").type("12345678")
     cy.get("#submit").click();
+    cy.clock();
 
     cy.url().should("include", "/posts");
+    cy.tick(660000);
 
     // how do we mock the token timing out
-
+    cy.get("#submit").click();
     cy.url().should("include", "/login");
   });
 
@@ -29,4 +31,4 @@ describe("making a post", () => {
 
     cy.get('.feed').contains("this is a test post").should('have.class', 'first');
   });
-});s
+});
