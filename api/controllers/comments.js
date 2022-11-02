@@ -1,28 +1,13 @@
 const Comment = require('../models/comment');
-const TokenGenerator = require('../models/token_generator');
+const Post = require('../models/post');
 
 const CommentsController = {
-  // return all comments (not sure if needed??)
-  Index: (req, res) => {
-    Comment.find(async (err, comments) => {
-      if (err) {
-        throw err;
-      }
-      const token = await TokenGenerator.jsonwebtoken(req.user_id);
-      res.status(200).json({ comments: comments, token: token });
-    });
+  DisplayComments: async (req, res) => {
+    
   },
-  // create new post
-  Create: (req, res) => {
-    const comment = new Post(req.body);
-    comment.save(async (err) => {
-      if (err) {
-        throw err;
-      }
+  // create new comment
+  CreateComment: async (req, res) => {
 
-      const token = await TokenGenerator.jsonwebtoken(req.user_id);
-      res.status(201).json({ message: 'OK', token: token });
-    });
   },
 };
 
