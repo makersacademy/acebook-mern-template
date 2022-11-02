@@ -18,7 +18,7 @@ describe ("Making a post", () => {
   cy.get("#new-post-form").find('[type="text"]').type("Hello, world!");
   cy.get("#new-post-form").submit();
 //view the post after
-  cy.get(".posts").should("contain", "Hello, world!")
+  cy.get(".posts").should("contain", "Hello, ")
 });
 });
  
