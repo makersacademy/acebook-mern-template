@@ -26,10 +26,6 @@ const SignUpForm = ({ navigate }) => {
       })
   }
 
-  const handleNameChange = (event) => {
-    setName(event.target.value)
-  }
-
   const handleEmailChange = (event) => {
     setEmail(event.target.value)
   }
@@ -57,8 +53,6 @@ const SignUpForm = ({ navigate }) => {
            <p>Ⓒ The Incredibles</p>
           </div>
       </form>
-    );
-
-    
+    );   
 }
 export default SignUpForm;
