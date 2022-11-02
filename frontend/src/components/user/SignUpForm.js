@@ -38,6 +38,10 @@ const SignUpForm = ({ navigate }) => {
     setPassword(event.target.value)
   }
 
+  const handleNameChange = (event) => {
+    setName(event.target.value)
+  }
+
     return (
       <form onSubmit={handleSubmit}>
         <p>Sign up to Acebook</p>
@@ -57,5 +61,4 @@ const SignUpForm = ({ navigate }) => {
 
     
 }
-
 export default SignUpForm;
