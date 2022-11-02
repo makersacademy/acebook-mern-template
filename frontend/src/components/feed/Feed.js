@@ -29,13 +29,23 @@ const Feed = ({ navigate }) => {
   if (token) {
     return (
       <>
-        <h2>Posts</h2>
+        <div id="header_wrapper">
+        <div id="header">
+        <li id="sitename">
+          <a href="">Acebook</a>
+        </li>
         <button onClick={logout}>Logout</button>
+        </div>
+        </div>
+        <div id="wrapper">
+        <h2>Feed</h2>
         <div id="feed" role="feed">
           {posts.map((post) => (
             <Post post={post} key={post._id} />
           ))}
         </div>
+        </div>
+        
       </>
     );
   } else {
