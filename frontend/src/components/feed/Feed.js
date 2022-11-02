@@ -28,6 +28,7 @@ const Feed = ({ navigate }) => {
   }
   
     if(token) {
+      console.log("if token is yes!")
       return(
         <>
           <h2>Posts</h2>
@@ -43,6 +44,7 @@ const Feed = ({ navigate }) => {
       )
     } else {
       navigate('/signin')
+      console.log("esle if no token at end")
     }
 }
 
