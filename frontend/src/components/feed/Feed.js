@@ -42,6 +42,9 @@ const Feed = ({ navigate }) => {
                 <Post post={ post } key={ post._id } /> )
               )}
           </div>
+          <div class="footer">
+           <p>Ⓒ The Incredibles</p>
+          </div>
         </>
       )
     } else {

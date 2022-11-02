@@ -38,13 +38,20 @@ const SignUpForm = ({ navigate }) => {
     setPassword(event.target.value)
   }
 
-
     return (
       <form onSubmit={handleSubmit}>
-          <input placeholder="Name" id="name" type='text' value={ name } onChange={handleNameChange} />
+        <p>Sign up to Acebook</p>
+        <input placeholder="Name" id="name" type='text' value={ name } onChange={handleEmailChange} />
+          <br />
           <input placeholder="Email" id="email" type='text' value={ email } onChange={handleEmailChange} />
+          <br />
           <input placeholder="Password" id="password" type='password' value={ password } onChange={handlePasswordChange} />
-        <input id='test' type="submit" value="Submit" />
+          <br />
+          <input id='submit' type="submit" value="Submit" />
+          <br />
+          <div class="footer">
+           <p>Ⓒ The Incredibles</p>
+          </div>
       </form>
     );
 
