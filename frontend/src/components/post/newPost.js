@@ -1,8 +1,8 @@
 export const NewPost = () => {
   return (
-    <form onSubmit={handleSubmit}>
+    <form onSubmit={handleSubmit} id='new-post-form'>
       <label for='input-message' >Write your message</label>
-      <textarea name="input-message" id="input-message" cols="30" rows="10" placeholder='Write your post here'></textarea>
+      <input type='text' />
       <button type="submit">Send</button>
     </form>
   )
