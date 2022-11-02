@@ -22,7 +22,7 @@ const Feed = ({ navigate }) => {
   }, [])
     
 
-  const logout = () => {
+  const newPost = () => {
     window.localStorage.removeItem("token")
     navigate('/login')
   }
@@ -31,8 +31,8 @@ const Feed = ({ navigate }) => {
       return(
         <>
           <h2>Posts</h2>
-            <button onClick={logout}>
-              Logout
+            <button onClick={newPost}>
+              New post
             </button>
           <div id='feed' role="feed">
               {posts.map(
@@ -42,7 +42,7 @@ const Feed = ({ navigate }) => {
         </>
       )
     } else {
-      navigate('/signin')
+      console.log('Could not create post for some reason')
     }
 }
 
