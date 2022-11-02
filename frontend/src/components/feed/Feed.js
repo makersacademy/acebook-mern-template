@@ -4,6 +4,7 @@ import './Feed.css';
 
 const Feed = ({ navigate }) => {
   const [posts, setPosts] = useState([]);
+  const [message, setMessage] = useState("");
   const [token, setToken] = useState(window.localStorage.getItem("token"));
   // const [message, setMessage] = useState("");
   // const [user, setUser] = useState("");
@@ -24,21 +25,29 @@ const Feed = ({ navigate }) => {
         })
     }
   }, [])
-    
-  // fetch( '/posts', {
-  //   method: 'post',
-  //   headers: {
-  //     'Content-Type': 'application/json',
-  //   },
-  //   body: JSON.stringify({ message: message})
-  // })
-  //   .then(response => {
-  //     if(response.status === 201) {
-  //       navigate('/posts')
-  //     } else {
-  //       navigate('/login')
-  //     }
-  //   })
+
+  const handlePostSubmit = async (event) => {
+    event.preventDefault();
+
+    if(token) fetch('/posts', {
+      method: 'post',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ message: message, user: token})
+    })
+      .then(response => response.json())
+      .then(
+        data => {          
+        window.localStorage.setItem("token", data.token)
+        setToken(window.localStorage.getItem("token"))
+        console.log(data)
+      })
+  }
+  
+  const handleMessageChange = (event) => {
+    setMessage(event.target.value)
+  } 
 
   
   const logout = () => {
@@ -46,30 +55,10 @@ const Feed = ({ navigate }) => {
     navigate('/login')
   }
 
-  const createPost = () => {
-    navigate('/createPost')
-  }
-
-  // const handleMessageChange = (event) => {
-  //   setMessage(event.target.value)
-  // }
-
-  //const handleUserChange = (event) => {
-    //setUser(event.target.value)
-  //}
-
-
     if(token) {
       return(
         <>
           <h2>Posts &#128075;</h2>
-          {/* <textarea placeholder="Message" id="message" type='text' value={ message } onChange={handleMessageChange}></textarea>
-          <br />
-          <input id='messagesubmit' type="submit" value="Submit" />
-          <br /> */}
-            <button onClick={createPost}>
-              Create a new post
-            </button>
 
             <button onClick={logout}>
               Logout

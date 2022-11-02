@@ -15,7 +15,7 @@ const SignUpForm = ({ navigate }) => {
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({ email: email, name: name, password: password })
+      body: JSON.stringify({ name: name, email: email, password: password })
     })
       .then(response => {
         if(response.status === 201) {
@@ -24,6 +24,10 @@ const SignUpForm = ({ navigate }) => {
           navigate('/signup')
         }
       })
+  }
+
+  const handleNameChange = (event) => {
+    setName(event.target.value)
   }
 
   const handleEmailChange = (event) => {
