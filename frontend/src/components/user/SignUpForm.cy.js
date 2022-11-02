@@ -2,7 +2,7 @@ import SignUpForm from './SignUpForm'
 const navigate = () => {}
 
 describe("Signing up", () => {
-  it("calls the /users endpoint", () => {
+  xit("calls the /users endpoint", () => {
     cy.mount(<SignUpForm navigate={navigate}/>)
 
     cy.intercept('POST', '/users', { message: "OK" }).as("signUpRequest")

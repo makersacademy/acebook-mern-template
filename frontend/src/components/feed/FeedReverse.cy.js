@@ -10,17 +10,16 @@ describe("Feed", () => {
         req.reply({
           statusCode: 200,
           body: { posts: [
-            {_id: 1, message: "Hello, world"},
-            {_id: 2, message: "Hello again, world"}
+            {_id: 1, message: "Earliest post"},
+            {_id: 2, message: "Most recent post"}
           ] }
         })
       }
     ).as("getPosts")
     
     cy.wait("@getPosts").then(() =>{
-      cy.get('[data-cy="post"]')
-      .should('contain.text', "Hello, world")
-      .and('contain.text', "Hello again, world")
+      cy.get('article').first()
+      .should('contain.text', "Most recent post")
     })
   })
 })
