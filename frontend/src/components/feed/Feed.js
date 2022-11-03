@@ -56,38 +56,38 @@ const Feed = ({ navigate }) => {
     navigate('/login')
   }
   
-    if(token) {
-      return(
-        <> <body className="posttitle">
-          <h1>Posts &#128075;</h1>
+  if(token) {
+    return(
+      <> <body className="posttitle">
+        <h1>Posts &#128075;</h1>
+        </body>
+        <form onSubmit={handlePostSubmit}>
+        <body className="createpost">
+          <h3>Create a New Post</h3>
+          <textarea placeholder="Share what you think" type="text" value={ message } onChange={handleMessageChange}>
+          </textarea>
+          <input id='submitPost' type="submit" value="Post" />
           </body>
-          <form onSubmit={handlePostSubmit}>
-          <body className="createpost">
-            <h3>Create a New Post</h3>
-            <textarea placeholder="Share what you think" type="text" value={ message } onChange={handleMessageChange}>
-            </textarea>
-            <input id='submitPost' type="submit" value="Post" />
-            </body>
-          </form>
-            <button onClick={logout}>
-              Logout
-            </button>
-            <body className="postbody">
-          <div id='feed' role="feed">
-              {posts.map(
-                (post) => ( 
-                <Post post={ post } key={ post._id }/> )
-              )}
-          </div>
-          
-          <div className="footer">
-           <p>Ⓒ The Incredibles</p>
-          </div>
-        </>
-      )
-    } else {
-      navigate('/signin')
-    }
+        </form>
+          <button onClick={logout}>
+            Logout
+          </button>
+          <body className="postbody">
+        <div id='feed' role="feed">
+            {posts.map(
+              (post) => ( 
+              <Post post={ post } key={ post._id }/> )
+            )}
+        </div>
+        </body>
+        <div class="footer">
+         <p>Ⓒ The Incredibles</p>
+        </div>
+      </>
+    )
+  } else {
+    navigate('/signin')
+  }
 }
 
 export default Feed;
