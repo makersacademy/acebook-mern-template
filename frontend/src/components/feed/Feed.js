@@ -20,13 +20,33 @@ const Feed = ({ navigate }) => {
           setPosts(data.posts);
         })
     }
-  }, [])
+  }, [token])
     
   const handleSubmit = async (event) => {
-    event.preventDefault();}
+    event.preventDefault();
+    
+    let response = await fetch( '/posts', {
+      method: 'post',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${token}`
+      },
+      body: JSON.stringify({ message: post, date: Date.now()})
+    });
+
+    if(response.status === 201) {
+      console.log("yay")
+      navigate('/posts')
+    } else {
+      console.log("oop")
+      // error message goes here
+      navigate('/posts');
+    }
+  }
 
   const handlePostChange = (event) => {
-    setPost(event.target.value)}
+    setPost(event.target.value)
+  }
 
   const logout = () => {
     window.localStorage.removeItem("token")
