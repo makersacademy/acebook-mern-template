@@ -33,7 +33,7 @@ const Feed = ({ navigate }) => {
         <div id="header_wrapper">
           <div id="header">
             <li id="sitename">
-              <a href="">Acebook</a>
+              <a href="/signup">Acebook</a>
             </li>
             <button onClick={logout}>Logout</button>
           </div>
