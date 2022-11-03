@@ -1,7 +1,6 @@
 var mongoose = require('mongoose');
 const Comment = require('../../models/comment');
 
-
 require('../mongodb_helper');
 var Post = require('../../models/post');
 
@@ -41,21 +40,53 @@ describe('Post model', () => {
   });
 
   it('can add a post comment ', (done) => {
-    var post = new Post({ message: 'some message', comments: 'Some comment' });
-    expect(post.message).toEqual('some message');
-    expect(post.comments).toEqual('Some comment');
-    done();
-  });
-
-  it('can add a post comment ', (done) => {
-    var comment = new Comment({
-      commentText: 'some comment 2',
-      username: 'Dave60',
+    var post = new Post({
+      message: 'some message',
+      comments: { text: 'Some comment' },
     });
-    var post = new Post({ message: 'some message', comments: comment });
     expect(post.message).toEqual('some message');
-    expect(comment.commentText).toBe('some comment 2');
+    expect(post.comments[0].text).toEqual('Some comment');
     done();
   });
 
+  it('can save a post with comment', (done) => {
+    var post = new Post({
+      message: 'some message 2',
+      comments: { text: 'Some comment 2' },
+    });
+
+    post.save((err) => {
+      expect(err).toBeNull();
+
+      Post.find((err, posts) => {
+        expect(err).toBeNull();
+
+        expect(posts[0]).toMatchObject({ message: 'some message 2' });
+        expect(posts[0].comments[0]).toMatchObject({
+          text: 'Some comment 2',
+        });
+        done();
+      });
+    });
+  });
+
+  it('can save a post and add comment later', (done) => {
+    var post = new Post({
+      message: 'some message 2',
+      comments: { text: 'Some comment 2' },
+    });
+    console.log(post);
+    post.save((err) => {
+      expect(err).toBeNull();
+      Post.find((err, posts) => {
+        expect(err).toBeNull();
+
+        expect(posts[0]).toMatchObject({ message: 'some message ' });
+        expect(posts[0].comments[0]).toMatchObject({
+          text: 'Some comment 2',
+        });
+        done();
+      });
+    });
+  });
 });
