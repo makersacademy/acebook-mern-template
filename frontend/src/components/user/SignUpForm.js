@@ -1,26 +1,31 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
 
 const SignUpForm = ({ navigate }) => {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [firstName, setFirstName] = useState("")
+  const [lastName, setLastName] = useState("")
 
   const handleSubmit = async (event) => {
     event.preventDefault();
 
-    fetch('/users', {
-      method: 'post',
+    fetch("/users", {
+      method: "post",
       headers: {
-        'Content-Type': 'application/json',
+        "Content-Type": "application/json",
       },
-      body: JSON.stringify({ email: email, password: password }),
+      body: JSON.stringify({ email: email, password: password,
+        firstName: firstName, lastName: lastName}),
     }).then((response) => {
       if (response.status === 201) {
-        navigate('/login');
+        navigate("/login");
       } else {
-        navigate('/signup');
+        navigate("/signup");
       }
     });
   };
+
+  // Handle value changes
 
   const handleEmailChange = (event) => {
     setEmail(event.target.value);
@@ -29,6 +34,14 @@ const SignUpForm = ({ navigate }) => {
   const handlePasswordChange = (event) => {
     setPassword(event.target.value);
   };
+
+  const handleFirstNameChange = (event) => {
+    setFirstName(event.target.value);
+  }
+
+  const handleLastNameChange = (event) => {
+    setLastName(event.target.value);
+  }
 
   return (
     <div id="header_wrapper">
@@ -50,6 +63,20 @@ const SignUpForm = ({ navigate }) => {
             type="password"
             value={password}
             onChange={handlePasswordChange}
+          />
+          <input
+            placeholder="First Name"
+            id="first-name"
+            type="text"
+            value={firstName}
+            onChange={handleFirstNameChange}
+          />
+          <input
+            placeholder="Last Name"
+            id="last-name"
+            type="text"
+            value={lastName}
+            onChange={handleLastNameChange}
           />
           <input id="submit" type="submit" value="Submit" />
         </form>
