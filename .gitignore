@@ -63,3 +63,5 @@ typings/
 # cypress.io
 cypress/screenshots
 cypress/videos
+frontend/cypress/videos
+frontend/cypress/screenshots
