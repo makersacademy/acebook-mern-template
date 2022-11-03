@@ -40,6 +40,7 @@ const SignUpForm = ({ navigate }) => {
 
     return (
       <form onSubmit={handleSubmit}>
+        <body className="signuploginbody">
         <p>Sign up to Acebook</p>
         <input placeholder="Name" id="name" type='text' value={ name } onChange={handleNameChange} />
           <br />
@@ -49,6 +50,7 @@ const SignUpForm = ({ navigate }) => {
           <br />
           <input id='submit' type="submit" value="Submit" />
           <br />
+          </body>
           <div class="footer">
            <p>Ⓒ The Incredibles</p>
           </div>
