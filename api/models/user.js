@@ -1,3 +1,4 @@
+const { ObjectId } = require("mongodb");
 const mongoose = require("mongoose");
 
 const defaultImage = 'default_image.jpg';
@@ -8,8 +9,8 @@ const UserSchema = new mongoose.Schema({
   firstName: { type: String, required: true },
   lastName: { type: String, required: true },
   picture: { type: String, default: defaultImage },
-  // friends: [{ type: Schema.Types.ObjectId, ref: 'Users' }],
-  // posts: [{ type: Schema.Types.ObjectId, ref: 'Posts' }],
+  friends: { type: [ObjectId], ref: 'User' },
+  posts: { type: [ObjectId], ref: 'Post'}
 }, { timestamps: true });
 
 const User = mongoose.model("User", UserSchema);

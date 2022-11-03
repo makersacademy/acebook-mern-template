@@ -15,7 +15,7 @@ const SignUpForm = ({ navigate }) => {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({ email: email, password: password,
-        firstName: firstName, lastName: lastName}),
+        firstName: firstName, lastName: lastName }),
     }).then((response) => {
       if (response.status === 201) {
         navigate("/login");
