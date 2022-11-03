@@ -2,9 +2,9 @@ import Feed from './Feed'
 const navigate = () => {}
 
 describe("Feed", () => {
-  xit("Calls the /posts endpoint and lists all the posts", () => {
+  it("Calls the /posts endpoint and lists all the posts", () => {
     window.localStorage.setItem("token", "fakeToken")
-    cy.mount(<Feed navigate={navigate}/>)
+
     
     cy.intercept('GET', '/posts', (req) => {
         req.reply({
@@ -16,9 +16,11 @@ describe("Feed", () => {
         })
       }
     ).as("getPosts")
+
+    cy.mount(<Feed navigate={navigate}/>)
     
     cy.wait("@getPosts").then(() =>{
-      cy.get('article').first()
+      cy.get('[data-cy="post"]').first()
       .should('contain.text', "Most recent post")
     })
   })
