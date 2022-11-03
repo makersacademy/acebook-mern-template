@@ -16,3 +16,8 @@ html {
   text-align: center;
   font-size: 18px;
 }
+
+.Navbar {
+  height: 62px;
+  background-color: white;
+}
