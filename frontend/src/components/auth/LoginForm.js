@@ -35,15 +35,18 @@ const LogInForm = ({ navigate }) => {
     setPassword(event.target.value)
   }
 
+  document.body.style = 'salmon';
 
     return (
       <form onSubmit={handleSubmit}>
-        <p>Login to Acebook</p>
+        <body className="loginbody">
+        <h3>Login to Acebook &#128075;</h3>
         <input placeholder='Email' id="email" type='text' value={ email } onChange={handleEmailChange} />
         <br />
         <input placeholder='Password' id="password" type='password' value={ password } onChange={handlePasswordChange} />
         <br />
         <input role='submit-button' id='submit' type="submit" value="Submit" />
+        </body>
         <div class="footer">
          <p>Ⓒ The Incredibles</p>
       </div>

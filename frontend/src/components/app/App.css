@@ -3,17 +3,4 @@ html {
   vertical-align: middle;
 }
 
-body {
-  background: white;
-  width: 500px;
-  height: 275px;
-  margin: auto;
-  margin-top: 20px;
-  padding: 20px;
-  border-radius: 10px;
-  vertical-align: middle;
-  text-align: center;
-  position:relative; left:0px; top:200px;
-  font-family: 'gill sans';
-  font-size: 25px;
-}
+
