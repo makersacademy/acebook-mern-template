@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 const PostForm = ({ navigate }) => {
   const [message, setMessage] = useState("");
@@ -6,7 +6,7 @@ const PostForm = ({ navigate }) => {
  
   useEffect(() => {
     if(token) {
-      fetch("/createpost", {
+      fetch("/posts", {
         headers: {
           'Authorization': `Bearer ${token}`
         }
@@ -18,19 +18,38 @@ const PostForm = ({ navigate }) => {
 
         })
     }
-  }, [])
-  
+  })
+
+  const handlePostSubmit = async (event) => {
+    event.preventDefault();
+
+    if(token) fetch('/posts', {
+      method: 'post',
+      headers: {
+        'Authorization': `Bearer ${token}`,
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({token: token, message: message})
+    })
+      .then(response => response.json())
+      .then(
+        data => {          
+        window.localStorage.setItem("token", data.token)
+        setToken(window.localStorage.getItem("token"))
+        console.log(data)
+      })
+  }
+
   const handleMessageChange = (event) => {
     setMessage(event.target.value)
   }
 
-
     return (
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handlePostSubmit}>
         <p>Create a new post</p>
         <input placeholder='Message' id="message" type='text' value={ message } onChange={handleMessageChange} />
         <br />
-        <input role='submit-button' id='submit' type="submit" value="Submit" />
+        <input id='submit' type="submit" value="Submit" />
         <div class="footer">
          <p>Ⓒ The Incredibles</p>
       </div>

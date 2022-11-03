@@ -29,15 +29,14 @@ const Feed = ({ navigate }) => {
     if(token) fetch('/posts', {
       method: 'post',
       headers: {
+        'Authorization': `Bearer ${token}`,
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({ message: message, user: token})
+      body: JSON.stringify({token: token, message: message })
     })
       .then(response => response.json())
       .then(
         data => {          
-        window.localStorage.setItem("token", data.token)
-        setToken(window.localStorage.getItem("token"))
         console.log(data)
       })
   }
@@ -67,7 +66,7 @@ const Feed = ({ navigate }) => {
           <div id='feed' role="feed">
               {posts.map(
                 (post) => ( 
-                <Post post={ post } key={ post._id } /> )
+                <Post post={ post } key={ post._id }/> )
               )}
           </div>
           <div class="footer">

@@ -2,7 +2,7 @@ const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
 const PostSchema = new mongoose.Schema({
-  message: String,
+  message: { type: String }, 
   date: {
     type: Date,
     default: Date.now
