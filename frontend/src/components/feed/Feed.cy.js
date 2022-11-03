@@ -1,4 +1,4 @@
-import Feed from './Feed'
+import Feed from './Feed';
 const navigate = () => {}
 
 describe("Feed", () => {
@@ -17,7 +17,7 @@ describe("Feed", () => {
       }
     ).as("getPosts")
     
-    cy.wait("@getPosts").then(() =>{
+    cy.wait("@getPosts").then(interception =>{
       cy.get('[data-cy="post"]')
       .should('contain.text', "Hello, world")
       .and('contain.text', "Hello again, world")
