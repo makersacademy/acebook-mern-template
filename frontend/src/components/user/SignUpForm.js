@@ -1,10 +1,11 @@
 import React, { useState } from "react";
+import "./SignUpForm.css";
 
 const SignUpForm = ({ navigate }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [firstName, setFirstName] = useState("")
-  const [lastName, setLastName] = useState("")
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -14,8 +15,12 @@ const SignUpForm = ({ navigate }) => {
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({ email: email, password: password,
-        firstName: firstName, lastName: lastName }),
+      body: JSON.stringify({
+        email: email,
+        password: password,
+        firstName: firstName,
+        lastName: lastName,
+      }),
     }).then((response) => {
       if (response.status === 201) {
         navigate("/login");
@@ -25,63 +30,50 @@ const SignUpForm = ({ navigate }) => {
     });
   };
 
-  // Handle value changes
-
-  const handleEmailChange = (event) => {
-    setEmail(event.target.value);
-  };
-
-  const handlePasswordChange = (event) => {
-    setPassword(event.target.value);
-  };
-
-  const handleFirstNameChange = (event) => {
-    setFirstName(event.target.value);
-  }
-
-  const handleLastNameChange = (event) => {
-    setLastName(event.target.value);
-  }
-
   return (
-    <div id="header_wrapper">
-      <div id="header">
-        <li id="sitename">
-          <a href="">Acebook</a>
-        </li>
+    <>
+      <div id="header_wrapper">
+        <div id="header">
+          <li id="sitename">
+            <a href="/login">Acebook</a>
+          </li>
+        </div>
+      </div>
+
+      <div className="signup-form-container">
         <form onSubmit={handleSubmit}>
           <input
             placeholder="Email"
             id="email"
             type="text"
             value={email}
-            onChange={handleEmailChange}
+            onChange={(e) => setEmail(e.target.value)}
           />
           <input
             placeholder="Password"
             id="password"
             type="password"
             value={password}
-            onChange={handlePasswordChange}
+            onChange={(e) => setPassword(e.target.value)}
           />
           <input
             placeholder="First Name"
             id="first-name"
             type="text"
             value={firstName}
-            onChange={handleFirstNameChange}
+            onChange={(e) => setFirstName(e.target.value)}
           />
           <input
             placeholder="Last Name"
             id="last-name"
             type="text"
             value={lastName}
-            onChange={handleLastNameChange}
+            onChange={(e) => setLastName(e.target.value)}
           />
           <input id="submit" type="submit" value="Submit" />
         </form>
       </div>
-    </div>
+    </>
   );
 };
 
