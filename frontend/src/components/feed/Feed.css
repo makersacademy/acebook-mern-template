@@ -1,26 +1,24 @@
 
 .posttitle {
-  background: white;
   width: 500px;
   height: 40px;
   margin: auto;
   padding: 10px;
-  border-radius: 5px;
   vertical-align: middle;
   text-align: center;
-  position:relative; left:0px; top:20px;
+  position:relative; left:0px; top:30px;
 }
 
 .createpost {
   background: white;
-  width: 500px;
-  height: 100px;
+  width: 400px;
+  height: 120px;
   margin: auto;
-  padding: 10px;
+  padding: 5px;
   border-radius: 5px;
   vertical-align: middle;
   text-align: center;
-  position:relative; left:0px; top:50px;
+  position:relative; left:0px; top:70px;
 }
 
 button {

@@ -53,11 +53,11 @@ const Feed = ({ navigate }) => {
     if(token) {
       return(
         <> <body className="posttitle">
-          <h2>Posts &#128075;</h2>
+          <h1>Posts &#128075;</h1>
           </body>
           <form onSubmit={handlePostSubmit}>
           <body className="createpost">
-            <p>Make Post</p>
+            <h3>Create a New Post</h3>
             <textarea placeholder="Share what you think" type="text" value={ message } onChange={handleMessageChange}>
             </textarea>
             <input id='submitPost' type="submit" value="Post" />
