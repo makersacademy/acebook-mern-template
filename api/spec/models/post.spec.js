@@ -54,7 +54,7 @@ describe('Post model', () => {
     });
     var post = new Post({ message: 'some message', comments: comment });
     expect(post.message).toEqual('some message');
-    expect(post.comments).toEqual('some comment 2');
+    expect(post.commentText).toBe();
     done();
   });
 
