@@ -1,20 +1,47 @@
 
-/* body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-} */
+.posttitle {
+  background: white;
+  width: 500px;
+  height: 40px;
+  margin: auto;
+  padding: 10px;
+  border-radius: 5px;
+  vertical-align: middle;
+  text-align: center;
+  position:relative; left:0px; top:20px;
+}
+
+.createpost {
+  background: white;
+  width: 500px;
+  height: 100px;
+  margin: auto;
+  padding: 10px;
+  border-radius: 5px;
+  vertical-align: middle;
+  text-align: center;
+  position:relative; left:0px; top:50px;
+}
+
+button {
+  margin-left: 0px
+}
+.postbody {
+
+  width: 500px;
+  height: 50px;
+  margin: auto;
+  padding: 10px;
+  border-radius: 5px;
+  vertical-align: middle;
+  text-align: center;
+  position:relative; left:0px; top:300px;
+}
+
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
-}
-
-h2 {
-  text-align: center;
 }
 
 .footer {

@@ -52,23 +52,28 @@ const Feed = ({ navigate }) => {
   
     if(token) {
       return(
-        <>
+        <> <body className="posttitle">
           <h2>Posts &#128075;</h2>
+          </body>
           <form onSubmit={handlePostSubmit}>
+          <body className="createpost">
             <p>Make Post</p>
             <textarea placeholder="Share what you think" type="text" value={ message } onChange={handleMessageChange}>
             </textarea>
             <input id='submitPost' type="submit" value="Post" />
+            </body>
           </form>
             <button onClick={logout}>
               Logout
             </button>
+            <body className="postbody">
           <div id='feed' role="feed">
               {posts.map(
                 (post) => ( 
                 <Post post={ post } key={ post._id }/> )
               )}
           </div>
+          </body>
           <div class="footer">
            <p>Ⓒ The Incredibles</p>
           </div>
