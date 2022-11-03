@@ -35,8 +35,7 @@ const SignUpForm = ({ navigate }) => {
         <li id="sitename">
           <a href="/login">Acebook</a>
         </li>
-      </div>
-      <form onSubmit={handleSubmit}>
+        <form onSubmit={handleSubmit}>
         <input
           placeholder="Email"
           id="email"
@@ -67,6 +66,7 @@ const SignUpForm = ({ navigate }) => {
         />
         <input id="submit" type="submit" value="Submit" />
       </form>
+      </div>
     </div>
   );
 };
