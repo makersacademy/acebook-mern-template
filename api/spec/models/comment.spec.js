@@ -19,6 +19,11 @@ describe('Comment model', () => {
     expect(comment.commentText).toEqual('some comment');
   });
 
+  it('has a username', () => {
+    var comment = new Comment({ username: 'Dave57' });
+    expect(comment.username).toEqual('Dave57');
+  });
+
   it('can list all comments', (done) => {
     Comment.find((err, comments) => {
       expect(err).toBeNull();
@@ -35,9 +40,25 @@ describe('Comment model', () => {
 
       Comment.find((err, comments) => {
         expect(err).toBeNull();
-        console.log(comments[0]);
-        console.log(comments[0].commentText);
         expect(comments[0].commentText).toEqual('some comment');
+        done();
+      });
+    });
+  });
+
+  it('can save a username and comment', (done) => {
+    var comment = new Comment({
+      commentText: 'some comment 2',
+      username: 'Dave60',
+    });
+
+    comment.save((err) => {
+      expect(err).toBeNull();
+
+      Comment.find((err, comments) => {
+        expect(err).toBeNull();
+        expect(comments[0].commentText).toEqual('some comment 2');
+        expect(comments[0].username).toEqual('Dave60');
         done();
       });
     });
