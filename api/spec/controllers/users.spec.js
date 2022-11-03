@@ -12,14 +12,14 @@ describe("/users", () => {
     test("the response code is 201", async () => {
       let response = await request(app)
         .post("/users")
-        .send({email: "poppy@email.com", password: "1234", username: "Ben Smith"})
+        .send({email: "poppy@email.com", password: "1234", usersName: "Kyle Cook"})
       expect(response.statusCode).toBe(201)
     })
 
     test("a user is created", async () => {
       await request(app)
         .post("/users")
-        .send({email: "scarlett@email.com", password: "1234", username: "Ben Smith"})
+        .send({email: "scarlett@email.com", password: "1234", usersName: "Kyle Cook"})
       let users = await User.find()
       let newUser = users[users.length - 1]
       expect(newUser.email).toEqual("scarlett@email.com")
@@ -64,14 +64,14 @@ describe("/users", () => {
     test("response code is 400", async () => {
       let response = await request(app)
         .post("/users")
-        .send({username: "Ben Smith"})
+        .send({usersName: "Kyle Cook"})
       expect(response.statusCode).toBe(400)
     });
 
     test("does not create a username", async () => {
       await request(app)
         .post("/users")
-        .send({username: "Ben Smith"})
+        .send({usersName: "Kyle Cook"})
       let users = await User.find()
       expect(users.length).toEqual(0)
     });
