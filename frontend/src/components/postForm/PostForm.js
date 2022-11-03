@@ -2,14 +2,18 @@ import { useState } from "react"
 
 export default function PostForm () {
   const [message, setMessage] = useState('')
+  const token = window.localStorage.getItem("token");
 
   const handleSubmit = async (e) => {
     e.preventDefault() // Prevents default action of refreshing the page
+
+    console.log(JSON.stringify(message))
     const response = await fetch('/posts/', {
       method: 'post',
       body: JSON.stringify(message),
       headers: {
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer ' + token
       }
     })
     const json = await response.json()
@@ -29,7 +33,7 @@ export default function PostForm () {
         <input
           type="text"
           className="text-box"
-          onChange={(event) => setMessage(event.type.value)}
+          onChange={(event) => setMessage(event.target.value)}
           value={message}
           />
         <button>Add</button>
