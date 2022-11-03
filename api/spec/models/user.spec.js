@@ -14,7 +14,7 @@ describe("User model", () => {
     const user = new User({
       email: "someone@example.com",
       password: "password",
-      username: "Ben Smith"
+      usersName: "Ben Smith"
     });
     expect(user.email).toEqual("someone@example.com");
   });
@@ -23,16 +23,16 @@ describe("User model", () => {
     const user = new User({
       email: "someone@example.com",
       password: "password",
-      username: "Ben Smith"
+      usersName: "Ben Smith"
     });
-    expect(user.username).toEqual("Ben Smith");
+    expect(user.usersName).toEqual("Ben Smith");
   });
 
   it("has a password", () => {
     const user = new User({
       email: "someone@example.com",
       password: "password",
-      username: "Ben Smith"
+      usersName: "Ben Smith"
     });
     expect(user.password).toEqual("password");
   });
@@ -49,7 +49,7 @@ describe("User model", () => {
     const user = new User({
       email: "someone@example.com",
       password: "password",
-      username: "Ben Smith"
+      usersName: "Ben Smith"
     });
 
     user.save((err) => {
@@ -61,7 +61,7 @@ describe("User model", () => {
         expect(users[0]).toMatchObject({
           email: "someone@example.com",
           password: "password",
-          username: "Ben Smith"
+          usersName: "Ben Smith"
         });
         done();
       });
@@ -72,8 +72,8 @@ describe("User model", () => {
   //   const user = new User({
   //     email: "someone@example.com",
   //     password: "password",
-  //     username: 12
+  //     usersName: 12
   //   });
-  //   expect(user.username).toEqual(1234);
+  //   expect(user.usersName).toEqual(1234);
   // });
 });

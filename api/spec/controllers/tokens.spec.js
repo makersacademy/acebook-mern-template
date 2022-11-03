@@ -5,7 +5,7 @@ const User = require('../../models/user');
 
 describe("/tokens", () => {
   beforeAll( () => {
-    const user = new User({ email: "test@test.com", password: "12345678", username: "Ben Smith" })
+    const user = new User({ email: "test@test.com", password: "12345678", usersName: "Kyle Cook" })
     user.save()
   });
 
