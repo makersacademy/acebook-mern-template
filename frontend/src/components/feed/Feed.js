@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import Post from "../post/Post";
+import PostForm from "../postForm/PostForm";
 
 const Feed = ({ navigate }) => {
   const [posts, setPosts] = useState([]);
@@ -45,6 +46,7 @@ const Feed = ({ navigate }) => {
             ))}
           </div>
         </div>
+        <PostForm />
       </>
     );
   } else {
