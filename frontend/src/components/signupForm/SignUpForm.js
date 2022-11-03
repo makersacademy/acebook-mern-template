@@ -32,7 +32,7 @@ const SignUpForm = ({ navigate }) => {
 
   return (
         <div className="signup-form-container">
-          <form onSubmit={handleSubmit} id="signup" class="form">
+          <form onSubmit={handleSubmit} class='signup-form'>
             <h1 class="form-title">Signup</h1>
             <input
               placeholder="Email"
