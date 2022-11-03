@@ -80,9 +80,6 @@ const Feed = ({ navigate }) => {
             )}
         </div>
         </body>
-        <div class="footer">
-         <p>Ⓒ The Incredibles</p>
-        </div>
       </>
     )
   } else {

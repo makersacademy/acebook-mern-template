@@ -63,16 +63,3 @@
     color: white;
     background: #Cdb4db;
   }
-
-  .footer {
-    position:fixed;
-    bottom:0;
-    left:0;
-    width:100%;
-    height: 62px;
-    background-color: #Ffc8dd;
-    font-family: 'gill sans';
-    color: black;
-    text-align: center;
-    font-size: 18px;
-  }
