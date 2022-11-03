@@ -39,8 +39,8 @@ const LogInForm = ({ navigate }) => {
 
     return (
       <form onSubmit={handleSubmit}>
-        <body className="signuploginbody">
-        <p>Login to Acebook</p>
+        <body className="loginbody">
+        <h3>Login to Acebook &#128075;</h3>
         <input placeholder='Email' id="email" type='text' value={ email } onChange={handleEmailChange} />
         <br />
         <input placeholder='Password' id="password" type='password' value={ password } onChange={handlePasswordChange} />

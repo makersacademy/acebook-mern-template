@@ -1,6 +1,21 @@
+.signupbody {
+  background: white;
+  width: 500px;
+  height: 350px;
+  margin: auto;
+  margin-top: 10px;
+  padding: 20px;
+  border-radius: 10px;
+  vertical-align: middle;
+  text-align: center;
+  position:relative; left:0px; top:200px;
+  font-family: 'gill sans';
+  font-size: 25px;
+}
 #email {
-    width: 30%;
+    width: 50%;
     background: #fefefe;
+    margin-top: 20px;
     border-radius: 4px;
     padding: 10px 8px;
     border: 1px solid #444;
@@ -9,7 +24,7 @@
   }
   
   #password {
-    width: 30%;
+    width: 50%;
     background: #fefefe;
     border-radius: 4px;
     padding: 10px 8px;
@@ -19,8 +34,8 @@
     font-family: 'gill sans';
     }
 
-    #name {
-      width: 30%;
+   #name {
+      width: 50%;
       background: #fefefe;
       border-radius: 4px;
       padding: 10px 8px;
@@ -34,6 +49,7 @@
     background: #Ffc8dd;
     border-radius: 4px;
     width: 30%;
+    margin-top: 20px;
     padding: 10px 8px;
     border: 1px solid #444;
     font-size: 20px;

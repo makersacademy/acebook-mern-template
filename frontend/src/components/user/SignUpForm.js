@@ -40,9 +40,9 @@ const SignUpForm = ({ navigate }) => {
 
     return (
       <form onSubmit={handleSubmit}>
-        <body className="signuploginbody">
-        <p>Sign up to Acebook</p>
-        <input placeholder="Name" id="name" type='text' value={ name } onChange={handleNameChange} />
+        <body className="signupbody">
+        <h3>Sign up to Acebook &#128075;</h3>
+          <input placeholder="Full Name" id="name" type='text' value={ name } onChange={handleNameChange} />
           <br />
           <input placeholder="Email" id="email" type='text' value={ email } onChange={handleEmailChange} />
           <br />
