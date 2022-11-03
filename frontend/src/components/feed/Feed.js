@@ -2,11 +2,11 @@ import React, { useEffect, useState } from 'react';
 import Post from '../post/Post'
 import "./Feed.css";
 
-
 const Feed = ({ navigate }) => {
   const [posts, setPosts] = useState([]);
   const [token, setToken] = useState(window.localStorage.getItem("token"));
   const [message, setMessage] = useState('');
+  const [submitButtonState, setSubmitButtonState] = useState(false);
 
   useEffect(() => {
     if (token) {
@@ -22,9 +22,10 @@ const Feed = ({ navigate }) => {
           setPosts(data.posts);
         })
     }
-  }, [token])
+  }, [submitButtonState])
 
-  const handleSubmitPost = async () => {
+  const handleSubmitPost = async (event) => {
+    event.preventDefault();
     if (message === '') return
     let response = await fetch('/posts', {
       method: 'post',
@@ -34,13 +35,16 @@ const Feed = ({ navigate }) => {
       },
       body: JSON.stringify({ message: message }),
     })
+    console.log("submit")
 
     if (response.status !== 201) {
       navigate('/posts')
     } else {
       let data = await response.json()
       window.localStorage.setItem("token", data.token)
-     }
+      setSubmitButtonState(!submitButtonState)
+      setMessage("")
+    }
   };
 
   const handleMessageChange = (event) => {
@@ -56,17 +60,17 @@ const Feed = ({ navigate }) => {
     return (
       <>
         <h2>Posts</h2>
-        <button id='logout-button'onClick={logout}>
+        <button id='logout-button' onClick={logout}>
           Logout
         </button>
         <div id="message-box">
-        <form onSubmit={handleSubmitPost}>
-          <label>
-            Post a message:
-            <textarea placeholder="Message" id="message" value={message} onChange={handleMessageChange} />
-          </label>
-          <input id='submit' type="submit" value="Submit" />
-        </form>
+          <form onSubmit={handleSubmitPost}>
+            <label>
+              Post a message:
+              <textarea placeholder="Message" id="message" value={message} onChange={handleMessageChange} />
+            </label>
+            <input id='submit' type="submit" value="Submit" />
+          </form>
         </div>
         <div id='feed' role="feed">
           {posts.map(
@@ -74,7 +78,7 @@ const Feed = ({ navigate }) => {
           )}
         </div>
         <div id="kyle">
-          <img src='https://i.postimg.cc/T5vGJyXj/kyle.png' border='0' alt='kyle'/>
+          <img src='https://i.postimg.cc/T5vGJyXj/kyle.png' border='0' alt='kyle' />
         </div>
       </>
     )
