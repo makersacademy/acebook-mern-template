@@ -62,4 +62,35 @@ describe("User model", () => {
       });
     });
   });
+
+  // TODO: Finish this test. Testing the friendslist.
+  it('can add friends', (done) => {
+    // Create 3 users
+    const user1 = new User({
+      email: "some1@example.com",
+      password: "password",
+      firstName: "Spongebob",
+      lastName: "Squarepants"
+    });
+    const user2 = new User({
+      email: "some2@example.com",
+      password: "password",
+      firstName: "Sandy",
+      lastName: "Cheeks"
+    });
+    const user3 = new User({
+      email: "some3@example.com",
+      password: "password",
+      firstName: "Eugene",
+      lastName: "Krabs"
+    });
+
+    // Save all 3 users on the database.
+    user1.save()
+    user2.save()
+    user2.save()
+    let spongebob = User.findOne({name: "spongebob"})
+    console.log(spongebob)
+    done()
+  })
 });
