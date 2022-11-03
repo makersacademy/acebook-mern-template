@@ -1,4 +1,6 @@
 var mongoose = require('mongoose');
+const Comment = require('../../models/comment');
+
 
 require('../mongodb_helper');
 var Post = require('../../models/post');
@@ -37,4 +39,23 @@ describe('Post model', () => {
       });
     });
   });
+
+  it('can add a post comment ', (done) => {
+    var post = new Post({ message: 'some message', comments: 'Some comment' });
+    expect(post.message).toEqual('some message');
+    expect(post.comments).toEqual('Some comment');
+    done();
+  });
+
+  it('can add a post comment ', (done) => {
+    var comment = new Comment({
+      commentText: 'some comment 2',
+      username: 'Dave60',
+    });
+    var post = new Post({ message: 'some message', comments: comment });
+    expect(post.message).toEqual('some message');
+    expect(post.comments).toEqual('some comment 2');
+    done();
+  });
+
 });
