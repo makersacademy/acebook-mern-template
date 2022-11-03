@@ -1,14 +1,18 @@
 import React, { useEffect, useState } from 'react';
 import Post from '../post/Post'
+import Kyle from '../kyle/Kyle'
 import "./Feed.css";
 
 const Feed = ({ navigate }) => {
   const [posts, setPosts] = useState([]);
   const [token, setToken] = useState(window.localStorage.getItem("token"));
   const [message, setMessage] = useState('');
-  const [submitButtonState, setSubmitButtonState] = useState(false);
 
   useEffect(() => {
+    fetchPosts()
+  }, [])
+
+  const fetchPosts = () => {
     if (token) {
       fetch("/posts", {
         headers: {
@@ -22,10 +26,11 @@ const Feed = ({ navigate }) => {
           setPosts(data.posts);
         })
     }
-  }, [submitButtonState])
+  }
 
   const handleSubmitPost = async (event) => {
     event.preventDefault();
+
     if (message === '') return
     let response = await fetch('/posts', {
       method: 'post',
@@ -42,7 +47,7 @@ const Feed = ({ navigate }) => {
     } else {
       let data = await response.json()
       window.localStorage.setItem("token", data.token)
-      setSubmitButtonState(!submitButtonState)
+      fetchPosts()
       setMessage("")
     }
   };
@@ -75,11 +80,9 @@ const Feed = ({ navigate }) => {
         <div id='feed' role="feed">
           {posts.map(
             (post) => (<Post post={post} key={post._id} />)
-          )}
+          ).reverse()}
         </div>
-        <div id="kyle">
-          <img src='https://i.postimg.cc/T5vGJyXj/kyle.png' border='0' alt='kyle' />
-        </div>
+        <Kyle />
       </>
     )
   } else {
