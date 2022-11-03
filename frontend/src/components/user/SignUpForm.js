@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import "./SignUpForm.css";
 
 const SignUpForm = ({ navigate }) => {
   const [email, setEmail] = useState("");
@@ -31,49 +30,47 @@ const SignUpForm = ({ navigate }) => {
   };
 
   return (
-    <>
+
       <div id="header_wrapper">
         <div id="header">
           <li id="sitename">
             <a href="/login">Acebook</a>
           </li>
         </div>
+        <div className="signup-form-container">
+          <form onSubmit={handleSubmit}>
+            <input
+              placeholder="Email"
+              id="email"
+              type="text"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+            />
+            <input
+              placeholder="Password"
+              id="password"
+              type="password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+            />
+            <input
+              placeholder="First Name"
+              id="first-name"
+              type="text"
+              value={firstName}
+              onChange={(e) => setFirstName(e.target.value)}
+            />
+            <input
+              placeholder="Last Name"
+              id="last-name"
+              type="text"
+              value={lastName}
+              onChange={(e) => setLastName(e.target.value)}
+            />
+            <input id="submit" type="submit" value="Submit" />
+          </form>
+        </div>
       </div>
-
-      <div className="signup-form-container">
-        <form onSubmit={handleSubmit}>
-          <input
-            placeholder="Email"
-            id="email"
-            type="text"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-          />
-          <input
-            placeholder="Password"
-            id="password"
-            type="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-          />
-          <input
-            placeholder="First Name"
-            id="first-name"
-            type="text"
-            value={firstName}
-            onChange={(e) => setFirstName(e.target.value)}
-          />
-          <input
-            placeholder="Last Name"
-            id="last-name"
-            type="text"
-            value={lastName}
-            onChange={(e) => setLastName(e.target.value)}
-          />
-          <input id="submit" type="submit" value="Submit" />
-        </form>
-      </div>
-    </>
   );
 };
 
