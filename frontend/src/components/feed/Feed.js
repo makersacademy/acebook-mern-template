@@ -7,7 +7,7 @@ const Feed = ({ navigate }) => {
   const [message, setMessage] = useState("");
   const [token, setToken] = useState(window.localStorage.getItem("token"));
 
-  useEffect(() => {
+  const loadPosts = () => {
     if(token) {
       fetch("/posts", {
         headers: {
@@ -18,10 +18,13 @@ const Feed = ({ navigate }) => {
         .then(async data => {
           window.localStorage.setItem("token", data.token)
           setToken(window.localStorage.getItem("token"))
+          console.log(data);
           setPosts(data.posts);
         })
     }
-  }, [])
+  }
+  
+  useEffect(loadPosts, [])
 
   const handlePostSubmit = async (event) => {
     event.preventDefault();
@@ -32,13 +35,16 @@ const Feed = ({ navigate }) => {
         'Authorization': `Bearer ${token}`,
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({token: token, message: message })
+      body: JSON.stringify({token: token, message: message})
     })
       .then(response => response.json())
       .then(
-        data => {          
-        console.log(data)
+        data => { 
+        loadPosts();   
+        console.log(data);
       })
+
+      
   }
   
   const handleMessageChange = (event) => {
@@ -50,33 +56,38 @@ const Feed = ({ navigate }) => {
     navigate('/login')
   }
   
-    if(token) {
-      return(
-        <>
-          <h2>Posts &#128075;</h2>
-          <form onSubmit={handlePostSubmit}>
-            <p>Make Post</p>
-            <textarea placeholder="Share what you think" type="text" value={ message } onChange={handleMessageChange}>
-            </textarea>
-            <input id='submitPost' type="submit" value="Post" />
-          </form>
-            <button onClick={logout}>
-              Logout
-            </button>
-          <div id='feed' role="feed">
-              {posts.map(
-                (post) => ( 
-                <Post post={ post } key={ post._id }/> )
-              )}
-          </div>
-          <div class="footer">
-           <p>Ⓒ The Incredibles</p>
-          </div>
-        </>
-      )
-    } else {
-      navigate('/signin')
-    }
+  if(token) {
+    return(
+      <> <body className="posttitle">
+        <h1>Posts &#128075;</h1>
+        </body>
+        <form onSubmit={handlePostSubmit}>
+        <body className="createpost">
+          <h3>Create a New Post</h3>
+          <textarea placeholder="Share what you think" type="text" value={ message } onChange={handleMessageChange}>
+          </textarea>
+          <input id='submitPost' type="submit" value="Post" />
+          </body>
+        </form>
+          <button onClick={logout}>
+            Logout
+          </button>
+          <body className="postbody">
+        <div id='feed' role="feed">
+            {posts.map(
+              (post) => ( 
+              <Post post={ post } key={ post._id }/> )
+            )}
+        </div>
+        </body>
+        <div class="footer">
+         <p>Ⓒ The Incredibles</p>
+        </div>
+      </>
+    )
+  } else {
+    navigate('/signin')
+  }
 }
 
 export default Feed;
