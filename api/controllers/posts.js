@@ -24,7 +24,39 @@ const PostsController = {
       res.status(201).json({ message: 'OK', token: token });
     });
   },
+
+  // Define a comment (linked to post_id, username or user_id and req.body.comment)
+  // save comment
+
+  CreateComment: (req, res) => {
+    let post_id = req.body.postID;
+    Post.findByIdAndUpdate(async (err, post) => {
+      post_id,
+      { $push: { comments: { text: 'Hi everyone!' } } },
+      { new: true },
+  function (err, docs) 
+      if (err) {
+        throw err;
+      }
+
+      const token = await TokenGenerator.jsonwebtoken(req.user_id);
+      res.status(201).json({ message: 'OK', token: token });
+    });
+  },
 };
+
+Post.findByIdAndUpdate(
+  post_id,
+  { $push: { comments: { text: 'Hi everyone!' } } },
+  { new: true },
+  function (err, docs) {
+    if (err) {
+      console.log(err);
+    } else {
+      console.log('Updated Post : ', docs);
+    }
+  }
+);
 
 // // comment
 // Comment: (req, res) => {
