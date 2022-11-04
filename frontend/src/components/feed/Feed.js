@@ -56,6 +56,7 @@ const Feed = ({ navigate }) => {
     navigate('/login')
   }
   
+
   if(token) {
     return(
       <> <body className="posttitle">
@@ -64,8 +65,8 @@ const Feed = ({ navigate }) => {
         <form onSubmit={handlePostSubmit}>
         <body className="createpost">
           <h3>Create a New Post</h3>
-          <textarea placeholder="Share what you think" type="text" value={ message } onChange={handleMessageChange}>
-          </textarea>
+          <input id='postMessage' placeholder="Share what you think" type="text" value={ message } onChange={handleMessageChange}>
+          </input> <br/>
           <input id='submitPost' type="submit" value="Post" />
           </body>
         </form>
@@ -80,9 +81,6 @@ const Feed = ({ navigate }) => {
             )}
         </div>
         </body>
-        <div class="footer">
-         <p>Ⓒ The Incredibles</p>
-        </div>
       </>
     )
   } else {

@@ -51,9 +51,6 @@ const SignUpForm = ({ navigate }) => {
           <input id='submit' type="submit" value="Submit" />
           <br />
           </body>
-          <div class="footer">
-           <p>Ⓒ The Incredibles</p>
-          </div>
       </form>
     );   
 }

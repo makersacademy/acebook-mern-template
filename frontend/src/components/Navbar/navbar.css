@@ -1,0 +1,26 @@
+.navbody {
+  background: #Bde0fe;
+  height: 20px;
+  margin: auto;
+  padding: 20px;
+  border-radius: 10px;
+  vertical-align: middle;
+  text-align: center;
+  position:relative; left:0px;
+  font-family: 'gill sans';
+  font-size: 25px;
+}
+
+.login {
+  background: #Ffc8dd;
+  border-radius: 4px;
+  width: 30%;
+  padding: 10px 8px;
+  border: 1px solid #444;
+  font-size: 20px;
+  transition-duration: 0.4s;
+  cursor: pointer;
+  position:relative; left:0px;
+  font-family: 'gill sans';
+}
+

@@ -35,8 +35,6 @@ const LogInForm = ({ navigate }) => {
     setPassword(event.target.value)
   }
 
-  document.body.style = 'salmon';
-
     return (
       <form onSubmit={handleSubmit}>
         <body className="loginbody">
@@ -47,9 +45,6 @@ const LogInForm = ({ navigate }) => {
         <br />
         <input role='submit-button' id='submit' type="submit" value="Submit" />
         </body>
-        <div class="footer">
-         <p>Ⓒ The Incredibles</p>
-      </div>
       </form>
     );
 }
