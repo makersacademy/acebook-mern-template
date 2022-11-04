@@ -73,7 +73,7 @@ describe('/posts', () => {
       expect(posts[0].message).toEqual('hello world');
     });
 
-    xtest('creates a new post', async () => {
+    test('creates a new post', async () => {
       await request(app)
         .post('/posts')
         .set('Authorization', `Bearer ${token}`)
@@ -83,7 +83,7 @@ describe('/posts', () => {
       expect(posts[0].message).toEqual('hello world');
     });
 
-    xtest('returns a new token', async () => {
+    test('returns a new token', async () => {
       let response = await request(app)
         .post('/posts')
         .set('Authorization', `Bearer ${token}`)
@@ -94,7 +94,7 @@ describe('/posts', () => {
     });
   });
 
-  xdescribe('POST, when token is missing', () => {
+  describe('POST, when token is missing', () => {
     test('responds with a 401', async () => {
       let response = await request(app)
         .post('/posts')
@@ -116,7 +116,7 @@ describe('/posts', () => {
     });
   });
 
-  xdescribe('GET, when token is present', () => {
+  describe('GET, when token is present', () => {
     test('returns every post in the collection', async () => {
       let post1 = new Post({ message: 'howdy!' });
       let post2 = new Post({ message: 'hola!' });
@@ -157,7 +157,7 @@ describe('/posts', () => {
     });
   });
 
-  xdescribe('GET, when token is missing', () => {
+  describe('GET, when token is missing', () => {
     test('returns no posts', async () => {
       let post1 = new Post({ message: 'howdy!' });
       let post2 = new Post({ message: 'hola!' });
