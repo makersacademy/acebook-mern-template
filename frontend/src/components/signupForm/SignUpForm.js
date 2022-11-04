@@ -31,40 +31,54 @@ const SignUpForm = ({ navigate }) => {
   };
 
   return (
-        <div className="signup-form-container">
-          <form onSubmit={handleSubmit} class='signup-form'>
-            <h1 class="form-title">Signup</h1>
-            <input
-              placeholder="Email"
-              id="email"
-              type="text"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-            />
-            <input
-              placeholder="Password"
-              id="password"
-              type="password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-            />
-            <input
-              placeholder="First Name"
-              id="first-name"
-              type="text"
-              value={firstName}
-              onChange={(e) => setFirstName(e.target.value)}
-            />
-            <input
-              placeholder="Last Name"
-              id="last-name"
-              type="text"
-              value={lastName}
-              onChange={(e) => setLastName(e.target.value)}
-            />
-            <input id="submit" type="submit" value="Submit" />
-          </form>
+    <div className="signup-form-container">
+      <form onSubmit={handleSubmit} class="signup-form">
+        <h1 class="form-title">Signup</h1>
+        <div>
+          <input
+            placeholder="Email"
+            id="email"
+            class='signup-form-input'
+            type="text"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+          />
         </div>
+        <div>
+          <input
+            placeholder="Password"
+            id="password"
+            class='signup-form-input'
+            type="password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+          />
+        </div>
+        <div>
+          <input
+            placeholder="First Name"
+            id="first-name"
+            class='signup-form-input'
+            type="text"
+            value={firstName}
+            onChange={(e) => setFirstName(e.target.value)}
+          />
+        </div>
+        <div>
+          <input
+            placeholder="Last Name"
+            id="last-name"
+            class='signup-form-input'
+            type="text"
+            value={lastName}
+            onChange={(e) => setLastName(e.target.value)}
+          />
+          <div>
+          <input class='signup-form-btn' type="submit" value="Submit" />
+          </div>
+        </div>
+      </form>
+    </div>
   );
 };
 
