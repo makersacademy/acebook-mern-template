@@ -40,14 +40,14 @@ describe('/posts', () => {
       expect(response.status).toEqual(201);
     });
 
-    xtest('creates a new post and adds a comment', async () => {
+    test('creates a new post and adds a comment', async () => {
       await request(app)
         .post('/posts')
         .set('Authorization', `Bearer ${token}`)
         .send({ message: 'hello world', token: token });
       let posts = await Post.find();
       let postId = posts[0].id;
-      // console.log(postId);
+      console.log(postId);
       expect(posts.length).toEqual(1);
       expect(posts[0].message).toEqual('hello world');
       await request(app)
@@ -55,7 +55,7 @@ describe('/posts', () => {
         .set('Authorization', `Bearer ${token}`)
         .send({
           postID: postId,
-          comment: { text: "It's friday!" },
+          comment: "It's friday!",
           token: token,
         });
       let posts2 = await Post.find();

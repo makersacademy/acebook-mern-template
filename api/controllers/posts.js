@@ -31,9 +31,9 @@ const PostsController = {
   UpdateComment: (req, res) => {
     // console.log(req.body.postID);
     // console.log(req.body.comment);
-    Post.findByIdAndUpdate(async (err) => {
-      req.body.postID,
-        { $push: { comments: {text: req.body.comment } } },
+    Post.findByIdAndUpdate(async () => {
+      req.params.postID,
+        { $push: { comments: { text: req.comment } } },
         { new: true },
         function (err, docs) {
           if (err) {
