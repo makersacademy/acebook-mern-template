@@ -1,0 +1,22 @@
+h1{
+  font-size: 30px;
+}
+
+p{
+  font-size: 20px;
+}
+
+.induction{
+  font-family: 'gill sans';
+  flex-wrap: wrap;
+  margin-left: 100px;
+  margin-top: 15%;
+}
+
+.logo {
+  position: relative;
+  left: 700px;
+  bottom: 200px;
+  width: 300px;
+  height: 400px;
+}
