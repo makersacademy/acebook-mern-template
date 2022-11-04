@@ -1,10 +1,10 @@
 describe("making a post", () => {
 
   before(() => {
-    cy.signup("user@email.com", "12345678");
+    cy.signup("user2@email.com", "123456789");
     cy.visit("/login");
-    cy.get("#email").type("user@email.com");
-    cy.get("#password").type("12345678");
+    cy.get("#email").type("user2@email.com");
+    cy.get("#password").type("123456789");
     cy.get("#submit").click();
   })
 
@@ -14,7 +14,7 @@ describe("making a post", () => {
     cy.tick(660000);
 
     cy.get("#submit").click();
-    cy.url().should("include", "/login");
+    cy.url().should("include", "/signin");
   });
 
   it("with valid credentials, pushes whatever you type into the box to the list of posts'", () => {

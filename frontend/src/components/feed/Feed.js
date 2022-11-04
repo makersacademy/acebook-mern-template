@@ -5,9 +5,13 @@ const Feed = ({ navigate }) => {
   const [posts, setPosts] = useState([]);
   const [token, setToken] = useState(window.localStorage.getItem("token"));
   const [post, setPost] = useState([]);
-  useEffect(() => {
+
+  const getPosts = () => {
+    console.log('is there a token?')
+    console.log(token)
     if(token) {
       console.log('fetch request now:')
+      console.log(token)
       fetch("/posts", {
         headers: {
           'Authorization': `Bearer ${token}`
@@ -20,7 +24,11 @@ const Feed = ({ navigate }) => {
           setPosts(data.posts);
         })
     }
-  }, [token])
+  }
+
+  useEffect(() => {
+    getPosts();
+  }, [])
     
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -36,11 +44,10 @@ const Feed = ({ navigate }) => {
 
     if(response.status === 201) {
       console.log("yay")
-      navigate('/posts')
+      getPosts();
     } else {
       console.log("oop")
       // error message goes here
-      navigate('/posts');
     }
   }
 
@@ -74,7 +81,7 @@ const Feed = ({ navigate }) => {
         </>
       )
     } else {
-      navigate('/signin')
+      navigate('/login')
     }
   }
 
