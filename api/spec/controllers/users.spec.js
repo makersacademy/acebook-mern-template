@@ -96,4 +96,15 @@ describe('/users', () => {
       expect(response.statusCode).toBe(400);
     });
   });
+
+  describe('POST, when username is invalid format', () => {
+    test('the response code is 201', async () => {
+      let response = await request(app).post('/users').send({
+        email: 'poppy@email.com',
+        password: '12345JJJJ',
+        usersName: 'Kyle<>?||--- Cook',
+      });
+      expect(response.statusCode).toBe(400);
+    });
+  });
 });
