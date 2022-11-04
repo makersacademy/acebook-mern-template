@@ -26,49 +26,49 @@ const PostsController = {
   },
 };
 
-// comment
-Comment: (req, res) => {
-  let comment = req.body.comment;
-  comment.postedBy = req.body.userId;
+// // comment
+// Comment: (req, res) => {
+//   let comment = req.body.comment;
+//   comment.postedBy = req.body.userId;
 
-  Post.findByIdAndUpdate(
-    req.body.postId,
-    { $push: { comments: req.body.userId } },
-    { new: true }
-  )
-    .populate('comments.postedBy', '_id name')
-    .populate('postedBy', '_id name')
-    .exec((err, results) => {
-      if (err) {
-        return res.status(400).json({
-          error: err,
-        });
-      } else {
-        res.json(result);
-      }
-    });
-};
+//   Post.findByIdAndUpdate(
+//     req.body.postId,
+//     { $push: { comments: req.body.userId } },
+//     { new: true }
+//   )
+//     .populate('comments.postedBy', '_id name')
+//     .populate('postedBy', '_id name')
+//     .exec((err, results) => {
+//       if (err) {
+//         return res.status(400).json({
+//           error: err,
+//         });
+//       } else {
+//         res.json(result);
+//       }
+//     });
+// };
 
-// delete comment
-Comment: (req, res) => {
-  let comment = req.body.comment;
+// // delete comment
+// Comment: (req, res) => {
+//   let comment = req.body.comment;
 
-  Post.findByIdAndUpdate(
-    req.body.postId,
-    { $pull: { comments: { _id: comment._id } } },
-    { new: true }
-  )
-    .populate('comments.postedBy', '_id name')
-    .populate('postedBy', '_id name')
-    .exec((err, results) => {
-      if (err) {
-        return res.status(400).json({
-          error: err,
-        });
-      } else {
-        res.json(result);
-      }
-    });
-};
+//   Post.findByIdAndUpdate(
+//     req.body.postId,
+//     { $pull: { comments: { _id: comment._id } } },
+//     { new: true }
+//   )
+//     .populate('comments.postedBy', '_id name')
+//     .populate('postedBy', '_id name')
+//     .exec((err, results) => {
+//       if (err) {
+//         return res.status(400).json({
+//           error: err,
+//         });
+//       } else {
+//         res.json(result);
+//       }
+//     });
+// };
 
 module.exports = PostsController;
