@@ -6,6 +6,17 @@ import { faHeart } from '@fortawesome/free-regular-svg-icons'
 
 const elementEnvelope = <FontAwesomeIcon icon={ faHeart } />
 
+// const loadLikes = () => {
+//   fetch('/posts/likes', {
+//     method: 'post',
+//     headers: {'Content-Type': 'application/json'},
+//     body: JSON.stringify({post: post._id})
+//   })
+//   .then(response => response.json())
+//   .then(data =>
+//     data.likes)
+// } 
+
 const Post = ({post}) => {
   return(
         <div class="post-wrap" data-cy="post" key={ post._id}>
@@ -23,7 +34,7 @@ const Post = ({post}) => {
           <div class="likes-container">
             <div class="likes">
               <button id="likes-button"> { elementEnvelope }</button>
-              <span id="likes-count"></span>
+              <span id="likes-count">{post.likes.length}</span>
             </div>
           </div>
         </div>
