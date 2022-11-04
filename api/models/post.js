@@ -9,7 +9,7 @@ const PostSchema = new mongoose.Schema(
       {
         text: String,
         created: { type: Date, default: Date.now },
-        postedBy: { type: ObjectId, ref: 'User' },
+        // postedBy: { type: ObjectId, ref: 'User' },
       },
     ],
     // comments: [

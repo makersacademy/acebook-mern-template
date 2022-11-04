@@ -72,18 +72,83 @@ describe('Post model', () => {
 
   it('can save a post and add comment later', (done) => {
     var post = new Post({
-      message: 'some message 2',
-      comments: { text: 'Some comment 2' },
+      message: 'some new message',
+      // comments: { text: 'Some comment 2' },
     });
+    let obId = post.id;
+    console.log(post.id);
     console.log(post);
     post.save((err) => {
+      let post_id = post.id;
+      Post.findByIdAndUpdate(
+        post_id,
+        { $push: { comments: { text: 'New comment!' } } },
+        { new: true },
+        function (err, docs) {
+          if (err) {
+            console.log(err);
+          } else {
+            console.log('Updated Post : ', docs);
+          }
+        }
+      );
       expect(err).toBeNull();
       Post.find((err, posts) => {
         expect(err).toBeNull();
-
-        expect(posts[0]).toMatchObject({ message: 'some message ' });
+        expect(posts[0]).toMatchObject({ message: 'some new message' });
+        console.log(posts[0].comments[0]);
         expect(posts[0].comments[0]).toMatchObject({
-          text: 'Some comment 2',
+          text: 'New comment!',
+        });
+        done();
+      });
+    });
+  });
+
+  it('can save a post and add 2 comments', (done) => {
+    var post = new Post({
+      message: 'some new message',
+      // comments: { text: 'Some comment 2' },
+    });
+    let obId = post.id;
+    console.log(post.id);
+    console.log(post);
+    post.save((err) => {
+      let post_id = post.id;
+      Post.findByIdAndUpdate(
+        post_id,
+        { $push: { comments: { text: 'New comment!' } } },
+        { new: true },
+        function (err, docs) {
+          if (err) {
+            console.log(err);
+          } else {
+            console.log('Updated Post : ', docs);
+          }
+        }
+      );
+      Post.findByIdAndUpdate(
+        post_id,
+        { $push: { comments: { text: 'Hi everyone!' } } },
+        { new: true },
+        function (err, docs) {
+          if (err) {
+            console.log(err);
+          } else {
+            console.log('Updated Post : ', docs);
+          }
+        }
+      );
+      expect(err).toBeNull();
+      Post.find((err, posts) => {
+        expect(err).toBeNull();
+        expect(posts[0]).toMatchObject({ message: 'some new message' });
+        console.log(posts[0].comments[0]);
+        expect(posts[0].comments[0]).toMatchObject({
+          text: 'New comment!',
+        });
+        expect(posts[0].comments[1]).toMatchObject({
+          text: 'Hi everyone!',
         });
         done();
       });
