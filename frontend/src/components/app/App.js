@@ -17,7 +17,7 @@ const App = () => {
           <Route path='/posts'  element={<Feed navigate={ useNavigate() }/>}/>
           <Route path='/login'  element={<LoginForm  navigate={ useNavigate() }/>}/>
           <Route path='/signup' element={<SignUpForm navigate={ useNavigate() }/>}/>
-          <Route path='/test' element={<TestSignUp />} />
+          <Route path='/test' element={<TestSignUp />} />{/* This is a test path for testing individual components and should be removed in production.*/}
         </Routes>
       </>
     );
