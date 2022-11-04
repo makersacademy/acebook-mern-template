@@ -8,7 +8,7 @@ const UserSchema = new mongoose.Schema({
   img: {
     data: Buffer,
     contentType: String
-  },
+  }
 
 });
 
