@@ -15,7 +15,9 @@ code {
 body {
   text-align: center;
   width: 100%;
-  margin: 0 auto;
+  min-height: 100vh;
+  margin: 0;
+  height: 100%;
   padding: 0px;
   font-family: 'lucida grande', tahoma, verdana, arial, sans-serif;
   background: linear-gradient(white, #d3d8e8);
