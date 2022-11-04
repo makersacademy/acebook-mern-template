@@ -3,12 +3,11 @@
   width: 500px;
   height: 330px;
   margin: auto;
-  margin-top: 20px;
   padding: 20px;
   border-radius: 10px;
   vertical-align: middle;
   text-align: center;
-  position:relative; left:0px; top:200px;
+  position:relative; left:0px; top:150px;
   font-family: 'gill sans';
   font-size: 25px;
 }
@@ -49,17 +48,4 @@ input[type=password] {
   font-size: 20px;
   position:relative; left:0px; top:10px;
   font-family: 'gill sans';
-}
-
-.footer {
-  position:fixed;
-  bottom:0;
-  left:0;
-  width:100%;
-  height: 62px;
-  background-color: #Ffc8dd;
-  font-family: 'gill sans';
-  color: black;
-  text-align: center;
-  font-size: 18px;
 }
