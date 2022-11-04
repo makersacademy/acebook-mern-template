@@ -3,12 +3,11 @@
   width: 500px;
   height: 350px;
   margin: auto;
-  margin-top: 10px;
   padding: 20px;
   border-radius: 10px;
   vertical-align: middle;
   text-align: center;
-  position:relative; left:0px; top:200px;
+  position:relative; left:0px; top:150px;
   font-family: 'gill sans';
   font-size: 25px;
 }
