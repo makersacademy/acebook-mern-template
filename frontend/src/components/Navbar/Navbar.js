@@ -7,7 +7,7 @@ const navbar= () =>{
   return (
   <body className="navbody">
   <div>
-    <li>
+    
       <Link className="signout" to="/login">Sign Out 
       </Link>
 
@@ -16,7 +16,7 @@ const navbar= () =>{
 
       <Link className="login" to="/login">Sign in
       </Link>
-    </li>
+    
   </div>
   </body>
   );
