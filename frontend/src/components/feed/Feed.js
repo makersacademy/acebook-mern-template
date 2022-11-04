@@ -29,6 +29,8 @@ const Feed = ({ navigate }) => {
           window.localStorage.setItem("token", data.token);
           setToken(window.localStorage.getItem("token"));
           setPosts(data.posts);
+          setImageList(data.imageList);
+          console.log(data.posts);
         });
     }
   };
@@ -73,6 +75,7 @@ const Feed = ({ navigate }) => {
       getDownloadURL(snapshot.ref).then((url) => {
         console.log(url);
         setImageList((prev) => [...prev, url]);
+        fetchPosts();
       });
     });
   };
