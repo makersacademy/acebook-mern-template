@@ -1,0 +1,14 @@
+.Feed {
+  width: 100vw;
+  height: auto;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+
+img {
+  height: 300px;
+  width: 300px;
+  margin: 10px;
+}
+

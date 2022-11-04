@@ -14,6 +14,10 @@ const Feed = ({ navigate }) => {
   const imageListRef = ref(storage, "images/");
 
   useEffect(() => {
+    fetchPosts();
+  }, []);
+
+  const fetchPosts = () => {
     if (token) {
       fetch("/posts", {
         headers: {
@@ -27,9 +31,11 @@ const Feed = ({ navigate }) => {
           setPosts(data.posts);
         });
     }
-  }, [token]);
+  };
 
-  const handleSubmitPost = async () => {
+  const handleSubmitPost = async (event) => {
+    event.preventDefault();
+
     if (message === "") return;
     let response = await fetch("/posts", {
       method: "post",
@@ -39,12 +45,15 @@ const Feed = ({ navigate }) => {
       },
       body: JSON.stringify({ message: message }),
     });
+    console.log("submit");
 
     if (response.status !== 201) {
       navigate("/posts");
     } else {
       let data = await response.json();
       window.localStorage.setItem("token", data.token);
+      fetchPosts();
+      setMessage("");
     }
   };
 
@@ -60,8 +69,11 @@ const Feed = ({ navigate }) => {
   const UploadImage = () => {
     if (imageUpload == null) return;
     const imageRef = ref(storage, `images/${imageUpload.name + v4()}`);
-    uploadBytes(imageRef, imageUpload).then(() => {
-      alert("Image Uploaded");
+    uploadBytes(imageRef, imageUpload).then((snapshot) => {
+      getDownloadURL(snapshot.ref).then((url) => {
+        console.log(url);
+        setImageList((prev) => [...prev, url]);
+      });
     });
   };
 
@@ -69,6 +81,8 @@ const Feed = ({ navigate }) => {
     listAll(imageListRef).then((res) => {
       res.items.forEach((item) => {
         getDownloadURL(item).then((url) => {
+          console.log(url);
+
           setImageList((prev) => [...prev, url]);
         });
       });
@@ -86,10 +100,11 @@ const Feed = ({ navigate }) => {
           }}
         />
         <button onClick={UploadImage}>Upload Photo</button> <br></br>
-        {imageList.map((url) => {
-          // eslint-disable-next-line jsx-a11y/alt-text
-          return <img src={url} />;
-        })}{" "}
+        {imageList
+          .map((url) => {
+            return <img src={url} />;
+          })
+          .reverse()}{" "}
         <br></br>
         <button id="logout-button" onClick={logout}>
           Logout
