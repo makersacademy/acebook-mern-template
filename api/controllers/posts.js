@@ -33,7 +33,7 @@ const PostsController = {
     // console.log(req.body.comment);
     Post.findByIdAndUpdate(async (err) => {
       req.body.postID,
-        { $push: { comments: req.body.comment } },
+        { $push: { comments: {text: req.body.comment } } },
         { new: true },
         function (err, docs) {
           if (err) {

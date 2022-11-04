@@ -33,7 +33,7 @@ describe('Post model', () => {
       Post.find((err, posts) => {
         expect(err).toBeNull();
 
-        expect(posts[0]).toMatchObject({ message: 'some message' });
+        expect(posts[0].message).toEqual('some message');
         done();
       });
     });
@@ -144,12 +144,8 @@ describe('Post model', () => {
         expect(err).toBeNull();
         expect(posts[0]).toMatchObject({ message: 'some new message' });
         console.log(posts[0].comments[0]);
-        expect(posts[0].comments[0]).toMatchObject({
-          text: 'New comment!',
-        });
-        expect(posts[0].comments[1]).toMatchObject({
-          text: 'Hi everyone!',
-        });
+        expect(posts[0].comments[0].text).toEqual('New comment!');
+        expect(posts[0].comments[1].text).toEqual('Hi everyone!');
         done();
       });
     });
