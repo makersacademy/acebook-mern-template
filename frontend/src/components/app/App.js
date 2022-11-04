@@ -4,6 +4,7 @@ import SignUpForm from '../user/SignUpForm'
 import React from 'react';
 import Feed from '../feed/Feed'
 import TestSignUp from '../signupForm/SignUpForm'
+import Footer from '../footer/Footer';
 import {
   useNavigate,
   Routes,
@@ -19,6 +20,7 @@ const App = () => {
           <Route path='/signup' element={<SignUpForm navigate={ useNavigate() }/>}/>
           <Route path='/test' element={<TestSignUp />} />{/* This is a test path for testing individual components and should be removed in production.*/}
         </Routes>
+        <Footer />
       </>
     );
 }
