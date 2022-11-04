@@ -27,36 +27,27 @@ const PostsController = {
 
   // Define a comment (linked to post_id, username or user_id and req.body.comment)
   // save comment
-
-  CreateComment: (req, res) => {
-    let post_id = req.body.postID;
-    Post.findByIdAndUpdate(async (err, post) => {
-      post_id,
-      { $push: { comments: { text: 'Hi everyone!' } } },
-      { new: true },
-  function (err, docs) 
-      if (err) {
-        throw err;
-      }
-
+  // the fetch post reqest req.body.comment assumes that the comment is packaged as object
+  UpdateComment: (req, res) => {
+    // console.log(req.body.postID);
+    // console.log(req.body.comment);
+    Post.findByIdAndUpdate(async (err) => {
+      req.body.postID,
+        { $push: { comments: req.body.comment } },
+        { new: true },
+        function (err, docs) {
+          if (err) {
+            // console.log(err);
+            throw err;
+          } else {
+            console.log('Updated Post comments : ', docs);
+          }
+        };
       const token = await TokenGenerator.jsonwebtoken(req.user_id);
       res.status(201).json({ message: 'OK', token: token });
     });
   },
 };
-
-Post.findByIdAndUpdate(
-  post_id,
-  { $push: { comments: { text: 'Hi everyone!' } } },
-  { new: true },
-  function (err, docs) {
-    if (err) {
-      console.log(err);
-    } else {
-      console.log('Updated Post : ', docs);
-    }
-  }
-);
 
 // // comment
 // Comment: (req, res) => {
