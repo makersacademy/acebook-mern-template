@@ -1,6 +1,9 @@
 {
   "dependencies": {
 
+    "bcrypt": "^5.1.0"
+
+
     "styled-components": "^5.3.6"
     "@fortawesome/fontawesome-svg-core": "^6.2.0",
     "@fortawesome/free-regular-svg-icons": "^6.2.0",
