@@ -5,7 +5,7 @@ import React, { useState } from 'react';
 import Feed from '../feed/Feed'
 import PostForm from '../create/PostForm'
 import Footer from '../footer/footer'
-import Navbar from '../Navbar/Navbar'
+import Navbar from '../navbar/navbar'
 
 import {
   useNavigate,
