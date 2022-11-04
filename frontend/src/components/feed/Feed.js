@@ -56,6 +56,7 @@ const Feed = ({ navigate }) => {
     navigate('/login')
   }
   
+
   if(token) {
     return(
       <> <body className="posttitle">
