@@ -12,43 +12,43 @@ const UserSchema = new mongoose.Schema({
 
 });
 
-//hashes and salts a password
+// //hashes and salts a password
 
-UserSchema.pre("save", function (next) {
-  const user = this;
-  if (!user.isModified("password")) {
-    return next();
-  }
-  bcrypt.genSalt(10, (err, salt) => {
-    if (err) {
-      return next(err);
-    }
-    bcrypt.hash(user.password, salt, (err, hash) => {
-      if (err) {
-        return next(err);
-      }
-      user.password = hash;
-      next();
-    });
-  });
-});
+// UserSchema.pre("save", function (next) {
+//   const user = this;
+//   if (!user.isModified("password")) {
+//     return next();
+//   }
+//   bcrypt.genSalt(10, (err, salt) => {
+//     if (err) {
+//       return next(err);
+//     }
+//     bcrypt.hash(user.password, salt, (err, hash) => {
+//       if (err) {
+//         return next(err);
+//       }
+//       user.password = hash;
+//       next();
+//     });
+//   });
+// });
 
-//compares a password with the hashed password
+// //compares a password with the hashed password
 
-UserSchema.methods.comparePassword = function (candidatePassword) {
-  const user = this;
-  return new Promise((resolve, reject) => {
-    bcrypt.compare(candidatePassword, user.password, (err, isMatch) => {
-      if (err) {
-        return reject(err);
-      }
-      if (!isMatch) {
-        return reject(false);
-      }
-      resolve(true);
-    });
-  });
-};
+// UserSchema.methods.comparePassword = function (candidatePassword) {
+//   const user = this;
+//   return new Promise((resolve, reject) => {
+//     bcrypt.compare(candidatePassword, user.password, (err, isMatch) => {
+//       if (err) {
+//         return reject(err);
+//       }
+//       if (!isMatch) {
+//         return reject(false);
+//       }
+//       resolve(true);
+//     });
+//   });
+// };
 
 
 const User = mongoose.model("User", UserSchema);
