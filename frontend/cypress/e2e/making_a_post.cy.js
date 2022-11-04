@@ -9,10 +9,12 @@ describe("making a post", () => {
   })
 
   it("after JWT timeout, redirects to '/login'", () => {
-    cy.clock();
+    const now = new Date(Date.UTC(2022, 10, 14)).getTime()
+    cy.clock(now);
     cy.url().should("include", "/posts");
     cy.tick(660000);
 
+    cy.get("#post").type("this is a test post");
     cy.get("#submit").click();
     cy.url().should("include", "/signin");
   });
