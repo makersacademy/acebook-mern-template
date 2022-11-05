@@ -1,6 +1,7 @@
 import errorHandlerMessage from './errorHandlerMessage';
 import errorHandlerEmail from './errorHandlerEmail';
 import errorHandlerPassword from './errorHandlerPassword';
+import errorHandlerUsersName from './errorHandlerUsersName';
 
 describe('errorHandlerMessage', () => {
   it('returns an error message when message is empty', () => {
@@ -104,6 +105,17 @@ describe('errorHandlerPassword', () => {
       <div>
         Your password must be only alphanumeric, between 4 and 25 characters and
         give us ownership over your soul.
+      </div>
+    );
+  });
+});
+
+describe('errorHandlerUsersName', () => {
+  it('returns an error message when UsersName is invalid format', () => {
+    const result = errorHandlerUsersName('');
+    expect(result).to.deep.equal(
+      <div>
+        Did you introduce some weird and not-allowed-at-all character as a name?
       </div>
     );
   });
