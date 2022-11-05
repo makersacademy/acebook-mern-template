@@ -1,9 +1,5 @@
-// const { errorHandlerMessage, errorHandlerEmail } = require('./errorHandler');
-import errorHandlerMessage from './errorHandler';
-// const errorHandlerMessage = errorHandler.errorHandlerMessage;
-// const errorHandlerEmail = errorHandler.errorHandlerEmail;
-// const errorHandlerPassword = errorHandler.errorHandlerPassword;
-// const errorHandlerUsersName = errorHandler.errorHandlerUsersName;
+import errorHandlerMessage from './errorHandlerMessage';
+import errorHandlerEmail from './errorHandlerEmail';
 
 describe('errorHandlerMessage', () => {
   it('returns an error message when message is empty', () => {
@@ -40,5 +36,12 @@ describe('errorHandlerMessage', () => {
       'Hello, my name is Kyle, and I hate ##@!!!???.,'
     );
     expect(result).to.be.undefined;
+  });
+});
+
+describe('errorHandlerEmail', () => {
+  it('returns an error message when email is empty', () => {
+    const result = errorHandlerEmail('');
+    expect(result).to.deep.equal(<div>Email can't be empty!!!! :@</div>);
   });
 });
