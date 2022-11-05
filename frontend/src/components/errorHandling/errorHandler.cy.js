@@ -24,4 +24,11 @@ describe('errorHandlerMessage', () => {
       </div>
     );
   });
+
+  it("doesn't return anything if the given string is valid", () => {
+    const result = errorHandlerMessage(
+      'Hello, my name is Kyle, and I hate ##@!!!???.,'
+    );
+    expect(result).to.be.undefined;
+  });
 });
