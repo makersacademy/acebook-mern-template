@@ -18,7 +18,6 @@ const CreatePost = ({ navigate, fetchPosts }) => {
       },
       body: JSON.stringify({ message: message }),
     })
-    console.log("submit")
 
     if (response.status !== 201) {
       navigate('/posts')
@@ -59,6 +58,6 @@ const CreatePost = ({ navigate, fetchPosts }) => {
       </form>
     </>
   )
-  }
+}
 
 export default CreatePost;
