@@ -1,5 +1,6 @@
 import React from 'react';
 import Comment from '../comment/Comment'
+import Hates from '../hates/Hates'
 import "./Post.css";
 
 const Post = ({ post }) => {
@@ -18,12 +19,10 @@ const Post = ({ post }) => {
       </div>
       <div class="message-container">
         <div class="message">{post.message}</div>
-        <div class="hates-container">
-        <img id="hate-image" src={require('../../images/kylerage2.png')} alt='hates' />
-        <div>Hates {"{ Hate quantity }"}</div>
-        </div>
-        <Comment />
       </div>
+      <Hates />
+      <Comment />
+
     </article>
   )
 }

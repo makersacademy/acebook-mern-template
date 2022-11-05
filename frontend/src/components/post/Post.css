@@ -59,20 +59,3 @@ article {
   color: rgb(250, 225, 225);
   margin-bottom: 12px;
 }
-
-
-.hates-container {
-  display: flex;
-  align-items: center;
-  margin-bottom: 6px;
-}
-.hates-container > * {
-  margin-right: 6px;
-}
-
-#hate-image {
-  width: 20px;
-  height: 20px;
-  border-radius: 30px;
-  object-fit: cover
-}

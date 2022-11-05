@@ -1,0 +1,23 @@
+.hates-container {
+  display: flex;
+  align-items: center;
+  margin-bottom: 6px;
+}
+.hates-container > * {
+  margin-right: 6px;
+}
+
+#hate-image {
+  width: 15px;
+  height: 15px;
+  border-radius: 30px;
+  object-fit: cover
+}
+
+
+button {
+  display: flex;
+  align-items: center;
+  color: rgb(173, 44, 49);
+  font-size: 8px;
+}
