@@ -97,4 +97,14 @@ describe('errorHandlerPassword', () => {
       </div>
     );
   });
+
+  it('returns an error message when password is too short', () => {
+    const result = errorHandlerPassword('74');
+    expect(result).to.deep.equal(
+      <div>
+        Your password must be only alphanumeric, between 4 and 25 characters and
+        give us ownership over your soul.
+      </div>
+    );
+  });
 });
