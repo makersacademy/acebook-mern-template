@@ -16,5 +16,4 @@ const errorHandlerMessage = (message) => {
     );
   }
 };
-
 export default errorHandlerMessage;
