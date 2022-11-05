@@ -1,0 +1,41 @@
+.comments-container > * {
+  margin-bottom: 6px;
+}
+
+.comment-profile-image {
+  border: solid rgb(173, 44, 49);
+  width: 30px;
+  height: 30px;
+  border-radius: 30px;
+  object-fit: cover
+}
+
+.comment-header {
+  display: flex;
+
+}
+
+.comment-header > * {
+  
+}
+.comment {
+  background-color: rgb(255, 255, 255);
+  width: auto;
+  height: 30px;
+  color: rgb(134, 134, 134);
+}
+
+.new-comment-form {
+  display: flex;
+  justify-content: space-between; 
+}
+
+.new-comment {
+  font-size: 11px;
+  display: flex;
+  width: 100%;
+}
+
+.submit-button {
+  font-size: 11px;
+}

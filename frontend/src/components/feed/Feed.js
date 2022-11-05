@@ -64,25 +64,38 @@ const Feed = ({ navigate }) => {
   if (token) {
     return (
       <>
-        <h2>Posts</h2>
-        <button id='logout-button' onClick={logout}>
-          Logout
-        </button>
-        <div id="message-box">
-          <form onSubmit={handleSubmitPost}>
-            <label>
-              Post a message:
+        <div id="post-body">
+          <h2 id="posts-heading">Posts</h2>
+          <button id='logout-button' onClick={logout}>
+            Just leave.
+          </button>
+          <div id="message-box">
+            <form id="submit-post-form"onSubmit={handleSubmitPost}>
+              <label id='post-a-message-label'>
+                Spew some shit that no one cares about:
+              </label>
               <textarea placeholder="Message" id="message" value={message} onChange={handleMessageChange} />
-            </label>
-            <input id='submit' type="submit" value="Submit" />
-          </form>
+              <div id="message-button-container">
+              <input class="message-button" id='submit' type="submit" value=":@" />
+              <div id="image-buttons">
+              <button class="message-button" id='choose-file-button'>
+                Choose file of your ugly child
+              </button>
+              <button class="message-button" id='upload-file-button'>
+                Upload photo of your food no one cares about
+              </button>
+              </div>
+              
+              </div>
+            </form>
+          </div>
+          <div id='feed' role="feed">
+            {posts.map(
+              (post) => (<Post post={post} key={post._id} />)
+            ).reverse()}
+          </div>
+          <Kyle />
         </div>
-        <div id='feed' role="feed">
-          {posts.map(
-            (post) => (<Post post={post} key={post._id} />)
-          ).reverse()}
-        </div>
-        <Kyle />
       </>
     )
   } else {

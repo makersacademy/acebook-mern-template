@@ -28,7 +28,7 @@ describe("Feed", () => {
     })
   })
 
-  it.only("calls the /posts endpoint to create a new post", () => {
+  it("calls the /posts endpoint to create a new post", () => {
     window.localStorage.setItem("token", "fakeToken")
     
     cy.mount(<Feed navigate={navigate}/>)

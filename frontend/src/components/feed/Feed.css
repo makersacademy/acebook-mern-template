@@ -1,0 +1,79 @@
+#post-body {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  background-color: rgb(248, 100, 2);
+  background-image: url("https://img.freepik.com/free-vector/angry-emoji-framed-background_53876-89765.jpg?w=360");
+  width: 400px;
+  margin: auto;
+}
+
+#posts-heading {
+  text-align: center;
+  margin: auto;
+  padding: 30px
+}
+
+#post-a-message-label {
+  margin: auto;
+  text-align: center;
+}
+
+#submit-post-form {
+  display: flex;
+  flex-direction: column;
+  border: solid black;
+  background-color: rgb(255, 55, 0);
+  padding: 12px;
+  margin: 12px;
+}
+
+#message {
+  resize: none;
+  height: 100px;
+  margin-top: 6px;
+  margin-bottom: 6px;
+}
+
+
+#choose-file-button {
+  /* display: inline-block;
+  padding: 5px 10px;
+  font-size: 20px;
+  cursor: pointer;
+  text-align: center;
+  text-decoration: none;
+  outline: none;
+  color: #fff;
+  background-color: #d1c12f;
+  border: none;
+  border-radius: 15px;
+  box-shadow: 0 9px rgb(114, 96, 64); */
+}
+
+#message-button-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+
+.message-button:hover {
+  background-color: #d8ab57;
+}
+
+.message-button:active {
+  background-color: #ebb462;
+  box-shadow: 0 5px rgb(92, 73, 39);
+  transform: translateY(4px);
+
+}
+
+#upload-file-button {
+  margin-left: 6px
+}
+
+#choose-file-button {
+  margin-left: 6px
+}
+
