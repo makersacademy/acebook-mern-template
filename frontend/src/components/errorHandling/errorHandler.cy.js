@@ -1,5 +1,6 @@
 import errorHandlerMessage from './errorHandlerMessage';
 import errorHandlerEmail from './errorHandlerEmail';
+import errorHandlerPassword from './errorHandlerPassword';
 
 describe('errorHandlerMessage', () => {
   it('returns an error message when message is empty', () => {
@@ -78,5 +79,12 @@ describe('errorHandlerEmail', () => {
   it('returns an error message when email is invalid format', () => {
     const result = errorHandlerEmail('email@email.com');
     expect(result).to.be.undefined;
+  });
+});
+
+describe('errorHandlerPassword', () => {
+  it('returns an error message when password is empty', () => {
+    const result = errorHandlerEmail('');
+    expect(result).to.deep.equal(<div>Password can't be empty!!!! :@</div>);
   });
 });
