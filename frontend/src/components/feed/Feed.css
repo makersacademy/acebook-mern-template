@@ -1,9 +1,16 @@
 html {
   background-color: #fff7f8;
   vertical-align: middle;
+  height: 100%;
+  font-size: 62.5%;
 }
 
-.posttitle {
+body {
+  min-height: 100%;
+  font-size: 1.6rem;
+}
+
+h1 {
   width: 500px;
   height: 40px;
   margin: auto;
@@ -13,30 +20,16 @@ html {
   position:relative; left:0px; top:30px;
 }
 
-.createpost {
+.create-post {
   background:  #fff7f8;
   width: 400px;
-  height: 200px;
+  height: 100px;
   margin: auto;
   padding: 5px;
   border-radius: 5px;
   vertical-align: left;
   text-align: left;
   position:relative; left:0px; top:50px;
-}
-
-button {
-  margin-left: 0px
-}
-.postbody {
-  width: 700px;
-  height: 50px;
-  margin: auto;
-  padding: 10px;
-  border-radius: 5px;
-  vertical-align: middle;
-  text-align: center;
-  position:relative; left:0px; top:80px;
 }
 
 

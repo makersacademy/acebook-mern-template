@@ -1,23 +1,23 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
 html {
   background-color: #Bde0fe;
   vertical-align: middle;
 }
-
 
 .footer {
   position:fixed;
   bottom:0;
   left:0;
   width:100%;
-  height: 62px;
+  height: 50px;
   background-color: #Ffc8dd;
   font-family: 'gill sans';
   color: black;
   text-align: center;
   font-size: 18px;
-}
-
-.Navbar {
-  height: 62px;
-  background-color: white;
 }
