@@ -29,10 +29,8 @@ const PostsController = {
   // save comment
   // the fetch post reqest req.body.comment assumes that the comment is packaged as object
   UpdateComment: (req, res) => {
-    // console.log(req.body.postID);
-    // console.log(req.body.comment);
     Post.findByIdAndUpdate(async (err) => {
-      req.params.postID,
+      '635fee24ff8189b02bbc8cf6',
         { $push: { comments: { text: req.body.comment } } },
         { new: true },
         function (err, docs) {
@@ -44,10 +42,31 @@ const PostsController = {
           }
         };
       const token = await TokenGenerator.jsonwebtoken(req.user_id);
-      res.status(201).json({ message: 'OK', token: token });
+      res.status(300).json({ message: 'OK', token: token, nope: req });
     });
   },
 };
+
+//   UpdateComment: (req, res) => {
+//     // console.log(req.body.postID);
+//     // console.log(req.body.comment);
+//     Post.findByIdAndUpdate(async (err) => {
+//       req.params.postID,
+//         { $push: { comments: { text: req.body.comment } } },
+//         { new: true },
+//         function (err, docs) {
+//           if (err) {
+//             // console.log(err);
+//             throw err;
+//           } else {
+//             console.log('Updated Post comments : ', docs);
+//           }
+//         };
+//       const token = await TokenGenerator.jsonwebtoken(req.user_id);
+//       res.status(201).json({ message: 'OK', token: token });
+//     });
+//   },
+// };
 
 // // comment
 // Comment: (req, res) => {

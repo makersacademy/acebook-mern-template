@@ -32,38 +32,15 @@ describe('/posts', () => {
       expect(response.status).toEqual(201);
     });
 
-    test('responds with a 201', async () => {
+    test('responds with a 300', async () => {
       let response = await request(app)
         .post('/posts/comment')
         .set('Authorization', `Bearer ${token}`)
         .send({ message: 'hello world', token: token });
-      expect(response.status).toEqual(201);
+      expect(response.status).toEqual(300);
     });
 
-    test('creates a new post and adds a comment', async () => {
-      await request(app)
-        .post('/posts')
-        .set('Authorization', `Bearer ${token}`)
-        .send({ message: 'hello world', token: token });
-      let posts = await Post.find();
-      let postId = posts[0].id;
-      console.log(postId);
-      expect(posts.length).toEqual(1);
-      expect(posts[0].message).toEqual('hello world');
-      await request(app)
-        .post('/posts/comment')
-        .set('Authorization', `Bearer ${token}`)
-        .send({
-          postID: postId,
-          comment: "It's friday!",
-          token: token,
-        });
-      let posts2 = await Post.find();
-      console.log(posts2);
-      expect(posts2[0].comments[0].text).toEqual("It's friday!");
-    });
-
-    xtest('creates a new post', async () => {
+    test('creates a new post', async () => {
       await request(app)
         .post('/posts')
         .set('Authorization', `Bearer ${token}`)
