@@ -22,10 +22,12 @@
 #submit-post-form {
   display: flex;
   flex-direction: column;
-  border: solid black;
-  background-color: rgb(255, 55, 0);
+  margin: 6px;
+  border: solid rgb(173, 44, 49);
+  background-color: rgb(245, 96, 100);
+  font-size: 11px;
+  border-radius: 8px;
   padding: 12px;
-  margin: 12px;
 }
 
 #message {
@@ -33,22 +35,6 @@
   height: 100px;
   margin-top: 6px;
   margin-bottom: 6px;
-}
-
-
-#choose-file-button {
-  /* display: inline-block;
-  padding: 5px 10px;
-  font-size: 20px;
-  cursor: pointer;
-  text-align: center;
-  text-decoration: none;
-  outline: none;
-  color: #fff;
-  background-color: #d1c12f;
-  border: none;
-  border-radius: 15px;
-  box-shadow: 0 9px rgb(114, 96, 64); */
 }
 
 #message-button-container {
@@ -69,6 +55,10 @@
 
 }
 
+#image-buttons {
+  display: flex;
+  flex-direction: row;
+}
 #upload-file-button {
   margin-left: 6px
 }
