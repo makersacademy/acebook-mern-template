@@ -8,6 +8,17 @@ import { faPaperPlane } from '@fortawesome/free-solid-svg-icons'
 const elementHeartOutline = <FontAwesomeIcon icon={ faHeart } />
 const elementPaperPlane = <FontAwesomeIcon icon={ faPaperPlane } />
 
+// const loadLikes = () => {
+//   fetch('/posts/likes', {
+//     method: 'post',
+//     headers: {'Content-Type': 'application/json'},
+//     body: JSON.stringify({post: post._id})
+//   })
+//   .then(response => response.json())
+//   .then(data =>
+//     data.likes)
+// } 
+
 const Post = ({post}) => {
   return(
 
@@ -23,10 +34,11 @@ const Post = ({post}) => {
         //     </div>
         //   </div>
     
+
         //   <div class="likes-container">
         //     <div class="likes">
         //       <button id="likes-button"> { elementEnvelope }</button>
-        //       <span id="likes-count"></span>
+        //       <span id="likes-count">{post.likes.length}</span>
         //     </div>
         //   </div>
         // </div>
@@ -53,7 +65,7 @@ const Post = ({post}) => {
               <div className="reactions-container">
                 <div className="likes">
                   <button id="likes-button"> { elementHeartOutline }</button>
-                  <span id="likes-count">123</span>
+                  <span id="likes-count">12</span>
                 </div>
                 <div>
                   <span className="comments-number">12 Comments</span>
