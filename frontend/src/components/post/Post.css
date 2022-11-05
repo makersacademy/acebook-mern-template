@@ -52,10 +52,11 @@ article {
   flex-direction: column;
   justify-content: center;
   border-radius: 8px;
+  margin-bottom: 18px;
   margin-top: 4px;
 }
 
 .message {
   color: rgb(250, 225, 225);
-  margin-bottom: 12px;
+
 }

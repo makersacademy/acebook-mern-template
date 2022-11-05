@@ -1,10 +1,16 @@
 .hates-container {
   display: flex;
   align-items: center;
-  margin-bottom: 6px;
+  margin-bottom: 18px;
+  background-color: rgb(173, 44, 49);
+  border-radius: 25px;
+  justify-content: space-between;
 }
 .hates-container > * {
-  margin-right: 6px;
+  margin: 3px;
+  margin-left: 12px;
+  margin-right: 12px;
+  
 }
 
 #hate-image {
@@ -14,10 +20,12 @@
   object-fit: cover
 }
 
-
 button {
   display: flex;
   align-items: center;
   color: rgb(173, 44, 49);
   font-size: 8px;
+  padding: 0px;
+  padding-left: 3px;
+  padding-right: 3px;
 }

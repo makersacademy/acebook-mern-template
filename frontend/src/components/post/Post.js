@@ -1,5 +1,5 @@
 import React from 'react';
-import Comment from '../comment/Comment'
+import Comments from '../comments/Comments'
 import Hates from '../hates/Hates'
 import "./Post.css";
 
@@ -12,17 +12,18 @@ const Post = ({ post }) => {
           <div class="username">{"{ Name }"}</div>
           <div class="post-time">{"{ Post time }"}</div>
         </div>
+      </div>
 
-      </div>
-      <div class="post-image-container">
-        <img class="post-image" src='https://i.postimg.cc/T5vGJyXj/kyle.png' alt='kyle' />
-      </div>
       <div class="message-container">
         <div class="message">{post.message}</div>
       </div>
+      
+      <div class="post-image-container">
+        <img class="post-image" src='https://i.postimg.cc/T5vGJyXj/kyle.png' alt='kyle' />
+      </div>
+    
       <Hates />
-      <Comment />
-
+      <Comments />
     </article>
   )
 }

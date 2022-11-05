@@ -1,6 +1,7 @@
 .new-comment-form {
   display: flex;
-  justify-content: space-between; 
+  justify-content: space-between;
+  margin-bottom: 6px;
 }
 
 .new-comment {
