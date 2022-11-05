@@ -25,17 +25,3 @@
   color: rgb(134, 134, 134);
 }
 
-.new-comment-form {
-  display: flex;
-  justify-content: space-between; 
-}
-
-.new-comment {
-  font-size: 11px;
-  display: flex;
-  width: 100%;
-}
-
-.submit-button {
-  font-size: 11px;
-}
