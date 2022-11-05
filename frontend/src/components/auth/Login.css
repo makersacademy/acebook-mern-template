@@ -29,7 +29,7 @@
   background: #Cdb4db;
 }
 
-input[type=text] {
+/* input[type=text] {
   width: 30%;
   background: #fefefe;
   border-radius: 4px;
@@ -48,4 +48,4 @@ input[type=password] {
   font-size: 20px;
   position:relative; left:0px; top:10px;
   font-family: 'gill sans';
-}
+} */
