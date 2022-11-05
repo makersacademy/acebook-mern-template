@@ -14,4 +14,14 @@ describe('errorHandlerMessage', () => {
       </div>
     );
   });
+
+  it('returns an error message when message contains invalid characters', () => {
+    const result = errorHandlerMessage('Hello, my name is Kyle, and I hate <>');
+    expect(result).to.deep.equal(
+      <div>
+        You have introduced some invalid special characters, good luck next
+        time, you clearly need it.
+      </div>
+    );
+  });
 });
