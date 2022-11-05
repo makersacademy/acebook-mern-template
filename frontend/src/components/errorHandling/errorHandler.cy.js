@@ -84,7 +84,17 @@ describe('errorHandlerEmail', () => {
 
 describe('errorHandlerPassword', () => {
   it('returns an error message when password is empty', () => {
-    const result = errorHandlerEmail('');
+    const result = errorHandlerPassword('');
     expect(result).to.deep.equal(<div>Password can't be empty!!!! :@</div>);
+  });
+
+  it('returns an error message when password is invalid format', () => {
+    const result = errorHandlerPassword('747<>');
+    expect(result).to.deep.equal(
+      <div>
+        Your password must be only alphanumeric, between 4 and 25 characters and
+        give us ownership over your soul.
+      </div>
+    );
   });
 });
