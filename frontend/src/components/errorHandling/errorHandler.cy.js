@@ -74,4 +74,9 @@ describe('errorHandlerEmail', () => {
       </div>
     );
   });
+
+  it('returns an error message when email is invalid format', () => {
+    const result = errorHandlerEmail('email@email.com');
+    expect(result).to.be.undefined;
+  });
 });
