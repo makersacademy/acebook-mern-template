@@ -6,31 +6,17 @@ import errorHandlerUsersName from './errorHandlerUsersName';
 describe('errorHandlerMessage', () => {
   it('returns an error message when message is empty', () => {
     const result = errorHandlerMessage('');
-    expect(result).to.deep.equal(
-      <div>
-        You need to write some text if you want to express your hate, you idiot.
-      </div>
-    );
+    expect(result.props.id).to.deep.equal('message-error-empty');
   });
 
   it('returns an error message when message contains invalid characters', () => {
     const result = errorHandlerMessage('Hello, my name is Kyle, and I hate <>');
-    expect(result).to.deep.equal(
-      <div>
-        You have introduced some invalid special characters, good luck next
-        time, you clearly need it.
-      </div>
-    );
+    expect(result.props.id).to.deep.equal('message-error-invalid');
   });
 
   it('returns an error message when message contains invalid characters', () => {
     const result = errorHandlerMessage('Hello, my name i{s Kyle, and I hate ');
-    expect(result).to.deep.equal(
-      <div>
-        You have introduced some invalid special characters, good luck next
-        time, you clearly need it.
-      </div>
-    );
+    expect(result.props.id).to.deep.equal('message-error-invalid');
   });
 
   it("doesn't return anything if the given string is valid", () => {
