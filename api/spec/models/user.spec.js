@@ -95,4 +95,36 @@ describe('user model', () => {
       });
     });
   });
+
+  it("won't save the user if password is incorrect format", (done) => {
+    const user = new User({
+      email: 'someone@example.com',
+      password: 'password<>',
+      usersName: 'Ben Smith',
+    });
+
+    user.save((err) => {
+      User.find((users) => {
+        expect(err).not.toBeNull();
+        expect(users).toBeNull();
+        done();
+      });
+    });
+  });
+
+  it("won't save the user if usersName is incorrect format", (done) => {
+    const user = new User({
+      email: 'someone@example.com',
+      password: 'password',
+      usersName: 'Ben[] Smith',
+    });
+
+    user.save((err) => {
+      User.find((users) => {
+        expect(err).not.toBeNull();
+        expect(users).toBeNull();
+        done();
+      });
+    });
+  });
 });
