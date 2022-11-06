@@ -10,6 +10,13 @@ const LogInForm = ({ navigate }) => {
   const handleSubmit = async (event) => {
     event.preventDefault();
 
+    if (email === '' || password === '') return;
+    if (
+      !email.match(/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/) ||
+      !password.match(/^[a-zA-Z0-9]{4,25}$/)
+    )
+      return;
+
     let response = await fetch('/tokens', {
       method: 'post',
       headers: {

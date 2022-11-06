@@ -31,8 +31,8 @@ const Feed = ({ navigate }) => {
   const handleSubmitPost = async (event) => {
     event.preventDefault();
 
-    // if (message === '') return;
-    // if (!message.match(/^[a-zA-Z0-9~!@#()`;\-':,.?| ]*$/)) return;
+    if (message === '') return;
+    if (!message.match(/^[a-zA-Z0-9~!@#()`;\-':,.?| ]*$/)) return;
 
     let response = await fetch('/posts', {
       method: 'post',
