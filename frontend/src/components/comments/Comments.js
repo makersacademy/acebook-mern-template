@@ -8,7 +8,7 @@ const Comments = ({ }) => {
         <NewComment />
       <div class="comments-container">
         <div class="comment-header">
-          <img class="comment-profile-image" src='https://iili.io/mVK9G2.png' alt='kyle' />
+          <img class="comment-profile-image" src={require('../../images/defaultProfileImage.png')} alt='kyle' />
           <div class="comment-username">{"{ Name }"}</div>
           <div class="comment-time">{"{ Comment time }"}</div>
           <div class="comment-name-and-time-container">

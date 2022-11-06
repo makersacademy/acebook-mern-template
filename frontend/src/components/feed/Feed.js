@@ -1,12 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import Post from '../post/Post'
-import Kyle from '../kyle/Kyle'
 import "./Feed.css";
+import CreatePost from '../createPost/CreatePost';
 
 const Feed = ({ navigate }) => {
   const [posts, setPosts] = useState([]);
   const [token, setToken] = useState(window.localStorage.getItem("token"));
-  const [message, setMessage] = useState('');
 
   useEffect(() => {
     fetchPosts()
@@ -26,36 +25,9 @@ const Feed = ({ navigate }) => {
           setPosts(data.posts);
         })
     }
+ 
   }
-
-  const handleSubmitPost = async (event) => {
-    event.preventDefault();
-
-    if (message === '') return
-    let response = await fetch('/posts', {
-      method: 'post',
-      headers: {
-        'Content-Type': 'application/json',
-        'Authorization': `Bearer ${token}`
-      },
-      body: JSON.stringify({ message: message }),
-    })
-    console.log("submit")
-
-    if (response.status !== 201) {
-      navigate('/posts')
-    } else {
-      let data = await response.json()
-      window.localStorage.setItem("token", data.token)
-      fetchPosts()
-      setMessage("")
-    }
-  };
-
-  const handleMessageChange = (event) => {
-    setMessage(event.target.value);
-  };
-
+  
   const logout = () => {
     window.localStorage.removeItem("token")
     navigate('/login')
@@ -70,31 +42,13 @@ const Feed = ({ navigate }) => {
             Just leave.
           </button>
           <div id="message-box">
-            <form id="submit-post-form"onSubmit={handleSubmitPost}>
-              <label id='post-a-message-label'>
-                Spew some shit that no one cares about:
-              </label>
-              <textarea placeholder="Message" id="message" value={message} onChange={handleMessageChange} />
-              <div id="message-button-container">
-              <input class="message-button" id='submit' type="submit" value=":@" />
-              <div id="image-buttons">
-              <button class="message-button" id='choose-file-button'>
-                Choose file of your ugly child
-              </button>
-              <button class="message-button" id='upload-file-button'>
-                Upload photo of your food no one cares about
-              </button>
-              </div>
-              
-              </div>
-            </form>
+            <CreatePost  fetchPosts={fetchPosts} navigate={navigate}/>
           </div>
           <div id='feed' role="feed">
             {posts.map(
               (post) => (<Post post={post} key={post._id} />)
             ).reverse()}
           </div>
-          <Kyle />
         </div>
       </>
     )
