@@ -16,6 +16,7 @@ const Post = ({ post }) => {
 
       <div class="message-container">
         <div class="message">{post.message}</div>
+        <div >{console.log(post.author)}</div>
       </div>
       
       <div class="post-image-container">
