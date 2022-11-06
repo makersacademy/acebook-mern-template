@@ -32,7 +32,7 @@ describe('/posts', () => {
       expect(response.status).toEqual(201);
     });
 
-    test('responds with a 300', async () => {
+    xtest('responds with a 300', async () => {
       let response = await request(app)
         .post('/posts/comment')
         .set('Authorization', `Bearer ${token}`)

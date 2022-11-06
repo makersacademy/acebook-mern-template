@@ -76,8 +76,8 @@ describe('Post model', () => {
       // comments: { text: 'Some comment 2' },
     });
     let obId = post.id;
-    console.log(post.id);
-    console.log(post);
+    // console.log(post.id);
+    // console.log(post);
     post.save((err) => {
       let post_id = post.id;
       Post.findByIdAndUpdate(
@@ -111,8 +111,8 @@ describe('Post model', () => {
       // comments: { text: 'Some comment 2' },
     });
     let obId = post.id;
-    console.log(post.id);
-    console.log(post);
+    // console.log(post.id);
+    // console.log(post);
     post.save((err) => {
       let post_id = post.id;
       Post.findByIdAndUpdate(
