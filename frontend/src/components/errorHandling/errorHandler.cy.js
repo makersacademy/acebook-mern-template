@@ -44,40 +44,25 @@ describe('errorHandlerMessage', () => {
 describe('errorHandlerEmail', () => {
   it('returns an error message when email is empty', () => {
     const result = errorHandlerEmail('');
-    expect(result).to.deep.equal(<div>Email can't be empty!!!! :@</div>);
+    expect(result.props.id).to.deep.equal('email-error-empty');
   });
 
   it('returns an error message when email is invalid format', () => {
     const result = errorHandlerEmail('email<@email.com');
-    expect(result).to.deep.equal(
-      <div>
-        Do you even know what an email looks like? Good luck next time, you are
-        clearly going to need it!
-      </div>
-    );
+    expect(result.props.id).to.deep.equal('email-error-invalid');
   });
 
   it('returns an error message when email is invalid format', () => {
     const result = errorHandlerEmail('email@email@email.com');
-    expect(result).to.deep.equal(
-      <div>
-        Do you even know what an email looks like? Good luck next time, you are
-        clearly going to need it!
-      </div>
-    );
+    expect(result.props.id).to.deep.equal('email-error-invalid');
   });
 
   it('returns an error message when email is invalid format', () => {
     const result = errorHandlerEmail('email@email email.com');
-    expect(result).to.deep.equal(
-      <div>
-        Do you even know what an email looks like? Good luck next time, you are
-        clearly going to need it!
-      </div>
-    );
+    expect(result.props.id).to.deep.equal('email-error-invalid');
   });
 
-  it('returns an error message when email is invalid format', () => {
+  it('does not return an error message when email is valid format', () => {
     const result = errorHandlerEmail('email@email.com');
     expect(result).to.be.undefined;
   });
