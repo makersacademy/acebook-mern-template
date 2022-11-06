@@ -74,11 +74,7 @@ describe('errorHandlerPassword', () => {
 describe('errorHandlerUsersName', () => {
   it('returns an error message when UsersName is invalid format', () => {
     const result = errorHandlerUsersName('Kyle <Book');
-    expect(result).to.deep.equal(
-      <div>
-        Did you introduce some weird and not-allowed-at-all character as a name?
-      </div>
-    );
+    expect(result.props.id).to.deep.equal('usersname-error-invalid');
   });
 
   it("doesn't return an error message if UsersName is empty", () => {
