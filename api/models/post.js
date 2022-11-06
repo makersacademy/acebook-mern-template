@@ -9,7 +9,7 @@ const PostSchema = new mongoose.Schema({
       validator: function (v) {
         return /^[a-zA-Z0-9~!@#()`;\-':,.?| ]*$/.test(v);
       },
-      message: 'Format is incorrect',
+      message: 'Format is incorrect', // There NEEDS to be a message in order to be able to test this, otherwise it will timeout.
     },
     required: [true],
   },
