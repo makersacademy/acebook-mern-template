@@ -36,7 +36,7 @@ describe('/posts', () => {
       expect(response.status).toEqual(201);
     });
 
-    test('creates a new post', async () => {
+    test('creates a new post and adds comment', async () => {
       await request(app)
         .post('/posts')
         .set('Authorization', `Bearer ${token}`)
