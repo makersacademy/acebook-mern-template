@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import Post from '../post/Post';
+import Comment from '../comment/comment';
 import './Feed.css';
 
 const Feed = ({ navigate }) => {
@@ -26,6 +27,7 @@ const Feed = ({ navigate }) => {
   
   useEffect(loadPosts, [])
 
+  
   const handlePostSubmit = async (event) => {
     event.preventDefault();
 
@@ -46,6 +48,7 @@ const Feed = ({ navigate }) => {
 
       
   }
+
   
   const handleMessageChange = (event) => {
     setMessage(event.target.value)
@@ -61,6 +64,8 @@ const Feed = ({ navigate }) => {
     return(
       <> <body className="posttitle">
         <h1>Posts &#128075;</h1>
+        
+        
         </body>
         <form onSubmit={handlePostSubmit}>
         <body className="createpost">
@@ -74,18 +79,23 @@ const Feed = ({ navigate }) => {
             Logout
           </button>
           <body className="postbody">
+    
+                    
         <div id='feed' role="feed">
             {posts.map(
               (post) => ( 
               <Post post={ post } key={ post._id }/> )
             )}
         </div>
+        
         </body>
       </>
     )
   } else {
     navigate('/signin')
   }
+  
+   
 }
 
 export default Feed;

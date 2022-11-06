@@ -1,10 +1,12 @@
 import React from 'react';
 import './Post.css';
+import Comment from '../comment/comment';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faHeart } from '@fortawesome/free-regular-svg-icons'
 
 const elementEnvelope = <FontAwesomeIcon icon={ faHeart } />
+
 
 const Post = ({post}) => {
   return(
@@ -25,6 +27,10 @@ const Post = ({post}) => {
               <button id="likes-button"> { elementEnvelope }</button>
               <span id="likes-count"></span>
             </div>
+          </div>
+            <Comment/>
+          <div>
+            
           </div>
         </div>
   )
