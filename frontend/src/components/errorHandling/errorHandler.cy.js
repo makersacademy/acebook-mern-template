@@ -57,27 +57,17 @@ describe('errorHandlerEmail', () => {
 describe('errorHandlerPassword', () => {
   it('returns an error message when password is empty', () => {
     const result = errorHandlerPassword('');
-    expect(result).to.deep.equal(<div>Password can't be empty!!!! :@</div>);
-  });
+    expect(result.props.id).to.deep.equal('password-error-empty');
 
-  it('returns an error message when password is invalid format', () => {
-    const result = errorHandlerPassword('747<>');
-    expect(result).to.deep.equal(
-      <div>
-        Your password must be only alphanumeric, between 4 and 25 characters and
-        give us ownership over your soul.
-      </div>
-    );
+    it('returns an error message when password is invalid format', () => {
+      const result = errorHandlerPassword('747<>');
+      expect(result.props.id).to.deep.equal('password-error-invalid');
+    });
   });
 
   it('returns an error message when password is too short', () => {
     const result = errorHandlerPassword('74');
-    expect(result).to.deep.equal(
-      <div>
-        Your password must be only alphanumeric, between 4 and 25 characters and
-        give us ownership over your soul.
-      </div>
-    );
+    expect(result.props.id).to.deep.equal('password-error-invalid');
   });
 });
 
