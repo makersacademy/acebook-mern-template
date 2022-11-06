@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import Post from '../post/Post';
 import './Feed.css';
+import errorHandlerMessage from '../errorHandling/errorHandlerMessage';
 
 const Feed = ({ navigate }) => {
   const [posts, setPosts] = useState([]);
@@ -30,8 +31,8 @@ const Feed = ({ navigate }) => {
   const handleSubmitPost = async (event) => {
     event.preventDefault();
 
-    if (message === '') return;
-    if (!message.match(/^[a-zA-Z0-9~!@#()`;\-':,.?| ]*$/)) return;
+    // if (message === '') return;
+    // if (!message.match(/^[a-zA-Z0-9~!@#()`;\-':,.?| ]*$/)) return;
 
     let response = await fetch('/posts', {
       method: 'post',
@@ -88,6 +89,8 @@ const Feed = ({ navigate }) => {
                   type="submit"
                   value=":@"
                 />
+                <div id="ErrorMessageEmail">{errorHandlerMessage(message)}</div>
+
                 <div id="image-buttons">
                   <button className="message-button" id="choose-file-button">
                     Choose file of your ugly child

@@ -6,7 +6,6 @@ import errorHandlerUsersName from '../errorHandling/errorHandlerUsersName';
 const LogInForm = ({ navigate }) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [validationErrors, setError] = useState('');
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -32,7 +31,6 @@ const LogInForm = ({ navigate }) => {
 
   const handleEmailChange = (event) => {
     setEmail(event.target.value);
-    setError(errorHandlerEmail(email));
   };
 
   const handlePasswordChange = (event) => {
@@ -59,13 +57,9 @@ const LogInForm = ({ navigate }) => {
         />
         <input role="submit-button" id="submit" type="submit" value="Submit" />
       </form>
-      <div id="ErrorMessageEmail" value={validationErrors}>
-        {errorHandlerEmail(email)}
-      </div>
+      <div id="ErrorMessageEmail">{errorHandlerEmail(email)}</div>
 
-      <div id="ErrorMessagePassword" value={validationErrors}>
-        {errorHandlerPassword(password)}
-      </div>
+      <div id="ErrorMessagePassword">{errorHandlerPassword(password)}</div>
     </>
   );
 };
