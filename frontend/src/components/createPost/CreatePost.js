@@ -10,25 +10,26 @@ const CreatePost = ({ navigate, fetchPosts }) => {
   const token = window.localStorage.getItem("token");
   const [message, setMessage] = useState("");
   const [imageUpload, setImageUpload] = useState(null);
-  const [imageList, setImageList] = useState([]);
+  let image = ""
   const imageListRef = ref(storage, "images/");
+ 
 
+  
   const handleSubmitPost = async (event) => {
     event.preventDefault();
     if (imageUpload === "" && message === "") return;
     if (!message.match(/^[a-zA-Z0-9~!@#()`;\-':,.?| ]*$/)) return;
 
-    UploadImage();
-
+    console.log("handlesub image first",image)     
     let response = await fetch("/posts", {
       method: "post",
       headers: {
         "Content-Type": "application/json",
         Authorization: `Bearer ${token}`,
       },
-      body: JSON.stringify({ message: message, imageUrls: imageList }),
+      body: JSON.stringify({ message: message, imageURL: image}),
     });
-
+    console.log("handlesub image last",image)
     if (response.status !== 201) {
       navigate("/posts");
     } else {
@@ -43,25 +44,18 @@ const CreatePost = ({ navigate, fetchPosts }) => {
     setMessage(event.target.value);
   };
 
-  const UploadImage = () => {
+  const UploadImage = (event) => {
+    event.preventDefault();
     if (imageUpload == null) return;
     const imageRef = ref(storage, `images/${imageUpload.name + v4()}`);
     uploadBytes(imageRef, imageUpload).then((snapshot) => {
       getDownloadURL(snapshot.ref).then((url) => {
-        setImageList((prev) => [...prev, url]);
+        image = url
+        console.log("uploadimage image",image)
       });
     });
   };
 
-  useEffect(() => {
-    listAll(imageListRef).then((res) => {
-      res.items.forEach((item) => {
-        getDownloadURL(item).then((url) => {
-          setImageList((prev) => [...prev, url]);
-        });
-      });
-    });
-  }, []);
 
   return (
     <>
@@ -87,12 +81,8 @@ const CreatePost = ({ navigate, fetchPosts }) => {
             setImageUpload(event.target.files[0]);
           }}
         />
-        <button onClick={UploadImage}>Upload Photo</button> <br></br>
-        {imageList
-          .map((url) => {
-            return <img src={url} class="center" />;
-          })
-          .reverse()}{" "}
+        <button onClick={(event) => {UploadImage(event)}}>Upload Photo</button> <br></br>
+        
       </form>
     </>
   );

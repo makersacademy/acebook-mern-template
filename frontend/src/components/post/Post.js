@@ -19,7 +19,7 @@ const Post = ({ post }) => {
       </div>
       
       <div class="post-image-container">
-        <img class="post-image" src='https://i.postimg.cc/T5vGJyXj/kyle.png' alt='kyle' />
+        <img class="post-image" src={post.imageURL} alt='kyle' />
       </div>
     
       <Hates />
