@@ -15,7 +15,8 @@ const PostsController = {
   },
 
   Create: (req, res) => {
-    const postData = {message: req.body.message, user: req.user_id, token: req.body.token};
+    console.log(req);
+    const postData = {message: req.body.message, user: req.user_id, token: req.body.token, img: req.body.img};
     console.log(postData);
     const post = new Post(postData);
     post.save(async (err) => {
@@ -27,6 +28,7 @@ const PostsController = {
       res.status(201).json({ post: post, token: token});
     });
   },
+
   Likes: (req, res) => {
     const likedPost = Post.find(req.post_id);
     likedPost.likes.push(req.user_id)
