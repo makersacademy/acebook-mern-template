@@ -6,7 +6,7 @@ const Feed = ({ navigate }) => {
   const [posts, setPosts] = useState([]);
   const [token, setToken] = useState(window.localStorage.getItem("token"));
 
-  useEffect(() => {
+  const reload = () => {
     if (token) {
       fetch("/posts", {
         headers: {
@@ -20,6 +20,10 @@ const Feed = ({ navigate }) => {
           setPosts(data.posts);
         });
     }
+  }
+
+  useEffect(() => {
+    reload()
   }, []);
 
   const logout = () => {
@@ -40,13 +44,15 @@ const Feed = ({ navigate }) => {
         </div>
         <div id="wrapper">
           <h2>Feed</h2>
+          <PostForm reload={ reload }/>
           <div id="feed" role="feed">
             {posts.map((post) => (
-              <Post post={post} key={post._id} />
+              <div class='post-card-container'>
+                <Post post={post} key={post._id} />
+              </div>
             ))}
           </div>
         </div>
-        <PostForm />
       </>
     );
   } else {

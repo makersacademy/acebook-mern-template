@@ -1,6 +1,6 @@
 import { useState } from "react"
 
-export default function PostForm () {
+export default function PostForm (props) {
   // Component state
   const [message, setMessage] = useState('')
   // Feed already resets the token for us.
@@ -24,26 +24,26 @@ export default function PostForm () {
     if (response.ok) {
       // If form sent successfully then it resets the input field.
       setMessage('')
+      props.reload()
     }
   }
 
-  // Handles value of the text input field.
-  const handleChange = (event) => {
-    setMessage(event.target.value)
-  }
   // Actual JSX
   return (
     <div className="form-container">
       <form className='create-message-form' onSubmit={handleSubmit}>
-        <label for='text-box'>Write your message here:</label>
+        <label for='text-box'>New Message</label>
         <input
           type="text"
           className="text-box"
-          onChange={handleChange}
+          onChange={(e) => setMessage(e.target.value)}
+          placeholder="What's on your mind?"
           value={message}
           required
           />
-        <button>Add</button>
+        <button
+          className='signup-form-btn'
+          >Add</button>
       </form>
     </div>
   )
