@@ -5,8 +5,8 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faHeart } from '@fortawesome/free-regular-svg-icons'
 import { faPaperPlane } from '@fortawesome/free-solid-svg-icons'
 
-const elementHeartOutline = <FontAwesomeIcon icon={ faHeart } />
-const elementPaperPlane = <FontAwesomeIcon icon={ faPaperPlane } />
+const elementHeartOutline = <FontAwesomeIcon icon={ faHeart } size = '2x' />
+const elementPaperPlane = <FontAwesomeIcon icon={ faPaperPlane } size = '2x' />
 
 // const loadLikes = () => {
 //   fetch('/posts/likes', {
@@ -21,29 +21,7 @@ const elementPaperPlane = <FontAwesomeIcon icon={ faPaperPlane } />
 
 const Post = ({post}) => {
   return(
-
-        // <div class="post-wrap" data-cy="post" key={ post._id}>
-  
-        //   <div class="post-header">
-        //     <img src="/images/bird-avator.png" alt="avatar" class="avatar" ></img> 
-        //     <div class="post-header-info">
-        //       <span id="user-name">{post.user.name}</span>
-        //       <span id="time">{post.date.substr(11,5)}</span>  
-        //       <span id="date">{post.date.substr(0,10)}</span>
-        //       <p id="post-content">{post.message}</p>
-        //     </div>
-        //   </div>
-    
-
-        //   <div class="likes-container">
-        //     <div class="likes">
-        //       <button id="likes-button"> { elementEnvelope }</button>
-        //       <span id="likes-count">{post.likes.length}</span>
-        //     </div>
-        //   </div>
-        // </div>
-
-        <div className="container" data-cy="post" key={ post._id}> 
+        <div className="posts-container" data-cy="post" key={ post._id}> 
           <div className="post">
             {/* POST HEADER */}
             <div className="post-header"> 
@@ -81,21 +59,28 @@ const Post = ({post}) => {
                 </div>
                 <div className="box-bar">
                   <input type="text" placeholder='Write a comment...' className="bar-input"></input>
-                  <button className="write-comment">{ elementPaperPlane  }</button>
+                  <button className="write-comment-btn">{ elementPaperPlane  }</button>
                 </div>
               </div>
             </div>
-            {/* SEE COMMENTS*/}
-            <div className="all-comments">
+            {/* SEE COMMENTS  - will need to be a separate component */}
+            <div className="all-comments-section">
               <img src="/images/bird-avator.png" alt="avatar" className="comment-author-pic" ></img> 
-              <div clasName="comment-section">
+              <div id="single-comment-wrapper">
                 <span className="comment-author">Comment Author</span>
-                <span className="comment-content">Fake comment!</span>
+                <span className="comment-content">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. </span>
               </div>
             </div>
-            
 
-
+            {/* SEE COMMENTS - duplicate to display as example */}
+            <div className="all-comments-section">
+              <img src="/images/bird-avator.png" alt="avatar" className="comment-author-pic" ></img> 
+              <div id="single-comment-wrapper">
+                <span className="comment-author">Comment Author</span>
+                <span className="comment-content">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. </span>
+              </div>
+            </div>
+          
           </div>
         </div> 
   )

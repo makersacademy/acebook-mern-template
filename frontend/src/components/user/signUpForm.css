@@ -1,64 +1,91 @@
-.signupbody {
-  background: white;
-  width: 500px;
-  height: 350px;
-  margin: auto;
-  padding: 35px;
-  border-radius: 10px;
-  vertical-align: middle;
-  text-align: center;
-  position:relative; left:0px; top:150px;
-  font-family: 'gill sans';
-  font-size: 25px;
-}
-#email {
-    width: 50%;
-    background: #fefefe;
-    margin-top: 20px;
-    border-radius: 4px;
-    padding: 10px 8px;
-    border: 1px solid #444;
-    font-size: 20px;
-    font-family: 'gill sans';
+
+.register-background {
+    background: linear-gradient(90deg, rgba(87,68,144,1) 0%, rgba(99,72,135,1) 100%);
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+  }
+
+  .register-background .register-logo {
+    position: absolute;
+    margin-bottom: 800px;
+    margin-right: 550px;
+    font-weight: 700;
+    font-size: 25pt;
+    color: #ffffff;
+  }
+
+  .register-background .register-login {
+    position: absolute;
+    margin-bottom: 800px;
+    margin-left: 550px;
+    font-weight: 300;
+    font-size: 13pt;
+    color: #ffffff;
+  }
+
+  .register-background .register-login a {
+    text-decoration: none;
+    margin-left: 10px;
+    padding: 10px 15px;
+    border-radius: 5px;
+    background: rgba(0,0,0,0.3);
+    color: #ffffff;
+  }
+
+  .register-background .register-login a:hover {
+    background: rgba(0,0,0,0.4);
+  }
+
+  .register-background .register-quote {
+    margin-bottom: 30px;
+    font-weight: 300;
+    color: #ffffff;
   }
   
-  #password {
-    width: 50%;
-    background: #fefefe;
-    border-radius: 4px;
-    padding: 10px 8px;
-    border: 1px solid #444;
-    font-size: 20px;
-    position:relative; left:0px; top:10px;
-    font-family: 'gill sans';
-    }
+  .register-box {
+    width: 350px;
+    padding: 15px;
+    text-align: center;
+    border-radius: 5px;
+    background: #ffffff;
+    box-shadow: 0px 1px 10px 1px rgba(71, 71, 71, 0.52);
+  }
 
-   #name {
-      width: 50%;
-      background: #fefefe;
-      border-radius: 4px;
-      padding: 10px 8px;
-      border: 1px solid #444;
-      font-size: 20px;
-      position:relative; left:0px; top:10px;
-      font-family: 'gill sans';
-      }
-  
-  #submit {
-    background: #Ffc8dd;
-    border-radius: 4px;
-    width: 30%;
-    margin-top: 20px;
-    padding: 10px 8px;
-    border: 1px solid #444;
+  .register-box input {
+    background: #ffffff;
+    width: 100%;
+    margin-bottom: 15px;
+    padding: 15px;
+    font-size: 18px;
+    font-weight: 100;
+    box-sizing: border-box;
+    border: 1px solid #c9c3c3;
+    border-radius: 5px;
+    outline: none;
+  }
+
+  .register-box input:focus {
+    box-shadow: 0px 0px 1px 1px #634887;
+  }
+
+  .register-box button {
+    width: 100%;
+    margin-bottom: 15px;
+    color: #f3f0f0;
     font-size: 20px;
-    transition-duration: 0.4s;
+    font-weight: 100;
+    border-radius: 5px;
+    border: none;
+    padding: 13px 0;
     cursor: pointer;
-    position:relative; left:0px; top:20px;
-    font-family: 'gill sans';
+    background: linear-gradient(90deg, rgba(87,68,144,1) 0%, rgba(99,72,135,1) 100%);
   }
 
-  #submit:hover {
-    color: white;
-    background: #Cdb4db;
+  .register-box button:hover {
+    background: linear-gradient(90deg, rgba(104,84,163,1) 0%, rgba(123,95,161,1) 100%);
   }
+
