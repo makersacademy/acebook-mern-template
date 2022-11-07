@@ -3,6 +3,7 @@ import './Post.css';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faHeart } from '@fortawesome/free-regular-svg-icons'
+// import { faHeart } from '@fortawesome/free-solid-svg-icons' (shaded heart)
 import { faPaperPlane } from '@fortawesome/free-solid-svg-icons'
 
 const elementHeartOutline = <FontAwesomeIcon icon={ faHeart } size = '2x' />
