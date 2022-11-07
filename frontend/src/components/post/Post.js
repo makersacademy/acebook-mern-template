@@ -1,13 +1,13 @@
 import React from 'react';
 import './Post.css';
-import Comment from '../comment/comment';
+import CommentForm from '../comment/CommentForm';
+import { useNavigate } from "react-router-dom";
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faHeart } from '@fortawesome/free-regular-svg-icons'
-import { faPaperPlane } from '@fortawesome/free-solid-svg-icons'
 
 const elementHeartOutline = <FontAwesomeIcon icon={ faHeart } size = '2x' />
-const elementPaperPlane = <FontAwesomeIcon icon={ faPaperPlane } size = '2x' />
+
 
 // const loadLikes = () => {
 //   fetch('/posts/likes', {
@@ -20,10 +20,9 @@ const elementPaperPlane = <FontAwesomeIcon icon={ faPaperPlane } size = '2x' />
 //     data.likes)
 // } 
 
-
 const Post = ({post}) => {
   return(
-        <div className="posts-container" data-cy="post" key={ post._id}> 
+        <div className="posts-container" data-cy="post" key={ post._id }> 
           <div className="post">
             {/* POST HEADER */}
             <div className="post-header"> 
@@ -54,7 +53,8 @@ const Post = ({post}) => {
               <div className="saparator"></div>
             </div>
             {/* WRITE COMMENT*/}
-            <div className="comments">
+            <CommentForm navigate={ useNavigate() }/>
+            {/* <div className="comments">
               <div className="comments-box">
                 <div className="box-profile">
                   <img src="/images/bird-avator.png" alt="avatar" className="profile-pic" ></img> 
@@ -64,24 +64,24 @@ const Post = ({post}) => {
                   <button className="write-comment-btn">{ elementPaperPlane  }</button>
                 </div>
               </div>
-            </div>
+            </div> */}
             {/* SEE COMMENTS  - will need to be a separate component */}
-            <div className="all-comments-section">
+            {/* <div className="all-comments-section">
               <img src="/images/bird-avator.png" alt="avatar" className="comment-author-pic" ></img> 
               <div id="single-comment-wrapper">
                 <span className="comment-author">Comment Author</span>
                 <span className="comment-content">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. </span>
               </div>
-            </div>
+            </div> */}
 
             {/* SEE COMMENTS - duplicate to display as example */}
-            <div className="all-comments-section">
+            {/* <div className="all-comments-section">
               <img src="/images/bird-avator.png" alt="avatar" className="comment-author-pic" ></img> 
               <div id="single-comment-wrapper">
                 <span className="comment-author">Comment Author</span>
                 <span className="comment-content">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. </span>
               </div>
-            </div>
+            </div> */}
           
           </div>
         </div> 

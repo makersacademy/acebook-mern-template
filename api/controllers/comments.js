@@ -1,13 +1,15 @@
+const { request } = require("express");
 const Comment = require("../models/comment");
 const TokenGenerator = require("../models/token_generator");
 
 const CommentsController = {
-
-  
-
-
     Create: (req, res) => {
-        const commentData = {message: req.body.message, user: req.user_id, post: req.post_id, token: req.body.token};
+        console.log(req);
+        const commentData = { 
+          message: req.body.message, 
+          user: req.user_id, 
+          token: req.body.token };
+          
         const comment = new Comment(commentData);
         comment.save(async (err) => {
             if(err) {

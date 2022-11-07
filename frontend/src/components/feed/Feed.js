@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import Navbar from '../Navbar/Navbar';
 import Post from '../post/Post';
-import Comment from '../comment/comment';
 import './Feed.css';
 
 const Feed = ({ navigate }) => {
@@ -28,7 +27,6 @@ const Feed = ({ navigate }) => {
   
   useEffect(loadPosts, [])
 
-  
   const handlePostSubmit = async (event) => {
     event.preventDefault();
 
@@ -97,6 +95,7 @@ const Feed = ({ navigate }) => {
           {posts.map(
             (post) => ( 
             <Post post={ post } key={ post._id }/> )
+
           )}
       </div> 
       </>
