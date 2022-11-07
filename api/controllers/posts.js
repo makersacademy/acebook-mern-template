@@ -25,44 +25,10 @@ const PostsController = {
       res.status(201).json({ message: 'OK', token: token });
     });
   },
+
+  // Define a comment (linked to post_id, username or user_id and req.body.comment)
+  // save comment
+  // the fetch post reqest req.body.comment assumes that the comment is packaged as object
 };
 
-
-/*const PostsController = {
-  Index: async (req, res) => {
-    res.render("posts/index");
-  },
-  ViewPosts: async (req, res) => {
-    const posts = await Post.find]((err, posts) => {
-      if (err) {
-        throw err;
-      }
-    }).populate("comments");
-    const comments = await Comment.find({});
-    res.setHeader("Content-Type", "application/json");
-    res.end(JSON.stringify({ 
-      posts: posts.reverse(),
-      comments: comments }));
-  },
-  New: (req, res) => {
-    res.render("posts/new", {});
-  },
-CreateReact: (req, res) => {
-    req.body = {
-      createdAt: req.body.createdAt,
-      message: req.body.value,
-      firstname: req.session.user.firstname,
-      likes: 0,
-      comments: [],
-    };
-    const post = new Post(req.body);
-    post.save((err) => {
-      if (err) {
-        throw err;
-      }
-      res.status(201).redirect("/posts");
-    });
-  },
-}
-*/
 module.exports = PostsController;
