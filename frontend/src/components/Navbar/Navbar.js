@@ -1,24 +1,30 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from "react-router-dom";
 import "./navbar.css";
 
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faRightFromBracket } from '@fortawesome/free-solid-svg-icons'
 
-const navbar= () =>{
+const elementSignOut = <FontAwesomeIcon icon={ faRightFromBracket } />
+
+const Navbar= () =>{
+
+  const handleLogout = () => {
+    window.localStorage.removeItem("token")
+  }
+  
   return (
-  <body className="navbody">
-  <div>
-    
-      <Link className="signout" to="/login">Sign Out 
-      </Link>
+    <>
+      <div className='navbar-top'>
+        <a className='navbar-home' href="/posts" >spybook &#129464;</a>
+        <a onClick={ handleLogout } className='navbar-signout' href="/" >Sign Out { elementSignOut }</a>
+      </div>
 
-      <Link className="signup" to="/Signup">Sign Up
-      </Link>
-
-      <Link className="login" to="/login">Sign in
-      </Link>
-    
-  </div>
-  </body>
-  );
+      <div className='navbar-bottom'>
+        <p> © 2022 The Incredibles &#128156;</p>
+      </div>
+    </>
+  )
 }
-export default navbar;
+
+export default Navbar;

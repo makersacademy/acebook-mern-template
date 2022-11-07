@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import Navbar from '../Navbar/Navbar';
 import Post from '../post/Post';
 import Comment from '../comment/comment';
 import './Feed.css';
@@ -44,55 +45,64 @@ const Feed = ({ navigate }) => {
         data => { 
         loadPosts();   
         console.log(data);
+        handlePopUpClosing();
       })
-
-      
   }
 
   
   const handleMessageChange = (event) => {
-    setMessage(event.target.value)
+    setMessage(event.target.value);
   } 
 
-  const logout = () => {
-    window.localStorage.removeItem("token")
-    navigate('/login')
+  const handlePopUp = () => {
+    document.querySelector(".popup-background").style.display = 'block';
+    document.querySelector(".create-post-box").style.display = 'block';
   }
-  
+
+  const handlePopUpClosing = () => {
+    document.querySelector(".create-post-box #post-message").value = '';
+    document.querySelector(".popup-background").style.display = 'none';
+    document.querySelector(".create-post-box").style.display = 'none';
+  }
 
   if(token) {
     return(
-      <> <body className="posttitle">
-        <h1>Posts &#128075;</h1>
-        
-        
-        </body>
-        <form onSubmit={handlePostSubmit}>
-        <body className="createpost">
-          <h3>Create a New Post</h3>
-          <input id='postMessage' placeholder="Share what you think" type="text" value={ message } onChange={handleMessageChange}>
-          </input> <br/>
-          <input id='submitPost' type="submit" value="Post" />
-          </body>
-        </form>
-          <button onClick={logout}>
-            Logout
-          </button>
-          <body className="postbody">
-    
-                    
-        <div id='feed' role="feed">
-            {posts.map(
-              (post) => ( 
-              <Post post={ post } key={ post._id }/> )
-            )}
+      <> 
+      <Navbar/>
+
+      {/* CREATE POST POPUP */}
+      <div className='create-post-box'>
+          <div onClick={ handlePopUpClosing } className="close-btn-create-post">&times;</div>
+          <header>Create Post</header>
+          <hr/>
+          <form onSubmit={ handlePostSubmit }>
+            <input id="post-message" placeholder="What's on your mind, Name?" type='text' value={ message } onChange={handleMessageChange} />
+            <button type="submit">Post</button>
+          </form>
         </div>
+      <div className='popup-background'></div>
+
+      {/* WRITE POST FIELD */}
+      <div className='write-post-container'>
+        <div className='write-post-box'>
+          <img src="/images/bird-avator.png" alt="avatar" className="write-post-pic" ></img> 
+          <div onClick={ handlePopUp } className='write-post-input'>
+            What's on your mind, Name?
+          </div>
+        </div>
+      </div>
         
-        </body>
+      {/* POSTS FEED */}
+      <div className='posts-feed'>
+          {posts.map(
+            (post) => ( 
+            <Post post={ post } key={ post._id }/> )
+          )}
+      </div> 
       </>
     )
   } else {
-    navigate('/signin')
+    navigate('/')
   }
   
    

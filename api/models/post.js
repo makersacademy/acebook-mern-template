@@ -16,7 +16,8 @@ const PostSchema = new mongoose.Schema({
     type: Schema.Types.ObjectId,
     ref: "User"
   },
-});
+  likes:  Array
+  });
 
 const Post = mongoose.model("Post", PostSchema);
 
