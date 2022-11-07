@@ -7,9 +7,14 @@ const TokenGenerator = require('../../models/token_generator');
 const JWT = require('jsonwebtoken');
 let token;
 
-describe("/posts", () => {
-  beforeAll( async () => {
-    const user = new User({email: "test@test.com", password: "12345678", firstName: "John", lastName: "Smith"});
+describe('/posts', () => {
+  beforeAll(async () => {
+    const user = new User({
+      email: 'test@test.com',
+      password: '12345678',
+      firstName: 'John',
+      lastName: 'Smith',
+    });
 
     await user.save();
     token = TokenGenerator.jsonwebtoken(user.id);
@@ -31,14 +36,6 @@ describe("/posts", () => {
         .set('Authorization', `Bearer ${token}`)
         .send({ message: 'hello world', token: token });
       expect(response.status).toEqual(201);
-    });
-
-    xtest('responds with a 300', async () => {
-      let response = await request(app)
-        .post('/posts/comment')
-        .set('Authorization', `Bearer ${token}`)
-        .send({ message: 'hello world', token: token });
-      expect(response.status).toEqual(300);
     });
 
     test('creates a new post', async () => {

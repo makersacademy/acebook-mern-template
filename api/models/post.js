@@ -4,19 +4,17 @@ const Comment = require('../models/comment');
 
 const PostSchema = new mongoose.Schema({
   message: String,
+  poster: {
+    type: mongoose.SchemaTypes.ObjectId,
+    ref: 'User'
+  },
   comments: [
     {
       text: String,
       created: { type: Date, default: Date.now },
-      // postedBy: { type: ObjectId, ref: 'User' },
     },
   ],
-  poster: {
-    type: mongoose.SchemaTypes.ObjectId,
-    ref: 'User'
-  }
 }, {timestamps: true});
-
 const Post = mongoose.model('Post', PostSchema);
 
 module.exports = Post;
