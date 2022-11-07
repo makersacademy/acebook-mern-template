@@ -43,7 +43,7 @@ const Post = ({post}) => {
               <div className="reactions-container">
                 <div className="likes">
                   <button id="likes-button"> { elementHeartOutline }</button>
-                  <span id="likes-count">12</span>
+                  <span id="likes-count">{post.likes.length}</span>
                 </div>
                 <div>
                   <span className="comments-number">12 Comments</span>
