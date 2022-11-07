@@ -1,5 +1,4 @@
 const Post = require("../models/post");
-const User = require("../models/user");
 const TokenGenerator = require("../models/token_generator");
 
 const PostsController = {
