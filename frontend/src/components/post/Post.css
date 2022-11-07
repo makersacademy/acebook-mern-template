@@ -66,7 +66,8 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 2rem;
+  padding: 1rem;
+  margin-top: 70px;
 }
 
 .post {
@@ -81,7 +82,7 @@
 .post-header {
   display: flex;
   justify-content: space-between;
-  padding: 1.2rem 1.6rem 0 1.6rem;
+  padding: 1.2rem 1.8rem 0 1.6rem;
 }
 
 .header-left {
