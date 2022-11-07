@@ -23,9 +23,8 @@ export default function PostForm (props) {
     }
     if (response.ok) {
       // If form sent successfully then it resets the input field.
-      // Changes state of outter component to reload the list of posts.
       setMessage('')
-      props.changePosts(message);
+      props.reload()
     }
   }
 
