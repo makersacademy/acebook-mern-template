@@ -16,6 +16,7 @@ const PostsController = {
     User.findById(req.user_id).then(async (user) => {
       console.log(user)
       console.log(user.id)
+      console.log(user.username)
     
       const newPost = {
         message: req.body.message,
