@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 
 const PostSchema = new mongoose.Schema({
   timestamp: Date,
-  imageURLs: [String],
+  imageURL: String,
   message: {
     type: String,
     validate: {
