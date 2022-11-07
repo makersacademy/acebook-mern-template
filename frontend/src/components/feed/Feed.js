@@ -7,7 +7,10 @@ import CreatePost from '../createPost/CreatePost';
 const Feed = ({ navigate }) => {
   const [posts, setPosts] = useState([]);
   const [token, setToken] = useState(window.localStorage.getItem("token"));
-
+  
+  useEffect(() => {
+    fetchPosts()
+  }, [])
 
   const fetchPosts = () => {
     if (token) {
