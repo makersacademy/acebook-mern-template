@@ -7,9 +7,10 @@ const TokenGenerator = require('../../models/token_generator');
 const JWT = require('jsonwebtoken');
 let token;
 
-describe('/posts', () => {
-  beforeAll(async () => {
-    const user = new User({ email: 'test@test.com', password: '12345678' });
+describe("/posts", () => {
+  beforeAll( async () => {
+    const user = new User({email: "test@test.com", password: "12345678", firstName: "John", lastName: "Smith"});
+
     await user.save();
     token = TokenGenerator.jsonwebtoken(user.id);
   });
