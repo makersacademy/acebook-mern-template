@@ -1,0 +1,49 @@
+.navbar-top {
+    overflow: hidden;
+    background-color: #ffffff;
+    position: fixed; 
+    top: 0; 
+    width: 100%; 
+    height: 60px;
+    border-image: radial-gradient(#564390, #d6cfe3) 40;
+    border-bottom-width: 4px;
+    border-bottom-style: solid;
+  }
+
+  .navbar-top .navbar-signout {
+    float: right;
+    display: block;
+    color: #634887;
+    text-align: center;
+    padding: 20px 20px;
+    text-decoration: none;
+    font-size: 18px;
+  }
+
+  .navbar-top .navbar-signout:hover {
+    color: #7d639f;
+  }
+
+  .navbar-top .navbar-home {
+    float: left;
+    display: block;
+    color: #634887;
+    text-align: center;
+    padding: 12px 20px;
+    text-decoration: none;
+    font-size: 25px;
+    font-weight: 700;
+  }
+
+  .navbar-bottom {
+    position:fixed;
+    bottom:0;
+    left: 735px;
+    width:100%;
+    height: 35px;
+    color: #634887;
+    text-align: center;
+    font-weight: 300;
+    font-size: 15px;
+  }
+  
