@@ -13,6 +13,6 @@ const UserSchema = new mongoose.Schema({
   posts: { type: [ObjectId], ref: 'Post'}
 }, { timestamps: true });
 
-const User = mongoose.model("User", UserSchema);
+const User = mongoose.model('User', UserSchema);
 
 module.exports = User;
