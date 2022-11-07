@@ -77,11 +77,6 @@ describe('errorHandlerUsersName', () => {
     expect(result.props.id).to.deep.equal('usersname-error-invalid');
   });
 
-  it("doesn't return an error message if UsersName is empty", () => {
-    const result = errorHandlerUsersName('');
-    expect(result).to.be.undefined;
-  });
-
   it("doesn't return an error message if UsersName is a valid string", () => {
     const result = errorHandlerUsersName('Kyle is our God');
     expect(result).to.be.undefined;

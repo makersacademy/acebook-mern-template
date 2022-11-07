@@ -23,6 +23,7 @@ const UserSchema = new mongoose.Schema({
   },
   usersName: {
     type: String,
+    required: true,
     validate: {
       validator: function (v) {
         return /^[a-z ,.'-]*$/i.test(v); // No special characters, empty string allowed

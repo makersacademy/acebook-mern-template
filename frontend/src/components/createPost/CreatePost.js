@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import errorHandlerMessage from '../errorHandling/errorHandlerMessage';
 import "./CreatePost";
 
 const CreatePost = ({ navigate, fetchPosts }) => {
