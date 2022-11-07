@@ -1,6 +1,6 @@
 import { useState } from "react"
 
-export default function PostForm () {
+export default function PostForm (props) {
   // Component state
   const [message, setMessage] = useState('')
   // Feed already resets the token for us.
@@ -23,7 +23,9 @@ export default function PostForm () {
     }
     if (response.ok) {
       // If form sent successfully then it resets the input field.
+      // Changes state of outter component to reload the list of posts.
       setMessage('')
+      props.changePosts(message);
     }
   }
 

@@ -20,7 +20,7 @@ const Feed = ({ navigate }) => {
           setPosts(data.posts);
         });
     }
-  }, []);
+  }, [posts]); // Post form modifies this value to cause a reload.
 
   const logout = () => {
     window.localStorage.removeItem("token");
@@ -40,7 +40,7 @@ const Feed = ({ navigate }) => {
         </div>
         <div id="wrapper">
           <h2>Feed</h2>
-          <PostForm />
+          <PostForm changePosts={ setPosts }/>
           <div id="feed" role="feed">
             {posts.map((post) => (
               <Post post={post} key={post._id} />
