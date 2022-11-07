@@ -4,6 +4,12 @@ const Comment = require('../models/comment');
 
 const PostSchema = new mongoose.Schema({
   message: String,
+  
+  createdAt: Date,
+  poster: {
+    type: mongoose.SchemaTypes.ObjectId,
+    ref: 'User'
+  },
   comments: [
     {
       text: String,
@@ -11,7 +17,6 @@ const PostSchema = new mongoose.Schema({
       // postedBy: { type: ObjectId, ref: 'User' },
     },
   ],
-  createdAt: Date, 
 });
 
 const Post = mongoose.model('Post', PostSchema);
