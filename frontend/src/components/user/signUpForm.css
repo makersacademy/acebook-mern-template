@@ -89,3 +89,12 @@
     background: linear-gradient(90deg, rgba(104,84,163,1) 0%, rgba(123,95,161,1) 100%);
   }
 
+  .set-user-image {
+    color: rgba(87,68,144,1);
+    font-size: 18px;
+    padding: 13px;
+    margin-bottom: 10px;
+    font-style: oblique;
+    font-family: 'Roboto', sans-serif;
+  }
+
