@@ -1,10 +1,5 @@
 import React, {useEffect, useState} from 'react';
 
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faPaperPlane } from '@fortawesome/free-solid-svg-icons'
-
-const elementPaperPlane = <FontAwesomeIcon icon={ faPaperPlane } size = '2x' />
-
 const Comment = ({ navigate }) => {
 
   const [comment, setComment] = useState("");

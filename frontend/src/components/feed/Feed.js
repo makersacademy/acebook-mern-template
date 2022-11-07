@@ -1,3 +1,4 @@
+import { faImages } from '@fortawesome/free-solid-svg-icons';
 import React, { useEffect, useState } from 'react';
 import Navbar from '../Navbar/Navbar';
 import Post from '../post/Post';
@@ -6,6 +7,7 @@ import './Feed.css';
 const Feed = ({ navigate }) => {
   const [posts, setPosts] = useState([]);
   const [message, setMessage] = useState("");
+  const [image, setImage] = useState();
   const [token, setToken] = useState(window.localStorage.getItem("token"));
 
   const loadPosts = () => {
@@ -36,7 +38,7 @@ const Feed = ({ navigate }) => {
         'Authorization': `Bearer ${token}`,
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({token: token, message: message})
+      body: JSON.stringify({token: token, message: message, img: image})
     })
       .then(response => response.json())
       .then(
@@ -51,6 +53,10 @@ const Feed = ({ navigate }) => {
   const handleMessageChange = (event) => {
     setMessage(event.target.value);
   } 
+  
+  const handleImageChange = (event) => {
+    setImage(event.target.value);
+  }
 
   const handlePopUp = () => {
     document.querySelector(".popup-background").style.display = 'block';
@@ -75,8 +81,9 @@ const Feed = ({ navigate }) => {
           <hr/>
           <form onSubmit={ handlePostSubmit }>
             <input id="post-message" placeholder="What's on your mind, Name?" type='text' value={ message } onChange={handleMessageChange} />
+            <input type="file" id="myFile" name="filename" value={image} onChange={handleImageChange} />
             <button type="submit">Post</button>
-          </form>
+         </form>
         </div>
       <div className='popup-background'></div>
 
