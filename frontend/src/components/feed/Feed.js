@@ -19,7 +19,7 @@ const Feed = ({ navigate }) => {
         .then(async data => {
           window.localStorage.setItem("token", data.token)
           setToken(window.localStorage.getItem("token"))
-          console.log(data);
+          //console.log(data);
           setPosts(data.posts);
         })
     }
@@ -42,7 +42,7 @@ const Feed = ({ navigate }) => {
       .then(
         data => { 
         loadPosts();   
-        console.log(data);
+        //console.log(data);
         handlePopUpClosing();
       })
   }
@@ -93,7 +93,7 @@ const Feed = ({ navigate }) => {
       <div className='posts-feed'>
           {posts.map(
             (post) => ( 
-            <Post post={ post } key={ post._id }/> )
+            <Post post={ post } key={ post._id } /> )
           )}
       </div> 
       </>

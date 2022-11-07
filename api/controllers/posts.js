@@ -15,7 +15,7 @@ const PostsController = {
   },
   Create: (req, res) => {
     const postData = {message: req.body.message, user: req.user_id, token: req.body.token};
-    console.log(postData);
+    //console.log(postData);
     const post = new Post(postData);
     post.save(async (err) => {
       if (err) {
@@ -27,11 +27,20 @@ const PostsController = {
     });
   },
   Likes: (req, res) => {
-    const likedPost = Post.find(req.post_id);
-    likedPost.likes.push(req.user_id)
-    likedPost.save()
+    let postData = {post: req.body.post, token: req.body.token};
+    // console.log(postData)
 
-    res.status(200).json({ likedPost: post });
+    var conditions = {
+      _id: postData.post._id
+    }
+
+    var update = {
+      'likes': postData.post.likes.push(req.user_id)
+    }
+    
+    Post.findOneAndUpdate(conditions, update)
+
+    res.status(200).json({token: postData.token, post: postData.post, post_id: postData.post._id, likes: postData.post.likes });
   }
 };
 

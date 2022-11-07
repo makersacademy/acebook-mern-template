@@ -8,17 +8,24 @@ import { faPaperPlane } from '@fortawesome/free-solid-svg-icons'
 
 const elementHeartOutline = <FontAwesomeIcon icon={ faHeart } size = '2x' />
 const elementPaperPlane = <FontAwesomeIcon icon={ faPaperPlane } size = '2x' />
+const token = window.localStorage.getItem("token");
 
-// const loadLikes = () => {
-//   fetch('/posts/likes', {
-//     method: 'post',
-//     headers: {'Content-Type': 'application/json'},
-//     body: JSON.stringify({post: post._id})
-//   })
-//   .then(response => response.json())
-//   .then(data =>
-//     data.likes)
-// } 
+const handleNewLike =  post  => {
+     fetch("/posts", {
+     method: 'put',
+     headers: {
+       'Authorization': `Bearer ${token}`,
+       'Content-Type': 'application/json',
+     },
+     body: JSON.stringify({token: token, post: post})
+   })
+   .then(response => response.json())
+      .then(
+        data => { 
+         
+        console.log(data);    
+  })
+}
 
 const Post = ({post}) => {
   return(
@@ -43,8 +50,10 @@ const Post = ({post}) => {
             <div className="post-footer">
               <div className="reactions-container">
                 <div className="likes">
-                  <button id="likes-button"> { elementHeartOutline }</button>
+                  <form onClick={ handleNewLike(post) }>
+                  <button id="likes-button"> { elementHeartOutline } </button>
                   <span id="likes-count">{post.likes.length}</span>
+                  </form>
                 </div>
                 <div>
                   <span className="comments-number">12 Comments</span>
