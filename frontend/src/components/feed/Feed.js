@@ -1,30 +1,31 @@
-import React, { useEffect, useState } from "react";
-import Post from "../post/Post";
-import PostForm from "../postForm/PostForm";
+import React, { useEffect, useState } from 'react';
+import Post from '../post/Post';
+import PostForm from '../postForm/PostForm';
+import CommentForm from '../postCommentForm/CommentForm';
 
 const Feed = ({ navigate }) => {
   const [posts, setPosts] = useState([]);
-  const [token, setToken] = useState(window.localStorage.getItem("token"));
+  const [token, setToken] = useState(window.localStorage.getItem('token'));
 
   useEffect(() => {
     if (token) {
-      fetch("/posts", {
+      fetch('/posts', {
         headers: {
           Authorization: `Bearer ${token}`,
         },
       })
         .then((response) => response.json())
         .then(async (data) => {
-          window.localStorage.setItem("token", data.token);
-          setToken(window.localStorage.getItem("token"));
+          window.localStorage.setItem('token', data.token);
+          setToken(window.localStorage.getItem('token'));
           setPosts(data.posts);
         });
     }
   }, []);
 
   const logout = () => {
-    window.localStorage.removeItem("token");
-    navigate("/login");
+    window.localStorage.removeItem('token');
+    navigate('/login');
   };
 
   if (token) {
@@ -44,13 +45,14 @@ const Feed = ({ navigate }) => {
             {posts.map((post) => (
               <Post post={post} key={post._id} />
             ))}
+            <CommentForm />
           </div>
         </div>
         <PostForm />
       </>
     );
   } else {
-    navigate("/signin");
+    navigate('/signin');
   }
 };
 

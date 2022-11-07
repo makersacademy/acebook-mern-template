@@ -1,17 +1,22 @@
+//This will be the comment form
+
 import { useState } from 'react';
 
-export default function PostForm() {
+export default function CommentForm() {
   // Component state
   const [message, setMessage] = useState('');
   // Feed already resets the token for us.
   const token = window.localStorage.getItem('token');
-
+  const tempId = '636932d263ba38502efa92d1';
   const handleSubmit = async (error) => {
     error.preventDefault(); // Prevents default action of refreshing the page
 
-    const response = await fetch('/posts', {
+    const response = await fetch('/comments', {
       method: 'post',
-      body: JSON.stringify({ message }),
+      body: JSON.stringify({
+        message: message,
+        id: tempId,
+      }),
       headers: {
         'Content-Type': 'application/json',
         Authorization: 'Bearer ' + token,
@@ -35,7 +40,7 @@ export default function PostForm() {
   return (
     <div className="form-container">
       <form className="create-message-form" onSubmit={handleSubmit}>
-        <label for="text-box">Write your message here:</label>
+        <label for="text-box">Write your comment here:</label>
         <input
           type="text"
           className="text-box"
@@ -43,7 +48,7 @@ export default function PostForm() {
           value={message}
           required
         />
-        <button>Add</button>
+        <button>submit</button>
       </form>
     </div>
   );
