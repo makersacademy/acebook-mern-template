@@ -46,6 +46,7 @@ const CreatePost = ({ navigate, fetchPosts }) => {
             id='submit'
             type="submit"
             value=":@" />
+            <div id="ErrorMessageEmail">{errorHandlerMessage(message)}</div>
           <div id="image-buttons">
             <button class="message-button" id='choose-file-button'>
               Choose file of your ugly child
