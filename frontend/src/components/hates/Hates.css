@@ -1,0 +1,31 @@
+.hates-container {
+  display: flex;
+  align-items: center;
+  margin-bottom: 18px;
+  background-color: rgb(173, 44, 49);
+  border-radius: 25px;
+  justify-content: space-between;
+}
+.hates-container > * {
+  margin: 3px;
+  margin-left: 12px;
+  margin-right: 12px;
+  
+}
+
+#hate-image {
+  width: 15px;
+  height: 15px;
+  border-radius: 30px;
+  object-fit: cover
+}
+
+button {
+  display: flex;
+  align-items: center;
+  color: rgb(173, 44, 49);
+  font-size: 8px;
+  padding: 0px;
+  padding-left: 3px;
+  padding-right: 3px;
+}
