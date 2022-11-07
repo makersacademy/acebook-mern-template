@@ -1,16 +1,12 @@
 import React, { useEffect, useState } from 'react';
-
 import Post from '../post/Post'
 import "./Feed.css";
 import CreatePost from '../createPost/CreatePost';
 
+
 const Feed = ({ navigate }) => {
   const [posts, setPosts] = useState([]);
   const [token, setToken] = useState(window.localStorage.getItem("token"));
-
-  useEffect(() => {
-    fetchPosts()
-  }, [])
 
 
   const fetchPosts = () => {
@@ -27,14 +23,12 @@ const Feed = ({ navigate }) => {
           setPosts(data.posts);
         });
     }
-
- 
   }
   
 
   const logout = () => {
-    window.localStorage.removeItem('token');
-    navigate('/login');
+    window.localStorage.removeItem("token");
+    navigate("/login");
   };
 
   if (token) {
