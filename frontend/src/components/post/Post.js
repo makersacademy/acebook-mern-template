@@ -1,5 +1,6 @@
 import React from 'react';
 import './Post.css';
+import Comment from '../comment/comment';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faHeart } from '@fortawesome/free-regular-svg-icons'
@@ -18,6 +19,7 @@ const elementPaperPlane = <FontAwesomeIcon icon={ faPaperPlane } size = '2x' />
 //   .then(data =>
 //     data.likes)
 // } 
+
 
 const Post = ({post}) => {
   return(
@@ -83,6 +85,7 @@ const Post = ({post}) => {
           
           </div>
         </div> 
+
   )
 }
 
