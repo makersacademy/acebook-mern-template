@@ -1,65 +1,44 @@
 import React, {useEffect, useState} from 'react';
 
-const Comment = ({comment}) => {
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faPaperPlane } from '@fortawesome/free-solid-svg-icons'
 
-    const [comments, setComment] = useState("");
-    const [token, setToken] = useState(window.localStorage.getItem("token"));
+const elementPaperPlane = <FontAwesomeIcon icon={ faPaperPlane } size = '2x' />
 
-    const handleCommentChange = (event) => {
-        setComment(event.target.value)
-    }
+const Comment = ({ navigate }) => {
 
+  const [comment, setComment] = useState("");
+  const [token, setToken] = useState(window.localStorage.getItem("token"));
 
-    const loadComments = () => {
-        if(token) {
-          fetch("/comments", {
-            headers: {
-              'Authorization': `Bearer ${token}`
-            }
-          })
-            .then(response => response.json())
-            .then(async data => {
-              window.localStorage.setItem("token", data.token)
-              setToken(window.localStorage.getItem("token"))
-              console.log(data);
-              setComment(data.comments);
-              ;
-            })
+  const loadComments = () => {
+    if(token) {
+      fetch("/comments", {
+        headers: {
+        'Authorization': `Bearer ${token}`
         }
-      }
-
-    const handleCommentSubmit = async (event) => {
-        event.preventDefault();
-
-        if (token) fetch('/comments', {
-          method: 'post',
-          headers: {
-            'Authorization': `Bearer ${token}`,
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({token: token, message: comments})
-        })
-          .then(response => response.json())
-          .then(
-            data => {   
-            console.log(data);
-          })
-    
-          
-      }
+      })
+      .then(response => response.json())
+      .then(async data => {
+        window.localStorage.setItem("token", data.token)
+        setToken(window.localStorage.getItem("token"))
+        console.log(data);
+        setComment(data.comments);
+        ;
+      })
+    }
+  }
 
     return(
-        <body>
-          <div class="comments">
-            <form onSubmit={handleCommentSubmit}>
-             <input id='commentMessage' placeholder="Add a comment.." type="text" value={comment} onChange={handleCommentChange}/>
-             <input id='submitComment' type="submit" value="Submit"/>
-           </form>
-        </div>
-
-
-        </body>
-        
+      <>
+      {/* SEE COMMENTS*/}
+    {/* <div className="all-comments-section">
+    <img src="/images/bird-avator.png" alt="avatar" className="comment-author-pic" ></img> 
+    <div id="single-comment-wrapper">
+      <span className="comment-author">Comment Author</span>
+      <span className="comment-content">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. </span>
+    </div>
+  </div> */}
+  </>   
         
     )
 }
