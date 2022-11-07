@@ -35,7 +35,7 @@ const PostsController = {
     }
 
     var update = {
-      'likes': postData.post.likes.push(req.user_id)
+      likes: postData.post.likes.push(req.user_id)
     }
     
     Post.findOneAndUpdate(conditions, update)

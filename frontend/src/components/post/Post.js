@@ -10,23 +10,6 @@ const elementHeartOutline = <FontAwesomeIcon icon={ faHeart } size = '2x' />
 const elementPaperPlane = <FontAwesomeIcon icon={ faPaperPlane } size = '2x' />
 const token = window.localStorage.getItem("token");
 
-const handleNewLike =  post  => {
-     fetch("/posts", {
-     method: 'put',
-     headers: {
-       'Authorization': `Bearer ${token}`,
-       'Content-Type': 'application/json',
-     },
-     body: JSON.stringify({token: token, post: post})
-   })
-   .then(response => response.json())
-      .then(
-        data => { 
-         
-        console.log(data);    
-  })
-}
-
 const Post = ({post}) => {
   return(
         <div className="posts-container" data-cy="post" key={ post._id}> 
@@ -94,6 +77,22 @@ const Post = ({post}) => {
           </div>
         </div> 
   )
+}
+
+const handleNewLike = post => {
+  if(token) fetch("/posts", {
+    method: 'put',
+    headers: {
+      'Authorization': `Bearer ${token}`,
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({token: token, post: post})
+  })
+    .then(response => response.json())
+    .then(
+      data => { 
+      console.log(data)   
+    })
 }
 
 export default Post;
