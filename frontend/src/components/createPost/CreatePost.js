@@ -8,8 +8,9 @@ const CreatePost = ({ navigate, fetchPosts }) => {
 
   const handleSubmitPost = async (event) => {
     event.preventDefault();
-
-    if (message === '') return
+    if (message === '') return;
+    if (!message.match(/^[a-zA-Z0-9~!@#()`;\-':,.?| ]*$/)) return;
+    
     let response = await fetch('/posts', {
       method: 'post',
       headers: {
@@ -46,7 +47,7 @@ const CreatePost = ({ navigate, fetchPosts }) => {
             id='submit'
             type="submit"
             value=":@" />
-            <div id="ErrorMessageEmail">{errorHandlerMessage(message)}</div>
+            <div id="ErrorMessageMessage">{errorHandlerMessage(message)}</div>
           <div id="image-buttons">
             <button class="message-button" id='choose-file-button'>
               Choose file of your ugly child
