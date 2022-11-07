@@ -40,13 +40,13 @@ const Feed = ({ navigate }) => {
         </div>
         <div id="wrapper">
           <h2>Feed</h2>
+          <PostForm />
           <div id="feed" role="feed">
             {posts.map((post) => (
               <Post post={post} key={post._id} />
             ))}
           </div>
         </div>
-        <PostForm />
       </>
     );
   } else {

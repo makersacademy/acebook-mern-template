@@ -27,23 +27,22 @@ export default function PostForm () {
     }
   }
 
-  // Handles value of the text input field.
-  const handleChange = (event) => {
-    setMessage(event.target.value)
-  }
   // Actual JSX
   return (
     <div className="form-container">
       <form className='create-message-form' onSubmit={handleSubmit}>
-        <label for='text-box'>Write your message here:</label>
+        <label for='text-box'>New Message</label>
         <input
           type="text"
           className="text-box"
-          onChange={handleChange}
+          onChange={(e) => setMessage(e.target.value)}
+          placeholder="What's on your mind?"
           value={message}
           required
           />
-        <button>Add</button>
+        <button
+          className='signup-form-btn'
+          >Add</button>
       </form>
     </div>
   )
