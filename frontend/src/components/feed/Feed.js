@@ -29,8 +29,6 @@ const Feed = ({ navigate }) => {
           window.localStorage.setItem("token", data.token);
           setToken(window.localStorage.getItem("token"));
           setPosts(data.posts);
-          setImageList(data.imageList);
-          console.log(data.posts);
         });
     }
   };
@@ -38,15 +36,19 @@ const Feed = ({ navigate }) => {
   const handleSubmitPost = async (event) => {
     event.preventDefault();
 
-    if (message === "") return;
+    if (imageUpload === "" && message === "") return;
+
+    UploadImage();
+
     let response = await fetch("/posts", {
       method: "post",
       headers: {
         "Content-Type": "application/json",
         Authorization: `Bearer ${token}`,
       },
-      body: JSON.stringify({ message: message }),
+      body: JSON.stringify({ message: message, imageUrls: imageList }),
     });
+    console.log(response);
     console.log("submit");
 
     if (response.status !== 201) {
@@ -73,9 +75,7 @@ const Feed = ({ navigate }) => {
     const imageRef = ref(storage, `images/${imageUpload.name + v4()}`);
     uploadBytes(imageRef, imageUpload).then((snapshot) => {
       getDownloadURL(snapshot.ref).then((url) => {
-        console.log(url);
         setImageList((prev) => [...prev, url]);
-        fetchPosts();
       });
     });
   };
@@ -84,8 +84,6 @@ const Feed = ({ navigate }) => {
     listAll(imageListRef).then((res) => {
       res.items.forEach((item) => {
         getDownloadURL(item).then((url) => {
-          console.log(url);
-
           setImageList((prev) => [...prev, url]);
         });
       });
