@@ -10,17 +10,13 @@ const CreatePost = ({ navigate, fetchPosts }) => {
   const token = window.localStorage.getItem("token");
   const [message, setMessage] = useState("");
   const [imageUpload, setImageUpload] = useState(null);
-  let image = ""
-  const imageListRef = ref(storage, "images/");
- 
-
+  const [image, setImage] = useState("");
   
   const handleSubmitPost = async (event) => {
     event.preventDefault();
     if (imageUpload === "" && message === "") return;
     if (!message.match(/^[a-zA-Z0-9~!@#()`;\-':,.?| ]*$/)) return;
-
-    console.log("handlesub image first",image)     
+    
     let response = await fetch("/posts", {
       method: "post",
       headers: {
@@ -29,7 +25,6 @@ const CreatePost = ({ navigate, fetchPosts }) => {
       },
       body: JSON.stringify({ message: message, imageURL: image}),
     });
-    console.log("handlesub image last",image)
     if (response.status !== 201) {
       navigate("/posts");
     } else {
@@ -50,8 +45,7 @@ const CreatePost = ({ navigate, fetchPosts }) => {
     const imageRef = ref(storage, `images/${imageUpload.name + v4()}`);
     uploadBytes(imageRef, imageUpload).then((snapshot) => {
       getDownloadURL(snapshot.ref).then((url) => {
-        image = url
-        console.log("uploadimage image",image)
+        setImage(url)
       });
     });
   };
