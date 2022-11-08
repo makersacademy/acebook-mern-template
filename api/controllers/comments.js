@@ -8,7 +8,9 @@ const CommentsController = {
         const commentData = { 
           message: req.body.message, 
           user: req.user_id, 
-          token: req.body.token };
+          token: req.body.token,
+          post: req.body.post
+        };
           
         const comment = new Comment(commentData);
         comment.save(async (err) => {

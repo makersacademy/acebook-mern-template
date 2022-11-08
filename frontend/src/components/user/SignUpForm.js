@@ -60,10 +60,10 @@ const SignUpForm = ({ navigate }) => {
               <input placeholder="Password" type='password' value={ password } onChange={handlePasswordChange} />
               
               <div className="set-user-image">
-                 Upload your profile picture  
+                <input type="file" id="userImage" name="filename" value={ image } onChange={handleImageChange} />
+                <span> Upload your profile picture</span>
               </div>
-              
-              <input placeholder="Upload profile photo" type="file" id="userImage" name="filename" value={ image } onChange={handleImageChange} />
+            
               <button type="submit">Sign Up</button>
           </form>
         </div>

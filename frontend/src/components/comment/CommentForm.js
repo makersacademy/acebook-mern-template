@@ -5,28 +5,11 @@ import { faPaperPlane } from '@fortawesome/free-solid-svg-icons'
 
 const elementPaperPlane = <FontAwesomeIcon icon={ faPaperPlane } size = '2x' />
 
-const CommentForm = ({ navigate }) => {
+const CommentForm = ({ postId }) => {
 
   const [comment, setComment] = useState("");
   const [token, setToken] = useState(window.localStorage.getItem("token"));
 
-  // const loadComments = () => {
-  //   if(token) {
-  //     fetch("/comments", {
-  //       headers: {
-  //       'Authorization': `Bearer ${token}`
-  //       }
-  //     })
-  //     .then(response => response.json())
-  //     .then(async data => {
-  //       window.localStorage.setItem("token", data.token)
-  //       setToken(window.localStorage.getItem("token"))
-  //       console.log(data);
-  //       setComment(data.comments);
-  //       ;
-  //     })
-  //   }
-  // }
 
     const handleCommentSubmit = async (event) => {
         event.preventDefault();
@@ -37,7 +20,7 @@ const CommentForm = ({ navigate }) => {
             'Authorization': `Bearer ${token}`,
             'Content-Type': 'application/json',
           },
-          body: JSON.stringify({token: token, message: comment})
+          body: JSON.stringify({token: token, message: comment, post: postId})
         })
           .then(response => response.json())
           .then(
