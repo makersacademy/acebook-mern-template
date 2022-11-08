@@ -34,7 +34,7 @@ const SignUpForm = ({ navigate }) => {
       });
     });
 
-    fetch("/users", {
+    await fetch("/users", {
       method: "post",
       headers: {
         "Content-Type": "application/json",
