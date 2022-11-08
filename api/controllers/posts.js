@@ -15,9 +15,7 @@ const PostsController = {
   },
 
   Create: (req, res) => {
-    console.log(req);
     const postData = {message: req.body.message, user: req.user_id, token: req.body.token, img: req.body.img};
-    console.log(postData);
     const post = new Post(postData);
     post.save(async (err) => {
       if (err) {
