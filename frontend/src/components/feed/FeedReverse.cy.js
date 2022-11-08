@@ -10,8 +10,8 @@ describe("Feed", () => {
         req.reply({
           statusCode: 200,
           body: { posts: [
-            {_id: 1, message: "Earliest post"},
-            {_id: 2, message: "Most recent post"}
+            {_id: 1, message: "Earliest post", author: {usersName: "Kyle"}},
+            {_id: 2, message: "Most recent post", author: {usersName: "Kyle"}}
           ] }
         })
       }
