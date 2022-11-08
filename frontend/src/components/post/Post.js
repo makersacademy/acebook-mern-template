@@ -53,7 +53,7 @@ const Post = ({post}) => {
               <div className="saparator"></div>
             </div>
             {/* WRITE COMMENT*/}
-            <CommentForm navigate={ useNavigate() }/>
+            <CommentForm postId={ post._id }/>
             {/* <div className="comments">
               <div className="comments-box">
                 <div className="box-profile">

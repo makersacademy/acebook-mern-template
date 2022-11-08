@@ -31,6 +31,7 @@ const Feed = ({ navigate }) => {
 
   const handlePostSubmit = async (event) => {
     event.preventDefault();
+    setMessage('');
 
     if(token) fetch('/posts', {
       method: 'post',
@@ -81,7 +82,10 @@ const Feed = ({ navigate }) => {
           <hr/>
           <form onSubmit={ handlePostSubmit }>
             <input id="post-message" placeholder="What's on your mind, Name?" type='text' value={ message } onChange={handleMessageChange} />
-            <input type="file" id="myFile" name="filename" value={image} onChange={handleImageChange} />
+            <div className="upload-post-image-section">
+              <input type="file" id="postImage" name="filename" value={image} onChange={handleImageChange} /> 
+              <span id='image-instructions'> Add image to your post </span>
+            </div>
             <button type="submit">Post</button>
          </form>
         </div>
