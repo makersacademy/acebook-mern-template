@@ -9,14 +9,14 @@ const Post = ({ post }) => {
       <div class="header-container">
         <img class="profile-image" src='https://iili.io/mVK9G2.png' alt='kyle' />
         <div class="name-and-time-container">
-          <div class="username">{"{ Name }"}</div>
+          <div class="username">{post.author.usersName}</div>
           <div class="post-time">{"{ Post time }"}</div>
         </div>
       </div>
 
       <div class="message-container">
         <div class="message">{post.message}</div>
-      </div>
+        </div>
       
       <div class="post-image-container">
         <img class="post-image" src={post.imageURL} alt='kyle' />

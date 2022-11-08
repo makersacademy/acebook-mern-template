@@ -1,4 +1,6 @@
+
 const mongoose = require('mongoose');
+
 
 const PostSchema = new mongoose.Schema({
   timestamp: Date,
@@ -13,6 +15,11 @@ const PostSchema = new mongoose.Schema({
     },
     required: [true],
   },
+  author: {
+       type: mongoose.Schema.Types.ObjectId,
+       ref: 'User'
+  }, required: [true],
+
 });
 
 const Post = mongoose.model('Post', PostSchema);

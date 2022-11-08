@@ -4,9 +4,11 @@ import errorHandlerUsersName from '../errorHandling/errorHandlerUsersName';
 import errorHandlerPassword from '../errorHandling/errorHandlerPassword';
 
 const SignUpForm = ({ navigate }) => {
+
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [usersName, setUsersName] = useState('');
+
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -25,6 +27,7 @@ const SignUpForm = ({ navigate }) => {
       headers: {
         'Content-Type': 'application/json',
       },
+
       body: JSON.stringify({
         email: email,
         password: password,
@@ -39,6 +42,7 @@ const SignUpForm = ({ navigate }) => {
     });
   };
 
+
   const handleEmailChange = (event) => {
     setEmail(event.target.value);
   };
@@ -48,13 +52,16 @@ const SignUpForm = ({ navigate }) => {
   };
 
   const handleUsersNameChange = (event) => {
+
     setUsersName(event.target.value);
   };
+
 
   return (
     <>
       <h1>Sign-up</h1>
       <form onSubmit={handleSubmit}>
+
         <input
           placeholder="Email"
           id="email"
