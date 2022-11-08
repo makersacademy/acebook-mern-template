@@ -39,7 +39,7 @@ const Feed = ({ navigate }) => {
             <li id="sitename">
               <a href="/signup">Acebook</a>
             </li>
-            <button onClick={logout}>Logout</button>
+            <button onClick={logout}>Logout <i className="fa-solid fa-right-from-bracket"></i></button>
           </div>
         </div>
         <div id="wrapper">

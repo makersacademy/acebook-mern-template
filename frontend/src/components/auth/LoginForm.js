@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import SignupForm from '../signupForm/SignUpForm';
 
 const LogInForm = ({ navigate }) => {
   const [email, setEmail] = useState('');
@@ -35,6 +36,7 @@ const LogInForm = ({ navigate }) => {
   };
 
   return (
+    <>
     <div id="header_wrapper">
       <div id="header">
         <li id="sitename">
@@ -64,6 +66,8 @@ const LogInForm = ({ navigate }) => {
         </form>
       </div>
     </div>
+    <SignupForm navigate={ navigate }/>
+    </>
   );
 };
 

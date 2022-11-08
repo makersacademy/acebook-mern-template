@@ -9,7 +9,10 @@ const UserSchema = new mongoose.Schema({
   firstName: { type: String, required: true },
   lastName: { type: String, required: true },
   picture: { type: String, default: defaultImage },
-  friends: { type: [ObjectId], ref: 'User' },
+  friends: [{
+    type: mongoose.SchemaTypes.ObjectId,
+    ref: 'User'
+  }],
   posts: { type: [ObjectId], ref: 'Post'}
 }, { timestamps: true });
 
