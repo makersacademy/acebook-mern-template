@@ -30,13 +30,34 @@ describe('/posts', () => {
   });
 
   describe('POST, when token is present', () => {
-    // test('responds with a 201', async () => {
-    //   let response = await request(app)
-    //     .post('/likes')
-    //     .set('Authorization', `Bearer ${token}`)
-    //     .send({ message: 'hello world', token: token });
-    //   expect(response.status).toEqual(201);
-    // });
+    test('responds with a 201', async () => {
+      let response = await request(app)
+        .post('/likes')
+        .set('Authorization', `Bearer ${token}`)
+        .send({ message: 'hello world', token: token });
+      expect(response.status).toEqual(201);
+    });
+
+    test('creates a new post and adds a like', async () => {
+      var user = new User({ email: 'test@test.com', password: 'testpassword', firstName: 'test', lastName: 'trial'});
+      await request(app)
+        .post('/posts')
+        .set('Authorization', `Bearer ${token}`)
+        .send({ message: 'hello world', token: token });
+      let posts = await Post.find();
+      const did = posts[0].id;
+      await request(app)
+        .post('/likes')
+        .set('Authorization', `Bearer ${token}`)
+        .send({
+          id: did,
+          userId: user.id,
+          token: token,
+        });
+      let posts2 = await Post.find();
+      console.log(posts2[0].likes[0].userObj)
+      expect(posts2[0].likes[0].userObj.toString()).toEqual(user.id);
+    });
 
   //   test('creates a new post', async () => {
   //     await request(app)
