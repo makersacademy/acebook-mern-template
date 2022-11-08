@@ -3,8 +3,9 @@ import LoginForm from '../auth/LoginForm'
 import SignUpForm from '../user/SignUpForm'
 import React from 'react';
 import Feed from '../feed/Feed'
-import TestSignUp from '../signupForm/SignUpForm'
 import Footer from '../footer/Footer';
+import FriendsForm from '../friends/friendForm';
+
 import {
   useNavigate,
   Routes,
@@ -18,7 +19,7 @@ const App = () => {
           <Route path='/posts'  element={<Feed navigate={ useNavigate() }/>}/>
           <Route path='/login'  element={<LoginForm  navigate={ useNavigate() }/>}/>
           <Route path='/signup' element={<SignUpForm navigate={ useNavigate() }/>}/>
-          <Route path='/test' element={<TestSignUp />} />{/* This is a test path for testing individual components and should be removed in production.*/}
+          <Route path='/test' element={<FriendsForm />} />{/* This is a test path for testing individual components and should be removed in production.*/}
         </Routes>
         <Footer />
       </>
