@@ -1,8 +1,8 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import errorHandlerMessage from "../errorHandling/errorHandlerMessage";
 import "./CreatePost";
-import { storage } from "./firebase";
-import { ref, uploadBytes, listAll, getDownloadURL } from "firebase/storage";
+import { storage } from "../../firebase";
+import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import { v4 } from "uuid";
 import "./CreatePost.css";
 
@@ -11,19 +11,19 @@ const CreatePost = ({ navigate, fetchPosts }) => {
   const [message, setMessage] = useState("");
   const [imageUpload, setImageUpload] = useState(null);
   const [image, setImage] = useState("");
-  
+
   const handleSubmitPost = async (event) => {
     event.preventDefault();
     if (imageUpload === "" && message === "") return;
     if (!message.match(/^[a-zA-Z0-9~!@#()`;\-':,.?| ]*$/)) return;
-    
+
     let response = await fetch("/posts", {
       method: "post",
       headers: {
         "Content-Type": "application/json",
         Authorization: `Bearer ${token}`,
       },
-      body: JSON.stringify({ message: message, imageURL: image}),
+      body: JSON.stringify({ message: message, imageURL: image }),
     });
     if (response.status !== 201) {
       navigate("/posts");
@@ -45,11 +45,10 @@ const CreatePost = ({ navigate, fetchPosts }) => {
     const imageRef = ref(storage, `images/${imageUpload.name + v4()}`);
     uploadBytes(imageRef, imageUpload).then((snapshot) => {
       getDownloadURL(snapshot.ref).then((url) => {
-        setImage(url)
+        setImage(url);
       });
     });
   };
-
 
   return (
     <>
@@ -75,8 +74,14 @@ const CreatePost = ({ navigate, fetchPosts }) => {
             setImageUpload(event.target.files[0]);
           }}
         />
-        <button onClick={(event) => {UploadImage(event)}}>Upload Photo</button> <br></br>
-        
+        <button
+          onClick={(event) => {
+            UploadImage(event);
+          }}
+        >
+          Upload Photo
+        </button>{" "}
+        <br></br>
       </form>
     </>
   );

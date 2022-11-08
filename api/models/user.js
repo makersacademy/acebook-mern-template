@@ -1,6 +1,7 @@
-const mongoose = require('mongoose');
+const mongoose = require("mongoose");
 
 const UserSchema = new mongoose.Schema({
+  profilePic: String,
 
   email: {
     type: String,
@@ -9,7 +10,7 @@ const UserSchema = new mongoose.Schema({
       validator: function (v) {
         return /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/.test(v); // Validator for email format.
       },
-      message: 'Email format is invalid',
+      message: "Email format is invalid",
     },
   },
   password: {
@@ -19,7 +20,7 @@ const UserSchema = new mongoose.Schema({
       validator: function (v) {
         return /^[a-zA-Z0-9]{4,25}$/.test(v); // ONLY ALPHANUMERIC, at least 4 characters, max 25 characters.
       },
-      message: 'password format is invalid',
+      message: "password format is invalid",
     },
   },
   usersName: {
@@ -34,8 +35,6 @@ const UserSchema = new mongoose.Schema({
   },
 });
 
-
-const User = mongoose.model('User', UserSchema);
+const User = mongoose.model("User", UserSchema);
 
 module.exports = User;
-
