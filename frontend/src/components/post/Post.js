@@ -9,13 +9,22 @@ const Post = ({ post }) => {
       <article data-cy="post" key={post._id}>
         <br></br>
         {post.message}
-        {post._id}
+        {/* {post._id} */}
         <br></br>
         <CommentForm postId={post._id} />
         <br></br>
         {console.log(post.comments.length)}
+        {/* {const sortedComments = post.comments.sort(
+          (objA, objB) => Number(objA.created) - Number(objB.created))
+        } */}
         {post.comments.map((comment) => {
-          return <p>{comment.text}</p>;
+          return (
+            <p>
+              {comment.text}
+              <br></br>
+              {comment.created}
+            </p>
+          );
         })}
       </article>
     </div>

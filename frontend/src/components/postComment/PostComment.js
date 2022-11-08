@@ -1,3 +1,4 @@
+//Not in use
 import React from 'react';
 import '../post/Post.css';
 
@@ -7,6 +8,7 @@ const Comment = ({ comment }) => {
       <article data-cy="comment" key={comment._id}>
         <br></br>
         {comment.text}
+        {comment.created}
       </article>
     </div>
   );
