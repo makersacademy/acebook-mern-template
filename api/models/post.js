@@ -8,10 +8,7 @@ const PostSchema = new mongoose.Schema({
     type: Date,
     default: Date.now
   },
-  img: {
-      data: Buffer,
-      contentType: String
-  },
+  img: String,
   user: {
     type: Schema.Types.ObjectId,
     ref: "User"

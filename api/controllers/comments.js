@@ -9,7 +9,7 @@ const CommentsController = {
           message: req.body.message, 
           user: req.user_id, 
           token: req.body.token,
-          post: req.body.post
+          post: req.body.post,
         };
           
         const comment = new Comment(commentData);

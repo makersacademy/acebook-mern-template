@@ -1,5 +1,8 @@
 import { faImages } from '@fortawesome/free-solid-svg-icons';
 import React, { useEffect, useState } from 'react';
+import { storage } from './firebase';
+import { uploadBytes, ref, getDownloadURL} from 'firebase/storage';
+import { v4 } from 'uuid';
 import Navbar from '../Navbar/Navbar';
 import Post from '../post/Post';
 import './Feed.css';
@@ -7,8 +10,24 @@ import './Feed.css';
 const Feed = ({ navigate }) => {
   const [posts, setPosts] = useState([]);
   const [message, setMessage] = useState("");
-  const [image, setImage] = useState();
+  const [image, setImage] = useState(null);
+  const [imageURL, setImageURL] = useState(null);
   const [token, setToken] = useState(window.localStorage.getItem("token"));
+
+  const UploadImage = () => {
+    if (image === null) return;
+
+    const imageRef = ref(storage, `images/${image.name + v4()}`); 
+    uploadBytes(imageRef, image).then((snapshot) => { 
+      alert("Image Uploaded")
+      getDownloadURL(snapshot.ref)
+        .then((url) => {   
+          console.log(url);
+          setImageURL(url);  
+        });
+        setImage(null);
+      });
+  };
 
   const loadPosts = () => {
     if(token) {
@@ -33,13 +52,15 @@ const Feed = ({ navigate }) => {
     event.preventDefault();
     setMessage('');
 
+    UploadImage();
+
     if(token) fetch('/posts', {
       method: 'post',
       headers: {
         'Authorization': `Bearer ${token}`,
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({token: token, message: message, img: image})
+      body: JSON.stringify({token: token, message: message, img: imageURL})
     })
       .then(response => response.json())
       .then(
@@ -56,7 +77,7 @@ const Feed = ({ navigate }) => {
   } 
   
   const handleImageChange = (event) => {
-    setImage(event.target.value);
+    setImage(event.target.files[0]);
   }
 
   const handlePopUp = () => {
@@ -83,7 +104,7 @@ const Feed = ({ navigate }) => {
           <form onSubmit={ handlePostSubmit }>
             <input id="post-message" placeholder="What's on your mind, Name?" type='text' value={ message } onChange={handleMessageChange} />
             <div className="upload-post-image-section">
-              <input type="file" id="postImage" name="filename" value={image} onChange={handleImageChange} /> 
+              <input type="file" id="postImage" name="filename" onChange={handleImageChange} /> 
               <span id='image-instructions'> Add image to your post </span>
             </div>
             <button type="submit">Post</button>
