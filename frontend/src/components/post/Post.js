@@ -2,14 +2,15 @@ import React from 'react';
 import './Post.css';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faHeart } from '@fortawesome/free-regular-svg-icons'
+// import { faHeart } from '@fortawesome/free-regular-svg-icons'
 // import { faHeart } from '@fortawesome/free-solid-svg-icons' 
+import { faHeart as faSolideHeart } from '@fortawesome/free-solid-svg-icons';
+import { faHeart as faRegularHeart } from '@fortawesome/free-regular-svg-icons';
 import { faPaperPlane } from '@fortawesome/free-solid-svg-icons'
 
-const elementHeartOutline = <FontAwesomeIcon icon={ faHeart } size = '2x' />
+const elementHeartOutline = <FontAwesomeIcon icon={ faRegularHeart } size = '2x' />
 const elementPaperPlane = <FontAwesomeIcon icon={ faPaperPlane } size = '2x' />
 const token = window.localStorage.getItem("token");
-// const [likeButton, setLikeButton] = useState(elementHeartOutline);
 
 const handleNewLike = post => {
   if(token) fetch("/posts", {
