@@ -1,5 +1,6 @@
 import React from 'react';
 import './Post.css';
+// import '../postComment/PostComment.js';
 import CommentForm from '../postCommentForm/CommentForm';
 
 const Post = ({ post }) => {
@@ -8,9 +9,14 @@ const Post = ({ post }) => {
       <article data-cy="post" key={post._id}>
         <br></br>
         {post.message}
-        {/* {post.createdAt} */}
+        {post._id}
         <br></br>
-        <CommentForm />
+        <CommentForm postId={post._id} />
+        <br></br>
+        {console.log(post.comments.length)}
+        {post.comments.map((comment) => {
+          return <p>{comment.text}</p>;
+        })}
       </article>
     </div>
   );

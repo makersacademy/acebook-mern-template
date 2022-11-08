@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 
-export default function CommentForm() {
+export default function CommentForm(props) {
   // Component state
   const [message, setMessage] = useState('');
   // Feed already resets the token for us.
@@ -15,7 +15,7 @@ export default function CommentForm() {
       method: 'post',
       body: JSON.stringify({
         message: message,
-        id: tempId,
+        id: props.postId,
       }),
       headers: {
         'Content-Type': 'application/json',
