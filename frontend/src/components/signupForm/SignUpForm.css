@@ -36,6 +36,7 @@
   font-size: 15px;
   font-weight: bold;
   width: 100px;
+  cursor: pointer;
 }
 
 .signup-form-btn:hover {
