@@ -15,6 +15,7 @@ const PostsController = {
   Create: (req, res) => {
     const newPost = {
       message: req.body.message,
+      imageURL: req.body.imageURL,
       author: req.user_id
     };
 
