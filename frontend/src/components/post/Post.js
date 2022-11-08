@@ -3,6 +3,8 @@ import './Post.css';
 // import '../postComment/PostComment.js';
 import CommentForm from '../postCommentForm/CommentForm';
 
+// const arrNow = post.comment
+
 const Post = ({ post }) => {
   return (
     <div class="post-card">
