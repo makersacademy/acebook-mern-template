@@ -41,8 +41,11 @@ const PostsController = {
         console.log('error');
     }
 );
+  
+   
+  postData.post.likes.push(req.user_id)
 
-    res.status(200).json({token: postData.token, post: postData.post, post_id: postData.post._id, likes: postData.post.likes });
+  res.status(200).json({token: postData.token, post: postData.post, post_id: postData.post._id, likes: postData.post.likes });
   }
 };
 

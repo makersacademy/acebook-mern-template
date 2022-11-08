@@ -3,12 +3,13 @@ import './Post.css';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faHeart } from '@fortawesome/free-regular-svg-icons'
-// import { faHeart } from '@fortawesome/free-solid-svg-icons' (shaded heart)
+// import { faHeart } from '@fortawesome/free-solid-svg-icons' 
 import { faPaperPlane } from '@fortawesome/free-solid-svg-icons'
 
 const elementHeartOutline = <FontAwesomeIcon icon={ faHeart } size = '2x' />
 const elementPaperPlane = <FontAwesomeIcon icon={ faPaperPlane } size = '2x' />
 const token = window.localStorage.getItem("token");
+// const [likeButton, setLikeButton] = useState(elementHeartOutline);
 
 const handleNewLike = post => {
   if(token) fetch("/posts", {
@@ -22,7 +23,7 @@ const handleNewLike = post => {
     .then(response => response.json())
     .then(
       data => { 
-      console.log(data)   
+      console.log(data)  
     })
 }
 
@@ -49,8 +50,10 @@ const Post = ({post}) => {
             <div className="post-footer">
               <div className="reactions-container">
                 <div className="likes">
-                  <button onClick={() => handleNewLike(post)} id="likes-button"> { elementHeartOutline } </button>
+                <form onSubmit={ () => handleNewLike(post) }>
+                  <button id="likes-button"> { elementHeartOutline } </button>
                   <span id="likes-count">{post.likes.length}</span>
+                </form>
                 </div>
                 <div>
                   <span className="comments-number">12 Comments</span>
