@@ -262,3 +262,7 @@ body {
 #footer2 a:hover {
   text-decoration: underline;
 }
+
+.post-card {
+  margin: 5px;
+}
