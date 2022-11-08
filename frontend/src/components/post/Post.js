@@ -1,16 +1,16 @@
-import React from 'react';
 import './Post.css';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-// import { faHeart } from '@fortawesome/free-regular-svg-icons'
-// import { faHeart } from '@fortawesome/free-solid-svg-icons' 
 import { faHeart as faSolideHeart } from '@fortawesome/free-solid-svg-icons';
 import { faHeart as faRegularHeart } from '@fortawesome/free-regular-svg-icons';
 import { faPaperPlane } from '@fortawesome/free-solid-svg-icons'
 
 const elementHeartOutline = <FontAwesomeIcon icon={ faRegularHeart } size = '2x' />
+const elementHeartShaded = <FontAwesomeIcon icon={ faSolideHeart } size = '2x' />
 const elementPaperPlane = <FontAwesomeIcon icon={ faPaperPlane } size = '2x' />
+
 const token = window.localStorage.getItem("token");
+var heartButton = elementHeartOutline;
 
 const handleNewLike = post => {
   if(token) fetch("/posts", {
@@ -24,11 +24,25 @@ const handleNewLike = post => {
     .then(response => response.json())
     .then(
       data => { 
-      console.log(data)  
+      console.log(data) 
+      heartButton = elementHeartShaded
     })
 }
 
 const Post = ({post}) => {
+  let userID = post.user._id
+
+  let userLiked = () => {
+    if (post.likes.includes(userID)) {
+      return elementHeartShaded
+      }
+    else {
+      return elementHeartOutline
+    }
+  }
+
+  userLiked()
+
   return(
         <div className="posts-container" data-cy="post" key={ post._id}> 
           <div className="post">
@@ -52,7 +66,7 @@ const Post = ({post}) => {
               <div className="reactions-container">
                 <div className="likes">
                 <form onSubmit={ () => handleNewLike(post) }>
-                  <button id="likes-button"> { elementHeartOutline } </button>
+                  <button id="likes-button"> { userLiked() } </button>
                   <span id="likes-count">{post.likes.length}</span>
                 </form>
                 </div>
@@ -96,6 +110,7 @@ const Post = ({post}) => {
         </div> 
   )
 }
+
 
 
 export default Post;
