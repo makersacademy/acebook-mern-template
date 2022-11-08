@@ -1,7 +1,7 @@
 var mongoose = require('mongoose');
 
 require('../mongodb_helper');
-jest.mock()
+jest.mock();
 
 var Post = require('../../models/post');
 
@@ -51,4 +51,19 @@ describe('Post model', () => {
   //   var post = new Post({ image: img });
   //   expect(post.image).toEqual(img);
   // });
+
+  it("doesn't save a post if it contains invalid characters", (done) => {
+    var post = new Post({ message: 'some<> message' });
+
+    post.save((err) => {
+      expect(err).not.toBeNull();
+
+      Post.find((err, posts) => {
+        expect(err).toBeNull();
+
+        expect(posts.length).toBe(0);
+        done();
+      });
+    });
+  });
 });

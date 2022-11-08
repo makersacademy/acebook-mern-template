@@ -1,5 +1,5 @@
-const Post = require("../models/post");
-const TokenGenerator = require("../models/token_generator");
+const Post = require('../models/post');
+const TokenGenerator = require('../models/token_generator');
 
 const PostsController = {
   Index: (req, res) => {
@@ -7,6 +7,7 @@ const PostsController = {
       if (err) {
         throw err;
       }
+
       const token = await TokenGenerator.jsonwebtoken(req.user_id)
       res.status(200).json({ posts: posts, token: token, author: req.user_id });
     });
@@ -19,12 +20,13 @@ const PostsController = {
 
     const post = new Post(newPost);
 
+
     post.save(async (err) => {
       if (err) {
         throw err;
       }
 
-      const token = await TokenGenerator.jsonwebtoken(req.user_id)
+      const token = await TokenGenerator.jsonwebtoken(req.user_id);
       res.status(201).json({ message: 'OK', token: token });
     });
 
