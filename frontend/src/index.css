@@ -266,3 +266,67 @@ body {
 .post-card {
   margin: 5px;
 }
+
+.friends-bar {
+  background-color: #fff;
+}
+
+.friends-form-container {
+  margin-top: 0;
+}
+
+.create-message-form, .signup-form, .post-card, .friends-form, .friend-card {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  max-width: 500px;
+  background-color: white;
+  border-radius: 5px;
+  padding: 16px;
+  box-shadow:  2px 4px rgb(0 0 0 / 10%), 0 8px 16px rgb(0 0 0 / 10%);
+}
+
+.signup-form h1, .create-message-form label, .friends-form p {
+  margin: 5px auto;
+}
+
+.signup-form p {
+  margin: 0 auto;
+  color:#606770;
+  font-size: 15px;
+  line-height: 24px;
+}
+
+.signup-form-header {
+  border-radius: 5px 5px 0 0;
+}
+
+.signup-form-btn, .create-message-form button, .friends-form-btn {
+  margin-top: 0.5rem;
+  margin-bottom: 0;
+  background-color: #00a400;
+  border-color: #04bf04;
+  color: white;
+  border-radius: 6px;
+  min-height: 2.2rem;
+  font-size: 15px;
+  font-weight: bold;
+  width: 100px;
+  cursor: pointer;
+}
+
+.signup-form-btn:hover {
+  background-color: #04bf04;;
+}
+
+.signup-form-input, .text-box {
+  margin: 0.2rem;
+  width: 235px;
+  height: 1.5rem;
+}
+
+.signup-form-container, .friends-form-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}

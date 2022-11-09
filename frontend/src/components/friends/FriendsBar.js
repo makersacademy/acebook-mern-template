@@ -22,9 +22,9 @@ export default function FriendsBar () {
   }
 
   return (
-    <>
+    <div className='friends-bar'>
       <FriendsForm reload={ reload } />
       <FriendsList reload={ reload } friends={ friends } />
-    </>
+    </div>
   )
 }
