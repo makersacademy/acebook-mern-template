@@ -1,3 +1,4 @@
+const { updateOne, updateMany } = require("../models/post");
 const Post = require("../models/post");
 const TokenGenerator = require("../models/token_generator");
 
@@ -15,6 +16,7 @@ const PostsController = {
   },
 
   Create: (req, res) => {
+
     const postData = {message: req.body.message, user: req.user_id, token: req.body.token, img: req.body.img};
     const post = new Post(postData);
     post.save(async (err) => {
@@ -28,11 +30,24 @@ const PostsController = {
   },
 
   Likes: (req, res) => {
-    const likedPost = Post.find(req.post_id);
-    likedPost.likes.push(req.user_id)
-    likedPost.save()
+    let postData = {post: req.body.post, token: req.body.token};
 
-    res.status(200).json({ likedPost: post });
+    postData.post.likes.push(req.user_id)
+
+
+  Post.findByIdAndUpdate(postData.post._id,
+    { "$push": { "likes": req.user_id } },
+    { "new": true, "upsert": true },
+    function (err) {
+        if (err) throw err;
+        console.log('error');
+    }
+);
+  
+   
+  postData.post.likes.push(req.user_id)
+
+  res.status(200).json({token: postData.token, post: postData.post, post_id: postData.post._id, likes: postData.post.likes });
   }
 };
 
