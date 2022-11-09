@@ -42,7 +42,6 @@ const PostsController = {
     if (req.body.status === "notLiked") {
     postData.post.likes.push(req.user_id)
 
-
       Post.findByIdAndUpdate(postData.post._id,
         { "$push": { "likes": req.user_id } },
         { "new": true, "upsert": true },
@@ -53,8 +52,6 @@ const PostsController = {
         );
         
     } else {
-      // postData.post.likes.remove(req.user_id)
-
       Post.findByIdAndUpdate(postData.post._id,
         { "$pull": { "likes": req.user_id } },
         { safe: true, upsert: true },

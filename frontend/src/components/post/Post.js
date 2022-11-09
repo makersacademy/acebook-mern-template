@@ -124,7 +124,6 @@ const Post = ({post, sessionUserName, sessionUserId }) => {
             )}
           </div>
         </div> 
-
   )
 }
 
