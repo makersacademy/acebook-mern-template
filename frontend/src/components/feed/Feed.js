@@ -21,10 +21,10 @@ const Feed = ({ navigate }) => {
           setPosts(data.posts);
         });
     }
-  }
+  };
 
   useEffect(() => {
-    reload()
+    reload();
   }, []);
 
   const logout = () => {
@@ -40,20 +40,25 @@ const Feed = ({ navigate }) => {
             <li id="sitename">
               <a href="/signup">Acebook</a>
             </li>
-            <button onClick={logout}>Logout <i className="fa-solid fa-right-from-bracket"></i></button>
+            <button onClick={logout}>
+              Logout <i className="fa-solid fa-right-from-bracket"></i>
+            </button>
           </div>
         </div>
         <div id="wrapper">
           <h2>Feed</h2>
-          <PostForm reload={ reload }/>
+          <PostForm reload={reload} />
           <div id="feed" role="feed">
             <PostForm />
             <br></br>
-            {posts.map((post) => (
-              <div class='post-card-container'>
-                <Post post={post} key={post._id} />
-              </div>
-            ))}
+            {posts
+              .slice(0)
+              .reverse()
+              .map((post) => (
+                <div class="post-card-container">
+                  <Post post={post} key={post._id} />
+                </div>
+              ))}
           </div>
         </div>
       </>
