@@ -11,8 +11,16 @@ const FriendsController = {
 
     const token = await TokenGenerator.jsonwebtoken(req.user_id);
 
-    if (!potentialFriend || user.friends.includes(potentialFriend._id)) {
+    if (!potentialFriend) {
       res.status(201).json({ message: 'Friend not found', token: token });
+    }
+
+    else if (user.friends.includes(potentialFriend._id)) {
+      res.status(201).json({ message: 'They are already friended', token: token });
+    }
+
+    else if (potentialFriend._id.toString() === req.user_id.toString()) {
+      res.status(201).json({ message: 'You cannot add yourself', token: token });
     }
     
     else {
