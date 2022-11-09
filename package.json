@@ -6,6 +6,7 @@
     "@fortawesome/react-fontawesome": "^0.2.0",
     "babel-plugin-macros": "^3.1.0",
     "bcrypt": "^5.1.0",
+    "firebase": "^9.13.0",
     "font-awesome": "^4.7.0",
     "gridfs-stream": "^1.1.1",
     "multer": "^1.4.4",
