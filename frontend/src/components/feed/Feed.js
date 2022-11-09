@@ -45,8 +45,8 @@ const Feed = ({ navigate }) => {
         </div>
         <div id="wrapper">
           <h2>Feed</h2>
-          <PostForm reload={ reload }/>
           <FriendsBar />
+          <PostForm reload={ reload }/>
           <div id="feed" role="feed">
             {posts.map((post) => (
               <div class='post-card-container'>
