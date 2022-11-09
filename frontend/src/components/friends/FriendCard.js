@@ -3,7 +3,13 @@ export default function FriendCard (props) {
 
   return (
     <div className='friend-card'>
-      <p>{friend.firstName + ' ' + friend.lastName}</p>
+      <div className="friend-picture">
+        <img src='' alt="" height='100' width='100' />
+      </div>
+      <div className="friend-name">
+        <p>{friend.firstName + ' ' + friend.lastName}</p>
+      </div>
+      
     </div>
   )
 }
