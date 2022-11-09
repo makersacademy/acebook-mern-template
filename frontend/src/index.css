@@ -263,31 +263,31 @@ body {
   text-decoration: underline;
 }
 
-.post-card {
-  margin: 5px;
-}
-
 .friends-bar {
-  background-color: #fff;
+  background-color: #AAA;
+  display: flex;
+  flex-direction: column;
 }
 
-.friends-form-container {
-  margin-top: 0;
+/* Defined some variables below for the rest of the stylesheet*/
+
+:root {
+  --shadow: 2px 4px rgb(0 0 0 / 10%), 0 8px 16px rgb(0 0 0 / 10%);
+  --padding: 16px;
+  --border-radius: 5px;
+  --fat: 500px;
+  --background: white;
 }
 
-.create-message-form, .signup-form, .post-card, .friends-form, .friend-card {
+.form {
   display: flex;
   align-items: center;
   flex-direction: column;
-  max-width: 500px;
-  background-color: white;
-  border-radius: 5px;
-  padding: 16px;
-  box-shadow:  2px 4px rgb(0 0 0 / 10%), 0 8px 16px rgb(0 0 0 / 10%);
-}
-
-.signup-form h1, .create-message-form label, .friends-form p {
-  margin: 5px auto;
+  max-width: var(--fat);
+  background-color: var(--background);
+  border-radius: var(--border-radius);
+  padding: var(--padding);
+  box-shadow: var(--shadow);
 }
 
 .signup-form p {
@@ -329,4 +329,25 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+.friends-card-container {
+  display: flex;
+  flex-direction: column;
+
+}
+
+.friend-card {
+  display: flex;
+  flex-direction: row; 
+}
+
+.friend-picture {
+  margin: 0px;
+  margin-right: 5px;
+  padding: 0px;
+}
+
+.signup-form-container {
+  margin-top: 1rem;
 }
