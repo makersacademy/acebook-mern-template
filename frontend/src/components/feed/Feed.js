@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Post from "../post/Post";
 import PostForm from "../postForm/PostForm";
-import FriendsForm from '../friends/friendForm'
+import FriendsForm from '../friends/FriendForm'
 
 const Feed = ({ navigate }) => {
   const [posts, setPosts] = useState([]);
