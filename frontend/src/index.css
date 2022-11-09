@@ -301,7 +301,7 @@ body {
   border-radius: 5px 5px 0 0;
 }
 
-.signup-form-btn, .create-message-form button, .friends-form-btn {
+.btn {
   margin-top: 0.5rem;
   margin-bottom: 0;
   background-color: #00a400;

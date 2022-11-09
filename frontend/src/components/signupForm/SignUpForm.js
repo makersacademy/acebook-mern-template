@@ -74,7 +74,7 @@ const SignUpForm = ({ navigate }) => {
           />
         </div>
         <div>
-          <input class="signup-form-btn" type="submit" value="Sign Up" />
+          <input class="signup-form-btn btn" type="submit" value="Sign Up" />
         </div>
       </form>
     </div>

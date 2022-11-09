@@ -42,7 +42,7 @@ export default function PostForm (props) {
           required
           />
         <button
-          className='signup-form-btn'
+          className='create-message-form-btn btn'
           >Add <i className="fa-solid fa-plus"></i></button>
       </form>
     </div>
