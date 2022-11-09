@@ -1,25 +1,10 @@
 import { useEffect } from "react"
 import FriendCard from "./FriendCard"
-import { useState } from "react";
 
-export default function Friendslist () {
-  
-  const [friends, setFriends] = useState([])
-  const [token, setToken] = useState(window.localStorage.getItem("token"));
+export default function Friendslist (props) {
+  const reload = props.reload;
+  const friends = props.friends;
 
-  const reload = () => {
-    fetch("/friends/", {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      }
-    })
-      .then((response) => response.json())
-      .then(async (data) => {
-        window.localStorage.setItem("token", data.token);
-          setToken(window.localStorage.getItem("token"));
-          setFriends(data.friends);
-      })
-  }
  
   // Runs on start
   useEffect(() => {

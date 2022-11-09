@@ -1,7 +1,7 @@
 import { useState } from "react";
 
-export default function FriendsForm () {
-  // Name of the person you're searching for.
+export default function FriendsForm (props) {
+
   const [friend, setFriend] = useState('')
   const token = window.localStorage.getItem("token");
 
@@ -24,6 +24,7 @@ export default function FriendsForm () {
     if (response.ok) {
       // If form sent successfully then it resets the input field.
       setFriend('')
+      props.reload();
     }
   }
 
