@@ -1,5 +1,6 @@
 var mongoose = require('mongoose');
 const Comment = require('../../models/comment');
+const User = require('../../models/user.js')
 
 require('../mongodb_helper');
 var Post = require('../../models/post');
@@ -115,7 +116,7 @@ describe('Post model', () => {
     });
   });
 
-  it('can save a post and add 2 comments', (done) => {
+  xit('can save a post and add 2 comments', (done) => {
     var post = new Post({
       message: 'some new message',
       // comments: { text: 'Some comment 2' },
@@ -160,4 +161,42 @@ describe('Post model', () => {
       });
     });
   });
+
+    it('has a message', () => {
+    var post = new Post({ message: 'some message' });
+    expect(post.message).toEqual('some message');
+  });
+
+  it('populates the likes array with users', (done) => {
+    var post = new Post({ message: 'test message' });
+    var user = new User({ email: 'test@test.com', password: 'testpassword', firstName: 'test', lastName: 'trial'});
+    let post_id = post.id;
+    console.log(user);
+    // console.log(post.id);
+    post.save((err) => {
+ 
+      Post.findByIdAndUpdate(
+        post_id,
+        { $push: { likes: {userObj : user.id} } },
+        { new: true },
+        function (err, docs) {
+          if (err) {
+            console.log(err);
+          } else {
+            console.log('Updated Post : ', docs);
+          }
+        }
+      );
+      expect(err).toBeNull();
+      Post.find((err, posts) => {
+        // console.log(posts[0].likes[0])
+        expect(err).toBeNull();
+        expect(posts[0]).toMatchObject({ message: 'test message' });
+        console.log(posts[0].likes[0]);
+        // expect(posts[0].likes[0].id).toEqual(user._id);
+        expect(posts[0].likes[0].userObj.toString()).toEqual(user.id);
+        done();
+      });
+  });
+});
 });
