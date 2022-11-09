@@ -68,8 +68,6 @@ export default function PostForm(props) {
         <label htmlFor="text-box">New Message</label>
         <input
           type="text"
-                    // Maybe add setImageUpload here?
-
           className="text-box"
           onChange={(e) => setMessage(e.target.value)}
           placeholder="What's on your mind?"
@@ -81,13 +79,11 @@ export default function PostForm(props) {
           onChange={(event) => {
             setImageUpload(event.target.files[0]);
           }}
-        multiple />
+         /> 
       <button id="upload-post-img-btn" onClick={uploadFile}>Add Post</button>
         {imageUrls.map((url) => {
         return <img className="uploaded-img" src={url} />;
       })}
-
-        {/* <button className="signup-form-btn">Add</button> */}
       </form>
     </div>
   );
