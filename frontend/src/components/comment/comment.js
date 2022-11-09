@@ -1,38 +1,15 @@
-import React, {useEffect, useState} from 'react';
-
-const Comment = ({ navigate }) => {
-
-  const [comment, setComment] = useState("");
-  const [token, setToken] = useState(window.localStorage.getItem("token"));
-
-  const loadComments = () => {
-    if(token) {
-      fetch("/comments", {
-        headers: {
-        'Authorization': `Bearer ${token}`
-        }
-      })
-      .then(response => response.json())
-      .then(async data => {
-        window.localStorage.setItem("token", data.token)
-        setToken(window.localStorage.getItem("token"))
-        console.log(data);
-        setComment(data.comments);
-        ;
-      })
-    }
-  }
+const Comment = ({ comment }) => {
 
     return(
       <>
       {/* SEE COMMENTS*/}
-    {/* <div className="all-comments-section">
+    <div className="all-comments-section" data-cy="comment" key={ comment._id }>
     <img src="/images/bird-avator.png" alt="avatar" className="comment-author-pic" ></img> 
     <div id="single-comment-wrapper">
-      <span className="comment-author">Comment Author</span>
-      <span className="comment-content">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. </span>
+      <span className="comment-author">{ comment.user.name }</span>
+      <span className="comment-content">{comment.message}</span>
     </div>
-  </div> */}
+  </div>
   </>   
         
     )

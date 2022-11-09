@@ -8,6 +8,7 @@
     border-image: radial-gradient(#564390, #d6cfe3) 40;
     border-bottom-width: 4px;
     border-bottom-style: solid;
+    z-index: 1000;
   }
 
   .navbar-top .navbar-signout {

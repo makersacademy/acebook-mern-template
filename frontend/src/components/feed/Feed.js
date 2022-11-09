@@ -1,4 +1,3 @@
-import { faImages } from '@fortawesome/free-solid-svg-icons';
 import React, { useEffect, useState } from 'react';
 import Navbar from '../Navbar/Navbar';
 import Post from '../post/Post';
@@ -9,7 +8,9 @@ const Feed = ({ navigate }) => {
   const [message, setMessage] = useState("");
   const [image, setImage] = useState();
   const [token, setToken] = useState(window.localStorage.getItem("token"));
+  const [userName, setUserName] = useState("");
 
+  
   const loadPosts = () => {
     if(token) {
       fetch("/posts", {
@@ -26,6 +27,26 @@ const Feed = ({ navigate }) => {
         })
     }
   }
+
+  const loadUser = () => {
+    if(token) {
+      fetch("/users", {
+        headers: {
+          'Authorization': `Bearer ${token}`,
+        }
+      })
+        .then(response => response.json())
+        .then(async data => {
+          // window.localStorage.setItem("token", data.token)
+          // setToken(window.localStorage.getItem("token"))
+          console.log(data);
+          setUserName(data.name);
+        })
+    }
+  }
+
+  loadUser();
+
   
   useEffect(loadPosts, [])
 
@@ -50,7 +71,6 @@ const Feed = ({ navigate }) => {
       })
   }
 
-  
   const handleMessageChange = (event) => {
     setMessage(event.target.value);
   } 
@@ -81,7 +101,7 @@ const Feed = ({ navigate }) => {
           <header>Create Post</header>
           <hr/>
           <form onSubmit={ handlePostSubmit }>
-            <input id="post-message" placeholder="What's on your mind, Name?" type='text' value={ message } onChange={handleMessageChange} />
+            <input id="post-message" placeholder={`What's on your mind, ${userName}?`} type='text' value={ message } onChange={handleMessageChange} />
             <div className="upload-post-image-section">
               <input type="file" id="postImage" name="filename" value={image} onChange={handleImageChange} /> 
               <span id='image-instructions'> Add image to your post </span>
@@ -96,7 +116,7 @@ const Feed = ({ navigate }) => {
         <div className='write-post-box'>
           <img src="/images/bird-avator.png" alt="avatar" className="write-post-pic" ></img> 
           <div onClick={ handlePopUp } className='write-post-input'>
-            What's on your mind, Name?
+          {`What's on your mind, ${userName}?`}
           </div>
         </div>
       </div>
@@ -106,7 +126,6 @@ const Feed = ({ navigate }) => {
           {posts.map(
             (post) => ( 
             <Post post={ post } key={ post._id }/> )
-
           )}
       </div> 
       </>
