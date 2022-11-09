@@ -19,7 +19,7 @@ const SessionsController = {
         res.status(201).json({ token: token, message: "OK" });
       }
     });
-  }
+  },
 };
 
 module.exports = SessionsController;

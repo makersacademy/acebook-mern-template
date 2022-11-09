@@ -30,6 +30,7 @@ const handleNewLike = post => {
 }
 
 const Post = ({post}) => {
+  
   let userID = post.user._id
 
   let userLiked = () => {
@@ -41,8 +42,8 @@ const Post = ({post}) => {
     }
   }
 
-  userLiked()
-
+   userLiked()
+  
   return(
         <div className="posts-container" data-cy="post" key={ post._id}> 
           <div className="post">
