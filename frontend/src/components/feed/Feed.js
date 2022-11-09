@@ -1,4 +1,3 @@
-import { faImages } from '@fortawesome/free-solid-svg-icons';
 import React, { useEffect, useState } from 'react';
 import { storage } from './firebase';
 import { uploadBytes, ref, getDownloadURL} from 'firebase/storage';
@@ -13,6 +12,7 @@ const Feed = ({ navigate }) => {
   const [image, setImage] = useState(null);
   const [imageURL, setImageURL] = useState(null);
   const [token, setToken] = useState(window.localStorage.getItem("token"));
+  const [userName, setUserName] = useState("");
 
   const UploadImage = () => {
     if (image === null) return;
@@ -40,11 +40,31 @@ const Feed = ({ navigate }) => {
         .then(async data => {
           window.localStorage.setItem("token", data.token)
           setToken(window.localStorage.getItem("token"))
-          console.log(data);
+          //console.log(data);
           setPosts(data.posts);
         })
     }
   }
+
+  const loadUser = () => {
+    if(token) {
+      fetch("/users", {
+        headers: {
+          'Authorization': `Bearer ${token}`,
+        }
+      })
+        .then(response => response.json())
+        .then(async data => {
+          // window.localStorage.setItem("token", data.token)
+          // setToken(window.localStorage.getItem("token"))
+          console.log(data);
+          setUserName(data.name);
+        })
+    }
+  }
+
+  loadUser();
+
   
   useEffect(loadPosts, [])
 
@@ -66,12 +86,11 @@ const Feed = ({ navigate }) => {
       .then(
         data => { 
         loadPosts();   
-        console.log(data);
+        //console.log(data);
         handlePopUpClosing();
       })
   }
 
-  
   const handleMessageChange = (event) => {
     setMessage(event.target.value);
   } 
@@ -102,7 +121,7 @@ const Feed = ({ navigate }) => {
           <header>Create Post</header>
           <hr/>
           <form onSubmit={ handlePostSubmit }>
-            <input id="post-message" placeholder="What's on your mind, Name?" type='text' value={ message } onChange={handleMessageChange} />
+            <input id="post-message" placeholder={`What's on your mind, ${userName}?`} type='text' value={ message } onChange={handleMessageChange} />
             <div className="upload-post-image-section">
               <input type="file" id="postImage" name="filename" onChange={handleImageChange} /> 
               <span id='image-instructions'> Add image to your post </span>
@@ -117,7 +136,7 @@ const Feed = ({ navigate }) => {
         <div className='write-post-box'>
           <img src="/images/bird-avator.png" alt="avatar" className="write-post-pic" ></img> 
           <div onClick={ handlePopUp } className='write-post-input'>
-            What's on your mind, Name?
+          {`What's on your mind, ${userName}?`}
           </div>
         </div>
       </div>
@@ -126,8 +145,7 @@ const Feed = ({ navigate }) => {
       <div className='posts-feed'>
           {posts.map(
             (post) => ( 
-            <Post post={ post } key={ post._id }/> )
-
+            <Post post={ post } key={ post._id } /> )
           )}
       </div> 
       </>
