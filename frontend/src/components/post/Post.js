@@ -33,12 +33,11 @@ const handleNewLike = post => {
     })
 }
 
-const Post = ({post}) => {
+const Post = ({post, sessionUserName, sessionUserId }) => {
   
-  let userID = post.user._id
 
   let userLiked = () => {
-    if (post.likes.includes(userID)) {
+    if (post.likes.includes(sessionUserId)) {
       return elementHeartShaded
       }
     else {

@@ -13,6 +13,7 @@ const Feed = ({ navigate }) => {
   const [imageURL, setImageURL] = useState(null);
   const [token, setToken] = useState(window.localStorage.getItem("token"));
   const [userName, setUserName] = useState("");
+  const [userId, setUserId] = useState("");
 
   const UploadImage = () => {
     if (image === null) return;
@@ -59,6 +60,7 @@ const Feed = ({ navigate }) => {
           // setToken(window.localStorage.getItem("token"))
           console.log(data);
           setUserName(data.name);
+          setUserId(data.id);
         })
     }
   }
@@ -145,7 +147,7 @@ const Feed = ({ navigate }) => {
       <div className='posts-feed'>
           {posts.map(
             (post) => ( 
-            <Post post={ post } key={ post._id } /> )
+            <Post post={ post } key={ post._id } sessionUserName = { userName } sessionUserId = { userId } /> )
           )}
       </div> 
       </>
