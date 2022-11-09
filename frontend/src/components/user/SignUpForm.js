@@ -27,10 +27,15 @@ const SignUpForm = ({ navigate }) => {
     if (!usersName.match(/^[a-z ,.'-]*$/i)) return;
 
     if (profilePicUpload == null) return;
-    const imageRef = ref(storage, `images/${profilePicUpload.name + v4()}`);
+    const imageRef = ref(
+      storage,
+      `profilePics/${profilePicUpload.name + v4()}`
+    );
     uploadBytes(imageRef, profilePicUpload).then((snapshot) => {
       getDownloadURL(snapshot.ref).then((url) => {
+        console.log("should be empty", profilePicURL);
         setImage(url);
+        console.log("should not be empty", profilePicURL);
       });
     });
 
@@ -52,6 +57,21 @@ const SignUpForm = ({ navigate }) => {
       } else {
         navigate("/signup");
       }
+    });
+  };
+
+  const UploadProfilePic = (event) => {
+    event.preventDefault();
+    if (profilePicUpload == null) return;
+    const imageRef = ref(
+      storage,
+      `profilePics/${profilePicUpload.name + v4()}`
+    );
+    uploadBytes(imageRef, profilePicUpload).then((snapshot) => {
+      getDownloadURL(snapshot.ref).then((url) => {
+        setImage(url);
+        console.log("Url", url);
+      });
     });
   };
 
@@ -99,13 +119,13 @@ const SignUpForm = ({ navigate }) => {
             setImageUpload(event.target.files[0]);
           }}
         />
-        {/* <button
+        <button
           onClick={(event) => {
             UploadProfilePic(event);
           }}
         >
           Upload Photo
-        </button>{" "} */}
+        </button>{" "}
       </form>
       <div id="ErrorMessageEmail">{errorHandlerEmail(email)}</div>
       <div id="ErrorMessagePassword">{errorHandlerPassword(password)}</div>
