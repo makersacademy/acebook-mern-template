@@ -30,7 +30,8 @@ export default function PostForm(props) {
 
   // Actual JSX
   return (
-    <div className="form-container">
+    <div class="post-card-container">
+      {/* <div className="form-container"> */}
       <form className="create-message-form" onSubmit={handleSubmit}>
         <label htmlFor="text-box">New Message</label>
         <input
@@ -43,6 +44,7 @@ export default function PostForm(props) {
         />
         <button className="signup-form-btn">Add</button>
       </form>
+      {/* </div> */}
     </div>
   );
 }

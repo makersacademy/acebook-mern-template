@@ -22,6 +22,16 @@ body {
   font-family: 'lucida grande', tahoma, verdana, arial, sans-serif;
   background: linear-gradient(white, #d3d8e8);
 }
+
+.center {
+  border-radius: 25px;
+  margin: auto;
+  width: 80%;
+  border: 5px solid #898f9c;
+  padding: 10px;
+  background-color: #dfe3ee;
+}
+
 #header_wrapper {
   width: 100%;
   min-width: 980px;
@@ -218,7 +228,7 @@ body {
   justify-content: center;
   flex-direction: column;
   align-items: center;
-  position:fixed;
+  position: fixed;
   bottom: 0;
 }
 #footer1 {
@@ -265,4 +275,10 @@ body {
 
 .post-card {
   margin: 5px;
+  width: 100%;
+}
+
+.post-card-container {
+  margin: 5px;
+  width: 80%;
 }

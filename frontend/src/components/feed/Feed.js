@@ -45,20 +45,23 @@ const Feed = ({ navigate }) => {
             </button>
           </div>
         </div>
+
         <div id="wrapper">
-          <h2>Feed</h2>
-          <PostForm reload={reload} />
           <div id="feed" role="feed">
-            <PostForm />
-            <br></br>
-            {posts
-              .slice(0)
-              .reverse()
-              .map((post) => (
-                <div class="post-card-container">
-                  <Post post={post} key={post._id} />
-                </div>
-              ))}
+            <h2 id="Page-title">Feed</h2>
+            <div id="feed-strip" class="center">
+              <PostForm reload={reload} />
+
+              <br></br>
+              {posts
+                .slice(0)
+                .reverse()
+                .map((post) => (
+                  <div class="post-card-container">
+                    <Post post={post} key={post._id} reload={reload} />
+                  </div>
+                ))}
+            </div>
           </div>
         </div>
       </>
