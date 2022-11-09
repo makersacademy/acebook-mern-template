@@ -30,7 +30,7 @@ export default function FriendsForm (props) {
 
   return (
     <div className='friends-form-container'>
-      <form className='friends-form' onSubmit={handleSubmit}>
+      <form className='friends-form form' onSubmit={handleSubmit}>
         <p>Add Friends</p>
         <input
           placeholder='Search using their name'

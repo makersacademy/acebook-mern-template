@@ -12,11 +12,8 @@ export default function Friendslist (props) {
   }, [])
 
   return (
-    <>
-      <h1>FriendsList!</h1>
       <div className="friends-card-container">
         {friends.map(friend => <FriendCard friend={friend}/>)}
       </div>
-    </>
   )
 }

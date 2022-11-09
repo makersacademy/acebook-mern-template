@@ -31,7 +31,7 @@ const SignUpForm = ({ navigate }) => {
 
   return (
     <div className="signup-form-container">
-      <form onSubmit={handleSubmit} class="signup-form">
+      <form onSubmit={handleSubmit} class="signup-form form">
         <div className='signup-form-header'>
         <h1 className="form-title">Create a new account</h1>
         <p>It's quick and easy</p>

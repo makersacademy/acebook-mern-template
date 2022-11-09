@@ -31,7 +31,7 @@ export default function PostForm (props) {
   // Actual JSX
   return (
     <div className="form-container">
-      <form className='create-message-form' onSubmit={handleSubmit}>
+      <form className='create-message-form form' onSubmit={handleSubmit}>
         <label htmlFor="text-box">New Message</label>
         <input
           type="text"
