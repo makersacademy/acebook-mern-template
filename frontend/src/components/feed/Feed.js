@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import Post from "../post/Post";
 import PostForm from "../postForm/PostForm";
 import FriendsForm from '../friends/FriendForm'
+import FriendsList from '../friends/FriendsList';
 
 const Feed = ({ navigate }) => {
   const [posts, setPosts] = useState([]);
@@ -47,6 +48,7 @@ const Feed = ({ navigate }) => {
           <h2>Feed</h2>
           <PostForm reload={ reload }/>
           <FriendsForm />
+          <FriendsList />
           <div id="feed" role="feed">
             {posts.map((post) => (
               <div class='post-card-container'>
