@@ -1,7 +1,9 @@
 export default function FriendCard (props) {
+  const friend = props.friend;
+
   return (
     <div className='friend-card'>
-      <h1>{props.friend.firstName}</h1>
+      <p>{friend.firstName + ' ' + friend.lastName}</p>
     </div>
   )
 }
