@@ -87,9 +87,14 @@ const Feed = ({ navigate }) => {
       .then(response => response.json())
       .then(
         data => { 
-        loadPosts();   
-        //console.log(data);
-        handlePopUpClosing();
+        if (data.message === 'Field cannot be empty') {
+          document.querySelector(".emptyPostErrorMessage").style.display = 'block'
+        } else {
+          loadPosts();
+          console.log(data);
+          handlePopUpClosing();
+        }
+        
       })
   }
 
@@ -104,12 +109,14 @@ const Feed = ({ navigate }) => {
   const handlePopUp = () => {
     document.querySelector(".popup-background").style.display = 'block';
     document.querySelector(".create-post-box").style.display = 'block';
+
   }
 
   const handlePopUpClosing = () => {
     document.querySelector(".create-post-box #post-message").value = '';
     document.querySelector(".popup-background").style.display = 'none';
     document.querySelector(".create-post-box").style.display = 'none';
+    document.querySelector(".emptyPostErrorMessage").style.display = 'none'
   }
 
   if(token) {
@@ -123,6 +130,7 @@ const Feed = ({ navigate }) => {
           <header>Create Post</header>
           <hr/>
           <form onSubmit={ handlePostSubmit }>
+            <div className="emptyPostErrorMessage">No empty thoughts allowed! &#128584;</div>
             <input id="post-message" placeholder={`What's on your mind, ${userName}?`} type='text' value={ message } onChange={handleMessageChange} />
             <div className="upload-post-image-section">
               <input type="file" id="postImage" name="filename" onChange={handleImageChange} /> 

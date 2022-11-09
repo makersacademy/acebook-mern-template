@@ -7,11 +7,13 @@ const PostsController = {
     const populatedPosts = Post.find().populate('user');
     populatedPosts.find().sort('-date').find(async (err, posts) => {
       if (err) {
-        throw err;
+        res.status(400).json({message: 'Bad request'})
+      } else {
+        const token = await TokenGenerator.jsonwebtoken(req.user_id)
+        res.status(200).json({ posts: posts, token: token, user: req.user_id });
       }
      
-      const token = await TokenGenerator.jsonwebtoken(req.user_id)
-      res.status(200).json({ posts: posts, token: token, user: req.user_id });
+      
     });
   },
 
@@ -24,16 +26,18 @@ const PostsController = {
       token: req.body.token, 
       img: req.body.img};
     console.log(postData);
+    if (req.body.message === "") {
+      res.status(400).json({ message: "Field cannot be empty"});
 
-    const post = new Post(postData);
-    post.save(async (err) => {
-      if (err) {
-        throw err;
-      }
-
+    } else {
+      const post = new Post(postData);
+      post.save(async (err) => {
       const token = await TokenGenerator.jsonwebtoken(req.user_id)
       res.status(201).json({ post: post, token: token});
     });
+
+    }
+    
   },
 
   Likes: (req, res) => {

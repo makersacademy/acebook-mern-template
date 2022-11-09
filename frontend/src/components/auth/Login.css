@@ -9,6 +9,7 @@
   box-shadow: 0px 1px 10px 1px rgba(71, 71, 71, 0.52);
 }
 
+
 .home-login-box input {
   background: #ffffff;
   width: 100%;
@@ -20,6 +21,21 @@
   border: 1px solid #c9c3c3;
   border-radius: 5px;
   outline: none;
+}
+
+.loginErrorMessage {
+  background: #f3d6d6;
+  width: 100%;
+  margin-bottom: 15px;
+  padding: 15px;
+  font-size: 18px;
+  font-weight: 100;
+  box-sizing: border-box;
+  border: 1px solid red;
+  border-radius: 5px;
+  outline: none;
+  color: red;
+  display: none;
 }
 
 .home-login-box input:focus {

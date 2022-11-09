@@ -68,6 +68,21 @@
     outline: none;
   }
 
+  .signUpErrorMessage {
+    background: #f3d6d6;
+    color: red;
+    width: 100%;
+    margin-bottom: 15px;
+    padding: 15px;
+    font-size: 18px;
+    font-weight: 100;
+    box-sizing: border-box;
+    border: 1px solid red;
+    border-radius: 5px;
+    outline: none;
+    display: none;
+  }
+
   .register-box input:focus {
     box-shadow: 0px 0px 1px 1px #634887;
   }
