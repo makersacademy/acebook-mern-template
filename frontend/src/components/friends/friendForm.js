@@ -38,7 +38,7 @@ export default function FriendsForm () {
           onChange={(e) => setFriend(e.target.value)}
           value={friend}
         />
-        <button className='signup-form-btn'>Add</button>
+        <button className='friends-form-btn'>Add</button>
       </form>
     </div>
   )
