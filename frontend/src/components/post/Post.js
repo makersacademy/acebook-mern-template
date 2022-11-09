@@ -14,29 +14,25 @@ const elementPaperPlane = <FontAwesomeIcon icon={ faPaperPlane } size = '2x' />
 
 
 const token = window.localStorage.getItem("token");
-var heartButton = elementHeartOutline;
 
-const handleNewLike = post => {
+const handleNewLike = (post, status) => {
   if(token) fetch("/posts", {
     method: 'put',
     headers: {
       'Authorization': `Bearer ${token}`,
       'Content-Type': 'application/json',
     },
-    body: JSON.stringify({token: token, post: post})
+    body: JSON.stringify({token: token, post: post, status: status})
   })
     .then(response => response.json())
     .then(
-      data => { 
-      console.log(data) 
-      heartButton = elementHeartShaded
+      data => {  
+      console.log(data)
     })
 }
 
 const Post = ({post, sessionUserName, sessionUserId }) => {
-  
-
-  let userLiked = () => {
+  let likeButton = () => {
     if (post.likes.includes(sessionUserId)) {
       return elementHeartShaded
       }
@@ -44,8 +40,16 @@ const Post = ({post, sessionUserName, sessionUserId }) => {
       return elementHeartOutline
     }
   }
+  likeButton()
 
-   userLiked()
+  let alreadyLiked = (post) => {
+    if (post.likes.includes(sessionUserId)) {
+      handleNewLike(post, 'liked')
+      }
+    else {
+      handleNewLike(post, 'notLiked')
+    }
+  }
 
   const [comments, setComments] = useState([]);
   const [token, setToken] = useState(window.localStorage.getItem("token"));
@@ -61,7 +65,6 @@ const Post = ({post, sessionUserName, sessionUserId }) => {
       .then(async data => {
         window.localStorage.setItem("token", data.token)
         setToken(window.localStorage.getItem("token"))
-        // console.log(data);
         setComments(data.message);
       })
     }
@@ -100,8 +103,8 @@ const Post = ({post, sessionUserName, sessionUserId }) => {
             <div className="post-footer">
               <div className="reactions-container">
                 <div className="likes">
-                <form onSubmit={ () => handleNewLike(post) }>
-                  <button id="likes-button"> { userLiked() } </button>
+                <form onSubmit={ () => alreadyLiked(post) }>
+                  <button id="likes-button"> { likeButton() } </button>
                   <span id="likes-count">{post.likes.length}</span>
                 </form>
                 </div>

@@ -37,22 +37,33 @@ const PostsController = {
   },
 
   Likes: (req, res) => {
-    let postData = {post: req.body.post, token: req.body.token};
-
+    let postData = {post: req.body.post, token: req.body.token, status: req.body.status};
+    
+    if (req.body.status === "notLiked") {
     postData.post.likes.push(req.user_id)
 
 
-  Post.findByIdAndUpdate(postData.post._id,
-    { "$push": { "likes": req.user_id } },
-    { "new": true, "upsert": true },
-    function (err) {
-        if (err) throw err;
-        console.log('error');
+      Post.findByIdAndUpdate(postData.post._id,
+        { "$push": { "likes": req.user_id } },
+        { "new": true, "upsert": true },
+        function (err) {
+            if (err) throw err;
+            console.log('error');
+          }
+        );
+        
+    } else {
+      // postData.post.likes.remove(req.user_id)
+
+      Post.findByIdAndUpdate(postData.post._id,
+        { "$pull": { "likes": req.user_id } },
+        { safe: true, upsert: true },
+        function (err) {
+            if (err) throw err;
+            console.log('error');
+          }
+        );
     }
-);
-  
-   
-  postData.post.likes.push(req.user_id)
 
   res.status(200).json({token: postData.token, post: postData.post, post_id: postData.post._id, likes: postData.post.likes });
   }
