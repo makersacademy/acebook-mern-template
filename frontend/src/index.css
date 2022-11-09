@@ -23,15 +23,6 @@ body {
   background: linear-gradient(white, #d3d8e8);
 }
 
-.center {
-  border-radius: 25px;
-  margin: auto;
-  width: 80%;
-  border: 5px solid #898f9c;
-  padding: 10px;
-  background-color: #dfe3ee;
-}
-
 #header_wrapper {
   width: 100%;
   min-width: 980px;
@@ -273,7 +264,7 @@ body {
   text-decoration: underline;
 }
 
-.post-card {
+/* .post-card {
   margin: 5px;
   width: 100%;
 }
@@ -281,4 +272,4 @@ body {
 .post-card-container {
   margin: 5px;
   width: 80%;
-}
+} */

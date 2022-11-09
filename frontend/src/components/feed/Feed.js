@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import Post from '../post/Post';
 import PostForm from '../postForm/PostForm';
+import './Feed.css';
 import CommentForm from '../postCommentForm/CommentForm';
 
 const Feed = ({ navigate }) => {
