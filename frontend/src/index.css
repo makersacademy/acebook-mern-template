@@ -361,3 +361,13 @@ body {
   margin-top: 1rem;
 }
 
+.post-card {
+  box-shadow: var(--shadow);
+  background-color: white;
+  border-radius: var(--border-radius);
+  padding: var(--padding);
+}
+
+.form-container, .post-card-container {
+  margin: 0px;
+}
