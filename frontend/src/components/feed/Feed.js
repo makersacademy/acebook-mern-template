@@ -49,7 +49,7 @@ const Feed = ({ navigate }) => {
 
   const loadUser = () => {
     if(token) {
-      fetch("/users", {
+      fetch("/sessions", {
         headers: {
           'Authorization': `Bearer ${token}`,
         }
