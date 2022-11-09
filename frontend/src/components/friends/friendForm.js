@@ -24,14 +24,15 @@ export default function FriendsForm (props) {
     if (response.ok) {
       // If form sent successfully then it resets the input field.
       setFriend('')
-      props.reload();
     }
+    
+    props.reload();
   }
 
   return (
-    <div className='friends-form-container'>
+    <div className='friends-form-container form-container'>
       <form className='friends-form form' onSubmit={handleSubmit}>
-        <p>Add Friends</p>
+        <p className='form-title' >Add Friends</p>
         <input
           placeholder='Search using their name'
           type='text'

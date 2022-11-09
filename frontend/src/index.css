@@ -263,20 +263,21 @@ body {
   text-decoration: underline;
 }
 
-.friends-bar {
-  background-color: #AAA;
-  display: flex;
-  flex-direction: column;
-}
-
-/* Defined some variables below for the rest of the stylesheet*/
-
 :root {
   --shadow: 2px 4px rgb(0 0 0 / 10%), 0 8px 16px rgb(0 0 0 / 10%);
   --padding: 16px;
   --border-radius: 5px;
   --fat: 500px;
   --background: white;
+}
+
+.friends-bar {
+  display: flex;
+  flex-direction: column;
+  box-shadow: var(--shadow);
+  border-radius: var(--border-radius);
+  background-color: #fff;
+  margin: 0 5px;
 }
 
 .form {
@@ -301,13 +302,21 @@ body {
   border-radius: 5px 5px 0 0;
 }
 
+.form-title {
+  margin: 0px auto;
+}
+
+.friend-name {
+  font-weight: bold;
+}
+
 .btn {
   margin-top: 0.5rem;
   margin-bottom: 0;
   background-color: #00a400;
   border-color: #04bf04;
   color: white;
-  border-radius: 6px;
+  border-radius: var(--border-radius);
   min-height: 2.2rem;
   font-size: 15px;
   font-weight: bold;
@@ -315,11 +324,11 @@ body {
   cursor: pointer;
 }
 
-.signup-form-btn:hover {
+.btn:hover {
   background-color: #04bf04;;
 }
 
-.signup-form-input, .text-box {
+.text-box {
   margin: 0.2rem;
   width: 235px;
   height: 1.5rem;
@@ -339,7 +348,7 @@ body {
 
 .friend-card {
   display: flex;
-  flex-direction: row; 
+  flex-direction: row;
 }
 
 .friend-picture {
@@ -351,3 +360,4 @@ body {
 .signup-form-container {
   margin-top: 1rem;
 }
+

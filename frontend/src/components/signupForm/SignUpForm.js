@@ -40,7 +40,7 @@ const SignUpForm = ({ navigate }) => {
           <input
             placeholder="First Name"
             id="first-name"
-            class="signup-form-input"
+            class="text-box"
             type="text"
             value={firstName}
             onChange={(e) => setFirstName(e.target.value)}
@@ -48,7 +48,7 @@ const SignUpForm = ({ navigate }) => {
           <input
             placeholder="Last Name"
             id="last-name"
-            class="signup-form-input"
+            class="text-box"
             type="text"
             value={lastName}
             onChange={(e) => setLastName(e.target.value)}
@@ -59,7 +59,7 @@ const SignUpForm = ({ navigate }) => {
           <input
             placeholder="Email"
             id="email"
-            class="signup-form-input"
+            class="text-box"
             type="text"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
@@ -67,7 +67,7 @@ const SignUpForm = ({ navigate }) => {
           <input
             placeholder="Password"
             id="password"
-            class="signup-form-input"
+            class="text-box"
             type="password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
