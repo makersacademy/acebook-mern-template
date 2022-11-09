@@ -1,4 +1,4 @@
-.create-message-form, .signup-form, .post-card, .friends-form {
+.create-message-form, .signup-form, .post-card, .friends-form, .friend-card {
   display: flex;
   align-items: center;
   flex-direction: column;

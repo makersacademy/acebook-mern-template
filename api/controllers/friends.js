@@ -8,7 +8,6 @@ const FriendsController = {
     let friendName = req.body.friend.split(' ')
 
     let potentialFriend = await User.findOne({firstName: friendName[0], lastName: friendName[1]});
-    console.log(potentialFriend);
 
     const token = await TokenGenerator.jsonwebtoken(req.user_id);
 
@@ -21,9 +20,16 @@ const FriendsController = {
       user.save();
       res.status(201).json({ message: 'OK', token: token });
     }
+  },
+
+  GetFriends: async (req, res) => {
+    let user = await User.findById(req.user_id).populate('friends')
+    let friends = await user.friends;
+    console.log('There are the friends', friends)
+    const token = await TokenGenerator.jsonwebtoken(req.user_id);
+    res.status(200).json({ friends: friends, token: token });
   }
 }
 
-module.exports = FriendsController;
 
-// TODO: Add an index method that returns a users friendslist.
+module.exports = FriendsController;
