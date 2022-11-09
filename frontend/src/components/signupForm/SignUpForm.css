@@ -10,7 +10,7 @@
   margin-top: 40px;
 }
 
-.signup-form h1, .create-message-form label {
+.signup-form h1, .create-message-form label, .friends-form p {
   margin: 5px auto;
 }
 
