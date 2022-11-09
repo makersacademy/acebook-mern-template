@@ -6,8 +6,11 @@ import './Feed.css';
 const Feed = ({ navigate }) => {
   const [posts, setPosts] = useState([]);
   const [message, setMessage] = useState("");
+  const [image, setImage] = useState();
   const [token, setToken] = useState(window.localStorage.getItem("token"));
+  const [userName, setUserName] = useState("");
 
+  
   const loadPosts = () => {
     if(token) {
       fetch("/posts", {
@@ -24,11 +27,32 @@ const Feed = ({ navigate }) => {
         })
     }
   }
+
+  const loadUser = () => {
+    if(token) {
+      fetch("/users", {
+        headers: {
+          'Authorization': `Bearer ${token}`,
+        }
+      })
+        .then(response => response.json())
+        .then(async data => {
+          // window.localStorage.setItem("token", data.token)
+          // setToken(window.localStorage.getItem("token"))
+          console.log(data);
+          setUserName(data.name);
+        })
+    }
+  }
+
+  loadUser();
+
   
   useEffect(loadPosts, [])
 
   const handlePostSubmit = async (event) => {
     event.preventDefault();
+    setMessage('');
 
     if(token) fetch('/posts', {
       method: 'post',
@@ -36,7 +60,7 @@ const Feed = ({ navigate }) => {
         'Authorization': `Bearer ${token}`,
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({token: token, message: message})
+      body: JSON.stringify({token: token, message: message, img: image})
     })
       .then(response => response.json())
       .then(
@@ -46,10 +70,14 @@ const Feed = ({ navigate }) => {
         handlePopUpClosing();
       })
   }
-  
+
   const handleMessageChange = (event) => {
     setMessage(event.target.value);
   } 
+  
+  const handleImageChange = (event) => {
+    setImage(event.target.value);
+  }
 
   const handlePopUp = () => {
     document.querySelector(".popup-background").style.display = 'block';
@@ -73,9 +101,13 @@ const Feed = ({ navigate }) => {
           <header>Create Post</header>
           <hr/>
           <form onSubmit={ handlePostSubmit }>
-            <input id="post-message" placeholder="What's on your mind, Name?" type='text' value={ message } onChange={handleMessageChange} />
+            <input id="post-message" placeholder={`What's on your mind, ${userName}?`} type='text' value={ message } onChange={handleMessageChange} />
+            <div className="upload-post-image-section">
+              <input type="file" id="postImage" name="filename" value={image} onChange={handleImageChange} /> 
+              <span id='image-instructions'> Add image to your post </span>
+            </div>
             <button type="submit">Post</button>
-          </form>
+         </form>
         </div>
       <div className='popup-background'></div>
 
@@ -84,7 +116,7 @@ const Feed = ({ navigate }) => {
         <div className='write-post-box'>
           <img src="/images/bird-avator.png" alt="avatar" className="write-post-pic" ></img> 
           <div onClick={ handlePopUp } className='write-post-input'>
-            What's on your mind, Name?
+          {`What's on your mind, ${userName}?`}
           </div>
         </div>
       </div>
@@ -101,6 +133,8 @@ const Feed = ({ navigate }) => {
   } else {
     navigate('/')
   }
+  
+   
 }
 
 export default Feed;

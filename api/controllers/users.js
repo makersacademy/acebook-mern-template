@@ -1,6 +1,13 @@
 const User = require("../models/user");
 
 const UsersController = {
+
+  Index: (req, res) => {
+    User.findOne({ _id: req.user_id }).then(async (user) => {
+      res.status(201).json({ name: user.name});
+    });
+  },
+
   Create: (req, res) => {
     const user = new User(req.body);
     user.save((err) => {

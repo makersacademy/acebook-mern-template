@@ -7,6 +7,7 @@ const SignUpForm = ({ navigate }) => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [image, setImage] = useState("");
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -16,7 +17,7 @@ const SignUpForm = ({ navigate }) => {
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({ name: name, email: email, password: password })
+      body: JSON.stringify({ name: name, email: email, password: password, img: image })
     })
       .then(response => {
         if(response.status === 201) {
@@ -39,6 +40,10 @@ const SignUpForm = ({ navigate }) => {
     setName(event.target.value)
   }
 
+  const handleImageChange = (event) => {
+    setImage(event.target.value)
+  }
+
     return (
       <div className='register-background'>
         
@@ -53,6 +58,12 @@ const SignUpForm = ({ navigate }) => {
               <input placeholder="Full Name" type='text' value={ name } onChange={handleNameChange} />
               <input placeholder="Email address" type='text' value={ email } onChange={handleEmailChange} />
               <input placeholder="Password" type='password' value={ password } onChange={handlePasswordChange} />
+              
+              <div className="set-user-image">
+                <input type="file" id="userImage" name="filename" value={ image } onChange={handleImageChange} />
+                <span> Upload your profile picture</span>
+              </div>
+            
               <button type="submit">Sign Up</button>
           </form>
         </div>

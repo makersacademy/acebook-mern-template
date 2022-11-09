@@ -1,4 +1,7 @@
 import './Post.css';
+import CommentForm from '../comment/CommentForm';
+import Comment from '../comment/comment';
+import React, { useEffect, useState } from 'react';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faHeart as faSolideHeart } from '@fortawesome/free-solid-svg-icons';
@@ -8,6 +11,7 @@ import { faPaperPlane } from '@fortawesome/free-solid-svg-icons'
 const elementHeartOutline = <FontAwesomeIcon icon={ faRegularHeart } size = '2x' />
 const elementHeartShaded = <FontAwesomeIcon icon={ faSolideHeart } size = '2x' />
 const elementPaperPlane = <FontAwesomeIcon icon={ faPaperPlane } size = '2x' />
+
 
 const token = window.localStorage.getItem("token");
 var heartButton = elementHeartOutline;
@@ -43,9 +47,40 @@ const Post = ({post}) => {
   }
 
    userLiked()
-  
+
+  const [comments, setComments] = useState([]);
+  const [token, setToken] = useState(window.localStorage.getItem("token"));
+
+  const loadComments = () => {
+    if(token) {
+      fetch("/comments", {
+        headers: {
+        'Authorization': `Bearer ${token}`
+        }
+      })
+      .then(response => response.json())
+      .then(async data => {
+        window.localStorage.setItem("token", data.token)
+        setToken(window.localStorage.getItem("token"))
+        // console.log(data);
+        setComments(data.message);
+      })
+    }
+  }
+
+  const relatedComments = [];
+
+  comments.map(
+    (comment) =>  {
+      if (post._id === comment.post) {
+        relatedComments.push(comment);
+      }
+    });
+
+  useEffect(loadComments, []);
+
   return(
-        <div className="posts-container" data-cy="post" key={ post._id}> 
+        <div className="posts-container" data-cy="post" key={ post._id }> 
           <div className="post">
             {/* POST HEADER */}
             <div className="post-header"> 
@@ -72,43 +107,22 @@ const Post = ({post}) => {
                 </form>
                 </div>
                 <div>
-                  <span className="comments-number">12 Comments</span>
+                  <span className="comments-number">{relatedComments.length} Comments</span>
                 </div>
               </div>
               <div className="saparator"></div>
             </div>
             {/* WRITE COMMENT*/}
-            <div className="comments">
-              <div className="comments-box">
-                <div className="box-profile">
-                  <img src="/images/bird-avator.png" alt="avatar" className="profile-pic" ></img> 
-                </div>
-                <div className="box-bar">
-                  <input type="text" placeholder='Write a comment...' className="bar-input"></input>
-                  <button className="write-comment-btn">{ elementPaperPlane  }</button>
-                </div>
-              </div>
-            </div>
-            {/* SEE COMMENTS  - will need to be a separate component */}
-            <div className="all-comments-section">
-              <img src="/images/bird-avator.png" alt="avatar" className="comment-author-pic" ></img> 
-              <div id="single-comment-wrapper">
-                <span className="comment-author">Comment Author</span>
-                <span className="comment-content">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. </span>
-              </div>
-            </div>
+            <CommentForm postId={ post._id } loadComments = { loadComments }/>
 
-            {/* SEE COMMENTS - duplicate to display as example */}
-            <div className="all-comments-section">
-              <img src="/images/bird-avator.png" alt="avatar" className="comment-author-pic" ></img> 
-              <div id="single-comment-wrapper">
-                <span className="comment-author">Comment Author</span>
-                <span className="comment-content">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. </span>
-              </div>
-            </div>
-          
+            {/* ALL COMMENTS*/}
+            {relatedComments.map(
+              (comment) => ( 
+                <Comment comment={ comment } key={ comment._id }/>  )
+            )}
           </div>
         </div> 
+
   )
 }
 

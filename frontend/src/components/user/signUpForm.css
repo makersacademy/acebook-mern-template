@@ -89,3 +89,29 @@
     background: linear-gradient(90deg, rgba(104,84,163,1) 0%, rgba(123,95,161,1) 100%);
   }
 
+  .set-user-image {
+    color: rgba(87,68,144,1);
+    font-size: 18px;
+    padding: 13px;
+    margin-bottom: 10px;
+    font-style: oblique;
+  }
+
+  #userImage {
+    color: #797979;
+  }
+
+  #userImage::file-selector-button {
+  margin-right: 20px;
+  border: none;
+  background: linear-gradient(90deg, rgba(87,68,144,1) 0%, rgba(99,72,135,1) 100%);
+  padding: 10px 20px;
+  border-radius: 5px;
+  color: #fff;
+  cursor: pointer;
+  }
+
+  #userImage::file-selector-button:hover {
+    background: linear-gradient(90deg, rgba(104,84,163,1) 0%, rgba(123,95,161,1) 100%);
+  }
+

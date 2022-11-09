@@ -104,7 +104,7 @@
 }
 
 
-.create-post-box input {
+#post-message {
   background: #ffffff;
   width: 100%;
   margin-bottom: 15px;
@@ -134,4 +134,37 @@
 .create-post-box button:hover {
   background: linear-gradient(90deg, rgba(104,84,163,1) 0%, rgba(123,95,161,1) 100%);
 }
+
+.upload-post-image-section {
+  float: left;
+  padding-bottom: 20px;
+}
+
+#postImage {
+  color: #ffffff;
+  font-size: 1pt;
+}
+
+#postImage::file-selector-button {
+margin-right: 1px;
+border: none;
+background: linear-gradient(90deg, rgba(87,68,144,1) 0%, rgba(99,72,135,1) 100%);
+padding: 10px 20px;
+border-radius: 5px;
+color: #fff;
+font-size: 12pt;
+cursor: pointer;
+}
+
+#postImage::file-selector-button:hover {
+  background: linear-gradient(90deg, rgba(104,84,163,1) 0%, rgba(123,95,161,1) 100%);
+}
+
+#image-instructions {
+  font-style: italic;
+  color: rgba(87,68,144,1);
+  font-size: 12pt;
+}
+
+
 

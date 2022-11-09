@@ -16,8 +16,16 @@ const PostSchema = new mongoose.Schema({
     type: Schema.Types.ObjectId,
     ref: "User"
   },
-  likes:  Array
-  });
+  likes:  Array,
+  comments: [{
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Comment'
+  }] 
+});
+
+// PostSchema.virtual('url').get(() => {
+//   return '/post/' + this._id
+// })
 
 const Post = mongoose.model("Post", PostSchema);
 
