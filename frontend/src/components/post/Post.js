@@ -16,18 +16,18 @@ const Post = ({ post }) => {
         <CommentForm postId={post._id} />
         <br></br>
         {console.log(post.comments.length)}
-        {/* {const sortedComments = post.comments.sort(
-          (objA, objB) => Number(objA.created) - Number(objB.created))
-        } */}
-        {post.comments.map((comment) => {
-          return (
-            <p>
-              {comment.text}
-              <br></br>
-              {comment.created}
-            </p>
-          );
-        })}
+        {post.comments
+          .slice(0)
+          .reverse()
+          .map((comment) => {
+            return (
+              <p>
+                {comment.text}
+                <br></br>
+                {comment.created}
+              </p>
+            );
+          })}
       </article>
     </div>
   );
