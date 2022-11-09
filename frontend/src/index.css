@@ -266,3 +266,8 @@ body {
 .post-card {
   margin: 5px;
 }
+
+.uploaded-img {
+  width: 250px;
+  margin: 10px;
+}
