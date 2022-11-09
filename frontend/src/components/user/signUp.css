@@ -8,12 +8,19 @@
   border-style: outset;
 }
 
-/* input[type="file"] {
+input[type="file"] {
   display: none;
 }
+
 .custom-file-upload {
+  border-radius: 5px;
+  width: 150px;
+  height: 20px;
   border: 1px solid #ccc;
   display: inline-block;
   padding: 6px 12px;
   cursor: pointer;
-} */
+  background-color: blue;
+  font-size: 10px;
+  
+}

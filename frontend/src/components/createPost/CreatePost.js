@@ -10,9 +10,10 @@ const CreatePost = ({ navigate, fetchPosts }) => {
   const token = window.localStorage.getItem("token");
   const [message, setMessage] = useState("");
   const [imageUpload, setImageUpload] = useState(null);
-  const [image, setImage] = useState("");
+  const imageURL = [];
 
   const handleSubmitPost = async (event) => {
+    UploadImage();
     event.preventDefault();
     if (imageUpload === "" && message === "") return;
     if (!message.match(/^[a-zA-Z0-9~!@#()`;\-':,.?| ]*$/)) return;
@@ -23,7 +24,7 @@ const CreatePost = ({ navigate, fetchPosts }) => {
         "Content-Type": "application/json",
         Authorization: `Bearer ${token}`,
       },
-      body: JSON.stringify({ message: message, imageURL: image }),
+      body: JSON.stringify({ message: message, imageURL: imageURL }),
     });
     if (response.status !== 201) {
       navigate("/posts");
@@ -39,13 +40,14 @@ const CreatePost = ({ navigate, fetchPosts }) => {
     setMessage(event.target.value);
   };
 
-  const UploadImage = (event) => {
-    event.preventDefault();
-    if (imageUpload == null) return;
-    const imageRef = ref(storage, `images/${imageUpload.name + v4()}`);
-    uploadBytes(imageRef, imageUpload).then((snapshot) => {
-      getDownloadURL(snapshot.ref).then((url) => {
-        setImage(url);
+  const UploadImage = async (event) => {
+    return new Promise((resolve, reject) => {
+      const imageRef = ref(storage, `images/${imageUpload + v4()}`);
+      uploadBytes(imageRef, imageUpload).then((snapshot) => {
+        getDownloadURL(snapshot.ref).then((url) => {
+          imageURL.push(url);
+          resolve();
+        });
       });
     });
   };
@@ -63,24 +65,25 @@ const CreatePost = ({ navigate, fetchPosts }) => {
           onChange={handleMessageChange}
         />
         <div id="message-button-container">
-          <input class="message-button" id="submit" type="submit" value=":@" />
-          <div id="ErrorMessageMessage">
-            {errorHandlerMessage(message)}
-          </div>{" "}
+          <input
+            class="message-button"
+            id="submit"
+            type="submit"
+            value="Submit"
+          />
+          <div id="ErrorMessageMessage">{errorHandlerMessage(message)}</div>{" "}
         </div>
+        <br />
+        <label for="file-upload" className="custom-file-upload">
+          Upload Grumble.jpg
+        </label>
         <input
+          id="file-upload"
           type="file"
           onChange={(event) => {
             setImageUpload(event.target.files[0]);
           }}
         />
-        <button
-          onClick={(event) => {
-            UploadImage(event);
-          }}
-        >
-          Upload Photo
-        </button>{" "}
         <br></br>
       </form>
     </>

@@ -16,9 +16,9 @@ article {
 
 .profile-image {
   border: solid rgb(173, 44, 49);
-  width: 30px;
-  height: 30px;
-  border-radius: 30px;
+  width: 90px;
+  height: 90px;
+  border-radius: 90px;
   object-fit: cover
 }
 
