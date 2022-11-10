@@ -60,7 +60,7 @@ export default function PostForm(props) {
   return (
     <div class="post-card-container">
       {/* <div className="form-container"> */}
-      <form className="create-message-form" onSubmit={handleSubmit}>
+      <form className="create-message-form form" onSubmit={handleSubmit}>
         <label htmlFor="text-box">New Message</label>
         <input
           type="text"

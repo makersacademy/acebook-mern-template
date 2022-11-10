@@ -39,7 +39,7 @@ export default function CommentForm(props) {
   // Actual JSX
   return (
     <div className="form-container">
-      <form className="create-message-form" onSubmit={handleSubmit}>
+      <form className="create-message-form form" onSubmit={handleSubmit}>
         <label for="text-box">Comment here:</label>
         <input
           type="text"
