@@ -16,6 +16,7 @@ const PostSchema = new mongoose.Schema({
       created: { type: Date, default: Date.now },
     },
   ],
+  imageUrls: [String]
 }, {timestamps: true});
 const Post = mongoose.model('Post', PostSchema);
 

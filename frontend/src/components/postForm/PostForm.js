@@ -44,7 +44,7 @@ export default function PostForm(props) {
 
     const response = await fetch('/posts', {
       method: 'post',
-      body: JSON.stringify({ message }),
+      body: JSON.stringify({ message: message, imageUrls: imageUrls }),
       headers: {
         'Content-Type': 'application/json',
         Authorization: 'Bearer ' + token,
