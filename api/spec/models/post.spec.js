@@ -177,7 +177,7 @@ describe('Post model', () => {
  
       Post.findByIdAndUpdate(
         post_id,
-        { $push: { likes: {userObj : user.id} } },
+        { $set: { likes: true} },
         { new: true },
         function (err, docs) {
           if (err) {
@@ -192,9 +192,9 @@ describe('Post model', () => {
         // console.log(posts[0].likes[0])
         expect(err).toBeNull();
         expect(posts[0]).toMatchObject({ message: 'test message' });
-        console.log(posts[0].likes[0]);
+        console.log(posts[0].likes);
         // expect(posts[0].likes[0].id).toEqual(user._id);
-        expect(posts[0].likes[0].userObj.toString()).toEqual(user.id);
+        expect(posts[0].likes).toEqual(true);
         done();
       });
   });

@@ -51,12 +51,12 @@ describe('/posts', () => {
         .set('Authorization', `Bearer ${token}`)
         .send({
           id: did,
-          userId: user.id,
+          likes: true,
           token: token,
         });
       let posts2 = await Post.find();
-      console.log(posts2[0].likes[0].userObj)
-      expect(posts2[0].likes[0].userObj.toString()).toEqual(user.id);
+      console.log(posts2[0].likes)
+      expect(posts2[0].likes).toEqual(true);
     });
 
   //   test('creates a new post', async () => {

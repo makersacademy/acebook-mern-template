@@ -29,7 +29,7 @@ const LikesController = {
   Like: (req, res) => {
     Post.findByIdAndUpdate(
       req.body.id,
-      { $push: { likes: { userObj: req.body.userId } } },
+      { $set: { likes: true} },
       { new: true },
       async function (err, docs) {
         if (err) {
