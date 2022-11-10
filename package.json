@@ -4,6 +4,6 @@
   },
   "dependencies": {
     "firebase": "^9.13.0",
-    "uuid": "^9.0.0"
+    "multer": "^1.4.5-lts.1"
   }
 }

@@ -48,7 +48,7 @@ export default function CommentForm(props) {
           value={message}
           required
         />
-        <button>submit</button>
+        <button>Submit</button>
       </form>
     </div>
   );
