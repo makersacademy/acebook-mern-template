@@ -47,7 +47,7 @@ const Feed = ({ navigate }) => {
           </div>
         </div>
 
-        <div id="wrapper">
+        <div class="flexbox-container">
           <div id="feed" role="feed">
             <h2 id="Page-title">Feed</h2>
             <div id="feed-strip" class="center">
