@@ -10,13 +10,13 @@ const CreatePost = ({ navigate, fetchPosts }) => {
   const token = window.localStorage.getItem("token");
   const [message, setMessage] = useState("");
   const [imageUpload, setImageUpload] = useState(null);
-  const imageURL = [];
 
   const handleSubmitPost = async (event) => {
-    UploadImage();
     event.preventDefault();
     if (imageUpload === "" && message === "") return;
     if (!message.match(/^[a-zA-Z0-9~!@#()`;\-':,.?| ]*$/)) return;
+
+    const imageURL = await handleImage();
 
     let response = await fetch("/posts", {
       method: "post",
@@ -34,19 +34,20 @@ const CreatePost = ({ navigate, fetchPosts }) => {
       setMessage("");
       fetchPosts();
     }
+    setImageUpload(null);
   };
 
   const handleMessageChange = (event) => {
     setMessage(event.target.value);
   };
 
-  const UploadImage = async (event) => {
+  const handleImage = async () => {
+    if (imageUpload == null) return;
     return new Promise((resolve, reject) => {
-      const imageRef = ref(storage, `images/${imageUpload + v4()}`);
+      const imageRef = ref(storage, `images/${imageUpload.name + v4()}`);
       uploadBytes(imageRef, imageUpload).then((snapshot) => {
         getDownloadURL(snapshot.ref).then((url) => {
-          imageURL.push(url);
-          resolve();
+          resolve(url);
         });
       });
     });
@@ -69,11 +70,11 @@ const CreatePost = ({ navigate, fetchPosts }) => {
             class="message-button"
             id="submit"
             type="submit"
-            value="Submit"
+            value="Grumble"
           />
           <div id="ErrorMessageMessage">{errorHandlerMessage(message)}</div>{" "}
         </div>
-        <br />
+        <br></br>
         <label for="file-upload" className="custom-file-upload">
           Upload Grumble.jpg
         </label>
@@ -84,7 +85,6 @@ const CreatePost = ({ navigate, fetchPosts }) => {
             setImageUpload(event.target.files[0]);
           }}
         />
-        <br></br>
       </form>
     </>
   );

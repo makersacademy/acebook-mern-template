@@ -14,17 +14,3 @@ img {
 input[type="file"] {
   display: none;
 }
-
-.custom-upload {
-  border-radius: 5px;
-  width: 150px;
-  height: 20px;
-  border: 1px solid #ccc;
-  display: inline-block;
-  padding: 6px 12px;
-  cursor: pointer;
-  background-color: blue;
-  font-size: 10px;
-
-}
-  

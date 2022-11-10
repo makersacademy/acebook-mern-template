@@ -12,7 +12,6 @@ const SignUpForm = ({ navigate }) => {
   const [password, setPassword] = useState("");
   const [usersName, setUsersName] = useState("");
   const [profilePicUpload, setProfilePicUpload] = useState(null);
-  let profilePicURL = [];
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -26,7 +25,7 @@ const SignUpForm = ({ navigate }) => {
       return;
     if (!usersName.match(/^[a-z ,.'-]*$/i)) return;
 
-    await UploadProfilePic();
+    const profilePicURL = await UploadProfilePic();
 
     await fetch("/users", {
       method: "post",
@@ -38,7 +37,7 @@ const SignUpForm = ({ navigate }) => {
         email: email,
         password: password,
         usersName: usersName,
-        profilePic: profilePicURL[0],
+        profilePic: profilePicURL,
       }),
     }).then((response) => {
       if (response.status === 201) {
@@ -49,16 +48,15 @@ const SignUpForm = ({ navigate }) => {
     });
   };
 
-  const UploadProfilePic = async (event) => {
-    return new Promise((resolve, reject) => {
+  const UploadProfilePic = async () => {
+    return new Promise((resolve) => {
       const imageRef = ref(
         storage,
         `profilePics/${profilePicUpload.name + v4()}`
       );
       uploadBytes(imageRef, profilePicUpload).then((snapshot) => {
         getDownloadURL(snapshot.ref).then((url) => {
-          profilePicURL.push(url);
-          resolve();
+          resolve(url);
         });
       });
     });
@@ -112,7 +110,7 @@ const SignUpForm = ({ navigate }) => {
           <input id="submit" type="submit" value="Submit" /> <br />
           <br />
           <label for="file-upload" className="custom-file-upload">
-            Choose your <s>vein seflie</s> beautiful profile pic!
+            Choose your vein seflie!
           </label>
           <input
             id="file-upload"
