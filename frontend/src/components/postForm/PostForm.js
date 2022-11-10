@@ -1,4 +1,7 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import { ref, uploadBytes, getDownloadURL, listAll } from 'firebase/storage';
+import { storage } from './firebase';
+import { v4 } from 'uuid';
 
 export default function PostForm(props) {
   // Component state
@@ -6,12 +9,37 @@ export default function PostForm(props) {
   // Feed already resets the token for us.
   const token = window.localStorage.getItem('token');
 
+  // Image upload starts here
+  const [imageUpload, setImageUpload] = useState(null);
+  const [imageUrls, setImageUrls] = useState([]);
+
+  const imagesListRef = ref(storage, 'images/');
+  const uploadFile = () => {
+    if (imageUpload == null) return;
+    const imageRef = ref(storage, `images/${imageUpload.name + v4()}`);
+    uploadBytes(imageRef, imageUpload).then((snapshot) => {
+      getDownloadURL(snapshot.ref).then((url) => {
+        setImageUrls((prev) => [...prev, url]);
+      });
+    });
+  };
+
+  useEffect(() => {
+    listAll(imagesListRef).then((response) => {
+      response.items.forEach((item) => {
+        getDownloadURL(item).then((url) => {
+          setImageUrls((prev) => [...prev, url]);
+        });
+      });
+    });
+  }, []);
+
   const handleSubmit = async (error) => {
     error.preventDefault(); // Prevents default action of refreshing the page
 
     const response = await fetch('/posts', {
       method: 'post',
-      body: JSON.stringify({ message }),
+      body: JSON.stringify({ message: message, imageUrls: imageUrls }),
       headers: {
         'Content-Type': 'application/json',
         Authorization: 'Bearer ' + token,
@@ -30,7 +58,8 @@ export default function PostForm(props) {
 
   // Actual JSX
   return (
-    <div className="form-container">
+    <div class="post-card-container">
+      {/* <div className="form-container"> */}
       <form className="create-message-form" onSubmit={handleSubmit}>
         <label htmlFor="text-box">New Message</label>
         <input
@@ -41,7 +70,15 @@ export default function PostForm(props) {
           value={message}
           required
         />
-        <button className="signup-form-btn">Add</button>
+        <input
+          type="file"
+          onChange={(event) => {
+            setImageUpload(event.target.files[0]);
+          }}
+        />
+        <button id="upload-post-img-btn" onClick={uploadFile}>
+          Add Post
+        </button>
       </form>
     </div>
   );

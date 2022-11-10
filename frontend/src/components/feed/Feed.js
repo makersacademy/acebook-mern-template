@@ -22,10 +22,10 @@ const Feed = ({ navigate }) => {
           setPosts(data.posts);
         });
     }
-  }
+  };
 
   useEffect(() => {
-    reload()
+    reload();
   }, []);
 
   const logout = () => {
@@ -39,9 +39,11 @@ const Feed = ({ navigate }) => {
         <div id="header_wrapper">
           <div id="header">
             <li id="sitename">
-              <a href="/signup">Acebook</a>
+              <a href="/login">Acebook</a>
             </li>
-            <button onClick={logout}>Logout <i className="fa-solid fa-right-from-bracket"></i></button>
+            <button onClick={logout}>
+              Logout <i className="fa-solid fa-right-from-bracket"></i>
+            </button>
           </div>
         </div>
         <div id="wrapper">

@@ -22,6 +22,7 @@ body {
   font-family: 'lucida grande', tahoma, verdana, arial, sans-serif;
   background: linear-gradient(white, #d3d8e8);
 }
+
 #header_wrapper {
   width: 100%;
   min-width: 980px;
@@ -218,7 +219,7 @@ body {
   justify-content: center;
   flex-direction: column;
   align-items: center;
-  position:fixed;
+  position: fixed;
   bottom: 0;
 }
 #footer1 {
@@ -263,6 +264,116 @@ body {
   text-decoration: underline;
 }
 
+:root {
+  --shadow: 2px 4px rgb(0 0 0 / 10%), 0 8px 16px rgb(0 0 0 / 10%);
+  --padding: 16px;
+  --border-radius: 5px;
+  --fat: 500px;
+  --background: white;
+}
+
+.friends-bar {
+  display: flex;
+  flex-direction: column;
+  box-shadow: var(--shadow);
+  border-radius: var(--border-radius);
+  background-color: #fff;
+  margin: 0 5px;
+}
+
+.form {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  max-width: var(--fat);
+  background-color: var(--background);
+  border-radius: var(--border-radius);
+  padding: var(--padding);
+  box-shadow: var(--shadow);
+}
+
+.signup-form p {
+  margin: 0 auto;
+  color:#606770;
+  font-size: 15px;
+  line-height: 24px;
+}
+
+.signup-form-header {
+  border-radius: 5px 5px 0 0;
+}
+
+.form-title {
+  margin: 0px auto;
+}
+
+.friend-name {
+  font-weight: bold;
+}
+
+.btn {
+  margin-top: 0.5rem;
+  margin-bottom: 0;
+  background-color: #00a400;
+  border-color: #04bf04;
+  color: white;
+  border-radius: var(--border-radius);
+  min-height: 2.2rem;
+  font-size: 15px;
+  font-weight: bold;
+  width: 100px;
+  cursor: pointer;
+}
+
+.btn:hover {
+  background-color: #04bf04;;
+}
+
+.text-box {
+  margin: 0.2rem;
+  width: 235px;
+  height: 1.5rem;
+}
+
+.signup-form-container, .friends-form-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.friends-card-container {
+  display: flex;
+  flex-direction: column;
+
+}
+
+.friend-card {
+  display: flex;
+  flex-direction: row;
+  border-bottom: 1px solid black;
+}
+
+.friend-picture {
+  margin: 0px;
+  margin-right: 5px;
+  padding: 0px;
+}
+
+.signup-form-container {
+  margin-top: 1rem;
+}
+
 .post-card {
-  margin: 5px;
+  box-shadow: var(--shadow);
+  background-color: white;
+  border-radius: var(--border-radius);
+  padding: var(--padding);
+}
+
+.form-container, .post-card-container {
+  margin: 0px;
+}
+.uploaded-img {
+  margin: 10px;
+  width: 300px;
 }
