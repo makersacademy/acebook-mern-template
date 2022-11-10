@@ -48,7 +48,6 @@ const Feed = ({ navigate }) => {
           <h2>Feed</h2>
           <PostForm reload={ reload }/>
           <div id="feed" role="feed">
-            <PostForm />
             <br></br>
             {posts.map((post) => (
               <div class='post-card-container'>

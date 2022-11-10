@@ -4,7 +4,7 @@ import React, { useState } from 'react';
 
 export default function LikeButton(props) {
   // Component state
-  const [like, setLike] = useState(null); /// set use state to null
+  const [like, setLike] = useState(false); /// set use state to null
   // Feed already resets the token for us.
   const token = window.localStorage.getItem('token');
   const tempId = '636932d263ba38502efa92d1';
@@ -20,25 +20,23 @@ export default function LikeButton(props) {
         'Content-Type': 'application/json',
         Authorization: 'Bearer ' + token,
       },
-    });
+    })
+
     const json = await response.json();
     if (!response.ok) {
       console.log('Like couldnt send', json);
     }
     if (response.ok) {
       // If form sent successfully then it resets the input field.
-      setLike('');
+      setLike(like => !like);
     }
+    // let theThumb = document.querySelector('.fa-regular');
+    // theThumb.classList = 'fa-solid fa-thumbs-up';
   };
 
-  // Handles value of the text input field.
-  const handleChange = (event) => {
-    setLike(event.target.value);
-  };
   // Actual JSX
   return (
-      <button onClick={handleSubmit}><i class="fa-regular fa-thumbs-up"></i></button>
-      
+      <button onClick={handleSubmit}>{like ? <i className="fa-solid fa-thumbs-up"></i>:<i className='fa-regular fa-thumbs-up'></i>}</button>
   );
 }
 
