@@ -13,6 +13,7 @@ const Post = ({ post }) => {
         {post.message}
         {/* {post._id} */}
         <br></br>
+        <img src={post.imageUrls} alt='post-img' margin='20' width='300' />
         <CommentForm postId={post._id} />
         <br></br>
         {console.log(post.comments.length)}
