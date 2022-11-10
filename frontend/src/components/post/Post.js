@@ -15,7 +15,6 @@ const Post = ({ post, reload }) => {
         <br></br>
         <button onClick={() => setShow(!show)}>Toggle Comments</button>
         <img src={post.imageUrls} alt="post-img" margin="20" width="300" />
-        <CommentForm postId={post._id} />
         <br></br>
         {show ? (
           <div id="hideComments">
