@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import Post from '../post/Post';
 import PostForm from '../postForm/PostForm';
 import CommentForm from '../postCommentForm/CommentForm';
+import LikeButton from '../likeButton/LikeButton';
 
 const Feed = ({ navigate }) => {
   const [posts, setPosts] = useState([]);

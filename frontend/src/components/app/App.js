@@ -6,6 +6,7 @@ import Feed from '../feed/Feed';
 import TestSignUp from '../signupForm/SignUpForm';
 import CommentForm from '../postCommentForm/CommentForm';
 import { useNavigate, Routes, Route } from 'react-router-dom';
+import LikeButton from '../likeButton/LikeButton';
 
 const App = () => {
   return (
@@ -21,6 +22,7 @@ const App = () => {
         {/* This is a test path for testing individual components and should be removed in production.*/}
         <Route path="/comment" element={<CommentForm />} />
         {/* This is a test path for testing individual components and should be removed in production.*/}
+        {/* <Route path="/likes" element={<LikeButton />} /> */}
       </Routes>
     </>
   );

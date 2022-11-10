@@ -2,6 +2,8 @@ import React from 'react';
 import './Post.css';
 // import '../postComment/PostComment.js';
 import CommentForm from '../postCommentForm/CommentForm';
+import LikeButton from '../likeButton/LikeButton';
+
 
 // const arrNow = post.comment
 
@@ -11,10 +13,11 @@ const Post = ({ post }) => {
       <article data-cy="post" key={post._id}>
         <br></br>
         {post.message}
-        {/* {post._id} */}
         <br></br>
         <CommentForm postId={post._id} />
         <br></br>
+        <LikeButton postId={post._id} />
+        {/* {<LikeButton />} */}
         {console.log(post.comments.length)}
         {post.comments
           .slice(0)
