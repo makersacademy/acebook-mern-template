@@ -1,12 +1,7 @@
-import { useState, useEffect } from "react";
-import {
-  ref,
-  uploadBytes,
-  getDownloadURL,
-  listAll
-} from "firebase/storage";
-import { storage } from "./firebase";
-import { v4 } from "uuid";
+import { useState, useEffect } from 'react';
+import { ref, uploadBytes, getDownloadURL, listAll } from 'firebase/storage';
+import { storage } from './firebase';
+import { v4 } from 'uuid';
 
 export default function PostForm(props) {
   // Component state
@@ -18,7 +13,7 @@ export default function PostForm(props) {
   const [imageUpload, setImageUpload] = useState(null);
   const [imageUrls, setImageUrls] = useState([]);
 
-  const imagesListRef = ref(storage, "images/");
+  const imagesListRef = ref(storage, 'images/');
   const uploadFile = () => {
     if (imageUpload == null) return;
     const imageRef = ref(storage, `images/${imageUpload.name + v4()}`);
@@ -63,7 +58,8 @@ export default function PostForm(props) {
 
   // Actual JSX
   return (
-    <div className="form-container">
+    <div class="post-card-container">
+      {/* <div className="form-container"> */}
       <form className="create-message-form" onSubmit={handleSubmit}>
         <label htmlFor="text-box">New Message</label>
         <input
@@ -79,12 +75,11 @@ export default function PostForm(props) {
           onChange={(event) => {
             setImageUpload(event.target.files[0]);
           }}
-         /> 
-      <button id="upload-post-img-btn" onClick={uploadFile}>Add Post</button>
-        {/* {imageUrls.map((url) => {
-        return <img className="uploaded-img" src={url} />;
-      })} */}
+        />
+        <button id="upload-post-img-btn" onClick={uploadFile}>
+          Add Post
+        </button>
       </form>
-    </div>  
+    </div>
   );
 }
