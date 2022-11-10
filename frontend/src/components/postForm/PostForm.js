@@ -81,10 +81,10 @@ export default function PostForm(props) {
           }}
          /> 
       <button id="upload-post-img-btn" onClick={uploadFile}>Add Post</button>
-        {imageUrls.map((url) => {
+        {/* {imageUrls.map((url) => {
         return <img className="uploaded-img" src={url} />;
-      })}
+      })} */}
       </form>
-    </div>
+    </div>  
   );
 }
