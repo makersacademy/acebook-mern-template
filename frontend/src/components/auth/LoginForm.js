@@ -40,7 +40,7 @@ const LogInForm = ({ navigate }) => {
     <div id="header_wrapper">
       <div id="header">
         <li id="sitename">
-          <a href="">Acebook</a>
+          <a href="/login">Acebook</a>
         </li>
         <form onSubmit={handleSubmit}>
           <input
@@ -58,7 +58,6 @@ const LogInForm = ({ navigate }) => {
             onChange={handlePasswordChange}
           />
           <input
-            role="submit-button"
             id="submit"
             type="submit"
             value="Submit"

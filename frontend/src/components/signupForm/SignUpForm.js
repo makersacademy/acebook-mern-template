@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import "./SignUpForm.css";
 
 const SignUpForm = ({ navigate }) => {
   const [email, setEmail] = useState("");
@@ -32,7 +31,7 @@ const SignUpForm = ({ navigate }) => {
 
   return (
     <div className="signup-form-container">
-      <form onSubmit={handleSubmit} class="signup-form">
+      <form onSubmit={handleSubmit} class="signup-form form">
         <div className='signup-form-header'>
         <h1 className="form-title">Create a new account</h1>
         <p>It's quick and easy</p>
@@ -41,7 +40,7 @@ const SignUpForm = ({ navigate }) => {
           <input
             placeholder="First Name"
             id="first-name"
-            class="signup-form-input"
+            class="text-box"
             type="text"
             value={firstName}
             onChange={(e) => setFirstName(e.target.value)}
@@ -49,7 +48,7 @@ const SignUpForm = ({ navigate }) => {
           <input
             placeholder="Last Name"
             id="last-name"
-            class="signup-form-input"
+            class="text-box"
             type="text"
             value={lastName}
             onChange={(e) => setLastName(e.target.value)}
@@ -60,7 +59,7 @@ const SignUpForm = ({ navigate }) => {
           <input
             placeholder="Email"
             id="email"
-            class="signup-form-input"
+            class="text-box"
             type="text"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
@@ -68,14 +67,14 @@ const SignUpForm = ({ navigate }) => {
           <input
             placeholder="Password"
             id="password"
-            class="signup-form-input"
+            class="text-box"
             type="password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
           />
         </div>
         <div>
-          <input class="signup-form-btn" type="submit" value="Sign Up" />
+          <input class="signup-form-btn btn" type="submit" value="Sign Up" />
         </div>
       </form>
     </div>

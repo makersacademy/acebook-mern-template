@@ -8,6 +8,7 @@ const commentsRouter = require('./routes/comments');
 const postsRouter = require('./routes/posts');
 const tokensRouter = require('./routes/tokens');
 const usersRouter = require('./routes/users');
+const friendsRouter = require('./routes/friends');
 const likesRouter = require('./routes/likes');
 
 const app = express();
@@ -40,6 +41,7 @@ const tokenChecker = (req, res, next) => {
 };
 
 // route setup
+app.use('/friends', tokenChecker, friendsRouter);
 app.use('/comments', tokenChecker, commentsRouter);
 app.use('/posts', tokenChecker, postsRouter);
 app.use('/tokens', tokensRouter);
