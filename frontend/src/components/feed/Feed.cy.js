@@ -4,7 +4,7 @@ const navigate = () => {}
 describe("Feed", () => {
   it("Calls the /posts endpoint and lists all the posts", () => {
     window.localStorage.setItem("token", "fakeToken")
-    cy.mount(<Feed navigate={navigate}/>)
+
     
     cy.intercept('GET', '/posts', (req) => {
         req.reply({
@@ -17,6 +17,9 @@ describe("Feed", () => {
       }
     ).as("getPosts")
     
+    //line below has been moved due to cy.intercept not intercepting in time
+    cy.mount(<Feed navigate={navigate}/>)
+
     cy.wait("@getPosts").then(() =>{
       cy.get('[data-cy="post"]')
       .should('contain.text', "Hello, world")
