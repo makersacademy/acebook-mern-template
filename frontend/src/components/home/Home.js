@@ -1,39 +1,45 @@
 import React, { useEffect, useState } from "react";
 
-const Home = () => {
+const Home = ({navigate}) => {
+
+  const handleLogin = async (event) => {
+    event.preventDefault();
+
+    fetch( '/', {
+      method: 'get',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ message: "OK" })
+    })
+      .then(response => {
+        if(response.status === 201) {
+          navigate('./login')
+        } else {
+          navigate('./')
+        }
+      })
+  }
+
+
+
+  
   return (
     <>
     <div>
       <h1>Hello there!</h1>
     </div>
     <div>
-        <form>
+        <body onSubmit={handleLogin}>
             <p>Select below where you'd like to go</p>
-            <button>Login</button>
-            <button>Sign up</button>
-        </form>
+            <a href="/login"><button>Login</button></a>
+            <a href="/signup"><button>Sign up</button></a>
+        </body>
     </div>
     </>
   );
-};
-
-/*
-const welcome_field = ("Welcome")
-
-const Home = ({ navigate }) => {
-    render( '/',
-        method: 'get',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        body: ({ welcome_field: welcome_field })
-        if(response => {
-            if (response.status === 200) {
-                navigate('/')
-            } else {
-                return "This hasn't worked"
-            }
-        })
 }
-*/
+
+
+
 export default Home;
