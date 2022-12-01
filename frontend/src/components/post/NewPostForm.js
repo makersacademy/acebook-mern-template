@@ -7,21 +7,22 @@ const NewPostForm = ({ navigate }) => {
   const postSubmit = async (event) => {
     event.preventDefault();
 
-    fetch( '/posts', {
-      method: 'post',
+    console.log(content);
+
+    fetch("/posts", {
+      method: "post",
       headers: {
-        'Authorization': `Bearer ${token}`
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
       },
-      // MUST FIX POST REQUEST
-      body: JSON.stringify({ message: content })
-    })
-      .then(response => {
-        if(response.status === 201) {
-          navigate('/posts')
-        } else {
-          navigate('/login')
-        }
-      })
+      body: JSON.stringify({ message: content }),
+    }).then((response) => {
+      if (response.status === 201) {
+        navigate("/posts");
+      } else {
+        navigate("/login");
+      }
+    });
   };
 
   const handleContentChange = (event) => {
@@ -37,7 +38,7 @@ const NewPostForm = ({ navigate }) => {
         value={content}
         onChange={handleContentChange}
       />
-      <input id="submit" type="submit" value="Create Post" />
+      <input id="submit" type="submit" value="Submit" />
     </form>
   );
 };
