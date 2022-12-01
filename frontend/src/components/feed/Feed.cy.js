@@ -1,4 +1,4 @@
-GGIimport Feed from "./Feed";
+import Feed from "./Feed";
 const navigate = () => {};
 
 describe("Feed", () => {
