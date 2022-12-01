@@ -43,7 +43,7 @@ describe("/posts", () => {
     });
 
     test("creates a new post and adds in the time", async () => {
-      const time = Date.now().toString()
+      const time = Date.now()
       await request(app)
         .post("/posts")
         .set("Authorization", `Bearer ${token}`)
@@ -52,7 +52,7 @@ describe("/posts", () => {
       expect(posts.length).toEqual(1);
       expect(posts[0].message).toEqual("hello world");
       console.log(time)
-      expect(posts[0].time).toContain(time)
+      expect((posts[0].time/10000)).toBeCloseTo((time/10000))
     });
 
     test("returns a new token", async () => {
@@ -115,8 +115,8 @@ describe("/posts", () => {
     });
 
     test("returns every post in the collection in reverse time order", async () => {
-      let post1 = new Post({ message: "howdy!", time: "2022-12-01-10:10:10" });
-      let post2 = new Post({ message: "hola!", time: "2022-12-01-10:10:20" });
+      let post1 = new Post({ message: "howdy!", time: 1669897643479 });
+      let post2 = new Post({ message: "hola!", time: 1669897643480 });
       await post1.save();
       await post2.save();
       let response = await request(app)

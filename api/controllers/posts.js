@@ -12,10 +12,7 @@ const PostsController = {
     }).sort({ time: -1 });
   },
   Create: (req, res) => {
-    const date = Date.now().toString();
-    console.log(date)
-    req.body.time = date;
-    console.log(req.body);
+    req.body.time = Date.now();
     const post = new Post(req.body);
     post.save(async (err) => {
       if (err) {
