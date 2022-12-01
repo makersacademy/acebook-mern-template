@@ -16,8 +16,14 @@ const NewPostForm = ({ navigate }) => {
         Authorization: `Bearer ${token}`,
       },
       body: JSON.stringify({ message: content }),
-    }).then((response) => {
+    }).then(async (response) => {
       if (response.status === 201) {
+        const data = await response.json();
+        window.localStorage.setItem("token", data.token);
+        setToken(window.localStorage.getItem("token"));
+        console.log(data);
+        console.log(data.token);
+        console.log(token);
         navigate("/posts");
       } else {
         navigate("/login");
