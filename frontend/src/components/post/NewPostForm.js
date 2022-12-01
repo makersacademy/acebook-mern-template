@@ -21,9 +21,6 @@ const NewPostForm = ({ navigate }) => {
         const data = await response.json();
         window.localStorage.setItem("token", data.token);
         setToken(window.localStorage.getItem("token"));
-        console.log(data);
-        console.log(data.token);
-        console.log(token);
         navigate("/posts");
       } else {
         navigate("/login");

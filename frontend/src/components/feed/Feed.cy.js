@@ -4,9 +4,9 @@ const navigate = () => {};
 describe("Feed", () => {
   it("Calls the /posts endpoint and lists all the posts", () => {
     window.localStorage.setItem("token", "fakeToken");
-    
+
     // We think this intercept is broken
-    
+
     cy.intercept("GET", "/posts", (req) => {
       req.reply({
         statusCode: 200,
@@ -18,10 +18,10 @@ describe("Feed", () => {
         },
       });
     }).as("getPosts");
-  
+
     // LINE BELOW MOVED HERE
     cy.mount(<Feed navigate={navigate} />);
-    
+
     cy.wait("@getPosts").then(() => {
       cy.get('[data-cy="post"]')
         .should("contain.text", "Hello, world")
