@@ -7,19 +7,20 @@ const PostsController = {
       if (err) {
         throw err;
       }
-      const token = await TokenGenerator.jsonwebtoken(req.user_id)
+      const token = await TokenGenerator.jsonwebtoken(req.user_id);
       res.status(200).json({ posts: posts, token: token });
-    });
+    }).sort({ time: -1 });
   },
   Create: (req, res) => {
+    req.body.time = Date.now();
     const post = new Post(req.body);
     post.save(async (err) => {
       if (err) {
         throw err;
       }
 
-      const token = await TokenGenerator.jsonwebtoken(req.user_id)
-      res.status(201).json({ message: 'OK', token: token });
+      const token = await TokenGenerator.jsonwebtoken(req.user_id);
+      res.status(201).json({ message: "OK", token: token });
     });
   },
 };
