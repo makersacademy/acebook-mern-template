@@ -12,9 +12,6 @@ describe("Post", () => {
     );
     cy.get('[data-cy="post"]')
       .should("contain", "Hello, world")
-      .and("contain", 1669898677163);
+      .and("contain", "Thu Dec 01 2022");
   });
-
 });
-
-// "hh:mm:d DD-MM-YYYY";
