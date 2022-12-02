@@ -37,4 +37,22 @@ describe("Post model", () => {
       });
     });
   });
+
+  it("can save a post with userid", (done) => {
+    var post = new Post({ message: "some message", posterUserId: "12345" });
+
+    post.save((err) => {
+      expect(err).toBeNull();
+
+      Post.find((err, posts) => {
+        expect(err).toBeNull();
+
+        expect(posts[0]).toMatchObject({
+          message: "some message",
+          posterUserId: "12345",
+        });
+        done();
+      });
+    });
+  });
 });

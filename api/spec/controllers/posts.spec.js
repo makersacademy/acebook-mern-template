@@ -10,6 +10,7 @@ let token;
 describe("/posts", () => {
   beforeAll(async () => {
     const user = new User({ email: "test@test.com", password: "12345678" });
+    userIdTest = user.id
     await user.save();
     token = TokenGenerator.jsonwebtoken(user.id);
   });
@@ -43,16 +44,26 @@ describe("/posts", () => {
     });
 
     test("creates a new post and adds in the time", async () => {
-      const time = Date.now()
+      const time = Date.now();
       await request(app)
         .post("/posts")
         .set("Authorization", `Bearer ${token}`)
-        .send({ message: "hello world",token: token });
+        .send({ message: "hello world", token: token });
       let posts = await Post.find();
       expect(posts.length).toEqual(1);
       expect(posts[0].message).toEqual("hello world");
-      console.log(time)
-      expect((posts[0].time/10000)).toBeCloseTo((time/10000))
+      expect(posts[0].time / 10000).toBeCloseTo(time / 10000);
+    });
+
+    test("creates a new post and adds in the userID", async () => {
+      await request(app)
+        .post("/posts")
+        .set("Authorization", `Bearer ${token}`)
+        .send({ message: "hello world", token: token });
+      let posts = await Post.find();
+      expect(posts.length).toEqual(1);
+      expect(posts[0].message).toEqual("hello world");
+      expect(posts[0].posterUserId).toEqual(userIdTest);
     });
 
     test("returns a new token", async () => {
@@ -126,7 +137,6 @@ describe("/posts", () => {
       let messages = response.body.posts.map((post) => post.message);
       expect(messages).toEqual(["hola!", "howdy!"]);
     });
-
 
     test("returns a new token", async () => {
       let post1 = new Post({ message: "howdy!" });
