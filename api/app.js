@@ -7,7 +7,6 @@ const JWT = require("jsonwebtoken");
 const postsRouter = require("./routes/posts");
 const tokensRouter = require("./routes/tokens");
 const usersRouter = require("./routes/users");
-const homeRouter = require("./routes/home");
 
 const app = express();
 
