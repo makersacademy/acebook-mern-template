@@ -13,6 +13,7 @@ const PostsController = {
   },
   Create: (req, res) => {
     req.body.time = Date.now();
+    req.body.posterUserId = req.user_id;
     const post = new Post(req.body);
     post.save(async (err) => {
       if (err) {
