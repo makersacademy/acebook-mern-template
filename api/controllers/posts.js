@@ -1,3 +1,4 @@
+const router = require("../routes/posts")
 const Post = require("../models/post");
 const TokenGenerator = require("../models/token_generator");
 
@@ -21,6 +22,7 @@ const PostsController = {
       }
 
       const token = await TokenGenerator.jsonwebtoken(req.user_id);
+      console.log(router);
       res.status(201).json({ message: "OK", token: token });
     });
   },
