@@ -1,7 +1,18 @@
 import NewPostForm from "./NewPostForm";
 
-describe("Post", () => {
-  it("can make new post", () => {
-    cy.mount(<NewPostForm />);
+const navigate = () => {};
+
+describe("Making New Post", () => {
+  it("Calls the /new_post endpoint", () => {
+    
+    cy.intercept("POST", "/users", { message: "OK" }).as("newPostRequest");
+    
+    cy.mount(<NewPostForm navigate={navigate} />);
+
+    cy.get("#content").type("Fake content");
+    cy.get("#submit").click();
+    cy.wait("@newPostRequest").then((interception) => {
+      expect(interception.response.body.message).to.eq("OK");
+    });
   });
 });
