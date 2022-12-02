@@ -5,7 +5,7 @@ const navigate = () => {};
 describe("Making New Post", () => {
   it("Calls the /new_post endpoint", () => {
     
-    cy.intercept("POST", "/users", { message: "OK" }).as("newPostRequest");
+    cy.intercept("POST", "/posts", { message: "OK" }).as("newPostRequest");
     
     cy.mount(<NewPostForm navigate={navigate} />);
 
