@@ -75,6 +75,17 @@ describe("/posts", () => {
       let originalPayload = JWT.decode(token, process.env.JWT_SECRET);
       expect(newPayload.iat > originalPayload.iat).toEqual(true);
     });
+    test("maje sure each comment has an empty array", async () => {
+      await request(app)
+        .post("/posts")
+        .set("Authorization", `Bearer ${token}`)
+        .send({ message: "hello world", token: token });
+      let posts = await Post.find();
+      expect(posts.length).toEqual(1);
+      expect(posts[0].message).toEqual("hello world");
+      expect(posts[0].posterUserId).toEqual(userIdTest);
+      expect(posts[0].comments.length).toEqual(0);
+    })
   });
 
   describe("POST, when token is missing", () => {
