@@ -4,11 +4,8 @@ const NewCommentForm = ({ navigate, post }) => {
   const [token, setToken] = useState(window.localStorage.getItem("token"));
   const [content, setContent] = useState("");
 
-  
   const commentSubmit = async (event) => {
     event.preventDefault();
-    console.log(post._id)
-    console.log(content)
 
     fetch("/comments", {
       method: "post",
