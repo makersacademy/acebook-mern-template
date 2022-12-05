@@ -11,6 +11,7 @@ const PostSchema = new mongoose.Schema({
    comment: { type: String },
   }, 
 ],
+  likes: Array
 });
 
 const Post = mongoose.model("Post", PostSchema);
