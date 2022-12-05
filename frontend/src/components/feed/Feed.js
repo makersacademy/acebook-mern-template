@@ -30,6 +30,14 @@ const Feed = ({ navigate }) => {
 
   const like = (post_id) => {
     console.log(`liked ${post_id}`);
+    const response = fetch("/likes", {
+      method: "post",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+      body: JSON.stringify({ post_id: post_id }),
+    });
   };
 
   if (token) {
@@ -41,9 +49,12 @@ const Feed = ({ navigate }) => {
           {posts.map((post) => (
             <div>
               <Post post={post} key={post._id} />
-              <button key={`like button ${post._id}`} onClick={() => {
-                like(post._id)
-              }}>
+              <button
+                key={`like button ${post._id}`}
+                onClick={() => {
+                  like(post._id);
+                }}
+              >
                 Like
               </button>
             </div>
