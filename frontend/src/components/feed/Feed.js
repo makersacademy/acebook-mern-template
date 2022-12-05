@@ -28,8 +28,8 @@ const Feed = ({ navigate }) => {
     navigate("/login");
   };
 
-  const like = () => {
-    console.log("like");
+  const like = (post_id) => {
+    console.log(`liked ${post_id}`);
   };
 
   if (token) {
@@ -41,7 +41,9 @@ const Feed = ({ navigate }) => {
           {posts.map((post) => (
             <div>
               <Post post={post} key={post._id} />
-              <button key={`like button ${post._id}`} onClick={like}>
+              <button key={`like button ${post._id}`} onClick={() => {
+                like(post._id)
+              }}>
                 Like
               </button>
             </div>
