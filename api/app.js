@@ -30,7 +30,7 @@ const tokenChecker = (req, res, next) => {
 
   JWT.verify(token, process.env.JWT_SECRET, (err, payload) => {
     if (err) {
-      console.log(err);
+      //console.log(err);
       res.status(401).json({ message: "auth error" });
     } else {
       req.user_id = payload.user_id;
@@ -41,7 +41,7 @@ const tokenChecker = (req, res, next) => {
 
 // route setup
 app.use("/posts", tokenChecker, postsRouter);
-//app.use("/comments", tokenChecker, commentsRouter);
+app.use("/comments", tokenChecker, commentsRouter);
 app.use("/tokens", tokensRouter);
 app.use("/users", usersRouter);
 //app.use("/", homeRouter);

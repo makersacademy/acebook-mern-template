@@ -23,7 +23,6 @@ const PostsController = {
       }
 
       const token = await TokenGenerator.jsonwebtoken(req.user_id);
-      console.log(router);
       res.status(201).json({ message: "OK", token: token });
     });
   },
@@ -31,9 +30,11 @@ const PostsController = {
     req.body.time = Date.now();
     req.body.posterUserId = req.user_id;
     const post = new Post(req.body);
-
+    console.log("Hello");
+    console.log(req.body);
     post.findByIdAndUpdate(
-      req.body.commentId, //depends on comment_id being stored in body of POST request here
+      
+      req.body.postId, //depends on comment_id being stored in body of POST request here
       {
         $push: {
           comments: {

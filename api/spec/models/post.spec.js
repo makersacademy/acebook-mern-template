@@ -65,7 +65,7 @@ describe("Post model", () => {
           user: "135235234h234bv34v",
           comment: "comments are overrated",
         },
-        {
+        {          
           time: 8888889999,
           user: "135235234h234bv34v",
           comment: "sorry about my previous comment ",
@@ -77,12 +77,15 @@ describe("Post model", () => {
       expect(err).toBeNull();
 
       Post.find((err, posts) => {
+        console.log(posts[0]);
         expect(err).toBeNull();
 
-        expect(posts[0]).toMatchObject({
+        expect(posts[0].comments[0].comment).toEqual("comments are overrated")
+        expect(posts[0].comments[1].time).toEqual(8888889999)
+          /*
           message: "some message",
           comments: [
-            {
+            {            
               time: 8888888888,
               user: "135235234h234bv34v",
               comment: "comments are overrated",
@@ -94,6 +97,7 @@ describe("Post model", () => {
             },
           ],
         });
+        */
         done();
       });
     });

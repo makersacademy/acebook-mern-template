@@ -88,7 +88,7 @@ describe("/posts", () => {
     });
   });
 
-  xdescribe("POST, plus COMMENTS, when token present", () => {
+  describe("POST, plus COMMENTS, when token present", () => {
     test("allow adding of one comment to new post by same user", async () => {
       await request(app)
         .post("/posts")
@@ -103,8 +103,9 @@ describe("/posts", () => {
         .post("/comments")
         .set("Authorization", `Bearer ${token}`)
         .send({ comment: "hello world", token: token });
-      let posts = await Post.find();
-      expect(posts[0].comments.length).toEqual(1);
+      let allPosts = await Post.find();
+      console.log(allPosts[0].comments);
+      expect(allPosts[0].comments.length).toEqual(1);
     });
   });
 
