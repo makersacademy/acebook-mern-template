@@ -37,7 +37,18 @@ const Feed = ({ navigate }) => {
         Authorization: `Bearer ${token}`,
       },
       body: JSON.stringify({ post_id: post_id }),
-    });
+    })
+    fetch("/posts", {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    })
+      .then((response) => response.json())
+      .then(async (data) => {
+        window.localStorage.setItem("token", data.token);
+        setToken(window.localStorage.getItem("token"));
+        setPosts(data.posts);
+      });
   };
 
   if (token) {

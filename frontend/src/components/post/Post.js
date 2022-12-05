@@ -9,6 +9,9 @@ const Post = ({ post }) => {
       <article data-cy="post" key={post._id}>
         {new Date(post.time).toString().slice(0, 28)}
       </article>
+      <article>
+        {`${post.likes.length} likes!`}
+      </article>
     </div>
   );
 };
