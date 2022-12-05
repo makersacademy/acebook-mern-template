@@ -22,6 +22,8 @@ describe("/users", () => {
         .send({email: "scarlett@email.com", password: "1234"})
       let users = await User.find()
       let newUser = users[users.length - 1]
+      //console.log(users)
+      //console.log(newUser.email)
       expect(newUser.email).toEqual("scarlett@email.com")
     })
   })
