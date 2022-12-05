@@ -17,9 +17,11 @@ const Post = ({ post }) => {
         {new Date(post.comments[post.comments.length - 1].time)
           .toString()
           .slice(0, 28)}
+      </article>   
       <article>
         {`${post.likes.length} likes!`}
       </article>
+
     </div>
   );
 };

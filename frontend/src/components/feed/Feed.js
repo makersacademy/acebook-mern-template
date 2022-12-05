@@ -62,7 +62,7 @@ const Feed = ({ navigate }) => {
           {posts.map((post) => (
             <div>
               <Post post={post} key={post._id} />
-              <NewCommentForm post={post} key={post._id} /        
+              <NewCommentForm post={post} key={post._id} />         
               <button
                 key={`like button ${post._id}`}
                 onClick={() => {
