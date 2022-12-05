@@ -29,17 +29,13 @@ const PostsController = {
   CreateComment: (req, res) => {
     req.body.time = Date.now();
     req.body.posterUserId = req.user_id;
-    const post = new Post(req.body);
-    console.log("Hello");
-    console.log(req.body);
-    post.findByIdAndUpdate(
-      
-      req.body.postId, //depends on comment_id being stored in body of POST request here
+    Post.findByIdAndUpdate(
+      req.body.postId,
       {
         $push: {
           comments: {
             time: req.body.time,
-            user: req.body.user_id, //depends on user_id being stored in body of POST request here
+            user: req.user_id,
             comment: req.body.comment,
           },
         },
@@ -48,7 +44,6 @@ const PostsController = {
         if (err) {
           throw err;
         }
-
         const token = await TokenGenerator.jsonwebtoken(req.user_id);
         res.status(201).json({ message: "OK", token: token });
       }
