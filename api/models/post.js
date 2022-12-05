@@ -4,7 +4,7 @@ const PostSchema = new mongoose.Schema({
   message: String,
   time: Number,
   posterUserId: String,
-  comments: Array
+  comments: { type: Array {time: Number, user: String, comment: String} },
 });
 
 const Post = mongoose.model("Post", PostSchema);

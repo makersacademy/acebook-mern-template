@@ -10,7 +10,7 @@ let token;
 describe("/posts", () => {
   beforeAll(async () => {
     const user = new User({ email: "test@test.com", password: "12345678" });
-    userIdTest = user.id
+    userIdTest = user.id;
     await user.save();
     token = TokenGenerator.jsonwebtoken(user.id);
   });
@@ -75,7 +75,7 @@ describe("/posts", () => {
       let originalPayload = JWT.decode(token, process.env.JWT_SECRET);
       expect(newPayload.iat > originalPayload.iat).toEqual(true);
     });
-    test("maje sure each comment has an empty array", async () => {
+    test("make sure each new comment has an empty array", async () => {
       await request(app)
         .post("/posts")
         .set("Authorization", `Bearer ${token}`)
@@ -85,7 +85,27 @@ describe("/posts", () => {
       expect(posts[0].message).toEqual("hello world");
       expect(posts[0].posterUserId).toEqual(userIdTest);
       expect(posts[0].comments.length).toEqual(0);
-    })
+    });
+  });
+
+  xdescribe("POST, plus COMMENTS, when token present", () => {
+    test("allow adding of one comment to new post by same user", async () => {
+      await request(app)
+        .post("/posts")
+        .set("Authorization", `Bearer ${token}`)
+        .send({ message: "hello world", token: token });
+      let posts = await Post.find();
+      expect(posts.length).toEqual(1);
+      expect(posts[0].message).toEqual("hello world");
+      expect(posts[0].posterUserId).toEqual(userIdTest);
+      expect(posts[0].comments.length).toEqual(0);
+      await request(app)
+        .post("/comments")
+        .set("Authorization", `Bearer ${token}`)
+        .send({ comment: "hello world", token: token });
+      let posts = await Post.find();
+      expect(posts[0].comments.length).toEqual(1);
+    });
   });
 
   describe("POST, when token is missing", () => {
