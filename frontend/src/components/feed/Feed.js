@@ -2,6 +2,8 @@
 
 import React, { useEffect, useState } from "react";
 import Post from "../post/Post";
+import NewCommentForm from "../post/NewComment";
+
 
 const Feed = ({ navigate }) => {
   const [posts, setPosts] = useState([]);
@@ -60,6 +62,7 @@ const Feed = ({ navigate }) => {
           {posts.map((post) => (
             <div>
               <Post post={post} key={post._id} />
+              <NewCommentForm post={post} key={post._id} /        
               <button
                 key={`like button ${post._id}`}
                 onClick={() => {

@@ -4,6 +4,13 @@ const PostSchema = new mongoose.Schema({
   message: String,
   time: Number,
   posterUserId: String,
+  comments: [  
+    {
+   time: { type: Number },
+   user: { type: String },
+   comment: { type: String },
+  }, 
+],
   likes: Array
 });
 
