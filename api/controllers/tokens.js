@@ -10,16 +10,16 @@ const SessionsController = {
     User.findOne({ email: email }).then(async (user) => {
       if (!user) {
         console.log("auth error: user not found")
-        res.status(401).json({ message: "auth error" });
-      } else if (user.password !== password) {
+        res.status(401).json({ message: "User not found" });
+      } else if  (!user.comparePassword(password)) {
         console.log("auth error: passwords do not match")
-        res.status(401).json({ message: "auth error" });
+        res.status(401).json({ message: "Password incorrect" });
       } else {
         const token = await TokenGenerator.jsonwebtoken(user.id)
         res.status(201).json({ token: token, message: "OK" });
       }
     });
-  }
+  },
 };
 
 module.exports = SessionsController;

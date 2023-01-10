@@ -1,0 +1,91 @@
+
+.home-login-box {
+  width: 350px;
+  padding: 15px;
+  text-align: center;
+  border-radius: 5px;
+  background: #ffffff;
+  margin-left: 60px;
+  box-shadow: 0px 1px 10px 1px rgba(71, 71, 71, 0.52);
+}
+
+
+.home-login-box input {
+  background: #ffffff;
+  width: 100%;
+  margin-bottom: 15px;
+  padding: 15px;
+  font-size: 18px;
+  font-weight: 100;
+  box-sizing: border-box;
+  border: 1px solid #c9c3c3;
+  border-radius: 5px;
+  outline: none;
+}
+
+.loginErrorMessage {
+  background: #f3d6d6;
+  width: 100%;
+  margin-bottom: 15px;
+  padding: 15px;
+  font-size: 18px;
+  font-weight: 100;
+  box-sizing: border-box;
+  border: 1px solid red;
+  border-radius: 5px;
+  outline: none;
+  color: red;
+  display: none;
+}
+
+.home-login-box input:focus {
+  box-shadow: 0px 0px 1px 1px #634887;
+}
+
+.home-login-box button {
+  width: 100%;
+  margin-bottom: 15px;
+  color: #f3f0f0;
+  font-size: 20px;
+  font-weight: 100;
+  border-radius: 5px;
+  border: none;
+  padding: 13px 0;
+  cursor: pointer;
+  background: linear-gradient(90deg, rgba(87,68,144,1) 0%, rgba(99,72,135,1) 100%);
+}
+
+.home-login-box button:hover {
+  background: linear-gradient(90deg, rgba(104,84,163,1) 0%, rgba(123,95,161,1) 100%);
+}
+
+.home-login-box a {
+  font-size: 14px;
+  text-decoration: none;
+  margin-top: 5px;
+  margin-bottom: 20px;
+  display: block;
+}
+
+.home-login-box a:hover {
+  text-decoration: underline;
+}
+
+.home-login-box hr {
+  border: 1px solid #c8ccd2;
+  margin-bottom: 15px;
+}
+
+.home-login-box .create-acc-btn a {
+  color: #323334;
+  font-size: 18px;
+  font-weight: 300;
+  display: inline-block;
+  margin-bottom: 5px;
+}
+
+.home-login-box .create-acc-btn {
+  color: #323334;
+  font-size: 18px;
+  font-weight: 300;
+}

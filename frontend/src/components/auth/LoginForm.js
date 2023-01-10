@@ -1,8 +1,11 @@
 import React, { useState } from 'react';
+import "./Login.css";
+import Footer from '../footer/footer';
 
 const LogInForm = ({ navigate }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -16,15 +19,18 @@ const LogInForm = ({ navigate }) => {
     })
 
     if(response.status !== 201) {
-      console.log("yay")
-      navigate('/login')
+      console.log("Login failed")
+      navigate('/')
+      document.querySelector(".loginErrorMessage").style.display = 'block'
     } else {
-      console.log("oop")
+      console.log("Login success")
       let data = await response.json()
       window.localStorage.setItem("token", data.token)
       navigate('/posts');
     }
   }
+
+
 
   const handleEmailChange = (event) => {
     setEmail(event.target.value)
@@ -34,13 +40,22 @@ const LogInForm = ({ navigate }) => {
     setPassword(event.target.value)
   }
 
-
     return (
-      <form onSubmit={handleSubmit}>
-        <input placeholder='Email' id="email" type='text' value={ email } onChange={handleEmailChange} />
-        <input placeholder='Password' id="password" type='password' value={ password } onChange={handlePasswordChange} />
-        <input role='submit-button' id='submit' type="submit" value="Submit" />
-      </form>
+      <div className="home-login-box">
+        <form onSubmit={handleSubmit} action="#">
+          <div className="loginErrorMessage">User details are incorrect.</div>
+          <input placeholder='Email address' type='text' value={ email } onChange={handleEmailChange} />
+          <input placeholder='Password' type='password' value={ password } onChange={handlePasswordChange} />
+          <button type="submit">Log In</button>
+        </form>
+        <hr/>
+        <div className="create-acc-btn">
+          New to Spybook? <a href="/signup" >Sign Up</a>
+        </div>
+        <Footer/>        
+      </div>
+        
+    
     );
 }
 

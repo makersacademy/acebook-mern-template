@@ -37,4 +37,14 @@ describe("Post model", () => {
       });
     });
   });
+
+  it("initially has empty like array", () => {
+    var post = new Post({ message: "some message" });
+    expect(post.likes.length).toBe(0);
+  });
+
+  it("a post can store user ids in likes array", () => {
+    var post = new Post({ message: "some post", likes: ["user_id_1", "user_id_2"] });
+    expect(post.likes.length).toBe(2);
+  })
 });
