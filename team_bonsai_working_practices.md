@@ -14,6 +14,9 @@ Compassion (Support/Empathy)
 Learning
 Efficiency (Structure)
 (in that order)
+Giving positive feedback
+Pairing with a different person every day
+Not spending longer than 30 minutes stuck on an issue. Park it until you can get help.
 
 We will have a nominated leader/spokesperson which will rotate every other day
 
