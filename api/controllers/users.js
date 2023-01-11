@@ -2,10 +2,10 @@ const User = require("../models/user");
 
 const UsersController = {
   Create: async (req, res) => {
-    const { email, password } = req.body;
+    const { name, email, password } = req.body;
 
     try {
-      const user = await User.signup(email, password);
+      const user = await User.signup(name, email, password);
 
       res.status(201).json({ message: 'OK'})
     } catch (error) {
