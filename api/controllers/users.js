@@ -1,16 +1,16 @@
+const TokenGenerator = require("../models/token_generator");
 const User = require("../models/user");
 
-const UsersController = {
-  Create: (req, res) => {
-    const user = new User(req.body);
-    user.save((err) => {
-      if (err) {
-        res.status(400).json({message: 'Bad request'})
-      } else {
-        res.status(201).json({ message: 'OK' });
-      }
-    });
-  },
-};
+const signupUser = async (req, res) => {
+  const {email, password} = req.body
+  try {
+    const user = await User.signup(email, password)
+    res.status(201).json({email})
+  } catch (error) {
+    res.status(400).json({error: error.message})
+  }
+}
 
-module.exports = UsersController;
+module.exports = signupUser;
+
+
