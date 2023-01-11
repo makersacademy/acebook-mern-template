@@ -1,9 +1,12 @@
 import Home from './Home';
+import { BrowserRouter as Router } from 'react-router-dom';
 
 describe('Home', () => {
   beforeEach(() => {
     cy.mount(
+      <Router>
         <Home />
+      </Router>
     );
   });
   it('renders the correct text', () => {
