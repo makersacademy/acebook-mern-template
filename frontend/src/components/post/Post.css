@@ -1,0 +1,42 @@
+.post-container {
+  display: flex;
+  justify-content: center;
+}
+
+.post-card {
+  width: 60%; /* You can adjust the width to fit your desired layout */
+  padding: 2rem;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.1); /* give the card a subtle shadow */
+  border-radius: 8px; /* rounded corner */
+}
+
+.card-header {
+  display: flex;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.avatar {
+  width: 3rem;
+  height: 3rem;
+  border-radius: 50%;
+}
+
+.card-meta {
+  margin-left: 1rem;
+}
+
+.username {
+  font-size: 1.2rem;
+  font-weight: 600;
+}
+
+.timestamp {
+  font-size: 0.8rem;
+  color: gray;
+}
+
+.card-message {
+  font-size: 1.1rem;
+  line-height: 1.5;
+}

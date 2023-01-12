@@ -3,7 +3,7 @@ const TokenGenerator = require("../models/token_generator");
 
 const PostsController = {
   Index: (req, res) => {
-    Post.find(async (err, posts) => {
+    Post.find().sort({createdAt: -1}).exec(async (err, posts) => {
       if (err) {
         throw err;
       }
