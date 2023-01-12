@@ -8,6 +8,7 @@ const Navbar = () => {
 
   if (window.localStorage.getItem("token")) {
     return (
+
       <nav className="navbar">
         <div className="links">
           <li>
@@ -26,6 +27,7 @@ const Navbar = () => {
           </li>
         </div>
       </nav>
+    
     );
   } else {
     return (
