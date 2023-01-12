@@ -20,7 +20,7 @@ const Feed = ({ navigate }) => {
           setPosts(data.posts);
         })
     }
-  }, [])
+  }, [posts, token])
   
     if(token) {
       return(

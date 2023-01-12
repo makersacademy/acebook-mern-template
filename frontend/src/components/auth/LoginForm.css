@@ -22,3 +22,11 @@ input {
   width: 20rem;
   cursor: pointer;
 }
+
+div.error {
+  padding: 10px;
+  background: #ffefef;
+  border: 1px solid red;
+  border-radius: 4px;
+  margin: 20px 0;
+}

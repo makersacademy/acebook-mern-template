@@ -50,7 +50,7 @@ const SignUpForm = ({ navigate }) => {
           <input placeholder="Email" id="email" type='email' value={ email } onChange={handleEmailChange} />
           <input placeholder="Password" id="password" type='password' value={ password } onChange={handlePasswordChange} />
         <input id='submit' type="submit" value="Submit" />
-        {error && <div>{error}</div>}
+        {error && <div className="error">{error}</div>}
       </form>
     );
 }

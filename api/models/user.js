@@ -3,7 +3,7 @@ const bcrypt = require("bcrypt");
 const validator = require("validator");
 
 const UserSchema = new mongoose.Schema({
-  name: { type: String, required: true},
+  name: { type: String},
   email: { type: String, required: true, unique: true },
   password: { type: String, required: true },
 });
@@ -23,7 +23,7 @@ UserSchema.statics.signup = async function (name, email, password) {
     throw Error("Email is not valid");
   }
   if (!validator.isStrongPassword(password)) {
-    throw Error("Password not strong enough");
+    throw Error("Password not strong enough - must include uppercase, lowercase, numbers, punctuation - min 8 chars");
   }
 
   const salt = await bcrypt.genSalt(10);

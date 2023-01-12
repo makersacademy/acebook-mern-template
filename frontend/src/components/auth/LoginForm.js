@@ -45,7 +45,7 @@ const LogInForm = ({ navigate }) => {
         <input placeholder='Email' id="email" type='text' value={ email } onChange={handleEmailChange} />
         <input placeholder='Password' id="password" type='password' value={ password } onChange={handlePasswordChange} />
         <input role='submit-button' id='submit' type="submit" value="Submit" />
-        {error && <div>{error}</div>}
+        {error && <div class="error">{error}</div>}
       </form>
     );
 }
