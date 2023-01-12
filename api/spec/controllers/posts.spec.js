@@ -149,4 +149,30 @@ describe("/posts", () => {
       expect(response.body.token).toEqual(undefined);
     })
   })
+
+  describe('Assigns user ID to a post', () => {
+
+    test("creates a new post with the correct user ID" , async () => {
+      const user1 = new User({_id: "5f8b5f5b5c5c5c5c5c5c5c5c", name: 'Test User', email: 'test@gmail.com', password: 'M@kers1'})
+      const post1 = new Post({message: 'My test post', author: user1._id})
+      await user1.save();
+      await post1.save();
+      const response = await request(app)
+      .get("/posts")
+      .set("Authorization", `Bearer ${token}`)
+      .send({token: token});
+    let messages = response.body.posts.map((post) => ( post.message));
+    expect(messages).toEqual(['My test post']);
+    let authors = response.body.posts.map((post) => ( post.author));
+    expect(authors).toEqual(['5f8b5f5b5c5c5c5c5c5c5c5c'])
+    })
+  })
 });
+
+// {
+//   "_id": ObjectId("5f8b5f5b5c5c5c5c5c5c5c5c"),
+//   "message": "This is my first post!",
+//   "author": ObjectId("5f8b5f5b5c5c5c5c5c5c5c5c"),
+//   "createdAt": ISODate("2022-12-01T12:00:00.000Z"),
+//   "updatedAt": ISODate("2022-12-01T12:00:00.000Z")
+// }
