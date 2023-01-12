@@ -2,14 +2,18 @@ import { Link } from "react-router-dom";
 import './Navbar.css';
 
 const Navbar = ({ navigate }) => {
-  
-  const loggedIn = localStorage.getItem("token");
+ const loggedIn = window.localStorage.getItem("token");
 
   const handleLogout = () => {
-    window.localStorage.removeItem("token")
-    navigate('/login')
+    setTimeout(() => {
+      window.localStorage.removeItem("token");
+    }, 100);
+    if (loggedIn) {
+      window.localStorage.removeItem("token");
+    }
+    navigate('/login');
   };
-
+  
   return (
     <header>
       <div className="container">
