@@ -6,6 +6,7 @@ const UserSchema = new mongoose.Schema({
   name: { type: String},
   email: { type: String, required: true, unique: true },
   password: { type: String, required: true },
+  posts: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Post' }],
 });
 
 UserSchema.statics.signup = async function (name, email, password) {
