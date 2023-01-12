@@ -1,0 +1,24 @@
+{
+  "name": "acebook-mern-priceless",
+  "version": "1.0.0",
+  "description": "In this project, you are tasked with working on an existing application. A significant part of the challenge will be to familiarise yourself with the codebase you've inherited, as you work to **improve and extend** it.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ChrisHutchinson1982/acebook-mern-priceless.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ChrisHutchinson1982/acebook-mern-priceless/issues"
+  },
+  "homepage": "https://github.com/ChrisHutchinson1982/acebook-mern-priceless#readme",
+  "devDependencies": {
+    "eslint": "^8.31.0",
+    "eslint-plugin-react": "^7.31.11"
+  }
+}
