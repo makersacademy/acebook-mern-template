@@ -5,8 +5,12 @@ const PostSchema = new mongoose.Schema(
     message: {
      type: String
     },
-  },
-  { timestamps: true }
+    author: {
+      type: mongoose.Schema.Types.ObjectId, ref: 'User'
+     },
+  }
+  
+  { timestamps: true },
 );
 
 const Post = mongoose.model("Post", PostSchema);
