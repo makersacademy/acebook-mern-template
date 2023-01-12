@@ -5,9 +5,10 @@ const createToken = (_id) => {
   return jwt.sign({_id}, process.env.SECRET, { expiresIn: '3d' })
 }
 const signupUser = async (req, res) => {
-  const {email, password} = req.body
+  const {name, email, password, aboutMe} = req.body
+  console.log(email)
   try {
-    const user = await User.signup(email, password)
+    const user = await User.signup(name, email, password, aboutMe)
     res.status(201).json({email})
   } catch (error) {
     res.status(400).json({error: error.message})

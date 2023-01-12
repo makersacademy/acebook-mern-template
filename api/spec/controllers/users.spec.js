@@ -5,9 +5,6 @@ const User = require('../../models/user');
 const { deleteOne } = require("../../models/user");
 
 describe("/users/signup", () => {
-  // beforeEach( async () => {
-  //   await User.deleteMany({});
-  // });
 
   describe("POST, when email and password are provided", () => {
     test("the response code is 201", async () => {
