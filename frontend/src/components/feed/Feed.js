@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import Post from '../post/Post'
+import CreatePost from '../createPost/CreatePost'
 
 const Feed = ({ navigate }) => {
   const [posts, setPosts] = useState([]);
@@ -17,7 +18,7 @@ const Feed = ({ navigate }) => {
           window.localStorage.setItem("token", data.token)
           setToken(window.localStorage.getItem("token"))
           setPosts(data.posts);
-        })
+        })//.then(() => {window.location.reload()})
     }
   }, [])
     
@@ -31,6 +32,7 @@ const Feed = ({ navigate }) => {
       return(
         <>
           <h2>Posts</h2>
+            <CreatePost />
             <button onClick={logout}>
               Logout
             </button>
