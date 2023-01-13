@@ -24,7 +24,7 @@ const Feed = ({ navigate }) => {
 
   const logout = () => {
     window.localStorage.removeItem("token")
-    navigate('/login')
+    navigate('/')
   }
   
     if(token) {
