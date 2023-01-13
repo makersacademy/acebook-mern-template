@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 const Navbar = () => {
   const handleLogout = () => {
     window.localStorage.removeItem("token");
+    window.localStorage.removeItem("user_id")
   };
 
   if (window.localStorage.getItem("token")) {

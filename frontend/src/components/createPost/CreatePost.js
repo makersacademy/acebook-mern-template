@@ -17,7 +17,7 @@ const CreatePost = () => {
         body: JSON.stringify({
           'message': `${body}`
         })
-      })
+      }).then(window.location.reload())
       }
   }
   

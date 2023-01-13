@@ -21,21 +21,12 @@ const Feed = ({ navigate }) => {
         })
     }
   }, [])
-    
-
-  const logout = () => {
-    window.localStorage.removeItem("token")
-    navigate('/')
-  }
   
     if(token) {
       return(
         <>
           <h2>Posts</h2>
             <CreatePost />
-            <button onClick={logout}>
-              Logout
-            </button>
           <div id='feed' role="feed">
               {posts.map(
                 (post) => ( <Post post={ post } key={ post._id } /> )
