@@ -8,7 +8,7 @@ const Post = ({post}) => {
   <div class="post-card" data-cy="post" key={ post._id }>
     <div class="card-header">
       <div class="card-meta">
-        <h2 class="username">Username Here</h2>
+        <h2 class="username">{ post.author.name }</h2>
         <p class="timestamp">{formatDistanceToNow(new Date(post.createdAt), { addSuffix: true })}</p>
       </div>
     </div>

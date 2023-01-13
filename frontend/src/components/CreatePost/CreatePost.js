@@ -2,7 +2,7 @@ import "./CreatePost.css";
 import { useState } from "react";
 import { FaWindowClose } from "react-icons/fa";
 
-const CreatePost = () => {
+const CreatePost = ({setUpdated}) => {
   const [postInput, setPostInput] = useState("");
   const [showPopup, setShowPopup] = useState(false);
 
@@ -40,12 +40,13 @@ const CreatePost = () => {
         "Content-Type": "application/json",
         Authorization: `Bearer ${token}`,
       },
-      body: JSON.stringify({ message: postInput }),
+      body: JSON.stringify({ message: postInput, author: window.localStorage.getItem("user_id") }),
     });
 
     if (response.status === 201) {
       setPostInput("");
       setShowPopup(false);
+      setUpdated(true);
       document.body.classList.toggle("darken-background", !showPopup);
       document.body.classList.toggle("disable-pointer-events", !showPopup);
     }

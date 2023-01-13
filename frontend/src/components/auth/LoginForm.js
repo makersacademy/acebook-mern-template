@@ -26,6 +26,7 @@ const LogInForm = ({ navigate }) => {
     } else {
       console.log("oop")
       window.localStorage.setItem("token", data.token)
+      window.localStorage.setItem("user_id", data.user_id)
       navigate('/posts');
     }
   }
