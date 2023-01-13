@@ -2,11 +2,15 @@ const app = require("../../app");
 const request = require("supertest");
 require("../mongodb_helper");
 const User = require('../../models/user')
+const TokenGenerator = require('../../models/token_generator');
+const JWT = require("jsonwebtoken");
+let token;
 
 describe("/users", () => {
   beforeEach( async () => {
     await User.deleteMany({});
   });
+
 
   describe("POST, when email, password and username are provided", () => {
     test("the response code is 201", async () => {
@@ -74,6 +78,28 @@ describe("/users", () => {
         .send({email: "skye@email.com", password: "skye1234"})
       let users = await User.find()
       expect(users.length).toEqual(0)
+    });
+  });
+
+  describe("GET, when id is given it returns user info", () => {
+    beforeEach( async () => {
+      let user = new User({email: 'shah@test.com', password: 'shah', username: 'shah8'});
+      await user.save();
+      console.log(user)
+      token = TokenGenerator.jsonwebtoken(user.id);
+    });
+  
+    test("response code is 201", async () => {
+      let response = await request(app)
+        .get("/users")
+        .set({_id: user._id})
+      expect(response.statusCode).toBe(201)
+    });
+    test("returns user info when id is given", async () => {
+      let response = await request(app)
+        .get("/users")
+        .set({_id: user._id})
+      expect(response.body).toContain("shah")
     });
   });
 })

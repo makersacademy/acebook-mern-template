@@ -12,6 +12,16 @@ const UsersController = {
       res.status(400).json({error: error.message});
     }
   },
+
+  Find: async (req, res) => {
+    try {
+      const user = await User.findOne({_id: req.get('User_ID')}, {password: 0})
+
+      res.status(201).json({user})
+    } catch (error) {
+      res.status(400).json({error: error.message})
+    }
+  }
 };
 
 module.exports = UsersController;
