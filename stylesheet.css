@@ -53,30 +53,6 @@ button {
   transition-duration: 0.4s;
 }
 
-form input.signup {
-  color: #fff;
-  font-size: 20px;
-  font-weight: bold;
-  background-color: #099c2c;
-  border-radius: 5px;
-  border: none;
-  padding: 10px;
-}
-
-form input.email, input.password {
-  border-radius: 5px;
-  border: 1 thin #e8e8e8;
-  padding: 10px;
-  border-width: 1pt;
-  background-color: #cce2ef;
-
-}
-
-form input.signup:hover {
-  color: #fff;
-  background-color: #088324;
-}
-
 button:hover {
   color: #4267B2;
   background-color: #fff;
