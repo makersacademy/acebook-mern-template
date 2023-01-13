@@ -4,7 +4,6 @@ require("../mongodb_helper");
 const User = require('../../models/user')
 const TokenGenerator = require('../../models/token_generator');
 const JWT = require("jsonwebtoken");
-let token;
 
 describe("/users", () => {
   beforeEach( async () => {
@@ -82,24 +81,24 @@ describe("/users", () => {
   });
 
   describe("GET, when id is given it returns user info", () => {
+    let user;
     beforeEach( async () => {
-      let user = new User({email: 'shah@test.com', password: 'shah', username: 'shah8'});
+      user = new User({email: 'shah@test.com', password: 'shah', username: 'shah8'});
       await user.save();
-      console.log(user)
       token = TokenGenerator.jsonwebtoken(user.id);
     });
   
     test("response code is 201", async () => {
       let response = await request(app)
         .get("/users")
-        .set({_id: user._id})
+        .set({"User_ID": user.id})
       expect(response.statusCode).toBe(201)
     });
     test("returns user info when id is given", async () => {
       let response = await request(app)
         .get("/users")
-        .set({_id: user._id})
-      expect(response.body).toContain("shah")
+        .set({"User_ID": user.id})
+      expect(response.body.user.username).toContain("shah8")
     });
   });
 })
