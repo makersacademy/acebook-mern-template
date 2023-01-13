@@ -1,0 +1,9 @@
+{
+  "devDependencies": {
+    "cypress": "^10.11.0"
+  },
+  "dependencies": {
+    "firebase": "^9.13.0",
+    "multer": "^1.4.5-lts.1"
+  }
+}
