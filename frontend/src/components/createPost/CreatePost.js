@@ -24,7 +24,6 @@ const CreatePost = () => {
   return (
     <div className="createPost">
       <h2>Create Post</h2>
-      <p>{body}</p>
       <form onSubmit={handleSubmit}>
         <input type="text" onChange={(event) => setBody(event.target.value)} />
         <input type="submit" value="Submit" />
