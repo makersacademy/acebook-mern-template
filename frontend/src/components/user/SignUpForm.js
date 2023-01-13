@@ -34,7 +34,7 @@ const SignUpForm = ({ navigate }) => {
 
 
     return (
-      <form onSubmit={handleSubmit}>
+      <form className="signup" onSubmit={handleSubmit}>
           <input className="email" placeholder="Email" id="email" type='text' value={ email } onChange={handleEmailChange} />
           <input className="password" placeholder="Password" id="password" type='password' value={ password } onChange={handlePasswordChange} />
         <input className="signup" id='submit' type="submit" value="Sign Up"  />

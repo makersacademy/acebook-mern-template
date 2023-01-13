@@ -5,7 +5,7 @@
 * {
   margin: 0;
   font-family: "Inter", "sans-serif";
-  /* background-color: #4267B2; */
+  background-color: #e8e9ed;
   
 }
 
@@ -53,11 +53,22 @@ button {
   transition-duration: 0.4s;
 }
 
+form.signup {
+  margin: auto;
+  margin-top: 200px;
+  padding: 15px;
+  height: 200px;
+  width: 350px;
+  border: 1 solid black;
+  background-color: white;
+  border-radius: 8px;
+}
+
 form input.signup {
   color: #fff;
   font-size: 20px;
   font-weight: bold;
-  background-color: #099c2c;
+  background-color: #42b729;
   border-radius: 5px;
   border: none;
   padding: 10px;
@@ -65,16 +76,21 @@ form input.signup {
 
 form input.email, input.password {
   border-radius: 5px;
-  border: 1 thin #e8e8e8;
+  border: 1 thin #f5f4f4;
   padding: 10px;
   border-width: 1pt;
-  background-color: #cce2ef;
+  background-color: #e9f0fe;
+}
 
+form input.email:hover, input.password:hover {
+  background-color: #fff;
+  color: #ccccce;
+  border: 1 thin rgb(96, 182, 248);
 }
 
 form input.signup:hover {
   color: #fff;
-  background-color: #088324;
+  background-color: #27960e;
 }
 
 button:hover {
