@@ -1,0 +1,19 @@
+
+.navbar {
+    background-color: gray;
+    padding: 10px;
+    display: flex;
+    justify-content: center;
+  }
+  
+  .links li {
+    list-style: none;
+    display: inline-block;
+    margin-right: 10px;
+  }
+  
+  .links a {
+    color: white;
+    text-decoration: none;
+  }
+  

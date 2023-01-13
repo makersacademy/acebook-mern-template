@@ -1,16 +1,33 @@
+const TokenGenerator = require("../models/token_generator");
 const User = require("../models/user");
 
-const UsersController = {
-  Create: (req, res) => {
-    const user = new User(req.body);
-    user.save((err) => {
-      if (err) {
-        res.status(400).json({message: 'Bad request'})
-      } else {
-        res.status(201).json({ message: 'OK' });
-      }
-    });
-  },
-};
+const createToken = (_id) => {
+  return jwt.sign({_id}, process.env.SECRET, { expiresIn: '3d' })
+}
+const signupUser = async (req, res) => {
+  const {name, email, password, aboutMe} = req.body
+  console.log(email)
+  try {
+    const user = await User.signup(name, email, password, aboutMe)
+    res.status(201).json({email})
+  } catch (error) {
+    res.status(400).json({error: error.message})
+  }
+}
 
-module.exports = UsersController;
+const loginUser = async (req, res) => {
+  const {email, password} = req.body
+  try {
+    const user = await User.login(email, password)
+    //create token here and add it to response
+    console.log(user)
+    const token = await TokenGenerator.jsonwebtoken(user.id)
+    res.status(200).json({ token: token, user: user, message: "OK" })
+  } catch (error) {
+    res.status(400).json({error: error.message})
+  }
+}
+
+
+module.exports = { signupUser, loginUser }
+
