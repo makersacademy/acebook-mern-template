@@ -11,8 +11,8 @@ describe("Feed", () => {
         statusCode: 200,
         body: {
           posts: [
-            { _id: 1, message: "Hello, world", createdAt: Date.now() },
-            { _id: 2, message: "Hello again, world", createdAt: Date.now() },
+            { _id: 1, message: "Hello, world", createdAt: Date.now(), author: { name: "Andy" }},
+            { _id: 2, message: "Hello again, world", createdAt: Date.now(), author: { name: "Will" } },
           ],
         },
       });
@@ -21,7 +21,9 @@ describe("Feed", () => {
     cy.wait("@getPosts").then(() => {
       cy.get('[data-cy="post"]')
         .should("contain.text", "Hello, world")
-        .and("contain.text", "Hello again, world");
+        .and("contain.text", "Andy")
+        .and("contain.text", "Hello again, world")
+        .and("contain.text", "Will");
     });
   });
 });
