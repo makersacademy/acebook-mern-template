@@ -7,9 +7,11 @@ const Navbar = ({ navigate }) => {
   const handleLogout = () => {
     setTimeout(() => {
       window.localStorage.removeItem("token");
+      window.localStorage.removeItem("user_id");
     }, 100);
     if (loggedIn) {
       window.localStorage.removeItem("token");
+      window.localStorage.removeItem("user_id");
     }
     navigate('/login');
   };
@@ -18,12 +20,12 @@ const Navbar = ({ navigate }) => {
     <header>
       <div className="container">
           <Link to={loggedIn ? '/posts' : '/login'}>
-            <h1>Acebook</h1>
+            <h1 data-cy='h1'>Acebook</h1>
          </Link>
-        <nav>
+        <nav data-cy='nav'>
           {loggedIn && (
             <div>
-              <button onClick={handleLogout}>Log out</button>
+              <button data-cy="logout" onClick={handleLogout}>Log out</button>
             </div>
           )}
           {!loggedIn && (

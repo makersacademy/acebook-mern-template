@@ -9,7 +9,7 @@ const SessionsController = {
     try {
       const user = await User.login(email, password);
       const token = await TokenGenerator.jsonwebtoken(user.id)
-      res.status(201).json({ token: token, message: 'OK'})
+      res.status(201).json({ token: token, user_id: user.id, message: 'OK'})
     } catch (error) {
       console.log(error.message);
       res.status(400).json({message: error.message})
