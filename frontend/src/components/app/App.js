@@ -10,14 +10,24 @@ import {
   Route,
 } from "react-router-dom";
 
-const App = () => {
+const App = ({ navigate }) => {
+  const logout = () => {
+    window.localStorage.removeItem("token")
+    navigate('/login')
+  }
     return (
+      <div>
+        <button onClick={logout}>
+              Logout
+            </button>
         <Routes>
           <Route path='/posts'  element={<Feed navigate={ useNavigate() }/>}/>
           <Route path='/login'  element={<LoginForm  navigate={ useNavigate() }/>}/>
           <Route path='/signup' element={<SignUpForm navigate={ useNavigate() }/>}/>
           <Route path='/profile' element={<Profile navigate={ useNavigate() }/>} />
         </Routes>
+
+        </div>
     );
 }
 

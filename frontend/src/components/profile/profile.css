@@ -3,9 +3,32 @@ body {
   justify-content: center;
 }
 
+.coverPhoto .card {
+  height: 100px
+}
+
 .container {
   display: flex;
   align-items: center;
   justify-content: space-between;
   width: 1000px;
+}
+
+.right {
+  width: 600px;
+}
+
+.left {
+  width: 300px
+}
+
+.photos .card {
+  display: flex;
+  flex-wrap: wrap;
+ 
+
+}
+
+.photo .card {
+  width: 60px;
 }

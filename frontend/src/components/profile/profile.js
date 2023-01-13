@@ -8,6 +8,12 @@ const Profile = () => {
 
 return(
   <div>
+    <div className='coverPhoto'>
+      <Card>
+        
+      </Card>
+
+    </div>
     <div className='container'>
       <div>
         <Card>
@@ -20,11 +26,50 @@ return(
       </div>
     </div>
     <div className='container'>
+      <div className='left'>
+        <div className='intro'>
+          <Card>
+            <h3>Intro</h3>
+            <button>Add Bio</button>
+          </Card>
+        </div>
+        <div className='photos'>
+        <Card>
+          <div className='photo'>
+            <Card>
+              <img src={profile_placeholder} style={{width: "50px", height: "50px"}} />
+            </Card>
+          </div>
+          <div className='photo'>
+            <Card>
+              <img src={profile_placeholder} style={{width: "50px", height: "50px"}} />
+            </Card>
+          </div>
+          <div className='photo'>
+            <Card>
+              <img src={profile_placeholder} style={{width: "50px", height: "50px"}} />
+            </Card>
+          </div>
+          <div className='photo'>
+            <Card>
+              <img src={profile_placeholder} style={{width: "50px", height: "50px"}} />
+            </Card>
+          </div>
+        </Card>
+      </div>
+      </div>
+
+      
+      <div className='right'>
       <div className='posts'>
         <Card>
           <Feed />
         </Card>
       </div>
+
+      </div>
+      
+      
     </div>
   </div>
 
