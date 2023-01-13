@@ -11,7 +11,9 @@ const CreatePost = () => {
   const handlePopUp = () => {
     setShowPopup(!showPopup);
     document.body.classList.toggle("darken-background", !showPopup);
-  };
+    document.body.classList.toggle("disable-pointer-events", !showPopup);
+    setPostInput("");
+  };  
 
   const handlePostInput = (event) => {
     setPostInput(event.target.value);
@@ -45,6 +47,7 @@ const CreatePost = () => {
       setPostInput("");
       setShowPopup(false);
       document.body.classList.toggle("darken-background", !showPopup);
+      document.body.classList.toggle("disable-pointer-events", !showPopup);
     }
   };
 
@@ -55,11 +58,10 @@ const CreatePost = () => {
           placeholder={showPopup ? "" : "What's on your mind?"}
           id="new-post-input"
           type="text"
-          onChange={handlePostInput}
-          onKeyDown={handleKeyDown}
           onClick={handlePopUp}
-          autocomplete="off"
+          autoComplete="off"
           disabled={showPopup}
+          readOnly
         />
         {showPopup && (
           <div className="popup">
@@ -71,7 +73,7 @@ const CreatePost = () => {
               value={postInput}
               onChange={handlePostInput}
               onKeyDown={handleKeyDown}
-              autocomplete="off"
+              autoComplete="off"
             />
             <button className="submit-post" onClick={handleSubmit}>
               Post

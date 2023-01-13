@@ -33,6 +33,7 @@ textarea {
   border: none;
   font-size: 16px;
   resize: none;
+  outline: none;
 }
 
 .submit-post {
@@ -51,3 +52,13 @@ textarea {
   top: 15px;
   right: 10px;
 }
+
+.disable-pointer-events {
+  pointer-events: none !important;
+}
+
+.popup {
+  pointer-events: all !important;
+}
+
+
