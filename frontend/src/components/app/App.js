@@ -11,17 +11,31 @@ import {
   Route,
 } from "react-router-dom";
 
+import { useEffect } from 'react';
+
 const App = () => {
-    return (
-      <>
-      < Navbar navigate={ useNavigate() }/>
+  const navigate = useNavigate();
+
+  // below is beginnings of preventing
+  // access to /login and /signup when currently logged in
+  // will use useLocation
+
+  // useEffect(() => {
+  //   if (window.localStorage.getItem("token")) {
+  //     navigate('/posts');
+  //   }
+  // }, [navigate]);
+
+  return (
+    <>
+      < Navbar navigate={ navigate }/>
         <Routes>
-          <Route path='/posts'  element={<Feed navigate={ useNavigate() }/>}/>
-          <Route path='/login'  element={<LoginForm  navigate={ useNavigate() }/>}/>
-          <Route path='/signup' element={<SignUpForm navigate={ useNavigate() }/>}/>
+          <Route path='/posts'  element={<Feed navigate={ navigate }/>}/>
+          <Route path='/login'  element={<LoginForm  navigate={ navigate }/>}/>
+          <Route path='/signup' element={<SignUpForm navigate={ navigate }/>}/>
         </Routes>
-        </>
-    );
+    </>
+  );
 }
 
 export default App;

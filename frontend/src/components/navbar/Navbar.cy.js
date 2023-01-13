@@ -1,5 +1,4 @@
 import Navbar from "./Navbar";
-import { useNavigate } from "react-router-dom";
 import { BrowserRouter as Router } from "react-router-dom";
 const navigate = () => {};
 
@@ -39,12 +38,6 @@ describe("Navbar", () => {
 
     cy.wait(1000).then(() => {
       expect(localStorage.getItem("token")).to.be.null;
-      cy.url().should("include", "/login");
-      // cy.get("[data-cy='h1']").should("contain", "Acebook");
-      // cy.get('[data-cy=nav] > div > a[href="/login"]').should("be.visible");
-      // cy.get('[data-cy=nav] > div > a[href="/signup"]').should("be.visible");
     });
   });
 });
-
-

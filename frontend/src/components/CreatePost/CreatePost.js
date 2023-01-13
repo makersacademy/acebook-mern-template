@@ -75,6 +75,7 @@ const CreatePost = ({setUpdated}) => {
               onChange={handlePostInput}
               onKeyDown={handleKeyDown}
               autoComplete="off"
+              autoFocus
             />
             <button className="submit-post" onClick={handleSubmit}>
               Post
