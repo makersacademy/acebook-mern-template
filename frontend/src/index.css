@@ -1,6 +1,15 @@
+@import url('https://fonts.googleapis.com/css2?family=Lobster&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer base {
+  @font-face {
+    font-family: "feather-bold";
+    src: url("/public/feather_bold.ttf") format("ttf");
+  }
+}
 
 
 /* code from the template below */

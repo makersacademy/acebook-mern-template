@@ -15,11 +15,9 @@ describe("Logging in", () => {
     });
   });
 
-  // it("redirects to the signup page", () => {
-  //   cy.mount(<LoginForm navigate={navigate} />);
-  //   cy.get('a[href*="/signup"]').click();
-  //   // cy.contains("Signup here").should("be.visible").click();
+  // it("redirects to /signup", function () {
+  //   cy.get('[data-cy="signup-link"]').click();
 
-  //   cy.url().should("be.equal", "/signup");
+  //   cy.location("pathname").should("eq", "/signup");
   // });
 });

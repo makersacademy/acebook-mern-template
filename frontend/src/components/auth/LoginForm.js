@@ -37,8 +37,11 @@ const LogInForm = ({ navigate }) => {
 
   return (
     <>
-      <h1 className="text-3xl font-bold">Welcome to Acebook</h1>
-      {/* <div class="flex items-center justify-center h-screen w-full max-w-xs "> */}
+      <div>
+        <h1 className="font-lobster text-blue-500 text-center text-7xl">
+          acebook
+        </h1>
+      </div>
       <div class="bg-grey-lighter h-screen font-sans">
         <div class="container mx-auto h-full flex justify-center items-center">
           <form
@@ -77,7 +80,7 @@ const LogInForm = ({ navigate }) => {
                 class="inline-block align-baseline font-bold text-sm text-blue-500 hover:text-blue-800"
                 href="/signup"
                 id="signup-link"
-                value="Signup here"
+                data-cy="signup-link"
               >
                 Signup here
               </a>
