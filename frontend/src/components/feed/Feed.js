@@ -5,6 +5,7 @@ import Create from '../createPost/CreatePost';
 const Feed = ({ navigate }) => {
   const [posts, setPosts] = useState([]);
   const [token, setToken] = useState(window.localStorage.getItem('token'));
+  const [postAdded, setPostAdded] = useState(false);
 
   useEffect(() => {
     if (token) {
@@ -18,34 +19,28 @@ const Feed = ({ navigate }) => {
           window.localStorage.setItem('token', data.token);
           setToken(window.localStorage.getItem('token'));
           setPosts(data.posts.reverse());
+          setPostAdded(false);
         });
     }
-  }, []);
+    // eslint-disable-next-line
+  }, [postAdded]);
 
-
-  // const logout = () => {
-  //   window.localStorage.removeItem("token")
-  //   navigate('/login')
-  // }
-  
-    if(token) {
-      return(
-        <>
-          <h2>Posts</h2>
-          {/* <button onClick={logout}>
-              Logout
-            </button> */}
-          <div id='feed' role="feed">
-              {posts.map(
-                (post) => ( <Post post={ post } key={ post._id } /> )
-              )}
-          </div>
-        </>
-      )
-    } else {
-      navigate('/signin')
-    }
-}
-
+  if (token) {
+    return (
+      <>
+        <button onClick={logout}>Logout</button>
+        <h2>Posts</h2>
+        <Create setPostAdded={setPostAdded} />
+        <div id="feed" role="feed">
+          {posts.map((post) => (
+            <Post post={post} key={post._id} />
+          ))}
+        </div>
+      </>
+    );
+  } else {
+    navigate('/signin');
+  }
+};
 
 export default Feed;

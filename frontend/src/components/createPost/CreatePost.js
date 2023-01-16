@@ -1,20 +1,20 @@
 import { useState } from 'react';
 
-const Create = () => {
+const Create = (props) => {
   const [body, setBody] = useState('');
+  const token = window.localStorage.getItem('token');
 
-  const handleSubmit = () => {
-    // e.preventDefault();
-    // console.log(window.localStorage.getItem('token'));
+  const handleSubmit = (e) => {
+    e.preventDefault();
 
     fetch('/posts', {
       method: 'POST',
       headers: {
-        Authorization: 'Bearer ' + window.localStorage.getItem('token'),
+        Authorization: `Bearer ${token}`,
         'Content-type': 'application/json',
       },
       body: JSON.stringify({ message: body }),
-    });
+    }).then(() => props.setPostAdded(true));
 
     setBody('');
   };
