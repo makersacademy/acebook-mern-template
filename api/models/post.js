@@ -1,8 +1,8 @@
 const mongoose = require("mongoose");
 
 const PostSchema = new mongoose.Schema({
+  author: { type: mongoose.Schema.Types.ObjectId, ref: 'User' },
   message: String,
-  author: { type: mongoose.Schema.Types.ObjectId, ref: 'user' },
   likes: Array,
   comments: Array,
 }, { timestamps: true });

@@ -1,11 +1,13 @@
 import React, { useState } from 'react';
+import '../feed/Feed.css';
 
-const CreatePost = () => {
+const CreatePost = ({setUpdated}) => {
   const [body, setBody] = useState("");
   const [token, setToken] = useState(window.localStorage.getItem("token"));
   
   
   const handleSubmit = (event) => {
+    
     event.preventDefault();
     if(token) {
       fetch( '/posts', {
@@ -15,18 +17,21 @@ const CreatePost = () => {
           'Authorization': `Bearer ${token}`
         },
         body: JSON.stringify({
+          'author': window.localStorage.getItem('user_id'),
           'message': `${body}`
         })
-      }).then(window.location.reload())
+      }).then(() => {
+        setUpdated(true)
+        setBody('')})
       }
   }
   
   return (
-    <div className="createPost">
+    <div id='create-post'>
       <h2>Create Post</h2>
-      <form onSubmit={handleSubmit}>
-        <input type="text" onChange={(event) => setBody(event.target.value)} />
-        <input type="submit" value="Submit" />
+      <form id ='input' onSubmit={handleSubmit}>
+        <textarea id='input' rows="4" value={body} onChange={(event) => setBody(event.target.value)} />
+        <button id="like-button" type="submit" value="Submit">Post</button>
       </form>
     </div>
   );
