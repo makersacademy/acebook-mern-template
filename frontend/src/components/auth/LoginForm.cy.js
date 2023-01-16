@@ -14,10 +14,4 @@ describe("Logging in", () => {
       expect(interception.response.body.token).to.eq("fakeToken");
     });
   });
-
-  // it("redirects to /signup", function () {
-  //   cy.get('[data-cy="signup-link"]').click();
-
-  //   cy.location("pathname").should("eq", "/signup");
-  // });
 });
