@@ -28,7 +28,6 @@ const Feed = ({ navigate }) => {
   if (token) {
     return (
       <>
-        <button onClick={logout}>Logout</button>
         <h2>Posts</h2>
         <Create setPostAdded={setPostAdded} />
         <div id="feed" role="feed">

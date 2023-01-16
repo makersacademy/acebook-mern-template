@@ -4,6 +4,7 @@ import Card from '../Helpers/Card'
 
 const Post = ({ post }) => {
   return (
+    <div>
       <Card>
         <article data-cy="post" key={post._id}>{ post.message }</article>
       </Card>
@@ -14,8 +15,7 @@ const Post = ({ post }) => {
           {formatDistanceToNow(new Date(post.createdAt), { addSuffix: true })}
         </p>
       </div>
-      {post.message}
-    </article>
+    </div>
   );
 };
 
