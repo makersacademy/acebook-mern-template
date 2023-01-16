@@ -11,4 +11,8 @@ router.post("/", PostsController.Create);
 router.patch("/like/:id", PostsController.Like);
 router.patch("/unlike/:id", PostsController.Unlike);
 
+// retrieves the names of likers of a post
+
+router.get("/likers/:id", PostsController.GetLikers);
+
 module.exports = router;
