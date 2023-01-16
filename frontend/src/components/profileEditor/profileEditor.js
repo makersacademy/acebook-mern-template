@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-const SignUpForm = ({ navigate }) => {
+const ProfileEditor = ({ navigate }) => {
 
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
@@ -12,11 +12,11 @@ const SignUpForm = ({ navigate }) => {
     event.preventDefault();
 
     fetch( '/users', {
-      method: 'post',
+      method: 'update',
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({ name: name, email: email, password: password, age: age})
+      body: JSON.stringify({ name: name, email: email, password: password, age: age, bio: bio})
     })
       .then(response => {
         if(response.status === 201) {
@@ -60,4 +60,4 @@ const SignUpForm = ({ navigate }) => {
     );
 }
 
-export default SignUpForm;
+export default ProfileEditor;
