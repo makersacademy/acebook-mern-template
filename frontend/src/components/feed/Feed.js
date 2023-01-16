@@ -1,26 +1,27 @@
 import React, { useEffect, useState } from 'react';
-import Post from '../post/Post'
+import Post from '../post/Post';
+import Create from '../createPost/CreatePost';
 
 const Feed = ({ navigate }) => {
   const [posts, setPosts] = useState([]);
-  const [token, setToken] = useState(window.localStorage.getItem("token"));
+  const [token, setToken] = useState(window.localStorage.getItem('token'));
 
   useEffect(() => {
-    if(token) {
-      fetch("/posts", {
+    if (token) {
+      fetch('/posts', {
         headers: {
-          'Authorization': `Bearer ${token}`
-        }
+          Authorization: `Bearer ${token}`,
+        },
       })
-        .then(response => response.json())
-        .then(async data => {
-          window.localStorage.setItem("token", data.token)
-          setToken(window.localStorage.getItem("token"))
-          setPosts(data.posts);
-        })
+        .then((response) => response.json())
+        .then(async (data) => {
+          window.localStorage.setItem('token', data.token);
+          setToken(window.localStorage.getItem('token'));
+          setPosts(data.posts.reverse());
+        });
     }
-  }, [])
-    
+  }, []);
+
 
   // const logout = () => {
   //   window.localStorage.removeItem("token")
@@ -45,5 +46,6 @@ const Feed = ({ navigate }) => {
       navigate('/signin')
     }
 }
+
 
 export default Feed;
