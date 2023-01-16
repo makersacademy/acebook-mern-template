@@ -25,11 +25,6 @@ const Feed = ({ navigate }) => {
     // eslint-disable-next-line
   }, [postAdded]);
 
-  const logout = () => {
-    window.localStorage.removeItem('token');
-    navigate('/login');
-  };
-
   if (token) {
     return (
       <>
