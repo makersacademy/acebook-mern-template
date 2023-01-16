@@ -9,6 +9,6 @@ const CommentsController = require('../controllers/comments');
 
 // Add routes 
 
-router.post("/", CommentsController.Create);
+router.post("/:id", CommentsController.Create);
 
 module.exports = router;
