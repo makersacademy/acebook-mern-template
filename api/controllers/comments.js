@@ -25,7 +25,29 @@ const CommentsController = {
     // });
   },
 
-  // Create a comment on a single post 
+  // const getPrescription = async (req, res) => {
+  //   // get the prescription Id
+  //   const { id } = req.params
+  
+  //   // Make sure the ID given is a valid type of mongoose object ID 
+  //   if(!mongoose.Types.ObjectId.isValid(id)){
+  //     return res.status(404).json({error: "No such prescription"})
+  //   }
+  
+  //   const prescription = await Prescription.findById(id)
+  
+  //   // if the workout doesnt exist:
+  //   if (!prescription) {
+  //     return res.status(404).json({error: "No such prescription"})
+  //   }
+  
+  //   res.status(200).json(prescription)
+  // }
+
+  Create: (req, res) => {
+
+  }
+// Create a comment on a single post 
 
     // Get the Post ID from the request parameters 
 
@@ -44,3 +66,5 @@ const CommentsController = {
 
   // Delete a comment 
 }
+
+module.exports = CommentsController;
