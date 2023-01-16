@@ -43,8 +43,6 @@ const SignUpForm = ({ navigate }) => {
     }
   }
 
-  
-
 
     return (
       <form onSubmit={handleSubmit}>

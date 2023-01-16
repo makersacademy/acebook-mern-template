@@ -28,6 +28,17 @@ const loginUser = async (req, res) => {
   }
 }
 
+const findUser = async (req, res) => {
+  try {
+    user_id = req.params.id
+    const user = await User.findById(user_id)
+    res.status(200).json({user: user})
+  } catch (error) {
+    res.status(404).json({error: 'This user no longer exists'})
+  }
+}
 
-module.exports = { signupUser, loginUser }
+
+
+module.exports = { signupUser, loginUser, findUser }
 

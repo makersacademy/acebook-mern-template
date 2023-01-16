@@ -18,6 +18,7 @@ const LogInForm = ({ navigate }) => {
       body: JSON.stringify({ email: email, password: password })
     })
     const data = await response.json()
+    window.localStorage.setItem('name', data.user.name)
     if(response.status !== 200) {
       setError(data.error)
       navigate('/login')

@@ -12,9 +12,9 @@ const Navbar = () => {
 
       <nav className="navbar">
         <div className="links">
-          <li>
+          {/* <li>
             <Link to="/">Home</Link>
-          </li>
+          </li> */}
           <li>
             <Link to="/posts">Posts</Link>
           </li>
