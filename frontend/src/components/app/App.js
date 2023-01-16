@@ -4,6 +4,7 @@ import SignUpForm from '../user/SignUpForm'
 import React, { useState } from 'react';
 import Feed from '../feed/Feed'
 import Navbar from "../navbar/Navbar";
+import Footer from "../footer/footer";
 
 import {
   useNavigate,
@@ -34,6 +35,7 @@ const App = () => {
           <Route path='/login'  element={<LoginForm  navigate={ navigate }/>}/>
           <Route path='/signup' element={<SignUpForm navigate={ navigate }/>}/>
         </Routes>
+      < Footer />
     </>
   );
 }
