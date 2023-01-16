@@ -24,10 +24,9 @@ const CommentsController = {
   // related data, in this case 'author' and 'comments', and the second argument is the fields that you want 
   // to select from the related documents.
 
-  // Find all comments that are on a single post 
-
-  GetCommentsById: (req, res) => {
-    // Get the Post ID from the request parameters 
+  // Find comment by its ID 
+  GetCommentById: (req, res) => {
+    // Get the Comment ID from the request parameters 
     const { id } = req.params
 
     Comment.findById(id).sort({createdAt: -1}).populate('author').exec(async (err, comments) => {
@@ -37,21 +36,21 @@ const CommentsController = {
       const token = await TokenGenerator.jsonwebtoken(req.user_id)
       res.status(200).json({ comments: comments, token: token });
     });
-
-    // Searching the posts collection for the array of comment objects 
-
-    // Populating each comment object with the author 
-
-    // Returns an array of comment objects with the message and author 
-
-    // Post.find().sort({createdAt: -1}).populate('author').exec(async (err, posts) => {
-    //   if (err) {
-    //     throw err;
-    //   }
-    //   const token = await TokenGenerator.jsonwebtoken(req.user_id)
-    //   res.status(200).json({ posts: posts, token: token });
-    // });
+    
   },
+  
+  
+  // GetCommentsByPostID
+
+  // Get the Comment (or Post?) ID from the request parameters 
+    
+  // Searching the posts collection for the array of comment objects 
+
+  // Populating each comment object with the author 
+
+  // Returns an array of comment objects with the message and author 
+
+
 
   // Create a comment on a single post 
 
