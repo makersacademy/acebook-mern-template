@@ -9,10 +9,34 @@ const mongoose = require('mongoose')
 
 const CommentsController = {
 
+  // Get all comments (for testing purposes)
+  Index: (req, res) => {
+    Comment.find().sort({createdAt: -1}).populate('author').exec(async (err, comments) => {
+      if (err) {
+        throw err;
+      }
+      const token = await TokenGenerator.jsonwebtoken(req.user_id)
+      res.status(200).json({ comments: comments, token: token });
+    });
+  },
+
+  // The first argument passed to the populate method is the name of the field that you want to replace with 
+  // related data, in this case 'author' and 'comments', and the second argument is the fields that you want 
+  // to select from the related documents.
+
   // Find all comments that are on a single post 
 
-  getCommentsById: (req, res) => {
-    // Get the post ID 
+  GetCommentsById: (req, res) => {
+    // Get the Post ID from the request parameters 
+    const { id } = req.params
+
+    Comment.findById(id).sort({createdAt: -1}).populate('author').exec(async (err, comments) => {
+      if (err) {
+        throw err;
+      }
+      const token = await TokenGenerator.jsonwebtoken(req.user_id)
+      res.status(200).json({ comments: comments, token: token });
+    });
 
     // Searching the posts collection for the array of comment objects 
 
