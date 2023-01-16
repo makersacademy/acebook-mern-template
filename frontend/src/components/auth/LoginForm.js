@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
 
 const LogInForm = ({ navigate }) => {
   const [email, setEmail] = useState("");

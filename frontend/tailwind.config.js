@@ -5,6 +5,7 @@ module.exports = {
     extend: {
       fontFamily: {
         lobster: ["lobster", "bold"],
+        pacifico: ["pacifico", "bold"],
       },
     },
   },

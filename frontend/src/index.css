@@ -1,4 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Lobster&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Pacifico&display=swap');
 
 @tailwind base;
 @tailwind components;
@@ -7,7 +8,7 @@
 @layer base {
   @font-face {
     font-family: "feather-bold";
-    src: url("/public/feather_bold.ttf") format("ttf");
+    src: url("/public/feather_bold.ttf") format("truetype");
   }
 }
 
