@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import formatDistanceToNow from 'date-fns/formatDistanceToNow'
 import useLikes from './useLikes'
-/// use post.author to look up users with that id and get there name
+import { Link } from "react-router-dom";
 
 const Post = ({ post, setUpdated }) => {
   const [userName, setUserName] = useState(null)
@@ -15,13 +15,12 @@ const Post = ({ post, setUpdated }) => {
   const handleLikes = (event) => {
     event.preventDefault()
     if (token) {
-      fetch(`posts/${post._id}`, {
+      fetch(`http://localhost:3000/posts/${post._id}`, {
         method: 'PATCH',
         headers: {
           'Content-Type': 'application/json',
           Authorization: `Bearer ${token}`,
         },
-
         body: JSON.stringify({
           field: 'likes',
           value: window.localStorage.getItem('user_id'),
@@ -49,7 +48,9 @@ const Post = ({ post, setUpdated }) => {
   return (
     <div id="post">
       <article data-cy="post" key={post._id}>
-        <p id="userName">{userName}</p>
+        <p id="userName">
+        <Link to={`../profile/${post.author}`}>{userName}</Link>
+        </p>
         <p>{post.message}</p>
         <p className="timePosted">
           Posted:{' '}

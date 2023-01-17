@@ -3,27 +3,29 @@ import { Link } from "react-router-dom";
 import "./UserProfileDetails.css";
 import CreatePost from "../createPost/CreatePost";
 import Post from "../post/Post";
+import { useParams } from 'react-router-dom';
+
 
 const Profile = () => {
   const [user, setUser] = useState(null);
   const [token, setToken] = useState(window.localStorage.getItem("token"));
   const [posts, setPosts] = useState(null);
   const [updated, setUpdated] = useState(null)
-
+  let { id } = useParams();
   useEffect(() => {
     if (token) {
-      fetch(`/users/${window.localStorage.getItem("user_id")}`)
+      fetch(`/users/${id}`)
         .then((response) => response.json())
         .then(async (data) => {
           setToken(window.localStorage.getItem("token"));
           setUser(data.user);
         });
     }
-  }, []);
+  }, [id]);
 
   useEffect(() => {
     if (token) {
-      fetch(`/posts/${window.localStorage.getItem("user_id")}`, {
+      fetch(`/posts/${id}`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -36,7 +38,7 @@ const Profile = () => {
           setUpdated(false)
         });
     }
-  }, [updated]);
+  }, [updated,id]);
 
   //  logged in user id  = window.localStorage.getItem("user_id")
 
@@ -51,7 +53,9 @@ const Profile = () => {
       
       <div className="user-posts">
       <h2 id="post" className="feedHeader">My Posts</h2>
-          <CreatePost setUpdated={setUpdated}/>
+      {(id === window.localStorage.getItem("user_id")) && 
+        <CreatePost setUpdated={setUpdated}/>
+      }
             <div id='feed' role="feed">
               {posts && posts.sort(function(postA, postB) {
                 return (new Date(postB.createdAt) - new Date(postA.createdAt));

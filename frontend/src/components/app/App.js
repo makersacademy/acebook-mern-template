@@ -26,7 +26,7 @@ const App = () => {
             element={<SignUpForm navigate={useNavigate()} />}
           />
           <Route
-            path="/profile"
+            path="/profile/:id"
             element={<UserProfileDetails navigate={useNavigate()} />}
           />
         </Routes>
