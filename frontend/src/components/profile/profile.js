@@ -8,6 +8,7 @@ import { useParams } from 'react-router-dom';
 const Profile = () => {
   const { id } = useParams();
   const [token, setToken] = useState(window.localStorage.getItem('token'));
+  const [user, setUser] = useState([]);
 
   useEffect(() => {
     if (token) {
@@ -20,6 +21,9 @@ const Profile = () => {
         .then(async (data) => {
           window.localStorage.setItem('token', data.token);
           setToken(window.localStorage.getItem('token'));
+          setUser(data.user);
+          console.log(data.user.name);
+          console.log(data.user.age)
         });
     }
     // eslint-disable-next-line
@@ -37,7 +41,7 @@ return(
         <div className='user-info'>
           <Card>
             <img src={profile_placeholder} style={{width: "50px", height: "50px"}} />
-            <h1>Username</h1>
+            <h1>{ user.name }</h1>
             <div className="user-details">
               <p>Hometown</p>
               <p>Profession</p>
