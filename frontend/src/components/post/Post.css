@@ -41,11 +41,11 @@
   line-height: 1.5;
 }
 
-.view-comments-container {
+.likes-and-comments-buttons-container {
   margin-top: 1rem; /* add some space between the post and the comments button */
 }
 
-.view-comments-button {
+.comments-buttons {
   background-color: #007bff; /* give the button a blue background color */
   color: #fff; /* set the text color to white */
   border: none; /* remove the default button border */
