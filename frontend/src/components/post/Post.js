@@ -38,7 +38,9 @@ const Post = ({ post }) => {
         </div>
         <p class="card-message">{ post.message }</p>
         <div className="view-comments-container">
-          <button className="view-comments-button" onClick={handleViewComments}>View comments</button>
+          {comments.length > 0 ?
+            <button className="view-comments-button" onClick={handleViewComments}>{ comments.length } comments</button> : 
+            <button className="view-comments-button">{ comments.length } comments</button>}
         </div>
       { comments && (viewComments === true) &&
         <div id="comments-container">
