@@ -50,6 +50,7 @@
     margin-top: 20px;
     padding-top: 20px;
     padding-bottom: 20px;
+    align-items: ;
   }
 
   h2 {
@@ -82,4 +83,10 @@
 
   form {
     margin: auto
+  }
+
+  .feedHeader {
+    width: 67%;
+    font-family:Arial, Helvetica, sans-serif;
+    margin: auto;
   }

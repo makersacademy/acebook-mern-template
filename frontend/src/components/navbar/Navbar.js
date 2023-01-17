@@ -12,9 +12,6 @@ const Navbar = () => {
 
       <nav className="navbar">
         <div className="links">
-          {/* <li>
-            <Link to="/">Home</Link>
-          </li> */}
           <li>
             <Link to="/posts">Posts</Link>
           </li>

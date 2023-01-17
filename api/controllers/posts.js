@@ -38,7 +38,25 @@ const PostsController = {
     }
     const token = await TokenGenerator.jsonwebtoken(req.user_id)
     res.status(200).json({ message: 'OK', token: token });
-  }
+  },
+  FindUsersPosts: async (req, res) => {
+    const id = req.params.id;
+    const posts = await Post.find({ author: id });
+    const token = await TokenGenerator.jsonwebtoken(req.user_id);
+    console.log(posts);
+    res.status(200).json({ message: "OK", token: token, posts: posts });
+
+    // const id = req.params.id;
+    // try {
+    //   let posts = await Post.find({ author: id });
+    //   if (!posts) {
+    //     throw new Error("User has no posts!");
+    //   }
+    //   return posts;
+    // } catch (error) {
+    //   console.log(error);
+    // }
+  },
 };
 
 module.exports = PostsController;
