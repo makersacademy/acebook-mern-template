@@ -11,18 +11,19 @@ import {
   useNavigate,
   Routes,
   Route,
+  Navigate
 } from "react-router-dom";
 
 const App = ({ navigate }) => {
     return (
       <div>
-        <Navbar />
+        <Navbar navigate={ useNavigate() } />
           <div>
             <Routes>
               <Route path='/posts'  element={<Feed navigate={ useNavigate() }/>}/>
               <Route path='/login'  element={<LoginForm  navigate={ useNavigate() }/>}/>
               <Route path='/signup' element={<SignUpForm navigate={ useNavigate() }/>}/>
-              <Route path='/profile' element={<Profile navigate={ useNavigate() }/>} />
+              <Route path='/profile/:id' element={<Profile navigate={ useNavigate() }/>} />
               <Route path='/profileEditor' element={<ProfileEditor navigate={ useNavigate() }/>} />
             </Routes>
           </div>

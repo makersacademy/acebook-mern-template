@@ -15,66 +15,67 @@ return(
 
     </div>
     <div className='container'>
-      <div>
-        <Card>
-          <img src={profile_placeholder} style={{width: "50px", height: "50px"}} />
-          <h1>Username</h1>
-        </Card>
-      </div>
-      <div>
-        <button>Edit profile</button>
-      </div>
-    </div>
-    <div className='container'>
       <div className='left'>
+        <div className='user-info'>
+          <Card>
+            <img src={profile_placeholder} style={{width: "50px", height: "50px"}} />
+            <h1>Username</h1>
+            <div className="user-details">
+              <p>Hometown</p>
+              <p>Profession</p>
+              <p>Relationship Status</p>
+            </div>
+          </Card>
+        </div>
+
         <div className='intro'>
           <Card>
             <h3>Intro</h3>
-            <button>Add Bio</button>
+            <p>Bio</p>
           </Card>
         </div>
+
         <div className='photos'>
-        <Card>
-          <div className='photo'>
-            <Card>
-              <img src={profile_placeholder} style={{width: "50px", height: "50px"}} />
-            </Card>
-          </div>
-          <div className='photo'>
-            <Card>
-              <img src={profile_placeholder} style={{width: "50px", height: "50px"}} />
-            </Card>
-          </div>
-          <div className='photo'>
-            <Card>
-              <img src={profile_placeholder} style={{width: "50px", height: "50px"}} />
-            </Card>
-          </div>
-          <div className='photo'>
-            <Card>
-              <img src={profile_placeholder} style={{width: "50px", height: "50px"}} />
-            </Card>
-          </div>
-        </Card>
-      </div>
+          <Card>
+            <div className='photo'>
+              <Card>
+                <img src={profile_placeholder} style={{width: "50px", height: "50px"}} />
+              </Card>
+            </div>
+            <div className='photo'>
+              <Card>
+                <img src={profile_placeholder} style={{width: "50px", height: "50px"}} />
+              </Card>
+            </div>
+            <div className='photo'>
+              <Card>
+                <img src={profile_placeholder} style={{width: "50px", height: "50px"}} />
+              </Card>
+            </div>
+            <div className='photo'>
+              <Card>
+                <img src={profile_placeholder} style={{width: "50px", height: "50px"}} />
+              </Card>
+            </div>
+          </Card>
+        </div>
       </div>
 
       
       <div className='right'>
-      <div className='posts'>
-        <Card>
-          <Feed />
-        </Card>
-      </div>
+        <div className='edit-button'>
+          <button>Edit profile</button>
+        </div>
 
-      </div>
-      
-      
+        <div className='posts'>
+          <Card>
+            <Feed />
+          </Card>
+        </div>
+      </div>  
     </div>
   </div>
-
-)
-
+ )
 }
 
 export default Profile
