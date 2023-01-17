@@ -12,6 +12,7 @@
   min-width: 200px;
   max-width: 400px;
   width: 400px;
+  height: 300px;
   align-items: center;
   justify-content: center;
 }
@@ -20,24 +21,28 @@ form {
   display: flex;
   flex-direction: column;
   gap: 10px 10px;
-  height: 30vh;
+  height: 45vh;
   width: 50vh;
   padding: 10px;
   justify-content: center;
   align-items: center;
 }
 
-form input.login, #submit {
+input.login, #submit {
   color: #fff;
   font-size: 20px;
   font-weight: bold;
-  background-color: #42b729;
+  background-color: #1877f2;
+  width: 330px;
   border-radius: 5px;
   border: none;
-  padding: 10px;
 }
 
-form input.email, input.password {
+input.login, #submit:hover {
+  background-color: #4267b2;
+}
+
+input.email, input.password {
   border-radius: 5px;
   border: 1 thin #f5f4f4;
   padding: 10px;
@@ -45,9 +50,44 @@ form input.email, input.password {
   background-color: #e9f0fe;
 }
 
-input {
-  border: none;
+input, #email, #password {
+  outline: none;
+  font-size: 20px;
+  height: 40px;
+  width: 300px;
+  border-radius: 6px;
 }
+
+#create-account {
+  color: #fff;
+  font-size: 16px;
+  font-weight: bold;
+  width: 200px;
+  background-color: #42b729;
+  border-radius: 5px;
+  border: none;
+  padding: 10px;
+}
+
+#create-account:hover {
+  background-color: #006400;
+}
+
+hr {
+  border-top: 1px solid lightgray;
+}
+
+h5 {
+  color: #1877f2;
+  text-align: center;
+  text-decoration: underline;
+}
+
+.login h1, h3 {
+  color: #1877f2;
+  text-align: center;
+}
+
 
 
 
