@@ -7,18 +7,8 @@ import formatDistanceToNow from "date-fns/formatDistanceToNow";
 const Post = ({ post, setUpdated }) => {
   
   const comments = post.comments;
-  const [viewComments, setViewComments] = useState(false)
-  // const [comments, setComments] = useState(post.comments);
-  // const [commentsUpdated, setCommentsUpdated] = useState(false);
 
-  // useEffect(() => {
-  //   fetch(`posts/${post._id}`, {
-  //     headers: {
-  //       Authorization: `Bearer ${token}`,
-  //     },
-  //   })
-  //     .then()
-  // })
+  const [viewComments, setViewComments] = useState(false)
   
   const handleViewComments = () => {
     if (viewComments === false) {

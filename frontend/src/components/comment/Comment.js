@@ -2,8 +2,7 @@ import './Comment.css';
 import formatDistanceToNow from "date-fns/formatDistanceToNow";
 
 const Comment = ({ comment }) => {
-  // console.log(comment);
-  console.log(localStorage.getItem("user_id"));
+  
   return (
     <div className="comment">
       <div className="comment-header">
