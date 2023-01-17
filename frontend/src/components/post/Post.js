@@ -47,7 +47,7 @@ const Post = ({ post }) => {
         { comments && (viewComments === true) &&
           <div id="comments-container">
             <div className="add-comment-container">
-              < CreateComment/>
+              <CreateComment post_id={post._id}/>
             </div>
             {comments.map((comment) => (
               <Comment comment={comment} key={comment._id} />
