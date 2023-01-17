@@ -6,21 +6,21 @@ import Feed from '../feed/Feed'
 import { useParams } from 'react-router-dom';
 
 const Profile = () => {
-  const { userId } = useParams();
+  const { id } = useParams();
   const [token, setToken] = useState(window.localStorage.getItem('token'));
 
   useEffect(() => {
     if (token) {
-      fetch(`/users/${ userId }`, {
+      fetch('/users/' + id, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
       })
-        .then((response) => console.log)
-        // .then(async (data) => {
-        //   window.localStorage.setItem('token', data.token);
-        //   setToken(window.localStorage.getItem('token'));
-        // });
+        .then((response) => response.json())
+        .then(async (data) => {
+          window.localStorage.setItem('token', data.token);
+          setToken(window.localStorage.getItem('token'));
+        });
     }
     // eslint-disable-next-line
   }, []);
@@ -29,7 +29,6 @@ return(
   <div>
     <div className='coverPhoto'>
       <Card>
-        <h1>{ userId }</h1>
       </Card>
 
     </div>
