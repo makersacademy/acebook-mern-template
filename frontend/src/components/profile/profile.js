@@ -40,12 +40,12 @@ return(
       <div className='left'>
         <div className='user-info'>
           <Card>
-            <img src={profile_placeholder} style={{width: "50px", height: "50px"}} />
+            <img src={ user.avatar } />
             <h1>{ user.name }</h1>
             <div className="user-details">
-              <p>Hometown</p>
-              <p>Profession</p>
-              <p>Relationship Status</p>
+              <p>{user.hometown}</p>
+              <p>{user.profession}</p>
+              <p>{user.relationship_status}</p>
             </div>
           </Card>
         </div>
@@ -53,7 +53,7 @@ return(
         <div className='intro'>
           <Card>
             <h3>Intro</h3>
-            <p>Bio</p>
+            <p>{user.bio}</p>
           </Card>
         </div>
 
