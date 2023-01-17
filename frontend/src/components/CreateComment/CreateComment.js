@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-const CreateComment = ({post_id}) => {
+const CreateComment = ({post_id, setUpdated}) => {
   
   // Possibly take in setUpdated as a prop, then update this to true when we post a comment
     // Above might need to go in post.js rather than createComment.js
@@ -49,6 +49,7 @@ const CreateComment = ({post_id}) => {
     if (response.status === 200) {
       setCommentInput("");
       setError(null);
+      setUpdated(true);
       console.log("Post request successful")
       // setUpdated(true);
     }

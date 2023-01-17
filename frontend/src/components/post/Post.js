@@ -4,7 +4,7 @@ import CreateComment from "../CreateComment/CreateComment";
 import "./Post.css"
 import formatDistanceToNow from "date-fns/formatDistanceToNow";
 
-const Post = ({ post }) => {
+const Post = ({ post, setUpdated }) => {
   
   const comments = post.comments;
   const [viewComments, setViewComments] = useState(false)
@@ -47,7 +47,7 @@ const Post = ({ post }) => {
         { comments && (viewComments === true) &&
           <div id="comments-container">
             <div className="add-comment-container">
-              <CreateComment post_id={post._id}/>
+              <CreateComment post_id={post._id} setUpdated={setUpdated} />
             </div>
             {comments.map((comment) => (
               <Comment comment={comment} key={comment._id} />
