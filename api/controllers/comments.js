@@ -20,10 +20,6 @@ const CommentsController = {
     });
   },
 
-  // The first argument passed to the populate method is the name of the field that you want to replace with 
-  // related data, in this case 'author' and 'comments', and the second argument is the fields that you want 
-  // to select from the related documents.
-
   // Find comment by its ID 
   GetCommentById: (req, res) => {
     // Get the Comment ID from the request parameters 
@@ -39,7 +35,7 @@ const CommentsController = {
     
   },
   
-  
+
   // GetCommentsByPostID
 
   // Get the Comment (or Post?) ID from the request parameters 
@@ -80,7 +76,14 @@ const CommentsController = {
       }
     // Get the user ID propety from the token
     const token = await TokenGenerator.jsonwebtoken(req.user_id)
+
     res.status(200).json({ message: 'Comment created', token: token});
+
+    // Adds comment to the matching post and saves
+    const newPost = await Post.findOne({ _id: id })
+    newPost.comments.push(comment)
+    const savedPost = await newPost.save()
+    console.log(savedPost)
     })
     
   }

@@ -20,7 +20,6 @@ const UsersController = {
     // Send a 200 response containing all users to the client 
     res.status(200).json(users)
   }
-  // Get all workouts 
   
 };
 
