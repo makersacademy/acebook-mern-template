@@ -10,12 +10,14 @@ import {
   useNavigate,
   Routes,
   Route,
+  useLocation,
 } from "react-router-dom";
 
 import { useEffect } from 'react';
 
 const App = () => {
   const navigate = useNavigate();
+  const location = useLocation();
 
   // below is beginnings of preventing
   // access to /login and /signup when currently logged in
@@ -35,7 +37,7 @@ const App = () => {
           <Route path='/login'  element={<LoginForm  navigate={ navigate }/>}/>
           <Route path='/signup' element={<SignUpForm navigate={ navigate }/>}/>
         </Routes>
-      < Footer />
+        {location.pathname !== '/login' && location.pathname !== '/signup' && <Footer />}
     </>
   );
 }
