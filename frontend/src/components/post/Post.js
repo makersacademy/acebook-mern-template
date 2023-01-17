@@ -1,16 +1,18 @@
 import React from 'react';
 import formatDistanceToNow from 'date-fns/formatDistanceToNow';
-import Card from '../Helpers/Card'
+import Card from '../Helpers/Card';
 
 const Post = ({ post }) => {
   return (
     <div>
       <Card>
-        <article data-cy="post" key={post._id}>{ post.message }</article>
+        <article data-cy="post" key={post._id}>
+          {post.message}
+        </article>
       </Card>
-   
+
       <div>
-        <span>User</span>
+        <span>{post.user_id.name}</span>
         <p>
           {formatDistanceToNow(new Date(post.createdAt), { addSuffix: true })}
         </p>

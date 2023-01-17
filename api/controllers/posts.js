@@ -3,13 +3,15 @@ const TokenGenerator = require('../models/token_generator');
 
 const PostsController = {
   Index: (req, res) => {
-    Post.find(async (err, posts) => {
-      if (err) {
-        throw err;
-      }
-      const token = await TokenGenerator.jsonwebtoken(req.user_id);
-      res.status(200).json({ posts: posts, token: token });
-    });
+    Post.find({})
+      .populate({ path: 'user_id', select: 'name avatar' })
+      .exec(async (err, posts) => {
+        if (err) {
+          throw err;
+        }
+        const token = await TokenGenerator.jsonwebtoken(req.user_id);
+        res.status(200).json({ posts: posts, token: token });
+      });
   },
 
   Create: (req, res) => {
@@ -26,3 +28,14 @@ const PostsController = {
 };
 
 module.exports = PostsController;
+
+// const PostsController = {
+//   Index: (req, res) => {
+//     Post.find(async (err, posts) => {
+//       if (err) {
+//         throw err;
+//       }
+//       const token = await TokenGenerator.jsonwebtoken(req.user_id);
+//       res.status(200).json({ posts: posts, token: token });
+//     });
+//   },

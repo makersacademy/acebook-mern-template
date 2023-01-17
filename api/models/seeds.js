@@ -24,7 +24,8 @@ const seedDB = async (model, data) => {
 
 const users = [
   {
-    name: 'bill',
+    _id: '63c5af31fc2b1ea9263a6ba1',
+    name: 'Bill',
     email: 'bill@bill.com',
     password: 'bill',
     age: 22,
@@ -33,11 +34,12 @@ const users = [
     hometown: 'London',
     profession: 'Artist',
     relationship_status: 'Single',
-    friends: ['63c53eee1d598b4bac90ae5e'],
+    friends: [],
   },
 
   {
-    name: 'jeff',
+    _id: '63c5af31fc2b1ea9263a6ba2',
+    name: 'Jeff',
     email: 'jeff@jeff.com',
     password: 'jeff',
     age: 25,
@@ -46,24 +48,25 @@ const users = [
     hometown: 'Los Angeles',
     profession: 'Tycoon',
     relationship_status: 'Single',
-    friends: ['63c53d1790253949a9bd3642'],
+    friends: [],
   },
 ];
 
 const posts = [
   {
-    user_id: '63c53d1790253949a9bd3642',
-    message: 'I am first!',
-    likes: ['63c53eee1d598b4bac90ae5e'],
-    comments: [
-      { user_id: '63c53eee1d598b4bac90ae5e', message: 'Nice post Bill' },
-    ],
+    _id: '63c5b11027eaf4a3bcc16d61',
+    user_id: '63c5af31fc2b1ea9263a6ba2',
+    message: 'Hello, world!',
+    likes: [],
+    comments: [],
   },
+
   {
-    user_id: '63c53eee1d598b4bac90ae5e',
-    message: 'I am second!',
-    likes: ['63c53d1790253949a9bd3642'],
-    comments: [{ user_id: '63c53d1790253949a9bd3642', message: 'Hi Jeff' }],
+    _id: '63c5b17727eaf4a3bcc16d70',
+    user_id: '63c5af31fc2b1ea9263a6ba1',
+    message: 'Hey, gang!',
+    likes: [],
+    comments: [],
   },
 ];
 

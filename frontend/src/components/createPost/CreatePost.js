@@ -3,6 +3,7 @@ import { useState } from 'react';
 const Create = (props) => {
   const [body, setBody] = useState('');
   const token = window.localStorage.getItem('token');
+  const userId = window.localStorage.getItem('user_id');
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -13,7 +14,7 @@ const Create = (props) => {
         Authorization: `Bearer ${token}`,
         'Content-type': 'application/json',
       },
-      body: JSON.stringify({ message: body }),
+      body: JSON.stringify({ user_id: userId, message: body }),
     }).then(() => props.setPostAdded(true));
 
     setBody('');
