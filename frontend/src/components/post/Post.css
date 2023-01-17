@@ -40,3 +40,18 @@
   font-size: 1.1rem;
   line-height: 1.5;
 }
+
+.like-container {
+  display: flex;
+  position: relative;
+  width: 100%; 
+}
+
+.liker-list {
+  position: absolute;
+  padding: 8px;
+  border-radius: 10px;
+  bottom: 110%;
+  background-color: rgba(0, 0, 0, 0.7); 
+  color: white;
+}

@@ -3,11 +3,11 @@ const bcrypt = require("bcrypt");
 const validator = require("validator");
 
 const UserSchema = new mongoose.Schema({
-  name: { type: String},
+  name: { type: String, required: true },
   email: { type: String, required: true, unique: true },
   password: { type: String, required: true },
   // Expects to receive a valid post ID from Post Schema
-  posts: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Post' }],
+  posts: [{ type: mongoose.Schema.Types.ObjectId, ref: "Post" }],
 });
 
 UserSchema.statics.signup = async function (name, email, password) {
@@ -18,14 +18,16 @@ UserSchema.statics.signup = async function (name, email, password) {
   }
 
   // validation of user input
-  if (!email || !password) {
+  if (!email || !password || !name) {
     throw Error("All fields must be filled");
   }
   if (!validator.isEmail(email)) {
     throw Error("Email is not valid");
   }
   if (!validator.isStrongPassword(password)) {
-    throw Error("Password not strong enough - must include uppercase, lowercase, numbers, punctuation - min 8 chars");
+    throw Error(
+      "Password not strong enough - must include uppercase, lowercase, numbers, punctuation - min 8 chars"
+    );
   }
 
   const salt = await bcrypt.genSalt(10);
