@@ -1,4 +1,7 @@
 import React, { useState } from 'react';
+import './Login.css';
+import Card from './../Helpers/Card'
+import CardInput from './../Helpers/CardInput'
 
 const LogInForm = ({ navigate }) => {
   const [email, setEmail] = useState('');
@@ -38,7 +41,24 @@ const LogInForm = ({ navigate }) => {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
+    <div className='login'>
+      <div className='login-left'>
+    <Card>
+      <h1>
+        Acebook
+      </h1>
+    </Card>
+    <Card>
+      <h3>
+        Acebook helps you connect and share with people in your life
+      </h3>
+    </Card>
+    </div>
+
+    <div className="login-right">
+    <Card>
+    <form className="login" onSubmit={handleSubmit}>
+      <CardInput>
       <input
         placeholder="Email"
         id="email"
@@ -46,15 +66,28 @@ const LogInForm = ({ navigate }) => {
         value={email}
         onChange={handleEmailChange}
       />
-      <input
-        placeholder="Password"
-        id="password"
-        type="password"
-        value={password}
-        onChange={handlePasswordChange}
-      />
-      <input role="submit-button" id="submit" type="submit" value="Submit" />
+      </CardInput>
+      <CardInput>
+        <input
+          placeholder="Password"
+          id="password"
+          type="password"
+          value={password}
+          onChange={handlePasswordChange}
+        />
+        
+      </CardInput>
+      <div>
+        <input role="submit-button" id="submit" type="submit" value="Log in" />
+        
+      </div>
+      <div>
+      <button>Create a new account</button>
+      </div>
     </form>
+    </Card>
+    </div>
+    </div>
   );
 };
 
