@@ -1,6 +1,7 @@
 .form-container {
   margin-top: 0px;
   margin-bottom: 0px;
+  border-bottom: 1px solid #d9d9d9;
 }
 
 .new-comment-form {
