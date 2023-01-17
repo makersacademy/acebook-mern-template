@@ -73,5 +73,6 @@
   background-color: #eff9fd; /* give the comments container a light gray background color */
   padding-left: 1rem; /* add some padding to the container */
   padding-right: 1rem; /* add some padding to the container */
+  padding-bottom: 8px;
   border-radius: 8px; /* give the container rounded corners */
 }
