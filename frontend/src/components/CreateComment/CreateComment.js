@@ -1,8 +1,12 @@
 const CreateComment = () => {
+  
+  // Possibly take in setUpdated as a prop, then update this to true when we post a comment
+    // Above might need to go in post.js rather than createComment.js
+
   return ( 
     <div className="form-container">
       <form className="my-comment-form">
-        <input type="text"></input>
+        <textarea type="textarea" placeholder="Write a comment..." />
       </form>
     </div>
     // Form
