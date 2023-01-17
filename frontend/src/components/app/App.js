@@ -23,7 +23,7 @@ const App = ({ navigate }) => {
               <Route path='/posts'  element={<Feed navigate={ useNavigate() }/>}/>
               <Route path='/login'  element={<LoginForm  navigate={ useNavigate() }/>}/>
               <Route path='/signup' element={<SignUpForm navigate={ useNavigate() }/>}/>
-              <Route path='/profile/:id' element={<Profile navigate={ useNavigate() }/>} />
+              <Route path='/users/:userId' element={<Profile navigate={ useNavigate() }/>} />
               <Route path='/profileEditor' element={<ProfileEditor navigate={ useNavigate() }/>} />
             </Routes>
           </div>

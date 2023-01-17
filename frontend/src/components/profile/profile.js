@@ -1,16 +1,35 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import profile_placeholder from './profile_placeholder.jpeg';
 import Card from '../Helpers/Card.js';
 import './profile.css';
 import Feed from '../feed/Feed'
+import { useParams } from 'react-router-dom';
 
 const Profile = () => {
+  const { userId } = useParams();
+  const [token, setToken] = useState(window.localStorage.getItem('token'));
+
+  useEffect(() => {
+    if (token) {
+      fetch(`/users/${ userId }`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      })
+        .then((response) => console.log)
+        // .then(async (data) => {
+        //   window.localStorage.setItem('token', data.token);
+        //   setToken(window.localStorage.getItem('token'));
+        // });
+    }
+    // eslint-disable-next-line
+  }, []);
 
 return(
   <div>
     <div className='coverPhoto'>
       <Card>
-        
+        <h1>{ userId }</h1>
       </Card>
 
     </div>
