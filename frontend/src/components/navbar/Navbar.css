@@ -14,11 +14,13 @@ h1 {
   font-size: 1.5rem;
   margin: 0;
   text-decoration: none;
+  color: black;
 }
 
 nav {
   display: flex;
   align-items: center;
+  font-weight: bolder;
 }
 
 nav div {
@@ -27,7 +29,7 @@ nav div {
 
 a {
   text-decoration: none;
-  color: #444;
+  color: rgb(0, 0, 0);
   margin-right: 0.5rem;
   font-size: 16px;
 }
