@@ -22,6 +22,8 @@ const Feed = ({ navigate }) => {
           setPosts(data.posts);
           setUpdated(false);
         });
+    } else {
+    navigate("/login");
     }
   }, [updated]);
 
@@ -37,9 +39,7 @@ const Feed = ({ navigate }) => {
         </div>
       </>
     );
-  } else {
-    navigate("/signin");
-  }
+  };
 };
 
 export default Feed;
