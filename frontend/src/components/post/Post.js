@@ -40,7 +40,7 @@ const Post = ({ post }) => {
         <p className="card-message">{ post.message }</p>
         <div className="likes-and-comments-buttons-container">
           <button className="comments-buttons" onClick={handleViewComments}>Add comment</button>
-          {comments.length > 0 ?
+          {comments.length > 0 ? 
             <button className="comments-buttons" onClick={handleViewComments}>{ comments.length } comments</button> : 
             <button className="comments-buttons">{ comments.length } comments</button>}
         </div>

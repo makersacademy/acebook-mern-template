@@ -2,11 +2,12 @@ import './Comment.css';
 import formatDistanceToNow from "date-fns/formatDistanceToNow";
 
 const Comment = ({ comment }) => {
-  console.log(comment);
+  // console.log(comment);
+  console.log(localStorage.getItem("user_id"));
   return (
     <div className="comment">
       <div className="comment-header">
-        <h4 className="comment-author">{ comment.author.name }</h4>
+        <h4 className="comment-author">{comment.author.name}</h4>
         <p className="timestamp">{formatDistanceToNow(new Date(comment.createdAt), { addSuffix: true })}</p>
       </div>
       <p className="comment-message">{ comment.message }</p>
