@@ -1,3 +1,4 @@
+import './Comment.css';
 import formatDistanceToNow from "date-fns/formatDistanceToNow";
 
 const Comment = ({ comment }) => {

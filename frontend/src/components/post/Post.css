@@ -40,3 +40,24 @@
   font-size: 1.1rem;
   line-height: 1.5;
 }
+
+.view-comments-container {
+  margin-top: 1rem; /* add some space between the post and the comments button */
+}
+
+.view-comments-button {
+  background-color: #007bff; /* give the button a blue background color */
+  color: #fff; /* set the text color to white */
+  border: none; /* remove the default button border */
+  padding: 0.5rem 1rem; /* add some padding to the button */
+  border-radius: 4px; /* give the button rounded corners */
+  font-size: 0.8rem; /* set the font size */
+  cursor: pointer; /* change the cursor to a pointer when hovering over the button */
+}
+
+#comments-container {
+  margin-top: 1rem; /* add some space between the button and the comments */
+  background-color: #f7f7f7; /* give the comments container a light gray background color */
+  padding: 1rem; /* add some padding to the container */
+  border-radius: 8px; /* give the container rounded corners */
+}

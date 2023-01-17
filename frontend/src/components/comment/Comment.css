@@ -1,0 +1,34 @@
+.comment {
+  padding-bottom: 1rem; /* add some padding to separate the border from the comment content */
+}
+
+.comment:not(:last-child) {
+  border-bottom: 1px solid #d9d9d9; /* add a faint border at the bottom of each comment except the last one */
+}
+
+.comment:last-child {
+  padding-bottom: 0; /* remove the padding below the last comment */
+}
+
+.comment-header {
+  display: flex;
+  align-items: center;
+  margin-bottom: 0.5rem;
+}
+
+.comment-author {
+  font-size: 0.8rem;
+  font-weight: 600;
+}
+
+.timestamp {
+  font-size: 0.6rem;
+  color: gray;
+  margin-left: 0.5rem;
+}
+
+.comment-message {
+  font-size: 0.9rem;
+  line-height: 1.3;
+  margin-bottom: 1rem;
+}
