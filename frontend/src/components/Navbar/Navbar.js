@@ -1,6 +1,17 @@
 import './Navbar.css';
 import { Link } from 'react-router-dom';
 
+const user_id = window.localStorage.getItem('user_id');
+
+const nav = ({ navigate }) => {
+  const logout = () => {
+    window.localStorage.removeItem('token');
+    window.localStorage.removeItem('user_id');
+    navigate('/login');
+  }
+}
+
+
 const Navbar = () => {
   return (
     <header>
@@ -12,11 +23,11 @@ const Navbar = () => {
           <Link to="/post">
             <button id="Feed">View Feed</button>
           </Link>
-          <Link to="/profile">
+          <Link to={ `/users/${user_id}` }>
             <button id="profile-page">My Profile</button>
           </Link>
           <Link to="/login">
-            <button id="logout">Logout</button>
+            <button className='logout' onClick={ nav }>Logout</button>
           </Link>
           {/* <a href='/posts'>Acebook</a>
           <a href='/posts'>View Feed</a>
