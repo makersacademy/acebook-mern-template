@@ -20,3 +20,12 @@
   border-radius: 8px; /* give the text area rounded corners */
   border: 0.5px solid #d9d9d9; /* add a faint border to the text area */
 }
+
+.press-enter-to-post {
+  margin-left: 32px;
+  margin-top: 4px;
+  border: 0;
+  padding-bottom: 8px;
+  font-size: x-small;
+  color: rgb(101, 101, 101);
+}

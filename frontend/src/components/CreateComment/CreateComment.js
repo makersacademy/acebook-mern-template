@@ -70,6 +70,7 @@ const CreateComment = ({post_id, setUpdated}) => {
           onKeyDown={handleKeyDown}
         />
       </form>
+      <p className="press-enter-to-post">Press Enter to post</p>
     </div>
     // Form
       // Input field

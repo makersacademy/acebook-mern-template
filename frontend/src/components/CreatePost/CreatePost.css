@@ -1,6 +1,6 @@
 .my-form {
   display: inline;
-  margin: 10px auto;
+  margin: 10px auto 0 auto;
 }
 
 .popup {
@@ -24,9 +24,8 @@
 }
 
 textarea {
-  width: 100%;
+  width: 90%;
   min-height: 200px;
-  padding: 10px;
   margin-top: 20px;
   margin-bottom: 20px;
   border-radius: 5px;
@@ -60,5 +59,3 @@ textarea {
 .popup {
   pointer-events: all !important;
 }
-
-
