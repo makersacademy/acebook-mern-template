@@ -50,7 +50,37 @@ describe("/posts", () => {
       let newPayload = JWT.decode(response.body.token, process.env.JWT_SECRET);
       let originalPayload = JWT.decode(token, process.env.JWT_SECRET);
       expect(newPayload.iat > originalPayload.iat).toEqual(true);
-    });  
+    });
+
+    test("creates a new post and can be liked", async () => {
+      await request(app)
+        .post("/posts")
+        .set("Authorization", `Bearer ${token}`)
+        .send({ message: "hello world", token: token });
+      let posts = await Post.find();
+      id = posts[0].id
+      await request(app)
+        .patch("/posts/" + id)
+        .set("Authorization", `Bearer ${token}`)
+        .send({ field: "likes", value: 'some valid user id' });  
+      posts = await Post.find();
+      expect(posts[0].likes.toObject()).toEqual(['some valid user id']);
+    });
+
+    test("creates a new post and can be commented on", async () => {
+      await request(app)
+        .post("/posts")
+        .set("Authorization", `Bearer ${token}`)
+        .send({ message: "hello world", token: token });
+      let posts = await Post.find();
+      id = posts[0].id
+      await request(app)
+        .patch("/posts/" + id)
+        .set("Authorization", `Bearer ${token}`)
+        .send({ field: "comments", value: 'i am a test comment' });  
+      posts = await Post.find();
+      expect(posts[0].comments.toObject()).toEqual(['i am a test comment']);
+    });
   });
   
   describe("POST, when token is missing", () => {

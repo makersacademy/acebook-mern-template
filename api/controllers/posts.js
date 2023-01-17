@@ -23,13 +23,14 @@ const PostsController = {
     });
   },
   Update: async (req, res) => {
-    console.log(req.body)
     post_id = req.params.id
-    console.log(post_id)
     value = req.body.value
     field = req.body.field
     if (field === 'likes') {
-      update = await Post.findOneAndUpdate({_id: post_id},{$push: {likes: value}} )
+      const post = await Post.findOne({_id: post_id});
+      const likes = post.likes.toObject();
+      post.likes.includes(value) ? beenLiked = true : beenLiked = false
+      beenLiked ? update = await Post.findOneAndUpdate({_id: post_id},{$pull: {likes: value}} ) : update = await Post.findOneAndUpdate({_id: post_id},{$push: {likes: value}} )
     } else if (field === 'comments') {
       update = await Post.findOneAndUpdate({_id: post_id},{$push: {comments: value}} )
     } else {
