@@ -12,16 +12,27 @@ const nav = ({ navigate }) => {
 }
 
 
-
 const Navbar = () => {
   return (
     <header>
       <div className='container'>
         <div className='links'>
-          <Link className='homepage' to='/posts'>Acebook</Link>
-          <Link className='homepage' to='/posts'>View Feed</Link>
-          <Link className='profile_page' to={ `/users/${user_id}` }>My Profile</Link>
-          <button className='logout' onClick={ nav }>Logout</button>
+          <Link to='/posts'>
+            <button id="homebutton">Acebook</button>
+          </Link>
+          <Link to="/post">
+            <button id="Feed">View Feed</button>
+          </Link>
+          <Link to={ `/users/${user_id}` }>
+            <button id="profile-page">My Profile</button>
+          </Link>
+          <Link to="/login">
+            <button className='logout' onClick={ nav }>Logout</button>
+          </Link>
+          {/* <a href='/posts'>Acebook</a>
+          <a href='/posts'>View Feed</a>
+          <a href='/profile'>My Profile</a>
+          <a href='/login'>Logout</a> */}
         </div>
       </div>
     </header>

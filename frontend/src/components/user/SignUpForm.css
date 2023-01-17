@@ -1,0 +1,32 @@
+.signup {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: 100vh;
+  align-items: center;
+}
+
+.signup-form {
+  height: 50vh;
+}
+
+h1 {
+  font-size: 60px;
+  color: #1877f2;
+  margin: 4px
+}
+
+h3 {
+  margin: 4px;
+}
+
+h4 {
+  color: #1877f2;
+  margin: 4px 4px  10px 4px;
+}
+
+a {
+color: #333;
+margin: 0px;
+}
+

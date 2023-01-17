@@ -3,6 +3,7 @@ import './Login.css';
 import Card from './../Helpers/Card'
 import CardInput from './../Helpers/CardInput'
 import '../../index.css';
+import { Link } from 'react-router-dom';
 
 const LogInForm = ({ navigate }) => {
   const [email, setEmail] = useState('');
@@ -84,7 +85,9 @@ const LogInForm = ({ navigate }) => {
       
       </div>
       <div>
-      <button id="create-account">Create a new account</button>
+        <Link to="/signup">
+          <button id="create-account">Create a new account</button>
+        </Link>
       </div>
     </form>
     </Card>
