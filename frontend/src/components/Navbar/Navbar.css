@@ -1,5 +1,5 @@
 header {
-  background: green;
+  background: #1877f2;
 }
 header .container {
   max-width: 1400px;
@@ -11,7 +11,7 @@ header .container {
 }
 
 header .container .links {
-  background-color: white;
+  background-color: #1877f2;
   min-width: 350px;
   display: flex;
   justify-content: space-between;
