@@ -1,4 +1,6 @@
 import React, { useState } from 'react';
+import Card from '../Helpers/Card';
+import './SignUpForm.css';
 
 const SignUpForm = ({ navigate }) => {
 
@@ -49,7 +51,16 @@ const SignUpForm = ({ navigate }) => {
 
 
     return (
-      <form onSubmit={handleSubmit}>
+      <div className='signup'>
+         <h1>
+        Acebook
+      </h1>
+      <h3>
+        Sign up
+      </h3>
+      <h4>It's quick and easy!</h4>
+      <Card>
+      <form className='signup-form' onSubmit={handleSubmit}>
         <input placeholder="Name" id="name" type='text' value={ name } onChange={handleNameChange} />
         <input placeholder="Email" id="email" type='text' value={ email } onChange={handleEmailChange} />
         <input placeholder="Password" id="password" type='password' value={ password } onChange={handlePasswordChange} />
@@ -57,6 +68,10 @@ const SignUpForm = ({ navigate }) => {
         <input placeholder="Bio" id="bio" type='text' value={ bio } onChange={handleBioChange} />
         <input id='submit' type="submit" value="Submit" />
       </form>
+      </Card>
+      <h4>already have an account?</h4>
+      <a href='/login'>log in</a> 
+      </div>
     );
 }
 
