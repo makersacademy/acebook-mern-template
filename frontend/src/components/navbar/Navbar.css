@@ -31,17 +31,20 @@ a {
   text-decoration: none;
   color: rgb(0, 0, 0);
   margin-right: 0.5rem;
+  padding-left: 4px;
+  padding-right: 4px;
   font-size: 16px;
 }
 
-button {
-  background-color: transparent; 
+/* .logout-button {
+  background-color: transparent;
   border: none; 
   font-size: 16px;
-  color: #444;
+  font-weight: bolder;
+  color: rgb(0, 0, 0);
   margin-right: 0.5rem;
   cursor: pointer; 
   font-size: 16px; 
   padding: 0; 
   text-align: left; 
-}
+} */
