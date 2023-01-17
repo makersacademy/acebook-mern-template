@@ -6,7 +6,11 @@ const mongoose = require('mongoose')
 const PostsController = {
   Index: (req, res) => {
     // Populate method is called twice - to populate author field, then comment field
-    Post.find().sort({createdAt: -1}).populate('author').populate('comments').exec(async (err, posts) => {
+    Post.find().sort({createdAt: -1}).populate('author').populate({
+      path : 'comments',
+      populate : {
+        path : 'author'
+      }}).exec(async (err, posts) => {
       if (err) {
         throw err;
       }
@@ -34,7 +38,12 @@ const PostsController = {
       return res.status(404).json({error: "Invalid post id"})
     }
     
-    Post.findOne({ _id: id }).sort({createdAt: -1}).populate('author').populate('comments').exec(async (err, post) => {
+    Post.findOne({ _id: id }).sort({createdAt: -1}).populate('author').populate({
+      path : 'comments',
+      populate : {
+        path : 'author'
+      }
+    }).exec(async (err, post) => {
       // If valid object ID but it doenst exist in database
       if (!post) {
         return res.status(404).json({error: "No such post exists"})
