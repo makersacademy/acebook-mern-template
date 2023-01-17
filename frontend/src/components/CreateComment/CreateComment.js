@@ -1,4 +1,5 @@
 import { useState } from "react";
+import "./CreateComment.css";
 
 const CreateComment = ({post_id, setUpdated}) => {
   
@@ -57,10 +58,13 @@ const CreateComment = ({post_id, setUpdated}) => {
 
   return ( 
     <div className="form-container">
-      <form className="my-comment-form">
+      <form className="new-comment-form">
         <textarea
+          className="comment-textarea"
           type="text"
           placeholder="Write a comment..."
+          autoComplete="off"
+          autoFocus
           value={commentInput}
           onChange={handleCommentInput}
           onKeyDown={handleKeyDown}
