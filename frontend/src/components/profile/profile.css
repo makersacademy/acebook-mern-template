@@ -14,23 +14,12 @@ body {
   width: 1000px;
 }
 
-.user-info {
-  width: 500px;
-}
-
-.user-details {
-  align-items: center;
-  justify-content: space-between;
-  display: flex;
-  margin-left: 10px;
-}
-
 .right {
   width: 600px;
 }
 
 .left {
-  width: 300px
+  width: 300px;
 }
 
 .photos .card {
