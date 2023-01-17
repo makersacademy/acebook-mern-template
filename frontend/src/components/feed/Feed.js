@@ -32,7 +32,7 @@ const Feed = ({ navigate }) => {
               {posts.sort(function(postA, postB) {
                 return (new Date(postB.createdAt) - new Date(postA.createdAt));
               }).map(
-                (post) => ( <Post post={ post } key={ post._id } /> )
+                (post) => ( <Post setUpdated={ setUpdated } post={ post } key={ post._id } /> )
               )}
           </div>
         </>
