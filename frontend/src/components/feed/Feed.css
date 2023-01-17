@@ -2,4 +2,5 @@ h2 {
   display: flex;
   justify-content: center;
   margin-top: 5px;
+  background-color: #eff9fd;
 }
