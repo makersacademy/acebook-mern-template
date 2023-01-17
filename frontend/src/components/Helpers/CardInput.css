@@ -1,0 +1,14 @@
+.card-input {
+  border-radius: 5px;
+  border: 1 thin #f5f4f4;
+  padding: 10px;
+  border-width: 1pt;
+  background-color: #e9f0fe;
+}
+
+
+form input.signup:hover {
+  color: #fff;
+  background-color: #27960e;
+}
+

@@ -1,4 +1,8 @@
 import React, { useState } from 'react';
+import './Login.css';
+import Card from './../Helpers/Card'
+import CardInput from './../Helpers/CardInput'
+import '../../index.css';
 
 const LogInForm = ({ navigate }) => {
   const [email, setEmail] = useState('');
@@ -38,7 +42,21 @@ const LogInForm = ({ navigate }) => {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
+    <div className='login'>
+      <div className='login-left'>
+      <h1>
+        Acebook
+      </h1>
+  
+      <h3>
+        Acebook helps you connect and share with people in your life
+      </h3>
+    </div>
+
+    <div className="login-right">
+    <Card>
+    <form className="login-form" onSubmit={handleSubmit}>
+ 
       <input
         placeholder="Email"
         id="email"
@@ -46,15 +64,32 @@ const LogInForm = ({ navigate }) => {
         value={email}
         onChange={handleEmailChange}
       />
-      <input
-        placeholder="Password"
-        id="password"
-        type="password"
-        value={password}
-        onChange={handlePasswordChange}
-      />
-      <input role="submit-button" id="submit" type="submit" value="Submit" />
+     
+     
+        <input
+          placeholder="Password"
+          id="password"
+          type="password"
+          value={password}
+          onChange={handlePasswordChange}
+        />
+        
+     
+      <div className='submit-login'>
+        <input role="submit-button" id="submit" type="submit" value="Log in" />
+        <h5>Forgotten password?</h5>
+        <hr></hr>
+      </div>
+      <div>
+      
+      </div>
+      <div>
+      <button id="create-account">Create a new account</button>
+      </div>
     </form>
+    </Card>
+    </div>
+    </div>
   );
 };
 
