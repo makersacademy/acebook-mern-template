@@ -1,6 +1,6 @@
 .my-form {
   display: inline;
-  margin: 10px auto;
+  margin: 15px auto 0 auto;
 }
 
 .popup {
@@ -25,9 +25,8 @@
 }
 
 textarea {
-  width: 100%;
+  width: 90%;
   min-height: 200px;
-  padding: 10px;
   margin-top: 20px;
   margin-bottom: 20px;
   border-radius: 5px;
@@ -38,7 +37,7 @@ textarea {
 }
 
 .submit-post {
-  background-color: #007bff;
+  background-color: #47a0fe;
   color: #fff;
   padding: 12px 20px;
   border-radius: 10px;
@@ -61,5 +60,3 @@ textarea {
 .popup {
   pointer-events: all !important;
 }
-
-
