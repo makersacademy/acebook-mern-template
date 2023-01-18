@@ -38,7 +38,7 @@ textarea {
 }
 
 .submit-post {
-  background-color: #007bff;
+  background-color: #4267B2; /* Facebook blue */
   color: #fff;
   padding: 12px 20px;
   border-radius: 10px;
@@ -46,6 +46,10 @@ textarea {
   font-size: 14px;
   font-weight: bold;
   box-shadow: 1px 1px 5px #333;
+}
+
+.submit-post:hover {
+  background-color: #285593;
 }
 
 .exit-post-icon {
