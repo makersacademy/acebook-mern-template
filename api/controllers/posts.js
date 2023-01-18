@@ -18,6 +18,7 @@ const PostsController = {
         res.status(200).json({ posts: posts, token: token });
       });
   },
+
   Create: (req, res) => {
     const post = new Post(req.body);
     post.save(async (err) => {
@@ -28,6 +29,18 @@ const PostsController = {
       const token = await TokenGenerator.jsonwebtoken(req.user_id);
       res.status(201).json({ message: "OK", token: token });
     });
+  },
+
+  Delete: async (req, res) => {
+    const id = req.params.id
+
+    if(!mongoose.Types.ObjectId.isValid(id)){
+      return res.status(404).json({error: "Invalid post id"})
+    }
+
+    const post = await Post.findByIdAndDelete({_id: id})
+
+    res.status(200).json({message: "Deleted post"})
   },
   GetPostById: (req, res ) => {
     // get id from req params
@@ -54,6 +67,7 @@ const PostsController = {
       res.status(200).json({ post: post, token: token });
     });
   },
+
   Like: (req, res) => {
     const postId = req.params.id;
     const userId = req.user_id;
@@ -70,6 +84,7 @@ const PostsController = {
       res.status(201).json({ message: "OK", token: token, post: post });
     });
   },
+
   Unlike: (req, res) => {
     const postId = req.params.id;
     const userId = req.user_id;
@@ -86,6 +101,7 @@ const PostsController = {
       res.status(201).json({ message: "OK!", token: token, post: post });
     });
   },
+
   GetLikers: (req, res) => {
     const postId = req.params.id;
 
@@ -103,5 +119,4 @@ const PostsController = {
       });
   },
 };
-
 module.exports = PostsController;
