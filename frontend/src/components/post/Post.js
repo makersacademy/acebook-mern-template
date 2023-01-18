@@ -13,7 +13,19 @@ const Post = ({ post, setPostAdded }) => {
   const handleEdit = (content, e) => {
     e.preventDefault();
     setEdit(true);
-    console.log(edit);
+  }
+
+  const handleDelete = () => {
+    fetch('/posts/' + post._id, {
+      method: 'DELETE',
+      headers: {
+        Authorization: `Bearer ${token}`,
+        'Content-type': 'application/json',
+      },
+      body: JSON.stringify({ post_id: post._id })
+    }).then(response => {response.json()}).then(data => { console.log(data) })
+
+    setPostAdded(true);
   }
 
   const handleSave = (e) => {
@@ -77,6 +89,7 @@ const Post = ({ post, setPostAdded }) => {
         <article data-cy="post" key={post._id}>
           {post.message}
           <button onClick={ (e) => {handleEdit(post.message, e)} }>Edit</button>
+          <button onClick={ handleDelete }>Delete</button>
         </article>
         
         <div className="post-data">

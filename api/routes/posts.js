@@ -7,5 +7,6 @@ router.get("/", PostsController.Index);
 router.post("/", PostsController.Create);
 router.put("/:id", PostsController.Edit);
 router.patch('/', PostsController.Like);
+router.delete('/:id', PostsController.Delete);
 
 module.exports = router;

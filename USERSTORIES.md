@@ -16,15 +16,15 @@ I would like to see a list of all the posts (done)
 
 As a user
 So that I can interact with other users
-I would like to click a like button on other user's posts (in progress)
+I would like to click a like button on other user's posts (done)
 
 As a user
 So that I can I can feel popular
-I would like to see how many likes each of my posts has received (in progress)
+I would like to see how many likes each of my posts has received (done)
 
 As a user
 So that I can share my stories
-I would like to create, edit and delete posts on my timeline (in progress)
+I would like to create, edit and delete posts on my timeline (done)
 
 
 -----------

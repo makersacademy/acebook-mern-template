@@ -30,8 +30,6 @@ const PostsController = {
     const { id } = req.params
     const post = await Post.findOneAndUpdate({_id: id}, {...req.body})
     const token = await TokenGenerator.jsonwebtoken(req.user_id);
-    console.log('here')
-    console.log(req);
   res.status(200).json({ message: 'OK', token: token})
   },
 
@@ -46,6 +44,13 @@ const PostsController = {
 
     res.status(200).json(post);
   },
+
+  Delete: async (req, res) => {
+    const { id } = req.params
+    const post = await Post.findByIdAndDelete({_id: id})
+    const token = await TokenGenerator.jsonwebtoken(req.user_id);
+    res.status(200).json({ message: 'OK', token: token })
+  }
 };
 
 module.exports = PostsController;
