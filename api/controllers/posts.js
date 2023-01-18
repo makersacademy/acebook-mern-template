@@ -26,14 +26,26 @@ const PostsController = {
     });
   },
 
-  Update: async (req, res) => {
+  Edit: async (req, res) => {
     const { id } = req.params
     const post = await Post.findOneAndUpdate({_id: id}, {...req.body})
     const token = await TokenGenerator.jsonwebtoken(req.user_id);
     console.log('here')
     console.log(req);
   res.status(200).json({ message: 'OK', token: token})
-  }
+  },
+
+  Like: async (req, res) => {
+    const data = req.body;
+
+    const post = await Post.findByIdAndUpdate(
+      { _id: data.post_id },
+      { $addToSet: { likes: data.user_id } },
+      { new: true }
+    );
+
+    res.status(200).json(post);
+  },
 };
 
 module.exports = PostsController;

@@ -34,8 +34,22 @@ const Post = ({ post, setPostAdded }) => {
     setEdit(false);
     setPostAdded(true);
   }
+  
+  const handleLike = () => {
+    if (userId) {
+      fetch('/posts', {
+        method: 'PATCH',
+        headers: {
+          Authorization: `Bearer ${token}`,
+          'Content-type': 'application/json',
+        },
+        body: JSON.stringify({ post_id: post._id, user_id: userId }),
+      }).then(() => setPostAdded(true));
+    }
+  };
 
   if (edit) {
+  
   return (
     <div>
       <Card>
@@ -70,6 +84,16 @@ const Post = ({ post, setPostAdded }) => {
         <p>
           {formatDistanceToNow(new Date(post.createdAt), { addSuffix: true })}
         </p>
+        <button className="like-button" onClick={handleLike}>
+          Like
+        </button>
+        <span>
+          {post.likes.length > 1
+            ? `${post.likes.length} people liked this`
+            : post.likes.length === 1
+            ? `${post.likes.length} person liked this`
+            : 'No likes'}
+        </span>
       </div>
       </Card>
     </div>

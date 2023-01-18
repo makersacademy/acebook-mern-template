@@ -36,7 +36,7 @@ const Feed = ({ navigate }) => {
         <Card>
         <div id="feed" role="feed">
           {posts.map((post) => (
-            <Post setPostAdded={setPostAdded} post={post} key={post._id} />
+            <Post post={post} key={post._id} setPostAdded={setPostAdded} />
           ))}
         </div>
         </Card>
