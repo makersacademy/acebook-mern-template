@@ -1,0 +1,26 @@
+.profile-container {
+  margin: 5px;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
+
+/* Update button */
+.update-button {
+  background-color: #4267B2; /* Facebook blue */
+  color: white;
+  padding: 10px 20px;
+  border-radius: 5px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 14px;
+  margin-top: 10px;
+}
+
+/* Update button hover effect */
+.update-button:hover {
+  background-color: #285593;
+}

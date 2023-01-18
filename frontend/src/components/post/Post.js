@@ -4,6 +4,7 @@ import CreateComment from "../CreateComment/CreateComment";
 import "./Post.css"
 import formatDistanceToNow from "date-fns/formatDistanceToNow";
 import { AiFillLike, AiOutlineLike } from "react-icons/ai";
+import { Link } from "react-router-dom";
 
 const Post = ({ post, setUpdated }) => {
   const [showLikers, setShowLikers] = useState(false);
@@ -57,7 +58,9 @@ const Post = ({ post, setUpdated }) => {
       <div className="post-card" data-cy="post" key={post._id}>
         <div className="card-header">
           <div className="card-meta">
-            <h2 className="username">{post.author.name}</h2>
+            <Link to={`/users/${post.author._id}`} style={{margin: "0"}}>
+              <h2 className="username">{post.author.name}</h2>
+            </Link>
             <p className="timestamp">
               {formatDistanceToNow(new Date(post.createdAt), {
                 addSuffix: true,

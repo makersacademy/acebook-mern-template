@@ -43,6 +43,10 @@ textarea {
   width: 175px;
 }
 
+.submit-post:hover {
+  background-color: #285593;
+}
+
 .exit-post-icon {
   position: absolute;
   top: 15px;
