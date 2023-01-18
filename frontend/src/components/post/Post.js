@@ -66,30 +66,34 @@ const Post = ({ post, setUpdated }) => {
           </div>
         </div>
         <p className="card-message">{post.message}</p>
-        <div className="like-container">
-          <button className="like-button" onClick={handleLike}>
-            {isLiked ? <AiFillLike size={20} /> : <AiOutlineLike size={20} />}
-          </button>
-          <div
-            className="like-count"
-            onMouseEnter={() => setShowLikers(true)}
-            onMouseLeave={() => setShowLikers(false)}
-          >
-            {post.likeCount}
-          </div>
-          {showLikers && (
-            <div className="liker-list">
-              {likers.length > 0 ? (
-                likers.map((liker) => <p key={liker._id}>{liker.name}</p>)
-              ) : (
-                <p>No likes</p>
-              )}
-            </div>
-          )}
-        </div>
+
         <div className="likes-and-comments-buttons-container">
-          <button className="comments-buttons" onClick={handleViewComments}>Add comment</button>
-          <button className="comments-buttons" onClick={handleViewComments}>{ comments.length } comments</button>
+          <div className="like-container">
+            <button className="like-button" onClick={handleLike}>
+              {isLiked ? <AiFillLike size={20} /> : <AiOutlineLike size={20} />}
+            </button>
+            <div
+              className="like-count"
+              onMouseEnter={() => setShowLikers(true)}
+              onMouseLeave={() => setShowLikers(false)}
+            >
+              {post.likeCount}
+            </div>
+            {showLikers && (
+              <div className="liker-list">
+                {likers.length > 0 ? (
+                  likers.map((liker) => <p key={liker._id}>{liker.name}</p>)
+                ) : (
+                  <p>No likes</p>
+                )}
+              </div>
+            )}
+          </div>
+            { comments.length === 0 ?
+              <button className="comments-button" onClick={handleViewComments}>Add comment</button> : comments.length === 1 ?
+              <button className="comments-button" onClick={handleViewComments}>{ comments.length } comment</button> :
+              <button className="comments-button" onClick={handleViewComments}>{ comments.length } comments</button>
+            }
         </div>
         { comments && (viewComments === true) &&
           <div id="comments-container">

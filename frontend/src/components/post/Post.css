@@ -58,16 +58,18 @@
   justify-content: space-between;
 }
 
-.comments-buttons {
+.comments-button {
   background-color: #47a0fe; /* give the button a blue background color */
   color: #fff; /* set the text color to white */
   border: none; /* remove the default button border */
   padding: 0.5rem 1rem; /* add some padding to the button */
   margin-left: 1rem;
+  margin-right: 1rem;
   margin-bottom: 0.5rem;
   border-radius: 4px; /* give the button rounded corners */
   font-size: 0.8rem; /* set the font size */
   cursor: pointer; /* change the cursor to a pointer when hovering over the button */
+  width: 175px;
 }
 
 #comments-container {
@@ -95,8 +97,22 @@
 }
 
 .like-button {
+  display: flex;
+  align-items: center;
   background: none;
   border: none;
   outline: none;
+  cursor: pointer;
+  padding-left: 18px;
 }
 
+.like-count {
+  display: flex;
+  align-items: center;
+}
+
+@media (max-width: 600px) {
+  .comments-button {
+    font-size: 11px;
+  }
+}
