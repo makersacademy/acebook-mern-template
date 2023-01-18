@@ -76,3 +76,19 @@
   padding-bottom: 8px;
   border-radius: 8px; /* give the container rounded corners */
 }
+
+.like-container {
+  display: flex;
+  position: relative;
+  width: 100%; 
+}
+
+.liker-list {
+  position: absolute;
+  padding: 8px;
+  border-radius: 10px;
+  bottom: 110%;
+  background-color: rgba(0, 0, 0, 0.7); 
+  color: white;
+}
+
