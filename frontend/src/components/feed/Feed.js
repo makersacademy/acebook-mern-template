@@ -40,7 +40,11 @@ const Feed = ({ navigate }) => {
     } else {
       navigate('/signin')
     }
+
 }
+
+
+
 
 export default Feed;
 

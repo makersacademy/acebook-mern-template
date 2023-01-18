@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 
+
 const LogInForm = ({ navigate }) => {
   const [error, setError] = useState(null)
   const [email, setEmail] = useState("");
@@ -46,6 +47,7 @@ const LogInForm = ({ navigate }) => {
         <input role='submit-button' id='submit' type="submit" value="Submit" />
         {error && <div className="error">{error}</div>}
       </form>
+
     );
 }
 

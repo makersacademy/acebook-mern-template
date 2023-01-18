@@ -4,6 +4,8 @@ import "./UserProfileDetails.css";
 import CreatePost from "../createPost/CreatePost";
 import Post from "../post/Post";
 import { useParams } from 'react-router-dom';
+import '../photos/profile.png'
+
 
 
 const Profile = () => {
@@ -11,6 +13,9 @@ const Profile = () => {
   const [token, setToken] = useState(window.localStorage.getItem("token"));
   const [posts, setPosts] = useState(null);
   const [updated, setUpdated] = useState(null)
+  const [image, setImageUrl] = useState("");
+
+
   let { id } = useParams();
   useEffect(() => {
     if (token) {
@@ -19,6 +24,7 @@ const Profile = () => {
         .then(async (data) => {
           setToken(window.localStorage.getItem("token"));
           setUser(data.user);
+          setImageUrl(data.user.image);
         });
     }
   }, [id]);
@@ -48,6 +54,7 @@ const Profile = () => {
       <h1>My details</h1>
       <p>Name: {user && user.name}</p>
       <p>About me: {user && user.aboutMe}</p>
+      <img src={image} className="profilepics" alt="img" />
       <button>Friends List</button>
     </div>
       

@@ -9,11 +9,13 @@ const UserSchema = new mongoose.Schema({
   password: { type: String, required: true },
   aboutMe: {type: String},
   friendRequests: { type: Array},
-  friends: { type: Array }
+  friends: { type: Array },
+  image: { type: String }
+
 });
 
 
-UserSchema.statics.signup = async function(name, email, password, aboutMe) {
+UserSchema.statics.signup = async function(name, email, password, aboutMe, image) {
 
   // validation
   if (!email || !password) {
@@ -34,7 +36,7 @@ UserSchema.statics.signup = async function(name, email, password, aboutMe) {
 
   const salt = await bcrypt.genSalt(10)
   const hash = await bcrypt.hash(password, salt)
-  const user = await this.create({ name, aboutMe, email, password: hash })
+  const user = await this.create({ name, aboutMe, email, password: hash, image })
   return user
 }
 
