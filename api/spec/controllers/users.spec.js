@@ -101,3 +101,31 @@ describe("/users/login", () => {
     });
   })
 })
+
+describe("GET, when a user detail is provided", () => {
+
+  test("the response code is 200", async () => {
+    let response = await request(app)
+      .get("/users/63c05196f61d7b5eeab48f20")
+    expect(response.statusCode).toBe(200);
+  })
+
+  test("the response has an error if the user doesn't exist", async () => {
+    let response = await request(app)
+      .get("/users/notarealuserid")
+    expect(response.statusCode).toBe(404);
+    expect(response.body.error).toBe("This user no longer exists");
+  })
+
+  test("finds the user and returns it", async () => {
+    let response = await request(app)
+      .post("/users/signup")
+      .send({email: "poppy@email.com", password: "Password!12345678"})
+    let users = await User.find()
+    let newUser = users[users.length - 1]
+    let id = newUser.id
+    let userResponse = await request(app)
+      .get("/users/" + id)
+    expect(userResponse.body.user.email).toBe("poppy@email.com")
+  })
+})

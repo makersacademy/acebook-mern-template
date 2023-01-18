@@ -26,18 +26,4 @@ const TokensController = {
   }
 };
 
-
-
-// const loginUser = async (req, res) => {
-//   const {email, password} = req.body
-//   try {
-//     const user = await User.login(email, password)
-//     //create token here and add it to response
-//     console.log(user)
-//     const token = await TokenGenerator.jsonwebtoken(user.id)
-//     res.status(200).json({ token: token, user: user, message: "OK" })
-//   } catch (error) {
-//     res.status(400).json({error: error.message})
-//   }
-// }
 module.exports = TokensController;
