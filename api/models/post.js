@@ -13,11 +13,6 @@ const PostSchema = new mongoose.Schema(
       required: true
      },
     comments: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Comment' }],
-      // Expects to receive a valid user ID from the User Schema
-      type: mongoose.Schema.Types.ObjectId,
-      ref: "User",
-      required: true,
-    },
     likes: [{ type: mongoose.Schema.Types.ObjectId, ref: "User" }],
     likeCount: { type: Number, default: 0 },
   },
