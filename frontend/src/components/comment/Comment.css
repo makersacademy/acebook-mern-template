@@ -1,10 +1,7 @@
 .comment {
-  padding-bottom: 1rem; /* add some padding to separate the border from the comment content */
+  padding-bottom: 1rem;
   padding-left: 1.5rem;
-}
-
-.comment:not(:last-child) {
-  border-bottom: 1px solid #d9d9d9; /* add a faint border at the bottom of each comment except the last one */
+  border-top: 1px solid #d9d9d9;
 }
 
 .comment-header {
