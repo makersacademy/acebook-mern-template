@@ -25,6 +25,18 @@ const PostsController = {
       res.status(201).json({ message: 'OK', token: token });
     });
   },
+
+  Update: async (req, res) => {
+    const data = req.body;
+
+    const post = await Post.findByIdAndUpdate(
+      { _id: data.post_id },
+      { $addToSet: { likes: data.user_id } },
+      { new: true }
+    );
+
+    res.status(200).json(post);
+  },
 };
 
 module.exports = PostsController;
