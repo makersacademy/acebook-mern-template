@@ -7,6 +7,8 @@ const Feed = ({ navigate }) => {
   const [posts, setPosts] = useState([]);
   const [token, setToken] = useState(window.localStorage.getItem("token"));
   const [updated, setUpdated] = useState(null)
+ 
+
   useEffect(() => {
     if(token) {
       fetch("/posts", {

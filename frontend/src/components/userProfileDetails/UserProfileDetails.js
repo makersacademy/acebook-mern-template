@@ -53,7 +53,7 @@ const Profile = () => {
       <h1>My details</h1>
       <p>Name: {user && user.name}</p>
       <p>About me: {user && user.aboutMe}</p>
-      <img src={image} className="profilepics" alt="img" />
+      <img src={image} id="profile-pics" alt="img" />
       <button>Friends List</button>
     </div>
       

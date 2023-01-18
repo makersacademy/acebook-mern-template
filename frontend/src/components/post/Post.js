@@ -12,6 +12,7 @@ const Post = ({post, setUpdated}) => {
   const [body, setBody] = useState("");
   const [showComments, setShowComments] = useState(false);
   const [addCommentForm, setAddCommentForm] = useState(false)
+  const [image, setImageUrl] = useState("");
 
 
   const hasBeenLiked = () => {
@@ -47,6 +48,9 @@ const Post = ({post, setUpdated}) => {
           //setToken(window.localStorage.getItem("token"))
           setUserName(data.user.name);
 
+          setImageUrl(data.user.image);
+        
+
         })
     }
   }, [])
@@ -74,7 +78,8 @@ const Post = ({post, setUpdated}) => {
         })
       }).then(() => {
         setUpdated(true)
-        setBody('')       
+        setBody('') 
+        
       })
       }
   }
@@ -103,9 +108,10 @@ const Post = ({post, setUpdated}) => {
     <div id="post">
       <article data-cy="post" key={ post._id }>
       <p id="userName">
+        <img src={image} id="profile-pics" alt="img" />
         <Link to={`../profile/${post.author}`}>{userName}</Link>
-        </p>
-        <p>{post.message}</p>
+      </p>
+      <p>{post.message}</p>
       <p className='timePosted'>Posted: {formatDistanceToNow(new Date(post.createdAt), { addSuffix: true })}</p>
        <button onClick={handleLikes} id="like-button">
           {hasBeenLiked() ? (
