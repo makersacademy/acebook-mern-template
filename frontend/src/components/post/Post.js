@@ -36,7 +36,7 @@ const Post = ({ post, setUpdated }) => {
       },
     });
 
-    if (response.status === 200) {
+    if (response.status === 201) {
       setUpdated(true);
     }
   };
@@ -65,7 +65,7 @@ const Post = ({ post, setUpdated }) => {
       },
     })
 
-    if (response.status === 201) {
+    if (response.status === 204) {
       setUpdated(true);
     }
   };
@@ -110,11 +110,11 @@ const Post = ({ post, setUpdated }) => {
             )}
           </div>
             { comments.length === 0 ?
-              <button className="comments-button" onClick={handleViewComments}>Add comment</button> : comments.length === 1 ?
-              <button className="comments-button" onClick={handleViewComments}>{ comments.length } comment</button> :
-              <button className="comments-button" onClick={handleViewComments}>{ comments.length } comments</button>
+              <button className="action-button" onClick={handleViewComments}>Add comment</button> : comments.length === 1 ?
+              <button className="action-button" onClick={handleViewComments}>{ comments.length } comment</button> :
+              <button className="action-button" onClick={handleViewComments}>{ comments.length } comments</button>
             }
-            <button className="delete-button" onClick={handleDelete}>Delete</button>
+            <button className="action-button" onClick={handleDelete}>Delete</button>
         </div>
         { comments && (viewComments === true) &&
           <div id="comments-container">
