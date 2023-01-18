@@ -22,7 +22,7 @@ const App = () => {
   
   return (
     <>
-      <Navbar navigate={ navigate }/>
+      < Navbar navigate={ navigate }/>
         <Routes>
           <Route path='/'  element={<Feed navigate={ navigate }/>}/>
           <Route path='/posts'  element={<Feed navigate={ navigate }/>}/>
@@ -30,9 +30,9 @@ const App = () => {
           <Route path='/signup' element={!user ? <SignUpForm navigate={ navigate }/> : <Navigate to="/posts"></Navigate>}/>
           <Route path='/users/:user_id' element={<Profile navigate={ navigate }/>}/>
           {/* The below NotFound route must be last as any routes under it will not be rendered */}
-          <Route path='/*' element={<NotFound />}/>
+          <Route path='/*' element={<NotFound />} />
         </Routes>
-      <Footer/>
+        {(location.pathname === '/' || location.pathname === '/posts' || location.pathname === '/users/:user_id') && <Footer />}
     </>
   );
 }

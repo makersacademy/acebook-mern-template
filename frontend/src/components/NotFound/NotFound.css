@@ -1,21 +1,20 @@
 .not-found-div {
-  display: flex;
-  flex-direction: column;
   background-color: #eff9fd;
   color: black;
   text-align: center;
+  margin-top: 30px;
   padding: 2rem;
 }
 
 .not-found-div h1 {
   font-size: 3rem;
-  margin: 10px 0;
+  margin: 30px 0;
 }
 
 .not-found-div h2 {
   font-size: 1.5rem;
-  margin: 10px 0;
-  margin-bottom: 30px;
+  margin: 30px 0;
+  margin-bottom: 50px;
 }
 
 .not-found-div a {
@@ -31,6 +30,6 @@
 
 .not-found-div a:hover {
   background-color: white;
-  color: #f44336;
+  color: black;
   cursor: pointer;
 }
