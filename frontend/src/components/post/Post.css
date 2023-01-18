@@ -1,0 +1,20 @@
+.post-data {
+  display: flex;
+  flex-direction: row;
+  font-style: italic;
+  font-size: 12px;
+  justify-content: right;
+  width: 300px;
+}
+
+article { 
+  display: flex;
+  justify-content: space-between;
+  font-size: 14px;
+}
+
+.input {
+  display: flex;
+  justify-content: space-between;
+  font-size: 14px;
+}
