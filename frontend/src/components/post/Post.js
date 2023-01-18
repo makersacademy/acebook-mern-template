@@ -87,7 +87,7 @@ const Post = ({ post, setUpdated }) => {
             </div>
           )}
         </div>
-          <div className="likes-and-comments-buttons-container">
+        <div className="likes-and-comments-buttons-container">
           <button className="comments-buttons" onClick={handleViewComments}>Add comment</button>
           <button className="comments-buttons" onClick={handleViewComments}>{ comments.length } comments</button>
         </div>
