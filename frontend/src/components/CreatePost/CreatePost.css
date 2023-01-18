@@ -10,18 +10,14 @@
   transform: translate(-50%, -50%);
   background: white;
   padding: 20px;
-  border-radius: 30px;
-  box-shadow: 0px 0px 10px #ccc;
+  border-radius: 10px;
   display: flex;
   flex-direction: column;
   align-items: center;
   width: 80%;
   max-width: 600px;
   z-index: 1;
-}
-
-.darken-background {
-  background: rgba(0,0,0,0.5);
+  box-shadow: rgba(0, 0, 0, 0.5) 0px 0px 0px 2000px;
 }
 
 textarea {
@@ -39,18 +35,22 @@ textarea {
 .submit-post {
   background-color: #47a0fe;
   color: #fff;
-  padding: 12px 20px;
-  border-radius: 10px;
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
   cursor: pointer;
-  font-size: 14px;
-  font-weight: bold;
-  box-shadow: 1px 1px 5px #333;
+  font-size: 0.8rem;
+  border: none;
+  width: 175px;
 }
 
 .exit-post-icon {
   position: absolute;
   top: 15px;
   right: 10px;
+  background: none;
+  border: none;
+  outline: none;
+  cursor: pointer;
 }
 
 .disable-pointer-events {

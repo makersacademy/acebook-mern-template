@@ -10,7 +10,6 @@ const CreatePost = ({setUpdated}) => {
 
   const handlePopUp = () => {
     setShowPopup(!showPopup);
-    // document.body.classList.toggle("darken-background", !showPopup);
     document.body.classList.toggle("disable-pointer-events", !showPopup);
     setPostInput("");
   };  
@@ -47,7 +46,6 @@ const CreatePost = ({setUpdated}) => {
       setPostInput("");
       setShowPopup(false);
       setUpdated(true);
-      document.body.classList.toggle("darken-background", !showPopup);
       document.body.classList.toggle("disable-pointer-events", !showPopup);
     }
   };
