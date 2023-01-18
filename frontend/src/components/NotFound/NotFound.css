@@ -1,0 +1,36 @@
+.not-found-div {
+  display: flex;
+  flex-direction: column;
+  background-color: #eff9fd;
+  color: black;
+  text-align: center;
+  padding: 2rem;
+}
+
+.not-found-div h1 {
+  font-size: 3rem;
+  margin: 10px 0;
+}
+
+.not-found-div h2 {
+  font-size: 1.5rem;
+  margin: 10px 0;
+  margin-bottom: 30px;
+}
+
+.not-found-div a {
+  background-color: #47a0fe;
+  color: #fff;
+  text-decoration: none;
+  font-weight: 600;
+  border: 2px solid white;
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  transition: all 0.3s ease;
+}
+
+.not-found-div a:hover {
+  background-color: white;
+  color: #f44336;
+  cursor: pointer;
+}
