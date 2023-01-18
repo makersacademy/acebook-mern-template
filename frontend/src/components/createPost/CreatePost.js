@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import './CreatePost.css'
 
 const Create = (props) => {
   const [body, setBody] = useState('');

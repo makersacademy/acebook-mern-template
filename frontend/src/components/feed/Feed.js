@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import Post from '../post/Post';
 import Create from '../createPost/CreatePost';
+import Card from '../Helpers/Card'
+import './Feed.css';
 
 const Feed = ({ navigate }) => {
   const [posts, setPosts] = useState([]);
@@ -27,16 +29,20 @@ const Feed = ({ navigate }) => {
 
   if (token) {
     return (
-      <>
+      
+      <div className='feed'>
         <h2>Posts</h2>
         <Create setPostAdded={setPostAdded} />
+        <Card>
         <div id="feed" role="feed">
           {posts.map((post) => (
-            <Post post={post} key={post._id} />
+            <Post setPostAdded={setPostAdded} post={post} key={post._id} />
           ))}
         </div>
-      </>
-    );
+        </Card>
+      </div>
+      
+    )
   } else {
     navigate('/signin');
   }

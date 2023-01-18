@@ -1,0 +1,17 @@
+.feed {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.feed, h2 {
+  margin: 0px
+}
+
+#feed {
+  display: flex;
+  flex-direction: column;
+  width: 50vw;
+  align-items: center;
+  margin: 0px;
+}
