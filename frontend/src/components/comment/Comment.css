@@ -1,0 +1,31 @@
+.comment {
+  padding-bottom: 1rem;
+  padding-left: 1.5rem;
+  border-top: 1px solid #d9d9d9;
+}
+
+.comment-header {
+  display: flex;
+  align-items: center;
+  margin-top: 0.5rem;
+  margin-bottom: 0.2rem;
+}
+
+.comment-author {
+  font-size: 0.8rem;
+  font-weight: 600;
+  padding-right: 1rem;
+}
+
+.timestamp {
+  font-size: 0.6rem;
+  color: gray;
+  margin-left: 0.5rem;
+}
+
+.comment-message {
+  font-size: 0.9rem;
+  line-height: 1.3;
+  margin-top: 0;
+  margin-bottom: 0.5rem;
+}

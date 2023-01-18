@@ -1,0 +1,32 @@
+.form-container {
+  margin-top: 0px;
+  margin-bottom: 0px;
+  /* border-bottom: 1px solid #d9d9d9; */
+}
+
+.new-comment-form {
+  display: flex;
+  align-items: center;
+}
+
+.comment-textarea {
+  margin-top: 1rem;
+  margin-bottom: -0.8rem;
+  width: 100%; /* make the text area take up the full width of the form container */
+  min-height: 1em; /* set the height of the text area to one line */
+  line-height: 1em; /* match the height of the text area with the line-height */
+  box-sizing: border-box; /* include the padding and border in the overall size of the element */
+  font-size: 0.8rem; /* set the font size */
+  padding: 1rem; /* add some padding to the text area */
+  border-radius: 8px; /* give the text area rounded corners */
+  border: 0.5px solid #d9d9d9; /* add a faint border to the text area */
+}
+
+.press-enter-to-post {
+  margin-left: 32px;
+  margin-top: 4px;
+  border: 0;
+  padding-bottom: 8px;
+  font-size: x-small;
+  color: rgb(101, 101, 101);
+}

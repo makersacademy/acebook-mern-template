@@ -7,11 +7,12 @@ const PostSchema = new mongoose.Schema(
       required: true,
     },
     author: {
-      // Expects to recieve a valid user ID from the User Schema
-      type: mongoose.Schema.Types.ObjectId,
-      ref: "User",
-      required: true,
-    },
+      // Expects to receive a valid user ID from the User Schema 
+      type: mongoose.Schema.Types.ObjectId, 
+      ref: 'User',
+      required: true
+     },
+    comments: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Comment' }],
     likes: [{ type: mongoose.Schema.Types.ObjectId, ref: "User" }],
     likeCount: { type: Number, default: 0 },
   },

@@ -13,13 +13,11 @@ const UsersController = {
       res.status(400).json({ message: error.message });
     }
   },
-
   Index: async (req, res) => {
-    // // Find all of the users from the user model
-    // const userId = req.params.id;
-    // const users = await User.findOne({_id: userId})
-    // // Send a 200 response containing all users to the client
-    // res.status(200).json(users)
+    // Find all of the users from the user model 
+    const users = await User.find({})
+    // Send a 200 response containing all users to the client 
+    res.status(200).json(users)
   },
   GetUserInfo: async (req, res) => {
     // Find all of the users from the user model

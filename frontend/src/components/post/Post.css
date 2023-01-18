@@ -1,13 +1,17 @@
 .post-container {
   display: flex;
   justify-content: center;
+  background-color: #eff9fd;
 }
 
 .post-card {
   width: 60%; /* You can adjust the width to fit your desired layout */
   padding: 2rem;
+  margin-top: 16px;
+  margin-bottom: 16px;
   box-shadow: 0 4px 6px rgba(0,0,0,0.1); /* give the card a subtle shadow */
   border-radius: 8px; /* rounded corner */
+  background-color: white;
 }
 
 .card-header {
@@ -24,21 +28,57 @@
 
 .card-meta {
   margin-left: 1rem;
+  margin-bottom: 0;
 }
 
 .username {
   font-size: 1.2rem;
   font-weight: 600;
+  background-color: white;
 }
 
 .timestamp {
   font-size: 0.8rem;
   color: gray;
+  margin-left: 0rem;
 }
 
 .card-message {
   font-size: 1.1rem;
   line-height: 1.5;
+  margin-top: -0.2rem;
+  margin-bottom: 2rem;
+  margin-left: 1rem;
+  margin-right: 1rem;
+}
+
+.likes-and-comments-buttons-container {
+  margin-top: 1rem; /* add some space between the post and the comments button */
+  display: flex;
+  justify-content: space-between;
+}
+
+.comments-button {
+  background-color: #47a0fe; /* give the button a blue background color */
+  color: #fff; /* set the text color to white */
+  border: none; /* remove the default button border */
+  padding: 0.5rem 1rem; /* add some padding to the button */
+  margin-left: 1rem;
+  margin-right: 1rem;
+  margin-bottom: 0.5rem;
+  border-radius: 4px; /* give the button rounded corners */
+  font-size: 0.8rem; /* set the font size */
+  cursor: pointer; /* change the cursor to a pointer when hovering over the button */
+  width: 175px;
+}
+
+#comments-container {
+  margin-top: -50px; /* add some space between the button and the comments */
+  background-color: #eff9fd; /* give the comments container a light gray background color */
+  padding-left: 1rem; /* add some padding to the container */
+  padding-right: 1rem; /* add some padding to the container */
+  padding-bottom: 8px;
+  border-radius: 8px; /* give the container rounded corners */
 }
 
 .like-container {
@@ -54,4 +94,25 @@
   bottom: 110%;
   background-color: rgba(0, 0, 0, 0.7); 
   color: white;
+}
+
+.like-button {
+  display: flex;
+  align-items: center;
+  background: none;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  padding-left: 18px;
+}
+
+.like-count {
+  display: flex;
+  align-items: center;
+}
+
+@media (max-width: 600px) {
+  .comments-button {
+    font-size: 11px;
+  }
 }

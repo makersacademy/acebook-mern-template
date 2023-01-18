@@ -23,6 +23,7 @@ const App = () => {
     <>
       < Navbar navigate={ navigate }/>
         <Routes>
+          <Route path='/'  element={<Feed navigate={ navigate }/>}/>
           <Route path='/posts'  element={<Feed navigate={ navigate }/>}/>
           <Route path='/login'  element={!user ? <LoginForm  navigate={ navigate }/> : <Navigate to="/posts"></Navigate>}/>
           <Route path='/signup' element={!user ? <SignUpForm navigate={ navigate }/> : <Navigate to="/posts"></Navigate>}/>

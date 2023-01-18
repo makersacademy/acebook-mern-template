@@ -27,6 +27,8 @@ const Feed = ({ navigate, filter }) => {
           setPosts(data.posts);
           setUpdated(false);
         });
+    } else {
+    navigate("/login");
     }
   }, [updated]);
 
@@ -34,7 +36,6 @@ const Feed = ({ navigate, filter }) => {
     return (
       <>
         <CreatePost setUpdated={setUpdated} />
-        <h2>Posts</h2>
         {/* <Dropdown options={options} onChange={setUpdated} value={defaultOption} placeholder="Choose" /> */}
         <div id="feed" role="feed">
           <div id="feed" role="feed">
@@ -51,9 +52,7 @@ const Feed = ({ navigate, filter }) => {
         </div>
       </>
     );
-  } else {
-    navigate("/signin");
-  }
+  };
 };
 
 export default Feed;
