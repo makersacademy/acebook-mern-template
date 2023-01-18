@@ -58,7 +58,7 @@ const Post = ({ post, setUpdated }) => {
       <div className="post-card" data-cy="post" key={post._id}>
         <div className="card-header">
           <div className="card-meta">
-            <Link to={`/users/${post.author._id}`} style={{margin: "0"}}>
+            <Link to={`/users/${post.author._id}`} className="username-link">
               <h2 className="username">{post.author.name}</h2>
             </Link>
             <p className="timestamp">
