@@ -130,4 +130,9 @@
   float: left;
 }
 /* margin: "0", padding: "0", float: "left" */
+.post-image {
+  max-width: 100%;
+  height: auto;
+  margin: 10px 0;
+}
 
