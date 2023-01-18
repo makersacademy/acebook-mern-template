@@ -8,26 +8,27 @@ const nav = ({ navigate }) => {
     window.localStorage.removeItem('token');
     window.localStorage.removeItem('user_id');
     navigate('/login');
-  }
-}
-
+  };
+};
 
 const Navbar = () => {
   return (
     <header>
-      <div className='container'>
-        <div className='links'>
-          <Link to='/posts'>
+      <div className="container">
+        <div className="links">
+          <Link to="/posts">
             <button id="homebutton">Acebook</button>
           </Link>
-          <Link to="/post">
+          <Link to="/posts">
             <button id="Feed">View Feed</button>
           </Link>
-          <Link to={ `/users/${user_id}` }>
+          <Link to={`/users/${user_id}`}>
             <button id="profile-page">My Profile</button>
           </Link>
           <Link to="/login">
-            <button className='logout' onClick={ nav }>Logout</button>
+            <button className="logout" onClick={nav}>
+              Logout
+            </button>
           </Link>
           {/* <a href='/posts'>Acebook</a>
           <a href='/posts'>View Feed</a>
@@ -36,8 +37,7 @@ const Navbar = () => {
         </div>
       </div>
     </header>
-
-  )
-}
+  );
+};
 
 export default Navbar;
