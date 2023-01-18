@@ -17,19 +17,19 @@ const PostsController = {
       if (err) {
         throw err;
       }
-
       const token = await TokenGenerator.jsonwebtoken(req.user_id)
       res.status(201).json({ message: 'OK', token: token });
     });
   },
   Update: async (req, res) => {
-    console.log(req.body)
     post_id = req.params.id
-    console.log(post_id)
     value = req.body.value
     field = req.body.field
     if (field === 'likes') {
-      update = await Post.findOneAndUpdate({_id: post_id},{$push: {likes: value}} )
+      const post = await Post.findOne({_id: post_id});
+      const likes = post.likes.toObject();
+      post.likes.includes(value) ? beenLiked = true : beenLiked = false
+      beenLiked ? update = await Post.findOneAndUpdate({_id: post_id},{$pull: {likes: value}} ) : update = await Post.findOneAndUpdate({_id: post_id},{$push: {likes: value}} )
     } else if (field === 'comments') {
       update = await Post.findOneAndUpdate({_id: post_id},{$push: {comments: value}} )
     } else {
@@ -37,7 +37,13 @@ const PostsController = {
     }
     const token = await TokenGenerator.jsonwebtoken(req.user_id)
     res.status(200).json({ message: 'OK', token: token });
-  }
+  },
+  FindUsersPosts: async (req, res) => {
+    const id = req.params.id;
+    const posts = await Post.find({ author: id });
+    const token = await TokenGenerator.jsonwebtoken(req.user_id);
+    res.status(200).json({ message: "OK", token: token, posts: posts });
+  },
 };
 
 module.exports = PostsController;

@@ -6,7 +6,6 @@ const createToken = (_id) => {
 }
 const signupUser = async (req, res) => {
   const {name, email, password, aboutMe} = req.body
-  console.log(email)
   try {
     const user = await User.signup(name, email, password, aboutMe)
     res.status(201).json({email})
@@ -19,8 +18,6 @@ const loginUser = async (req, res) => {
   const {email, password} = req.body
   try {
     const user = await User.login(email, password)
-    //create token here and add it to response
-    console.log(user)
     const token = await TokenGenerator.jsonwebtoken(user.id)
     res.status(200).json({ token: token, user: user, message: "OK" })
   } catch (error) {

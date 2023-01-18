@@ -9,7 +9,7 @@ const CreatePost = ({setUpdated}) => {
   const handleSubmit = (event) => {
     
     event.preventDefault();
-    if(token) {
+    if(token && body) {
       fetch( '/posts', {
         method: 'post',
         headers: {
