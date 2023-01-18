@@ -40,7 +40,7 @@ const PostsController = {
 
     const post = await Post.findByIdAndDelete({_id: id})
 
-    res.status(200).json({message: "Deleted post"})
+    res.status(200).json({message: "Post deleted"})
   },
   GetPostById: (req, res ) => {
     // get id from req params
