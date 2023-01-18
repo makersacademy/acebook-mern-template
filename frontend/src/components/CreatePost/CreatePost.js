@@ -1,22 +1,34 @@
 import "./CreatePost.css";
 import { useState } from "react";
 import { FaWindowClose } from "react-icons/fa";
+import UploadWidget from './UploadWidget'
 
 const CreatePost = ({setUpdated}) => {
   const [postInput, setPostInput] = useState("");
   const [showPopup, setShowPopup] = useState(false);
-
+  const [showWidget, setShowWidget] = useState(false)
+  const [imageInput, setImageInput] = useState("")
   const token = window.localStorage.getItem("token");
 
   const handlePopUp = () => {
     setShowPopup(!showPopup);
-    document.body.classList.toggle("disable-pointer-events", !showPopup);
+    // document.body.classList.toggle("disable-pointer-events", !showPopup);
     setPostInput("");
   };  
 
   const handlePostInput = (event) => {
     setPostInput(event.target.value);
   };
+
+  const handleImageUpload = (event) => {
+    // Event listener to get the hosted image info
+      console.log(`image input should be ${event.info.url}`);
+      const imageUrl = event.info.url;
+      console.log(imageUrl)
+      setImageInput(imageUrl);
+      setShowWidget(true)
+      console.log(`image input is  ${imageInput}`);
+    };
 
   const handleKeyDown = (event) => {
     if (event.key === "Enter") {
@@ -33,17 +45,23 @@ const CreatePost = ({setUpdated}) => {
       return;
     }
 
+    if (showWidget === false) {
+      return
+    }
+
     let response = await fetch("/posts", {
       method: "post",
       headers: {
         "Content-Type": "application/json",
         Authorization: `Bearer ${token}`,
       },
-      body: JSON.stringify({ message: postInput, author: window.localStorage.getItem("user_id") }),
+      body: JSON.stringify({ message: postInput, author: window.localStorage.getItem("user_id"), image: imageInput }),
     });
 
     if (response.status === 201) {
       setPostInput("");
+      setImageInput("");
+      setShowWidget(false);
       setShowPopup(false);
       setUpdated(true);
       document.body.classList.toggle("disable-pointer-events", !showPopup);
@@ -75,6 +93,7 @@ const CreatePost = ({setUpdated}) => {
               autoComplete="off"
               autoFocus
             />
+            < UploadWidget handleImageUpload={handleImageUpload}/>
             <button className="submit-post" onClick={handleSubmit}>
               Post
             </button>
