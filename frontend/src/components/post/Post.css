@@ -1,0 +1,9 @@
+#comment-button{
+    background-color: rgba(11, 115, 227, 0.702);
+    color: white;
+    padding: 2px;
+    border-radius: 5px;
+    border: none;
+    cursor: pointer;
+    margin-inline-end: auto;
+}
