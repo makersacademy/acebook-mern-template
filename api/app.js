@@ -26,7 +26,7 @@ const tokenChecker = (req, res, next) => {
   if(authHeader) {
     token = authHeader.slice(7)
   }
-
+  console.log(req);
   JWT.verify(token, process.env.JWT_SECRET, (err, payload) => {
     if(err) {
       console.log(err)
