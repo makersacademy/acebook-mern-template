@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import '../photos/profile.png'
 
 const SignUpForm = ({ navigate }) => {
   

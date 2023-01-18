@@ -4,7 +4,6 @@ import "./UserProfileDetails.css";
 import CreatePost from "../createPost/CreatePost";
 import Post from "../post/Post";
 import { useParams } from 'react-router-dom';
-import '../photos/profile.png'
 
 
 
