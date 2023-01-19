@@ -4,22 +4,18 @@ const PostSchema = new mongoose.Schema(
   {
     user_id: {
       type: mongoose.Types.ObjectId,
-      ref: 'User',
-      required: true,
+      ref: 'User'
     },
     message: {
-      type: String,
-      required: true,
+      type: String
     },
     likes: {
       type: Array,
-      default: [],
-      required: false,
+      default: []
     },
     comments: {
       type: Array,
-      default: [],
-      required: false,
+      default: []
     },
   },
   { timestamps: true }
