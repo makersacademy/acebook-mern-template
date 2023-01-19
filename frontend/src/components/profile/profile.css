@@ -1,23 +1,33 @@
-body {
+
+
+.profile-header {
+  background-color: white;
+  width: 100vw;
   display: flex;
   justify-content: center;
+  height: 70vh;
 }
 
 .coverPhoto {
-  height: 200px;
+  height: 300px;
   background-image: url('./cover-photo.jpg');
   background-size: 100% auto;
   background-repeat: no-repeat;
   background-position: bottom;
-
+  width: 80vw;
+  border-radius: 0px 0px 10px 10px;  
 }
 
 .profile {
   display: flex;
+  width: 60%;
 
-  justify-content: space-between;
-  width: 1000px;
-  border: 2px solid red;
+  margin: 0px 300px;
+
+}
+
+.profile .card {
+  margin: 10px 0px;
 }
 
 .right {
@@ -26,7 +36,7 @@ body {
 
 .left {
   width: 300px;
-  border: 2px solid blue;
+  
 }
 
 .photos .card {

@@ -5,6 +5,7 @@ import './profile.css';
 import Feed from '../feed/Feed'
 import { useParams } from 'react-router-dom';
 import coverPhoto from './cover-photo.jpg';
+import '../../index.css';
 
 const Profile = () => {
 
@@ -36,8 +37,14 @@ const Profile = () => {
 
 return(
   <div>
-    <div className='coverPhoto'>
+    <div className='profile-header'>
+      <div className='coverPhoto'>
+      </div>
+      <div>
+
+      </div>
     </div>
+
     <div className='profile'>
       <div className='left'>
         <div className='user-info'>
@@ -61,14 +68,15 @@ return(
               </div>
               )}
             </div>
-          </Card>
+            </Card>
         </div>
 
         <div className='intro'>
-          <Card>
+          <Card> 
             <h3>Intro</h3>
             <p>{user.bio}</p>
-          </Card>
+          </Card>   
+   
         </div>
 
         <div className='photos'>
