@@ -71,7 +71,8 @@ const CreatePost = ({setUpdated}) => {
   return (
     <div className="container">
       <form className="my-form" onSubmit={handleSubmit}>
-        <input
+        <textarea
+          className="feed-textarea"
           placeholder={showPopup ? "" : "What's on your mind?"}
           id="new-post-input"
           type="text"
@@ -86,6 +87,7 @@ const CreatePost = ({setUpdated}) => {
               <FaWindowClose size={15} color="dark-gray" />
             </button>
             <textarea
+              className="popup-textarea"
               placeholder="What's on your mind?"
               value={postInput}
               onChange={handlePostInput}
