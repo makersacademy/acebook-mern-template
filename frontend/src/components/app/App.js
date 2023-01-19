@@ -6,6 +6,7 @@ import Feed from '../feed/Feed'
 import Navbar from "../navbar/Navbar";
 import Footer from "../footer/footer";
 import Profile from "../profile/profile";
+import FriendsPage from '../FriendsPage/FriendsPage';
 import {
   useNavigate,
   Routes,
@@ -28,6 +29,8 @@ const App = () => {
           <Route path='/login'  element={!user ? <LoginForm  navigate={ navigate }/> : <Navigate to="/posts"></Navigate>}/>
           <Route path='/signup' element={!user ? <SignUpForm navigate={ navigate }/> : <Navigate to="/posts"></Navigate>}/>
           <Route path='/users/:user_id' element={<Profile navigate={ navigate }/>}/>
+          <Route path='/friends/:user_id' element={<FriendsPage navigate={ navigate }/>}/>
+          {/* <Route path='/friends'  element={<FriendsPage navigate={ navigate }/>}/> */}
         </Routes>
         {location.pathname !== '/login' && location.pathname !== '/signup' && <Footer />}
     </>
