@@ -6,6 +6,7 @@
   border-radius: 10px;
   overflow: hidden;
   box-shadow: 0px 0px 10px #ccc;
+  background-color: white;
 }
 
 /* card header */
@@ -67,6 +68,8 @@
 /* post message */
 .card-message {
   padding: 10px;
+  padding-top: 20px;
+  padding-left: 20px;
   font-size: 1.0em;
   background: #ffffff;
   margin: 0;

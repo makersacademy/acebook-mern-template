@@ -3,9 +3,10 @@ const User = require("../models/user");
 const UsersController = {
   Create: async (req, res) => {
     const { name, email, password } = req.body;
+    const profilePicture = "https://preview.redd.it/v0caqchbtn741.jpg?auto=webp&s=c5d05662a039c031f50032e22a7c77dfcf1bfddc";
 
     try {
-      const user = await User.signup(name, email, password);
+      const user = await User.signup(name, email, password, profilePicture);
 
       res.status(201).json({ message: "OK" });
     } catch (error) {
@@ -19,6 +20,7 @@ const UsersController = {
     // Send a 200 response containing all users to the client
     res.status(200).json(users);
   },
+
   GetUserInfo: async (req, res) => {
     // Find all of the users from the user model
     const userId = req.params.id;
@@ -27,43 +29,71 @@ const UsersController = {
     // Send a 200 response containing all users to the client
     res.status(200).json({ user });
   },
+
   UpdateUserInfo: async (req, res) => {
-    try {
-      // Find the user by their ID
-      const user = await User.findById(req.params.id);
+      const { id } = req.params
+    
+      const user = await User.findOneAndUpdate({_id: id}, {
+        ...req.body
+      })
 
-      // Update the user's name with the new name provided in the request body
-      const profilePicture = req.body.profilePicture;
-      const coverPicture = req.body.coverPicture;
-      const name = req.body.name;
-
-      if (profilePicture !== null) {
-        user.profilePicture = profilePicture
+      if (!user) {
+        return res.status(400).json({error: "no such user in DB"})
       }
 
-      if (coverPicture !== null) {
-        user.coverPicture = coverPicture
-      }
-
-      if (name !== null) {
-        user.name = name
-      }
-
-
-
-      // Save the updated user to the database
-      await user.save();
-
-      // Send a success response with the updated user information
-      res.status(200).json({
-        message: "User info updated successfully",
-        data: user,
-      });
-    } catch (error) {
-      // Send a failure response with the error message
-      res.status(400).json({ message: error.message });
-    }
+      res.status(200).json(user)
+    
   },
+
+
+  // UpdateUserInfo: async (req, res) => {
+
+  //   const { id } = req.params
+    
+  //     const user = await User.findOneAndUpdate({_id: id}, {
+  //       ...req.body
+  //     })
+
+  //     if (!user) {
+  //       return res.status(400).json({error: "no such user in DB"})
+  //     }
+
+  //     res.status(200).json(workout)
+  //   },
+
+  //     // Update the user's name with the new name provided in the request body
+  //     const profilePicture = req.body.profilePicture;
+
+  //     console.log(req.body)
+  //     // const coverPicture = req.body.coverPicture;
+  //     // const name = req.body.name;
+
+  //     user.profilePicture = profilePicture 
+      
+
+  //     // if (coverPicture !== null) {
+  //     //   user.coverPicture = coverPicture
+  //     // }
+
+  //     // if (name !== null) {
+  //     //   user.name = name
+  //     // }
+
+
+
+  //     // Save the updated user to the database
+  //     await user.save();
+
+  //     // Send a success response with the updated user information
+  //     res.status(200).json({
+  //       message: `User info updated successfully - profile pic is: ${profilePicture}`,
+  //       data: user,
+  //     });
+  //   } catch (error) {
+  //     // Send a failure response with the error message
+  //     res.status(400).json({ message: error.message });
+  //   }
+  // },
   SendFriendRequest: async (req, res) => {
     // gets user_id of sender and user_id of receiver
     // will put the user_id of the sender in the friendRequestRecieved of the reciever

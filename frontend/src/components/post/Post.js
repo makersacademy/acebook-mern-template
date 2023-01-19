@@ -58,9 +58,9 @@ const Post = ({ post, setUpdated }) => {
       <div className="post-card" data-cy="post" key={post._id}>
         <div className="card-header">
           <div className="card-meta">
-          <div className="profile-picture-div">
-                <img className="profile-picture" src="https://wallpapersmug.com/download/3840x2400/43b4da/dwayne-johnson-face-jumanji-welcome-to-the-jungle-8k.jpg" />
-              </div>
+            <div className="profile-picture-div">
+              <img className="profile-picture" src={post.author.profilePicture} />
+            </div>
             <div className="name-timestamp">
               <Link to={`/users/${post.author._id}`} className="username-link">
                   <h2 className="username">{post.author.name}</h2>
