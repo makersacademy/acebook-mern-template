@@ -8,9 +8,9 @@ const UserSchema = new mongoose.Schema({
   password: { type: String, required: true },
   // Expects to receive a valid post ID from Post Schema
   posts: [{ type: mongoose.Schema.Types.ObjectId, ref: "Post" }],
-  friends: [{ type: mongoose.Schema.Types.ObjectId, ref: "User" }],
-  friendRequestsReceived: [{ type: mongoose.Schema.Types.ObjectId, ref: "User" }],
-  friendRequestsSent: [{ type: mongoose.Schema.Types.ObjectId, ref: "User"}]
+  friends: [{ type: mongoose.Schema.Types.ObjectId, ref: "User", unique: true }],
+  friendRequestsReceived: [{ type: mongoose.Schema.Types.ObjectId, ref: "User", unique: true }],
+  friendRequestsSent: [{ type: mongoose.Schema.Types.ObjectId, ref: "User", unique: true}]
 });
 
 UserSchema.statics.signup = async function (name, email, password) {
