@@ -33,13 +33,13 @@ const Feed = ({ navigate }) => {
       <div className='feed'>
         <h2>Posts</h2>
         <Create setPostAdded={setPostAdded} />
-        <Card>
+
         <div id="feed" role="feed">
           {posts.map((post) => (
             <Post post={post} key={post._id} setPostAdded={setPostAdded} />
           ))}
         </div>
-        </Card>
+     
       </div>
       
     )

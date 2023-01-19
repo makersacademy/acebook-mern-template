@@ -1,11 +1,20 @@
+@import url('https://fonts.googleapis.com/css2?family=Mulish:ital,wght@0,300;0,400;0,700;1,300&display=swap');
+
+
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+  font-family: 'Mulish';
+  /*-apple-system, BlinkMacSystemFont, 'Mulish', 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
+    sans-serif; */
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   background-color: #f1f2f5;
+
+}
+
+h1 {
+  font-weight: light;
 }
 
 code {
@@ -22,4 +31,9 @@ input:hover {
 input {
     border: thin solid lightgray;
     padding: 5px 15px;
+}
+
+button {
+  background-color: transparent;
+  border: none;
 }

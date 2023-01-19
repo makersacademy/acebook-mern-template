@@ -1,20 +1,67 @@
-.post-data {
+.post {
+  width: 500px;
+
+}
+
+.header {
   display: flex;
   flex-direction: row;
   font-style: italic;
   font-size: 12px;
-  justify-content: right;
-  width: 300px;
+  justify-content: space-between;
+  align-items: center;
+}
+
+#username {
+  display: flex;
+}
+
+
+.edit-buttons button {
+  color: gray;
 }
 
 article { 
-  display: flex;
+  position: relative;
+  width: 400px;
   justify-content: space-between;
-  font-size: 14px;
+  font-size: 16px;
+  margin-bottom: 20px;
+  box-sizing: border-box;
+  flex-wrap: wrap;
+  overflow: auto;
+  height: auto;
 }
+
+
+
+
+
+
 
 .input {
   display: flex;
   justify-content: space-between;
   font-size: 14px;
+}
+
+span {
+  font-size: 14px;
+}
+
+hr {
+  border-top: 1px solid lightgray;
+  margin-top: 10px;
+
+}
+
+.bottom-buttons {
+  display: flex;
+  justify-content: center;
+}
+
+.bottom-buttons button {
+  margin: 0px 10px;
+  background-color: none;
+  color: gray;
 }
