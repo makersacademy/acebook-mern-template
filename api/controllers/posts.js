@@ -35,20 +35,18 @@ const PostsController = {
   Delete: async (req, res) => {
     const id = req.params.id
     const post = Post.findById({_id: id})
-    
-    await Post.findByIdAndDelete({_id: id})
   
     if(!mongoose.Types.ObjectId.isValid(id)){
       return res.status(404).json({error: "Invalid post id"})
     }
-    
-    // const comments = post.populate({
-    //   path : 'comments',
-    //   match : { post : { id }}
-    // })
-    //   .exec(function (err, post)
-  
-    res.status(204).json({message: "Post deleted"})
+
+    const deletedCommentInfo = await Comment.deleteMany({ post_id: id })
+    if (deletedCommentInfo.ok === 1) {
+      await Post.findByIdAndDelete({_id: id})
+      res.status(204).json({message: "Post deleted"})  
+    } else { 
+      return res.status(500).json({message: "Could not delete associated comments"})
+    }
   },
 
   GetPostById: (req, res ) => {
