@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import './CreatePost.css'
-
+import Card from '../Helpers/Card'
 const Create = (props) => {
   const [body, setBody] = useState('');
   const token = window.localStorage.getItem('token');
@@ -23,16 +23,20 @@ const Create = (props) => {
 
   return (
     <div className="create">
-      <h2>Add a New Post</h2>
-      <form onSubmit={handleSubmit}>
-        <input
-          type="text"
-          value={body}
-          onChange={(e) => setBody(e.target.value)}
-        ></input>
-        <button type="submit">Post me</button>
-      </form>
-    </div>
+    <Card>
+    <form onSubmit={handleSubmit}>
+      <div className='create-form'>
+      <h3>Name</h3>
+      <input
+        type="text"
+        value={body}
+        onChange={(e) => setBody(e.target.value)}
+      /> 
+      <button type="submit">Post</button>
+      </div>
+    </form>
+    </Card>
+  </div>
   );
 };
 
