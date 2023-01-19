@@ -1,7 +1,8 @@
 const Post = require("../models/post");
 const Comment = require("../models/comment")
 const TokenGenerator = require("../models/token_generator");
-const mongoose = require('mongoose')
+const mongoose = require('mongoose');
+const { db } = require("../models/post");
 
 const PostsController = {
   Index: (req, res) => {
@@ -33,15 +34,23 @@ const PostsController = {
 
   Delete: async (req, res) => {
     const id = req.params.id
-
+    const post = Post.findById({_id: id})
+    
+    await Post.findByIdAndDelete({_id: id})
+  
     if(!mongoose.Types.ObjectId.isValid(id)){
       return res.status(404).json({error: "Invalid post id"})
     }
-
-    const post = await Post.findByIdAndDelete({_id: id})
-
+    
+    // const comments = post.populate({
+    //   path : 'comments',
+    //   match : { post : { id }}
+    // })
+    //   .exec(function (err, post)
+  
     res.status(204).json({message: "Post deleted"})
   },
+
   GetPostById: (req, res ) => {
     // get id from req params
     const { id } = req.params

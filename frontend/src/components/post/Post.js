@@ -13,8 +13,9 @@ const Post = ({ post, setUpdated }) => {
   const token = window.localStorage.getItem("token");
   const isLiked = post.likes.includes(window.localStorage.getItem("user_id"));
   const comments = post.comments;
-  const createdBy = post.author;
-  
+  const createdBy = post.author._id;
+  const currentUser = window.localStorage.getItem("user_id");
+
   const handleViewComments = () => {
     if (viewComments === false) {
       setViewComments(true);
@@ -56,7 +57,7 @@ const Post = ({ post, setUpdated }) => {
 
   const handleDelete = async (e) => {
     e.preventDefault();
-
+  
     let response = await fetch(`/posts/${post._id}`, {
       method: 'DELETE',
       headers: {
@@ -114,7 +115,9 @@ const Post = ({ post, setUpdated }) => {
               <button className="action-button" onClick={handleViewComments}>{ comments.length } comment</button> :
               <button className="action-button" onClick={handleViewComments}>{ comments.length } comments</button>
             }
-            <button className="action-button" onClick={handleDelete}>Delete</button>
+            { createdBy === currentUser ?
+              <button className="action-button" onClick={handleDelete}>Delete</button> : null
+            }
         </div>
         { comments && (viewComments === true) &&
           <div id="comments-container">
