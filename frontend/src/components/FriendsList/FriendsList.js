@@ -2,17 +2,18 @@ import Friend from "../Friend/Friend";
 import "../FriendsPage/FriendsPage.css";
 
 const FriendsList = ({ friends, setFriendsUpdated }) => {
+  console.log(friends)
   return (
     <div className="friends-list-container">
-      { friends && (
-        <>
-          <h2 className="heading">Friends</h2>
-          {/* Map through user's friends using Friend component, pass each friend info as a prop */}
-          {friends.map((friend) =>
+      <h2 className="heading">Friends</h2>
+      { friends.length !== 0 ?
+          friends.map((friend) =>
             <Friend friend={friend} key={friend._id} setFriendsUpdated={setFriendsUpdated} />
-          )}
-        </>
-      )}
+          ) :
+          <div className="no-friends-message-container">
+            <p className="no-friends-message">Time to add some friends!</p>
+          </div>
+      }
     </div>
   );
 };
