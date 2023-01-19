@@ -2,13 +2,37 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router";
 import "./profile.css";
 import Feed from "../feed/Feed";
+import UploadWidget from "../CreatePost/UploadWidget"
 
 const Profile = () => {
   const [profile, setProfile] = useState(null);
   const [selectedTab, setSelectedTab] = useState("posts");
   const [isUpdated, setIsUpdated] = useState(false);
   const token = window.localStorage.getItem("token");
+  const [showWidget, setShowWidget] = useState(false)
+  const [imageInput, setImageInput] = useState("")
   const { user_id } = useParams();
+
+  const handleProfileImageUpload = (event) => {
+    // Event listener to get the hosted image info
+      console.log(`image input should be ${event.info.url}`);
+      const imageUrl = event.info.url;
+      console.log(imageUrl)
+      setImageInput(imageUrl);
+      setShowWidget(true)
+      console.log(`image input is  ${imageInput}`);
+    };
+
+    // const handleSubmit = async (event) => {
+    //   event.preventDefault();
+    //   let response = await fetch("/pos", {
+    //     method: "post",
+    //     headers: {
+    //       "Content-Type": "application/json",
+    //       Authorization: `Bearer ${token}`,
+    //     },
+    //     body: JSON.stringify({ message: postInput, author: window.localStorage.getItem("user_id"), image: imageInput }),
+    //   });
 
   useEffect(() => {
     const fetchProfile = async () => {
@@ -138,9 +162,9 @@ const Profile = () => {
                 backgroundImage: `url(${"https://images.unsplash.com/photo-1608501078713-8e445a709b39?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8d2FsbHBhcGVyJTIwNGt8ZW58MHx8MHx8&w=1000&q=80"})`,
               }}
             >
-              <div className="profile-picture-container">
+              <div className="profile-picture-container-page">
                 <img
-                  className="profile-picture"
+                  className="profile-picture-page"
                   src="https://wallpapersmug.com/download/3840x2400/43b4da/dwayne-johnson-face-jumanji-welcome-to-the-jungle-8k.jpg"
                   alt="profile"
                 />
@@ -219,6 +243,10 @@ const Profile = () => {
                 <div>Bio: Stuff here</div>
                 <div>Birthday: 11/11/11</div>
                 <div>Other stuff idk</div>
+                <p>Profile Picture:</p>
+                < UploadWidget handleImageUpload={handleProfileImageUpload}/>
+                <p>Cover Photo:</p>
+                < UploadWidget handleImageUpload={handleProfileImageUpload}/>
               </div>
             ) : (
               <Feed filter={user_id} />

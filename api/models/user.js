@@ -10,7 +10,9 @@ const UserSchema = new mongoose.Schema({
   posts: [{ type: mongoose.Schema.Types.ObjectId, ref: "Post" }],
   friends: [{ type: mongoose.Schema.Types.ObjectId, ref: "User" } ],
   friendRequestsReceived: [{ type: mongoose.Schema.Types.ObjectId, ref: "User" }],
-  friendRequestsSent: [{ type: mongoose.Schema.Types.ObjectId, ref: "User"}]
+  friendRequestsSent: [{ type: mongoose.Schema.Types.ObjectId, ref: "User"}],
+  profilePicture: {type: String},
+  coverPicture: {type: String}
 });
 
 UserSchema.statics.signup = async function (name, email, password) {

@@ -45,7 +45,7 @@ const CreatePost = ({setUpdated}) => {
       return;
     }
 
-    if (showWidget === false) {
+    if (showWidget === false && imageInput !== "") {
       return
     }
 

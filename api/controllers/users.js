@@ -33,14 +33,30 @@ const UsersController = {
       const user = await User.findById(req.params.id);
 
       // Update the user's name with the new name provided in the request body
-      user.name = req.body.name;
+      const profilePicture = req.body.profilePicture;
+      const coverPicture = req.body.coverPicture;
+      const name = req.body.name;
+
+      if (profilePicture !== null) {
+        user.profilePicture = profilePicture
+      }
+
+      if (coverPicture !== null) {
+        user.coverPicture = coverPicture
+      }
+
+      if (name !== null) {
+        user.name = name
+      }
+
+
 
       // Save the updated user to the database
       await user.save();
 
       // Send a success response with the updated user information
       res.status(200).json({
-        message: "User's name updated successfully",
+        message: "User info updated successfully",
         data: user,
       });
     } catch (error) {
