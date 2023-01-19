@@ -6,6 +6,7 @@ import Feed from "../feed/Feed";
 const Profile = () => {
   const [profile, setProfile] = useState(null);
   const [selectedTab, setSelectedTab] = useState("posts");
+  const [isUpdated, setIsUpdated] = useState(false);
   const token = window.localStorage.getItem("token");
   const { user_id } = useParams();
 
@@ -20,10 +21,111 @@ const Profile = () => {
       const data = await response.json();
       if (response.status === 200) {
         setProfile(data);
+        setIsUpdated(false);
       }
     };
     fetchProfile();
-  }, []);
+  }, [isUpdated]);
+
+  const handleSendFriendRequest = async (event) => {
+    event.preventDefault();
+
+    const response = await fetch(`/friends/`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+      body: JSON.stringify({
+        senderId: window.localStorage.getItem("user_id"),
+        receiverId: user_id,
+      }),
+    });
+
+    if (response.status === 200) {
+      setIsUpdated(true);
+    }
+  };
+
+  const handleAcceptFriendRequest = async (event) => {
+    event.preventDefault();
+
+    const response = await fetch(`/friends/accept/`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+      body: JSON.stringify({
+        senderId: user_id,
+        receiverId: window.localStorage.getItem("user_id"),
+      }),
+    });
+
+    if (response.status === 200) {
+      setIsUpdated(true);
+    }
+  };
+
+  const handleRejectFriendRequest = async (event) => {
+    event.preventDefault();
+
+    const response = await fetch(`/friends/reject/`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+      body: JSON.stringify({
+        senderId: user_id,
+        receiverId: window.localStorage.getItem("user_id"),
+      }),
+    });
+
+    if (response.status === 200) {
+      setIsUpdated(true);
+    }
+  };
+
+  const handleCancelFriendRequest = async (event) => {
+    event.preventDefault();
+
+    const response = await fetch(`/friends/cancel/`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+      body: JSON.stringify({
+        senderId: window.localStorage.getItem("user_id"),
+        receiverId: user_id,
+      }),
+    });
+
+    if (response.status === 200) {
+      setIsUpdated(true);
+    }
+  };
+
+  const handleRemoveFriend = async (event) => {
+    event.preventDefault();
+
+    const response = await fetch(`/friends/delete/`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+      body: JSON.stringify({
+        userId: window.localStorage.getItem("user_id"),
+        friendId: user_id,
+      }),
+    });
+
+    if (response.status === 200) {
+      setIsUpdated(true);
+    }
+  };
 
   return (
     <>
@@ -45,6 +147,53 @@ const Profile = () => {
               </div>
               <div className="profile-name">{profile.user.name}</div>
             </div>
+          </div>
+          <div className="button-container">
+            {window.localStorage.getItem("user_id") === user_id ? (
+              <></>
+            ) : profile.user.friends.includes(
+                window.localStorage.getItem("user_id")
+              ) ? (
+              <button
+                className="remove-friend-button"
+                onClick={handleRemoveFriend}
+              >
+                Remove Friend
+              </button>
+            ) : profile.user.friendRequestsReceived.includes(
+                window.localStorage.getItem("user_id")
+              ) ? (
+              <button
+                className="cancel-friend-request-button"
+                onClick={handleCancelFriendRequest}
+              >
+                Cancel Friend Request
+              </button>
+            ) : profile.user.friendRequestsSent.includes(
+                window.localStorage.getItem("user_id")
+              ) ? (
+              <>
+                <button
+                  className="accept-friend-request-button"
+                  onClick={handleAcceptFriendRequest}
+                >
+                  Accept Friend Request
+                </button>
+                <button
+                  className="reject-friend-request-button"
+                  onClick={handleRejectFriendRequest}
+                >
+                  Reject Friend Request
+                </button>
+              </>
+            ) : (
+              <button
+                className="send-friend-request-button"
+                onClick={handleSendFriendRequest}
+              >
+                Send Friend Request
+              </button>
+            )}
           </div>
           <div className="tabs-container">
             <button
