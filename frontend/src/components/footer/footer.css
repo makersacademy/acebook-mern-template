@@ -13,3 +13,21 @@
   align-items: center;
   justify-content: center;
 }
+
+/* footer sticks to bottom */
+/* .footer {
+  position: fixed;
+  bottom: 0;
+  height: 25px;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  background-color: #343a40;
+  margin-top: 20px;
+  padding: 1rem;
+  border-top: 1px solid #e5e5e5;
+  background-color: #ffffff;
+  font-size: 15px;
+} */
