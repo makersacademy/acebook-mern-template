@@ -4,8 +4,10 @@ import Card from '../Helpers/Card.js';
 import './profile.css';
 import Feed from '../feed/Feed'
 import { useParams } from 'react-router-dom';
+import coverPhoto from './cover-photo.jpg';
 
 const Profile = () => {
+
   const { id } = useParams();
   const [token, setToken] = useState(window.localStorage.getItem('token'));
   const [user, setUser] = useState([]);
@@ -35,10 +37,8 @@ const Profile = () => {
 return(
   <div>
     <div className='coverPhoto'>
-      <Card>
-      </Card>
-
     </div>
+    
     <div className='container'>
       <div className='left'>
         <div className='user-info'>

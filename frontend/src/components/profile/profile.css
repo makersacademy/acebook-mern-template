@@ -3,8 +3,13 @@ body {
   justify-content: center;
 }
 
-.coverPhoto .card {
-  height: 100px
+.coverPhoto {
+  height: 200px;
+  background-image: url('./cover-photo.jpg');
+  background-size: 100% auto;
+  background-repeat: no-repeat;
+  background-position: bottom;
+
 }
 
 .container {
