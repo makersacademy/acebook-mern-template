@@ -3,6 +3,7 @@ import { useState } from 'react';
 import formatDistanceToNow from 'date-fns/formatDistanceToNow';
 import Card from '../Helpers/Card';
 import './Post.css';
+import { Link } from 'react-router-dom';
 
 const Post = ({ post, setPostAdded }) => {
   const [edit, setEdit] = useState(false)
@@ -84,22 +85,25 @@ const Post = ({ post, setPostAdded }) => {
     </div>
   )} else {
     return (
-      <div>
+      <div className="post">
       <Card>
+        <div className="header">
+        <div id='username'>
+          <Link to={`/users/${post.user_id._id}`}>{post.user_id.name}</Link>
+          <p>
+            {formatDistanceToNow(new Date(post.createdAt), { addSuffix: true })}
+          </p>
+          </div>
+          <div className='edit-buttons'>
+          <button id='edit' onClick={ (e) => {handleEdit(post.message, e)} }>Edit</button>
+          <button id='delete' onClick={ handleDelete }>Delete</button>
+          </div>
+        </div>
         <article data-cy="post" key={post._id}>
+          <div id='message'>
           {post.message}
-          <button onClick={ (e) => {handleEdit(post.message, e)} }>Edit</button>
-          <button onClick={ handleDelete }>Delete</button>
+          </div>
         </article>
-        
-        <div className="post-data">
-        <p>{post.user_id.name},&nbsp;</p>
-        <p>
-          {formatDistanceToNow(new Date(post.createdAt), { addSuffix: true })}
-        </p>
-        <button className="like-button" onClick={handleLike}>
-          Like
-        </button>
         <span>
           {post.likes.length > 1
             ? `${post.likes.length} people liked this`
@@ -107,7 +111,19 @@ const Post = ({ post, setPostAdded }) => {
             ? `${post.likes.length} person liked this`
             : 'No likes'}
         </span>
-      </div>
+        <hr></hr>
+        <div className='bottom-buttons'>
+        <button id="like-button" onClick={handleLike}>
+          Like
+        </button>
+        <button id="comment-button" onClick={handleLike}>
+          Comment
+        </button>
+        <button id="share-button" onClick={handleLike}>
+          Share
+        </button>
+        </div>
+        <hr></hr>
       </Card>
     </div>
     )
