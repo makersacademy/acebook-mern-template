@@ -4,38 +4,47 @@
 
 .friend-requests-container, .friends-list-container {
   background-color: white;
-  width: 50%;
+  width: 80%;
+  max-width: 600px;
   margin: 40px auto;
   padding: 20px;
   border: 1px solid #D9D9D9;
   border-radius: 8px;
+  box-shadow: 0px 0px 10px #ccc;
 }
 
 .heading {
   background-color: white;
-}
-
-.received-sent-heading {
-  /* padding-left: 20px; */
-  text-align: center;
-}
-
-.f-username {
-  background-color: white;
-  padding: 10px;
-  padding-bottom: 20px;
   font-weight: 600;
 }
 
-.friend-request-received-container, .friend-request-sent-container, .friend-container {
+.received-sent-heading {
+  text-align: center;
+  font-weight: 600;
+
+}
+
+.f-username {
+  padding: 10px;
+  padding-bottom: 20px;
+  font-weight: 400;
+}
+
+.friend-request-received-container, .friend-request-sent-container,
+.friend-container, .no-friends-message-container, .no-requests-message-container {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  background-color: white;
+  background-color: #eff9fd;
   border: 1px solid #D9D9D9;
   border-radius: 8px;
-  padding: 5px 20px;
+  padding: 0 20px;
   margin: 20px;
+}
+
+.no-friends-message, .no-requests-message {
+  padding: 12px 10px;
+  font-weight: 400;
 }
 
 .f-accept-friend-request-button {
@@ -88,9 +97,9 @@
 
 .f-accept-friend-request-button:hover, .f-reject-friend-request-button:hover,
 .f-cancel-friend-request-button:hover, .f-remove-friend-button:hover {
-  background-color: #eff9fd;
-  border: 1px;
+  background-color: white;
+  border: 0.5px;
   border-style: solid;
-  border-color: black;
+  border-color: #D9D9D9;
   color: #4267B2;
 }
