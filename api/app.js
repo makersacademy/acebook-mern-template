@@ -8,6 +8,7 @@ const postsRouter = require("./routes/posts");
 const tokensRouter = require("./routes/tokens");
 const usersRouter = require("./routes/users");
 const commentsRouter = require("./routes/comments")
+const friendsRouter = require("./routes/friendRequests");
 
 const app = express();
 
