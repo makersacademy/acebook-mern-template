@@ -1,4 +1,4 @@
-import "./Friend.css";
+import "../FriendsPage/FriendsPage.css";
 import { Link } from "react-router-dom";
 
 
@@ -27,9 +27,9 @@ const Friend = ({ friend, setFriendsUpdated }) => {
     <div className="friend-container">
       {/* Profile picture of person sending friend request, with link to their profile */}
       <Link to={`/users/${friend._id}`} className="username-link">
-        <h4>{ friend.name }</h4>
+        <h3 className="f-username">{ friend.name }</h3>
       </Link>
-      <button className="remove-friend-button" onClick={handleClickRemove}>Remove friend</button>
+      <button className="f-remove-friend-button" onClick={handleClickRemove}>Remove friend</button>
     </div>
   );
 }
