@@ -38,8 +38,7 @@ return(
   <div>
     <div className='coverPhoto'>
     </div>
-    
-    <div className='container'>
+    <div className='profile'>
       <div className='left'>
         <div className='user-info'>
           <Card>
@@ -49,6 +48,18 @@ return(
               <p>{user.hometown}</p>
               <p>{user.profession}</p>
               <p>{user.relationship_status}</p>
+            </div>
+
+            <div>
+              {profileMatch ? (
+              <div className='edit-button'>
+                <button>Edit profile</button>
+              </div>
+              ) : (
+              <div className='friend-button'>
+                <button>Add Friend</button>
+              </div>
+              )}
             </div>
           </Card>
         </div>
@@ -85,25 +96,12 @@ return(
           </Card>
         </div>
       </div>
-
-      
-      <div className='right'>
-        {profileMatch ? (
-          <div className='edit-button'>
-            <button>Edit profile</button>
-          </div>
-         ) : (
-          <div className='friend-button'>
-            <button>Add Friend</button>
-          </div>
-        )}
+                
+      <div className='posts right'>
+        <Feed />
       </div>
-        
-        <div className='posts'>
-            <Feed />
-        </div>
-      </div>  
-    </div>
+    </div>  
+  </div>
  )
 }
 

@@ -12,11 +12,12 @@ body {
 
 }
 
-.container {
+.profile {
   display: flex;
-  align-items: center;
+
   justify-content: space-between;
   width: 1000px;
+  border: 2px solid red;
 }
 
 .right {
@@ -25,6 +26,7 @@ body {
 
 .left {
   width: 300px;
+  border: 2px solid blue;
 }
 
 .photos .card {
