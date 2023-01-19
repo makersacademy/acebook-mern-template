@@ -2,7 +2,7 @@ import Friend from "../Friend/Friend";
 import "../FriendsPage/FriendsPage.css";
 
 const FriendsList = ({ friends, setFriendsUpdated }) => {
-  console.log(friends)
+
   return (
     <div className="friends-list-container">
       <h2 className="heading">Friends</h2>
