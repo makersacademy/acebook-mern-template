@@ -1,67 +1,61 @@
+/* post container */
 .post-container {
-  display: flex;
-  justify-content: center;
-  background-color: #eff9fd;
+  width: 80%;
+  max-width: 600px;
+  margin: 20px auto;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0px 0px 10px #ccc;
 }
 
-.post-card {
-  width: 60%; /* You can adjust the width to fit your desired layout */
-  padding: 2rem;
-  margin-top: 16px;
-  margin-bottom: 16px;
-  box-shadow: 0 4px 6px rgba(0,0,0,0.1); /* give the card a subtle shadow */
-  border-radius: 8px; /* rounded corner */
-  background-color: white;
-}
-
+/* card header */
 .card-header {
+  background: #f7f7f7;
+  padding-top: 10px;
+  padding-right: 10px;
+  padding-left: 10px;
   display: flex;
   align-items: center;
-  margin-bottom: 1rem;
 }
 
-.avatar {
-  width: 3rem;
-  height: 3rem;
-  border-radius: 50%;
-}
-
+/* username and timestamp */
 .card-meta {
-  margin-left: 1rem;
-  margin-bottom: 0;
-  display: flex;
-  flex-direction: column;
+  margin-left: 10px;
 }
 
 .username {
   font-size: 1.2rem;
   font-weight: 600;
-  background-color: white;
+  background-color: #f7f7f7;
   display: flex;
   justify-content: start;
   margin-top: 5px;
 }
 
 .timestamp {
-  font-size: 0.8rem;
-  color: gray;
-  margin-left: 0rem;
-  width: 100%;
+  color: #999;
+  font-size: 0.8em;
 }
 
+/* post image */
+.post-image {
+  width: 100%;
+  height: auto;
+}
+
+/* post message */
 .card-message {
-  font-size: 1.1rem;
-  line-height: 1.5;
-  margin-top: -0.2rem;
-  margin-bottom: 2rem;
-  margin-left: 1rem;
-  margin-right: 1rem;
+  padding: 10px;
+  font-size: 1.0em;
+  background: #ffffff;
+  margin: 0;
 }
 
 .likes-and-comments-buttons-container {
   margin-top: 1rem; /* add some space between the post and the comments button */
   display: flex;
   justify-content: space-between;
+  background: #ffffff;
 }
 
 .comments-button {
@@ -129,10 +123,3 @@
   padding: 0;
   float: left;
 }
-/* margin: "0", padding: "0", float: "left" */
-.post-image {
-  max-width: 100%;
-  height: auto;
-  margin: 10px 0;
-}
-
