@@ -129,6 +129,13 @@ const UsersController = {
     // data.friendRequestsSent.map for the sent friend requests
     // data.friendRequestsRecieved.map for the friend requests bit
     // like data.friends.map for the friends bit
+    const userId = req.body.userId;
+    const user = await User.findById(userId)
+        .populate("friends", "name")
+        .populate("friendRequestsReceived", "name")
+        .populate("friendRequestsSent", "name")
+        .exec();
+    res.status(200).json({ user });
   },
 };
 
