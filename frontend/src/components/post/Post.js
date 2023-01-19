@@ -85,30 +85,45 @@ const Post = ({ post, setPostAdded }) => {
     </div>
   )} else {
     return (
-      <div>
+      <div className="post">
       <Card>
-        <article data-cy="post" key={post._id}>
-          {post.message}
-          <button onClick={ (e) => {handleEdit(post.message, e)} }>Edit</button>
-          <button onClick={ handleDelete }>Delete</button>
-        </article>
-        
-        <div className="post-data">
+        <div className="header">
+        <div id='username'>
           <Link to={`/users/${post.user_id._id}`}>{post.user_id.name}</Link>
           <p>
             {formatDistanceToNow(new Date(post.createdAt), { addSuffix: true })}
           </p>
-          <button className="like-button" onClick={handleLike}>
-            Like
-          </button>
-          <span>
-            {post.likes.length > 1
-              ? `${post.likes.length} people liked this`
-              : post.likes.length === 1
-              ? `${post.likes.length} person liked this`
-              : 'No likes'}
-          </span>
+          </div>
+          <div className='edit-buttons'>
+          <button id='edit' onClick={ (e) => {handleEdit(post.message, e)} }>Edit</button>
+          <button id='delete' onClick={ handleDelete }>Delete</button>
+          </div>
         </div>
+        <article data-cy="post" key={post._id}>
+          <div id='message'>
+          {post.message}
+          </div>
+        </article>
+        <span>
+          {post.likes.length > 1
+            ? `${post.likes.length} people liked this`
+            : post.likes.length === 1
+            ? `${post.likes.length} person liked this`
+            : 'No likes'}
+        </span>
+        <hr></hr>
+        <div className='bottom-buttons'>
+        <button id="like-button" onClick={handleLike}>
+          Like
+        </button>
+        <button id="comment-button" onClick={handleLike}>
+          Comment
+        </button>
+        <button id="share-button" onClick={handleLike}>
+          Share
+        </button>
+        </div>
+        <hr></hr>
       </Card>
     </div>
     )
