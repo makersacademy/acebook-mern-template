@@ -12,18 +12,16 @@ const FriendsPage = ({ navigate }) => {
   const token = window.localStorage.getItem("token");
   const userId = window.localStorage.getItem("user_id");
 
-  // use effect to fetch friend data for logged in user
+  // Fetch friend data for logged in user
   useEffect(() => {
     if (token) {
       fetch(`/friends/${userId}`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
-        // body: JSON.stringify({ userId: window.localStorage.getItem("user_id") })
       })
         .then((response) => response.json())
         .then(async (data) => {
-          // can maybe delete "async"
           setFriends(data.user.friends);
           setFriendRequestsSent(data.user.friendRequestsSent);
           setFriendRequestsReceived(data.user.friendRequestsReceived);
