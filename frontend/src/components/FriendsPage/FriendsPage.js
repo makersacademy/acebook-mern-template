@@ -38,8 +38,8 @@ const FriendsPage = ({ navigate }) => {
     <div className="friends-page-container">
       {friends && (
         <div className="friend-requests-container">
-          <h2>Friend requests</h2>
-          <h4>Received</h4>
+          <h2 className="heading">Friend requests</h2>
+          <h3 className="received-sent-heading">Received</h3>
           {friendRequestsReceived.map((friendRequester) => (
             <FriendRequestReceived
               friendRequester={friendRequester}
@@ -47,7 +47,7 @@ const FriendsPage = ({ navigate }) => {
               setFriendsUpdated={setFriendsUpdated}
             />
           ))}
-          <h4>Sent</h4>
+          <h3 className="received-sent-heading">Sent</h3>
           {friendRequestsSent.map((requestedFriend) => (
             <FriendRequestSent
               requestedFriend={requestedFriend}
@@ -57,7 +57,7 @@ const FriendsPage = ({ navigate }) => {
           ))}
         </div>
       )}
-      <FriendsList friends={friends} setFriendsUpdated={setFriendsUpdated} />
+      {friends && <FriendsList friends={friends} setFriendsUpdated={setFriendsUpdated} />}
     </div>
   );
 };
