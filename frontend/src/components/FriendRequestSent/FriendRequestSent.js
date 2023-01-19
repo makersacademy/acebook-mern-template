@@ -8,9 +8,9 @@ const FriendRequestSent = ({ requestedFriend, setFriendsUpdated }) => {
   // Do once back end for cancel sent friend request is sorted
   // Cancel sent friend request
   const handleClickCancel = () => {
-    fetch('/friends/cancel', {
+    fetch('/friends/cancel/', {
       method: "POST",
-      header: {
+      headers: {
         "Content-Type": "application/json",
         Authorization: `Bearer ${token}`
       },

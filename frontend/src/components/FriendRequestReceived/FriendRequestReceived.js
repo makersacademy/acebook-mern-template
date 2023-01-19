@@ -9,11 +9,14 @@ const FriendRequestReceived = ({ friendRequester, setFriendsUpdated }) => {
   const handleClickAccept = () => {
     fetch('/friends/accept', {
       method: "POST",
-      header: {
+      headers: {
         "Content-Type": "application/json",
         Authorization: `Bearer ${token}`
       },
-      body: JSON.stringify({ senderId: friendRequester._id, receiverId: window.localStorage.getItem("user_id") }),
+      body: JSON.stringify({
+        senderId: friendRequester._id,
+        receiverId: window.localStorage.getItem("user_id")
+      }),
     })
       .then(() => {
         setFriendsUpdated(true);
@@ -27,7 +30,7 @@ const FriendRequestReceived = ({ friendRequester, setFriendsUpdated }) => {
   const handleClickReject = () => {
     fetch('/friends/reject', {
       method: "POST",
-      header: {
+      headers: {
         "Content-Type": "application/json",
         Authorization: `Bearer ${token}`
       },

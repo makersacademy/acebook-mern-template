@@ -3,13 +3,16 @@ import { Link } from "react-router-dom";
 
 
 const Friend = ({ friend, setFriendsUpdated }) => {
-  
-  const userId = window.localStorage.getItem("User")
+  const token = window.localStorage.getItem("token");
 
   // Remove friend
   const handleClickRemove = () => {
-    fetch("/delete/", {
-      method: "DELETE",
+    fetch("/friends/delete/", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
       body: JSON.stringify({ userId: window.localStorage.getItem("user_id"), friendId: friend._id })
     })
       .then(() => {
