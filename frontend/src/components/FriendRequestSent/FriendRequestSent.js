@@ -26,7 +26,7 @@ const FriendRequestSent = ({ requestedFriend, setFriendsUpdated }) => {
   
   return (
     <div className="friend-request-sent-container">
-      {/* Profile picture of person sending friend request, with link to their profile */}
+      {/* Add profile picture of person sending friend request, with link to their profile */}
       <Link to={`/users/${requestedFriend._id}`} className="username-link">
         <h3 className="f-username">{ requestedFriend.name }</h3>
       </Link>

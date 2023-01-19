@@ -25,7 +25,7 @@ const Friend = ({ friend, setFriendsUpdated }) => {
 
   return (
     <div className="friend-container">
-      {/* Profile picture of person sending friend request, with link to their profile */}
+      {/* Add profile picture of person sending friend request, with link to their profile */}
       <Link to={`/users/${friend._id}`} className="username-link">
         <h3 className="f-username">{ friend.name }</h3>
       </Link>
