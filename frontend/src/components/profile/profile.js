@@ -100,9 +100,7 @@ return(
       </div>
         
         <div className='posts'>
-          <Card>
             <Feed />
-          </Card>
         </div>
       </div>  
     </div>

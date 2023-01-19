@@ -14,6 +14,7 @@
 
 #username {
   display: flex;
+  align-items: center;
 }
 
 
@@ -31,6 +32,7 @@ article {
   flex-wrap: wrap;
   overflow: auto;
   height: auto;
+  overflow-wrap: break-word;
 }
 
 

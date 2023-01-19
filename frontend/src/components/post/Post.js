@@ -91,7 +91,7 @@ const Post = ({ post, setPostAdded }) => {
         <div id='username'>
           <Link to={`/users/${post.user_id._id}`}>{post.user_id.name}</Link>
           <p>
-            {formatDistanceToNow(new Date(post.createdAt), { addSuffix: true })}
+            &nbsp;&nbsp;{formatDistanceToNow(new Date(post.createdAt), { addSuffix: true })}
           </p>
           </div>
           <div className='edit-buttons'>

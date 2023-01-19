@@ -32,9 +32,7 @@ const Feed = ({ navigate }) => {
   if (token && window.location.pathname === `/users/${userId}`) {
     return (
       <div className="feed">
-        <h2>Posts</h2>
 
-        <Card>
           <div id="feed" role="feed">
             {posts
               .filter((post) => post.user_id._id === userId)
@@ -42,22 +40,18 @@ const Feed = ({ navigate }) => {
                 <Post post={post} key={post._id} setPostAdded={setPostAdded} />
               ))}
           </div>
-        </Card>
+        
       </div>
     );
   } else if (token) {
     return (
       <div className="feed">
-        <h2>Posts</h2>
         <Create setPostAdded={setPostAdded} />
-
-        <Card>
           <div id="feed" role="feed">
             {posts.map((post) => (
               <Post post={post} key={post._id} setPostAdded={setPostAdded} />
             ))}
           </div>
-        </Card>
 
       </div>
     );
