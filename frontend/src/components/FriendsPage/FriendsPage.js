@@ -9,7 +9,7 @@ const FriendsPage = ({ navigate }) => {
   const [friendRequestsSent, setFriendRequestsSent] = useState([]);
   const [friendRequestsReceived, setFriendRequestsReceived] = useState([]);
   const [friendsUpdated, setFriendsUpdated] = useState(false);
-  const [token, setToken] = useState(window.localStorage.getItem("token"));
+  const token = window.localStorage.getItem("token");
   const userId = window.localStorage.getItem("user_id");
 
   // use effect to fetch friend data for logged in user
@@ -44,7 +44,7 @@ const FriendsPage = ({ navigate }) => {
             <FriendRequestReceived
               friendRequester={friendRequester}
               key={friendRequester._id}
-              setFriendsUpdated={friendsUpdated}
+              setFriendsUpdated={setFriendsUpdated}
             />
           ))}
           <h4>Sent</h4>
@@ -52,12 +52,12 @@ const FriendsPage = ({ navigate }) => {
             <FriendRequestSent
               requestedFriend={requestedFriend}
               key={requestedFriend._id}
-              setFriendsUpdated={friendsUpdated}
+              setFriendsUpdated={setFriendsUpdated}
             />
           ))}
         </div>
       )}
-      <FriendsList friends={friends} setFriendsUpdated={friendsUpdated} />
+      <FriendsList friends={friends} setFriendsUpdated={setFriendsUpdated} />
     </div>
   );
 };
