@@ -8,8 +8,12 @@ const Comment = ({ comment }) => {
       <div className="comment-header">
         <h4 className="comment-author">{comment.author.name}</h4>
         <p className="timestamp">{formatDistanceToNow(new Date(comment.createdAt), { addSuffix: true })}</p>
-      </div>
+      </div>  
       <p className="comment-message">{ comment.message }</p>
+      <img
+          className='post-image'
+          src={comment.image}
+        /> 
     </div>
   );
 }
