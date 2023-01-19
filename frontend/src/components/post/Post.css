@@ -23,19 +23,17 @@
 
 article { 
   position: relative;
+  width: 400px;
   justify-content: space-between;
   font-size: 16px;
   margin-bottom: 20px;
   box-sizing: border-box;
-  
-
+  flex-wrap: wrap;
+  overflow: auto;
+  height: auto;
 }
 
-#message {
-  width: 400px;
-  box-sizing: border-box;
-  
-}
+
 
 
 
