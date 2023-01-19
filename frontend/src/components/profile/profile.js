@@ -9,6 +9,7 @@ const Profile = () => {
   const { id } = useParams();
   const [token, setToken] = useState(window.localStorage.getItem('token'));
   const [user, setUser] = useState([]);
+  const userId = window.localStorage.getItem('user_id');
 
   useEffect(() => {
     if (token) {
@@ -28,6 +29,8 @@ const Profile = () => {
     }
     // eslint-disable-next-line
   }, []);
+  console.log(user);
+  const profileMatch = user._id === userId;
 
 return(
   <div>
@@ -85,10 +88,17 @@ return(
 
       
       <div className='right'>
-        <div className='edit-button'>
-          <button>Edit profile</button>
-        </div>
-
+        {profileMatch ? (
+          <div className='edit-button'>
+            <button>Edit profile</button>
+          </div>
+         ) : (
+          <div className='friend-button'>
+            <button>Add Friend</button>
+          </div>
+        )}
+      </div>
+        
         <div className='posts'>
           <Card>
             <Feed />
@@ -96,7 +106,6 @@ return(
         </div>
       </div>  
     </div>
-  </div>
  )
 }
 

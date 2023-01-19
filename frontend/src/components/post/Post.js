@@ -3,6 +3,7 @@ import { useState } from 'react';
 import formatDistanceToNow from 'date-fns/formatDistanceToNow';
 import Card from '../Helpers/Card';
 import './Post.css';
+import { Link } from 'react-router-dom';
 
 const Post = ({ post, setPostAdded }) => {
   const [edit, setEdit] = useState(false)
@@ -93,21 +94,21 @@ const Post = ({ post, setPostAdded }) => {
         </article>
         
         <div className="post-data">
-        <p>{post.user_id.name},&nbsp;</p>
-        <p>
-          {formatDistanceToNow(new Date(post.createdAt), { addSuffix: true })}
-        </p>
-        <button className="like-button" onClick={handleLike}>
-          Like
-        </button>
-        <span>
-          {post.likes.length > 1
-            ? `${post.likes.length} people liked this`
-            : post.likes.length === 1
-            ? `${post.likes.length} person liked this`
-            : 'No likes'}
-        </span>
-      </div>
+          <Link to={`/users/${post.user_id._id}`}>{post.user_id.name}</Link>
+          <p>
+            {formatDistanceToNow(new Date(post.createdAt), { addSuffix: true })}
+          </p>
+          <button className="like-button" onClick={handleLike}>
+            Like
+          </button>
+          <span>
+            {post.likes.length > 1
+              ? `${post.likes.length} people liked this`
+              : post.likes.length === 1
+              ? `${post.likes.length} person liked this`
+              : 'No likes'}
+          </span>
+        </div>
       </Card>
     </div>
     )
