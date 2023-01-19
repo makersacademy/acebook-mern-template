@@ -1,0 +1,96 @@
+.friends-page-container {
+  background-color: #eff9fd;
+}
+
+.friend-requests-container, .friends-list-container {
+  background-color: white;
+  width: 50%;
+  margin: 40px auto;
+  padding: 20px;
+  border: 1px solid #D9D9D9;
+  border-radius: 8px;
+}
+
+.heading {
+  background-color: white;
+}
+
+.received-sent-heading {
+  /* padding-left: 20px; */
+  text-align: center;
+}
+
+.f-username {
+  background-color: white;
+  padding: 10px;
+  padding-bottom: 20px;
+  font-weight: 600;
+}
+
+.friend-request-received-container, .friend-request-sent-container, .friend-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: white;
+  border: 1px solid #D9D9D9;
+  border-radius: 8px;
+  padding: 5px 20px;
+  margin: 20px;
+}
+
+.f-accept-friend-request-button {
+  background-color: #2ECC40;
+  color: #fff;
+  border: none; /* remove the default button border */
+  padding: 0.5rem 1rem; 
+  margin-right: 2.5px;
+  margin-left: auto;
+  border-radius: 4px; /* give the button rounded corners */
+  font-size: 0.8rem; /* set the font size */
+  cursor: pointer; /* change the cursor to a pointer when hovering over the button */
+  width: 85px;
+}
+
+.f-reject-friend-request-button {
+  background-color: #FF4136;
+  color: #fff;
+  border: none; /* remove the default button border */
+  padding: 0.5rem 1rem; /* add some padding to the button */
+  margin-left: 2.5px;
+  /* margin-left: auto; */
+  border-radius: 4px; /* give the button rounded corners */
+  font-size: 0.8rem; /* set the font size */
+  cursor: pointer; /* change the cursor to a pointer when hovering over the button */
+  width: 85px;
+}
+
+.f-cancel-friend-request-button {
+  background-color: #FF851B;
+  color: #fff;
+  border: none; /* remove the default button border */
+  padding: 0.5rem 1rem; /* add some padding to the button */
+  border-radius: 4px; /* give the button rounded corners */
+  font-size: 0.8rem; /* set the font size */
+  cursor: pointer; /* change the cursor to a pointer when hovering over the button */
+  width: 175px;
+}
+
+.f-remove-friend-button {
+  background-color: #FF4136;
+  color: #fff;
+  border: none; /* remove the default button border */
+  padding: 0.5rem 1rem; /* add some padding to the button */
+  border-radius: 4px; /* give the button rounded corners */
+  font-size: 0.8rem; /* set the font size */
+  cursor: pointer; /* change the cursor to a pointer when hovering over the button */
+  width: 175px;
+}
+
+.f-accept-friend-request-button:hover, .f-reject-friend-request-button:hover,
+.f-cancel-friend-request-button:hover, .f-remove-friend-button:hover {
+  background-color: #eff9fd;
+  border: 1px;
+  border-style: solid;
+  border-color: black;
+  color: #4267B2;
+}
