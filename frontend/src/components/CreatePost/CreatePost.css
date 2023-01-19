@@ -20,7 +20,23 @@
   box-shadow: rgba(0, 0, 0, 0.5) 0px 0px 0px 2000px;
 }
 
-textarea {
+.feed-textarea {
+  width: 500px;
+  min-height: 60px;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  resize: none;
+  outline: none;
+}
+
+.feed-textarea::placeholder {
+  padding: 20px;
+}
+
+.popup-textarea {
   width: 90%;
   min-height: 200px;
   margin-top: 20px;
