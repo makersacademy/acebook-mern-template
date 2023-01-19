@@ -80,3 +80,19 @@
 .popup {
   pointer-events: all !important;
 }
+
+.upload-image {
+  background-color: #47a0fe;
+  color: #fff;
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 0.8rem;
+  border: none;
+  width: 175px;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  }
+  .upload-image:hover {
+  background-color: #285593;
+  }

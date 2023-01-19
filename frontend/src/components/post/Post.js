@@ -68,8 +68,12 @@ const Post = ({ post, setUpdated }) => {
             </p>
           </div>
         </div>
+    
         <p className="card-message">{post.message}</p>
-
+        <img
+          className='post-image'
+          src={post.image}
+        />      
         <div className="likes-and-comments-buttons-container">
           <div className="like-container">
             <button className="like-button" onClick={handleLike}>
