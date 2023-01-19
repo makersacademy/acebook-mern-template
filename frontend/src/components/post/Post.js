@@ -3,6 +3,7 @@ import { useState } from 'react';
 import formatDistanceToNow from 'date-fns/formatDistanceToNow';
 import Card from '../Helpers/Card';
 import './Post.css';
+import { Link } from 'react-router-dom';
 
 const Post = ({ post, setPostAdded }) => {
   const [edit, setEdit] = useState(false)
@@ -88,7 +89,7 @@ const Post = ({ post, setPostAdded }) => {
       <Card>
         <div className="header">
         <div id='username'>
-          <p>{post.user_id.name},&nbsp;</p>
+          <Link to={`/users/${post.user_id._id}`}>{post.user_id.name}</Link>
           <p>
             {formatDistanceToNow(new Date(post.createdAt), { addSuffix: true })}
           </p>
