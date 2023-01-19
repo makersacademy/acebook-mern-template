@@ -1,5 +1,6 @@
 import { useState } from "react";
 import "./CreateComment.css";
+import UploadWidget from '../CreatePost/UploadWidget'
 
 const CreateComment = ({post_id, setUpdated}) => {
   
@@ -7,6 +8,8 @@ const CreateComment = ({post_id, setUpdated}) => {
     // Above might need to go in post.js rather than createComment.js
 
   const [commentInput, setCommentInput] = useState("");
+  const [showWidget, setShowWidget] = useState(false)
+  const [imageInput, setImageInput] = useState("")
   const [error, setError] = useState(null);
 
   const token = window.localStorage.getItem("token");
@@ -22,6 +25,16 @@ const CreateComment = ({post_id, setUpdated}) => {
     }
   };
 
+  const handleImageUpload = (event) => {
+    // Event listener to get the hosted image info
+      console.log(`image input should be ${event.info.url}`);
+      const imageUrl = event.info.url;
+      console.log(imageUrl)
+      setImageInput(imageUrl);
+      setShowWidget(true)
+      console.log(`image input is  ${imageInput}`);
+    };
+
   const handleSubmit = async (event) => {
     // Stop page from refreshing
     event.preventDefault();
@@ -31,13 +44,17 @@ const CreateComment = ({post_id, setUpdated}) => {
       return;
     }
 
+    if (showWidget === false) {
+      return
+    }
+
     const response = await fetch(`/comments/${post_id}`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
         Authorization: `Bearer ${token}`,
       },
-      body: JSON.stringify({ message: commentInput, post_id: post_id, author: window.localStorage.getItem("user_id") }),
+      body: JSON.stringify({ message: commentInput, post_id: post_id, author: window.localStorage.getItem("user_id"), image: imageInput }),
     });
 
     // const json = await response.json();
@@ -50,6 +67,8 @@ const CreateComment = ({post_id, setUpdated}) => {
     if (response.status === 200) {
       setCommentInput("");
       setError(null);
+      setImageInput("");
+      setShowWidget(false);
       setUpdated(true);
       console.log("Post request successful")
       // setUpdated(true);
@@ -70,6 +89,7 @@ const CreateComment = ({post_id, setUpdated}) => {
           onKeyDown={handleKeyDown}
         />
       </form>
+      < UploadWidget handleImageUpload={handleImageUpload}/>
       <p className="press-enter-to-post">Press Enter to post</p>
     </div>
     // Form
