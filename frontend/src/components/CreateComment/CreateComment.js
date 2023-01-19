@@ -89,7 +89,7 @@ const CreateComment = ({post_id, setUpdated}) => {
           onKeyDown={handleKeyDown}
         />
       </form>
-      < UploadWidget handleImageUpload={handleImageUpload}/>
+      < UploadWidget handleImageUpload={handleImageUpload} buttonText="Upload Image"/>
       <p className="press-enter-to-post">Press Enter to post</p>
     </div>
     // Form

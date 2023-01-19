@@ -3,7 +3,11 @@ import { useParams } from "react-router";
 import "./profile.css";
 import Feed from "../feed/Feed";
 import UploadWidget from "../CreatePost/UploadWidget"
+import { AiFillHome, AiFillHeart } from "react-icons/ai";
+import { MdWork} from "react-icons/md";
+import { FaBirthdayCake,} from "react-icons/fa";
 
+ 
 const Profile = () => {
   const [profile, setProfile] = useState(null);
   const [selectedTab, setSelectedTab] = useState("posts");
@@ -290,20 +294,24 @@ const Profile = () => {
           <div className="profile-container">
             {selectedTab === "about" ? (
               <div className="about-section">
-                <div>Bio: Stuff here</div>
-                <div>Birthday: 11/11/11</div>
-                <div>Other stuff idk</div>
-                <p>Profile Picture:</p>
-                < UploadWidget handleImageUpload={handleProfileImageUpload}/>
-                <button data-button-id="profile-image-upload"className="submit-post" onClick={handleSubmit}>
-                Confirm & submit
-                </button>
-                <p>Cover Image:</p>
-                < UploadWidget handleImageUpload={handleCoverImageUpload}/>
-                <button data-button-id="cover-image-upload" className="submit-cover-photo" onClick={handleCoverSubmit}>
-                Confirm & submit
-                </button>
-                
+              <div className="about-card">
+                  <div className="about-card-header">About</div>
+                <div className="about-card-body">
+                  <div><AiFillHome /> Lives In: London</div>
+                  <div><MdWork /> Work: Burger King</div>
+                  <div><FaBirthdayCake /> Birthday: 11/11/11</div>
+                  <div><AiFillHeart /> Relationship Status: Single</div>
+                </div>
+              </div>
+              <div className="button-container">
+                </div>
+                <div className="button-container">
+                  <UploadWidget  handleImageUpload={handleProfileImageUpload} buttonText="Upload Profile Picture"/>
+                  <button data-button-id="profile-image-upload" onClick={handleSubmit}>Update Profile Picture</button>
+                  <UploadWidget handleImageUpload={handleCoverImageUpload} buttonText="Upload Cover Picture"/>
+                  <button data-button-id="cover-image-upload" onClick={handleCoverSubmit} >Update Cover Picture</button>
+              </div>
+
               </div>
             ) : (
               <Feed filter={user_id} />

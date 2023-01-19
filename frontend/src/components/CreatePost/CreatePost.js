@@ -95,7 +95,7 @@ const CreatePost = ({setUpdated}) => {
               autoComplete="off"
               autoFocus
             />
-            < UploadWidget handleImageUpload={handleImageUpload}/>
+            < UploadWidget handleImageUpload={handleImageUpload} buttonText="Upload Image"/>
             <button className="submit-post" onClick={handleSubmit}>
               Post
             </button>
