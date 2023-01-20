@@ -15,7 +15,7 @@ const UserSchema = new mongoose.Schema({
   coverPicture: {type: String}
 });
 
-UserSchema.statics.signup = async function (name, email, password, profilePicture) {
+UserSchema.statics.signup = async function (name, email, password, profilePicture, coverPicture) {
   const exists = await this.findOne({ email });
 
   if (exists) {
@@ -38,7 +38,7 @@ UserSchema.statics.signup = async function (name, email, password, profilePictur
   const salt = await bcrypt.genSalt(10);
   const hash = await bcrypt.hash(password, salt);
 
-  const user = await this.create({ name, email, password: hash, profilePicture});
+  const user = await this.create({ name, email, password: hash, profilePicture, coverPicture});
 
   return user;
 };

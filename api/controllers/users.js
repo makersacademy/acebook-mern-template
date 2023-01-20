@@ -3,10 +3,10 @@ const User = require("../models/user");
 const UsersController = {
   Create: async (req, res) => {
     const { name, email, password } = req.body;
-    const profilePicture = "https://preview.redd.it/v0caqchbtn741.jpg?auto=webp&s=c5d05662a039c031f50032e22a7c77dfcf1bfddc";
-
+    const profilePicture = "https://img.freepik.com/free-icon/user_318-790139.jpg?w=2000";
+    const coverPicture = "https://i.pinimg.com/originals/0f/01/ba/0f01bac2cd274f3eb00444c2b6c3b94b.jpg";
     try {
-      const user = await User.signup(name, email, password, profilePicture);
+      const user = await User.signup(name, email, password, profilePicture, coverPicture);
 
       res.status(201).json({ message: "OK" });
     } catch (error) {

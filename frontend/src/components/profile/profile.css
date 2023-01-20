@@ -253,6 +253,7 @@ button {
 
 .about-card-body > div {
   margin-bottom: 10px;
+}
 
 .accept-friend-request-button:hover, .reject-friend-request-button:hover,
 .cancel-friend-request-button:hover, .remove-friend-button:hover {
