@@ -93,7 +93,7 @@
   border-radius: 4px; /* give the button rounded corners */
   font-size: 0.8rem; /* set the font size */
   cursor: pointer; /* change the cursor to a pointer when hovering over the button */
-  width: 175px;
+  width: 185px;
 }
 
 #comments-container {
