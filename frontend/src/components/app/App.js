@@ -6,6 +6,7 @@ import Feed from '../feed/Feed'
 import Navbar from "../navbar/Navbar";
 import Footer from "../footer/footer";
 import Profile from "../profile/profile";
+import FriendsPage from '../FriendsPage/FriendsPage';
 import {
   useNavigate,
   Routes,
@@ -13,6 +14,7 @@ import {
   useLocation,
   Navigate
 } from "react-router-dom";
+import NotFound from '../NotFound/NotFound';
 
 const App = () => {
   const navigate = useNavigate();
@@ -28,8 +30,11 @@ const App = () => {
           <Route path='/login'  element={!user ? <LoginForm  navigate={ navigate }/> : <Navigate to="/posts"></Navigate>}/>
           <Route path='/signup' element={!user ? <SignUpForm navigate={ navigate }/> : <Navigate to="/posts"></Navigate>}/>
           <Route path='/users/:user_id' element={<Profile navigate={ navigate }/>}/>
+          <Route path='/friends/:user_id' element={<FriendsPage navigate={ navigate }/>}/>
+          {/* The below NotFound route must be last as any routes under it will not be rendered */}
+          <Route path='/*' element={<NotFound />} />
         </Routes>
-        {location.pathname !== '/login' && location.pathname !== '/signup' && <Footer />}
+        {(location.pathname === '/' || location.pathname === '/posts' || location.pathname === '/users/:user_id') && <Footer />}
     </>
   );
 }

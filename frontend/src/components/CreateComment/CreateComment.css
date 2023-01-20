@@ -20,6 +20,7 @@
   padding: 1rem; /* add some padding to the text area */
   border-radius: 8px; /* give the text area rounded corners */
   border: 0.5px solid #d9d9d9; /* add a faint border to the text area */
+  outline: none;
 }
 
 .press-enter-to-post {

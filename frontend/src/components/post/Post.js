@@ -76,18 +76,26 @@ const Post = ({ post, setUpdated }) => {
       <div className="post-card" data-cy="post" key={post._id}>
         <div className="card-header">
           <div className="card-meta">
-            <Link to={`/users/${post.author._id}`} className="username-link">
-              <h2 className="username">{post.author.name}</h2>
-            </Link>
-            <p className="timestamp">
-              {formatDistanceToNow(new Date(post.createdAt), {
-                addSuffix: true,
-              })}
-            </p>
+            <div className="profile-picture-div">
+              <img className="profile-picture" src={post.author.profilePicture} />
+            </div>
+            <div className="name-timestamp">
+              <Link to={`/users/${post.author._id}`} className="username-link">
+                  <h2 className="username">{post.author.name}</h2>
+              </Link>
+              <p className="timestamp">
+                  {formatDistanceToNow(new Date(post.createdAt), {
+                      addSuffix: true,
+                  })}
+              </p>
+            </div>
           </div>
         </div>
         <p className="card-message">{post.message}</p>
-
+        <img
+          className='post-image'
+          src={post.image}
+        />      
         <div className="likes-and-comments-buttons-container">
           <div className="like-container">
             <button className="like-button" onClick={handleLike}>

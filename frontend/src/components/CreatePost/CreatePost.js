@@ -1,22 +1,34 @@
 import "./CreatePost.css";
 import { useState } from "react";
 import { FaWindowClose } from "react-icons/fa";
+import UploadWidget from './UploadWidget'
 
 const CreatePost = ({setUpdated}) => {
   const [postInput, setPostInput] = useState("");
   const [showPopup, setShowPopup] = useState(false);
-
+  const [showWidget, setShowWidget] = useState(false)
+  const [imageInput, setImageInput] = useState("")
   const token = window.localStorage.getItem("token");
 
   const handlePopUp = () => {
     setShowPopup(!showPopup);
-    document.body.classList.toggle("disable-pointer-events", !showPopup);
+    // document.body.classList.toggle("disable-pointer-events", !showPopup);
     setPostInput("");
   };  
 
   const handlePostInput = (event) => {
     setPostInput(event.target.value);
   };
+
+  const handleImageUpload =  (event) => {
+    // Event listener to get the hosted image info
+    setImageInput(event.info.url);
+    console.log(`image input should be ${event.info.url}`);
+    const imageUrl = event.info.url;
+    console.log(imageUrl)
+    setShowWidget(true);
+    console.log(`image input is  ${event.info.url}`);
+    };
 
   const handleKeyDown = (event) => {
     if (event.key === "Enter") {
@@ -33,17 +45,27 @@ const CreatePost = ({setUpdated}) => {
       return;
     }
 
+    if (event.target.getAttribute("data-button-id") !== "submit-post") {
+      return;
+    }
+
+    if (showWidget === false && imageInput !== "") {
+      return
+    }
+
     let response = await fetch("/posts", {
       method: "post",
       headers: {
         "Content-Type": "application/json",
         Authorization: `Bearer ${token}`,
       },
-      body: JSON.stringify({ message: postInput, author: window.localStorage.getItem("user_id") }),
+      body: JSON.stringify({ message: postInput, author: window.localStorage.getItem("user_id"), image: imageInput }),
     });
 
     if (response.status === 201) {
       setPostInput("");
+      setImageInput("");
+      setShowWidget(false);
       setShowPopup(false);
       setUpdated(true);
       document.body.classList.toggle("disable-pointer-events", !showPopup);
@@ -53,7 +75,8 @@ const CreatePost = ({setUpdated}) => {
   return (
     <div className="container">
       <form className="my-form" onSubmit={handleSubmit}>
-        <input
+        <textarea
+          className="feed-textarea"
           placeholder={showPopup ? "" : "What's on your mind?"}
           id="new-post-input"
           type="text"
@@ -68,6 +91,7 @@ const CreatePost = ({setUpdated}) => {
               <FaWindowClose size={15} color="dark-gray" />
             </button>
             <textarea
+              className="popup-textarea"
               placeholder="What's on your mind?"
               value={postInput}
               onChange={handlePostInput}
@@ -75,7 +99,8 @@ const CreatePost = ({setUpdated}) => {
               autoComplete="off"
               autoFocus
             />
-            <button className="submit-post" onClick={handleSubmit}>
+            < UploadWidget handleImageUpload={handleImageUpload} buttonText="Upload Image"/>
+            <button data-button-id="submit-post" className="submit-post" onClick={handleSubmit}>
               Post
             </button>
           </div>

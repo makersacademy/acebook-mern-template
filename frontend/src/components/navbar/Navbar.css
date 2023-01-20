@@ -21,6 +21,7 @@ nav {
   display: flex;
   align-items: center;
   font-weight: bolder;
+  padding-right: 20px;
 }
 
 nav div {
@@ -34,6 +35,11 @@ a {
   padding-left: 4px;
   padding-right: 4px;
   font-size: 16px;
+}
+
+.nav-bar-link {
+  font-size: 18px;
+  padding-left: 16px;
 }
 
 /* .logout-button {
