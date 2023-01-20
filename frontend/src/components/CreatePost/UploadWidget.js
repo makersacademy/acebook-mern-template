@@ -1,7 +1,7 @@
 import "./CreatePost.css";
 import { useEffect, useRef} from 'react'
 
-const UploadWidget = ({handleImageUpload} ) => {
+const UploadWidget = ({handleImageUpload, buttonText} ) => {
 
   const cloudinaryRef = useRef();
   const widgetRef = useRef();
@@ -20,7 +20,7 @@ const UploadWidget = ({handleImageUpload} ) => {
 
   return (
     <button className="upload-image" onClick={() => widgetRef.current.open()}>
-      Upload Image
+      {buttonText}
     </button>
   )
 }

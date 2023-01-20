@@ -6,6 +6,7 @@
   border-radius: 10px;
   overflow: hidden;
   box-shadow: 0px 0px 10px #ccc;
+  background-color: white;
 }
 
 /* card header */
@@ -23,6 +24,24 @@
   margin-left: 10px;
 }
 
+.name-timestamp {
+  display: flex;
+}
+
+.profile-picture-div {
+  height: 50px;
+  width: 85px;
+  border-radius: 50%;
+  overflow: hidden;
+  border: 5px solid #eff9fd;
+}
+
+.profile-picture {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
 .username {
   font-size: 1.2rem;
   font-weight: 600;
@@ -30,12 +49,14 @@
   display: flex;
   justify-content: start;
   margin-top: 5px;
+  width: 100%;
 }
 
 .timestamp {
   font-size: 0.8rem;
   color: gray;
   margin-left: 0rem;
+  width: 100%;
 }
 
 /* post image */
@@ -47,6 +68,8 @@
 /* post message */
 .card-message {
   padding: 10px;
+  padding-top: 20px;
+  padding-left: 20px;
   font-size: 1.0em;
   background: #ffffff;
   margin: 0;
@@ -123,4 +146,31 @@
   margin-bottom: -15px;
   padding: 0;
   float: left;
+}
+
+.card-header {
+  display: flex;
+}
+
+.profile-picture-div {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  overflow: hidden;
+  justify-content: center;
+  align-items: center;
+  margin-right: 10px;
+  float: left;
+}
+
+.profile-picture {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.name-timestamp {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
 }

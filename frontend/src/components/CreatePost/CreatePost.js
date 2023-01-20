@@ -20,14 +20,14 @@ const CreatePost = ({setUpdated}) => {
     setPostInput(event.target.value);
   };
 
-  const handleImageUpload = (event) => {
+  const handleImageUpload =  (event) => {
     // Event listener to get the hosted image info
-      console.log(`image input should be ${event.info.url}`);
-      const imageUrl = event.info.url;
-      console.log(imageUrl)
-      setImageInput(imageUrl);
-      setShowWidget(true)
-      console.log(`image input is  ${imageInput}`);
+    setImageInput(event.info.url);
+    console.log(`image input should be ${event.info.url}`);
+    const imageUrl = event.info.url;
+    console.log(imageUrl)
+    setShowWidget(true);
+    console.log(`image input is  ${event.info.url}`);
     };
 
   const handleKeyDown = (event) => {
@@ -45,7 +45,11 @@ const CreatePost = ({setUpdated}) => {
       return;
     }
 
-    if (showWidget === false) {
+    if (event.target.getAttribute("data-button-id") !== "submit-post") {
+      return;
+    }
+
+    if (showWidget === false && imageInput !== "") {
       return
     }
 
@@ -95,8 +99,8 @@ const CreatePost = ({setUpdated}) => {
               autoComplete="off"
               autoFocus
             />
-            < UploadWidget handleImageUpload={handleImageUpload}/>
-            <button className="submit-post" onClick={handleSubmit}>
+            < UploadWidget handleImageUpload={handleImageUpload} buttonText="Upload Image"/>
+            <button data-button-id="submit-post" className="submit-post" onClick={handleSubmit}>
               Post
             </button>
           </div>

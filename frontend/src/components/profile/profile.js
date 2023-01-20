@@ -2,13 +2,39 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router";
 import "./profile.css";
 import Feed from "../feed/Feed";
+import UploadWidget from "../CreatePost/UploadWidget"
+import { AiFillHome, AiFillHeart } from "react-icons/ai";
+import { MdWork} from "react-icons/md";
+import { FaBirthdayCake,} from "react-icons/fa";
 
+ 
 const Profile = () => {
   const [profile, setProfile] = useState(null);
   const [selectedTab, setSelectedTab] = useState("posts");
   const [isUpdated, setIsUpdated] = useState(false);
   const token = window.localStorage.getItem("token");
+  const [imageInput, setImageInput] = useState("")
+  const[coverImageInput, setCoverImageInput] = useState("")
   const { user_id } = useParams();
+
+  const handleCoverImageUpload = async (event) => {
+    // Event listener to get the hosted image info
+      console.log(`Cover image input should be ${event.info.url}`);
+      const coverImageUrl = event.info.url;
+      console.log(coverImageUrl)
+      setCoverImageInput(coverImageUrl);
+      console.log(`Cover image input is  ${coverImageInput}`);
+    };
+
+    const handleProfileImageUpload  = async (event) => {
+      // Event listener to get the hosted image info
+        console.log(`image input should be ${event.info.url}`);
+        const imageUrl = event.info.url;
+        console.log(imageUrl)
+        setImageInput(imageUrl);
+        console.log(`image input is  ${imageInput}`);
+      };
+
 
   useEffect(() => {
     const fetchProfile = async () => {
@@ -26,6 +52,58 @@ const Profile = () => {
     };
     fetchProfile();
   }, [isUpdated]);
+
+  const handleSubmit = async (event) => {
+    if (event.target.getAttribute("data-button-id") === "cover-image-upload") {
+      // do something for button 1
+    } else  {
+      // do something for button 2
+    
+      event.preventDefault();
+      console.log(`image input during handlesubmits is ${imageInput}`)
+      if (imageInput === "") {
+        console.log('no image input!')
+      }
+      const userId = window.localStorage.getItem("user_id")
+      let response = await fetch(`/users/${userId}`, {
+        method: "PATCH",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify({ profilePicture: imageInput }),
+      });
+
+      if (response.status === 201) {
+        setImageInput("");
+        setIsUpdated(true);
+        console.log(`/users/${userId}`)
+      }
+    }
+  };
+
+  const handleCoverSubmit = async (event) => {
+    event.preventDefault();
+    console.log(`Cover image input during handlesubmits is ${coverImageInput}`)
+    if (coverImageInput === "") {
+      console.log('noCover image input!')
+    }
+    const userId = window.localStorage.getItem("user_id")
+    let response = await fetch(`/users/${userId}`, {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+      body: JSON.stringify({ coverPicture: coverImageInput }),
+    });
+
+    if (response.status === 201) {
+      setCoverImageInput("");
+      setIsUpdated(true);
+      console.log(`/users/${userId}`)
+    }
+  };
 
   const handleSendFriendRequest = async (event) => {
     event.preventDefault();
@@ -135,13 +213,13 @@ const Profile = () => {
             <div
               className="cover-photo"
               style={{
-                backgroundImage: `url(${"https://images.unsplash.com/photo-1608501078713-8e445a709b39?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8d2FsbHBhcGVyJTIwNGt8ZW58MHx8MHx8&w=1000&q=80"})`,
+                backgroundImage: `url(${profile.user.coverPicture})`,
               }}
             >
-              <div className="profile-picture-container">
+              <div className="profile-picture-container-page">
                 <img
-                  className="profile-picture"
-                  src="https://wallpapersmug.com/download/3840x2400/43b4da/dwayne-johnson-face-jumanji-welcome-to-the-jungle-8k.jpg"
+                  className="profile-picture-page"
+                  src={profile.user.profilePicture}
                   alt="profile"
                 />
               </div>
@@ -216,9 +294,24 @@ const Profile = () => {
           <div className="profile-container">
             {selectedTab === "about" ? (
               <div className="about-section">
-                <div>Bio: Stuff here</div>
-                <div>Birthday: 11/11/11</div>
-                <div>Other stuff idk</div>
+              <div className="about-card">
+                  <div className="about-card-header">About</div>
+                <div className="about-card-body">
+                  <div><AiFillHome /> Lives In: London</div>
+                  <div><MdWork /> Work: Burger King</div>
+                  <div><FaBirthdayCake /> Birthday: 11/11/11</div>
+                  <div><AiFillHeart /> Relationship Status: Single</div>
+                </div>
+              </div>
+              <div className="button-container">
+                </div>
+                <div className="button-container">
+                  <UploadWidget  handleImageUpload={handleProfileImageUpload} buttonText="Upload Profile Picture"/>
+                  <button data-button-id="profile-image-upload" onClick={handleSubmit}>Update Profile Picture</button>
+                  <UploadWidget handleImageUpload={handleCoverImageUpload} buttonText="Upload Cover Picture"/>
+                  <button data-button-id="cover-image-upload" onClick={handleCoverSubmit} >Update Cover Picture</button>
+              </div>
+
               </div>
             ) : (
               <Feed filter={user_id} />
