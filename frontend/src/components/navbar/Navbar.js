@@ -25,9 +25,9 @@ const Navbar = ({ navigate }) => {
         <nav data-cy="nav">
           {loggedIn && (
             <div>
-              <Link to={`/users/${loggedIn}`}>Profile</Link>
-              <Link to={`/friends/${loggedIn}`}>Friends</Link>
-              <Link to="/login" data-cy="logout" onClick={handleLogout}>Log out</Link>
+              <Link to={`/users/${loggedIn}`} className="nav-bar-link">Profile</Link>
+              <Link to={`/friends/${loggedIn}`} className="nav-bar-link">Friends</Link>
+              <Link to="/login" data-cy="logout" onClick={handleLogout} className="nav-bar-link">Log out</Link>
             </div>
           )}
           {!loggedIn && (

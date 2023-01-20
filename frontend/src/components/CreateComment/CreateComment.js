@@ -3,10 +3,6 @@ import "./CreateComment.css";
 import UploadWidget from '../CreatePost/UploadWidget'
 
 const CreateComment = ({post_id, setUpdated}) => {
-  
-  // Possibly take in setUpdated as a prop, then update this to true when we post a comment
-    // Above might need to go in post.js rather than createComment.js
-
   const [commentInput, setCommentInput] = useState("");
   const [showWidget, setShowWidget] = useState(false)
   const [imageInput, setImageInput] = useState("")

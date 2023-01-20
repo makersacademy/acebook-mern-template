@@ -1,4 +1,4 @@
-import "./FriendRequestSent.css";
+import "../FriendsPage/FriendsPage.css";
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
@@ -8,9 +8,9 @@ const FriendRequestSent = ({ requestedFriend, setFriendsUpdated }) => {
   // Do once back end for cancel sent friend request is sorted
   // Cancel sent friend request
   const handleClickCancel = () => {
-    fetch('/friends/cancel', {
+    fetch('/friends/cancel/', {
       method: "POST",
-      header: {
+      headers: {
         "Content-Type": "application/json",
         Authorization: `Bearer ${token}`
       },
@@ -26,11 +26,11 @@ const FriendRequestSent = ({ requestedFriend, setFriendsUpdated }) => {
   
   return (
     <div className="friend-request-sent-container">
-      {/* Profile picture of person sending friend request, with link to their profile */}
+      {/* Add profile picture of person sending friend request, with link to their profile */}
       <Link to={`/users/${requestedFriend._id}`} className="username-link">
-        <h4>{ requestedFriend.name }</h4>
+        <h3 className="f-username">{ requestedFriend.name }</h3>
       </Link>
-      <button className="friend-request-button" onClick={handleClickCancel}>Cancel friend request</button>
+      <button className="f-cancel-friend-request-button" onClick={handleClickCancel}>Cancel friend request</button>
     </div>
   );
 }

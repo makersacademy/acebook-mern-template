@@ -82,7 +82,7 @@
   background-color: #285593;
 }
 
-.tab-button.active {
+.tab-button:active {
   background-color: #285593;
 }
 
@@ -178,4 +178,13 @@
   font-size: 0.8rem; /* set the font size */
   cursor: pointer; /* change the cursor to a pointer when hovering over the button */
   width: 175px;
+}
+
+.accept-friend-request-button:hover, .reject-friend-request-button:hover,
+.cancel-friend-request-button:hover, .remove-friend-button:hover {
+  background-color: white;
+  color: #4267B2;
+  /* border-style: solid;
+  border: 0.5px;
+  border-color: #D9D9D9; */
 }
