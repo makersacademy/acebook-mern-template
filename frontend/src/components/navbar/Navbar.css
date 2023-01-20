@@ -37,6 +37,11 @@ a {
   font-size: 16px;
 }
 
+.nav-bar-link {
+  font-size: 18px;
+  padding-left: 16px;
+}
+
 /* .logout-button {
   background-color: transparent;
   border: none; 

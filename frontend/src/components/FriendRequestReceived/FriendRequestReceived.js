@@ -1,4 +1,4 @@
-import "./FriendRequestReceived.css";
+import "../FriendsPage/FriendsPage.css";
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
@@ -9,11 +9,14 @@ const FriendRequestReceived = ({ friendRequester, setFriendsUpdated }) => {
   const handleClickAccept = () => {
     fetch('/friends/accept', {
       method: "POST",
-      header: {
+      headers: {
         "Content-Type": "application/json",
         Authorization: `Bearer ${token}`
       },
-      body: JSON.stringify({ senderId: friendRequester._id, receiverId: window.localStorage.getItem("user_id") }),
+      body: JSON.stringify({
+        senderId: friendRequester._id,
+        receiverId: window.localStorage.getItem("user_id")
+      }),
     })
       .then(() => {
         setFriendsUpdated(true);
@@ -27,7 +30,7 @@ const FriendRequestReceived = ({ friendRequester, setFriendsUpdated }) => {
   const handleClickReject = () => {
     fetch('/friends/reject', {
       method: "POST",
-      header: {
+      headers: {
         "Content-Type": "application/json",
         Authorization: `Bearer ${token}`
       },
@@ -45,10 +48,10 @@ const FriendRequestReceived = ({ friendRequester, setFriendsUpdated }) => {
     <div className="friend-request-received-container">
       {/* Add profile picture of person sending friend request, with link to their profile */}
       <Link to={`/users/${friendRequester._id}`} className="username-link">
-        <h4>{ friendRequester.name }</h4>
+        <h3 className="f-username">{ friendRequester.name }</h3>
       </Link>
-      <button className="friend-request-button" onClick={handleClickAccept}>Accept</button>
-      <button className="friend-request-button" onClick={handleClickReject}>Reject</button>
+      <button className="f-accept-friend-request-button" onClick={handleClickAccept}>Accept</button>
+      <button className="f-reject-friend-request-button" onClick={handleClickReject}>Reject</button>
     </div>
   );
 }
