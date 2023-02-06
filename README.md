@@ -123,7 +123,7 @@ The signature is created using a 'secret', which must be kept private (i.e. not 
 Here, we've used an environment variable called `JWT_SECRET`, which you'll see used in the commands to start the application and run the tests (below). You can change the value of that environment variable to anything you like.
 ## Card wall
 
-REPLACE THIS TEXT WITH A LINK TO YOUR CARD WALL
+https://trello.com/b/m9vUEAAv/acebook
 
 ## Quickstart
 
