@@ -1,17 +1,20 @@
 import React, { useState } from 'react';
+//userid for post
 
-const CreatePostForm = () => {
+const CreatePostForm = ({ token, id }) => {
   const [message, setMessage] = useState('');
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log('hello');
+
     alert('Post submitted');
     setMessage('');
   };
   return (
     <>
       <form onSubmit={handleSubmit}>
-        {message}
+        {console.log('token: ', token)}
+
+        {console.log('i am the id: ', id)}
         <input
           id='post-input'
           placeholder='Whats on your mind?'
