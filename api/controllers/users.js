@@ -17,6 +17,7 @@ const UsersController = {
         // response is successfully created (note 201)
         // only returns a json object
         res.status(201).json({ message: 'OK' });
+        
       }
     });
   },
