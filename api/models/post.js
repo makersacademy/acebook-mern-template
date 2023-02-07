@@ -7,7 +7,11 @@ const mongoose = require('mongoose');
  */
 const PostSchema = new mongoose.Schema(
   {
-    message: String,
+    user_id: {
+      type: mongoose.Types.ObjectId,
+      ref: 'User',
+    },
+    message: { type: String, required: true },
   },
   { timestamps: true }
 );

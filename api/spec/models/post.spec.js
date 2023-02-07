@@ -52,4 +52,20 @@ describe('Post model', () => {
       });
     });
   });
+
+  it('should have a user_id field', (done) => {
+    const post = new Post({
+      user_id: mongoose.Types.ObjectId(),
+      message: 'some message',
+    });
+
+    post.save((err) => {
+      expect(err).toBeNull();
+      Post.findById(post._id, (err, post) => {
+        expect(err).toBeNull();
+        expect(post.user_id).toBeDefined();
+        done();
+      });
+    });
+  });
 });
