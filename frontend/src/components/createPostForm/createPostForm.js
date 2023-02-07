@@ -1,11 +1,12 @@
 import React, { useState } from 'react';
 
 const CreatePostForm = () => {
-  const [message, setMessage] = useState();
+  const [message, setMessage] = useState('');
   const handleSubmit = async (e) => {
     e.preventDefault();
     console.log('hello');
     alert('Post submitted');
+    setMessage('');
   };
   return (
     <>
