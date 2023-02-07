@@ -16,9 +16,11 @@ const LogInForm = ({ navigate }) => {
     })
 
     if(response.status !== 201) {
+      // if the user is not already signed in, render the login form
       console.log("yay")
       navigate('/login')
     } else {
+      // otherwise, redirect to the posts page
       console.log("oop")
       let data = await response.json()
       window.localStorage.setItem("token", data.token)
