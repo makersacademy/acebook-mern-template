@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import Post from '../post/Post'
+import Post from '../post/Post';
 
 const Feed = ({ navigate }) => {
   const [posts, setPosts] = useState([]);
@@ -26,14 +26,12 @@ const Feed = ({ navigate }) => {
     window.localStorage.removeItem("token")
     navigate('/login')
   }
-
+  
     if(token) {
-      console.log(window.localStorage.getItem("token"));
-
       return(
-        <>
+        <>        
           <h2>Posts</h2>
-            <button onClick={logout}>
+            <button onClick={ logout }>
               Logout
             </button>
           <div id='feed' role="feed">
@@ -44,7 +42,7 @@ const Feed = ({ navigate }) => {
         </>
       )
     } else {
-      navigate('/login')
+      navigate('/signin')
     }
 }
 

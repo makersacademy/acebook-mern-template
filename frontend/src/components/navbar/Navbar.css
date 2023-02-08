@@ -1,0 +1,32 @@
+/* .nav{
+  background-color: red;
+  color: green;
+} */
+
+.nav-container{
+  display: flex;
+  flex-direction: row;
+  background-color: #1778f2;
+  color: white;
+}
+
+.nav-list{
+  padding: 10px;
+  margin: 10px;
+  display: flex;
+  flex-direction: row;
+  list-style: none;
+}
+
+.logo{
+  margin-right: auto;
+  padding: 10px;
+}
+
+.nav-item{
+  
+}
+
+.nav-item:not(:last-child){
+  margin-right: 20px;
+}
