@@ -10,14 +10,23 @@ const secret = process.env.JWT_SECRET;
 
 describe("/posts", () => {
   beforeEach(async () => {
+    await User.deleteMany({});
     await Post.deleteMany({});
   });
-  afterAll(async () => {
+  afterEach(async () => {
+    await User.deleteMany({});
     await Post.deleteMany({});
   });
+
+  const createUser = async () => {
+    const response = await request(app)
+      .post("/users")
+      .send({ email: "scarlett@email.com", password: "1234" });
+  };
+
   describe("GET - users", () => {
     test("returns 401 when token missing", async () => {
-      let response = await request(app).get("/users");
+      let response = await request(app).get("/profile-page");
       expect(response.status).toEqual(401);
     });
     test("returns 1 post of user when token passed", async () => {
@@ -37,7 +46,7 @@ describe("/posts", () => {
         .set("Authorization", `Bearer ${token}`)
         .send({ user_id: user_id, message: "hello world" });
       let response = await request(app)
-        .get("/users")
+        .get("/profile-page")
         .set("Authorization", `Bearer ${token}`);
       expect(response.status).toBe(200);
     });
