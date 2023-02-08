@@ -20,10 +20,6 @@ const UsersController = {
       }
     });
   },
-
-  Index: (req, res) => {
-    res.status(401).json({ message: "Bad request" });
-  },
 };
 
 module.exports = UsersController;

@@ -59,11 +59,4 @@ describe("/users", () => {
       expect(users.length).toEqual(0);
     });
   });
-
-  describe("GET, with token missing", () => {
-    test("returns 401 when token missing", async () => {
-      let response = await request(app).get("/users");
-      expect(response.status).toEqual(401);
-    });
-  });
 });
