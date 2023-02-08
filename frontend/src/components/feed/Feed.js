@@ -26,7 +26,7 @@ const Feed = ({ navigate }) => {
     navigate("/login");
   };
 
-  const post = () => {};
+  const post = () => {}; // Added by Marta and David
 
   if (token) {
     return (
@@ -34,6 +34,13 @@ const Feed = ({ navigate }) => {
         <h2>Posts</h2>
         <button onClick={logout}>Logout</button>
         <button onClick={post}>Post</button>
+        {/* <input placeholder="Email" id="email" type='text' value={ email } onChange={handleEmailChange} /> */}
+        <input
+          placeholder="Write your post here"
+          id="post"
+          type="text"
+          value={post}
+        />
         <div id="feed" role="feed">
           {posts.map((post) => (
             <Post post={post} key={post._id} />
