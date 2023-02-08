@@ -23,11 +23,12 @@ const LogInForm = ({ navigate }) => {
       // otherwise, redirect to the posts page
       console.log("oop")
       let data = await response.json()
-      window.localStorage.setItem("token", data.token)
+      window.localStorage.setItem("token", data.token) // not sure what the window obeject is?
       navigate('/posts');
     }
   }
 
+  // React controlled components, update state when input values change
   const handleEmailChange = (event) => {
     setEmail(event.target.value)
   }

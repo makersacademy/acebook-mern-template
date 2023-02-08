@@ -26,8 +26,10 @@ const Feed = ({ navigate }) => {
     window.localStorage.removeItem("token")
     navigate('/login')
   }
-  
+
     if(token) {
+      console.log(window.localStorage.getItem("token"));
+
       return(
         <>
           <h2>Posts</h2>
@@ -42,7 +44,7 @@ const Feed = ({ navigate }) => {
         </>
       )
     } else {
-      navigate('/signin')
+      navigate('/login')
     }
 }
 

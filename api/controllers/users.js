@@ -5,8 +5,10 @@ const UsersController = {
     const user = new User(req.body);
     user.save((err) => {
       if (err) {
+        // if account already exists
         res.status(400).json({message: 'Bad request'})
       } else {
+        // account does not already exist
         res.status(201).json({ message: 'OK' });
       }
     });
