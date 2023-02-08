@@ -35,12 +35,27 @@ const LogInForm = ({ navigate }) => {
   }
 
 
-    return (
+  return (
+    <div>
+    <nav className="nav">
+        <a href="/posts" className="site-title">
+            Acebook
+        </a>
+        <ul>
+            <li>
+                <a href="/signup"> Signup </a>
+            </li>
+        </ul>
+   </nav>
+{/* )
+
+return ( */}
       <form onSubmit={handleSubmit}>
         <input placeholder='Email' id="email" type='text' value={ email } onChange={handleEmailChange} />
         <input placeholder='Password' id="password" type='password' value={ password } onChange={handlePasswordChange} />
         <input role='submit-button' id='submit' type="submit" value="Submit" />
       </form>
+    </div>
     );
 }
 

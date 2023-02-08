@@ -31,15 +31,61 @@ const SignUpForm = ({ navigate }) => {
   const handlePasswordChange = (event) => {
     setPassword(event.target.value)
   }
+  
+return (
+    <div>
+    <nav className="nav">
+        <a href="/posts" className="site-title">
+            Acebook
+        </a>
+        <ul>
+            <li>
+                <a href="/login"> Login </a>
+            </li>
+        </ul>
+   </nav>
 
-
-    return (
+      
       <form onSubmit={handleSubmit}>
           <input placeholder="Email" id="email" type='text' value={ email } onChange={handleEmailChange} />
           <input placeholder="Password" id="password" type='password' value={ password } onChange={handlePasswordChange} />
         <input id='submit' type="submit" value="Submit" />
       </form>
+      </div>
     );
 }
-
+console.log(SignUpForm)
 export default SignUpForm;
+
+//   We asked chatgpt to have a look and see if we did anything wrong and it sent back this which is almost exactly the same
+//   return (
+//     <div>
+//       <nav className="nav">
+//         <a href="/posts" className="site-title">
+//           Acebook
+//         </a>
+//         <ul>
+//           <li>
+//             <a href="/login"> Login </a>
+//           </li>
+//         </ul>
+//       </nav>
+
+//       <form onSubmit={handleSubmit}>
+//         <input
+//           placeholder="Email"
+//           id="email"
+//           type="text"
+//           value={email}
+//           onChange={handleEmailChange}
+//         /> <input
+//         placeholder="Password"
+//         id="password"
+//         type="password"
+//         value={password}
+//         onChange={handlePasswordChange}
+//       />
+//       <input id="submit" type="submit" value="Submit" />
+//     </form>
+//   </div>
+// );
