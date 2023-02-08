@@ -26,7 +26,7 @@ const Feed = ({ navigate }) => {
     navigate("/login");
   };
 
-  const post = () => {}; // Added by Marta and David
+  const post = () => {};
 
   if (token) {
     return (
@@ -34,7 +34,6 @@ const Feed = ({ navigate }) => {
         <h2>Posts</h2>
         <button onClick={logout}>Logout</button>
         <button onClick={post}>Post</button>
-        {/* <input placeholder="Email" id="email" type='text' value={ email } onChange={handleEmailChange} /> */}
         <input
           placeholder="Write your post here"
           id="post"
