@@ -7,6 +7,7 @@ const Feed = ({ navigate }) => {
   const [posts, setPosts] = useState([]);
   const [token, setToken] = useState(window.localStorage.getItem('token'));
   const [id, setId] = useState(window.localStorage.getItem('user_id'));
+  const [reload, setReload] = useState(false);
 
   useEffect(() => {
     if (token) {
@@ -20,11 +21,12 @@ const Feed = ({ navigate }) => {
           window.localStorage.setItem('token', data.token);
           setToken(window.localStorage.getItem('token'));
           setId(window.localStorage.getItem('user_id'));
-
+          console.log('i just fetched the data');
           setPosts(data.posts);
+          setReload(false);
         });
     }
-  }, []);
+  }, [reload]);
 
   const logout = () => {
     window.localStorage.removeItem('token');
@@ -36,10 +38,18 @@ const Feed = ({ navigate }) => {
       <>
         <h2>Posts</h2>
         <button onClick={logout}>Logout</button>
-        <CreatePostForm navigate={navigate} token={token} id={id} />
+        <CreatePostForm
+          navigate={navigate}
+          token={token}
+          id={id}
+          setReload={setReload}
+        />
         <div id='feed' role='feed'>
           {posts ? (
-            posts.map((post) => <Post post={post} key={post._id} />)
+            posts
+              .slice(0)
+              .reverse()
+              .map((post) => <Post post={post} key={post._id} />)
           ) : (
             <p>loading</p>
           )}
@@ -47,7 +57,7 @@ const Feed = ({ navigate }) => {
       </>
     );
   } else {
-    navigate('/signin');
+    navigate('/login');
   }
 };
 

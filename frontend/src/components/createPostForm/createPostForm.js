@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 //userid for post
 
-const CreatePostForm = ({ navigate, token, id }) => {
+const CreatePostForm = ({ navigate, token, id, setReload }) => {
   const [message, setMessage] = useState('');
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -23,10 +23,11 @@ const CreatePostForm = ({ navigate, token, id }) => {
       console.log('yay');
 
       let data = await response.json();
-      console.log(data)
+      console.log(data);
       alert('Post submitted');
       setMessage('');
       navigate('/posts');
+      setReload(true);
     }
   };
   return (
