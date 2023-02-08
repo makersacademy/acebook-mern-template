@@ -9,7 +9,7 @@ import Profile from "../profile/Profile";
 
 const App = () => {
   return (
-    <>
+    <div className="app-container">
       <Navbar />
       <Routes>
         <Route path="/posts" element={<Feed navigate={useNavigate()} />} />
@@ -20,7 +20,7 @@ const App = () => {
         />
         <Route path="/profile" element={<Profile navigate={useNavigate()} />} />
       </Routes>
-    </>
+    </div>
   );
 };
 
