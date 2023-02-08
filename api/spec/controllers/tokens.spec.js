@@ -3,7 +3,7 @@ const request = require("supertest");
 require("../mongodb_helper");
 const User = require("../../models/user");
 
-describe.skip("/tokens", () => {
+describe("/tokens", () => {
   beforeAll(() => {
     const user = new User({
       email: "test@test.com",
@@ -22,6 +22,8 @@ describe.skip("/tokens", () => {
     let response = await request(app).post("/tokens").send({
       email: "test@test.com",
       password: "12345678",
+      firstName: "John",
+      lastName: "Smith",
     });
     expect(response.status).toEqual(201);
     expect(response.body.token).not.toEqual(undefined);

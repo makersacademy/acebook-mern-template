@@ -7,6 +7,7 @@ const SignUpForm = ({ navigate }) => {
   const [password, setPassword] = useState("");
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
+  const [token, setToken] = useState(window.localStorage.getItem("token"));
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -15,6 +16,7 @@ const SignUpForm = ({ navigate }) => {
     fetch( '/users', {
       method: 'post',
       headers: {
+        'Authorization': `Bearer ${token}`,
         'Content-Type': 'application/json',
       },
       // this is what is sent to the backend
