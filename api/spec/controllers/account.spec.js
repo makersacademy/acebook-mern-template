@@ -35,15 +35,9 @@ describe("/posts", () => {
     await Post.deleteMany({});
   });
 
-  const createUser = async () => {
-    const response = await request(app)
-      .post("/users")
-      .send({ email: "scarlett@email.com", password: "1234" });
-  };
-
   describe("GET - users", () => {
     test("returns 401 when token missing", async () => {
-      let response = await request(app).get("/profile-page");
+      let response = await request(app).get("/account");
       expect(response.status).toEqual(401);
     });
     test("returns 1 post of user when token passed", async () => {
@@ -52,8 +46,9 @@ describe("/posts", () => {
         .set("Authorization", `Bearer ${token}`)
         .send({ user_id: user_id, message: "hello world" });
       let response = await request(app)
-        .get("/profile-page")
+        .get("/account")
         .set("Authorization", `Bearer ${token}`);
+
       expect(response.status).toBe(200);
 
       let message = response.body.posts.map((post) => post.message);
@@ -68,7 +63,7 @@ describe("/posts", () => {
     await post1.save();
     await post2.save();
     let response = await request(app)
-      .get("/profile-page")
+      .get("/account")
       .set("Authorization", `Bearer ${token}`)
       .send({ token: token });
     let newPayload = JWT.decode(response.body.token, process.env.JWT_SECRET);
@@ -82,7 +77,7 @@ describe("/posts", () => {
       let post2 = new Post({ user_id: user_id, message: "hola!" });
       await post1.save();
       await post2.save();
-      let response = await request(app).get("/profile-page");
+      let response = await request(app).get("/account");
       expect(response.body.posts).toEqual(undefined);
     });
 
@@ -91,7 +86,7 @@ describe("/posts", () => {
       let post2 = new Post({ user_id: user_id, message: "hola!" });
       await post1.save();
       await post2.save();
-      let response = await request(app).get("/profile-page");
+      let response = await request(app).get("/account");
       expect(response.body.token).toEqual(undefined);
     });
   });

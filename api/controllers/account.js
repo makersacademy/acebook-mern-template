@@ -1,7 +1,7 @@
 const Post = require("../models/post");
 const TokenGenerator = require("../models/token_generator");
 
-const ProfilePageController = {
+const AccountController = {
   Index: (req, res) => {
     Post.find({ user_id: req.user_id }, async (err, posts) => {
       if (err) {
@@ -17,4 +17,4 @@ const ProfilePageController = {
   },
 };
 
-module.exports = ProfilePageController;
+module.exports = AccountController;
