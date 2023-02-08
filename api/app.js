@@ -3,7 +3,6 @@ const express = require('express');
 const path = require('path');
 const logger = require('morgan');
 const JWT = require('jsonwebtoken');
-const multer = require('multer');
 
 const postsRouter = require('./routes/posts');
 const tokensRouter = require('./routes/tokens');
@@ -12,23 +11,7 @@ const accountRouter = require('./routes/account');
 
 const app = express();
 
-// Setup for receiving JSON and multi-part form data (e.g. image uploads)
 app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
-
-// Setup for multer to handle file uploads
-const storage = multer.diskStorage({
-  destination: function (req, file, cb) {
-    cb(null, './public/images');
-  },
-  filename: function (req, file, cb) {
-    cb(
-      null,
-      file.fieldname + '-' + Date.now() + path.extname(file.originalname)
-    );
-  },
-});
-const upload = multer({ storage: storage });
 
 app.use(logger('dev'));
 app.use(express.json());
@@ -38,7 +21,6 @@ app.use(express.static(path.join(__dirname, 'public')));
 const tokenChecker = (req, res, next) => {
   let token;
   const authHeader = req.get('Authorization');
-
   if (authHeader) {
     token = authHeader.slice(7);
   }

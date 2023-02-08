@@ -1,7 +1,4 @@
 const User = require('../models/user');
-const multer = require('multer');
-const storage = multer.memoryStorage();
-const upload = require('../routes/middleware');
 
 const UsersController = {
   Create: (req, res) => {
