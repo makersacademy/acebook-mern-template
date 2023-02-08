@@ -1,4 +1,4 @@
-const User = require('../models/user');
+const User = require("../models/user");
 
 /**
  * Actions for Users
@@ -12,12 +12,13 @@ const UsersController = {
     user.save((err) => {
       if (err) {
         // error sets resonse status and returns json object
-        res.status(400).json({ message: 'Bad request' });
+        res.status(400).json({ message: "Bad request" });
       } else {
         // response is successfully created (note 201)
         // only returns a json object
-        res.status(201).json({ message: 'OK' });
-        
+
+        res.status(201).json({ message: "OK" });
+
       }
     });
   },

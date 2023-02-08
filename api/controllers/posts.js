@@ -1,5 +1,5 @@
-const Post = require('../models/post');
-const TokenGenerator = require('../models/token_generator');
+const Post = require("../models/post");
+const TokenGenerator = require("../models/token_generator");
 
 const PostsController = {
   Index: (req, res) => {
@@ -28,7 +28,7 @@ const PostsController = {
       const token = await TokenGenerator.jsonwebtoken(req.user_id);
       // response is successful created (notice 201)
       // currently only sends back json object with following details
-      res.status(201).json({ message: 'OK', token: token });
+      res.status(201).json({ message: "OK", token: token });
     });
   },
 };
