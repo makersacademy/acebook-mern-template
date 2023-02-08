@@ -14,6 +14,7 @@ describe("User model", () => {
     const user = new User({
       email: "someone@example.com",
       password: "password",
+
     });
     expect(user.email).toEqual("someone@example.com");
   });
@@ -34,24 +35,30 @@ describe("User model", () => {
     });
   });
 
-  it("can save a user", (done) => {
-    const user = new User({
-      email: "someone@example.com",
-      password: "password",
-    });
-
-    user.save((err) => {
-      expect(err).toBeNull();
-
-      User.find((err, users) => {
-        expect(err).toBeNull();
-
-        expect(users[0]).toMatchObject({
-          email: "someone@example.com",
-          password: "password",
-        });
-        done();
+    it('can save a user with an array of numbers', (done) => {
+      const user = new User({
+        email: "someone@example.com",
+        password: "password",
+        firstName: "Rachel",
+        surname: "Newby",
+        friendsList: [1, 2, 3]
       });
+
+      user.save((err) => {
+        expect(err).toBeNull();
+  
+        User.find((err, users) => {
+          expect(err).toBeNull();
+  
+          expect(users[0].toJSON()).toMatchObject({
+            email: "someone@example.com",
+            password: "password",
+            firstName: "Rachel",
+            surname: "Newby",
+            friendsList: [1, 2, 3]
+          });
+          done();
+      })
     });
-  });
+  })
 });
