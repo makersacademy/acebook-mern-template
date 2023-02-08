@@ -5,6 +5,8 @@ const SignUpForm = ({ navigate }) => {
   // React hooks
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -15,7 +17,8 @@ const SignUpForm = ({ navigate }) => {
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({ email: email, password: password })
+      // this is what is sent to the backend
+      body: JSON.stringify({ email: email, password: password, firstName: firstName, lastName: lastName })
     })
       .then(response => {
         if(response.status === 201) {
@@ -35,11 +38,19 @@ const SignUpForm = ({ navigate }) => {
     setPassword(event.target.value)
   }
 
+  const handleFirstNameChange = (event) => {
+    setFirstName(event.target.value)
+  }
+
+  const handleLastNameChange = (event) => {
+    setLastName(event.target.value)
+  }
+
     // returning of jsx, this is what shows on the page
     return (
-      <>
-      <h1>Sign Up</h1>
-        <form onSubmit={handleSubmit}>
+      <div className="signUpForm">
+        <h1>Sign Up</h1>
+          <form onSubmit={handleSubmit}>
             <div>
               <div>Email</div><br />
               <input placeholder="eg j.smith@email.com" id="email" type='text' value={ email } onChange={handleEmailChange} />
@@ -51,19 +62,20 @@ const SignUpForm = ({ navigate }) => {
             </div>
             <br />
             <div>
-              <div>First Name</div><br />
-              <input placeholder="eg John" id="password" type='password' value={ password } onChange={handlePasswordChange} />
+              <div>First Name</div><br /> 
+              <input placeholder="eg John" id="firstName" type='firstName' value={ firstName } onChange={handleFirstNameChange} />
             </div>
             <br />
             <div>
               <div>Last Name</div><br />
-              <input placeholder="eg Smith" id="password" type='password' value={ password } onChange={handlePasswordChange} />
+              <input placeholder="eg Smith" id="lastName" type='lastName' value={ lastName } onChange={handleLastNameChange} />
             </div>
             <br />
           <input id='submit' type="submit" value="Submit" />
         </form>
-      </>
+      </div>
     );
 }
 
 export default SignUpForm;
+
