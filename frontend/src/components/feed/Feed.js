@@ -38,7 +38,7 @@ const Feed = ({ navigate }) => {
           placeholder="Write your post here"
           id="post"
           type="text"
-          value={post}
+          defaultValue={post}
         />
         <div id="feed" role="feed">
           {posts.map((post) => (
