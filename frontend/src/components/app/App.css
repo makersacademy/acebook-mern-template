@@ -1,0 +1,20 @@
+.app-container{
+    max-width: 800px;
+    border-radius: 4px;
+    background-color: #ddd;
+    margin: auto;
+    margin-top: 44px;
+    padding: 0;
+    min-height: 400px;
+    
+}
+
+form {
+    padding:12px;
+}
+form input, button{
+    padding: 8px;
+    border-radius: 4px;
+    margin-right: 12px;
+    border: solid 1px #333
+}
