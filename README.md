@@ -2,6 +2,9 @@
 
 In this project, you are tasked with working on an existing application. A significant part of the challenge will be to familiarise yourself with the codebase you've inherited, as you work to **improve and extend** it.
 
+## Team Charter 
+
+https://docs.google.com/document/d/1msbIhL9wBZz-WyXMNL7pRJ3V3kx_nkSkFzjr4wYDQkw/edit
 ## Videos
 
 These videos complement the docs below.
