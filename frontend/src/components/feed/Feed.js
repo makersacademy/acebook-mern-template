@@ -35,9 +35,9 @@ const Feed = ({ navigate }) => {
       return(
         <>
           <h2 className='h2'>Posts</h2>
-            <button className='btn' onClick={() => setForm(!form) }>Add Post</button>
+            <button className='deleteButton' onClick={() => setForm(!form) }>Add Post</button>
                       {form && <PostForm />}
-            <button className='btn' onClick={logout}>
+            <button className='deleteButton' onClick={logout}>
               Logout
             </button>
           <div id='feed' role="feed">
