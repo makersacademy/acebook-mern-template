@@ -1,16 +1,16 @@
-const app = require("../../app");
-const request = require("supertest");
-require("../mongodb_helper");
-const Post = require("../../models/post");
-const User = require("../../models/user");
-const JWT = require("jsonwebtoken");
+const app = require('../../app');
+const request = require('supertest');
+require('../mongodb_helper');
+const Post = require('../../models/post');
+const User = require('../../models/user');
+const JWT = require('jsonwebtoken');
 const secret = process.env.JWT_SECRET;
 
 let token;
 
-describe("/posts", () => {
+describe('/posts', () => {
   beforeAll(async () => {
-    const user = new User({ email: "test@test.com", password: "12345678" });
+    const user = new User({ email: 'test@test.com', password: '12345678' });
     await user.save();
     user_id = user._id;
     token = JWT.sign(
@@ -34,95 +34,95 @@ describe("/posts", () => {
     await Post.deleteMany({});
   });
 
-  describe("POST, when token is present", () => {
-    test("responds with a 201", async () => {
+  describe('POST, when token is present', () => {
+    test('responds with a 201', async () => {
       let response = await request(app)
-        .post("/posts")
-        .set("Authorization", `Bearer ${token}`)
-        .send({ user_id: user_id, message: "hello world", token: token });
+        .post('/posts')
+        .set('Authorization', `Bearer ${token}`)
+        .send({ user_id: user_id, message: 'hello world', token: token });
 
       expect(response.status).toEqual(201);
     });
 
-    test("creates a new post", async () => {
+    test('creates a new post', async () => {
       await request(app)
-        .post("/posts")
-        .set("Authorization", `Bearer ${token}`)
-        .send({ user_id: user_id, message: "hello world", token: token });
+        .post('/posts')
+        .set('Authorization', `Bearer ${token}`)
+        .send({ user_id: user_id, message: 'hello world', token: token });
       let posts = await Post.find();
       expect(posts.length).toEqual(1);
-      expect(posts[0].message).toEqual("hello world");
+      expect(posts[0].message).toEqual('hello world');
     });
 
-    test("returns a new token", async () => {
+    test('returns a new token', async () => {
       let response = await request(app)
-        .post("/posts")
-        .set("Authorization", `Bearer ${token}`)
-        .send({ user_id: user_id, message: "hello world", token: token });
+        .post('/posts')
+        .set('Authorization', `Bearer ${token}`)
+        .send({ user_id: user_id, message: 'hello world', token: token });
       let newPayload = JWT.decode(response.body.token, process.env.JWT_SECRET);
       let originalPayload = JWT.decode(token, process.env.JWT_SECRET);
       expect(newPayload.iat > originalPayload.iat).toEqual(true);
     });
   });
 
-  describe("POST, when token is missing", () => {
-    test("responds with a 401", async () => {
+  describe('POST, when token is missing', () => {
+    test('responds with a 401', async () => {
       let response = await request(app)
-        .post("/posts")
-        .send({ user_id: user_id, message: "hello again world" });
+        .post('/posts')
+        .send({ user_id: user_id, message: 'hello again world' });
       expect(response.status).toEqual(401);
     });
 
-    test("a post is not created", async () => {
+    test('a post is not created', async () => {
       await request(app)
-        .post("/posts")
-        .send({ user_id: user_id, message: "hello again world" });
+        .post('/posts')
+        .send({ user_id: user_id, message: 'hello again world' });
       let posts = await Post.find();
       expect(posts.length).toEqual(0);
     });
 
-    test("a token is not returned", async () => {
+    test('a token is not returned', async () => {
       let response = await request(app)
-        .post("/posts")
-        .send({ user_id: user_id, message: "hello again world" });
+        .post('/posts')
+        .send({ user_id: user_id, message: 'hello again world' });
       expect(response.body.token).toEqual(undefined);
     });
   });
 
-  describe("GET, when token is present", () => {
-    test("returns every post in the collection", async () => {
-      let post1 = new Post({ user_id: user_id, message: "howdy!" });
-      let post2 = new Post({ user_id: user_id, message: "hola!" });
+  describe('GET, when token is present', () => {
+    test('returns every post in the collection', async () => {
+      let post1 = new Post({ user_id: user_id, message: 'howdy!' });
+      let post2 = new Post({ user_id: user_id, message: 'hola!' });
       await post1.save();
       await post2.save();
       let response = await request(app)
-        .get("/posts")
-        .set("Authorization", `Bearer ${token}`)
+        .get('/posts')
+        .set('Authorization', `Bearer ${token}`)
         .send({ token: token });
       let messages = response.body.posts.map((post) => post.message);
-      expect(messages).toEqual(["howdy!", "hola!"]);
+      expect(messages).toEqual(['howdy!', 'hola!']);
     });
 
-    test("the response code is 200", async () => {
-      let post1 = new Post({ user_id: user_id, message: "howdy!" });
-      let post2 = new Post({ user_id: user_id, message: "hola!" });
+    test('the response code is 200', async () => {
+      let post1 = new Post({ user_id: user_id, message: 'howdy!' });
+      let post2 = new Post({ user_id: user_id, message: 'hola!' });
       await post1.save();
       await post2.save();
       let response = await request(app)
-        .get("/posts")
-        .set("Authorization", `Bearer ${token}`)
+        .get('/posts')
+        .set('Authorization', `Bearer ${token}`)
         .send({ token: token });
       expect(response.status).toEqual(200);
     });
 
-    test("returns a new token", async () => {
-      let post1 = new Post({ user_id: user_id, message: "howdy!" });
-      let post2 = new Post({ user_id: user_id, message: "hola!" });
+    test('returns a new token', async () => {
+      let post1 = new Post({ user_id: user_id, message: 'howdy!' });
+      let post2 = new Post({ user_id: user_id, message: 'hola!' });
       await post1.save();
       await post2.save();
       let response = await request(app)
-        .get("/posts")
-        .set("Authorization", `Bearer ${token}`)
+        .get('/posts')
+        .set('Authorization', `Bearer ${token}`)
         .send({ token: token });
       let newPayload = JWT.decode(response.body.token, process.env.JWT_SECRET);
       let originalPayload = JWT.decode(token, process.env.JWT_SECRET);
@@ -130,45 +130,45 @@ describe("/posts", () => {
     });
   });
 
-  describe("GET, when token is missing", () => {
-    test("returns no posts", async () => {
-      let post1 = new Post({ user_id: user_id, message: "howdy!" });
-      let post2 = new Post({ user_id: user_id, message: "hola!" });
+  describe('GET, when token is missing', () => {
+    test('returns no posts', async () => {
+      let post1 = new Post({ user_id: user_id, message: 'howdy!' });
+      let post2 = new Post({ user_id: user_id, message: 'hola!' });
       await post1.save();
       await post2.save();
-      let response = await request(app).get("/posts");
+      let response = await request(app).get('/posts');
       expect(response.body.posts).toEqual(undefined);
     });
 
-    test("the response code is 401", async () => {
-      let post1 = new Post({ user_id: user_id, message: "howdy!" });
-      let post2 = new Post({ user_id: user_id, message: "hola!" });
+    test('the response code is 401', async () => {
+      let post1 = new Post({ user_id: user_id, message: 'howdy!' });
+      let post2 = new Post({ user_id: user_id, message: 'hola!' });
       await post1.save();
       await post2.save();
-      let response = await request(app).get("/posts");
+      let response = await request(app).get('/posts');
       expect(response.status).toEqual(401);
     });
 
-    test("does not return a new token", async () => {
-      let post1 = new Post({ user_id: user_id, message: "howdy!" });
-      let post2 = new Post({ user_id: user_id, message: "hola!" });
+    test('does not return a new token', async () => {
+      let post1 = new Post({ user_id: user_id, message: 'howdy!' });
+      let post2 = new Post({ user_id: user_id, message: 'hola!' });
       await post1.save();
       await post2.save();
-      let response = await request(app).get("/posts");
+      let response = await request(app).get('/posts');
       expect(response.body.token).toEqual(undefined);
     });
   });
 
-  describe("DELETE posts", () => {
-    test("deletes post with valid token", async () => {
-      let post1 = new Post({ user_id: user_id, message: "howdy!" });
+  describe('DELETE posts', () => {
+    test('deletes post with valid token', async () => {
+      let post1 = new Post({ user_id: user_id, message: 'howdy!' });
       const savedPost = await post1.save();
 
       const p_id = await savedPost._id;
 
       let response = await request(app)
-        .delete("/posts")
-        .set("Authorization", `Bearer ${token}`)
+        .delete('/posts')
+        .set('Authorization', `Bearer ${token}`)
         .send({ _id: p_id });
       expect(response.status).toBe(204);
 
@@ -176,42 +176,42 @@ describe("/posts", () => {
       expect(posts.length).toEqual(0);
     });
 
-    test("returns 401 without token", async () => {
-      let post1 = new Post({ user_id: user_id, message: "howdy!" });
+    test('returns 401 without token', async () => {
+      let post1 = new Post({ user_id: user_id, message: 'howdy!' });
       const savedPost = await post1.save();
       const p_id = await savedPost._id;
 
-      let response = await request(app).delete("/posts").send({ _id: p_id });
+      let response = await request(app).delete('/posts').send({ _id: p_id });
       expect(response.status).toBe(401);
     });
   });
 
-  describe("PUT updates posts", () => {
-    it("updates a post", async () => {
-      let post1 = new Post({ user_id: user_id, message: "howdy!" });
+  describe('PUT updates posts', () => {
+    it('updates a post', async () => {
+      let post1 = new Post({ user_id: user_id, message: 'howdy!' });
       const savedPost = await post1.save();
 
       const p_id = await savedPost._id;
 
       let response = await request(app)
-        .put("/posts")
-        .set("Authorization", `Bearer ${token}`)
-        .send({ _id: p_id, message: "hello world" });
+        .put('/posts')
+        .set('Authorization', `Bearer ${token}`)
+        .send({ _id: p_id, message: 'hello world' });
 
       expect(response.status).toBe(204);
       let posts = await Post.find();
-      expect(posts[0].message).toBe("hello world");
+      expect(posts[0].message).toBe('hello world');
     });
 
-    it("returns 401 when no token", async () => {
-      let post1 = new Post({ user_id: user_id, message: "howdy!" });
+    it('returns 401 when no token', async () => {
+      let post1 = new Post({ user_id: user_id, message: 'howdy!' });
       const savedPost = await post1.save();
 
       const p_id = await savedPost._id;
 
       let response = await request(app)
-        .put("/posts")
-        .send({ _id: p_id, message: "hello world" });
+        .put('/posts')
+        .send({ _id: p_id, message: 'hello world' });
 
       expect(response.status).toBe(401);
     });

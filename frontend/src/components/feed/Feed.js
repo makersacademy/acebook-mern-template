@@ -1,36 +1,38 @@
-import React, { useEffect, useState } from "react";
-import CreatePostForm from "../createPostForm/createPostForm";
+import React, { useEffect, useState } from 'react';
+import CreatePostForm from '../createPostForm/createPostForm';
 
-import Post from "../post/Post";
+import Post from '../post/Post';
 
 const Feed = ({ navigate, path }) => {
   const [posts, setPosts] = useState([]);
-  const [token, setToken] = useState(window.localStorage.getItem("token"));
-  const [id, setId] = useState(window.localStorage.getItem("user_id"));
+  const [token, setToken] = useState(window.localStorage.getItem('token'));
+  const [id, setId] = useState(window.localStorage.getItem('user_id'));
   const [reload, setReload] = useState(false);
 
   useEffect(() => {
     if (token) {
-      fetch(path || "/posts", {
+      fetch(path || '/posts', {
         headers: {
           Authorization: `Bearer ${token}`,
         },
       })
         .then((response) => response.json())
         .then(async (data) => {
-          window.localStorage.setItem("token", data.token);
-          setToken(window.localStorage.getItem("token"));
-          setId(window.localStorage.getItem("user_id"));
-          console.log("i just fetched the data");
+          window.localStorage.setItem('token', data.token);
+          setToken(window.localStorage.getItem('token'));
+          setId(window.localStorage.getItem('user_id'));
+          console.log('i just fetched the data');
           setPosts(data.posts);
           setReload(false);
         });
+    } else {
+      navigate('/login');
     }
   }, [reload]);
 
   const logout = () => {
-    window.localStorage.removeItem("token");
-    navigate("/login");
+    window.localStorage.removeItem('token');
+    navigate('/login');
   };
 
   if (token) {
@@ -56,8 +58,6 @@ const Feed = ({ navigate, path }) => {
         </div>
       </>
     );
-  } else {
-    navigate("/login");
   }
 };
 export default Feed;
