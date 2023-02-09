@@ -37,8 +37,10 @@ const LogInForm = ({ navigate }) => {
 
 
   return (
-    <div>
+    <div className="logInForm">
+      <br></br>
     <nav className="nav">
+      
         <a href="/posts" className="site-title">
             Acebook
         </a>
@@ -51,9 +53,15 @@ const LogInForm = ({ navigate }) => {
 {/* )
 
 return ( */}
+        <b>
+          
+        </b>
       <form onSubmit={handleSubmit}>
+      <div></div><br />
         <input placeholder='Email' id="email" type='text' value={ email } onChange={handleEmailChange} />
+        <div></div><br />
         <input placeholder='Password' id="password" type='password' value={ password } onChange={handlePasswordChange} />
+        <div></div><br />
         <input role='submit-button' id='submit' type="submit" value="Submit" />
       </form>
     </div>
