@@ -36,3 +36,9 @@ padding: 0 1rem;
 .signUpForm {
   text-align: center;
 }
+
+.logInForm {
+  text-align: center;
+  padding-top: px 40;
+  margin-top: px 40;
+}
