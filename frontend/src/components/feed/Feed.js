@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+
 import Post from '../post/Post'
 import './Feed.css';
 
@@ -33,11 +34,13 @@ const Feed = ({ navigate }) => {
   
     if(token) {
       return(
+
         <>
           <h2 className='h2'>Posts</h2>
             <button className='deleteButton' onClick={() => setForm(!form) }>Add Post</button>
                       {form && <PostForm />}
             <button className='deleteButton' onClick={logout}>
+
               Logout
             </button>
           <div id='feed' role="feed">
@@ -48,7 +51,7 @@ const Feed = ({ navigate }) => {
         </>
       )
     } else {
-      navigate('/signin')
+      navigate('/login')
     }
 }
 
