@@ -1,23 +1,21 @@
 const User = require('../models/user');
 
-/**
- * Actions for Users
- * Create: ***
- */
 const UsersController = {
   Create: (req, res) => {
-    // create new instance of User from request info
-    const user = new User(req.body);
-    // save this to the database
+    const user = new User({
+      email: req.body.email,
+      password: req.body.password,
+    });
+
+    if (req.file) {
+      user.image = req.file.buffer;
+    }
+
     user.save((err) => {
       if (err) {
-        // error sets resonse status and returns json object
         res.status(400).json({ message: 'Bad request' });
       } else {
-        // response is successfully created (note 201)
-        // only returns a json object
         res.status(201).json({ message: 'OK' });
-        
       }
     });
   },
