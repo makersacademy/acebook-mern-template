@@ -98,4 +98,16 @@ describe('User model', () => {
       done();
     });
   });
+  it('should allow bios to be added to the user model', async () => {
+    const user = new User({
+      email: 'someone@example.com',
+      password: 'password',
+    });
+    const newBio = 'This is my new bio!';
+    user.bio = newBio;
+    await user.save();
+    const updatedUser = await User.findOne({ _id: user._id });
+    console.log(updatedUser);
+    expect(updatedUser.bio).toBe(newBio);
+  });
 });
