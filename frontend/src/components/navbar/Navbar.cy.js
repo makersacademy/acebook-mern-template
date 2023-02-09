@@ -15,4 +15,11 @@ describe("Navbar", () => {
     cy.get('a')
     .eq(0).click();
   });
+
+  it("clicks Account logo", () => {
+    cy.mount(<MemoryRouter><Navbar/></MemoryRouter>)
+    
+    cy.get('a')
+    .eq(3).click();
+  });
 });
