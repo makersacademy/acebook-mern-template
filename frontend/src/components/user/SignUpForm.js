@@ -39,6 +39,14 @@ const SignUpForm = ({ navigate }) => {
   const handlePasswordChange = (event) => {
     setPassword(event.target.value)
   }
+
+  const handleFirstNameChange = (event) => {
+    setFirstName(event.target.value)
+  }
+
+  const handleLastNameChange = (event) => {
+    setLastName(event.target.value)
+  }
   
 return (
     <div>
@@ -53,16 +61,10 @@ return (
         </ul>
    </nav>
 
-  const handleFirstNameChange = (event) => {
-    setFirstName(event.target.value)
-  }
+  
 
-  const handleLastNameChange = (event) => {
-    setLastName(event.target.value)
-  }
-
-    // returning of jsx, this is what shows on the page
-    return (
+    {/* // returning of jsx, this is what shows on the page
+    return ( */}
       <div className="signUpForm">
         <h1>Sign Up</h1>
           <form onSubmit={handleSubmit}>
@@ -88,6 +90,7 @@ return (
             <br />
           <input id='submit' type="submit" value="Submit" />
         </form>
+      </div>
       </div>
     );
 }
