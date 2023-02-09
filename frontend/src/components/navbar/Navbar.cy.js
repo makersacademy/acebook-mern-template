@@ -48,4 +48,11 @@ describe("Navbar", () => {
     
     cy.contains('a', 'Acebook-Air').should('not.have.attr', 'href', '#undefined');
   });
+
+  //#7
+  it("confirms that Acebook-Air contains the right link '/posts'", () => {
+    cy.mount(<MemoryRouter><Navbar/></MemoryRouter>)
+    
+    cy.contains('a', 'Acebook-Air').should('have.attr', 'href', '/posts');
+  });
 });
