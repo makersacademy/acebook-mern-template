@@ -1,12 +1,13 @@
 import React from 'react';
+import './Post.css';
 
 const Post = ({post}) => {
-  console.log('posts page')
+
   return(
-    <div>
+    <div className="post">
       <article data-cy="post" key={ post._id }>{ post.message }</article>
     </div>
   )
 }
-
 export default Post;
+

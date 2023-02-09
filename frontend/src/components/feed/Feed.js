@@ -1,9 +1,14 @@
 import React, { useEffect, useState } from 'react';
-import Post from '../post/Post';
+
+import Post from '../post/Post'
+import './Feed.css';
+
+import PostForm from '../post/PostForm';
 
 const Feed = ({ navigate }) => {
   const [posts, setPosts] = useState([]);
   const [token, setToken] = useState(window.localStorage.getItem("token"));
+  const [form, setForm] = useState(false);
 
   useEffect(() => {
     if(token) {
@@ -29,9 +34,13 @@ const Feed = ({ navigate }) => {
   
     if(token) {
       return(
-        <>        
-          <h2>Posts</h2>
-            <button onClick={ logout }>
+
+        <>
+          <h2 className='h2'>Posts</h2>
+            <button className='deleteButton' onClick={() => setForm(!form) }>Add Post</button>
+                      {form && <PostForm />}
+            <button className='deleteButton' onClick={logout}>
+
               Logout
             </button>
           <div id='feed' role="feed">
