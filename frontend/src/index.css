@@ -12,6 +12,27 @@ code {
     monospace;
 }
 
+
+.nav {
+background-color: blue;
+color: white;
+display: flex;
+justify-content: space-between;
+align-items: center;
+gap: 2rem;
+padding: 0 1rem;
+}
+
+.site-title {
+  font-size: 2rem;
+}
+
+.nav a {
+  color: inherit;
+  text-decoration: none;
+
+}
+
 .signUpForm {
   text-align: center;
 }

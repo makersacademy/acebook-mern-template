@@ -39,6 +39,19 @@ const SignUpForm = ({ navigate }) => {
   const handlePasswordChange = (event) => {
     setPassword(event.target.value)
   }
+  
+return (
+    <div>
+    <nav className="nav">
+        <a href="/posts" className="site-title">
+            Acebook
+        </a>
+        <ul>
+            <li>
+                <a href="/login"> Login </a>
+            </li>
+        </ul>
+   </nav>
 
   const handleFirstNameChange = (event) => {
     setFirstName(event.target.value)
@@ -78,6 +91,5 @@ const SignUpForm = ({ navigate }) => {
       </div>
     );
 }
-
+console.log(SignUpForm)
 export default SignUpForm;
-
