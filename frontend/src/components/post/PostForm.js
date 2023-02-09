@@ -27,20 +27,20 @@ const PostForm = ({post}) => {
         }
       }
 
-    const handlePostChange = (event) => {
+    const handlePostInputChange = (event) => {
+      //updates the current content inside the input html tag
         setNewPost(event.target.value)
       }
 
   return(
-  
 
     <div>
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={handleSubmit}> 
             <input 
                 placeholder='Add new post' 
                 id="post" type='text'
                 value={newPost}
-                onChange={handlePostChange}
+                onChange={handlePostInputChange} // we are invoking the function that keeps track of what is inside the input
             />
             <button type='submit'>create post</button>
         </form>
