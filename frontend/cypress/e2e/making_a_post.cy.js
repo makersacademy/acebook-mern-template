@@ -18,13 +18,7 @@ it("tests to see if the post button and box works properly", () => {
     cy.get('#message').type('cypress test 2');
     cy.get('#submit').click();
     cy.url().should('contains', 'http://localhost:3000/posts');
-    // cy.get('#feed').should('contains', 'cypress test 2')
     
-    // cy.visit('http://localhost:3000/posts');
-    // cy.get('#message').click();
-    // cy.get('#message').type('this is my cypress test');
-    // cy.get('#submit').click();
-    // cy.url().should('contains', 'http://localhost:3000/posts');
-
+    // cy.get('#feed').should('contains', 'cypress test 2')
   })
 })
