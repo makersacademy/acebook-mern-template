@@ -3,7 +3,7 @@ import CreatePostForm from '../createPostForm/createPostForm';
 
 import Post from '../post/Post';
 
-const Feed = ({ navigate }) => {
+const Feed = ({ navigate, path }) => {
   const [posts, setPosts] = useState([]);
   const [token, setToken] = useState(window.localStorage.getItem('token'));
   const [id, setId] = useState(window.localStorage.getItem('user_id'));
@@ -11,7 +11,7 @@ const Feed = ({ navigate }) => {
 
   useEffect(() => {
     if (token) {
-      fetch('/posts', {
+      fetch(path || '/posts', {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -60,5 +60,4 @@ const Feed = ({ navigate }) => {
     );
   }
 };
-
 export default Feed;

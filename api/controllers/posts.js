@@ -13,6 +13,7 @@ const PostsController = {
       res.status(200).json({ posts: posts, token: token });
     });
   },
+
   Create: (req, res) => {
     const post = new Post(req.body);
     post.save(async (err) => {
