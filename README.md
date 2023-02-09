@@ -1,4 +1,9 @@
-Scripts:
+# Acebook
+
+In this project, you are tasked with working on an existing application. A significant part of the challenge will be to familiarise yourself with the codebase you've inherited, as you work to **improve and extend** it.
+
+# Scripts:
+
 Frontend -
 "npm run start-front-end-server" = "JWT_SECRET=SUPER_SECRET npm start"
 "npm run run-front-end-test" = "JWT_SECRET=SUPER_SECRET npm run test"
@@ -6,10 +11,6 @@ Api -
 "npm run start-api-server" = "JWT_SECRET=SUPER_SECRET npm start",
 "npm run start-api-server-test-mode" = "JWT_SECRET=SUPER_SECRET npm run start:test",
 "npm run run-test-server-test" = "JWT_SECRET=SUPER_SECRET npm run test"
-
-# Acebook
-
-In this project, you are tasked with working on an existing application. A significant part of the challenge will be to familiarise yourself with the codebase you've inherited, as you work to **improve and extend** it.
 
 ## Videos
 
