@@ -12,6 +12,8 @@ const App = () => {
     <div className="app-container">
       <Navbar />
       <Routes>
+        <Route path="/" element={<Feed navigate={useNavigate()} />} />
+
         <Route path="/posts" element={<Feed navigate={useNavigate()} />} />
         <Route path="/login" element={<LoginForm navigate={useNavigate()} />} />
         <Route
