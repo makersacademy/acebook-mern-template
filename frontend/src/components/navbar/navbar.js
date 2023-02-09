@@ -10,7 +10,7 @@ const Navbar = ({ navigate, signedIn }) => {
 
   return (
     <nav className="nav-container">
-      <div className='logo'>Logo</div>
+      <div className='logo'><a href="/"><img className='logo-img' src="logo-blue.png" /></a></div>
       <ul className="nav-list">
 
           { signedIn &&
