@@ -3,6 +3,8 @@ import './Navbar.css';
 
 
 const Navbar = ({ navigate, signedIn }) => {
+  
+
   const logout = () => {
     window.localStorage.removeItem("token");
     navigate('/login');

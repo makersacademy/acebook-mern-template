@@ -12,13 +12,15 @@ import {
 } from "react-router-dom";
 
 const App = () => {
+  const [token, setToken] = useState(window.localStorage.getItem("token"));
+  
     return (
       <>
-      <Navbar navigate={ useNavigate() } signedIn={ false }/>
+        <Navbar navigate={ useNavigate() } signedIn={ token }/>
         <Routes>
           <Route path='/posts'  element={<Feed navigate={ useNavigate() }/>}/>
-          <Route path='/login'  element={<LoginForm  navigate={ useNavigate() }/>}/>
-          <Route path='/signup' element={<SignUpForm navigate={ useNavigate() }/>}/>
+          <Route path='/login'  element={<LoginForm  navigate={ useNavigate() } assignToken={ setToken }/>}/>
+          <Route path='/signup' element={<SignUpForm navigate={ useNavigate() } />}/>
         </Routes>
       </>
     );
