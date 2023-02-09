@@ -77,4 +77,25 @@ describe('User model', () => {
       });
     });
   });
+
+  it('should allow the user to include a display name', (done) => {
+    const user = new User({
+      email: 'someone@example.com',
+      password: 'password',
+      display_name: 'John Smith',
+    });
+    user.save((err) => {
+      expect(err).toBeNull();
+
+      User.find((err, users) => {
+        expect(err).toBeNull();
+        expect(users[0]).toMatchObject({
+          email: 'someone@example.com',
+          password: 'password',
+          display_name: 'John Smith',
+        });
+      });
+      done();
+    });
+  });
 });

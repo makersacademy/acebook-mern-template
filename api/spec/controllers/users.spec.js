@@ -74,4 +74,19 @@ describe('/users', () => {
       expect(response.statusCode).toBe(201);
     });
   });
+
+  describe('POST with a display_name included', () => {
+    it('should create a user with a display name', async () => {
+      let response = await request(app).post('/users').send({
+        email: 'poppy@email.com',
+        password: '1234',
+        display_name: 'Poppy Smith',
+      });
+      let users = await User.find();
+      let newUser = users[users.length - 1];
+      console.log(newUser);
+      expect(newUser.display_name).toBe('Poppy Smith');
+      expect(response.statusCode).toBe(201);
+    });
+  });
 });

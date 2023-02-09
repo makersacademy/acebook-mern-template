@@ -5,6 +5,7 @@ const UsersController = {
     const user = new User({
       email: req.body.email,
       password: req.body.password,
+      display_name: req.body.display_name,
     });
 
     if (req.file) {
