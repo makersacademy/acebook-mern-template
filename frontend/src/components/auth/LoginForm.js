@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 const LogInForm = ({ navigate }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [error, setError] = useState(null);
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -16,10 +17,9 @@ const LogInForm = ({ navigate }) => {
     })
 
     if(response.status !== 201) {
-      console.log("yay")
-      navigate('/login')
+      setError("Incorrect login details, try again....");
+      return
     } else {
-      console.log("oop")
       let data = await response.json()
       window.localStorage.setItem("token", data.token)
       navigate('/posts');
@@ -33,6 +33,7 @@ const LogInForm = ({ navigate }) => {
   const handlePasswordChange = (event) => {
     setPassword(event.target.value)
   }
+
 
 
   return (
@@ -56,6 +57,7 @@ return ( */}
         <input role='submit-button' id='submit' type="submit" value="Submit" />
       </form>
     </div>
+
     );
 }
 
