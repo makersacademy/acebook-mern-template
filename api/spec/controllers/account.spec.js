@@ -48,7 +48,6 @@ describe("/posts", () => {
       let response = await request(app)
         .get("/account")
         .set("Authorization", `Bearer ${token}`);
-
       expect(response.status).toBe(200);
 
       let message = response.body.posts.map((post) => post.message);

@@ -1,3 +1,4 @@
+const { collection } = require("../models/post");
 const Post = require("../models/post");
 const TokenGenerator = require("../models/token_generator");
 
