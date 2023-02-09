@@ -33,4 +33,12 @@ describe("Navbar", () => {
     cy.get('a')
     .eq(0).find('img');
   });
+
+  //#5
+  it("finds Account logo", () => {
+    cy.mount(<MemoryRouter><Navbar/></MemoryRouter>)
+    
+    cy.get('a')
+    .eq(3).find('img');
+  });
 });
