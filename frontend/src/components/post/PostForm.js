@@ -6,12 +6,12 @@ const PostForm = ({post}) => {
 
     const handleSubmit = async (event) => {
         // event.preventDefault();
-        const token = window.localStorage.getItem("token")
+        const token = window.localStorage.getItem("token") //every event that will be handled by LOGGED IN user has to have this bit, its about JWT
         let response = await fetch( '/posts', {
           method: 'post',
           headers: {
             'Content-Type': 'application/json',
-            'Authorization': `Bearer ${token}`
+            'Authorization': `Bearer ${token}` // This is the token header
           },
           body: JSON.stringify({ message: newPost })
         })
