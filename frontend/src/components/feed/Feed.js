@@ -5,6 +5,10 @@ const Feed = ({ navigate }) => {
   const [posts, setPosts] = useState([]);
   const [token, setToken] = useState(window.localStorage.getItem("token"));
 
+/////////////////////////
+// This below is code from the exisiting codebase, it might be that it can post messages and the new code below ** is unnecessary.
+/////////////////////////
+
   useEffect(() => {
     if (token) {
       fetch("/posts", {
@@ -26,26 +30,74 @@ const Feed = ({ navigate }) => {
     navigate("/login");
   };
 
-  const post = () => {};
+  const post = () => {};  /// Does something need to be added to this? Seems important aas the page doesn't work when it's commented out
 
+/////////////////////////
+// **This below is new code which handles the fetch to api, sending the new post to the database 
+/////////////////////////
+
+const [message, setMessage] = useState("");
+
+const handleSubmitPost = async (event) => {
+  // event.preventDefault(); This line stops the page refreshing automatically so it has been commented out
+
+  fetch( '/posts', {
+    method: 'post',
+    headers: {
+      Authorization: `Bearer ${token}`,
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({ message: message })
+  })
+    .then(response => {
+      if(response.status === 201) {
+        navigate('/posts')
+      } else {
+        navigate('/signup')
+      }
+    })
+}
+
+
+/////////////////////////
+// This below is new code
+/////////////////////////
+
+const handleMessageChange = (event) => {
+  setMessage(event.target.value)
+}
+
+/////////////////////////
+// Below is the code for the form that posts the new message
+/////////////////////////
   if (token) {
     return (
+      <div>
+      <nav className="nav">
+          <a href="/posts" className="site-title">
+            Acebook
+          </a>
+          <ul>
+            
+            <button onClick={logout}>Logout</button><br></br>
+            {/* <a href="/signup"> logout </a> */}
+           
+          </ul>
+        </nav>
       <>
         <h2>Posts</h2>
-        <button onClick={logout}>Logout</button>
-        <button onClick={post}>Post</button>
-        <input
-          placeholder="Write your post here"
-          id="post"
-          type="text"
-          defaultValue={post}
-        />
+          <form onSubmit={handleSubmitPost}>
+          <input placeholder="Write your post here" id="message" type='message' defaultValue={post} onChange={handleMessageChange} />
+          <input id='submit' type="submit" value="Submit" />
+         </form>
+
         <div id="feed" role="feed">
           {posts.map((post) => (
             <Post post={post} key={post._id} />
           ))}
         </div>
       </>
+      </div>
     );
   } else {
     navigate("/signin");
