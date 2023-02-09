@@ -12,15 +12,14 @@ code {
     monospace;
 }
 
-
 .nav {
-background-color: blue;
-color: white;
-display: flex;
-justify-content: space-between;
-align-items: center;
-gap: 2rem;
-padding: 0 1rem;
+  background-color: blue;
+  color: white;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 2rem;
+  padding: 0 1rem;
 }
 
 .site-title {
@@ -30,7 +29,6 @@ padding: 0 1rem;
 .nav a {
   color: inherit;
   text-decoration: none;
-
 }
 
 .signUpForm {
@@ -41,4 +39,56 @@ padding: 0 1rem;
   text-align: center;
   padding-top: px 40;
   margin-top: px 40;
+}
+
+#feedComponent {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  justify-content: flex-start;
+  align-items: center;
+  width: 600px;
+  margin: 0 auto;
+}
+
+.post {
+  padding: 5px;
+  background-color: #fff;
+  border-radius: 20px;
+  border: solid;
+  margin-bottom: 15px;
+  margin-top: 15px;
+  width: 500px;
+  height: 200px;
+  display: flex;
+  justify-content: space-between;
+  justify-content: flex-end;
+}
+
+.postContent {
+  display: flex;
+  justify-content: flex-start;
+  padding: 60px;
+  background-color: #fff;
+  border-radius: 20px;
+  border: solid;
+  width: 300px;
+  align-self: flex-end;
+  margin-top: 20px;
+  margin-bottom: 30px;
+}
+
+#like {
+  padding: 5px;
+  border-radius: 10px;
+  width: 50px;
+  align-self: flex-end;
+  margin-right: 10px;
+}
+
+#comment {
+  padding: 5px;
+  border-radius: 10px;
+  width: 100px;
+  align-self: flex-end;
 }

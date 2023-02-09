@@ -72,32 +72,34 @@ const handleMessageChange = (event) => {
 /////////////////////////
   if (token) {
     return (
-      <div>
-      <nav className="nav">
-          <a href="/posts" className="site-title">
-            Acebook
-          </a>
-          <ul>
-            
-            <button onClick={logout}>Logout</button><br></br>
-            {/* <a href="/signup"> logout </a> */}
-           
-          </ul>
-        </nav>
       <>
-        <h2>Posts</h2>
-          <form onSubmit={handleSubmitPost}>
-          <input placeholder="Write your post here" id="message" type='message' defaultValue={post} onChange={handleMessageChange} />
-          <input id='submit' type="submit" value="Submit" />
-         </form>
-
-        <div id="feed" role="feed">
-          {posts.map((post) => (
-            <Post post={post} key={post._id} />
-          ))}
+        <div>
+          <nav className="nav">
+              <a href="/posts" className="site-title">
+                Acebook
+              </a>
+              <ul>
+                <button onClick={logout}>Logout</button><br></br>
+              </ul>
+            </nav>
+            <div id="feedComponent">
+              <h2>Posts</h2>
+                <form onSubmit={handleSubmitPost}>
+                <input placeholder="Write your post here" id="message" type='message' defaultValue={post} onChange={handleMessageChange} />
+                <input id='submit' type="submit" value="Submit" />
+                </form>
+                <div id="feed" role="feed">
+                      {posts.map((post) => (
+                        <div class="post">
+                          <button id='like'>Like</button>
+                          <button id='comment'>Comment</button>
+                          <div class="postContent"><Post post={post} key={post._id} /><br /></div>
+                        </div>
+                      ))}
+                </div>
+            </div>
         </div>
       </>
-      </div>
     );
   } else {
     navigate("/signin");
