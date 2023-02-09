@@ -52,6 +52,11 @@ code {
 }
 
 .post {
+  display: flex;
+  border-width: 0.9px;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: flex-end;
   padding: 5px;
   background-color: #fff;
   border-radius: 20px;
@@ -59,36 +64,34 @@ code {
   margin-bottom: 15px;
   margin-top: 15px;
   width: 500px;
-  height: 200px;
-  display: flex;
-  justify-content: space-between;
-  justify-content: flex-end;
+  height: 100%;
+  position: relative;
 }
 
 .postContent {
   display: flex;
-  justify-content: flex-start;
+  flex-direction: column;
   padding: 60px;
   background-color: #fff;
   border-radius: 20px;
   border: solid;
+  border-width: 0.75px;
   width: 300px;
+  margin-top: 15px;
+  margin-bottom: 10px;
+  word-wrap: break-word;
   align-self: flex-end;
-  margin-top: 20px;
-  margin-bottom: 30px;
 }
 
-#like {
-  padding: 5px;
-  border-radius: 10px;
-  width: 50px;
-  align-self: flex-end;
-  margin-right: 10px;
+.postButtons {
+  display: flex;
+  position: relative;
+  bottom: 10px;
+  left: 10px;
 }
 
+#like,
 #comment {
-  padding: 5px;
-  border-radius: 10px;
-  width: 100px;
-  align-self: flex-end;
+  margin-right: 10px;
+  position: relative;
 }

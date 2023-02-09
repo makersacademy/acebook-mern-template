@@ -91,9 +91,11 @@ const handleMessageChange = (event) => {
                 <div id="feed" role="feed">
                       {posts.map((post) => (
                         <div class="post">
-                          <button id='like'>Like</button>
-                          <button id='comment'>Comment</button>
                           <div class="postContent"><Post post={post} key={post._id} /><br /></div>
+                          <div id="postButtons">
+                            <button id='like'>Like</button>
+                            <button id='comment'>Comment</button>
+                          </div>
                         </div>
                       ))}
                 </div>
