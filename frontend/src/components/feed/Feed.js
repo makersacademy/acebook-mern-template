@@ -25,6 +25,8 @@ const Feed = ({ navigate }) => {
           setPosts(data.posts);
           setReload(false);
         });
+    } else {
+      navigate('/login');
     }
   }, [reload]);
 
@@ -44,7 +46,7 @@ const Feed = ({ navigate }) => {
           id={id}
           setReload={setReload}
         />
-        <div id='feed' role='feed'>
+        <div id="feed" role="feed">
           {posts ? (
             posts
               .slice(0)
@@ -56,8 +58,6 @@ const Feed = ({ navigate }) => {
         </div>
       </>
     );
-  } else {
-    navigate('/login');
   }
 };
 
