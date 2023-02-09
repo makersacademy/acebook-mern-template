@@ -1,0 +1,9 @@
+.post {
+    width: 30%;
+    height: 30%;
+    margin-top: 15px; 
+    border-radius: 15px; 
+    background-color: rgb(204, 206, 236);
+    box-shadow: 0px 5px 7px -7px rgba(0, 0, 0, 0.75);    
+    text-align: center;
+}

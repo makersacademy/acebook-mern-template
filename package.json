@@ -18,6 +18,6 @@
   },
   "homepage": "https://github.com/alexHoggett/acebook-mern-fire#readme",
   "dependencies": {
-    "jest": "^29.4.2"
+    "eslint": "^8.33.0"
   }
 }

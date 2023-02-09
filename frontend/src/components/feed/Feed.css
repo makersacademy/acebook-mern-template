@@ -1,0 +1,22 @@
+.deleteButton{
+    width: 100px;
+    font-size: 16px;
+    line-height: 30px;
+    padding: 3px 8px;
+    border-radius: 30%;
+}
+
+.btn:hover {
+    font-size: 17px;;
+}
+
+.h2{
+    width: 100px;
+    font-size: 44px;
+    line-height: 30px;
+    padding: 3px 8px;
+    border-radius: 25%;
+    border-color: aqua;
+    color: blue;
+    background-color: aqua;
+}
