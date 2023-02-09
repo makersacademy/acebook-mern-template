@@ -26,5 +26,5 @@ afterAll(function (done) {
     mongoose.connection.close(true, function () { // The connection to the database is closed 
     done();
     });
-  })
+  });
 });
