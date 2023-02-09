@@ -2,6 +2,7 @@ import { MemoryRouter } from 'react-router-dom'
 import Navbar from './Navbar'
 
 describe("Navbar", () => {
+  //#1
   it("sees all div", () => {
     cy.mount(<MemoryRouter><Navbar/></MemoryRouter>)
     
@@ -9,6 +10,7 @@ describe("Navbar", () => {
     .should('be.visible')
   });
 
+  //#2
   it("clicks Acebook logo", () => {
     cy.mount(<MemoryRouter><Navbar/></MemoryRouter>)
     
@@ -16,10 +18,19 @@ describe("Navbar", () => {
     .eq(0).click();
   });
 
+  //#3
   it("clicks Account logo", () => {
     cy.mount(<MemoryRouter><Navbar/></MemoryRouter>)
     
     cy.get('a')
     .eq(3).click();
+  });
+
+  //#4
+  it("finds Acebook logo", () => {
+    cy.mount(<MemoryRouter><Navbar/></MemoryRouter>)
+    
+    cy.get('a')
+    .eq(0).find('img');
   });
 });
