@@ -10,6 +10,7 @@ const Feed = ({ navigate }) => {
   const [token, setToken] = useState(window.localStorage.getItem("token"));
   const [form, setForm] = useState(false);
 
+
   useEffect(() => {
     if(token) {
       fetch("/posts", {
@@ -22,37 +23,28 @@ const Feed = ({ navigate }) => {
           window.localStorage.setItem("token", data.token)
           setToken(window.localStorage.getItem("token"))
           setPosts(data.posts);
+          console.log(posts);
         })
     }
   }, [])
-    
+  
+  if(token) {
+    return(
+      <>
+        <h2 className='h2'>Posts</h2>
+          <button className='deleteButton' onClick={() => setForm(!form) }>Add Post</button>
+          {form && <PostForm />}
 
-  const logout = () => {
-    window.localStorage.removeItem("token")
+        <div id='feed' role="feed">
+            {posts.map(
+              (post) => ( <Post post={ post } key={ post._id } /> )
+            )}
+        </div>
+      </>
+    )
+  } else {
     navigate('/login')
   }
-  
-    if(token) {
-      return(
-
-        <>
-          <h2 className='h2'>Posts</h2>
-            <button className='deleteButton' onClick={() => setForm(!form) }>Add Post</button>
-                      {form && <PostForm />}
-            <button className='deleteButton' onClick={logout}>
-
-              Logout
-            </button>
-          <div id='feed' role="feed">
-              {posts.map(
-                (post) => ( <Post post={ post } key={ post._id } /> )
-              )}
-          </div>
-        </>
-      )
-    } else {
-      navigate('/login')
-    }
 }
 
 export default Feed;

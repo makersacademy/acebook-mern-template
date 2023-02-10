@@ -87,21 +87,42 @@ describe("/posts", () => {
 
   describe("GET, when token is present", () => {
     test("returns every post in the collection", async () => {
-      let post1 = new Post({message: "howdy!"});
-      let post2 = new Post({message: "hola!"});
+      let post1 = new Post({
+        content: "howdy!",
+        date_created: new Date(),
+        user_id: 2,
+        likes: 0
+
+      });
+      let post2 = new Post({
+        content: "Something else",
+        date_created: new Date(),
+        user_id: 1,
+        likes: 2
+      });
       await post1.save();
       await post2.save();
       let response = await request(app)
         .get("/posts")
         .set("Authorization", `Bearer ${token}`)
         .send({token: token});
-      let messages = response.body.posts.map((post) => ( post.message ));
-      expect(messages).toEqual(["howdy!", "hola!"]);
+      let messages = response.body.posts.map((post) => ( post.content ));
+      expect(messages).toEqual(["howdy!", "Something else"]);
     })
 
     test("the response code is 200", async () => {
-      let post1 = new Post({message: "howdy!"});
-      let post2 = new Post({message: "hola!"});
+      let post1 = new Post({
+        content: "acebook is great", 
+        date_created: new Date (), 
+        user_id: 1, 
+        likes: 1
+      });
+      let post2 = new Post({
+        content: "i miss facebook", 
+        date_created: new Date(), 
+        user_id: 2, 
+        likes: 5
+      });
       await post1.save();
       await post2.save();
       let response = await request(app)
@@ -112,8 +133,18 @@ describe("/posts", () => {
     })
 
     test("returns a new token", async () => {
-      let post1 = new Post({message: "howdy!"});
-      let post2 = new Post({message: "hola!"});
+      let post1 = new Post({
+        content: "acebook is great",
+        date_created: new Date(), 
+        user_id: 1,
+        likes: 1
+      });
+      let post2 = new Post({
+        content: "i miss facebook", 
+        date_created: new Date(), 
+        user_id: 2, 
+        likes: 5
+      });
       await post1.save();
       await post2.save();
       let response = await request(app)
@@ -128,8 +159,18 @@ describe("/posts", () => {
 
   describe("GET, when token is missing", () => {
     test("returns no posts", async () => {
-      let post1 = new Post({message: "howdy!"});
-      let post2 = new Post({message: "hola!"});
+      let post1 = new Post({
+        content: "acebook is great",
+        date_created: new Date(), 
+        user_id: 1,
+        likes: 1
+      });
+      let post2 = new Post({
+        content: "i miss facebook", 
+        date_created: new Date(), 
+        user_id: 2, 
+        likes: 5
+      });
       await post1.save();
       await post2.save();
       let response = await request(app)
@@ -138,8 +179,17 @@ describe("/posts", () => {
     })
 
     test("the response code is 401", async () => {
-      let post1 = new Post({message: "howdy!"});
-      let post2 = new Post({message: "hola!"});
+      let post1 = new Post({
+        content: "acebook is great",
+        date_created: new Date(), 
+        user_id: 1,
+        likes: 1});
+      let post2 = new Post({
+        content: "i miss facebook", 
+        date_created: new Date(), 
+        user_id: 2, 
+        likes: 5
+      });
       await post1.save();
       await post2.save();
       let response = await request(app)
@@ -148,8 +198,18 @@ describe("/posts", () => {
     })
 
     test("does not return a new token", async () => {
-      let post1 = new Post({message: "howdy!"});
-      let post2 = new Post({message: "hola!"});
+      let post1 = new Post({
+        content: "acebook is great",
+        date_created: new Date(), 
+        user_id: 1,
+        likes: 1
+      });
+      let post2 = new Post({
+        content: "i miss facebook", 
+        date_created: new Date(), 
+        user_id: 2, 
+        likes: 5
+      });
       await post1.save();
       await post2.save();
       let response = await request(app)

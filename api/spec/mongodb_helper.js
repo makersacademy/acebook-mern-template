@@ -1,6 +1,8 @@
 var mongoose = require("mongoose");
 const User = require('../models/user.js');
-const seedUsers = require('./seeds/userSeeds.js')
+const Post = require('../models/post.js');
+const seedUsers = require('./seeds/userSeeds.js');
+const seedPosts = require('./seeds/postSeeds.js');
 
 beforeAll(function (done) {
   mongoose.connect("mongodb://0.0.0.0/acebook_test", { //Connects to the test database
@@ -18,6 +20,8 @@ beforeAll(function (done) {
 const seedDB = async () => { // We are assigning a function to the variable seedDB which is asynchronous 
   await User.deleteMany({}); // It deletes the existing contents from the database (User is the schema for one user)
   await User.insertMany(seedUsers); // It seeds the seedUsers data (required at the top of this file) into the collection 
+  await Post.deleteMany({});
+  await Post.insertMany(seedPosts);
 }
 
 afterAll(function (done) {

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 
 const PostForm = ({post}) => {  
-    console.log(window.localStorage)
+    // console.log(window.localStorage)
     const[newPost, setNewPost] = useState("")
 
     const handleSubmit = async (event) => {
