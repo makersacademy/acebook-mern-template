@@ -1,49 +1,64 @@
 import React, { useEffect, useState } from 'react';
-import Post from '../post/Post'
+import CreatePostForm from '../createPostForm/createPostForm';
+
+import Post from '../post/Post';
 
 const Feed = ({ navigate }) => {
   const [posts, setPosts] = useState([]);
-  const [token, setToken] = useState(window.localStorage.getItem("token"));
+  const [token, setToken] = useState(window.localStorage.getItem('token'));
+  const [id, setId] = useState(window.localStorage.getItem('user_id'));
+  const [reload, setReload] = useState(false);
 
   useEffect(() => {
-    if(token) {
-      fetch("/posts", {
+    if (token) {
+      fetch('/posts', {
         headers: {
-          'Authorization': `Bearer ${token}`
-        }
+          Authorization: `Bearer ${token}`,
+        },
       })
-        .then(response => response.json())
-        .then(async data => {
-          window.localStorage.setItem("token", data.token)
-          setToken(window.localStorage.getItem("token"))
+        .then((response) => response.json())
+        .then(async (data) => {
+          window.localStorage.setItem('token', data.token);
+          setToken(window.localStorage.getItem('token'));
+          setId(window.localStorage.getItem('user_id'));
+          console.log('i just fetched the data');
           setPosts(data.posts);
-        })
+          setReload(false);
+        });
     }
-  }, [])
-    
+  }, [reload]);
 
   const logout = () => {
-    window.localStorage.removeItem("token")
-    navigate('/login')
+    window.localStorage.removeItem('token');
+    navigate('/login');
+  };
+
+  if (token) {
+    return (
+      <>
+        <h2>Posts</h2>
+        <button onClick={logout}>Logout</button>
+        <CreatePostForm
+          navigate={navigate}
+          token={token}
+          id={id}
+          setReload={setReload}
+        />
+        <div id='feed' role='feed'>
+          {posts ? (
+            posts
+              .slice(0)
+              .reverse()
+              .map((post) => <Post post={post} key={post._id} />)
+          ) : (
+            <p>loading</p>
+          )}
+        </div>
+      </>
+    );
+  } else {
+    navigate('/login');
   }
-  
-    if(token) {
-      return(
-        <>
-          <h2>Posts</h2>
-            <button onClick={logout}>
-              Logout
-            </button>
-          <div id='feed' role="feed">
-              {posts.map(
-                (post) => ( <Post post={ post } key={ post._id } /> )
-              )}
-          </div>
-        </>
-      )
-    } else {
-      navigate('/signin')
-    }
-}
+};
 
 export default Feed;
