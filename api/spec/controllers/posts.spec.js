@@ -249,7 +249,7 @@ describe('/posts', () => {
         const p_id = await savedPost._id;
 
         let response = await request(app)
-          .patch("/posts")
+          .patch("/posts/like")
           .send({ _id: p_id, _user_id: user_id });
 
         expect(response.status).toBe(401);
@@ -260,7 +260,7 @@ describe('/posts', () => {
       const p_id = savedPost._id;
 
       let response = await request(app)
-        .patch("/posts")
+        .patch("/posts/like")
         .set("Authorization", `Bearer ${token}`)
         .send({ _id: p_id, _user_id: user_id });
 
@@ -277,7 +277,7 @@ describe('/posts', () => {
       const p_id = savedPost._id;
   
       let response = await request(app)
-        .patch("/posts")
+        .patch("/posts/like")
         .set("Authorization", `Bearer ${token}`)
         .send({ _id: p_id, _user_id: user_id });
   
@@ -286,7 +286,7 @@ describe('/posts', () => {
       expect(posts[0].likes.length).toBe(1);
   
       let response2 = await request(app)
-        .patch("/posts")
+        .patch("/posts/like")
         .set("Authorization", `Bearer ${token2}`)
         .send({ _id: p_id, _user_id: user2_id });
      
@@ -301,7 +301,7 @@ describe('/posts', () => {
       const p_id = savedPost._id;
 
       let response = await request(app)
-        .patch("/posts")
+        .patch("/posts/like")
         .set("Authorization", `Bearer ${token}`)
         .send({ _id: p_id, _user_id: user_id });
 
@@ -310,7 +310,7 @@ describe('/posts', () => {
       expect(posts[0].likes.length).toBe(1);
 
       let response1 = await request(app)
-        .patch("/posts")
+        .patch("/posts/like")
         .set("Authorization", `Bearer ${token}`)
         .send({ _id: p_id, _user_id: user_id });
 
@@ -326,7 +326,7 @@ describe('/posts', () => {
       const p_id = savedPost._id;
 
       let response = await request(app)
-        .patch("/posts")
+        .patch("/posts/like")
         .set("Authorization", `Bearer ${token}`)
         .send({ _id: p_id, _user_id: user_id });
 
@@ -359,4 +359,50 @@ describe('/posts', () => {
         console.log(posts[0].likes)
         expect(posts[0].message).toBe("howdy!")
       });
+      test("without a token it should return 401", async () => {
+        let post1 = new Post({ user_id: user_id, message: "howdy!" });
+        const savedPost = await post1.save();
+
+        const p_id = await savedPost._id;
+
+        let response = await request(app)
+          .patch("/posts/unlike")
+          .send({ _id: p_id, _user_id: user_id });
+        expect(response.status).toBe(401);
+      });
+      test("When there is two likes and one person unlikes it should return 1 like", async () => {
+        let user1 = new User({ email: "user1@user.com", password: "password1" });
+      await user1.save();
+  
+      let post1 = new Post({ user_id: user_id, message: "howdy!" });
+      const savedPost = await post1.save();
+      const p_id = savedPost._id;
+  
+      let response = await request(app)
+        .patch("/posts/like")
+        .set("Authorization", `Bearer ${token}`)
+        .send({ _id: p_id, _user_id: user_id });
+  
+      expect(response.status).toBe(204);
+      let posts = await Post.find();
+      expect(posts[0].likes.length).toBe(1);
+  
+      let response2 = await request(app)
+        .patch("/posts/like")
+        .set("Authorization", `Bearer ${token2}`)
+        .send({ _id: p_id, _user_id: user2_id });
+     
+      expect(response2.status).toBe(204);
+      let posts2 = await Post.find();
+      expect(posts2[0].likes.length).toBe(2);
+
+      let response3 = await request(app)
+        .patch("/posts/unlike")
+        .set("Authorization", `Bearer ${token2}`)
+        .send({ _id: p_id, _user_id: user2_id });
+      
+      expect(response3.status).toBe(204)
+      let posts3 = await Post.find();
+      expect(posts3[0].likes.length).toBe(1);
+      })
 });
