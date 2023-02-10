@@ -22,6 +22,7 @@ const LogInForm = ({ navigate }) => {
     } else {
       let data = await response.json()
       window.localStorage.setItem("token", data.token)
+      window.localStorage.setItem("email", email)
       navigate('/posts');
     }
   }
