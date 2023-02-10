@@ -65,7 +65,6 @@ useEffect(() => {
 }, []);
 
 const [message, setMessage] = useState("");
-const [author, setAuthor] = useState("");
 
   const handleSubmitPost = async (event) => {
     // event.preventDefault(); This line stops the page refreshing automatically so it has been commented out
@@ -92,25 +91,7 @@ const [author, setAuthor] = useState("");
     setMessage(event.target.value);
   };
 
-  const handleDeletePost = async (id) => {
-    await fetch(`/posts/${id}`, {
-      method: "delete",
-      headers: {
-        Authorization: `Bearer ${token}`,
-        "Content-Type": "application/json",
-      },
-    }).then((response) => {
-      if (response.status === 200) {
-        setPosts(posts.filter((post) => post._id !== id));
-      }
-    });
-  };
-
-const handleAuthorChange = (event) => {
-  setAuthor(event.target.value)
-}
-
-  if (token) {
+ if (token) {
     return (
       <>
         <div>
