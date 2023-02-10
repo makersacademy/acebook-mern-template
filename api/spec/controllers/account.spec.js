@@ -89,5 +89,25 @@ describe('/posts', () => {
     });
   });
 
-  // describe('PUT updates')
+  describe('PUT updates user details', () => {
+    it('updates password for session user if password sent in body', async () => {
+      const newPassword = "secure_password"
+      await request(app)
+      .put('/account')
+      .set('Authorization', `Bearer ${token}`)
+      .send({ newPassword: newPassword });
+      const updateUser = await User.findById(user_id);
+      expect(updateUser.password).toBe(newPassword);  
+    })
+
+    it('should not update password if no token present', async () => {
+      const newPassword = "very_secure_password"
+      await request(app)
+      .put('/account')
+      .send({ newPassword: newPassword });
+      const updateUser = await User.findById(user_id);
+      debugger
+      expect(updateUser.password).not.toBe(newPassword);  
+    })
+  });
 });

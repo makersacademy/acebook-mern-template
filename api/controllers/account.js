@@ -1,5 +1,6 @@
 const { collection } = require("../models/post");
 const Post = require("../models/post");
+const User = require("../models/user")
 const TokenGenerator = require("../models/token_generator");
 
 const AccountController = {
@@ -15,6 +16,19 @@ const AccountController = {
         // res.status(200).json({ message: "ok" });
       }
     });
+  },
+
+  Update: (req, res) => {
+    User.findById(req.user_id, async (err, user) => {
+      if (err) {
+        throw err;
+      } else {
+        const token = await TokenGenerator.jsonwebtoken(req.user_id);
+        user.password = req.body.newPassword
+        await user.save()
+        res.status(204).json({ message: "OK", token: token })
+      }
+    })
   },
 };
 
