@@ -24,7 +24,10 @@ const AccountController = {
         throw err;
       } else {
         const token = await TokenGenerator.jsonwebtoken(req.user_id);
-        user.password = req.body.newPassword
+        user.password = req.body.newPassword || user.password
+        user.email = req.body.newEmail || user.email
+        user.display_name= req.body.newDisplayName || user.display_name
+        user.bio = req.body.newBio || user.bio
         await user.save()
         res.status(204).json({ message: "OK", token: token })
       }
