@@ -2,7 +2,7 @@
   "name": "frontend",
   "version": "0.1.0",
   "private": true,
-  "proxy": "http://localhost:8080",
+  "proxy": "acebook-air:10000",
   "dependencies": {
     "cypress": "^10.7.0",
     "eslint": "^8.23.0",
@@ -23,7 +23,6 @@
     "cypress:open": "cypress open",
     "start-front-end-server": "JWT_SECRET=SUPER_SECRET npm start",
     "run-front-end-test": "JWT_SECRET=SUPER_SECRET npm run test"
-
   },
   "eslintConfig": {
     "extends": [
