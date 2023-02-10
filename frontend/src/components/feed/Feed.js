@@ -37,6 +37,7 @@ const Feed = ({ navigate }) => {
 /////////////////////////
 
 const [message, setMessage] = useState("");
+const [author, setAuthor] = useState("");
 
 const handleSubmitPost = async (event) => {
   // event.preventDefault(); This line stops the page refreshing automatically so it has been commented out
@@ -47,7 +48,7 @@ const handleSubmitPost = async (event) => {
       Authorization: `Bearer ${token}`,
       'Content-Type': 'application/json',
     },
-    body: JSON.stringify({ message: message })
+    body: JSON.stringify({ message: message, author: author })
   })
     .then(response => {
       if(response.status === 201) {
@@ -65,6 +66,10 @@ const handleSubmitPost = async (event) => {
 
 const handleMessageChange = (event) => {
   setMessage(event.target.value)
+}
+
+const handleAuthorChange = (event) => {
+  setAuthor(event.target.value)
 }
 
 /////////////////////////
@@ -86,12 +91,14 @@ const handleMessageChange = (event) => {
               <h2>Posts</h2>
                 <form onSubmit={handleSubmitPost}>
                 <input placeholder="Write your post here" id="message" type='message' defaultValue={post} onChange={handleMessageChange} />
+                <input placeholder="Write your name here" id="author" type='author' defaultValue={post} onChange={handleAuthorChange} />
                 <input id='submit' type="submit" value="Submit" />
                 </form>
                 <div id="feed" role="feed">
                       {posts.map((post) => (
                         <div class="post">
-                          <div class="postContent"><Post post={post} key={post._id} /><br /></div>
+                          <div class="postAuthor"><Post post={post} key={post._id} show="author" /><br /></div>
+                          <div class="postContent"><Post post={post} key={post._id} show="message" /><br /></div>
                           <div id="postButtons">
                             <button id='like'>Like</button>
                             <button id='comment'>Comment</button>
