@@ -4,6 +4,7 @@ import Post from "../post/Post";
 const Feed = ({ navigate }) => {
   const [posts, setPosts] = useState([]);
   const [token, setToken] = useState(window.localStorage.getItem("token"));
+  
 
 /////////////////////////
 // This below is code from the exisiting codebase, it might be that it can post messages and the new code below ** is unnecessary.
@@ -30,11 +31,42 @@ const Feed = ({ navigate }) => {
     navigate("/login");
   };
 
-  const post = () => {};  /// Does something need to be added to this? Seems important aas the page doesn't work when it's commented out
+const post = () => {};
 
-/////////////////////////
-// **This below is new code which handles the fetch to api, sending the new post to the database 
-/////////////////////////
+const [user, setUser] = useState({});
+
+useEffect(() => {
+  const fetchUser = async () => {
+    const email = window.localStorage.getItem("email");
+    const url = `/users?email=${email}`;
+  
+    try {
+      const response = await fetch(url, {
+        method: 'get',
+        headers: {
+          Authorization: `Bearer ${token}`,
+          'Content-Type': 'application/json',
+        },
+      });
+  
+      if (!response.ok) {
+        throw new Error(response.statusText);
+      }
+  
+      const data = await response.json();
+      const userData = {
+        email: data.user.email,
+        firstName: data.user.firstName,
+        lastName: data.user.lastName,
+      };
+  
+      setUser(userData)
+    } catch (error) {
+      console.error(error);
+    }
+  };
+  fetchUser();
+}, []);
 
 const [message, setMessage] = useState("");
 
@@ -47,7 +79,7 @@ const handleSubmitPost = async (event) => {
       Authorization: `Bearer ${token}`,
       'Content-Type': 'application/json',
     },
-    body: JSON.stringify({ message: message })
+    body: JSON.stringify({ message: message, userName: `${user.firstName} ${user.lastName}` })
   })
     .then(response => {
       if(response.status === 201) {
@@ -58,23 +90,7 @@ const handleSubmitPost = async (event) => {
     })
 }
 
-const handleFindUser = async (event) => {
-  const email = window.localStorage.getItem("email");
-  const url = `/users?email=${email}`;
 
-  const response = await fetch( url, {
-    method: 'get',
-    headers: {
-      Authorization: `Bearer ${token}`,
-      'Content-Type': 'application/json',
-    },
-  });
-
-  const user = await response.json();
-  return user
-}
-
-console.log(handleFindUser())
 /////////////////////////
 // This below is new code
 /////////////////////////
