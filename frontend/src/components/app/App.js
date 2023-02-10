@@ -6,6 +6,7 @@ import Feed from '../feed/Feed';
 import Navbar from '../navbar/Navbar';
 import { useNavigate, Routes, Route } from 'react-router-dom';
 import Profile from '../profile/Profile';
+import Account from '../account/account';
 
 const App = () => {
   return (
@@ -13,6 +14,7 @@ const App = () => {
       <Navbar />
       <Routes>
         <Route path="/" element={<Feed navigate={useNavigate()} />} />
+        <Route path="/account" element={<Account navigate={useNavigate()} />} />
 
         <Route path="/posts" element={<Feed navigate={useNavigate()} />} />
         <Route path="/login" element={<LoginForm navigate={useNavigate()} />} />
