@@ -1,6 +1,6 @@
 describe("Signing in", () => {
 
-  before(() => {
+  beforeEach(() => {
     cy.signup("user@email.com", "12345678")
   })
 
