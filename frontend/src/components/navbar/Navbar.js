@@ -1,5 +1,6 @@
 import React from 'react';
 import './Navbar.css';
+// bananas
 
 
 const Navbar = ({ navigate, signedIn }) => {

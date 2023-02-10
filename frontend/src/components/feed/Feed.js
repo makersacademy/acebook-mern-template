@@ -45,6 +45,28 @@ const Feed = ({ navigate }) => {
   } else {
     navigate('/login')
   }
+  
+    if(token) {
+      return(
+
+        <>
+          <h2 className='h2'>Posts</h2>
+            <button className='deleteButton' onClick={() => setForm(!form) }>Add Post</button>
+                      {form && <PostForm />}
+            <button className='deleteButton' onClick={logout}>
+
+              Logout
+            </button>
+          <div id='feed' role="feed">
+              {posts.map(
+                (post) => ( <Post setPosts={ setPosts } post={ post } key={ post._id } /> )
+              )}
+          </div>
+        </>
+      )
+    } else {
+      navigate('/login')
+    }
 }
 
 export default Feed;
