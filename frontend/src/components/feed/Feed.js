@@ -46,6 +46,7 @@ const Feed = ({ navigate }) => {
     navigate('/login')
   }
   
+  
     if(token) {
       return(
 
