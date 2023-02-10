@@ -1,9 +1,16 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 export const Form = ({ form_type }) => {
+  const [inputValue, setInputValue] = useState('');
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+  };
+  const handleInputChange = (e) => {
+    setInputValue(e.target.value);
+  };
   return (
     <div>
-      <form>
+      <form onSubmit={handleSubmit}>
         <input
           type={
             form_type === 'password'
@@ -12,8 +19,23 @@ export const Form = ({ form_type }) => {
               ? 'file'
               : 'text'
           }
+          placeholder={
+            form_type === 'display'
+              ? 'New display name'
+              : form_type === 'email'
+              ? 'New email address'
+              : form_type === 'bio'
+              ? 'New bio'
+              : form_type === 'image'
+              ? null
+              : form_type === 'password'
+              ? 'New password'
+              : null
+          }
+          value={form_type === 'image' ? '' : inputValue}
+          onChange={handleInputChange}
         ></input>
-        <button type="submit">Confirm</button>
+        <button type='submit'>Confirm</button>
       </form>
     </div>
   );

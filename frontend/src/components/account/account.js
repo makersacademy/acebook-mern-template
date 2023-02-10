@@ -2,77 +2,59 @@ import React, { useState } from 'react';
 import { Form } from './form/form';
 
 const Account = () => {
-  const [showDisplayForm, setShowDisplayForm] = useState(false);
-  const [showEmailForm, setShowEmailForm] = useState(false);
-  const [showPasswordForm, setShowPasswordForm] = useState(false);
-  const [showImagedForm, setShowImageForm] = useState(false);
-  const [showBioForm, setShowBioForm] = useState(false);
+  const [showForm, setShowForm] = useState(false);
+  const [formType, setFormType] = useState('');
 
   return (
     <>
       <h2>Welcome</h2>
       <button
         onClick={() => {
-          setShowDisplayForm(!showDisplayForm);
+          formType === 'display' ? setShowForm(!showForm) : setShowForm(true);
+          setFormType('display');
         }}
       >
-        Edit display name{' '}
+        Edit display name
       </button>
-      {showDisplayForm ? (
-        <div>
-          <Form form_type={'display_name'} />
-        </div>
-      ) : null}
 
       <button
         onClick={() => {
-          setShowEmailForm(!showEmailForm);
+          formType === 'email' ? setShowForm(!showForm) : setShowForm(true);
+          setFormType('email');
         }}
       >
         Edit email
       </button>
-      {showEmailForm ? (
-        <div>
-          <Form form_type={'email'} />
-        </div>
-      ) : null}
 
       <button
         onClick={() => {
-          setShowBioForm(!showBioForm);
+          formType === 'bio' ? setShowForm(!showForm) : setShowForm(true);
+          setFormType('bio');
         }}
       >
         Edit bio
       </button>
-      {showBioForm ? (
-        <div>
-          <Form form_type={'bio'} />
-        </div>
-      ) : null}
 
       <button
         onClick={() => {
-          setShowImageForm(!showImagedForm);
+          formType === 'image' ? setShowForm(!showForm) : setShowForm(true);
+          setFormType('image');
         }}
       >
         Upload image
       </button>
-      {showImagedForm ? (
-        <div>
-          <Form form_type={'image'} />
-        </div>
-      ) : null}
 
       <button
         onClick={() => {
-          setShowPasswordForm(!showPasswordForm);
+          formType === 'password' ? setShowForm(!showForm) : setShowForm(true);
+          setFormType('password');
         }}
       >
         Edit password
       </button>
-      {showPasswordForm ? (
+      {showForm ? (
         <div>
-          <Form form_type={'password'} />
+          <Form form_type={formType} />
         </div>
       ) : null}
     </>
