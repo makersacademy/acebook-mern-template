@@ -1,28 +1,19 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './Post.css';
+import DeleteButtonPost from './DeleteButtonPost';
+// in posts we are calling the button  what does the request to delete the post
 
 const Post = ({post}) => {
-  const token = localStorage.getItem('token');
+  const [isDeleted, setIsDeleted] = useState(false);
 
-  const handleClick = async () => {
-    try {
-      await fetch(`/posts/${post._id}`, {
-        method: 'delete',
-        headers: {
-          'Authorization': `Bearer ${token}`
-        }
-      });
-    } catch (err) {
-      console.error(err.message);
-    }
-  };
-  
-  return(
+  return isDeleted ? (
+    <div>{console.log("post was deleted :)")}</div>
+  ) : (
     <div className="post">
       <article data-cy="post" key={ post._id }>{ post.message }</article>
-      <button onClick={handleClick}>delete post</button>
+      <DeleteButtonPost post={post} id={post._id} setIsDeleted={setIsDeleted} /> 
     </div>
-  )
+  );
 };
 
 export default Post;
