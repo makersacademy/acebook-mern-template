@@ -20,7 +20,9 @@
     "test:unit": "cypress run --component",
     "test:feature": "cypress run",
     "eject": "react-scripts eject",
-    "cypress:open": "cypress open"
+    "cypress:open": "cypress open",
+    "start-front-end-server": "JWT_SECRET=SUPER_SECRET npm start",
+    "run-front-end-test": "JWT_SECRET=SUPER_SECRET npm run test"
   },
   "eslintConfig": {
     "extends": [

@@ -2,17 +2,28 @@
 
 In this project, you are tasked with working on an existing application. A significant part of the challenge will be to familiarise yourself with the codebase you've inherited, as you work to **improve and extend** it.
 
+# Scripts:
+
+Frontend -
+"npm run start-front-end-server" = "JWT_SECRET=SUPER_SECRET npm start"
+"npm run run-front-end-test" = "JWT_SECRET=SUPER_SECRET npm run test"
+Api -
+"npm run start-api-server" = "JWT_SECRET=SUPER_SECRET npm start",
+"npm run start-api-server-test-mode" = "JWT_SECRET=SUPER_SECRET npm run start:test",
+"npm run run-test-server-test" = "JWT_SECRET=SUPER_SECRET npm run test"
+
 ## Videos
 
 These videos complement the docs below.
 
-* [An overview of the app](https://youtu.be/meTABGgrO2c)
-* [The backend (api)](https://youtu.be/mFczOzWW3vo)
-* [Postman](https://youtu.be/VO_kinuJngA)
+- [An overview of the app](https://youtu.be/meTABGgrO2c)
+- [The backend (api)](https://youtu.be/mFczOzWW3vo)
+- [Postman](https://youtu.be/VO_kinuJngA)
 
 ## Existing Features
 
 It's already possible for a user to:
+
 - Sign up
 - Sign in
 - Sign out
@@ -23,15 +34,19 @@ It's already possible for a user to:
 Here's an overview of the technologies used to build this template application. You don't need to do a deep dive on each one right now. Instead, try to get a feeling for the big picture and then dive into the details when a specific task pushes you in that direction.
 
 ### **M** is for MongoDB
+
 [MongoDB](https://www.mongodb.com/) is a _NoSQL_ database program that stores data in collections of documents (in a format similar to JSON), rather than in tables. The application interacts with MongoDB using a tool called Mongoose.
 
 ### **E** is for Express
+
 [Express](https://expressjs.com/) is the Javascript equivalent of Sinatra. The structure of this application will feel quite different to what you're used to but the principles are the same.
 
 ### **R** is for React
+
 [React](https://reactjs.org/) is a hugely popular tool that is used to build engaging front ends. The basic principle is that the front end is split up into _components_, each of which _could_ include some logic, template structure (HTML) and styling (CSS).
 
 ### **N** is for Node
+
 Java script was originally designed to run exclusively in browsers, such as Chrome. [Node](https://nodejs.org/en/) is a tool that allows you to run Javascript outside the browser and its invention made it possible to build full stack Javascript apps.
 
 We also used...
@@ -94,6 +109,7 @@ Once received by the React FE, the JSON in the response body is used to render a
 ![response body mapped onto a page](./diagrams/response_parsing.png)
 
 This architectural pattern is quite popular because it allows teams to build multiple front ends, all of which use the same backend API. You could, for example, go on to build a mobile app without needing to create another backend API.
+
 ## Authentication
 
 Up until now, if you've implemented authentication, it will likely have been done using sessions - this is a useful point of comparison but, if you haven't implemented authentication yet, that's not going to impede you right now.
@@ -121,6 +137,7 @@ A JSON Web Token, or JWT, is a token that comprises three parts
 The signature is created using a 'secret', which must be kept private (i.e. not put on GitHub) otherwise nefarious internet users could start to issue tokens for your application.
 
 Here, we've used an environment variable called `JWT_SECRET`, which you'll see used in the commands to start the application and run the tests (below). You can change the value of that environment variable to anything you like.
+
 ## Card wall
 
 REPLACE THIS TEXT WITH A LINK TO YOUR CARD WALL
@@ -158,7 +175,7 @@ REPLACE THIS TEXT WITH A LINK TO YOUR CARD WALL
    brew tap mongodb/brew
    brew install mongodb-community@5.0
    ```
-   *Note:* If you see a message that says `If you need to have mongodb-community@5.0 first in your PATH, run:`, follow the instruction. Restart your terminal after this.
+   _Note:_ If you see a message that says `If you need to have mongodb-community@5.0 first in your PATH, run:`, follow the instruction. Restart your terminal after this.
 7. Start MongoDB
    ```
    brew services start mongodb-community@5.0
@@ -168,20 +185,21 @@ REPLACE THIS TEXT WITH A LINK TO YOUR CARD WALL
 
 1. Start the server
 
-  **Note the use of an environment variable for the JWT secret**
+   **Note the use of an environment variable for the JWT secret**
 
    ```
    ; cd api
    ; JWT_SECRET=SUPER_SECRET npm start
    ```
+
 2. Start the front end
 
-  In a new terminal session...
+In a new terminal session...
 
-  ```
-  ; cd frontend
-  ; npm start
-  ```
+```
+; cd frontend
+; npm start
+```
 
 You should now be able to open your browser and go to `http://localhost:3000/signup` to create a new user.
 
@@ -191,49 +209,48 @@ After logging in, you won't see much but you can create posts using PostMan and 
 
 ### Testing
 
-
 #### The Backend (API)
 
 **Note the use of an environment variable for the JWT secret**
 
-  Start the server in test mode (so that it connects to the test DB)
+Start the server in test mode (so that it connects to the test DB)
 
-  ```
-  ; cd api
-  ; JWT_SECRET=SUPER_SECRET npm run start:test
-  ```
+```
+; cd api
+; JWT_SECRET=SUPER_SECRET npm run start:test
+```
 
-  Then run the tests in a new terminal session
+Then run the tests in a new terminal session
 
-  ```
-  ; cd api
-  ; JWT_SECRET=SUPER_SECRET npm run test
-  ```
+```
+; cd api
+; JWT_SECRET=SUPER_SECRET npm run test
+```
 
 #### The frontend (React)
 
 **Note the use of an environment variable for the JWT secret**
 
-  Start the server in test mode (so that it connects to the test DB)
+Start the server in test mode (so that it connects to the test DB)
 
-  ```
-  ; cd api
-  ; JWT_SECRET=SUPER_SECRET npm run start:test
-  ```
+```
+; cd api
+; JWT_SECRET=SUPER_SECRET npm run start:test
+```
 
-  Then start the front end in a new terminal session
+Then start the front end in a new terminal session
 
-  ```
-  ; cd frontend
-  ; JWT_SECRET=SUPER_SECRET npm start
-  ```
+```
+; cd frontend
+; JWT_SECRET=SUPER_SECRET npm start
+```
 
-  Then run the tests in a new terminal session
+Then run the tests in a new terminal session
 
-  ```
-  ; cd frontend
-  ; JWT_SECRET=SUPER_SECRET npm run test
-  ```
+```
+; cd frontend
+; JWT_SECRET=SUPER_SECRET npm run test
+```
 
 ## MongoDB Connection Errors?
 
@@ -244,13 +261,12 @@ Some people occasionally experience MongoDB connection errors when running the t
 
 If you have issues that are not resolved by these tips, please reach out to a coach and, once the issue is resolved, we can add a new tip!
 
-
 <!-- BEGIN GENERATED SECTION DO NOT EDIT -->
 
 ---
 
-**How was this resource?**  
-[😫](https://airtable.com/shrUJ3t7KLMqVRFKR?prefill_Repository=makersacademy%2Facebook-mern-template&prefill_File=README.md&prefill_Sentiment=😫) [😕](https://airtable.com/shrUJ3t7KLMqVRFKR?prefill_Repository=makersacademy%2Facebook-mern-template&prefill_File=README.md&prefill_Sentiment=😕) [😐](https://airtable.com/shrUJ3t7KLMqVRFKR?prefill_Repository=makersacademy%2Facebook-mern-template&prefill_File=README.md&prefill_Sentiment=😐) [🙂](https://airtable.com/shrUJ3t7KLMqVRFKR?prefill_Repository=makersacademy%2Facebook-mern-template&prefill_File=README.md&prefill_Sentiment=🙂) [😀](https://airtable.com/shrUJ3t7KLMqVRFKR?prefill_Repository=makersacademy%2Facebook-mern-template&prefill_File=README.md&prefill_Sentiment=😀)  
+**How was this resource?**
+[😫](https://airtable.com/shrUJ3t7KLMqVRFKR?prefill_Repository=makersacademy%2Facebook-mern-template&prefill_File=README.md&prefill_Sentiment=😫) [😕](https://airtable.com/shrUJ3t7KLMqVRFKR?prefill_Repository=makersacademy%2Facebook-mern-template&prefill_File=README.md&prefill_Sentiment=😕) [😐](https://airtable.com/shrUJ3t7KLMqVRFKR?prefill_Repository=makersacademy%2Facebook-mern-template&prefill_File=README.md&prefill_Sentiment=😐) [🙂](https://airtable.com/shrUJ3t7KLMqVRFKR?prefill_Repository=makersacademy%2Facebook-mern-template&prefill_File=README.md&prefill_Sentiment=🙂) [😀](https://airtable.com/shrUJ3t7KLMqVRFKR?prefill_Repository=makersacademy%2Facebook-mern-template&prefill_File=README.md&prefill_Sentiment=😀)
 Click an emoji to tell us.
 
 <!-- END GENERATED SECTION DO NOT EDIT -->

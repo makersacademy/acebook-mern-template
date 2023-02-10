@@ -3,7 +3,7 @@ import CreatePostForm from '../createPostForm/createPostForm';
 
 import Post from '../post/Post';
 
-const Feed = ({ navigate }) => {
+const Feed = ({ navigate, path }) => {
   const [posts, setPosts] = useState([]);
   const [token, setToken] = useState(window.localStorage.getItem('token'));
   const [id, setId] = useState(window.localStorage.getItem('user_id'));
@@ -11,7 +11,7 @@ const Feed = ({ navigate }) => {
 
   useEffect(() => {
     if (token) {
-      fetch('/posts', {
+      fetch(path || '/posts', {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -25,6 +25,8 @@ const Feed = ({ navigate }) => {
           setPosts(data.posts);
           setReload(false);
         });
+    } else {
+      navigate('/login');
     }
   }, [reload]);
 
@@ -44,7 +46,7 @@ const Feed = ({ navigate }) => {
           id={id}
           setReload={setReload}
         />
-        <div id='feed' role='feed'>
+        <div id="feed" role="feed">
           {posts ? (
             posts
               .slice(0)
@@ -56,9 +58,6 @@ const Feed = ({ navigate }) => {
         </div>
       </>
     );
-  } else {
-    navigate('/login');
   }
 };
-
 export default Feed;
