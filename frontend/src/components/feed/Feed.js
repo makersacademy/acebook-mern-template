@@ -58,7 +58,23 @@ const handleSubmitPost = async (event) => {
     })
 }
 
+const handleFindUser = async (event) => {
+  const email = window.localStorage.getItem("email");
+  const url = `/users?email=${email}`;
 
+  const response = await fetch( url, {
+    method: 'get',
+    headers: {
+      Authorization: `Bearer ${token}`,
+      'Content-Type': 'application/json',
+    },
+  });
+
+  const user = await response.json();
+  return user
+}
+
+console.log(handleFindUser())
 /////////////////////////
 // This below is new code
 /////////////////////////

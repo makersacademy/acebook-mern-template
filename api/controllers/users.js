@@ -14,7 +14,7 @@ const UsersController = {
 
   Find: (req, res) => {
     const email = req.query.email;
-    User.findOne({ email: email }, (err, user) => {
+    User.findOne({ email: email }, "-password", (err, user) => {
       if (err) {
         res.status(500).json({ message: "Error finding the user" });
       } else if (!user) {
