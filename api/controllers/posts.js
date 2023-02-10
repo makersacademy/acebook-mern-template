@@ -22,6 +22,19 @@ const PostsController = {
       res.status(201).json({ message: 'OK', token: token });
     });
   },
-};
+
+  Delete: async (req, res) => {
+    const postId = req.params.id;
+    try {
+      await Post.deleteOne({ _id: postId });
+      const token = await TokenGenerator.jsonwebtoken(req.user_id);
+      res
+        .status(200)
+        .json({ message: 'Post deleted successfully', token: token });
+    } catch (err) {
+      res.status(500).json({ error: err.message });
+    }
+  },
+  };
 
 module.exports = PostsController;
