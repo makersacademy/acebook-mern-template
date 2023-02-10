@@ -9,7 +9,7 @@ const CreatePost = ({ token }) => {
   const handleSubmit = async (event) => {
     event.preventDefault();
 
-    let response = await fetch("/newPost", {
+    let response = await fetch("/post", {
       method: "post",
       headers: {
         "Content-Type": "application/json",
@@ -19,13 +19,13 @@ const CreatePost = ({ token }) => {
     });
 
     if (response.status !== 201) {
-      console.log("new post created");
-      //   navigate("/posts");
+      console.log("oop");
+        navigate("/posts");
     } else {
-      console.log("oops");
-      //   let data = await response.json();
-      //   window.localStorage.setItem("token", data.token);
-      //   navigate("/posts");
+      console.log("new post created");
+        let data = await response.json();
+        window.localStorage.setItem("token", data.token);
+        navigate("/posts");
     }
   };
 
