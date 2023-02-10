@@ -43,7 +43,7 @@ describe("Navbar", () => {
   });
 
   //#6
-  it("confirms that Acebook-Air does not contain the right link", () => {
+  it("confirms that Acebook-Air does not contain any undefined link", () => {
     cy.mount(<MemoryRouter><Navbar/></MemoryRouter>)
     
     cy.contains('a', 'Acebook-Air').should('not.have.attr', 'href', '#undefined');
