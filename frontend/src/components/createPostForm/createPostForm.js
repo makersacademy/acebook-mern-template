@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-const AddPostForm = ({callback}) => {
+const CreatePostForm = ({callback}) => {
     const [textArea, setTextArea] = useState("");
 
     const handleTextAreaChange = (event) => {
@@ -32,13 +32,13 @@ const AddPostForm = ({callback}) => {
     }
 
     return (
-        <>
-            <div>
-                <form className='create-post-form'>
-                    <input type='text' value= {textArea} onChange= {handleTextAreaChange}></input>
-                    <button type='submit' onClick={handleSubmit}>Create post</button>
-                </form>
-            </div>
-        </>
+        <div>
+            <form className='create-post-form'>
+                <input type='text' value= {textArea} onChange= {handleTextAreaChange}></input>
+                <button type='submit' onClick={handleSubmit}>Create post</button>
+            </form>
+        </div>
     )
 }
+
+export default CreatePostForm;
