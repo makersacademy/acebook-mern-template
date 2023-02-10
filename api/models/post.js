@@ -14,7 +14,7 @@ const PostSchema = new mongoose.Schema(
       required: true,
     },
     message: { type: String, required: true },
-    likes: {type: mongoose.Types.ObjectId, ref:'User'}
+    likes: [{type: mongoose.Types.ObjectId, ref:'User'}]
   },
   { timestamps: true }  
 );
