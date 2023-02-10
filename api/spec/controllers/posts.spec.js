@@ -157,4 +157,16 @@ describe("/posts", () => {
       expect(response.body.token).toEqual(undefined);
     })
   })
+
+  describe('DELETE /posts/:id', () => {
+    it('should delete a post', async () => {
+      const postId = '5e9b04a8b0d4a914cc3f1234';
+  
+      const res = await request(app)
+        .delete(`/posts/${postId}`)
+        .expect(200);
+  
+      expect(res.body).toEqual({ message: 'Post deleted successfully' });
+    });
+  });
 });

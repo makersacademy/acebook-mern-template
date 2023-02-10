@@ -45,7 +45,7 @@ const Feed = ({ navigate }) => {
             </button>
           <div id='feed' role="feed">
               {posts.map(
-                (post) => ( <Post post={ post } key={ post._id } /> )
+                (post) => ( <Post setPosts={ setPosts } post={ post } key={ post._id } /> )
               )}
           </div>
         </>
