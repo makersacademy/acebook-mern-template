@@ -63,10 +63,10 @@ const PostsController = {
       }
     );
   },
-  Unlike: (req, res) => {
+  Unlikes: (req, res) => {
     Post.updateOne(
       { _id: req.body._id },
-      { $pull: { likes: req.body._user_id } },
+      { $pull: { likes: req.body._user_id } }, //addToSet searches the array and if it matches it doesn't push
       async (err) => {
         if (err) {
           throw err;
@@ -76,6 +76,6 @@ const PostsController = {
         }
       }
     );
-  }
+  },
 }
 module.exports = PostsController;
