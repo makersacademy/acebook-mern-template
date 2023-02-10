@@ -7,5 +7,6 @@ router.get("/", PostsController.Index);
 router.post("/", PostsController.Create);
 router.delete("/", PostsController.Delete);
 router.put("/", PostsController.Update);
-router.patch("/", PostsController.Likes); //Patch is like put, but it's only small changes - it does a refresh.
+router.patch("/", PostsController.Likes); 
+router.patch("/unlike", PostsController.Unlikes);
 module.exports = router;
