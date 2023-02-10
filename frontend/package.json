@@ -2,7 +2,7 @@
   "name": "frontend",
   "version": "0.1.0",
   "private": true,
-  "proxy": "http://localhost:8080",
+  "proxy": "acebook-air:10000",
   "dependencies": {
     "cypress": "^10.7.0",
     "eslint": "^8.23.0",
@@ -20,8 +20,7 @@
     "test:unit": "cypress run --component",
     "test:feature": "cypress run",
     "eject": "react-scripts eject",
-    "cypress:open": "cypress open"   
-    
+    "cypress:open": "cypress open"
   },
   "eslintConfig": {
     "extends": [
