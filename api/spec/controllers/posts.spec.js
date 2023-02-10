@@ -36,7 +36,11 @@ describe("/posts", () => {
       let response = await request(app)
         .post("/posts")
         .set("Authorization", `Bearer ${token}`)
-        .send({ message: "hello world", token: token });
+        .send({ content: "howdy!",
+        date_created: new Date(),
+        user_id: 2,
+        likes: 0,
+        token: token });
       expect(response.status).toEqual(201);
     });
   
@@ -44,17 +48,25 @@ describe("/posts", () => {
       await request(app)
         .post("/posts")
         .set("Authorization", `Bearer ${token}`)
-        .send({ message: "hello world", token: token });
+        .send({ content: "howdy!",
+        date_created: new Date(),
+        user_id: 2,
+        likes: 0,
+        token: token });
       let posts = await Post.find();
       expect(posts.length).toEqual(1);
-      expect(posts[0].message).toEqual("hello world");
+      expect(posts[0].content).toEqual("howdy!");
     });
   
     test("returns a new token", async () => {
       let response = await request(app)
         .post("/posts")
         .set("Authorization", `Bearer ${token}`)
-        .send({ message: "hello world", token: token })
+        .send({ content: "howdy!",
+        date_created: new Date(),
+        user_id: 2,
+        likes: 0,
+        token: token })
       let newPayload = JWT.decode(response.body.token, process.env.JWT_SECRET);
       let originalPayload = JWT.decode(token, process.env.JWT_SECRET);
       expect(newPayload.iat > originalPayload.iat).toEqual(true);
@@ -65,14 +77,20 @@ describe("/posts", () => {
     test("responds with a 401", async () => {
       let response = await request(app)
         .post("/posts")
-        .send({ message: "hello again world" });
+        .send({ content: "howdy!",
+        date_created: new Date(),
+        user_id: 2,
+        likes: 0 });
       expect(response.status).toEqual(401);
     });
   
     test("a post is not created", async () => {
       await request(app)
         .post("/posts")
-        .send({ message: "hello again world" });
+        .send({ content: "howdy!",
+        date_created: new Date(),
+        user_id: 2,
+        likes: 0 });
       let posts = await Post.find();
       expect(posts.length).toEqual(0);
     });
