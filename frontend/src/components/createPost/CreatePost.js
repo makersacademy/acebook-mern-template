@@ -2,9 +2,7 @@ import React, { useState } from "react";
 
 const CreatePost = ({ token }) => {
   const [post, setPost] = useState("");
-  const handlePostChange = (event) => {
-    setPost(event.target.value);
-  };
+  const [token, setToken] = useState(window.localStorage.getItem("token"));
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -25,8 +23,13 @@ const CreatePost = ({ token }) => {
       console.log("new post created");
         let data = await response.json();
         window.localStorage.setItem("token", data.token);
+        setToken(window.localStorage.getItem("token"));
         navigate("/posts");
     }
+  };
+
+  const handlePostChange = (event) => {
+    setPost(event.target.value);
   };
 
   if (token) {
@@ -34,7 +37,7 @@ const CreatePost = ({ token }) => {
       <>
         <form onSubmit={handleSubmit}>
           <textarea
-            placeholder="what are you thinking?"
+            placeholder="What are you thinking?"
             id="newPost"
             type="text"
             rows="5"
