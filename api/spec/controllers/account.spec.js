@@ -24,18 +24,16 @@ describe('/posts', () => {
       secret
     );
   });
+
   beforeEach(async () => {
-    await User.deleteMany({});
-
     await Post.deleteMany({});
   });
 
-  afterEach(async () => {
-    await User.deleteMany({});
-    await Post.deleteMany({});
-  });
+  afterAll(async () => {
+    await User.deleteMany({})
+  })
 
-  describe('GET - users', () => {
+  describe('GET - /account', () => {
     test('returns 401 when token missing', async () => {
       let response = await request(app).get('/account');
       expect(response.status).toEqual(401);
@@ -90,4 +88,6 @@ describe('/posts', () => {
       expect(response.body.token).toEqual(undefined);
     });
   });
+
+  // describe('PUT updates')
 });
