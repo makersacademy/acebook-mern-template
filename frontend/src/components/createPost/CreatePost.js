@@ -1,30 +1,30 @@
 import React, { useState } from "react";
 
-const CreatePost = ({ token }) => {
+const CreatePost = ({ navigate }) => {
   const [post, setPost] = useState("");
   const [token, setToken] = useState(window.localStorage.getItem("token"));
 
   const handleSubmit = async (event) => {
     event.preventDefault();
 
-    let response = await fetch("/post", {
+    let response = await fetch("/posts", {
       method: "post",
       headers: {
         "Content-Type": "application/json",
         Authorization: `Bearer ${token}`,
       },
-      body: JSON.stringify({ post: post }),
+      body: JSON.stringify({ message: post }),
     });
 
     if (response.status !== 201) {
-      console.log("oop");
-        navigate("/posts");
+      console.log("oop")
+      // navigate("/posts")
     } else {
-      console.log("new post created");
-        let data = await response.json();
-        window.localStorage.setItem("token", data.token);
-        setToken(window.localStorage.getItem("token"));
-        navigate("/posts");
+      console.log("new post created")
+        let data = await response.json()
+        window.localStorage.setItem("token", data.token)
+        setToken(window.localStorage.getItem("token"))
+        // navigate("/posts");
     }
   };
 
