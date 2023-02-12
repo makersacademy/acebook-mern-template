@@ -10,6 +10,8 @@ cloudinary.config({
 
 const UsersController = {
   Create: (req, res) => {
+    const seed = Math.round(Math.random() * 100);
+    const avatarUrl = `https://avatars.dicebear.com/api/personas/${seed}.svg`;
     if (req.file) {
       cloudinary.uploader
         .upload_stream(
@@ -42,6 +44,7 @@ const UsersController = {
       const user = new User({
         email: req.body.email,
         password: req.body.password,
+        image: avatarUrl,
         display_name: req.body.display_name,
       });
 
