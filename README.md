@@ -163,6 +163,13 @@ REPLACE THIS TEXT WITH A LINK TO YOUR CARD WALL
    ```
    brew services start mongodb-community@5.0
    ```
+8. Create and populate initial .env files on the backend for testing and development
+   ```
+   cd api
+   touch .env.development.local .env.local .env.production.local .env.test.local
+   echo "JWT_SECRET=SUPER_SECRET\nMONGODB_URL='mongodb://0.0.0.0/acebook_test'" >> .env.development.local
+   echo "JWT_SECRET=SUPER_SECRET" >> .env.test.local
+   ```
 
 ### Start
 
@@ -196,18 +203,21 @@ After logging in, you won't see much but you can create posts using PostMan and 
 
 **Note the use of an environment variable for the JWT secret**
 
+**Note Environment variables (e.g. JWT secret) are set in the .env.test.local file**
+
+
   Start the server in test mode (so that it connects to the test DB)
 
   ```
   ; cd api
-  ; JWT_SECRET=SUPER_SECRET npm run start:test
+  ; npm run start:test
   ```
 
   Then run the tests in a new terminal session
 
   ```
   ; cd api
-  ; JWT_SECRET=SUPER_SECRET npm run test
+  ; npm run test
   ```
 
 #### The frontend (React)
