@@ -1,12 +1,15 @@
 const User = require('../models/user');
 const cloudinary = require('cloudinary').v2;
+require('dotenv').config();
 
 cloudinary.config({
   cloud_name: 'de2y4osyf',
-  api_key: '285215674626885',
-  api_secret: 'BkVMUzdVZfQq-XDSQzkrIDoM0Ac',
+  api_key: process.env.API_KEY,
+  api_secret: process.env.API_SECRET,
 });
 
+console.log(`API KEY HERE: ${process.env.API_KEY}`);
+console.log(`API SECRET HERE: ${process.env.API_SECRET}`);
 const UsersController = {
   Create: (req, res) => {
     if (req.file) {
