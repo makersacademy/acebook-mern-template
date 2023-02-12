@@ -8,8 +8,6 @@ cloudinary.config({
   api_secret: process.env.API_SECRET,
 });
 
-console.log(`API KEY HERE: ${process.env.API_KEY}`);
-console.log(`API SECRET HERE: ${process.env.API_SECRET}`);
 const UsersController = {
   Create: (req, res) => {
     if (req.file) {
