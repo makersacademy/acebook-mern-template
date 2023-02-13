@@ -15,7 +15,7 @@ const Home = ({ navigate }) => {
         <p></p>
         </ul>
       <div>
-        <img src="/images/community-acebook.svg" alt="home" />
+        <img src="/images/noback-community-acebook.svg" alt="home" />
       </div>
     </div>
   );
