@@ -28,7 +28,7 @@ const Post = ({ post, setPosts, posts, token }) => {
 
   return (
     <>
-    <button onClick={() => handleDeletePost(post._id)}>Delete</button>
+    <button data-cy="delete" onClick={() => handleDeletePost(post._id)}>Delete</button>
         <div className="likes">
        <p className="left-aligned">{post.message}</p>
        <p className="likes-text">Likes: {likes}</p>
