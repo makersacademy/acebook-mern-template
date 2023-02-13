@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-const CreatePost = ({}) => {
+const CreatePost = ({navigate}) => {
   const [post, setPost] = useState("");
   const [token, setToken] = useState(window.localStorage.getItem("token"));
 
@@ -18,13 +18,13 @@ const CreatePost = ({}) => {
 
     if (response.status !== 201) {
       console.log("new post not created")
-      // navigate("/posts")
+      navigate("/posts")
     } else {
       console.log("new post created")
         let data = await response.json()
         window.localStorage.setItem("token", data.token)
         setToken(window.localStorage.getItem("token"))
-        // navigate("/posts");
+        navigate("/posts");
     }
   };
 

@@ -16,7 +16,7 @@ const LogInForm = ({ navigate }) => {
     })
 
     if(response.status !== 201) {
-      console.log("oop")
+      console.log("login unsuccessful")
       navigate('/login')
     } else {
       console.log("login successful")

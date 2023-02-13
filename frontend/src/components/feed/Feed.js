@@ -20,7 +20,7 @@ const Feed = ({ navigate }) => {
           setPosts(data.posts);
         });
     }
-  }, []);
+  });
 
   const logout = () => {
     window.localStorage.removeItem("token");
