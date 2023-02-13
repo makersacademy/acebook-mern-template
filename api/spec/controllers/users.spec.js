@@ -69,4 +69,32 @@ describe("/users", () => {
       expect(users.length).toEqual(0);
     });
   });
+
+  describe("Find user by email", () => {
+    it("should return 200 and the found user if the user exists", async () => {
+      await request(app).post("/users").send({
+        email: "scarlett@email.com",
+        password: "1234",
+        firstName: "John",
+        lastName: "Smith",
+      });
+      const response = await request(app)
+        .get("/users")
+        .query({ email: "scarlett@email.com" });
+
+      expect(response.statusCode).toBe(200);
+      expect(response.body.user.email).toEqual("scarlett@email.com");
+      expect(response.body.user.firstName).toEqual("John");
+      expect(response.body.user.lastName).toEqual("Smith");
+    });
+
+    it("should return 404 if the user doesn't exist", async () => {
+      const response = await request(app)
+        .get("/users")
+        .query({ email: "notfound@email.com" });
+
+      expect(response.statusCode).toBe(404);
+      expect(response.body.message).toEqual("User not found");
+    });
+  });
 });
