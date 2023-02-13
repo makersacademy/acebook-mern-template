@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import './signUpForm.css';
 
 const SignUpForm = ({ navigate }) => {
 
@@ -34,11 +35,15 @@ const SignUpForm = ({ navigate }) => {
 
 
     return (
-      <form onSubmit={handleSubmit}>
-          <input placeholder="Email" id="email" type='text' value={ email } onChange={handleEmailChange} />
-          <input placeholder="Password" id="password" type='password' value={ password } onChange={handlePasswordChange} />
-        <input id='submit' type="submit" value="Submit" />
-      </form>
+      <main>
+        <img alt='middleLogo' className='middleLogo' />
+        <h2>Sign up now!</h2>
+        <form className='signUpLoginForm' onSubmit={handleSubmit}>
+            <input placeholder="Email" className='email' id="email" type='text' value={ email } onChange={handleEmailChange} />
+            <input placeholder="Password" className='password' id="password" type='password' value={ password } onChange={handlePasswordChange} />
+            <input id='submit' type="submit" value="Sign Up" />
+        </form>
+      </main>
     );
 }
 
