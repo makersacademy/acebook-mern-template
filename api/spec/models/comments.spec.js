@@ -14,4 +14,16 @@ describe('Testing comments model', () => {
     const comment = new Comment({ message: 'great post you have here' });
     expect(comment.message).toEqual('great post you have here');
   });
+
+  it('has a user_id property', () => {
+    user_id = new mongoose.Types.ObjectId();
+    const comment = new Comment({ user_id: user_id });
+    expect(comment.user_id).toEqual(user_id);
+  });
+
+  it('has a post_id property', () => {
+    post_id = new mongoose.Types.ObjectId();
+    const comment = new Comment({ post_id: post_id });
+    expect(comment.post_id).toEqual(post_id);
+  });
 });
