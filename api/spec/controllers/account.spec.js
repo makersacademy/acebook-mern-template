@@ -30,8 +30,8 @@ describe('/posts', () => {
   });
 
   afterAll(async () => {
-    await User.deleteMany({})
-  })
+    await User.deleteMany({});
+  });
 
   describe('GET - /account', () => {
     test('returns 401 when token missing', async () => {
@@ -91,63 +91,63 @@ describe('/posts', () => {
 
   describe('PUT updates user details', () => {
     it('updates password for session user if password sent in body', async () => {
-      const newPassword = "secure_password"
+      const newPassword = 'secure_password';
       await request(app)
-      .put('/account')
-      .set('Authorization', `Bearer ${token}`)
-      .send({ newPassword: newPassword });
+        .put('/account')
+        .set('Authorization', `Bearer ${token}`)
+        .send({ newPassword: newPassword });
       const updateUser = await User.findById(user_id);
-      expect(updateUser.password).toBe(newPassword);  
-    })
+      expect(updateUser.password).toBe(newPassword);
+    });
 
     it('should not update password if no token present', async () => {
-      const newPassword = "very_secure_password"
-      await request(app)
-      .put('/account')
-      .send({ newPassword: newPassword });
+      const newPassword = 'very_secure_password';
+      await request(app).put('/account').send({ newPassword: newPassword });
       const updateUser = await User.findById(user_id);
-      debugger
-      expect(updateUser.password).not.toBe(newPassword);  
-    })
+
+      expect(updateUser.password).not.toBe(newPassword);
+    });
 
     it('Can update email, password, display_name, bio simultaneously', async () => {
-      const newPassword = "super_secure_password"
-      const newEmail = 'mrjelly@wibblywobbly.com'
-      const newDisplayName = "Timmy"
-      const newBio = "I'm a Makers student"
+      const newPassword = 'super_secure_password';
+      const newEmail = 'mrjelly@wibblywobbly.com';
+      const newDisplayName = 'Timmy';
+      const newBio = "I'm a Makers student";
       await request(app)
-      .put('/account')
-      .set('Authorization', `Bearer ${token}`)
-      .send({ newPassword: newPassword, 
-              newEmail: newEmail,
-              newDisplayName: newDisplayName,              
-              newBio: newBio
-            });
+        .put('/account')
+        .set('Authorization', `Bearer ${token}`)
+        .send({
+          newPassword: newPassword,
+          newEmail: newEmail,
+          newDisplayName: newDisplayName,
+          newBio: newBio,
+        });
       const updateUser = await User.findById(user_id);
-      expect(updateUser.password).toBe(newPassword);  
-      expect(updateUser.email).toBe(newEmail);  
-      expect(updateUser.display_name).toBe(newDisplayName);  
+      expect(updateUser.password).toBe(newPassword);
+      expect(updateUser.email).toBe(newEmail);
+      expect(updateUser.display_name).toBe(newDisplayName);
       expect(updateUser.bio).toBe(newBio);
-    })
+    });
 
     it('should not update any information without valid token', async () => {
-      const newPassword = "uber_secure_password"
-      const newEmail = 'mrjelly@wibblywobbly.net'
-      const newDisplayName = "Jimmy"
-      const newBio = "I'm a professional software engineer"
+      const newPassword = 'uber_secure_password';
+      const newEmail = 'mrjelly@wibblywobbly.net';
+      const newDisplayName = 'Jimmy';
+      const newBio = "I'm a professional software engineer";
       await request(app)
-      .put('/account')
-      .send({ newPassword: newPassword, 
-              newEmail: newEmail,
-              newDisplayName: newDisplayName,              
-              newBio: newBio
-            });
+        .put('/account')
+        .send({
+          newPassword: newPassword,
+          newEmail: newEmail,
+          newDisplayName: newDisplayName,
+          newBio: newBio,
+        });
       const updateUser = await User.findById(user_id);
-      debugger
-      expect(updateUser.password).not.toBe(newPassword);  
-      expect(updateUser.email).not.toBe(newEmail);  
-      expect(updateUser.display_name).not.toBe(newDisplayName);  
-      expect(updateUser.bio).not.toBe(newBio);  
-    })
+      debugger;
+      expect(updateUser.password).not.toBe(newPassword);
+      expect(updateUser.email).not.toBe(newEmail);
+      expect(updateUser.display_name).not.toBe(newDisplayName);
+      expect(updateUser.bio).not.toBe(newBio);
+    });
   });
 });
