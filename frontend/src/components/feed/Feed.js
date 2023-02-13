@@ -59,7 +59,7 @@ useEffect(() => {
         firstName: data.user.firstName,
         lastName: data.user.lastName,
       };
-  
+      
       setUser(userData)
     } catch (error) {
       console.error(error);
@@ -67,6 +67,7 @@ useEffect(() => {
   };
   fetchUser();
 }, []);
+console.log(user)
 
 const [message, setMessage] = useState("");
 
@@ -122,8 +123,8 @@ const handleMessageChange = (event) => {
                 </form>
                 <div id="feed" role="feed">
                 {posts.map((post) => (
-                    <div class="post" key={post._id}>
-                      <div class="postUserName">
+                    <div class="post" key={post._id} data-cy="post">
+                      <div data-cy="userName" class="postUserName">
                         {post.userName}
                       </div>
                       <div class="postContent">
