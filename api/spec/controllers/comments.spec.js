@@ -77,12 +77,29 @@ describe('/comments', () => {
     });
   });
 
-  describe('When a token is not present', () => {
+  describe('POST without a token', () => {
     it('Sends 401 status in response', async () => {
       const response = await request(app)
         .post('/comments')
         .send({ user_id: user_id, post_id: post_id, message: 'hello world' });
       expect(response.status).toEqual(401);
+    });
+
+    it('Should not create a comment in the database', async () => {
+      const response = await request(app)
+        .post('/comments')
+        .send({ user_id: user_id, post_id: post_id, message: 'hello world' });
+      Comment.find((err, comments) => {
+        expect(err).toBeNull();
+        expect(comments.length).toBe(0);
+      });
+    });
+
+    it('Should not return a token', async () => {
+      const response = await request(app)
+        .post('/comments')
+        .send({ user_id: user_id, post_id: post_id, message: 'hello world' });
+      expect(response.body.token).toBe(undefined);
     });
   });
 });
