@@ -121,15 +121,20 @@ const handleMessageChange = (event) => {
                 <input id='submit' type="submit" value="Submit" />
                 </form>
                 <div id="feed" role="feed">
-                      {posts.map((post) => (
-                        <div class="post">
-                          <div class="postContent"><Post post={post} key={post._id} /><br /></div>
-                          <div id="postButtons">
-                            <button id='like'>Like</button>
-                            <button id='comment'>Comment</button>
-                          </div>
-                        </div>
-                      ))}
+                {posts.map((post) => (
+                    <div class="post" key={post._id}>
+                      <div class="postUserName">
+                        {post.userName}
+                      </div>
+                      <div class="postContent">
+                        {post.message}
+                      </div>
+                      <div class="postButtons">
+                        <button id='like'>Like</button>
+                        <button id='comment'>Comment</button>
+                      </div>
+                    </div>
+                  ))}
                 </div>
             </div>
         </div>
