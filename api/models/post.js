@@ -14,9 +14,13 @@ const PostSchema = new mongoose.Schema(
       required: true,
     },
     message: { type: String, required: true },
-    likes: [{type: mongoose.Types.ObjectId, ref:'User'}]
+    likes: {
+      type: Array,
+      default: [],
+      required: false,
+    },
   },
-  { timestamps: true }  
+  { timestamps: true }
 );
 
 const Post = mongoose.model('Post', PostSchema);

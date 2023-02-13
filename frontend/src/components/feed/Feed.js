@@ -46,12 +46,14 @@ const Feed = ({ navigate, path }) => {
           id={id}
           setReload={setReload}
         />
-        <div id="feed" role="feed">
+        <div id='feed' role='feed'>
           {posts ? (
             posts
               .slice(0)
               .reverse()
-              .map((post) => <Post post={post} key={post._id} />)
+              .map((post) => (
+                <Post post={post} key={post._id} setReload={setReload} />
+              ))
           ) : (
             <p>loading</p>
           )}
