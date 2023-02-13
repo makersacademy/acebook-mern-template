@@ -1,0 +1,28 @@
+{
+  "name": "acebook-the-crown-jewels",
+  "version": "1.0.0",
+  "description": "In this project, you are tasked with working on an existing application. A significant part of the challenge will be to familiarise yourself with the codebase you've inherited, as you work to **improve and extend** it.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/murat-zsertay/acebook-the-crown-jewels.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/murat-zsertay/acebook-the-crown-jewels/issues"
+  },
+  "homepage": "https://github.com/murat-zsertay/acebook-the-crown-jewels#readme",
+  "devDependencies": {
+    "eslint": "^8.33.0",
+    "eslint-config-standard": "^17.0.0",
+    "eslint-plugin-import": "^2.27.5",
+    "eslint-plugin-n": "^15.6.1",
+    "eslint-plugin-promise": "^6.1.1",
+    "eslint-plugin-react": "^7.32.2"
+  }
+}
