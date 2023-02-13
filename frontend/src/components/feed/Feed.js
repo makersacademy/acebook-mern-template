@@ -64,8 +64,6 @@ useEffect(() => {
   fetchUser();
 }, []);
 
-const [message, setMessage] = useState("");
-
   const handleSubmitPost = async (event) => {
     // event.preventDefault(); This line stops the page refreshing automatically so it has been commented out
 
@@ -121,6 +119,7 @@ const [message, setMessage] = useState("");
                       <div class="postButtons">
                         <button id='like'>Like</button>
                         <button id='comment'>Comment</button>
+                        <button id='delete'>Delete</button>
                       </div>
                     </div>
                   ))}
