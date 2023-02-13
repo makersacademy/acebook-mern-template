@@ -15,7 +15,7 @@ const Home = ({ navigate }) => {
         <p></p>
         </ul>
       <div>
-        <img src="/images/social-media-connecting-people-vector.avif" alt="home" />
+        <img src="/images/community-acebook.svg" alt="home" />
       </div>
     </div>
   );
