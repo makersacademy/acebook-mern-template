@@ -116,6 +116,10 @@ useEffect(() => {
                       <div class="postContent">
                         {post.message}
                       </div>
+                      {/* {comments.map(comment) => ()} */}
+                      <div class="postComments">
+                        {post.comments}
+                      </div>
                       <div class="postButtons">
                         <button id='like'>Like</button>
                         <button id='comment'>Comment</button>
