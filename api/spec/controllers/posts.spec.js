@@ -10,7 +10,7 @@ let token;
 
 describe("/posts", () => {
   beforeAll( async () => {
-    const user = new User({email: "test@test.com", password: "12345678"});
+    const user = new User({email: "test@test.com", password: "12345678", firstName: "John", lastName: "Brooks" });
     await user.save();
 
     token = JWT.sign({
@@ -36,7 +36,12 @@ describe("/posts", () => {
       let response = await request(app)
         .post("/posts")
         .set("Authorization", `Bearer ${token}`)
-        .send({ content: "hello world", token: token });
+        .send({ title: "greeting",
+          content: "hello world",
+          likes: 0,
+          comments: [],
+          token: token,
+        });
       expect(response.status).toEqual(201);
     });
   
@@ -44,7 +49,12 @@ describe("/posts", () => {
       await request(app)
         .post("/posts")
         .set("Authorization", `Bearer ${token}`)
-        .send({ message: "hello world", token: token });
+        .send({ title: "greeting",
+          content: "hello world",
+          likes: 0,
+          comments: [],
+          token: token,
+        });
       let posts = await Post.find();
       expect(posts.length).toEqual(1);
       expect(posts[0].content).toEqual("hello world");
@@ -54,7 +64,12 @@ describe("/posts", () => {
       let response = await request(app)
         .post("/posts")
         .set("Authorization", `Bearer ${token}`)
-        .send({ content: "hello world", token: token })
+        .send({ title: "greeting",
+          content: "hello world",
+          likes: 0,
+          comments: [],
+          token: token,
+        });
       let newPayload = JWT.decode(response.body.token, process.env.JWT_SECRET);
       let originalPayload = JWT.decode(token, process.env.JWT_SECRET);
       expect(newPayload.iat > originalPayload.iat).toEqual(true);
@@ -65,14 +80,24 @@ describe("/posts", () => {
     test("responds with a 401", async () => {
       let response = await request(app)
         .post("/posts")
-        .send({ content: "hello again world" });
+        .send({ title: "greeting",
+          content: "hello again world",
+          likes: 0,
+          comments: [],
+          token: token,
+        });
       expect(response.status).toEqual(401);
     });
   
     test("a post is not created", async () => {
       await request(app)
         .post("/posts")
-        .send({ content: "hello again world" });
+        .send({ title: "greeting",
+        content: "hello again world",
+        likes: 0,
+        comments: [],
+        token: token,
+      });
       let posts = await Post.find();
       expect(posts.length).toEqual(0);
     });
@@ -80,7 +105,12 @@ describe("/posts", () => {
     test("a token is not returned", async () => {
       let response = await request(app)
         .post("/posts")
-        .send({ content: "hello again world" });
+        .send({ title: "greeting",
+        content: "hello again world",
+        likes: 0,
+        comments: [],
+        token: token,
+      });
       expect(response.body.token).toEqual(undefined);
     });
   })
