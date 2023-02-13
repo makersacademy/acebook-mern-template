@@ -4,7 +4,22 @@ const Form = ({ form_type }) => {
   const [inputValue, setInputValue] = useState('');
   const handleSubmit = async (e) => {
     e.preventDefault();
-    
+    //password form only for now
+    fetch('/account', {
+      method: 'put',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        password: inputValue,
+      }),
+    }).then((response) => {
+      if (response.status === 201) {
+        console.log('password changed');
+      } else {
+        console.log('error changing password');
+      }
+    });
   };
   const handleInputChange = (e) => {
     setInputValue(e.target.value);

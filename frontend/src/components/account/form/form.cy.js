@@ -28,4 +28,10 @@ describe('Rendering forms', () => {
       './src/components/account/form/test-image.png'
     );
   });
+  it('Updates password', () => {
+    window.localStorage.setItem('token', 'fakeToken');
+    cy.mount(<Form form_type={'password'} />);
+    cy.get('input[placeholder*="New password"]').type('new-password');
+    cy.get('button[type=submit]').click();
+  });
 });
