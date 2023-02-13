@@ -7,11 +7,11 @@ describe('CreatePost', () => {
       cy.intercept('POST', '/posts', { 
         statusCode: 200,
         body: {
-            message: 'test new post'
+            content: 'test new post'
         }
       }).as("postRequest")
 
-      cy.get("#newpost").type('test new post');
+      cy.get("#content").type('test new post');
       cy.get("#submit").click();
       cy.wait('@postRequest').then(() => {
 
