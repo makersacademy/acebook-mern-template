@@ -15,7 +15,7 @@ const UsersController = {
     if (req.file) {
       cloudinary.uploader
         .upload_stream(
-          { resource_type: 'raw', format: 'jpg' },
+          { resource_type: 'image', format: 'jpg' },
           (error, result) => {
             if (error) {
               console.error(error);
