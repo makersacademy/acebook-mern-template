@@ -5,11 +5,6 @@ const Feed = ({ navigate }) => {
   const [posts, setPosts] = useState([]);
   const [token, setToken] = useState(window.localStorage.getItem("token"));
   
-
-/////////////////////////
-// This below is code from the exisiting codebase, it might be that it can post messages and the new code below ** is unnecessary.
-/////////////////////////
-
   useEffect(() => {
     if (token) {
       fetch("/posts", {
@@ -70,6 +65,7 @@ useEffect(() => {
 console.log(user)
 
 const [message, setMessage] = useState("");
+const [author, setAuthor] = useState("");
 
 const handleSubmitPost = async (event) => {
   // event.preventDefault(); This line stops the page refreshing automatically so it has been commented out
@@ -100,6 +96,10 @@ const handleMessageChange = (event) => {
   setMessage(event.target.value)
 }
 
+const handleAuthorChange = (event) => {
+  setAuthor(event.target.value)
+}
+
 /////////////////////////
 // Below is the code for the form that posts the new message
 /////////////////////////
@@ -119,6 +119,7 @@ const handleMessageChange = (event) => {
               <h2>Posts</h2>
                 <form onSubmit={handleSubmitPost}>
                 <input placeholder="Write your post here" id="message" type='message' defaultValue={post} onChange={handleMessageChange} />
+                <input placeholder="Write your name here" id="author" type='author' defaultValue={post} onChange={handleAuthorChange} />
                 <input id='submit' type="submit" value="Submit" />
                 </form>
                 <div id="feed" role="feed">
