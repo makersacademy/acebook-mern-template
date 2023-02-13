@@ -23,8 +23,10 @@ describe("Comment model", () => {
     });
   });
 
-  xit("can save a comment", (done) => {
-    var comment = new Comment({ content: "some content" });
+  it("can save a comment", (done) => {
+    const mockPostId = new mongoose.Types.ObjectId();
+    const mockUserId = new mongoose.Types.ObjectId();
+    var comment = new Comment({ content: "some content", user_id: mockUserId, post_id: mockPostId });
 
     comment.save((err) => {
       expect(err).toBeNull();
@@ -32,7 +34,7 @@ describe("Comment model", () => {
       Comment.find((err, comments) => {
         expect(err).toBeNull();
 
-        expect(comments[0]).toMatchObject({ content: "some content", user_id: 1, post_id: 1 });
+        expect(comments[0]).toMatchObject({ content: "some content"});
         console.log('this message');
         done();
       });
