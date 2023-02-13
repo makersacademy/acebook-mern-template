@@ -2,7 +2,7 @@
   "name": "frontend",
   "version": "0.1.0",
   "private": true,
-  "proxy": "http://acebook-air:10000",
+  "proxy": "http://localhost:8080",
   "dependencies": {
     "cypress": "^10.7.0",
     "eslint": "^8.23.0",

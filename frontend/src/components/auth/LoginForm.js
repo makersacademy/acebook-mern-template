@@ -16,13 +16,9 @@ const LogInForm = ({ navigate }) => {
     });
 
     if (response.status !== 201) {
-      console.log('oops');
       navigate('/login');
     } else {
-      console.log('yay');
-
       let data = await response.json();
-      console.log(data.user_id);
       window.localStorage.setItem('token', data.token);
       window.localStorage.setItem('user_id', data.user_id);
       navigate('/posts');
