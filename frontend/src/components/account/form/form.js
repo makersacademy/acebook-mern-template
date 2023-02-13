@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-export const Form = ({ form_type }) => {
+const Form = ({ form_type }) => {
   const [inputValue, setInputValue] = useState('');
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -40,3 +40,5 @@ export const Form = ({ form_type }) => {
     </div>
   );
 };
+
+export default Form;
