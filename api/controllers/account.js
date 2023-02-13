@@ -28,7 +28,7 @@ const AccountController = {
         user.email = req.body.newEmail || user.email;
         user.display_name = req.body.newDisplayName || user.display_name;
         user.bio = req.body.newBio || user.bio;
-        // user.image = req.body.newImage || user.image
+        user.image = req.body.newImage || user.image;
         await user.save();
         res.status(204).json({ message: 'OK', token: token });
       }

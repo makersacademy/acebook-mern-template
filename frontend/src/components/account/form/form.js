@@ -11,20 +11,18 @@ const Form = ({ form_type, token }) => {
       : form_type === 'bio'
       ? setStringMessage(`newBio: ${inputValue}`)
       : form_type === 'password'
-      ? setStringMessage(`newPassword: ${inputValue}`)
+      ? setStringMessage(JSON.stringify({ newPassword: `${inputValue}` }))
       : setStringMessage(null);
 
     e.preventDefault();
-    //display form
+
     fetch('/account', {
       method: 'put',
       headers: {
         Authorization: `Bearer ${token}`,
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({
-        stringMessage,
-      }),
+      body: stringMessage,
     }).then((response) => {
       if (response.status === 204) {
         console.log('inputvalue: ', inputValue);
