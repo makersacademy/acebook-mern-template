@@ -128,11 +128,6 @@ const Feed = ({ navigate }) => {
                     posts={posts}
                     token={token}
                   />
-                  <div class="postContent">{post.message}</div>
-                  <div class="postButtons">
-                    <button id="like">Like</button>
-                    <button id="comment">Comment</button>
-                  </div>
                 </div>
               ))}
             </div>
