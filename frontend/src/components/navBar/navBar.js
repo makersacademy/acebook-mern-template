@@ -11,8 +11,7 @@ const NavBar = () => {
                     <ul>
                         <CustomLink href="/login">Login</CustomLink>
                         <CustomLink href="/signup">Sign-up</CustomLink>
-                        <CustomLink href="/posts">Posts</CustomLink>
-                        {console.log(window.localStorage)}
+                        <CustomLink href={window.localStorage.token ? "/posts" : "/login"}>Posts</CustomLink>
                     </ul>
                 </div>
             </nav>
