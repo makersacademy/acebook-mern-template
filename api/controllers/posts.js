@@ -36,6 +36,31 @@ const PostsController = {
         .json({ message: "Post deleted successfully", token: token });
     });
   },
+  AddComment: (req, res) => {
+    const postId = req.params.id;
+    const comment = req.body.comment;
+    Post.updateOne(
+      { _id: postId },
+      {
+        $push: [
+          {
+            userName: `${user.firstName} ${user.lastName}`,
+            timeStamp: Date.now(),
+            message: comment,
+          },
+        ],
+      },
+      async (err) => {
+        if (err) {
+          throw err;
+        }
+        const token = await TokenGenerator.jsonwebtoken(req.user_id);
+        res
+          .status(200)
+          .json({ message: "Comment added successfully", token: token });
+      }
+    );
+  },
 };
 
 module.exports = PostsController;
