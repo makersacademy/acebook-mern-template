@@ -16,14 +16,27 @@ describe('Testing comments model', () => {
   });
 
   it('has a user_id property', () => {
-    user_id = new mongoose.Types.ObjectId();
+    const user_id = new mongoose.Types.ObjectId();
     const comment = new Comment({ user_id: user_id });
     expect(comment.user_id).toEqual(user_id);
   });
 
   it('has a post_id property', () => {
-    post_id = new mongoose.Types.ObjectId();
+    const post_id = new mongoose.Types.ObjectId();
     const comment = new Comment({ post_id: post_id });
     expect(comment.post_id).toEqual(post_id);
+  });
+
+  it('can have all properties simultaneously', () => {
+    const post_id = new mongoose.Types.ObjectId();
+    const user_id = new mongoose.Types.ObjectId();
+    const comment = new Comment({
+      post_id: post_id,
+      user_id: user_id,
+      message: 'hello world',
+    });
+    expect(comment.post_id).toEqual(post_id);
+    expect(comment.user_id).toEqual(user_id);
+    expect(comment.message).toEqual('hello world');
   });
 });
