@@ -1,3 +1,5 @@
+[//]: # (TODO: Complete sequence diagrams for creating a comment)
+
 ## A user requesting posts
 ```mermaid
 sequenceDiagram

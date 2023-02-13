@@ -1,4 +1,5 @@
 ## A user requesting posts
+
 ```mermaid
 sequenceDiagram
 participant w as web page (index.html)
@@ -18,7 +19,7 @@ rfc->>exr: HTTP/Fetch Request POST /users,<br>(Body contains email: email, passw
 activate exr
 exr->>exc: Calling the UsersController.Create method within express
 activate exc
-exc->>mg: Create a new document of a User,<br>(which is an instance of a mongoose model)<br> then calls .save on that document           
+exc->>mg: Create a new document of a User,<br>(which is an instance of a mongoose model)<br> then calls .save on that document         
 activate mg
 mg->>mdb: Calls mongoose.connect on the database with the query
 activate mdb
