@@ -28,57 +28,59 @@ const Feed = ({ navigate }) => {
     navigate("/login");
   };
 
-const post = () => {};
+  const post = () => {};
 
-const [user, setUser] = useState({});
+  const [user, setUser] = useState({});
 
-useEffect(() => {
-  const fetchUser = async () => {
-    const email = window.localStorage.getItem("email");
-    const url = `/users?email=${email}`;
-  
-    try {
-      const response = await fetch(url, {
-        method: 'get',
-        headers: {
-          Authorization: `Bearer ${token}`,
-          'Content-Type': 'application/json',
-        },
-      });
-  
-      if (!response.ok) {
-        throw new Error(response.statusText);
+  useEffect(() => {
+    const fetchUser = async () => {
+      const email = window.localStorage.getItem("email");
+      const url = `/users?email=${email}`;
+
+      try {
+        const response = await fetch(url, {
+          method: "get",
+          headers: {
+            Authorization: `Bearer ${token}`,
+            "Content-Type": "application/json",
+          },
+        });
+
+        if (!response.ok) {
+          throw new Error(response.statusText);
+        }
+
+        const data = await response.json();
+        const userData = {
+          email: data.user.email,
+          firstName: data.user.firstName,
+          lastName: data.user.lastName,
+        };
+
+        setUser(userData);
+      } catch (error) {
+        console.error(error);
       }
-  
-      const data = await response.json();
-      const userData = {
-        email: data.user.email,
-        firstName: data.user.firstName,
-        lastName: data.user.lastName,
-      };
-      
-      setUser(userData)
-    } catch (error) {
-      console.error(error);
-    }
-  };
-  fetchUser();
-}, []);
+    };
+    fetchUser();
+  }, []);
 
   const handleSubmitPost = async (event) => {
     // event.preventDefault(); This line stops the page refreshing automatically so it has been commented out
 
-  fetch( '/posts', {
-    method: 'post',
-    headers: {
-      Authorization: `Bearer ${token}`,
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify({ message: message, userName: `${user.firstName} ${user.lastName}` })
-  })
-    .then(response => {
-      if(response.status === 201) {
-        navigate('/posts')
+    fetch("/posts", {
+      method: "post",
+      headers: {
+        Authorization: `Bearer ${token}`,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        message: message,
+        userName: `${user.firstName} ${user.lastName}`,
+      }),
+    }).then((response) => {
+      if (response.status === 201) {
+        navigate("/posts");
       } else {
         navigate("/signup");
       }
@@ -92,7 +94,7 @@ useEffect(() => {
     setMessage(event.target.value);
   };
 
-  const handleCommentChange = (event) => {
+   const handleCommentChange = (event) => {
     setComment(event.target.value);
   };
 
@@ -101,31 +103,44 @@ useEffect(() => {
       <>
         <div>
           <nav className="nav">
-              <a href="/posts" className="site-title">
-                Acebook
-              </a>
-              <ul>
-                <button onClick={logout}>Logout</button><br></br>
-              </ul>
-            </nav>
-            <div id="feedComponent">
-              <h2>Posts</h2>
-                <form onSubmit={handleSubmitPost}>
-                <input placeholder="Write your post here" id="message" type='message' defaultValue={post} onChange={handleMessageChange} />
-                <input id='submit' type="submit" value="Submit" />
-                </form>
-                <div id="feed" role="feed">
-                {posts.map((post) => (
-                    <div class="post" key={post._id} data-cy="post">
-                      <div data-cy="userName" class="postUserName">
-                        {post.userName}
-                      </div>
-                      <div class="postContent">
-                        {post.message}
-                      </div>
-                      {console.log(post.comments)}
+            <a href="/posts" className="site-title">
+              Acebook
+            </a>
+            <ul>
+              <button onClick={logout}>Logout</button>
+              <br></br>
+            </ul>
+          </nav>
+          <div id="feedComponent">
+            <h2>Posts</h2>
+            <form onSubmit={handleSubmitPost}>
+              <input
+                placeholder="Write your post here"
+                id="message"
+                type="message"
+                defaultValue={post}
+                onChange={handleMessageChange}
+              />
+              <input id="submit" type="submit" value="Submit" />
+            </form>
 
-                      <div class="postButtons">
+            <div id="feed" role="feed">
+              {posts.map((post) => (
+                <div class="post" key={post._id} data-cy="post">
+                  <div data-cy="userName" class="postUserName">
+                    {post.userName}
+                  </div>
+                  
+                  <Post
+                    post={post}
+                    setPosts={setPosts}
+                    posts={posts}
+                    token={token}
+                  />
+                  
+                  <div class="postContent">{post.message}</div>
+                  
+                  <div class="postButtons">
                         <button id='like'>Like</button>
                         <button id='delete'>Delete</button>
                         <input id='commentButton' type="submit" value="Comment" />
@@ -135,21 +150,21 @@ useEffect(() => {
                           </form>
                         </div>
                       </div>
-                 
+
                       <div class="comments">
                       Comments:
                       </div>
-                      
+
                       {post.comments.map((comment) => (
                         <div data-cy="comment" class="comment">
                           {comment.message}
                         </div>  
                       ))}
 
-                      </div>                  
-                      ))}
                 </div>
+              ))}
             </div>
+          </div>
         </div>
       </>
     );
