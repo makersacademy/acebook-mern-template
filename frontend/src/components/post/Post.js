@@ -51,8 +51,6 @@ const Post = ({ post, setPosts, comment, setComment, posts, token }) => {
           {comment.message}
         </div>  
       ))}
-
-      
     </>
   );
 };

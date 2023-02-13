@@ -38,17 +38,18 @@ const PostsController = {
   },
   AddComment: (req, res) => {
     const postId = req.params.id;
-    const comment = req.body.comment;
+    const message = req.body.message;
+    const userName = req.body.userName;
     Post.updateOne(
       { _id: postId },
       {
-        $push: [
-          {
-            userName: `${user.firstName} ${user.lastName}`,
+        $push: {
+          comments: {
+            userName: userName,
             timeStamp: Date.now(),
-            message: comment,
+            message: message,
           },
-        ],
+        },
       },
       async (err) => {
         if (err) {
