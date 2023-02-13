@@ -4,6 +4,7 @@ const Form = ({ form_type }) => {
   const [inputValue, setInputValue] = useState('');
   const handleSubmit = async (e) => {
     e.preventDefault();
+    
   };
   const handleInputChange = (e) => {
     setInputValue(e.target.value);
@@ -33,7 +34,7 @@ const Form = ({ form_type }) => {
               : null
           }
           value={form_type === 'image' ? '' : inputValue}
-          onChange={handleInputChange}
+          onChange={form_type === 'image' ? null : handleInputChange}
         ></input>
         <button type='submit'>Confirm</button>
       </form>

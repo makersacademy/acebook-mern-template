@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Form } from './form/form';
+import Form from './form/form';
 
 const Account = () => {
   const [showForm, setShowForm] = useState(false);
