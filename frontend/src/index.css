@@ -105,6 +105,7 @@ code {
 #commentButton {
   position: relative;
   display: flex;
+  margin-left: 10px;
 }
 
 .postUserName {
@@ -137,5 +138,5 @@ code {
 }
 
 #comment {
-  width: 190%;
+  width: 180%;
 }

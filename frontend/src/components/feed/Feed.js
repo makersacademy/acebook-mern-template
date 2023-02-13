@@ -87,16 +87,13 @@ const Feed = ({ navigate }) => {
     })
 }
 
-  const handleCommentPost = async(event) => {}
+
 
 
   const handleMessageChange = (event) => {
     setMessage(event.target.value);
   };
 
-   const handleCommentChange = (event) => {
-    setComment(event.target.value);
-  };
 
  if (token) {
     return (
@@ -134,34 +131,13 @@ const Feed = ({ navigate }) => {
                   <Post
                     post={post}
                     setPosts={setPosts}
+                    comment={comment}
+                    setComments={setComment}
                     posts={posts}
                     token={token}
                   />
-                  
-                  <div class="postContent">{post.message}</div>
-                  
-                  <div class="postButtons">
-                        <button id='like'>Like</button>
-                        <button id='delete'>Delete</button>
-                        <input id='commentButton' type="submit" value="Comment" />
-                        <div class="commentField">
-                          <form onSubmit={handleCommentPost}>
-                              <input placeholder="Write your comment here" id="comment" type='comment' defaultValue={comment} onChange={handleCommentChange} />
-                          </form>
-                        </div>
-                      </div>
 
-                      <div class="comments">
-                      Comments:
-                      </div>
-
-                      {post.comments.map((comment) => (
-                        <div data-cy="comment" class="comment">
-                          {comment.message}
-                        </div>  
-                      ))}
-
-                </div>
+                  </div>
               ))}
             </div>
           </div>
