@@ -1,0 +1,24 @@
+.container{
+    max-width: 800px;
+    background-color: #fff;
+    border:solid 1px #000;
+    border-radius: 4px;
+    margin:22px;
+    padding:12px;   
+}
+.container article{
+    padding: 22px 44px 22px 22px;
+}
+
+.postContainer{
+    display:flex;
+}
+.postContent {
+    display: flex;
+
+}
+.postContent img{
+    border-radius: 50%;
+    width:80px;
+    background-color: #000;
+}

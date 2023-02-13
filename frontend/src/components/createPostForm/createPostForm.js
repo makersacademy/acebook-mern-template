@@ -16,15 +16,9 @@ const CreatePostForm = ({ navigate, token, id, setReload }) => {
     });
 
     if (response.status !== 201) {
-      console.log('oops');
-      alert('Error try again');
       navigate('/posts');
     } else {
-      console.log('yay');
-
       let data = await response.json();
-      console.log(data);
-      alert('Post submitted');
       setMessage('');
       navigate('/posts');
       setReload(true);
@@ -33,9 +27,6 @@ const CreatePostForm = ({ navigate, token, id, setReload }) => {
   return (
     <>
       <form onSubmit={handleSubmit}>
-        {console.log('token: ', token)}
-
-        {console.log('i am the id: ', id)}
         <input
           id='post-input'
           placeholder='Whats on your mind?'

@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from 'react';
+import styles from './Post.module.css';
+import ReactTimeAgo from 'react-time-ago';
 
 const Post = ({ post, setReload }) => {
   const user_id = window.localStorage.getItem('user_id');
@@ -9,7 +11,7 @@ const Post = ({ post, setReload }) => {
 
   const handleLikeToggle = async () => {
     toggleIsLiked((likeState) => !likeState);
-
+    console.log(post);
     if (user_id) {
       let url = isLiked ? '/posts/unlike' : '/posts/like';
       let response = await fetch(url, {
@@ -20,7 +22,6 @@ const Post = ({ post, setReload }) => {
         },
         body: JSON.stringify({ _id: post._id, _user_id: user_id }),
       });
-      console.log(response);
       const data = await response;
       if (response.status !== 204) {
         console.log(data.error);
@@ -32,12 +33,36 @@ const Post = ({ post, setReload }) => {
 
   return (
     <>
-      <article data-cy='post' key={post._id}>
-        {post.message}
-      </article>
-      <button type='button' data-cy='like-button' onClick={handleLikeToggle}>
-        {isLiked ? 'Unlike' : 'Like'}
-      </button>
+      <div className={styles.container}>
+        <div className={styles.postContent}>
+          <img alt='avatar' src={post.user_id && post.user_id.image} />
+          <span>{post.user_id && post.user_id.display_name}</span>
+          <br />
+          <article className={styles.content} data-cy='post' key={post._id}>
+            {post.message}
+          </article>
+        </div>
+        <div>
+          <button
+            type='button'
+            data-cy='like-button'
+            onClick={handleLikeToggle}
+          >
+            {isLiked ? 'Unlike' : 'Like'}
+          </button>
+          <span>Likes: {post.likes.length}</span>
+          <br />
+          <span>
+            Posted{' '}
+            <ReactTimeAgo
+              date={post.createdAt}
+              locale='en-US'
+              timeStyle='twitter'
+            />{' '}
+            ago
+          </span>
+        </div>
+      </div>
     </>
   );
 };

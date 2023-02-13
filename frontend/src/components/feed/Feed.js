@@ -21,7 +21,6 @@ const Feed = ({ navigate, path }) => {
           window.localStorage.setItem('token', data.token);
           setToken(window.localStorage.getItem('token'));
           setId(window.localStorage.getItem('user_id'));
-          console.log('i just fetched the data');
           setPosts(data.posts);
           setReload(false);
         });
