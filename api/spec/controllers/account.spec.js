@@ -134,20 +134,33 @@ describe('/posts', () => {
       const newEmail = 'mrjelly@wibblywobbly.net';
       const newDisplayName = 'Jimmy';
       const newBio = "I'm a professional software engineer";
-      await request(app)
-        .put('/account')
-        .send({
-          newPassword: newPassword,
-          newEmail: newEmail,
-          newDisplayName: newDisplayName,
-          newBio: newBio,
-        });
+      await request(app).put('/account').send({
+        newPassword: newPassword,
+        newEmail: newEmail,
+        newDisplayName: newDisplayName,
+        newBio: newBio,
+      });
       const updateUser = await User.findById(user_id);
-      debugger;
+
       expect(updateUser.password).not.toBe(newPassword);
       expect(updateUser.email).not.toBe(newEmail);
       expect(updateUser.display_name).not.toBe(newDisplayName);
       expect(updateUser.bio).not.toBe(newBio);
+    });
+
+    it('only updates one of the values leaving others unchanged', async () => {
+      const user = await User.findById(user_id);
+      const newPassword = 'uber_secure_password';
+      let response = await request(app)
+        .put('/account')
+        .set('Authorization', `Bearer ${token}`)
+        .send({
+          newPassword: newPassword,
+        });
+      expect(response.status).toBe(204);
+      const updateUser = await User.findById(user_id);
+      expect(updateUser.password).toBe(newPassword);
+      expect(user.password).not.toBe(newPassword);
     });
   });
 });
