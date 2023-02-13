@@ -76,4 +76,13 @@ describe('/comments', () => {
       expect(newPayload.iat > originalPayload.iat).toEqual(true);
     });
   });
+
+  describe('When a token is not present', () => {
+    it('Sends 401 status in response', async () => {
+      const response = await request(app)
+        .post('/comments')
+        .send({ user_id: user_id, post_id: post_id, message: 'hello world' });
+      expect(response.status).toEqual(401);
+    });
+  });
 });
