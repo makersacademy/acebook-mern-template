@@ -2,35 +2,57 @@ import React, { useState } from 'react';
 
 const Form = ({ form_type, token }) => {
   const [inputValue, setInputValue] = useState('');
-  const [stringMessage, setStringMessage] = useState('');
+
+  let stringMessage;
+
   const handleSubmit = async (e) => {
-    form_type === 'display'
-      ? setStringMessage(`newDisplayName: ${inputValue}`)
-      : form_type === 'email'
-      ? setStringMessage(`newEmail: ${inputValue}`)
-      : form_type === 'bio'
-      ? setStringMessage(`newBio: ${inputValue}`)
-      : form_type === 'password'
-      ? setStringMessage(JSON.stringify({ newPassword: `${inputValue}` }))
-      : setStringMessage(null);
-
+    const inputElement = document.querySelector('input[type="file"]');
+    const formData = new FormData();
+    formData.append('image', inputElement.files[0]);
     e.preventDefault();
-
-    fetch('/account', {
-      method: 'put',
-      headers: {
-        Authorization: `Bearer ${token}`,
-        'Content-Type': 'application/json',
-      },
-      body: stringMessage,
-    }).then((response) => {
-      if (response.status === 204) {
-        console.log('inputvalue: ', inputValue);
-        console.log(`${form_type} changed`);
-      } else {
-        console.log(`Error changing ${form_type}`);
-      }
-    });
+    form_type === 'display'
+      ? (stringMessage = JSON.stringify({ newDisplayName: inputValue }))
+      : form_type === 'email'
+      ? (stringMessage = JSON.stringify({ newEmail: inputValue }))
+      : form_type === 'bio'
+      ? (stringMessage = JSON.stringify({ newBio: inputValue }))
+      : form_type === 'password'
+      ? (stringMessage = JSON.stringify({ newPassword: inputValue }))
+      : (stringMessage = null);
+    !form_type === 'image'
+      ? fetch('/account', {
+          method: 'put',
+          headers: {
+            Authorization: `Bearer ${token}`,
+            'Content-Type': 'application/json',
+          },
+          body: stringMessage,
+        }).then((response) => {
+          if (response.status === 204) {
+            console.log('inputvalue: ', inputValue);
+            console.log(`${form_type} changed`);
+          } else {
+            console.log(`Error changing ${form_type}`);
+            console.log('inputvalue: ', inputValue);
+          }
+        })
+      : fetch('/account', {
+          method: 'put',
+          headers: {
+            Authorization: `Bearer ${token}`,
+            'Content-Type': 'application/json',
+          },
+          body: formData,
+        }).then((response) => {
+          if (response.status === 204) {
+            console.log('inputvalue: ', inputValue);
+            console.log(`${form_type} changed`);
+          } else {
+            console.log(formData);
+            console.log(`Error changing ${form_type}`);
+            console.log('inputvalue: ', inputValue);
+          }
+        });
   };
 
   const handleInputChange = (e) => {
@@ -60,10 +82,11 @@ const Form = ({ form_type, token }) => {
               ? 'New password'
               : null
           }
-          value={form_type === 'image' ? '' : inputValue}
-          onChange={form_type === 'image' ? null : handleInputChange}
+          value={!form_type === 'image' ? inputValue : null}
+          onChange={handleInputChange}
         ></input>
         <button type='submit'>Confirm</button>
+        {formData ? formData : null} 
       </form>
     </div>
   );
