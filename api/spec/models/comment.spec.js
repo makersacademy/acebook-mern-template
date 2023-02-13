@@ -15,24 +15,25 @@ describe("Comment model", () => {
     expect(comment.content).toEqual("some content");
   });
   
-  xit("can list all posts", (done) => {
-    Post.find((err, posts) => {
+  it("can list all comments", (done) => {
+    Comment.find((err, comments) => {
       expect(err).toBeNull();
-      expect(posts).toEqual([]);
+      expect(comments).toEqual([]);
       done();
     });
   });
 
-  xit("can save a post", (done) => {
-    var post = new Post({ message: "some message" });
+  xit("can save a comment", (done) => {
+    var comment = new Comment({ content: "some content" });
 
-    post.save((err) => {
+    comment.save((err) => {
       expect(err).toBeNull();
 
-      Post.find((err, posts) => {
+      Comment.find((err, comments) => {
         expect(err).toBeNull();
 
-        expect(posts[0]).toMatchObject({ message: "some message" });
+        expect(comments[0]).toMatchObject({ content: "some content", user_id: 1, post_id: 1 });
+        console.log('this message');
         done();
       });
     });
