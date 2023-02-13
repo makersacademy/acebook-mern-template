@@ -13,10 +13,10 @@ describe('CreatePost', () => {
 
       cy.get("#newpost").type('test new post');
       cy.get("#submit").click();
-    //   cy.wait('@postRequest').then(() => {
+      cy.wait('@postRequest').then(() => {
 
-    //     cy.get('[data-cy="post"]').should('contain.text', "test new post")
-    //   })
+        cy.get('[data-cy="post"]').should('contain.text', "test new post")
+      })
       
     });
 });
