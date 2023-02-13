@@ -57,4 +57,24 @@ describe('Testing comments model', () => {
       });
     });
   });
+
+  it('should have created at and posted at timestamps', (done) => {
+    const post_id = new mongoose.Types.ObjectId();
+    const user_id = new mongoose.Types.ObjectId();
+    const comment = new Comment({
+      post_id: post_id,
+      user_id: user_id,
+      message: 'hello world',
+    });
+    comment.save((err) => {
+      debugger;
+      expect(err).toBeNull();
+      Comment.find((err, comments) => {
+        expect(err).toBeNull();
+        expect(comments[0].createdAt).toBeDefined();
+        expect(comments[0].updatedAt).toBeDefined();
+        done();
+      });
+    });
+  });
 });
