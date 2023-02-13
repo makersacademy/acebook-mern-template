@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-const CreatePost = ({ navigate }) => {
+const CreatePost = ({}) => {
   const [post, setPost] = useState("");
   const [token, setToken] = useState(window.localStorage.getItem("token"));
 
@@ -17,7 +17,7 @@ const CreatePost = ({ navigate }) => {
     });
 
     if (response.status !== 201) {
-      console.log("oop")
+      console.log("new post not created")
       // navigate("/posts")
     } else {
       console.log("new post created")
@@ -32,13 +32,12 @@ const CreatePost = ({ navigate }) => {
     setPost(event.target.value);
   };
 
-  if (token) {
     return (
-      <>
+      <div>
         <form onSubmit={handleSubmit}>
           <textarea
             placeholder="What are you thinking?"
-            id="newPost"
+            id="newpost"
             type="text"
             rows="5"
             cols="50"
@@ -46,12 +45,9 @@ const CreatePost = ({ navigate }) => {
             onChange={handlePostChange}
           ></textarea>
 
-          <input id="submit" type="submit" value="Submit" />
+          <button id="submit" type="submit">Create post</button>
         </form>
-      </>
+      </div>
     );
-  } else {
-    return <></>;
-  }
 };
 export default CreatePost;
