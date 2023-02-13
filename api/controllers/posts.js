@@ -8,14 +8,10 @@ const PostsController = {
         throw err;
       }
       const token = await TokenGenerator.jsonwebtoken(req.user_id)
-      const reversedPosts = posts.reverse();
-      console.log('posts logged here', reversedPosts);
-      // res.status(200).json({ posts: posts, token: token });
-      res.status(200).json({ posts: reversedPosts, token: token });
+      res.status(200).json({ posts: posts, token: token });
     });
   },
   Create: (req, res) => {
-    // console.log("req: ", req.body);
     const post = new Post(req.body);
     post.save(async (err) => {
       if (err) {
