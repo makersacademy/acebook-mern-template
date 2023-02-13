@@ -4,7 +4,6 @@ require('../mongodb_helper');
 
 describe('Testing comments model', () => {
   beforeEach((done) => {
-    debugger;
     mongoose.connection.collections.comments.drop(() => {
       done();
     });
@@ -38,5 +37,24 @@ describe('Testing comments model', () => {
     expect(comment.post_id).toEqual(post_id);
     expect(comment.user_id).toEqual(user_id);
     expect(comment.message).toEqual('hello world');
+  });
+
+  it('comments can be saved', (done) => {
+    const post_id = new mongoose.Types.ObjectId();
+    const user_id = new mongoose.Types.ObjectId();
+    const comment = new Comment({
+      post_id: post_id,
+      user_id: user_id,
+      message: 'hello world',
+    });
+    comment.save((err) => {
+      expect(err).toBeNull();
+      Comment.find((err, comments) => {
+        expect(err).toBeNull();
+        expect(comments[0]).toMatchObject(comment.toObject());
+        expect(comments.length).toBe(1);
+        done();
+      });
+    });
   });
 });
