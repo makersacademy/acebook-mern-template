@@ -16,8 +16,10 @@
     "node": ">=18.1.0"
   },
   "dependencies": {
+    "cloudinary": "^1.33.0",
     "cookie-parser": "~1.4.4",
     "debug": "~2.6.9",
+    "dotenv": "^16.0.3",
     "express": "~4.16.1",
     "express-session": "^1.17.2",
     "hbs": "^4.1.0",
@@ -34,6 +36,7 @@
     "supertest": "^6.3.3"
   },
   "devDependencies": {
+    "dotenv-webpack": "^8.0.1",
     "eslint-plugin-cypress": "^2.12.1",
     "jest": "^27.5.1"
   },
