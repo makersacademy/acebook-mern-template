@@ -62,7 +62,6 @@ useEffect(() => {
   };
   fetchUser();
 }, []);
-console.log(user)
 
 const [message, setMessage] = useState("");
 const [author, setAuthor] = useState("");
@@ -88,10 +87,6 @@ const handleSubmitPost = async (event) => {
 }
 
 
-/////////////////////////
-// This below is new code
-/////////////////////////
-
 const handleMessageChange = (event) => {
   setMessage(event.target.value)
 }
@@ -100,9 +95,6 @@ const handleAuthorChange = (event) => {
   setAuthor(event.target.value)
 }
 
-/////////////////////////
-// Below is the code for the form that posts the new message
-/////////////////////////
   if (token) {
     return (
       <>
@@ -119,7 +111,6 @@ const handleAuthorChange = (event) => {
               <h2>Posts</h2>
                 <form onSubmit={handleSubmitPost}>
                 <input placeholder="Write your post here" id="message" type='message' defaultValue={post} onChange={handleMessageChange} />
-                <input placeholder="Write your name here" id="author" type='author' defaultValue={post} onChange={handleAuthorChange} />
                 <input id='submit' type="submit" value="Submit" />
                 </form>
                 <div id="feed" role="feed">
