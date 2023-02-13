@@ -5,6 +5,7 @@ const Feed = ({ navigate }) => {
   const [posts, setPosts] = useState([]);
   const [token, setToken] = useState(window.localStorage.getItem("token"));
   const [message, setMessage] = useState("");
+  const [comment, setComment] = useState("");
 
   useEffect(() => {
     if (token) {
@@ -84,9 +85,15 @@ useEffect(() => {
     })
 }
 
+  const handleCommentPost = async(event) => {}
+
 
   const handleMessageChange = (event) => {
     setMessage(event.target.value);
+  };
+
+  const handleCommentChange = (event) => {
+    setComment(event.target.value);
   };
 
  if (token) {
@@ -116,17 +123,31 @@ useEffect(() => {
                       <div class="postContent">
                         {post.message}
                       </div>
-                      {/* {comments.map(comment) => ()} */}
-                      <div class="postComments">
-                        {post.comments}
-                      </div>
+                      {console.log(post.comments)}
+
                       <div class="postButtons">
                         <button id='like'>Like</button>
-                        <button id='comment'>Comment</button>
                         <button id='delete'>Delete</button>
+                        <input id='commentButton' type="submit" value="Comment" />
+                        <div class="commentField">
+                          <form onSubmit={handleCommentPost}>
+                              <input placeholder="Write your comment here" id="comment" type='comment' defaultValue={comment} onChange={handleCommentChange} />
+                          </form>
+                        </div>
                       </div>
-                    </div>
-                  ))}
+                 
+                      <div class="comments">
+                      Comments:
+                      </div>
+                      
+                      {post.comments.map((comment) => (
+                        <div data-cy="comment" class="comment">
+                          {comment.message}
+                        </div>  
+                      ))}
+
+                      </div>                  
+                      ))}
                 </div>
             </div>
         </div>
