@@ -1,26 +1,40 @@
 import React, { useState } from 'react';
 
-const Form = ({ form_type }) => {
+const Form = ({ form_type, token }) => {
   const [inputValue, setInputValue] = useState('');
+  const [stringMessage, setStringMessage] = useState('');
   const handleSubmit = async (e) => {
+    form_type === 'display'
+      ? setStringMessage(`newDisplayName: ${inputValue}`)
+      : form_type === 'email'
+      ? setStringMessage(`newEmail: ${inputValue}`)
+      : form_type === 'bio'
+      ? setStringMessage(`newBio: ${inputValue}`)
+      : form_type === 'password'
+      ? setStringMessage(`newPassword: ${inputValue}`)
+      : setStringMessage(null);
+
     e.preventDefault();
-    //password form only for now
+    //display form
     fetch('/account', {
       method: 'put',
       headers: {
+        Authorization: `Bearer ${token}`,
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-        password: inputValue,
+        stringMessage,
       }),
     }).then((response) => {
-      if (response.status === 201) {
-        console.log('password changed');
+      if (response.status === 204) {
+        console.log('inputvalue: ', inputValue);
+        console.log(`${form_type} changed`);
       } else {
-        console.log('error changing password');
+        console.log(`Error changing ${form_type}`);
       }
     });
   };
+
   const handleInputChange = (e) => {
     setInputValue(e.target.value);
   };

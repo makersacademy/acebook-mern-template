@@ -4,6 +4,8 @@ import Form from './form/form';
 const Account = () => {
   const [showForm, setShowForm] = useState(false);
   const [formType, setFormType] = useState('');
+  const [token, setToken] = useState(window.localStorage.getItem('token'));
+  // const [id, setId] = useState(window.localStorage.getItem('user_id'));
 
   return (
     <>
@@ -54,7 +56,7 @@ const Account = () => {
       </button>
       {showForm ? (
         <div>
-          <Form form_type={formType} />
+          <Form token={token} form_type={formType} />
         </div>
       ) : null}
     </>
