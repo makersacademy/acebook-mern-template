@@ -3,11 +3,10 @@ import CreatePostForm from '../createPostForm/createPostForm';
 
 import Post from '../post/Post';
 
-const Feed = ({ navigate, path }) => {
+const Feed = ({ navigate, path, setReload, reload }) => {
   const [posts, setPosts] = useState([]);
   const [token, setToken] = useState(window.localStorage.getItem('token'));
   const [id, setId] = useState(window.localStorage.getItem('user_id'));
-  const [reload, setReload] = useState(false);
 
   useEffect(() => {
     if (token) {
@@ -37,16 +36,10 @@ const Feed = ({ navigate, path }) => {
   if (token) {
     return (
       <>
-        <h2>Posts</h2>
-        <button id="logout-button" onClick={logout}>
+        <button id='logout-button' onClick={logout}>
           Logout
         </button>
-        <CreatePostForm
-          navigate={navigate}
-          token={token}
-          id={id}
-          setReload={setReload}
-        />
+
         <div id='feed' role='feed'>
           {posts ? (
             posts
