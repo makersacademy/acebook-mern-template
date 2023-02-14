@@ -9,6 +9,7 @@ const Posts = ({ navigate }) => {
 
   return (
     <>
+      <h2>Posts</h2>
       <CreatePostForm
         navigate={navigate}
         token={token}
