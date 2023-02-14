@@ -1,0 +1,129 @@
+main {
+    height:100%;
+    width:100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+#sign-up-title{
+    color:#0d67b5;
+}
+
+.middleLogo {
+    height: 30%;
+    width: 22%;
+    object-fit: contain;
+    border-radius: 10%;
+}
+
+
+#submit {
+    align-items: center;
+    appearance: button;
+    background-color: #0d67b5;
+    border-radius: 8px;
+    border-style: none;
+    box-shadow: rgba(255, 255, 255, 0.26) 0 1px 2px inset;
+    box-sizing: border-box;
+    color: #fff;
+    cursor: pointer;
+    display: flex;
+    flex-direction: row;
+    flex-shrink: 0;
+    font-family: "RM Neue",sans-serif;
+    font-size: 100%;
+    line-height: 1.15;
+    margin: 0;
+    padding: 10px 21px;
+    text-align: center;
+    text-transform: none;
+    transition: color .13s ease-in-out,background .13s ease-in-out,opacity .13s ease-in-out,box-shadow .13s ease-in-out;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+}
+
+#submit:active {
+    background-color: #2e6fbd;
+}
+
+#submit:hover {
+    background-color: #1C84FF;
+}
+
+.signUpLoginForm {
+    /* display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column; */
+    position: relative;
+    padding: 50px;
+    background: #fff;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 25px;
+    border-radius: 8px;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.25);
+}
+
+.input-box {
+    position: relative;
+    width: 350px;
+}
+
+.input-box input {
+    position: relative;
+    padding: 8px 10px;
+    width: 100%;
+    border: none;
+    border-radius: 6px;
+    outline: none;
+    background: transparent;
+    color: #fff;
+    font-size: 1.25rem;
+    letter-spacing: 0.05rem;
+    z-index: 2;
+    cursor: pointer;
+}
+
+.input-box label {
+    position: absolute;
+    left: 0;
+    padding: 10px 0;
+    pointer-events: none;
+    font-size: 1rem;
+    letter-spacing: 0.05rem;
+    color: #333;
+    transition: 0.5s;
+}
+
+
+.input-box input:focus ~ label {
+    font-size: 0.85rem;
+    transform: translateY(-32px);
+}
+
+.input-box i  {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 3px;
+    border-radius: 1.5px;
+    background: linear-gradient(45deg, #0d67b5, #ff4685);
+    transition: 0.5s;
+    z-index: 1;
+    pointer-events: none;
+}
+
+.input-box input:focus ~ i {
+    height: 100%;
+    border-radius: 6px;
+    box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.25);
+}
+
+  
