@@ -1,11 +1,10 @@
 const app = require("../../app");
 const request = require("supertest");
 require("../mongodb_helper");
-const Post = require('../../models/post');
 const User = require('../../models/user');
 const Comment = require('../../models/comment');
 const JWT = require("jsonwebtoken");
-
+// TODO: Add mocking in place for Mongoose models
 const secret = process.env.JWT_SECRET;
 
 let token;
@@ -57,7 +56,7 @@ describe("/comments", () => {
         });
 
         it("creates multiples Comments for single post", async () => {
-            let res1 = await requestMaker(
+           await requestMaker(
                 "/comments",
                 token,
                 {
@@ -65,7 +64,7 @@ describe("/comments", () => {
                     post_id:"1",
                     user_id:"5"
                 })
-            let res2 = await requestMaker(
+         await requestMaker(
                 "/comments",
                 token,
                 {
