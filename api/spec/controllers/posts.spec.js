@@ -187,4 +187,48 @@ describe("/posts", () => {
       expect(response.body.token).toEqual(undefined);
     })
   })
+
+  describe("DELETE, when token is present", () => {
+    test("deletes the post", async () => {
+
+      const post_id = '63ebab0c9a93032525d4c623'
+      let post1 = new Post({_id: post_id, content: "howdy!"});
+      
+      await post1.save();
+
+      let response = await request(app)
+        .delete(`/posts/${post_id}`)
+        .set("Authorization", `Bearer ${token}`)
+        .send({message: "OK", token: token});
+
+        expect(response.status).toBe(204);
+
+        let posts = await Post.find();
+        expect(posts.length).toEqual(0);
+    })
+
+    test("fails to delete post without present token", async () => {
+      const post_id = '63ebab0c9a93032525d4c623'
+      let post1 = new Post({_id: post_id, content: "howdy!"});
+      
+      await post1.save();
+
+      let response = await request(app)
+        .delete(`/posts/${post_id}`)
+        .send({message: "OK", token: token});
+
+        expect(response.status).toBe(401);
+
+        let posts = await Post.find();
+        expect(posts.length).toEqual(1);
+    })
+  })
+
+  describe("UPDATE, when token is present", () => {
+    test("fails to update post without token")
+  })
 });
+
+
+
+
