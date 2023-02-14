@@ -3,6 +3,7 @@ import LoginForm from '../auth/LoginForm';
 import SignUpForm from '../user/SignUpForm';
 import React, { useState } from 'react';
 import Feed from '../feed/Feed';
+import Home from '../home/Home';
 import Navbar from '../navbar/Navbar';
 import { useNavigate, Routes, Route } from 'react-router-dom';
 import Profile from '../profile/Profile';
@@ -13,10 +14,9 @@ const App = () => {
     <div className='app-container'>
       <Navbar />
       <Routes>
-        <Route path='/' element={<Feed navigate={useNavigate()} />} />
-
-        <Route path='/posts' element={<Posts navigate={useNavigate()} />} />
-        <Route path='/login' element={<LoginForm navigate={useNavigate()} />} />
+        <Route path="/" element={<Home navigate={useNavigate()} />} />
+        <Route path="/posts" element={<Feed navigate={useNavigate()} />} />
+        <Route path="/login" element={<LoginForm navigate={useNavigate()} />} />
         <Route
           path='/signup'
           element={<SignUpForm navigate={useNavigate()} />}
