@@ -27,7 +27,7 @@ const Feed = ({ navigate }) => {
     navigate("/login");
   };
 
-  const post = () => {};
+  const post = () => { };
 
   const [user, setUser] = useState({});
 
@@ -128,6 +128,16 @@ const Feed = ({ navigate }) => {
                     posts={posts}
                     token={token}
                   />
+                  <div data-cy="timestamp" class="posttimestamp">
+                    {console.log(post)}
+                    {post.createdAt && new Date(post.createdAt).toISOString().split('.')[0].replace('T', ' ')}
+                  </div>
+
+                  <div class="postContent">{post.message}</div>
+                  <div class="postButtons">
+                    <button id="like">Like</button>
+                    <button id="comment">Comment</button>
+                  </div>
                 </div>
               ))}
             </div>
