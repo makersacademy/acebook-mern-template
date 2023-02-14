@@ -1,17 +1,19 @@
-const Post = require("../models/post");
-const TokenGenerator = require("../models/token_generator");
+const Post = require('../models/post');
+const TokenGenerator = require('../models/token_generator');
 
 const PostsController = {
   Index: (req, res) => {
-    Post.find(async (err, posts) => {
-      if (err) {
-        throw err;
-      }
+    Post.find({})
+      .populate('user_id')
+      .exec(async (err, posts) => {
+        if (err) {
+          throw err;
+        }
 
-      const token = await TokenGenerator.jsonwebtoken(req.user_id);
+        const token = await TokenGenerator.jsonwebtoken(req.user_id);
 
-      res.status(200).json({ posts: posts, token: token });
-    });
+        res.status(200).json({ posts: posts, token: token });
+      });
   },
 
   Create: (req, res) => {
@@ -22,7 +24,7 @@ const PostsController = {
       }
       const token = await TokenGenerator.jsonwebtoken(req.user_id);
 
-      res.status(201).json({ message: "OK", token: token });
+      res.status(201).json({ message: 'OK', token: token });
     });
   },
 
@@ -33,7 +35,7 @@ const PostsController = {
       } else {
         const token = await TokenGenerator.jsonwebtoken(req.user_id);
 
-        res.status(204).json({ message: "OK", token: token });
+        res.status(204).json({ message: 'OK', token: token });
       }
     });
   },
@@ -45,7 +47,7 @@ const PostsController = {
           throw err;
         } else {
           const token = await TokenGenerator.jsonwebtoken(req.user_id);
-          res.status(204).json({ message: "OK", token: token });
+          res.status(204).json({ message: 'OK', token: token });
         }
       }
     );
@@ -59,7 +61,7 @@ const PostsController = {
           throw err;
         } else {
           const token = await TokenGenerator.jsonwebtoken(req.user_id);
-          res.status(204).json({ message: "OK", token: token });
+          res.status(204).json({ message: 'OK', token: token });
         }
       }
     );
@@ -73,10 +75,10 @@ const PostsController = {
           throw err;
         } else {
           const token = await TokenGenerator.jsonwebtoken(req.user_id);
-          res.status(204).json({ message: "OK", token: token });
+          res.status(204).json({ message: 'OK', token: token });
         }
       }
     );
   },
-}
+};
 module.exports = PostsController;

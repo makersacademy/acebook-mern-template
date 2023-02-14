@@ -10,14 +10,26 @@ describe('Feed', () => {
         statusCode: 200,
         body: {
           posts: [
-            { _id: 1, message: 'Hello, world' },
-            { _id: 2, message: 'Hello again, world' },
+
+            {
+              _id: 1,
+              message: 'Hello, world',
+              likes: [],
+              createdAt: '2023-02-14T11:44:40.970Z',
+            },
+            {
+              _id: 2,
+              message: 'Hello again, world',
+              likes: [],
+              createdAt: '2023-02-14T11:44:40.970Z',
+            },
           ],
         },
       });
     }).as('getPosts');
 
-    cy.mount(<Feed setReload={() => {}} navigate={navigate} />);
+
+    cy.mount(<Feed navigate={navigate} />);
 
     cy.wait('@getPosts').then(() => {
       cy.get('[data-cy="post"]')
