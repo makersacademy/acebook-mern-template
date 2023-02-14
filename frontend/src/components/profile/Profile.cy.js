@@ -11,8 +11,18 @@ describe('Profile', () => {
         statusCode: 200,
         body: {
           posts: [
-            { _id: 1, message: 'Hello, world', likes: [] },
-            { _id: 2, message: 'Hello again, world', likes: [] },
+            {
+              _id: 1,
+              message: 'Hello, world',
+              likes: [],
+              createdAt: '2023-02-14T11:44:40.970Z',
+            },
+            {
+              _id: 2,
+              message: 'Hello again, world',
+              likes: [],
+              createdAt: '2023-02-14T11:44:40.970Z',
+            },
           ],
         },
       });
