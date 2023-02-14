@@ -47,7 +47,7 @@ const Form = ({ form_type, token, setShowForm }) => {
   };
   return (
     <div>
-      <form onSubmit={handleSubmit} encType='multipart/form-data'>
+      <form onSubmit={handleSubmit} encType="multipart/form-data">
         <input
           type={form_type === 'image' ? 'file' : 'text'}
           placeholder={
@@ -67,7 +67,9 @@ const Form = ({ form_type, token, setShowForm }) => {
             form_type === 'image' ? handleFileInputChange : handleInputChange
           }
         />
-        <button type='submit'>Confirm</button>
+        <button id="submit-button" type="submit">
+          Confirm
+        </button>
       </form>
     </div>
   );

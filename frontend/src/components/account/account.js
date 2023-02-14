@@ -11,6 +11,7 @@ const Account = () => {
     <>
       <h2>Welcome</h2>
       <button
+        id="display-button"
         onClick={() => {
           formType === 'display' ? setShowForm(!showForm) : setShowForm(true);
           setFormType('display');
@@ -20,6 +21,7 @@ const Account = () => {
       </button>
 
       <button
+        id="email-button"
         onClick={() => {
           formType === 'email' ? setShowForm(!showForm) : setShowForm(true);
           setFormType('email');
@@ -29,6 +31,7 @@ const Account = () => {
       </button>
 
       <button
+        id="bio-button"
         onClick={() => {
           formType === 'bio' ? setShowForm(!showForm) : setShowForm(true);
           setFormType('bio');
@@ -38,6 +41,7 @@ const Account = () => {
       </button>
 
       <button
+        id="image-upload-button"
         onClick={() => {
           formType === 'image' ? setShowForm(!showForm) : setShowForm(true);
           setFormType('image');
@@ -47,6 +51,7 @@ const Account = () => {
       </button>
 
       <button
+        id="password-button"
         onClick={() => {
           formType === 'password' ? setShowForm(!showForm) : setShowForm(true);
           setFormType('password');

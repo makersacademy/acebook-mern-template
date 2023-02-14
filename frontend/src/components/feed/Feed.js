@@ -39,7 +39,9 @@ const Feed = ({ navigate, path }) => {
     return (
       <>
         <h2>Posts</h2>
-        <button onClick={logout}>Logout</button>
+        <button id="logout-button" onClick={logout}>
+          Logout
+        </button>
         <CreatePostForm
           navigate={navigate}
           token={token}
