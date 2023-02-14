@@ -1,30 +1,24 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import PulldownMenu from "../pulldownMenu/PulldownMenu";
 import styles from "./Navbar.module.css";
-
-const Navbar = () => {
+const Navbar = ({ navigate }) => {
   return (
     <div className={styles.navbar}>
       <div className={styles.logo}>
-        <Link to="/posts">
-          <img src="/images/ace-casino-svgrepo-com.svg" alt="logo" />
+        <Link to="/">
+          <img src="/images/Acebook.svg" alt="logo" />
           Acebook-Air
         </Link>
       </div>
-      <ul className={styles.links}>
-        <li>
-          <Link to="/posts">Posts</Link>
-        </li>
-        <li>
-          <Link to="/profile">Profile</Link>
-        </li>
-      </ul>
       <div className={styles.profile}>
         <Link to="/profile">
-          <img src="/images/profile-circle-svgrepo-com.svg" alt="logo" />
+          <img src="/images/buttons/account-button.svg" alt="logo" />
         </Link>
+        <PulldownMenu />
       </div>
     </div>
   );
 };
+
 export default Navbar;
