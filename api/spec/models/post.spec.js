@@ -74,4 +74,12 @@ describe('Post model', () => {
       });
     });
   });
+
+  it('should have a comments array', () => {
+    const post = new Post({
+      user_id: new mongoose.Types.ObjectId(),
+      message: 'some message',
+    });
+    expect([...post.comments]).toEqual([]);
+  });
 });

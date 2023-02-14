@@ -1,5 +1,7 @@
 const app = require('../../app');
 const request = require('supertest');
+const fs = require('fs');
+const path = require('path');
 require('../mongodb_helper');
 const Post = require('../../models/post');
 const User = require('../../models/user');
@@ -161,6 +163,16 @@ describe('/posts', () => {
       const updateUser = await User.findById(user_id);
       expect(updateUser.password).toBe(newPassword);
       expect(user.password).not.toBe(newPassword);
+    });
+
+    it('updates image url', async () => {
+      const filePath = path.resolve(__dirname, '../test-image-2.jpg');
+      const image = fs.readFileSync(filePath);
+      let response = await request(app)
+        .put('/account')
+        .set('Authorization', `Bearer ${token}`)
+        .attach('image', image, 'test-image-2.jpg');
+      expect(response.status).toBe(204);
     });
   });
 });

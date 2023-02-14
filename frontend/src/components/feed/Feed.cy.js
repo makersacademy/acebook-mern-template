@@ -10,6 +10,7 @@ describe('Feed', () => {
         statusCode: 200,
         body: {
           posts: [
+
             {
               _id: 1,
               message: 'Hello, world',
@@ -26,6 +27,7 @@ describe('Feed', () => {
         },
       });
     }).as('getPosts');
+
 
     cy.mount(<Feed navigate={navigate} />);
 

@@ -18,7 +18,6 @@ const CreatePostForm = ({ navigate, token, id, setReload }) => {
     if (response.status !== 201) {
       navigate('/posts');
     } else {
-      let data = await response.json();
       setMessage('');
       navigate('/posts');
       setReload(true);
@@ -26,7 +25,7 @@ const CreatePostForm = ({ navigate, token, id, setReload }) => {
   };
   return (
     <>
-      <form onSubmit={handleSubmit}>
+      <form className='create-post-form' onSubmit={handleSubmit}>
         <input
           id='post-input'
           placeholder='Whats on your mind?'
