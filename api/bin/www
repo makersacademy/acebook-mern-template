@@ -3,28 +3,24 @@
 /**
  * Module dependencies.
  */
-
-var app = require("../app");
-var debug = require("debug")("acebook:server");
-var http = require("http");
-var mongoose = require("mongoose");
+require("../utils.js")
+let app = require("../app");
+let debug = require("debug")("acebook:server");
+let http = require("http");
+let mongoose = require("mongoose");
 
 /**
  * Get port from environment and store in Express.
  */
-
-var port = normalizePort(process.env.PORT || "8080");
+let port = normalizePort(process.env.PORT || "8080");
 app.set("port", port);
-
 /**
  * Connect to MongoDB
  **/
-
-var mongoDbUrl = process.env.MONGODB_URL || "mongodb://0.0.0.0/acebook";
-mongoose.connect(mongoDbUrl, {
+mongoose.connect(process.env.MONGODB_URL, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
-});
+}).then();
 
 var db = mongoose.connection;
 db.on("error", console.error.bind(console, "MongoDB connection error:"));

@@ -1,7 +1,7 @@
 var mongoose = require("mongoose");
-
+mongoose.set('strictQuery', true)
 beforeAll(function (done) {
-  mongoose.connect("mongodb://0.0.0.0/acebook_test", {
+  mongoose.connect(process.env.MONGODB_URL, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
   });

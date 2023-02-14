@@ -4,10 +4,8 @@ require("../mongodb_helper");
 const User = require("../../models/user");
 
 describe("User model", () => {
-  beforeEach((done) => {
-    mongoose.connection.collections.users.drop(() => {
-      done();
-    });
+  beforeEach(async () => {
+    await mongoose.connection.collections.users.drop(() => {});
   });
 
   it("has an email address", () => {
