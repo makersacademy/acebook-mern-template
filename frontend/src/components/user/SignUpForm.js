@@ -54,7 +54,7 @@ const SignUpForm = ({ navigate }) => {
         value={password}
         onChange={handlePasswordChange}
       />
-      />
+
       <input
         placeholder='Display Name'
         id='display_name'

@@ -1,9 +1,9 @@
-const express = require("express");
+const express = require('express');
 const router = express.Router();
+const upload = require('./middleware');
+const AccountController = require('../controllers/account');
 
-const AccountController = require("../controllers/account");
-
-router.get("/", AccountController.Index);
-router.put("/", AccountController.Update);
+router.get('/', AccountController.Index);
+router.put('/', upload.single('image'), AccountController.Update);
 
 module.exports = router;
