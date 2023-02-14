@@ -2,57 +2,43 @@ import React, { useState } from 'react';
 
 const Form = ({ form_type, token }) => {
   const [inputValue, setInputValue] = useState('');
-
-  let stringMessage;
+  const [file, setFile] = useState(null);
+  const handleFileInputChange = (e) => {
+    setFile(e.target.files[0]);
+    setInputValue(e.target.value);
+  };
 
   const handleSubmit = async (e) => {
-    const inputElement = document.querySelector('input[type="file"]');
-    const formData = new FormData();
-    formData.append('image', inputElement.files[0]);
     e.preventDefault();
-    form_type === 'display'
-      ? (stringMessage = JSON.stringify({ newDisplayName: inputValue }))
-      : form_type === 'email'
-      ? (stringMessage = JSON.stringify({ newEmail: inputValue }))
-      : form_type === 'bio'
-      ? (stringMessage = JSON.stringify({ newBio: inputValue }))
-      : form_type === 'password'
-      ? (stringMessage = JSON.stringify({ newPassword: inputValue }))
-      : (stringMessage = null);
-    !form_type === 'image'
-      ? fetch('/account', {
-          method: 'put',
-          headers: {
-            Authorization: `Bearer ${token}`,
-            'Content-Type': 'application/json',
-          },
-          body: stringMessage,
-        }).then((response) => {
-          if (response.status === 204) {
-            console.log('inputvalue: ', inputValue);
-            console.log(`${form_type} changed`);
-          } else {
-            console.log(`Error changing ${form_type}`);
-            console.log('inputvalue: ', inputValue);
-          }
-        })
-      : fetch('/account', {
-          method: 'put',
-          headers: {
-            Authorization: `Bearer ${token}`,
-            'Content-Type': 'application/json',
-          },
-          body: formData,
-        }).then((response) => {
-          if (response.status === 204) {
-            console.log('inputvalue: ', inputValue);
-            console.log(`${form_type} changed`);
-          } else {
-            console.log(formData);
-            console.log(`Error changing ${form_type}`);
-            console.log('inputvalue: ', inputValue);
-          }
-        });
+
+    const formData = new FormData();
+    if (form_type === 'display') {
+      formData.append('newDisplayName', inputValue);
+    } else if (form_type === 'email') {
+      formData.append('newEmail', inputValue);
+    } else if (form_type === 'bio') {
+      formData.append('newBio', inputValue);
+    } else if (form_type === 'password') {
+      formData.append('newPassword', inputValue);
+    } else if (form_type === 'image') {
+      formData.append('image', file);
+    }
+
+    fetch('/account', {
+      method: 'put',
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+      body: formData,
+    }).then((response) => {
+      if (response.status === 204) {
+        console.log('inputvalue: ', inputValue);
+        console.log(`${form_type} changed`);
+        alert(`${form_type} changed`);
+      } else {
+        console.log(`Error changing ${form_type}`);
+      }
+    });
   };
 
   const handleInputChange = (e) => {
@@ -60,15 +46,9 @@ const Form = ({ form_type, token }) => {
   };
   return (
     <div>
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit} encType='multipart/form-data'>
         <input
-          type={
-            form_type === 'password'
-              ? 'password'
-              : form_type === 'image'
-              ? 'file'
-              : 'text'
-          }
+          type={form_type === 'image' ? 'file' : 'text'}
           placeholder={
             form_type === 'display'
               ? 'New display name'
@@ -77,16 +57,18 @@ const Form = ({ form_type, token }) => {
               : form_type === 'bio'
               ? 'New bio'
               : form_type === 'image'
-              ? null
+              ? 'Choose image'
               : form_type === 'password'
               ? 'New password'
               : null
           }
-          value={!form_type === 'image' ? inputValue : null}
-          onChange={handleInputChange}
-        ></input>
+          value={form_type === 'image' ? '' : inputValue}
+          onChange={
+            form_type === 'image' ? handleFileInputChange : handleInputChange
+          }
+        />
         <button type='submit'>Confirm</button>
-        {formData ? formData : null} 
+        {file ? <span>One file selected.</span> : null}
       </form>
     </div>
   );
