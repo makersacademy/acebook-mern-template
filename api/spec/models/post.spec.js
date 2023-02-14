@@ -15,6 +15,11 @@ describe("Post model", () => {
     expect(post.message).toEqual("some message");
   });
 
+    it("has comments", () => {
+    let post = new Post({ message: "some message" });
+    expect(post.message).toEqual("some message");
+  });
+
   it("can list all posts", (done) => {
     Post.find((err, posts) => {
       expect(err).toBeNull();

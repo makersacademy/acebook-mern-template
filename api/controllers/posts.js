@@ -11,6 +11,20 @@ const PostsController = {
       res.status(200).json({ posts: posts, token: token });
     });
   },
+
+    FindPostById: (req, res) => {
+      //extract param post_id
+      let post_id = req.params.post_id
+
+    Post.find({post_id}, async (err, posts) => {
+      if (err) {
+        throw err;
+      }
+      const token = await TokenGenerator.jsonwebtoken(req.user_id)
+      res.status(200).json({ posts: posts, token: token });
+    });
+  },
+
   Create: (req, res) => {
     const post = new Post(req.body);
     post.save(async (err) => {
