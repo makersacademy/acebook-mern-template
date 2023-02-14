@@ -51,7 +51,7 @@
 }
 .like{
     cursor: pointer;
-    transform:rotate(180deg);
+    transform:none;
     width:28px;
 }
 
