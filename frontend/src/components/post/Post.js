@@ -62,7 +62,11 @@ const Post = ({ post, setReload }) => {
               data-cy="like-button"
               onClick={handleLikeToggle}
             >
-              <img src="/images/like.svg" alt="like" />
+              {isLiked ? (
+                <img src="/images/thumbFilled.png" alt="like" />
+              ) : (
+                <img src="/images/thumbOutline.png" alt="like" />
+              )}
             </div>
             <div className={styles.likesNumber}>
               <div>
