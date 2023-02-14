@@ -25,13 +25,14 @@ describe('/comments', () => {
       },
       secret
     );
-    const post = new Post({ message: 'I love this website', user_id: user_id });
-    await post.save();
-    let post_id = post._id;
   });
 
   beforeEach(async () => {
     await Comment.deleteMany({});
+    await Post.deleteMany({});
+    const post = new Post({ message: 'I love this website', user_id: user_id });
+    await post.save();
+    post_id = post._id;
   });
 
   afterAll(async () => {
@@ -83,12 +84,11 @@ describe('/comments', () => {
         .post('/comments')
         .set('Authorization', `Bearer ${token}`)
         .send({ user_id: user_id, post_id: post_id, message: 'hello world' });
-      Comment.find((err, comments) => {
+      await Comment.find(async (err, comments) => {
         expect(err).toBeNull();
         const comment_id = comments[0]._id;
-        Post.find((err, posts) => {
+        await Post.find((err, posts) => {
           expect(err).toBeNull();
-          debugger;
           const updatedPost = posts[0];
           expect([...updatedPost.comments]).toEqual([comment_id]);
         });
