@@ -3,6 +3,7 @@ import React, { useState } from "react";
 const Post = ({ navigate, post, setPosts, posts, token, user, onAddComment }) => {
   const [comment, setComment] = useState("");
   const [showComments, setShowComments] = useState(false);
+  const [likes, setLikes] = useState(post.likes || 0);
 
   const handleDeletePost = async (id) => {
     await fetch(`/posts/${id}`, {
@@ -67,20 +68,25 @@ const Post = ({ navigate, post, setPosts, posts, token, user, onAddComment }) =>
     setShowComments(!showComments);
   };
 
+  const handleLike = () => {
+    setLikes(likes + 1);
+  };
+
   return (
     <>
       <div class="postContent">{post.message}</div>
 
       <div class="postButtons">
-        <button id="like">Like</button>
+        <button id="like" onClick={handleLike}>Like</button>
+        
         <button onClick={() => handleDeletePost(post._id)}>Delete</button>
-
+        
         <label htmlFor="comment">
           <button onClick={() => handleCommentPost(post._id)} id="commentButton" type="submit">
             Comment
           </button>
         </label>
-
+        
         <div class="commentField">
           <form onSubmit={handleCommentPost}>
             <input
@@ -93,6 +99,10 @@ const Post = ({ navigate, post, setPosts, posts, token, user, onAddComment }) =>
             />
           </form>
         </div>
+      </div>
+
+      <div class="likesDiv">        
+        <p class="likesText">Likes: {likes}</p>
       </div>
 
       <div class="comments">

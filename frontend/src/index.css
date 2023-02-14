@@ -124,6 +124,12 @@ input::placeholder {
   display: flex;
 }
 
+.likesDiv {
+  display: flex;
+  align-self: flex-start;
+  margin-left: 10px;
+}
+
 #like {
   margin-left: 10px;
 }
