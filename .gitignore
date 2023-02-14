@@ -65,7 +65,7 @@ typings/
 .next
 
 # cypress.io
-cypress/screenshots
+frontend/cypress/screenshots
 frontend/cypress/videos
 
 # Idea modules
