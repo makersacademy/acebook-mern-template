@@ -1,5 +1,7 @@
 const app = require('../../app');
 const request = require('supertest');
+const fs = require('fs');
+const path = require('path');
 require('../mongodb_helper');
 const Post = require('../../models/post');
 const User = require('../../models/user');
@@ -24,18 +26,16 @@ describe('/posts', () => {
       secret
     );
   });
+
   beforeEach(async () => {
-    await User.deleteMany({});
-
     await Post.deleteMany({});
   });
 
-  afterEach(async () => {
+  afterAll(async () => {
     await User.deleteMany({});
-    await Post.deleteMany({});
   });
 
-  describe('GET - users', () => {
+  describe('GET - /account', () => {
     test('returns 401 when token missing', async () => {
       let response = await request(app).get('/account');
       expect(response.status).toEqual(401);
@@ -88,6 +88,91 @@ describe('/posts', () => {
       await post2.save();
       let response = await request(app).get('/account');
       expect(response.body.token).toEqual(undefined);
+    });
+  });
+
+  describe('PUT updates user details', () => {
+    it('updates password for session user if password sent in body', async () => {
+      const newPassword = 'secure_password';
+      await request(app)
+        .put('/account')
+        .set('Authorization', `Bearer ${token}`)
+        .send({ newPassword: newPassword });
+      const updateUser = await User.findById(user_id);
+      expect(updateUser.password).toBe(newPassword);
+    });
+
+    it('should not update password if no token present', async () => {
+      const newPassword = 'very_secure_password';
+      await request(app).put('/account').send({ newPassword: newPassword });
+      const updateUser = await User.findById(user_id);
+
+      expect(updateUser.password).not.toBe(newPassword);
+    });
+
+    it('Can update email, password, display_name, bio simultaneously', async () => {
+      const newPassword = 'super_secure_password';
+      const newEmail = 'mrjelly@wibblywobbly.com';
+      const newDisplayName = 'Timmy';
+      const newBio = "I'm a Makers student";
+      await request(app)
+        .put('/account')
+        .set('Authorization', `Bearer ${token}`)
+        .send({
+          newPassword: newPassword,
+          newEmail: newEmail,
+          newDisplayName: newDisplayName,
+          newBio: newBio,
+        });
+      const updateUser = await User.findById(user_id);
+      expect(updateUser.password).toBe(newPassword);
+      expect(updateUser.email).toBe(newEmail);
+      expect(updateUser.display_name).toBe(newDisplayName);
+      expect(updateUser.bio).toBe(newBio);
+    });
+
+    it('should not update any information without valid token', async () => {
+      const newPassword = 'uber_secure_password';
+      const newEmail = 'mrjelly@wibblywobbly.net';
+      const newDisplayName = 'Jimmy';
+      const newBio = "I'm a professional software engineer";
+      await request(app).put('/account').send({
+        newPassword: newPassword,
+        newEmail: newEmail,
+        newDisplayName: newDisplayName,
+        newBio: newBio,
+      });
+      const updateUser = await User.findById(user_id);
+
+      expect(updateUser.password).not.toBe(newPassword);
+      expect(updateUser.email).not.toBe(newEmail);
+      expect(updateUser.display_name).not.toBe(newDisplayName);
+      expect(updateUser.bio).not.toBe(newBio);
+    });
+
+    it('only updates one of the values leaving others unchanged', async () => {
+      const user = await User.findById(user_id);
+      const newPassword = 'uber_secure_password';
+      let response = await request(app)
+        .put('/account')
+        .set('Authorization', `Bearer ${token}`)
+        .send({
+          newPassword: newPassword,
+        });
+      expect(response.status).toBe(204);
+      const updateUser = await User.findById(user_id);
+      expect(updateUser.password).toBe(newPassword);
+      expect(user.password).not.toBe(newPassword);
+    });
+
+    it('updates image url', async () => {
+      const filePath = path.resolve(__dirname, '../test-image-2.jpg');
+      const image = fs.readFileSync(filePath);
+      let response = await request(app)
+        .put('/account')
+        .set('Authorization', `Bearer ${token}`)
+        .attach('image', image, 'test-image-2.jpg');
+      expect(response.status).toBe(204);
     });
   });
 });

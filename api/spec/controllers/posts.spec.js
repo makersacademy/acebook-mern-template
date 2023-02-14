@@ -23,6 +23,19 @@ describe('/posts', () => {
       },
       secret
     );
+    const user2 = new User({ email: "user2@test.com", password: "12345678" });
+    await user2.save();
+    user2_id = user2._id;
+    token2 = JWT.sign(
+      {
+        user_id: user2.id,
+        // Backdate this token of 5 minutes
+        iat: Math.floor(Date.now() / 1000) - 5 * 60,
+        // Set the JWT token to expire in 10 minutes
+        exp: Math.floor(Date.now() / 1000) + 10 * 60,
+      },
+      secret
+    );
   });
 
   beforeEach(async () => {
@@ -216,4 +229,180 @@ describe('/posts', () => {
       expect(response.status).toBe(401);
     });
   });
+    describe("LIKES posts", () => { //need to create one then test it.
+      test("When there's no likes on a post it should return an empty array", async () => {
+        let post1 = new Post({ user_id: user_id, message: "howdy!" });
+        await post1.save();
+        let response = await request(app)
+          .get("/posts")
+          .set("Authorization", `Bearer ${token}`)
+          .send({ token: token });
+        let messages = response.body.posts.map((post) => post.message);
+        let likes = response.body.posts.map((post) => post.likes.length);
+        expect(messages).toEqual(["howdy!"]);  
+        expect(likes).toEqual([0]);
+      });
+    test("without a token it should return 401", async () => {
+        let post1 = new Post({ user_id: user_id, message: "howdy!" });
+        const savedPost = await post1.save();
+
+        const p_id = await savedPost._id;
+
+        let response = await request(app)
+          .patch("/posts/like")
+          .send({ _id: p_id, _user_id: user_id });
+
+        expect(response.status).toBe(401);
+      });
+    test("a user can like a post", async () => {
+      let post1 = new Post({ user_id: user_id, message: "howdy!" });
+      const savedPost = await post1.save();
+      const p_id = savedPost._id;
+
+      let response = await request(app)
+        .patch("/posts/like")
+        .set("Authorization", `Bearer ${token}`)
+        .send({ _id: p_id, _user_id: user_id });
+
+      expect(response.status).toBe(204);
+      let posts = await Post.find();
+      expect(posts[0].likes.length).toBe(1);
+      });
+    test("two different users can like a post", async () => {
+      let user1 = new User({ email: "user1@user.com", password: "password1" });
+      await user1.save();
+  
+      let post1 = new Post({ user_id: user_id, message: "howdy!" });
+      const savedPost = await post1.save();
+      const p_id = savedPost._id;
+  
+      let response = await request(app)
+        .patch("/posts/like")
+        .set("Authorization", `Bearer ${token}`)
+        .send({ _id: p_id, _user_id: user_id });
+  
+      expect(response.status).toBe(204);
+      let posts = await Post.find();
+      expect(posts[0].likes.length).toBe(1);
+  
+      let response2 = await request(app)
+        .patch("/posts/like")
+        .set("Authorization", `Bearer ${token2}`)
+        .send({ _id: p_id, _user_id: user2_id });
+     
+      expect(response2.status).toBe(204);
+      let posts2 = await Post.find();
+      expect(posts2[0].likes.length).toBe(2);
+      console.log(posts2[0].likes)
+  })
+    test('A user cannot like a post twice', async () => {
+      let post1 = new Post({ user_id: user_id, message: "howdy!" });
+      const savedPost = await post1.save();
+      const p_id = savedPost._id;
+
+      let response = await request(app)
+        .patch("/posts/like")
+        .set("Authorization", `Bearer ${token}`)
+        .send({ _id: p_id, _user_id: user_id });
+
+      expect(response.status).toBe(204);
+      let posts = await Post.find();
+      expect(posts[0].likes.length).toBe(1);
+
+      let response1 = await request(app)
+        .patch("/posts/like")
+        .set("Authorization", `Bearer ${token}`)
+        .send({ _id: p_id, _user_id: user_id });
+
+      expect(response1.status).toBe(204);
+      let posts1 = await Post.find();
+      expect(posts1[0].likes.length).toBe(1);
+    });
+  });
+  describe("Unlike posts", () => { 
+    test("When there's one likes on a post it should return an empty array when unliked", async () => {
+      let post1 = new Post({ user_id: user_id, message: "howdy!" });
+      const savedPost = await post1.save();
+      const p_id = savedPost._id;
+
+      let response = await request(app)
+        .patch("/posts/like")
+        .set("Authorization", `Bearer ${token}`)
+        .send({ _id: p_id, _user_id: user_id });
+
+      expect(response.status).toBe(204);
+      let posts = await Post.find();
+      expect(posts[0].likes.length).toBe(1);
+
+      let response1 = await request(app)
+        .patch("/posts/unlike")
+        .set("Authorization", `Bearer ${token}`)
+        .send({ _id: p_id, _user_id: user_id });
+
+      expect(response1.status).toBe(204);
+      let posts1 = await Post.find();
+      expect(posts1[0].likes.length).toBe(0);
+    });
+  });
+    test("Unliking a post with no likes should return an empty array", async () => {
+      let post1 = new Post({ user_id: user_id, message: "howdy!" });
+        const savedPost = await post1.save();
+        const p_id = savedPost._id;
+
+        let response = await request(app)
+          .patch("/posts/unlike")
+          .set("Authorization", `Bearer ${token}`)
+          .send({ _id: p_id, _user_id: user_id });
+
+        expect(response.status).toBe(204);
+        let posts = await Post.find();
+        console.log(posts[0].likes)
+        expect(posts[0].message).toBe("howdy!")
+      });
+      test("without a token it should return 401", async () => {
+        let post1 = new Post({ user_id: user_id, message: "howdy!" });
+        const savedPost = await post1.save();
+
+        const p_id = await savedPost._id;
+
+        let response = await request(app)
+          .patch("/posts/unlike")
+          .send({ _id: p_id, _user_id: user_id });
+        expect(response.status).toBe(401);
+      });
+      test("When there is two likes and one person unlikes it should return 1 like", async () => {
+        let user1 = new User({ email: "user1@user.com", password: "password1" });
+      await user1.save();
+  
+      let post1 = new Post({ user_id: user_id, message: "howdy!" });
+      const savedPost = await post1.save();
+      const p_id = savedPost._id;
+  
+      let response = await request(app)
+        .patch("/posts/like")
+        .set("Authorization", `Bearer ${token}`)
+        .send({ _id: p_id, _user_id: user_id });
+  
+      expect(response.status).toBe(204);
+      let posts = await Post.find();
+      expect(posts[0].likes.length).toBe(1);
+  
+      let response2 = await request(app)
+        .patch("/posts/like")
+        .set("Authorization", `Bearer ${token2}`)
+        .send({ _id: p_id, _user_id: user2_id });
+     
+      expect(response2.status).toBe(204);
+      let posts2 = await Post.find();
+      expect(posts2[0].likes.length).toBe(2);
+
+      let response3 = await request(app)
+        .patch("/posts/unlike")
+        .set("Authorization", `Bearer ${token2}`)
+        .send({ _id: p_id, _user_id: user2_id });
+      
+      expect(response3.status).toBe(204)
+      let posts3 = await Post.find();
+      expect(posts3[0].likes.length).toBe(1);
+      })
 });
