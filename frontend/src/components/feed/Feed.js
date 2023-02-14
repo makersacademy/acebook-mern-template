@@ -21,7 +21,6 @@ const Feed = ({ navigate, path }) => {
           window.localStorage.setItem('token', data.token);
           setToken(window.localStorage.getItem('token'));
           setId(window.localStorage.getItem('user_id'));
-          console.log('i just fetched the data');
           setPosts(data.posts);
           setReload(false);
         });
@@ -48,12 +47,14 @@ const Feed = ({ navigate, path }) => {
           id={id}
           setReload={setReload}
         />
-        <div id="feed" role="feed">
+        <div id='feed' role='feed'>
           {posts ? (
             posts
               .slice(0)
               .reverse()
-              .map((post) => <Post post={post} key={post._id} />)
+              .map((post) => (
+                <Post post={post} key={post._id} setReload={setReload} />
+              ))
           ) : (
             <p>loading</p>
           )}

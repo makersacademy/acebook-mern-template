@@ -16,6 +16,7 @@
     "node": ">=18.1.0"
   },
   "dependencies": {
+    "clean": "^4.0.2",
     "cloudinary": "^1.33.0",
     "cookie-parser": "~1.4.4",
     "debug": "~2.6.9",
