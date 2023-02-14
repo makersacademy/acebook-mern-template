@@ -1,11 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import CreatePostForm from '../createPostForm/createPostForm';
+
 import Post from '../post/Post';
 
-const Feed = ({ reload, setReload, navigate, path }) => {
+const Feed = ({ navigate, path }) => {
   const [posts, setPosts] = useState([]);
   const [token, setToken] = useState(window.localStorage.getItem('token'));
   const [id, setId] = useState(window.localStorage.getItem('user_id'));
+  const [reload, setReload] = useState(false);
 
   useEffect(() => {
     if (token) {
@@ -37,7 +39,12 @@ const Feed = ({ reload, setReload, navigate, path }) => {
       <>
         <h2>Posts</h2>
         <button onClick={logout}>Logout</button>
-
+        <CreatePostForm
+          navigate={navigate}
+          token={token}
+          id={id}
+          setReload={setReload}
+        />
         <div id='feed' role='feed'>
           {posts ? (
             posts
