@@ -122,14 +122,15 @@ const Feed = ({ navigate }) => {
           <div id="feedComponent">
             <h2>Posts</h2>
             <form onSubmit={handleSubmitPost}>
-              <input
+              <textarea
                 placeholder="Write your post here"
                 id="message"
                 type="message"
                 defaultValue={post}
                 onChange={handleMessageChange}
               />
-              <input id="submit" type="submit" value="Submit" />
+              <br />
+              <input id="submitPost" type="submit" value="Submit" />
             </form>
 
             <div id="feed" role="feed">

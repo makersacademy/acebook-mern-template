@@ -41,6 +41,22 @@ code {
   margin-top: px 40;
 }
 
+#message {
+  height: 100px;
+  width: 500px;
+  border-width: 0.9px;
+  border-radius: 10px;
+  text-align: center;
+}
+
+input {
+  text-align: center;
+}
+
+input::placeholder {
+  text-align: center;
+}
+
 #feedComponent {
   display: flex;
   flex-direction: column;
@@ -49,6 +65,10 @@ code {
   align-items: center;
   width: 600px;
   margin: 0 auto;
+}
+
+#submitPost {
+  margin-left: 20px;
 }
 
 .post {
