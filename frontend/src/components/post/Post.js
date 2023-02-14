@@ -74,7 +74,7 @@ const Post = ({ navigate, post, setPosts, posts, token, user, onAddComment }) =>
 
   return (
     <>
-      <div class="postContent">{post.message}</div>
+      <div data-cy="post" class="postContent">{post.message}</div>
 
       <div class="postButtons">
         <button id="like" onClick={handleLike}>Like</button>
