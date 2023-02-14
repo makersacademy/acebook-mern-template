@@ -5,7 +5,7 @@ describe("post function", () => {
 
   it("tests to see if the post button and box works properly", () => {
     // need to login in from the login page
-    cy.visit('http://localhost:3000/login');
+    cy.visit('/login');
     cy.get('#email').click();
     cy.get('#email').type('someone@example.com');
     cy.get('#password').click();

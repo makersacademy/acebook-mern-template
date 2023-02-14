@@ -1,4 +1,4 @@
-describe.skip("Signing in", () => {
+describe("Signing in", () => {
 
   before(() => {
     cy.signup("someone@example.com", "password", "John", "Smith")
