@@ -19,10 +19,16 @@ const PostSchema = new mongoose.Schema(
       default: [],
       required: false,
     },
-    comments: [{ type: mongoose.Types.ObjectId, ref: 'Comment' }],
+    comments: {
+      type: Array,
+      default: [],
+      required: false,
+    },
   },
   { timestamps: true }
 );
+
+//yes and my laptop is running so slow
 
 const Post = mongoose.model('Post', PostSchema);
 
