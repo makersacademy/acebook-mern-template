@@ -20,7 +20,7 @@ const Feed = ({ navigate }) => {
           setPosts(data.posts);
         });
     }
-  });
+  }, [token]);
 
   const logout = () => {
     window.localStorage.removeItem("token");
@@ -32,7 +32,8 @@ const Feed = ({ navigate }) => {
       <>
         <h2>Posts</h2>
         <button onClick={logout}>Logout</button>
-        <CreatePost navigate={navigate} /><br></br>
+        <CreatePost navigate={navigate} 
+        /><br></br>
         <div id="feed" role="feed">
           {posts.map((post) => (
             <Post post={post} key={post._id} />

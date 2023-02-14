@@ -29,6 +29,8 @@ const CreatePost = ({navigate}) => {
         let data = await response.json()
         window.localStorage.setItem("token", data.token)
         setToken(window.localStorage.getItem("token"))
+        setTitle("")
+        setPost("")
         navigate("/posts");
     }
   };
@@ -46,7 +48,7 @@ const CreatePost = ({navigate}) => {
   }
 
     return (
-      <div>
+      <>
         <form onSubmit={handleSubmit}>
           <label for="title">Title</label><br></br>
           <input
@@ -83,7 +85,7 @@ const CreatePost = ({navigate}) => {
 
           <button id="submit" type="submit">Create post</button>
         </form>
-      </div>
+      </>
     );
 };
 export default CreatePost;
