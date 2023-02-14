@@ -138,6 +138,10 @@ const Feed = ({ navigate }) => {
                 <div class="post" key={post._id} data-cy="post">
                   <div data-cy="userName" class="postUserName">
                     {post.userName}
+                      <div data-cy="timestamp" class="postTimestamp">
+                        {console.log(post)}
+                        {post.createdAt && new Date(post.createdAt).toISOString().split('.')[0].replace('T', ' ')}
+                      </div>
                   </div>
                   
                   <Post

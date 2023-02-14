@@ -103,6 +103,12 @@ input::placeholder {
   align-self: flex-end;
 }
 
+.postTimestamp {
+  display: flex;
+  align-self: flex-start;
+  margin-left: 250px;
+}
+
 .postButtons {
   display: flex;
   position: relative;
@@ -131,6 +137,7 @@ input::placeholder {
 .postUserName {
   display: flex;
   align-self: flex-start;
+  width: 100%;
 }
 
 .comments {
