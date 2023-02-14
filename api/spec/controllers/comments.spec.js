@@ -5,6 +5,7 @@ const Comment = require('../../models/comment');
 const Post = require('../../models/post');
 const User = require('../../models/user');
 const JWT = require('jsonwebtoken');
+const mongoose = require('mongoose');
 const secret = process.env.JWT_SECRET;
 
 let token;
@@ -24,18 +25,20 @@ describe('/comments', () => {
       },
       secret
     );
+  });
+
+  beforeEach(async () => {
+    await Comment.deleteMany({});
+    await Post.deleteMany({});
     const post = new Post({ message: 'I love this website', user_id: user_id });
     await post.save();
     post_id = post._id;
   });
 
-  beforeEach(async () => {
-    await Comment.deleteMany({});
-  });
-
   afterAll(async () => {
     await User.deleteMany({});
-    Comment.deleteMany({});
+    await Comment.deleteMany({});
+    await Post.deleteMany({});
   });
 
   describe('POST, when token is present', () => {
@@ -52,7 +55,7 @@ describe('/comments', () => {
         .post('/comments')
         .set('Authorization', `Bearer ${token}`)
         .send({ user_id: user_id, post_id: post_id, message: 'hello world' });
-      Comment.find((err, comments) => {
+      await Comment.find((err, comments) => {
         expect(err).toBeNull();
         const comment = comments[0];
         expect(comment).toMatchObject({
@@ -75,6 +78,22 @@ describe('/comments', () => {
       const originalPayload = JWT.decode(token, process.env.JWT_SECRET);
       expect(newPayload.iat > originalPayload.iat).toEqual(true);
     });
+
+    it('Adds the id of the comment to the corresponding post document', async () => {
+      await request(app)
+        .post('/comments')
+        .set('Authorization', `Bearer ${token}`)
+        .send({ user_id: user_id, post_id: post_id, message: 'hello world' });
+      await Comment.find(async (err, comments) => {
+        expect(err).toBeNull();
+        const comment_id = comments[0]._id;
+        await Post.find((err, posts) => {
+          expect(err).toBeNull();
+          const updatedPost = posts[0];
+          expect([...updatedPost.comments]).toEqual([comment_id]);
+        });
+      });
+    });
   });
 
   describe('POST without a token', () => {
@@ -89,7 +108,7 @@ describe('/comments', () => {
       const response = await request(app)
         .post('/comments')
         .send({ user_id: user_id, post_id: post_id, message: 'hello world' });
-      Comment.find((err, comments) => {
+      await Comment.find((err, comments) => {
         expect(err).toBeNull();
         expect(comments.length).toBe(0);
       });
