@@ -5,6 +5,7 @@ const Comment = require('../../models/comment');
 const Post = require('../../models/post');
 const User = require('../../models/user');
 const JWT = require('jsonwebtoken');
+const mongoose = require('mongoose');
 const secret = process.env.JWT_SECRET;
 
 let token;
@@ -26,7 +27,7 @@ describe('/comments', () => {
     );
     const post = new Post({ message: 'I love this website', user_id: user_id });
     await post.save();
-    post_id = post._id;
+    let post_id = post._id;
   });
 
   beforeEach(async () => {
@@ -35,7 +36,8 @@ describe('/comments', () => {
 
   afterAll(async () => {
     await User.deleteMany({});
-    Comment.deleteMany({});
+    await Comment.deleteMany({});
+    await Post.deleteMany({});
   });
 
   describe('POST, when token is present', () => {
@@ -74,6 +76,23 @@ describe('/comments', () => {
       );
       const originalPayload = JWT.decode(token, process.env.JWT_SECRET);
       expect(newPayload.iat > originalPayload.iat).toEqual(true);
+    });
+
+    it('Adds the id of the comment to the corresponding post document', async () => {
+      await request(app)
+        .post('/comments')
+        .set('Authorization', `Bearer ${token}`)
+        .send({ user_id: user_id, post_id: post_id, message: 'hello world' });
+      Comment.find((err, comments) => {
+        expect(err).toBeNull();
+        const comment_id = comments[0]._id;
+        Post.find((err, posts) => {
+          expect(err).toBeNull();
+          debugger;
+          const updatedPost = posts[0];
+          expect([...updatedPost.comments]).toEqual([comment_id]);
+        });
+      });
     });
   });
 
