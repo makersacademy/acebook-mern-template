@@ -5,6 +5,7 @@ const Feed = ({ navigate }) => {
   const [posts, setPosts] = useState([]);
   const [token, setToken] = useState(window.localStorage.getItem("token"));
   const [message, setMessage] = useState("");
+  const [user, setUser] = useState({});
 
   useEffect(() => {
     if (token) {
@@ -29,7 +30,7 @@ const Feed = ({ navigate }) => {
 
   const post = () => {};
 
-  const [user, setUser] = useState({});
+  
 
   useEffect(() => {
     const fetchUser = async () => {
@@ -83,14 +84,29 @@ const Feed = ({ navigate }) => {
       } else {
         navigate("/signup");
       }
-    });
+    })
+}
+
+  const handleAddComment = (postId, comment) => {
+    setPosts(posts.map(post => {
+      if (post._id === postId) {
+        return {
+          ...post,
+          comments: [...post.comments, comment]
+        };
+      } else {
+        return post;
+      }
+    }));
   };
+
 
   const handleMessageChange = (event) => {
     setMessage(event.target.value);
   };
 
-  if (token) {
+
+ if (token) {
     return (
       <>
         <div>
@@ -106,14 +122,15 @@ const Feed = ({ navigate }) => {
           <div id="feedComponent">
             <h2>Posts</h2>
             <form onSubmit={handleSubmitPost}>
-              <input
+              <textarea
                 placeholder="Write your post here"
                 id="message"
                 type="message"
                 defaultValue={post}
                 onChange={handleMessageChange}
               />
-              <input id="submit" type="submit" value="Submit" />
+              <br />
+              <input id="submitPost" type="submit" value="Submit" />
             </form>
 
             <div id="feed" role="feed">
@@ -122,18 +139,19 @@ const Feed = ({ navigate }) => {
                   <div data-cy="userName" class="postUserName">
                     {post.userName}
                   </div>
+                  
                   <Post
                     post={post}
                     setPosts={setPosts}
                     posts={posts}
                     token={token}
+                    user={user}
+                    setUser={setUser}
+                    navigate={navigate}
+                    onAddComment={(comment) => handleAddComment(post._id, comment)}
                   />
-                  <div class="postContent">{post.message}</div>
-                  <div class="postButtons">
-                    <button id="like">Like</button>
-                    <button id="comment">Comment</button>
+
                   </div>
-                </div>
               ))}
             </div>
           </div>
