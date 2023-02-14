@@ -13,7 +13,7 @@ const CommentsController = {
     });
   },
   Create: (req, res) => {
-    //we need a used_id in the object we pass to new Comment. The object needs to look the same as the model
+    //we need a user_id in the object we pass to new Comment. The object needs to look the same as the model
     const commentBody = req.body;
     //in the frontend, we need to pass post_id and content to our Comment component
     commentBody.user_id = req.user_id;
