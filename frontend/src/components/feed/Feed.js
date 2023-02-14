@@ -5,7 +5,7 @@ const Feed = ({ navigate }) => {
   const [posts, setPosts] = useState([]);
   const [token, setToken] = useState(window.localStorage.getItem("token"));
   const [message, setMessage] = useState("");
-  const [comment, setComment] = useState("");
+  const [user, setUser] = useState({});
 
   useEffect(() => {
     if (token) {
@@ -30,7 +30,7 @@ const Feed = ({ navigate }) => {
 
   const post = () => {};
 
-  const [user, setUser] = useState({});
+  
 
   useEffect(() => {
     const fetchUser = async () => {
@@ -87,7 +87,18 @@ const Feed = ({ navigate }) => {
     })
 }
 
-
+  const handleAddComment = (postId, comment) => {
+    setPosts(posts.map(post => {
+      if (post._id === postId) {
+        return {
+          ...post,
+          comments: [...post.comments, comment]
+        };
+      } else {
+        return post;
+      }
+    }));
+  };
 
 
   const handleMessageChange = (event) => {
@@ -131,10 +142,12 @@ const Feed = ({ navigate }) => {
                   <Post
                     post={post}
                     setPosts={setPosts}
-                    comment={comment}
-                    setComments={setComment}
                     posts={posts}
                     token={token}
+                    user={user}
+                    setUser={setUser}
+                    navigate={navigate}
+                    onAddComment={(comment) => handleAddComment(post._id, comment)}
                   />
 
                   </div>

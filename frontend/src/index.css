@@ -115,20 +115,24 @@ code {
 
 .comments {
   display: flex;
+  flex-direction: column;
   align-self: flex-start;
-  margin-right: 20px;
+  margin-left: auto;
+  margin-right: auto;
   margin-top: 30px;
   margin-bottom: 20px;
-  margin-left: 20px;
 }
 
 .comment {
   display: flex;
+  flex-direction: column;
   align-self: flex-start;
-  margin-right: 20px;
-
   margin-bottom: 20px;
-  margin-left: 20px;
+  margin-left: auto;
+  margin-right: auto;
+}
+.comment > * {
+  width: 100%;
 }
 
 .commentField {
@@ -139,4 +143,8 @@ code {
 
 #comment {
   width: 180%;
+}
+
+#showComments {
+  margin-bottom: 10px;
 }
