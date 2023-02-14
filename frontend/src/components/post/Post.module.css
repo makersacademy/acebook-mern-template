@@ -62,14 +62,17 @@
 }
 .likesNumber{
     display: flex;
-    width: 42px;
+    color: rgb(99, 37, 37);
+    font-size: 0.8rem;
+    font-weight: bold;
+}
+.likesNumber div{
+    width:38px;
+}
+.likesNumber p{
+    text-align: right;
+    width: 14px;
 }
 .likesNumber img{
     width: 100%;
-}
-.likesNumber div{
-color: rgb(99, 37, 37);
-font-size: 0.8rem;
-font-weight: bold;
-padding-right: 6px;
 }

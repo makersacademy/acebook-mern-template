@@ -68,7 +68,7 @@ const Post = ({ post, setReload }) => {
               <div>
                 <img src="/images/likes.jpg" alt="Number of likes" />
               </div>
-              <span>{post.likes.length}</span>
+              <p>{post.likes.length}</p>
             </div>
           </div>
         </div>
