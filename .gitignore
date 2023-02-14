@@ -68,4 +68,4 @@ cypress/videos
 # misc
 .DS_Store
 api/spec/.DS_Store
-api/.DS_Store
+api/.DS_Store.DS_Store
