@@ -11,7 +11,7 @@ describe("post function", () => {
     cy.get("#message").type("cypress test 45");
     cy.get("#submit").click();
 
-    cy.get('[data-cy="delete"]').last().click();
+    cy.get("#delete").last().click();
 
     cy.get('[data-cy="post"]').contains("cypress test 45").should("not.exist");
   });
