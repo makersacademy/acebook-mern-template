@@ -1,9 +1,7 @@
 require("./utils")
-const createError = require("http-errors");
 const express = require("express");
 const path = require("path");
 const logger = require("morgan");
-const JWT = require("jsonwebtoken");
 
 const postsRouter = require("./routes/posts");
 const tokensRouter = require("./routes/tokens");
@@ -27,10 +25,11 @@ app.use("/tokens", tokensRouter);
 app.use("/users", usersRouter);
 app.use("/comments", tokenChecker, commentsRouter);
 
+
 // catch 404 and forward to error handler
-app.use(errorHandler);
+app.use(catch404);
 
 // error handler
-app.use(catch404);
+app.use(errorHandler);
 
 module.exports = app;
