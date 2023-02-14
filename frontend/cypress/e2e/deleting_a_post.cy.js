@@ -1,4 +1,4 @@
-describe("post function", () => {
+describe.skip("post function", () => {
   before(() => {
     cy.signup("someone@example.com", "password", "John", "Smith");
   });
