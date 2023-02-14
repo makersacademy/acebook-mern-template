@@ -13,7 +13,7 @@ code {
 }
 
 .nav {
-  background-color: blue;
+  background-color: rgb(79, 79, 221);
   color: white;
   display: flex;
   justify-content: space-between;

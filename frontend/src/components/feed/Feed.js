@@ -112,7 +112,7 @@ const Feed = ({ navigate }) => {
         <div>
           <nav className="nav">
             <a href="/posts" className="site-title">
-              Acebook
+              acebook
             </a>
             <ul>
               <button onClick={logout}>Logout</button>
