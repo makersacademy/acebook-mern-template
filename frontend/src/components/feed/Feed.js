@@ -134,16 +134,16 @@ const Feed = ({ navigate }) => {
             </form>
 
             <div id="feed" role="feed">
-              {posts.map((post) => (
+              {posts.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt)).map((post) => (
                 <div class="post" key={post._id} data-cy="post">
                   <div data-cy="userName" class="postUserName">
                     {post.userName}
-                      <div data-cy="timestamp" class="postTimestamp">
-                        {console.log(post)}
-                        {post.createdAt && new Date(post.createdAt).toISOString().split('.')[0].replace('T', ' ')}
-                      </div>
+                    <div data-cy="timestamp" class="postTimestamp">
+                      {console.log(post)}
+                      {post.createdAt && new Date(post.createdAt).toISOString().split('.')[0].replace('T', ' ')}
+                    </div>
                   </div>
-                  
+
                   <Post
                     post={post}
                     setPosts={setPosts}
@@ -154,8 +154,7 @@ const Feed = ({ navigate }) => {
                     navigate={navigate}
                     onAddComment={(comment) => handleAddComment(post._id, comment)}
                   />
-
-                  </div>
+                </div>
               ))}
             </div>
           </div>
