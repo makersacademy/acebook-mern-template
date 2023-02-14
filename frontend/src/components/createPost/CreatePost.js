@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 
+
 const CreatePost = ({navigate}) => {
   const [title, setTitle] = useState("");
   const [post, setPost] = useState("");

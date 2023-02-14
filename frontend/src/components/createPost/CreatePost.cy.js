@@ -1,22 +1,18 @@
 import CreatePost from './CreatePost'
 
-describe('CreatePost', () => {
-    it('adds a new post', () => {
-      cy.mount(<CreatePost />);
+const token = "12345"
 
-      cy.intercept('POST', '/posts', { 
-        statusCode: 200,
-        body: {
-            content: 'test new post'
-        }
-      }).as("postRequest")
+describe("create new post", () => {
+  it("calls the /newPost endpoint", () => {
+    cy.mount(<CreatePost token={token}/>)
 
-      cy.get("#content").type('test new post');
-      cy.get("#submit").click();
-      cy.wait('@postRequest').then(() => {
+    cy.intercept('POST', '/posts', { token: "fakeToken" }).as("postRequest")
 
-        cy.get('[data-cy="post"]').should('contain.text', "test new post")
-      })
-      
-    });
-});
+    cy.get("#newPost").type("I'm making pancakes!");
+    cy.get("#submit").click();
+    cy.wait('@postRequest').then( interception => {
+      expect(interception.response.body.token).to.eq("fakeToken")
+    })
+  })
+})
+
