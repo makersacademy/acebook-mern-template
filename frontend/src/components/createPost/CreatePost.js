@@ -20,14 +20,16 @@ const CreatePost = ({ navigate }) => {
     });
 
     if (response.status !== 201) {
-      console.log("new post not created");
-      navigate("/posts");
+      console.log("new post not created")
+      navigate("/posts")
     } else {
-      console.log("new post created");
-      let data = await response.json();
-      window.localStorage.setItem("token", data.token);
-      setToken(window.localStorage.getItem("token"));
-     
+      console.log("new post created")
+        let data = await response.json()
+        window.localStorage.setItem("token", data.token)
+        setToken(window.localStorage.getItem("token"))
+        setTitle("")
+        setContent("")
+        navigate("/posts");
     }
   };
 

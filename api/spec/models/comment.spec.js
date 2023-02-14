@@ -1,7 +1,6 @@
 var mongoose = require("mongoose");
 
 require("../mongodb_helper");
-var Post = require("../../models/post");
 var Comment = require("../../models/comment");
 
 describe("Comment model", () => {
@@ -11,13 +10,11 @@ describe("Comment model", () => {
     });
   });
 
-  it("has a message", () => {
-    var post = new Post({ content: "some post" });
-    var comment = new Comment({ content: "some comment" });
-    expect(post.content).toEqual("some post");
-    expect(comment.content).toEqual("some comment");
+  it("has a content", () => {
+    var comment = new Comment({ content: "some content", user_id: 1, post_id: 12 });
+    expect(comment.content).toEqual("some content");
   });
-
+  
   it("can list all comments", (done) => {
     Comment.find((err, comments) => {
       expect(err).toBeNull();
@@ -27,21 +24,20 @@ describe("Comment model", () => {
   });
 
   it("can save a comment", (done) => {
-    var post = new Post({ content: "some post" });
-    var comment = new Comment({ content: "some comment" });
+    const mockPostId = new mongoose.Types.ObjectId();
+    const mockUserId = new mongoose.Types.ObjectId();
+    var comment = new Comment({ content: "some content", user_id: mockUserId, post_id: mockPostId });
 
-    
-    post.save((err) => {
-      expect(err1).toBeNull();
-        comment.save((err) => {
-          expect(err).toBeNull();
+    comment.save((err) => {
+      expect(err).toBeNull();
+
       Comment.find((err, comments) => {
         expect(err).toBeNull();
 
-         expect(comments[0]).toMatchObject({ message: "some comment" });
+        expect(comments[0]).toMatchObject({ content: "some content"});
+        console.log('this message');
         done();
       });
     });
-  });
   });
 });
