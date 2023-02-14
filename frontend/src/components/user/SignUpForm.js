@@ -20,7 +20,7 @@ const SignUpForm = ({ navigate }) => {
         password: password,
         firstName: firstName,
         lastName: lastName,
-        dateOfBirth: dateOfBirth,
+        dateOfBirth: dateOfBirth
       }),
     }).then((response) => {
       if (response.status === 201) {
