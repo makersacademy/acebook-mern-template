@@ -1,7 +1,12 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Titillium+Web&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat&family=Titillium+Web&display=swap');
+
 .app-container{
     max-width: 800px;
+    padding-bottom: 44px;
     border-radius: 4px;
-    background-color: #ddd;
+    background-color: #cddef6;
     margin: auto;
     margin-top: 44px;
     padding: 0;

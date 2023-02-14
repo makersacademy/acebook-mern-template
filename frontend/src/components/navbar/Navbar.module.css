@@ -1,12 +1,11 @@
 
-  @import url('https://fonts.googleapis.com/css2?family=Titillium+Web&display=swap');
-
 .navbar {
     font-family: 'Titillium Web', sans-serif;
     display:flex;
     background-color: #fff;
     padding: 18px 22px;
     border-radius: 4px 4px 0 0;
+    border-bottom: solid 1px #ccc;
     justify-content: space-between;
 }
 .links{

@@ -4,6 +4,7 @@
   "private": true,
   "proxy": "http://localhost:8080",
   "dependencies": {
+    "clean": "^4.0.2",
     "eslint": "^8.23.0",
     "javascript-time-ago": "^2.5.9",
     "react": "^18.2.0",
