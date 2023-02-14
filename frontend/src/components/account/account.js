@@ -56,7 +56,7 @@ const Account = () => {
       </button>
       {showForm ? (
         <div>
-          <Form token={token} form_type={formType} />
+          <Form token={token} form_type={formType} setShowForm={setShowForm} />
         </div>
       ) : null}
     </>

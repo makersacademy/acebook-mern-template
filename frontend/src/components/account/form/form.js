@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-const Form = ({ form_type, token }) => {
+const Form = ({ form_type, token, setShowForm }) => {
   const [inputValue, setInputValue] = useState('');
   const [file, setFile] = useState(null);
   const handleFileInputChange = (e) => {
@@ -35,6 +35,7 @@ const Form = ({ form_type, token }) => {
         console.log('inputvalue: ', inputValue);
         console.log(`${form_type} changed`);
         alert(`${form_type} changed`);
+        setShowForm(false);
       } else {
         console.log(`Error changing ${form_type}`);
       }
