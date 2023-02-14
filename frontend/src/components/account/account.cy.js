@@ -21,10 +21,10 @@ describe('Visiting account page', () => {
     cy.get('button').contains('Upload image');
     cy.get('button').contains('Edit password');
   });
-
-  xit('sends put request to endpoint', () => {
-    cy.mount(<Account navigate={navigate} />);
-    window.localStorage.setItem('token', 'fakeToken');
-    cy.intercept("PUT, '/tokens", { token: 'fakeToken' }.as(''));
-  });
 });
+//   xit('sends put request to endpoint', () => {
+//     cy.mount(<Account navigate={navigate} />);
+//     window.localStorage.setItem('token', 'fakeToken');
+//     cy.intercept("PUT, '/tokens", { token: 'fakeToken' }.as(''));
+//   });
+// });
