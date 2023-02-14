@@ -55,7 +55,7 @@ describe('/comments', () => {
         .post('/comments')
         .set('Authorization', `Bearer ${token}`)
         .send({ user_id: user_id, post_id: post_id, message: 'hello world' });
-      Comment.find((err, comments) => {
+      await Comment.find((err, comments) => {
         expect(err).toBeNull();
         const comment = comments[0];
         expect(comment).toMatchObject({
@@ -108,7 +108,7 @@ describe('/comments', () => {
       const response = await request(app)
         .post('/comments')
         .send({ user_id: user_id, post_id: post_id, message: 'hello world' });
-      Comment.find((err, comments) => {
+      await Comment.find((err, comments) => {
         expect(err).toBeNull();
         expect(comments.length).toBe(0);
       });
