@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-const CreatePost = ({ token }) => {
+const CreatePost = ({ token, navigate }) => {
   const [post, setPost] = useState("");
   const handlePostChange = (event) => {
     setPost(event.target.value);
@@ -18,14 +18,14 @@ const CreatePost = ({ token }) => {
       body: JSON.stringify({ post: post }),
     });
 
-    if (response.status !== 201) {
+    if (response.status === 201) {
       console.log("new post created");
-      //   navigate("/posts");
+        navigate("/posts");
     } else {
       console.log("oops");
-      //   let data = await response.json();
-      //   window.localStorage.setItem("token", data.token);
-      //   navigate("/posts");
+        let data = await response.json();
+        window.localStorage.setItem("token", data.token);
+        navigate("/posts");
     }
   };
 
