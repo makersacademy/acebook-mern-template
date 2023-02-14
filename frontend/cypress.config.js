@@ -5,6 +5,7 @@ module.exports = defineConfig({
     devServer: {
       framework: "create-react-app",
       bundler: "webpack",
+      
     },
   },
 
@@ -14,4 +15,5 @@ module.exports = defineConfig({
     },
     baseUrl: 'http://localhost:3000'
   },
+  "video": false
 });
