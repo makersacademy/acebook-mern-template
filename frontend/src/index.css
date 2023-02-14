@@ -51,7 +51,7 @@ code {
 }
 
 input {
-  text-align: center;
+  text-align: left;
 }
 
 input::placeholder {
