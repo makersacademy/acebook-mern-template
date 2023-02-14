@@ -58,7 +58,7 @@ const Post = ({ post, setReload }) => {
         <div>
           <div className={styles.postFooter}>
             <div
-              className={isLiked ? styles.like : styles.unlike}
+              className={styles.like}
               data-cy="like-button"
               onClick={handleLikeToggle}
             >
