@@ -20,10 +20,10 @@ const App = () => {
     <div className='app-container'>
       <Navbar />
       <Routes>
-
-        <Route path="/" element={<Home navigate={useNavigate()} />} />
-        <Route path="/posts" element={<Feed navigate={useNavigate()} />} />
-        <Route path="/login" element={<LoginForm navigate={useNavigate()} />} />
+        <Route path='/' element={<Home navigate={useNavigate()} />} />
+        <Route path='/account' element={<Account navigate={useNavigate()} />} />
+        <Route path='/posts' element={<Feed navigate={useNavigate()} />} />
+        <Route path='/login' element={<LoginForm navigate={useNavigate()} />} />
         <Route
           path='/signup'
           element={<SignUpForm navigate={useNavigate()} />}
