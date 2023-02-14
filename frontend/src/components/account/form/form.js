@@ -62,13 +62,11 @@ const Form = ({ form_type, token }) => {
               ? 'New password'
               : null
           }
-          value={form_type === 'image' ? '' : inputValue}
           onChange={
             form_type === 'image' ? handleFileInputChange : handleInputChange
           }
         />
         <button type='submit'>Confirm</button>
-        {file ? <span>One file selected.</span> : null}
       </form>
     </div>
   );
