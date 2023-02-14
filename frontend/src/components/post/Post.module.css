@@ -62,7 +62,7 @@
 }
 .likesNumber{
     display: flex;
-    width: 32px;
+    width: 42px;
 }
 .likesNumber img{
     width: 100%;
@@ -71,4 +71,5 @@
 color: rgb(99, 37, 37);
 font-size: 0.8rem;
 font-weight: bold;
+padding-right: 6px;
 }

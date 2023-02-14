@@ -65,8 +65,10 @@ const Post = ({ post, setReload }) => {
               <img src="/images/like.svg" alt="like" />
             </div>
             <div className={styles.likesNumber}>
-              <img src="/images/likes.jpg" alt="Number of likes" />{" "}
-              <div>{post.likes.length}</div>
+              <div>
+                <img src="/images/likes.jpg" alt="Number of likes" />
+              </div>
+              <span>{post.likes.length}</span>
             </div>
           </div>
         </div>
