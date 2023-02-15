@@ -12,7 +12,8 @@
 		"cloudinary": "^1.34.0",
 		"express": "^4.17.1",
 		"mongoose": "^6.2.1",
-		"multer": "^1.4.5-lts.1"
+		"multer": "^1.4.5-lts.1",
+		"multer-storage-cloudinary": "^4.0.0"
 	},
 	"devDependencies": {
 		"eslint": "^8.33.0",
