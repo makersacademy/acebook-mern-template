@@ -5,12 +5,12 @@ In this project, you are tasked with working on an existing application. A signi
 # Scripts:
 
 Frontend -
-"npm run start-front-end-server" = "JWT_SECRET=SUPER_SECRET npm start"
-"npm run run-front-end-test" = "JWT_SECRET=SUPER_SECRET npm run test"
+"npm run front-server" = "JWT_SECRET=SUPER_SECRET npm start"
+"npm run front-test" = "JWT_SECRET=SUPER_SECRET npm run test"
 Api -
-"npm run start-api-server" = "JWT_SECRET=SUPER_SECRET npm start",
-"npm run start-api-server-test-mode" = "JWT_SECRET=SUPER_SECRET npm run start:test",
-"npm run run-test-server-test" = "JWT_SECRET=SUPER_SECRET npm run test"
+"npm run api-server" = "JWT_SECRET=SUPER_SECRET npm start",
+"npm api-test-mode" = "JWT_SECRET=SUPER_SECRET npm run start:test",
+"npm run test" = "JWT_SECRET=SUPER_SECRET npm run test"
 
 ## Videos
 
