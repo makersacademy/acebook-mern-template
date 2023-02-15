@@ -23,7 +23,6 @@ const PostSchema = new mongoose.Schema(
       type: Array,
       default: [],
       required: false,
-      ref: 'Comment',
     },
   },
   { timestamps: true }
