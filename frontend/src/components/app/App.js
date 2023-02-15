@@ -1,3 +1,4 @@
+
 import './App.css';
 import LoginForm from '../auth/LoginForm'
 import SignUpForm from '../user/SignUpForm'
@@ -22,5 +23,6 @@ const App = () => {
       </>
     );
 }
+
 
 export default App;
