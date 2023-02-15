@@ -183,3 +183,50 @@ input::placeholder {
 #showComments {
   margin-bottom: 10px;
 }
+
+.profilePagePicture {
+  display: flex;
+  width: 50%;
+  height: 50%;
+  border-radius: 50%;
+}
+
+#profileBio,
+#bioTitle,
+#bioText,
+#friendsListTitle,
+#friendsList,
+.friendElement {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  justify-content: flex-start;
+  align-items: center;
+  margin: 0 auto;
+}
+
+#bioTitle {
+  margin-top: 40px;
+}
+
+#bioText {
+  margin-top: 20px;
+  margin-bottom: 20px;
+  border-width: 0.9px;
+  border-radius: 10px;
+  border: solid;
+  padding: 40px;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.friendElement {
+  margin-top: 20px;
+  margin-bottom: 20px;
+  border-width: 0.9px;
+  border-radius: 10px;
+  border: solid;
+  padding: 40px;
+  justify-content: space-between;
+  align-items: center;
+}
