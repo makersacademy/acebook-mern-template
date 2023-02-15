@@ -10,6 +10,8 @@ const usersRouter = require("./routes/users");
 const cloudinary = require('cloudinary').v2;
 const cloudinaryApiKey = require("./cloudinaryApiKey")
 const cloudinarySecret = require("./cloudinarySecret")
+const multer = require('multer');
+const { CloudinaryStorage } = require('multer-storage-cloudinary');
 const app = express();
 
 // setup for receiving JSON
@@ -66,5 +68,18 @@ app.use((err, req, res) => {
     api_key: cloudinaryApiKey,
     api_secret: cloudinarySecret,
     });
+
+  // multer middleware
+
+  const storage = new CloudinaryStorage({
+  cloudinary: cloudinary,
+  params: {
+  folder: 'acebook-image-uploads',
+  format: async (req, file) => 'png', // or any other format you like
+  public_id: (req, file) => 'unique_file_name'
+  }
+  });
+
+  const upload = multer({ storage: storage });
 
 module.exports = app;
