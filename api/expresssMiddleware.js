@@ -19,10 +19,12 @@ const tokenChecker = (req, res, next) => {
     });
 };
 const catch404 = (req, res, next) => {
+    // TODO: catch 404 may need to be tested
     next(createError(404));
 }
 const errorHandler = (err, req, res) => {
     // set locals, only providing error in development
+    // TODO: errorHandler may need to be tested
     res.locals.message = err.message;
     res.locals.error = req.app.get("env") === "development" ? err : {};
 
