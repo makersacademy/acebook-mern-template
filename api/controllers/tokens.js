@@ -9,6 +9,7 @@ const SessionsController = {
 
     User.findOne({ email: email }).then(async (user) => {
       if (!user) {
+        // TODO: User.findOne error handler needs to be tested
         console.log("auth error: user not found")
         res.status(401).json({ message: "auth error" });
       } else if (user.password !== password) {
