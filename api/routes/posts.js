@@ -2,11 +2,10 @@ const express = require("express");
 const router = express.Router();
 
 const PostsController = require("../controllers/posts");
-const CommentsRoute = require("../routes/comments");
 
-// Posts / :post_id
-router.get("/:post_id", PostsController.Find);
+router.get("/:post_id", PostsController.FindPostById);
 router.get("/", PostsController.Index);
+router.post("/:post_id/comment", PostsController.CreateComment);
 router.post("/", PostsController.Create);
 
 
