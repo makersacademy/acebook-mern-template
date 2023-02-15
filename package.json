@@ -1,5 +1,8 @@
 {
   "devDependencies": {
     "cypress-file-upload": "^5.0.8"
+  },
+  "dependencies": {
+    "cors": "^2.8.5"
   }
 }
