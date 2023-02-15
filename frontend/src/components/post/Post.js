@@ -74,6 +74,8 @@ const Post = ({ navigate, post, setPosts, posts, token, user, onAddComment }) =>
 
 /////////////////////////////////////////////
   
+
+
 useEffect(() => {
   const fetchLikesCount = async () => {
     try {
@@ -99,6 +101,8 @@ useEffect(() => {
   fetchLikesCount();
 }, [post._id, token]);
 
+console.log(user)
+
 const handleLike = async () => {
   try {
     const response = await fetch(`/posts/${post._id}/like`, {
@@ -108,13 +112,14 @@ const handleLike = async () => {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({ 
-        postId: post._id,
-        userName: `${user.firstName}` 
+        postId: post._id, 
+        userId: `${user.userId}` 
       }),
     });
 
     if (response.ok) {
       const data = await response.json();
+      console.log(data.likes)
       setLikes(data.likes.length);
     } else {
       console.log(`Failed to like post with ID ${post._id}`);
@@ -124,6 +129,11 @@ const handleLike = async () => {
   }
 };
 
+
+// email: data.user.email,
+// firstName: data.user.firstName,
+// lastName: data.user.lastName,
+// userId: data.user._id
 
 /////////////////////////// the below was working until the above was put in ///////
   // const handleLike = async (id) => {
