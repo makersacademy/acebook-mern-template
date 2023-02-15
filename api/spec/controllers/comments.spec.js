@@ -25,6 +25,19 @@ describe('/comments', () => {
       },
       secret
     );
+    const user2 = new User({ email: 'test2@test.com', password: '12345678' });
+    await user2.save();
+    user_id2 = user2._id;
+    token2 = JWT.sign(
+      {
+        user_id: user2.id,
+        // Backdate this token of 5 minutes
+        iat: Math.floor(Date.now() / 1000) - 5 * 60,
+        // Set the JWT token to expire in 10 minutes
+        exp: Math.floor(Date.now() / 1000) + 10 * 60,
+      },
+      secret
+    );
   });
 
   beforeEach(async () => {
@@ -285,11 +298,10 @@ describe('/comments', () => {
     response.body.posts[1].comments.forEach(
       (comment) => (likeCount += comment.likes.length)
     );
-
     expect(likeCount).toEqual(1);
 
     let unlikingComment = await request(app)
-      .patch('/comments/like')
+      .patch('/comments/unlike')
       .set('Authorization', `Bearer ${token}`)
       .send({
         _user_id: user_id,
@@ -301,13 +313,63 @@ describe('/comments', () => {
       .set('Authorization', `Bearer ${token}`);
 
       let likeCount2 = 0;
+      response2.body.posts[1].comments.forEach(
+      (comment) => (likeCount2 += comment.likes.length));
+      expect(likeCount2).toEqual(0);
+  });
+  it('should let 2 different user like a post', async () => {
+    let post = new Post({
+      user_id: user_id,
+      comments: [],
+      message: 'posting howdy!',
+    });
 
-    response2.body.posts[1].comments.forEach(
-      (comment) => (likeCount2 += comment.likes.length)
+    await post.save();
+
+    let addingComment = await request(app)
+      .post('/comments')
+      .set('Authorization', `Bearer ${token}`)
+      .send({
+        user_id: user_id,
+        post_id: post._id,
+        message: 'commenting howdy!',
+      });
+
+    let fetchingCommentForId = await request(app)
+      .get('/posts')
+      .set('Authorization', `Bearer ${token}`);
+
+    let likingComment = await request(app)
+      .patch('/comments/like')
+      .set('Authorization', `Bearer ${token}`)
+      .send({
+        _user_id: user_id,
+        _id: fetchingCommentForId.body.posts[1].comments[0]._id,
+      });
+
+      let likingComment2 = await request(app)
+      .patch('/comments/like')
+      .set('Authorization', `Bearer ${token2}`)
+      .send({
+        _user_id: user_id2,
+        _id: fetchingCommentForId.body.posts[1].comments[0]._id,
+      });
+
+      let response = await request(app)
+      .get('/posts')
+      .set('Authorization', `Bearer ${token}`);
+
+    let likeCount = 0;
+
+    response.body.posts[1].comments.forEach(
+      (comment) => (likeCount += comment.likes.length)
     );
-    expect(likeCount2).toEqual(0);
+
+    expect(likeCount).toEqual(2);
+
   });
 });
+
 
 // console.log('comment-id: ', fetchingCommentForId.body.posts[1].comments[0]._id);
 // console.log('response.body: ', response.body.posts[1].comments[0].likes);
