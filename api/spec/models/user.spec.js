@@ -13,6 +13,7 @@ describe("User model", () => {
 			email: "someone@example.com",
 			password: "password",
 		});
+
 		expect(user.email).toEqual("someone@example.com");
 	});
 
