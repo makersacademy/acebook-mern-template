@@ -153,7 +153,7 @@ describe('/comments', () => {
       expect(likeCount).toEqual(0);
     });
 
-    it('should have 1 like when comment is liked once', async () => {
+    it('should have 1 like when the same user likes a comment twice', async () => {
       let post = new Post({
         user_id: user_id,
         comments: [],
@@ -183,6 +183,14 @@ describe('/comments', () => {
           _id: fetchingCommentForId.body.posts[1].comments[0]._id,
         });
 
+      let secondlikingComment = await request(app)
+        .patch('/comments/like')
+        .set('Authorization', `Bearer ${token}`)
+        .send({
+          _user_id: user_id,
+          _id: fetchingCommentForId.body.posts[1].comments[0]._id,
+        });
+
       let response = await request(app)
         .get('/posts')
         .set('Authorization', `Bearer ${token}`);
@@ -195,6 +203,48 @@ describe('/comments', () => {
 
       expect(likeCount).toEqual(1);
     });
+  });
+  it('should have 1 like when comment is liked once', async () => {
+    let post = new Post({
+      user_id: user_id,
+      comments: [],
+      message: 'posting howdy!',
+    });
+
+    await post.save();
+
+    let addingComment = await request(app)
+      .post('/comments')
+      .set('Authorization', `Bearer ${token}`)
+      .send({
+        user_id: user_id,
+        post_id: post._id,
+        message: 'commenting howdy!',
+      });
+
+    let fetchingCommentForId = await request(app)
+      .get('/posts')
+      .set('Authorization', `Bearer ${token}`);
+
+    let likingComment = await request(app)
+      .patch('/comments/like')
+      .set('Authorization', `Bearer ${token}`)
+      .send({
+        _user_id: user_id,
+        _id: fetchingCommentForId.body.posts[1].comments[0]._id,
+      });
+
+    let response = await request(app)
+      .get('/posts')
+      .set('Authorization', `Bearer ${token}`);
+
+    let likeCount = 0;
+
+    response.body.posts[1].comments.forEach(
+      (comment) => (likeCount += comment.likes.length)
+    );
+
+    expect(likeCount).toEqual(1);
   });
 });
 
