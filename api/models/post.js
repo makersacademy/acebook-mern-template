@@ -28,8 +28,6 @@ const PostSchema = new mongoose.Schema(
   { timestamps: true }
 );
 
-//yes and my laptop is running so slow
-
 const Post = mongoose.model('Post', PostSchema);
 
 module.exports = Post;
