@@ -1,5 +1,6 @@
 import Feed from './Feed';
 const navigate = () => {};
+const setReload = () => {};
 
 describe('Feed', () => {
   it('Calls the /posts endpoint and lists all the posts', () => {
@@ -10,7 +11,6 @@ describe('Feed', () => {
         statusCode: 200,
         body: {
           posts: [
-
             {
               _id: 1,
               message: 'Hello, world',
@@ -28,8 +28,7 @@ describe('Feed', () => {
       });
     }).as('getPosts');
 
-
-    cy.mount(<Feed navigate={navigate} />);
+    cy.mount(<Feed navigate={navigate} setReload={setReload} />);
 
     cy.wait('@getPosts').then(() => {
       cy.get('[data-cy="post"]')
