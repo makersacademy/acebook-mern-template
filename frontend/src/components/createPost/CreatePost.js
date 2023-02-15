@@ -27,6 +27,7 @@ const CreatePost = ({setPosts, token}) => {
         // Clearing the input form for title and content after submission
         setTitle("")
         setContent("")
+        setPhoto("")
         let responseTwo = await fetch("/posts", {
           headers: {
             // token is now the token returned from the fetch request
@@ -36,7 +37,7 @@ const CreatePost = ({setPosts, token}) => {
         let dataTwo = await responseTwo.json();
         // As we are using setPosts function/hook to change state, feed is re-rendered
         setPosts(dataTwo.posts)
-
+        window.localStorage.setItem("token", dataTwo.token)
         // printing the array of posts to the console
         console.log(dataTwo.posts)
     }
