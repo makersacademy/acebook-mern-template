@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-const Post = ({ navigate, post, setPosts, posts, token, user, onAddComment }) => {
+const Post = ({ navigate, post, setPosts, posts, token, user, onAddComment, imageURL }) => {
   const [comment, setComment] = useState("");
   const [showComments, setShowComments] = useState(false);
   const [likes, setLikes] = useState(post.likes || 0);
@@ -74,7 +74,11 @@ const Post = ({ navigate, post, setPosts, posts, token, user, onAddComment }) =>
 
   return (
     <>
-      <div data-cy="post" class="postContent">{post.message}</div>
+    <div data-cy="post" class="postContent">
+      {post.message}
+      
+    </div>
+    <div data-cy="postImage" class="postImage"> {post.imageURL && <img src={post.imageURL} alt="" height="300" width="" />}</div>
 
       <div class="postButtons">
         <button id="like" onClick={handleLike}>Like</button>

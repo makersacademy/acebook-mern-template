@@ -6,8 +6,8 @@ const Feed = ({ navigate }) => {
   const [token, setToken] = useState(window.localStorage.getItem("token"));
   const [message, setMessage] = useState("");
   const [user, setUser] = useState({});
-  const [image, setImage] = useState(null);
-
+  const [imageURL, setImageURL] = useState(null);
+  
   useEffect(() => {
     if (token) {
       fetch("/posts", {
@@ -31,25 +31,30 @@ const Feed = ({ navigate }) => {
 
   const handleImageUpload = async (event) => {
     const file = event.target.files[0];
+    
+    try {
     const formData = new FormData();
     formData.append("image", file);
     console.log(file)
     console.log(formData)
     
-    try {
-      const response = await fetch("/posts/image", {
-        method: "POST",
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-        body: formData,
-      });
+    
+    const response = await fetch("/posts/image", {
+      method: "POST",
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+      body: formData,
+    });
   
-      const data = await response.json();
-      console.log(data);
+    const data = await response.json()
+    console.log(data);
+    setImageURL(data.url);
+    
     } catch (error) {
       console.error(error);
     }
+    console.log(imageURL)
   };
 
   const post = () => {};
@@ -89,8 +94,16 @@ const Feed = ({ navigate }) => {
     fetchUser();
   }, []);
 
-  const handleSubmitPost = async (event) => {
-    // event.preventDefault(); This line stops the page refreshing automatically so it has been commented out
+  const handleSubmitPost = async (event, imageURL) => {
+    // event.preventDefault(); 
+    const postBody = {
+      message: message, 
+      userName: `${user.firstName} ${user.lastName}`,
+    };
+
+    if (imageURL) {
+      postBody.imageURL = imageURL;
+    }
 
     fetch("/posts", {
       method: "post",
@@ -98,10 +111,7 @@ const Feed = ({ navigate }) => {
         Authorization: `Bearer ${token}`,
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({
-        message: message,
-        userName: `${user.firstName} ${user.lastName}`,
-      }),
+      body: JSON.stringify(postBody),
     }).then((response) => {
       if (response.status === 201) {
         navigate("/posts");
@@ -145,7 +155,7 @@ const Feed = ({ navigate }) => {
           </nav>
           <div id="feedComponent">
             <h2>Posts</h2>
-            <form onSubmit={handleSubmitPost}>
+            <form onSubmit={(event) => handleSubmitPost(event, imageURL)}>
               <textarea
                 placeholder="Write your post here"
                 id="message"
@@ -158,7 +168,7 @@ const Feed = ({ navigate }) => {
             </form>
 
             <div>
-              <form>
+              <form class="chooseFile">
                 <input type="file" accept="image/*" onChange={handleImageUpload} />
               </form>
             </div>
@@ -182,6 +192,7 @@ const Feed = ({ navigate }) => {
                     setUser={setUser}
                     navigate={navigate}
                     onAddComment={(comment) => handleAddComment(post._id, comment)}
+                    imageURL={imageURL}
                   />
                 </div>
               ))}

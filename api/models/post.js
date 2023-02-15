@@ -5,7 +5,7 @@ const PostSchema = new mongoose.Schema(
     message: String,
     userName: String,
     comments: [{ userName: String, timeStamp: Date, message: String }],
-    image: String,
+    imageURL: String,
   },
   { timestamps: true }
 );

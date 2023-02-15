@@ -16,7 +16,13 @@ const PostsController = {
   },
   Create: async (req, res) => {
     try {
-      const post = new Post(req.body);
+      const { message, imageURL, userName } = req.body;
+  
+      const post = new Post({
+        message: message,
+        userName: userName,
+        imageURL: imageURL });
+
       await post.save();
       const token = await TokenGenerator.jsonwebtoken(req.user_id);
       res.status(201).json({ message: "OK", token });
@@ -68,20 +74,10 @@ const PostsController = {
         throw new Error("No file uploaded");
       }
 
-      // Upload image to Cloudinary
       const result = await cloudinary.uploader.upload(req.file.path);
+      res.json({message : "Image uploaded successfully", url: result.secure_url })
+      return result.secure_url
 
-      // Create new post with image URL
-      const post = new Post({
-        text: req.body.text,
-        image: result.secure_url,
-      });
-
-      // Save post to the database
-      const savedPost = await post.save();
-
-      const token = await TokenGenerator.jsonwebtoken(req.user_id);
-      res.json({ message: "Image uploaded successfully", token, post: savedPost });
     } catch (error) {
       console.error(error);
       res.status(500).json({ error: error.message });
