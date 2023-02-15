@@ -76,6 +76,64 @@ describe('Post', () => {
       .and('not.contain.text', 'fourth message');
   });
 
+  it('will display an expand button if there are four or more comments', () => {
+    cy.mount(
+      <Post
+        post={{
+          _id: 1,
+          message: 'Hello world again',
+          likes: [],
+          comments: [
+            { message: 'another message', user_id: 1, post_id: 1, likes: [] },
+            {
+              message: 'another hello world',
+              user_id: 2,
+              post_id: 1,
+              likes: [],
+            },
+            { message: 'third message', user_id: 3, post_id: 1, likes: [] },
+            {
+              message: 'fourth message',
+              user_id: 4,
+              post_id: 1,
+              likes: [],
+            },
+          ],
+          createdAt: '2023-02-14T11:44:40.970Z',
+        }}
+      />
+    );
+    cy.get('[data-cy="expand-button"]');
+  });
+
+  it('will NOT display an expand button if there are fewer than four comments', () => {
+    cy.mount(
+      <Post
+        post={{
+          _id: 1,
+          message: 'Hello world again',
+          likes: [],
+          comments: [
+            {
+              message: 'another hello world',
+              user_id: 2,
+              post_id: 1,
+              likes: [],
+            },
+            {
+              message: 'fourth message',
+              user_id: 4,
+              post_id: 1,
+              likes: [],
+            },
+          ],
+          createdAt: '2023-02-14T11:44:40.970Z',
+        }}
+      />
+    );
+    cy.get('[data-cy="expand-button"]').should('not.exist');
+  });
+
   describe('like button', () => {
     it('Calls the /like endpoin and toggles likes on and off', () => {
       window.localStorage.setItem('token', 'fakeToken');

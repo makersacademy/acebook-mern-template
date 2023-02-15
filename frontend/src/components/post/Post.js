@@ -64,6 +64,9 @@ const Post = ({ post, setReload }) => {
               post.comments
                 .slice(0, 3)
                 .map((comment) => <Comment comment={comment} />)}
+            {post.comments && post.comments.length > 3 && (
+              <button data-cy='expand-button'>Expand!</button>
+            )}
           </div>
         </article>
 
