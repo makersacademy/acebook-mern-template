@@ -1,3 +1,4 @@
+
 @charset "UTF-8";
 /*!
  * Bootstrap  v5.3.0-alpha1 (https://getbootstrap.com/)
@@ -194,6 +195,7 @@
     scroll-behavior: smooth;
   }
 }
+@import url("https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css");
 
 body {
   margin: 0;
