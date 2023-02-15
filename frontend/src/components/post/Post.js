@@ -61,7 +61,9 @@ const Post = ({ post, setReload }) => {
           {post.message}
           <div className='comment-section'>
             {post.comments &&
-              post.comments.map((comment) => <Comment comment={comment} />)}
+              post.comments
+                .slice(0, 3)
+                .map((comment) => <Comment comment={comment} />)}
           </div>
         </article>
 
