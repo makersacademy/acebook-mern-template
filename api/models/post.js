@@ -6,7 +6,7 @@ const PostSchema = new mongoose.Schema(
     message: String,
     userName: String,
     comments: [{ userName: String, timeStamp: Date, message: String }],
-    likes: [{ userName: String }]        //[{type:ObjectId, ref:"User"}] //////////////// added this
+    likes: [{}]        
   },
   { timestamps: true }
 );

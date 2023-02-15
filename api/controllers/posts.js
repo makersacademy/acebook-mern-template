@@ -39,8 +39,9 @@ const PostsController = {
 
   ///////////////////////////
   Addlike: (req, res) => {
+    console.log(req.body.postId,req.body.userId);
     Post.findByIdAndUpdate(req.body.postId,{
-      $push:{likes:req.body.username}
+      $push:{likes:req.body.userId}
     },{
       new:true
     }).exec((err,result) => {
