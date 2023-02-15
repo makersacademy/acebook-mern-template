@@ -6,6 +6,7 @@ const Feed = ({ navigate }) => {
   const [token, setToken] = useState(window.localStorage.getItem("token"));
   const [message, setMessage] = useState("");
   const [user, setUser] = useState({});
+  const [image, setImage] = useState(null);
 
   useEffect(() => {
     if (token) {
@@ -26,6 +27,29 @@ const Feed = ({ navigate }) => {
   const logout = () => {
     window.localStorage.removeItem("token");
     navigate("/login");
+  };
+
+  const handleImageUpload = async (event) => {
+    const file = event.target.files[0];
+    const formData = new FormData();
+    formData.append("image", file);
+    console.log(file)
+    console.log(formData)
+    
+    try {
+      const response = await fetch("/posts/image", {
+        method: "POST",
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+        body: formData,
+      });
+  
+      const data = await response.json();
+      console.log(data);
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   const post = () => {};
@@ -133,13 +157,18 @@ const Feed = ({ navigate }) => {
               <input id="submitPost" type="submit" value="Submit" />
             </form>
 
+            <div>
+              <form>
+                <input type="file" accept="image/*" onChange={handleImageUpload} />
+              </form>
+            </div>
+
             <div id="feed" role="feed">
               {posts.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt)).map((post) => (
                 <div class="post" key={post._id} data-cy="post">
                   <div data-cy="userName" class="postUserName">
                     {post.userName}
                     <div data-cy="timestamp" class="postTimestamp">
-                      {console.log(post)}
                       {post.createdAt && new Date(post.createdAt).toISOString().split('.')[0].replace('T', ' ')}
                     </div>
                   </div>
