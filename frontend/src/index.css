@@ -106,7 +106,7 @@ input::placeholder {
 
 .postTimestamp {
   display: flex;
-  align-self: flex-start;
+  align-self: flex-end;
   margin-left: 250px;
 }
 
@@ -119,6 +119,7 @@ input::placeholder {
 }
 
 #like,
+#unlike,
 #delete {
   margin-right: 10px;
   position: relative;
@@ -176,7 +177,7 @@ input::placeholder {
 }
 
 #comment {
-  width: 180%;
+  width: 145%;
 }
 
 #showComments {

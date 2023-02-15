@@ -72,10 +72,6 @@ const Post = ({ navigate, post, setPosts, posts, token, user, onAddComment }) =>
     setShowComments(!showComments);
   };
 
-/////////////////////////////////////////////
-  
-
-
 useEffect(() => {
   const fetchLikesCount = async () => {
     try {
@@ -155,11 +151,6 @@ const handleUnLike = async () => {
     console.error(error);
   }
 };
-
-
-
-////////////////////////////////////////
-
 
   return (
     <>
