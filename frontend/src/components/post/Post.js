@@ -1,9 +1,13 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 const Post = ({ navigate, post, setPosts, posts, token, user, onAddComment }) => {
   const [comment, setComment] = useState("");
   const [showComments, setShowComments] = useState(false);
-  const [likes, setLikes] = useState(post.likes || 0);
+
+  // const [likes, setLikes] = useState(post.likes || 0);  changed by chatgp for the below
+  const [likes, setLikes] = useState(post.likes ? post.likes.length : 0);
+
+
 
   const handleDeletePost = async (id) => {
     await fetch(`/posts/${id}`, {
@@ -68,17 +72,105 @@ const Post = ({ navigate, post, setPosts, posts, token, user, onAddComment }) =>
     setShowComments(!showComments);
   };
 
-  const handleLike = () => {
-    setLikes(likes + 1);
+/////////////////////////////////////////////
+  
+
+
+useEffect(() => {
+  const fetchLikesCount = async () => {
+    try {
+      const response = await fetch(`/posts/${post._id}/likes`, {
+        method: "get",
+        headers: {
+          Authorization: `Bearer ${token}`,
+          "Content-Type": "application/json",
+        },
+      });
+
+      if (response.ok) {
+        const data = await response.json();
+        setLikes(data.likes.length);
+      } else {
+        console.log(`Failed to fetch likes count for post with ID ${post._id}`);
+      }
+    } catch (error) {
+      console.error(error);
+    }
   };
+
+  fetchLikesCount();
+}, [post._id, token]);
+
+console.log(user)
+
+const handleLike = async () => {
+  try {
+    const response = await fetch(`/posts/${post._id}/like`, {
+      method: "put",
+      headers: {
+        Authorization: `Bearer ${token}`,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ 
+        postId: post._id, 
+        userId: `${user.userId}` 
+      }),
+    });
+
+    if (response.ok) {
+      const data = await response.json();
+      console.log(data.likes)
+      setLikes(data.likes.length);
+    } else {
+      console.log(`Failed to like post with ID ${post._id}`);
+    }
+  } catch (error) {
+    console.error(error);
+  }
+};
+
+
+const handleUnLike = async () => {
+  try {
+    const response = await fetch(`/posts/${post._id}/unlike`, {
+      method: "put",
+      headers: {
+        Authorization: `Bearer ${token}`,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ 
+        postId: post._id, 
+        userId: `${user.userId}` 
+      }),
+    });
+
+    if (response.ok) {
+      const data = await response.json();
+      console.log(data.likes)
+      setLikes(data.likes.length);
+    } else {
+      console.log(`Failed to unlike post with ID ${post._id}`);
+    }
+  } catch (error) {
+    console.error(error);
+  }
+};
+
+
+
+////////////////////////////////////////
+
 
   return (
     <>
-      <div data-cy="post" class="postContent">{post.message}</div>
+      <div class="postContent">{post.message}</div>
 
       <div class="postButtons">
-        <button id="like" onClick={handleLike}>Like</button>
+      
+        <button id="like" onClick={() => handleLike(post._id)}>Like</button>
+        <button id="unlike" onClick={() => handleUnLike(post._id)}>Unlike</button>
         
+
         <button onClick={() => handleDeletePost(post._id)}>Delete</button>
         
         <label htmlFor="comment">

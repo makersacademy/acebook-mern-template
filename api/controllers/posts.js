@@ -36,6 +36,49 @@ const PostsController = {
         .json({ message: "Post deleted successfully", token: token });
     });
   },
+
+
+  Addlike: (req, res) => {
+    console.log(req.body.postId, req.body.userId);
+    Post.findById(req.body.postId, (err, post) => {
+        if (err) {
+            return res.status(422).json({ error: err });
+        }
+        if (post.likes.includes(req.body.userId)) {
+            return res.status(422).json({ error: 'User has already liked this post' });
+        }
+        Post.findByIdAndUpdate(req.body.postId, {
+            $push: { likes: req.body.userId }
+        }, {
+            new: true
+        }).exec((err, result) => {
+            if (err) {
+                return res.status(422).json({ error: err });
+            } else {
+                res.json(result);
+            }
+        });
+    });
+},
+
+
+Unlike: (req, res) => {
+  console.log(req.body.postId,req.body.userId);
+  Post.findByIdAndUpdate(req.body.postId,{
+    $pull:{likes:req.body.userId}
+  },{
+    new:true
+  }).exec((err,result) => {
+      if(err){
+        return res.status(422).json({error:err})
+      }else{
+        res.json(result)
+      }
+  })
+},
+
+
+
   AddComment: (req, res) => {
     const postId = req.params.id;
     const message = req.body.message;
