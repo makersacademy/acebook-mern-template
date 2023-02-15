@@ -23,7 +23,7 @@ const CommentController = {
       );
     });
   },
-  Likes: (req, reqs) => {
+  Like: (req, res) => {
     Comment.updateOne(
       { _id: req.body._id },
       { $addToSet: { likes: req.body._user_id } },

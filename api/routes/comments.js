@@ -4,5 +4,6 @@ const router = express.Router();
 const CommentController = require('../controllers/comments');
 
 router.post('/', CommentController.Create);
+router.patch('/like', CommentController.Like)
 
 module.exports = router;
