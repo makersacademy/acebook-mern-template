@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 import Feed from './Feed';
 const navigate = () => {};
 const setReload = () => {};

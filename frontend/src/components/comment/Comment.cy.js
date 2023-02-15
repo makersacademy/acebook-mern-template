@@ -55,5 +55,41 @@ describe('Comment', () => {
         '/images/thumbFilled.png'
       );
     });
+    it('should allow the user to unlike a comment', () => {
+      window.localStorage.setItem('token', 'fakeToken');
+      window.localStorage.setItem('user_id', 'fakeId');
+
+      cy.intercept({
+        method: 'PATCH',
+        url: '/comments/unlike',
+      }).as('patchUnlikeComment');
+
+      cy.mount(
+        <Comment
+          comment={{
+            _id: 1,
+            message: 'Hello, world',
+            likes: [window.localStorage.getItem('user_id')],
+            createdAt: '2023-02-14T11:44:40.970Z',
+          }}
+          setReload={setReload}
+        />
+      );
+
+      cy.get('[data-cy=like-button]').should('exist');
+      cy.get('[data-cy=like-button] img').should(
+        'have.attr',
+        'src',
+        '/images/thumbFilled.png'
+      );
+
+      cy.get('[data-cy=like-button]').click();
+      cy.wait('@patchUnlikeComment');
+      cy.get('[data-cy=like-button] img').should(
+        'have.attr',
+        'src',
+        '/images/thumbOutline.png'
+      );
+    });
   });
 });
