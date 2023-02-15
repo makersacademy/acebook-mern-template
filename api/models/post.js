@@ -19,7 +19,11 @@ const PostSchema = new mongoose.Schema(
       default: [],
       required: false,
     },
-    comments: [{ type: mongoose.Types.ObjectId, ref: 'Comment' }],
+    comments: {
+      type: Array,
+      default: [],
+      required: false,
+    },
   },
   { timestamps: true }
 );

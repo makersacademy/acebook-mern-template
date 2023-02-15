@@ -3,6 +3,7 @@ import styles from './Post.module.css';
 import ReactTimeAgo from 'react-time-ago';
 import TimeAgo from 'javascript-time-ago';
 import en from 'javascript-time-ago/locale/en';
+import Comment from '../comment/Comment'
 
 TimeAgo.addLocale(en);
 
@@ -58,7 +59,15 @@ const Post = ({ post, setReload }) => {
         </div>
         <article className={styles.content} data-cy='post' key={post._id}>
           {post.message}
+          <div className="comment-section"> 
+          {post.comments && (
+            post.comments.map((comment) => (<Comment data={comment}/>)
+
+            )
+          )}
+          </div>
         </article>
+        
         <div>
           <div className={styles.postFooter}>
             <div

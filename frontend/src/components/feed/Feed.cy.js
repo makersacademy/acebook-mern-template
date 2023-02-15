@@ -36,4 +36,44 @@ describe('Feed', () => {
         .and('contain.text', 'Hello again, world');
     });
   });
+
+  it('If posts have comments then comments are displayed', () => {
+    window.localStorage.setItem('token', 'fakeToken');
+
+    cy.intercept('GET', '/posts', (req) => {
+      req.reply({
+        statusCode: 200,
+        body: {
+          posts: [
+            {
+              _id: 1,
+              message: 'Hello, world',
+              likes: [],
+              createdAt: '2023-02-14T11:44:40.970Z',
+              comments: [
+                { message: 'another message', user_id: 1, post_id: 1 },
+              ],
+            },
+            {
+              _id: 2,
+              message: 'Hello again, world',
+              likes: [],
+              createdAt: '2023-02-14T11:44:40.970Z',
+              comments: [
+                { message: 'another hello world', user_id: 2, post_id: 1 },
+              ],
+            },
+          ],
+        },
+      });
+    }).as('getPosts');
+
+    cy.mount(<Feed navigate={navigate} setReload={setReload} />);
+
+    cy.wait('@getPosts').then(() => {
+      cy.get('[data-cy="comment"]')
+        .should('contain.text', 'another message')
+        .and('contain.text', 'another hello world');
+    });
+  });
 });
