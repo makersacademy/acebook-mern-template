@@ -1,11 +1,10 @@
 import React, { useState } from "react";
 
-
-const CreatePost = ({ navigate }) => {
+// Passing down the necessary props from the Feed component
+const CreatePost = ({setPosts, token}) => {
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
   const [photo, setPhoto] = useState("");
-  const [token, setToken] = useState(window.localStorage.getItem("token"));
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -21,15 +20,26 @@ const CreatePost = ({ navigate }) => {
 
     if (response.status !== 201) {
       console.log("new post not created")
-      navigate("/posts")
     } else {
       console.log("new post created")
         let data = await response.json()
         window.localStorage.setItem("token", data.token)
-        setToken(window.localStorage.getItem("token"))
+        // Clearing the input form for title and content after submission
         setTitle("")
         setContent("")
-        navigate("/posts");
+        setPhoto("")
+        let responseTwo = await fetch("/posts", {
+          headers: {
+            // token is now the token returned from the fetch request
+            Authorization: `Bearer ${data.token}`,
+          }
+        })
+        let dataTwo = await responseTwo.json();
+        // As we are using setPosts function/hook to change state, feed is re-rendered
+        setPosts(dataTwo.posts)
+        window.localStorage.setItem("token", dataTwo.token)
+        // printing the array of posts to the console
+        console.log(dataTwo.posts)
     }
   };
 
