@@ -116,7 +116,7 @@ const Profile = ({ navigate }) => {
               </>
             ) : (
               <>
-                <div id="bioText">{user.bio}</div>
+                <div id="bioText">{user.bio ? user.bio : "You have no bio, please write one!"}</div>
                 <button onClick={handleEditBio}>Edit Bio</button>
               </>
             )}
