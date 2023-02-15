@@ -28,6 +28,10 @@ const Feed = ({ navigate }) => {
     navigate("/login");
   };
 
+  const profile = () => {
+    navigate("/profile");
+  };
+
   const post = () => {};
 
   
@@ -116,6 +120,7 @@ const Feed = ({ navigate }) => {
               acebook
             </a>
             <ul>
+              <button onClick={profile}>Profile</button>
               <button onClick={logout}>Logout</button>
               <br></br>
             </ul>

@@ -12,6 +12,10 @@ const Profile = ({ navigate }) => {
     navigate("/login");
   };
 
+  const profile = () => {
+    navigate("/profile");
+  };
+
     const fetchUser = async () => {
       const email = window.localStorage.getItem("email");
       const url = `/users?email=${email}`;
@@ -89,6 +93,7 @@ const Profile = ({ navigate }) => {
               acebook
             </a>
             <ul>
+              <button onClick={profile}>Profile</button>
               <button onClick={logout}>Logout</button>
               <br></br>
             </ul>
