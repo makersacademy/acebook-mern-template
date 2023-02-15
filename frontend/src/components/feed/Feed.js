@@ -32,7 +32,7 @@ const Feed = ({ navigate }) => {
       <>
         <h2>Posts</h2>
         <button onClick={logout}>Logout</button>
-        <CreatePost navigate={navigate} 
+        <CreatePost navigate={navigate} setPosts={setPosts}
         /><br></br>
         <div id="feed" role="feed">
           {posts.map((post) => (

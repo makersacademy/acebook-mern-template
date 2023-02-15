@@ -1,11 +1,13 @@
 import React, { useState } from "react";
 
 
-const CreatePost = ({ navigate }) => {
+const CreatePost = ({ navigate, setPosts }) => {
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
   const [photo, setPhoto] = useState("");
   const [token, setToken] = useState(window.localStorage.getItem("token"));
+
+  // console.log(setPosts);
 
   const handleSubmit = async (event) => {
     event.preventDefault();
