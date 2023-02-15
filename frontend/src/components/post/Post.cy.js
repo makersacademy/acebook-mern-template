@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 import Post from './Post';
 const setReload = () => {};
 
@@ -24,8 +25,13 @@ describe('Post', () => {
           message: 'Hello world again',
           likes: [],
           comments: [
-            { message: 'another message', user_id: 1, post_id: 1 },
-            { message: 'another hello world', user_id: 2, post_id: 1 },
+            { message: 'another message', user_id: 1, post_id: 1, likes: [] },
+            {
+              message: 'another hello world',
+              user_id: 2,
+              post_id: 1,
+              likes: [],
+            },
           ],
           createdAt: '2023-02-14T11:44:40.970Z',
         }}
@@ -87,5 +93,4 @@ describe('Post', () => {
       );
     });
   });
-
 });
