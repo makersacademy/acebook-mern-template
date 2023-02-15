@@ -8,9 +8,9 @@
     "start": "nodemon ./bin/www",
     "start:test": "MONGODB_URL='mongodb://0.0.0.0/acebook_test' npm start",
     "test": "jest",
-    "start-api-server": "JWT_SECRET=SUPER_SECRET npm start",
-    "start-api-server-test-mode": "JWT_SECRET=SUPER_SECRET npm run start:test",
-    "run-test-server-test": "JWT_SECRET=SUPER_SECRET npm run test"
+    "api-server": "JWT_SECRET=SUPER_SECRET npm start",
+    "api-test-mode": "JWT_SECRET=SUPER_SECRET npm run start:test",
+    "api-test": "JWT_SECRET=SUPER_SECRET npm run test"
   },
   "engines": {
     "node": ">=18.1.0"

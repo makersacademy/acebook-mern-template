@@ -23,6 +23,34 @@ const CommentController = {
       );
     });
   },
+  Like: (req, res) => {
+    Comment.updateOne(
+      { _id: req.body._id },
+      { $addToSet: { likes: req.body._user_id } },
+      async (err) => {
+        if (err) {
+          throw err;
+        } else {
+          const token = await TokenGenerator.jsonwebtoken(req.user_id);
+          res.status(204).json({ message: 'OK', token: token });
+        }
+      }
+    );
+  },
+  Unlike: (req, res) => {
+    Comment.updateOne(
+      { _id: req.body._id },
+      { $pull: { likes: req.body._user_id } },
+      async (err) => {
+        if (err) {
+          throw err;
+        } else {
+          const token = await TokenGenerator.jsonwebtoken(req.user_id);
+          res.status(204).json({ message: 'OK', token: token });
+        }
+      }
+    );
+  },
 };
 
 module.exports = CommentController;

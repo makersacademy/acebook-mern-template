@@ -46,12 +46,13 @@ describe('Testing comments model', () => {
       post_id: post_id,
       user_id: user_id,
       message: 'hello world',
+      likes: [user_id],
     });
     comment.save((err) => {
       expect(err).toBeNull();
       Comment.find((err, comments) => {
         expect(err).toBeNull();
-        expect(comments[0]).toMatchObject(comment.toObject());
+        expect(comments[0].toJSON()).toEqual(comment.toObject());
         expect(comments.length).toBe(1);
         done();
       });
@@ -77,4 +78,17 @@ describe('Testing comments model', () => {
       });
     });
   });
+
+  it('initializes likes field as an empty array', () => {
+    const post_id = new mongoose.Types.ObjectId();
+    const user_id = new mongoose.Types.ObjectId();
+    const comment = new Comment({
+      post_id: post_id,
+      user_id: user_id,
+      message: 'hello world',
+    });
+    expect(comment.likes.toObject()).toEqual([]);
+  });
+
+  
 });
