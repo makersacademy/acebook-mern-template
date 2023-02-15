@@ -121,4 +121,42 @@ describe('/comments', () => {
       expect(response.body.token).toBe(undefined);
     });
   });
+
+  describe('Liking comments', () => {
+    it('should return an empty array when comment has no likes', async () => {
+      let post = new Post({
+        user_id: user_id,
+        comments: [],
+        message: 'posting howdy!',
+      });
+
+      // let comment = new Comment({
+      //   user_id: user_id,
+      //   post_id: post._id,
+      //   message: 'commenting howdy!',
+      // });
+
+      await post.save();
+      // await comment.save();
+      let response1 = await request(app)
+        .post('/comments')
+        .set('Authorization', `Bearer ${token}`)
+        .send({
+          user_id: user_id,
+          post_id: post._id,
+          message: 'commenting howdy!',
+        });
+
+      let response = await request(app)
+        .get('/posts')
+        .set('Authorization', `Bearer ${token}`);
+      // .send({ token: token });
+      let likeCount = 0;
+      console.log('response.body: ', response.body.posts[1].comments[0].likes);
+      response.body.posts[1].comments.forEach(
+        (comment) => (likeCount += comment.likes.length)
+      );
+      expect(likeCount).toEqual(0);
+    });
+  });
 });

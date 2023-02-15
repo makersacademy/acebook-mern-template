@@ -89,4 +89,6 @@ describe('Testing comments model', () => {
     });
     expect(comment.likes.toObject()).toEqual([]);
   });
+
+  
 });
