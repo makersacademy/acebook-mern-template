@@ -12,7 +12,9 @@ const UsersController = {
 			if (err) {
 				res.status(400).json({ message: err.message });
 			} else {
-				res.status(201).json({ message: "Thanks! your account has been successfully created." });
+				res.status(201).json({
+					message: "Thanks! your account has been successfully created.",
+				});
 			}
 		});
 	},
