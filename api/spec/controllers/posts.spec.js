@@ -199,9 +199,9 @@ describe("/posts", () => {
       let response = await request(app)
         .delete(`/posts/${post_id}`)
         .set("Authorization", `Bearer ${token}`)
-        .send({message: "OK", token: token});
+        .send({token: token});
 
-        expect(response.status).toBe(204);
+        expect(response.status).toEqual(201);
 
         let posts = await Post.find();
         expect(posts.length).toEqual(0);
@@ -215,17 +215,32 @@ describe("/posts", () => {
 
       let response = await request(app)
         .delete(`/posts/${post_id}`)
-        .send({message: "OK", token: token});
+        .send({token: token});
 
-        expect(response.status).toBe(401);
+        expect(response.status).toEqual(401);
 
         let posts = await Post.find();
         expect(posts.length).toEqual(1);
     })
   })
 
-  describe("UPDATE, when token is present", () => {
-    test("fails to update post without token")
+  describe("PUT, when token is present", () => {
+    test("update post with token", async () => {
+      const post_id = '63ebab0c9a93032525d4c623'
+      let post1 = new Post({_id: post_id, content: "howdy!"});
+
+      await post1.save();
+      
+      let response = await request(app)
+      .put("/posts")
+      .set("Authorization", `Bearer ${token}`)
+      .send({_id: post_id, content: "howdy again!"})
+
+      expect(response.status).toEqual(201)
+
+      let posts = await Post.find()
+      expect(posts[0].content).toEqual("howdy again!")
+    })
   })
 });
 

@@ -31,7 +31,19 @@ const PostsController = {
       } else {
 
         const token = await TokenGenerator.jsonwebtoken(req.user_id);
-        res.status(204).json({ message: "OK", token: token });
+        res.status(201).json({ message: "OK", token: token });
+      }
+    });
+  },
+
+  Update: (req, res) => {
+    Post.updateOne({_id: req.body._id, title: req.body.title, content: req.body.content }, async (err) => {
+      if (err) {
+        throw err;
+      } else {
+
+        const token = await TokenGenerator.jsonwebtoken(req.user_id);
+        res.status(201).json({ message: "OK", token: token });
       }
     });
   }
