@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 import Feed from './Feed';
 const navigate = () => {};
 const setReload = () => {};
@@ -51,7 +52,12 @@ describe('Feed', () => {
               likes: [],
               createdAt: '2023-02-14T11:44:40.970Z',
               comments: [
-                { message: 'another message', user_id: 1, post_id: 1 },
+                {
+                  message: 'another message',
+                  user_id: 1,
+                  post_id: 1,
+                  likes: [],
+                },
               ],
             },
             {
@@ -60,7 +66,12 @@ describe('Feed', () => {
               likes: [],
               createdAt: '2023-02-14T11:44:40.970Z',
               comments: [
-                { message: 'another hello world', user_id: 2, post_id: 1 },
+                {
+                  message: 'another hello world',
+                  user_id: 2,
+                  post_id: 1,
+                  likes: [],
+                },
               ],
             },
           ],

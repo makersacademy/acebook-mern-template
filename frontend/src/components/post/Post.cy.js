@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 import Post from './Post';
 const setReload = () => {};
 
@@ -16,7 +17,7 @@ describe('Post', () => {
     cy.get('[data-cy="post"]').should('contain.text', 'Hello, world');
   });
 
-  it('If passed comments as a prop, will display comments', () => {
+  it('If passed less than four comments as a prop, will display comments', () => {
     cy.mount(
       <Post
         post={{
@@ -24,8 +25,13 @@ describe('Post', () => {
           message: 'Hello world again',
           likes: [],
           comments: [
-            { message: 'another message', user_id: 1, post_id: 1 },
-            { message: 'another hello world', user_id: 2, post_id: 1 },
+            { message: 'another message', user_id: 1, post_id: 1, likes: [] },
+            {
+              message: 'another hello world',
+              user_id: 2,
+              post_id: 1,
+              likes: [],
+            },
           ],
           createdAt: '2023-02-14T11:44:40.970Z',
         }}
@@ -34,6 +40,40 @@ describe('Post', () => {
     cy.get('[data-cy="comment"]')
       .should('contain.text', 'another message')
       .and('contain.text', 'another hello world');
+  });
+
+  it('If passed four or more comments as a prop, will display the first three comments', () => {
+    cy.mount(
+      <Post
+        post={{
+          _id: 1,
+          message: 'Hello world again',
+          likes: [],
+          comments: [
+            { message: 'another message', user_id: 1, post_id: 1, likes: [] },
+            {
+              message: 'another hello world',
+              user_id: 2,
+              post_id: 1,
+              likes: [],
+            },
+            { message: 'third message', user_id: 3, post_id: 1, likes: [] },
+            {
+              message: 'fourth message',
+              user_id: 4,
+              post_id: 1,
+              likes: [],
+            },
+          ],
+          createdAt: '2023-02-14T11:44:40.970Z',
+        }}
+      />
+    );
+    cy.get('[data-cy="comment"]')
+      .should('contain.text', 'another message')
+      .and('contain.text', 'another hello world')
+      .and('contain.text', 'third message')
+      .and('not.contain.text', 'fourth message');
   });
 
   describe('like button', () => {
@@ -87,5 +127,4 @@ describe('Post', () => {
       );
     });
   });
-
 });
