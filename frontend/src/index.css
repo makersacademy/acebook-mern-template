@@ -220,6 +220,18 @@ input::placeholder {
   align-items: center;
 }
 
+#bioEdit {
+  margin-top: 20px;
+  margin-bottom: 20px;
+  border-width: 0.9px;
+  border-radius: 10px;
+  border: solid;
+  padding: 40px;
+  justify-content: space-between;
+  align-items: center;
+  width: 300px;
+}
+
 .friendElement {
   margin-top: 20px;
   margin-bottom: 20px;
@@ -229,4 +241,8 @@ input::placeholder {
   padding: 40px;
   justify-content: space-between;
   align-items: center;
+}
+
+#friendsListTitle {
+  margin-top: 20px;
 }

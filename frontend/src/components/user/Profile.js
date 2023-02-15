@@ -1,34 +1,17 @@
 import React, { useEffect, useState } from "react";
 import Post from "../post/Post";
 
-const Feed = ({ navigate }) => {
-  const [posts, setPosts] = useState([]);
+const Profile = ({ navigate }) => {
   const [token, setToken] = useState(window.localStorage.getItem("token"));
-  const [message, setMessage] = useState("");
   const [user, setUser] = useState({});
-
-  useEffect(() => {
-    if (token) {
-      fetch("/posts", {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      })
-        .then((response) => response.json())
-        .then(async (data) => {
-          window.localStorage.setItem("token", data.token);
-          setToken(window.localStorage.getItem("token"));
-          setPosts(data.posts);
-        });
-    }
-  }, []);
+  const [isEditingBio, setIsEditingBio] = useState(false);
+  const [bioInput, setBioInput] = useState("");
 
   const logout = () => {
     window.localStorage.removeItem("token");
     navigate("/login");
   };
 
-  useEffect(() => {
     const fetchUser = async () => {
       const email = window.localStorage.getItem("email");
       const url = `/users?email=${email}`;
@@ -51,7 +34,8 @@ const Feed = ({ navigate }) => {
           email: data.user.email,
           firstName: data.user.firstName,
           lastName: data.user.lastName,
-          userId: data.user._id
+          userId: data.user._id,
+          bio: data.user.bio,
         };
         console.log(data)
         setUser(userData);
@@ -59,11 +43,44 @@ const Feed = ({ navigate }) => {
         console.error(error);
       }
     };
+    
+
+    const handleEditBio = () => {
+      setIsEditingBio(true);
+      setBioInput(user.bio);
+    };
+    
+
+  useEffect(() => {
     fetchUser();
   }, []);
 
+  const updateBio = async (event) => {
+    try {
+      const response = await fetch(`/users/bio/${user.userId}`, {
+        method: "post",
+        headers: {
+          Authorization: `Bearer ${token}`,
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ bio: bioInput }),
+      });
 
- if (token) {
+      if (!response.ok) {
+        throw new Error(response.statusText);
+      }
+
+      const data = await response.json();
+      setUser((prevUser) => ({ ...prevUser, bio: data.bio }));
+      setIsEditingBio(false);
+      fetchUser(); // Fetch the updated user data after updating the bio
+    } catch (error) {
+      console.error(error);
+    }
+  };
+  
+
+  if (token) {
     return (
       <>
         <div>
@@ -82,12 +99,25 @@ const Feed = ({ navigate }) => {
           </div>
           <h3 id="bioTitle">Bio</h3>
           <div id="profileBio">
-
-            <div id="bioText">I'm the person with no face but hey, this social media page is just great....</div>
+            {isEditingBio ? (
+              <>
+                <textarea
+                  id="bioEdit"
+                  type="text"
+                  value={bioInput}
+                  onChange={(e) => setBioInput(e.target.value)}
+                />
+                <button onClick={updateBio}>Submit</button>
+              </>
+            ) : (
+              <>
+                <div id="bioText">{user.bio}</div>
+                <button onClick={handleEditBio}>Edit Bio</button>
+              </>
+            )}
           </div>
           <h3 id="friendsListTitle">Friends List</h3>
           <div id="friendsList">
-
             <div class="friendElement">You currently have no friends....that's ok if you prefer to keep it simple!</div>
           </div>
         </div>
@@ -98,4 +128,4 @@ const Feed = ({ navigate }) => {
   }
 };
 
-export default Feed;
+export default Profile
