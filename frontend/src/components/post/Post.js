@@ -130,41 +130,35 @@ const handleLike = async () => {
 };
 
 
-// email: data.user.email,
-// firstName: data.user.firstName,
-// lastName: data.user.lastName,
-// userId: data.user._id
+const handleUnLike = async () => {
+  try {
+    const response = await fetch(`/posts/${post._id}/unlike`, {
+      method: "put",
+      headers: {
+        Authorization: `Bearer ${token}`,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ 
+        postId: post._id, 
+        userId: `${user.userId}` 
+      }),
+    });
 
-/////////////////////////// the below was working until the above was put in ///////
-  // const handleLike = async (id) => {
-  //   try {
-  //     const response = await fetch(`/posts/${id}/like`, {
-  //       method: "put",
-  //       headers: {
-  //         Authorization: `Bearer ${token}`,
-  //         "Content-Type": "application/json",
-  //       },
-  //       body: JSON.stringify({ 
-  //         postId: id,
-  //         userName: `${user.firstName}` 
-  //       }),
-  //     });
-  
-  //     if (response.ok) {
-  //       const data = await response.json();
-  //       setLikes(data.likes.length);
-  //     } else {
-  //       console.log(`Failed to like post with ID ${id}`);
-  //     }
-  //   } catch (error) {
-  //     console.error(error);
-  //   }
-  // };
-  
+    if (response.ok) {
+      const data = await response.json();
+      console.log(data.likes)
+      setLikes(data.likes.length);
+    } else {
+      console.log(`Failed to unlike post with ID ${post._id}`);
+    }
+  } catch (error) {
+    console.error(error);
+  }
+};
+
+
 
 ////////////////////////////////////////
-
-
 
 
   return (
@@ -172,10 +166,10 @@ const handleLike = async () => {
       <div class="postContent">{post.message}</div>
 
       <div class="postButtons">
-        {/* <button id="like" onClick={handleLike}>Like</button> */}
+      
         <button id="like" onClick={() => handleLike(post._id)}>Like</button>
-
-
+        <button id="unlike" onClick={() => handleUnLike(post._id)}>Unlike</button>
+        
 
         <button onClick={() => handleDeletePost(post._id)}>Delete</button>
         
