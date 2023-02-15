@@ -56,7 +56,7 @@ const Feed = ({ navigate }) => {
           firstName: data.user.firstName,
           lastName: data.user.lastName,
         };
-
+        console.log(data)
         setUser(userData);
       } catch (error) {
         console.error(error);

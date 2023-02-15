@@ -36,6 +36,23 @@ const PostsController = {
         .json({ message: "Post deleted successfully", token: token });
     });
   },
+
+  ///////////////////////////
+  Addlike: (req, res) => {
+    Post.findByIdAndUpdate(req.body.postId,{
+      $push:{likes:req.body.username}
+    },{
+      new:true
+    }).exec((err,result) => {
+        if(err){
+          return res.status(422).json({error:err})
+        }else{
+          res.json(result)
+        }
+    })
+  },
+////////////////////////////////
+
   AddComment: (req, res) => {
     const postId = req.params.id;
     const message = req.body.message;
