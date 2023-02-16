@@ -1,26 +1,27 @@
-import React, { useState, useNavigate } from 'react';
-import styles from './Post.module.css';
-import ReactTimeAgo from 'react-time-ago';
-import TimeAgo from 'javascript-time-ago';
-import en from 'javascript-time-ago/locale/en';
-import Comment from '../comment/Comment';
+import React, { useState, useNavigate } from "react";
+import styles from "./Post.module.css";
+import ReactTimeAgo from "react-time-ago";
+import TimeAgo from "javascript-time-ago";
+import en from "javascript-time-ago/locale/en";
+import Comment from "../comment/Comment";
 
 TimeAgo.addLocale(en);
 
 const Post = ({ post, setReload }) => {
-  const user_id = window.localStorage.getItem('user_id');
-  const token = window.localStorage.getItem('token');
+  const user_id = window.localStorage.getItem("user_id");
+  const token = window.localStorage.getItem("token");
 
   const isPostLikedByUser = post.likes.includes(user_id);
 
   const [isLiked, toggleIsLiked] = useState(isPostLikedByUser);
+  const [isEditable, setIsEditable] = useState(false);
 
   const handleDelete = async () => {
     if (user_id) {
-      let response = await fetch('/posts', {
-        method: 'DELETE',
+      let response = await fetch("/posts", {
+        method: "DELETE",
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
           Authorization: `Bearer ${token}`,
         },
         body: JSON.stringify({ _id: post._id }),
@@ -34,15 +35,26 @@ const Post = ({ post, setReload }) => {
   };
 
   const handleEdit = () => {
+    setIsEditable(!isEditable);
+  };
+
+  const submitEdit = async () => {
+    let message = "";
     if (user_id) {
-      let response = await('/fetch', {
-        method: 'PUT',
+      let response = await ("/fetch",
+      {
+        method: "PUT",
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
           Authorization: `Bearer ${token}`,
         },
         body: JSON.stringify({ _id: post._id, message: message }),
       });
+      if (response.status !== 204) {
+        console.log(response.error);
+      } else {
+        setReload(true);
+      }
     }
   };
 
@@ -50,11 +62,11 @@ const Post = ({ post, setReload }) => {
     toggleIsLiked((likeState) => !likeState);
     console.log(post);
     if (user_id) {
-      let url = isLiked ? '/posts/unlike' : '/posts/like';
+      let url = isLiked ? "/posts/unlike" : "/posts/like";
       let response = await fetch(url, {
-        method: 'PATCH',
+        method: "PATCH",
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
           Authorization: `Bearer ${token}`,
         },
         body: JSON.stringify({ _id: post._id, _user_id: user_id }),
@@ -78,17 +90,22 @@ const Post = ({ post, setReload }) => {
           <div>
             <h1> {post.user_id && post.user_id.display_name}</h1>
             <p>
-              Posted{' '}
+              Posted{" "}
               <ReactTimeAgo
                 date={post.createdAt}
                 locale="en-US"
                 timeStyle="twitter"
-              />{' '}
+              />{" "}
               ago
             </p>
           </div>
         </div>
-        <article className={styles.content} data-cy="post" key={post._id}>
+        <p
+          className={styles.content}
+          data-cy="post"
+          key={post._id}
+          contenteditable="true"
+        >
           {post.message}
           <div className="comment-section">
             {post.comments &&
@@ -96,7 +113,7 @@ const Post = ({ post, setReload }) => {
                 .slice(0, 3)
                 .map((comment) => <Comment comment={comment} />)}
           </div>
-        </article>
+        </p>
 
         <div>
           <div className={styles.postFooter}>
@@ -115,6 +132,11 @@ const Post = ({ post, setReload }) => {
             <div>
               <button className={styles.deleteButton} onClick={handleDelete}>
                 Delete
+              </button>
+            </div>
+            <div>
+              <button className={styles.deleteButton} onClick={handleEdit}>
+                Edit
               </button>
             </div>
             <div className={styles.likesNumber}>
