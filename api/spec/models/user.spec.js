@@ -13,6 +13,7 @@ describe("User model", () => {
       email: "someone@example.com",
       password: "password",
     });
+
     expect(user.email).toEqual("someone@example.com");
   });
 
@@ -32,7 +33,7 @@ describe("User model", () => {
     });
   });
 
-  it("can save a user", (done) => {
+  it("can save a user when both email address and password are valid", (done) => {
     const user = new User({
       email: "someone@example.com",
       password: "password",
@@ -50,6 +51,60 @@ describe("User model", () => {
         });
         done();
       });
+    });
+  });
+
+  it("throws an error message when email address is invalid", (done) => {
+    const user = new User({
+      email: "invalidemail",
+      password: "password",
+    });
+
+    user.validate(function (err) {
+      expect(err.message).toBe(
+        "User validation failed: email: Please use a valid email address"
+      );
+      done();
+    });
+  });
+
+  it("throws an error message when password does not meet minimum requirement of password length", (done) => {
+    const user = new User({
+      email: "someone@example.com",
+      password: "123",
+    });
+
+    user.validate(function (err) {
+      expect(err.message).toBe(
+        "User validation failed: password: Path `password` (`123`) is shorter than the minimum allowed length (4)."
+      );
+      done();
+    });
+  });
+
+  it("can save a new user when password length meets the requirement of minimum length of 4 or more characters", (done) => {
+    const user = new User({
+      email: "someone@example.com",
+      password: "1234",
+    });
+
+    user.validate(function (err) {
+      expect(err).toBe(null);
+      done();
+    });
+  });
+
+  it("throws an error message when password exceeds the maximum allowed length of 10 characters", (done) => {
+    const user = new User({
+      email: "someone@example.com",
+      password: "123567891011",
+    });
+
+    user.validate(function (err) {
+      expect(err.message).toBe(
+        "User validation failed: password: Path `password` (`123567891011`) is longer than the maximum allowed length (10)."
+      );
+      done();
     });
   });
 });
