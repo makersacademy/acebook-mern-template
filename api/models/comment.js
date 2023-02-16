@@ -1,10 +1,10 @@
 const mongoose = require("mongoose");
+mongoose.set('strictQuery', true);
 const CommentSchema = new mongoose.Schema({
-  comment: String,
-  post_id: String,
   user_id: String,
-}, { timestamps: true });
+  content: String
+},{timestamps:true});
 
 let Comment = mongoose.model("Comment", CommentSchema);
 
-module.exports = Comment;
+module.exports = {Comment,CommentSchema};

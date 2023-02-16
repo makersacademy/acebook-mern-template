@@ -6,9 +6,8 @@ const logger = require("morgan");
 const postsRouter = require("./routes/posts");
 const tokensRouter = require("./routes/tokens");
 const usersRouter = require("./routes/users");
-const commentsRouter = require("./routes/comments");
 
-const {tokenChecker, errorHandler, catch404} = require("./controllers/controllerUtils");
+const {tokenChecker, errorHandler, catch404} = require("./expresssMiddleware");
 
 const app = express();
 // setup for receiving JSON
@@ -23,8 +22,6 @@ app.use(express.static(path.join(__dirname, "public")));
 app.use("/posts", tokenChecker, postsRouter);
 app.use("/tokens", tokensRouter);
 app.use("/users", usersRouter);
-app.use("/comments", tokenChecker, commentsRouter);
-
 
 // catch 404 and forward to error handler
 app.use(catch404);
