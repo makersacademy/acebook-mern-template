@@ -14,6 +14,7 @@ const Post = ({ post, setReload }) => {
   const isPostLikedByUser = post.likes.includes(user_id);
 
   const [isLiked, toggleIsLiked] = useState(isPostLikedByUser);
+  const [isExpanded, toggleExpansion] = useState(false);
 
   const handleLikeToggle = async () => {
     toggleIsLiked((likeState) => !likeState);
@@ -35,6 +36,18 @@ const Post = ({ post, setReload }) => {
         setReload(true);
       }
     }
+  };
+
+  const handleCommentExpansionToggle = async () => {
+    toggleExpansion(!isExpanded);
+    setReload(true);
+  };
+
+  const displayComments = () => {
+    const finalIndex = isExpanded ? post.comments.length : 3;
+    return post.comments
+      .slice(0, finalIndex)
+      .map((comment) => <Comment comment={comment} />);
   };
 
   return (
@@ -60,10 +73,15 @@ const Post = ({ post, setReload }) => {
         <article className={styles.content} data-cy='post' key={post._id}>
           {post.message}
           <div className='comment-section'>
-            {post.comments &&
-              post.comments
-                .slice(0, 3)
-                .map((comment) => <Comment comment={comment} />)}
+            {post.comments && displayComments()}
+            {
+              <button
+                data-cy='expand-button'
+                onClick={handleCommentExpansionToggle}
+              >
+                Comment
+              </button>
+            }
           </div>
         </article>
 
