@@ -33,6 +33,19 @@ const Post = ({ post, setReload }) => {
     }
   };
 
+  // const handleEdit = () => {
+  //   if (user_id) {
+  //     let response = await('/fetch', {
+  //       method: 'PUT',
+  //       headers: {
+  //         'Content-Type': 'application/json',
+  //         Authorization: `Bearer ${token}`,
+  //       },
+  //       body: JSON.stringify({ _id: post._id, message: message }),
+  //     });
+  //   }
+  // };
+
   const handleLikeToggle = async () => {
     toggleIsLiked((likeState) => !likeState);
     console.log(post);
