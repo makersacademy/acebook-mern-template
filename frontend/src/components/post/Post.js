@@ -8,6 +8,7 @@ import Comment from '../comment/Comment';
 TimeAgo.addLocale(en);
 
 const Post = ({ post, setReload }) => {
+  let pid = post.user_id._id;
   const user_id = window.localStorage.getItem('user_id');
   const token = window.localStorage.getItem('token');
 
@@ -148,7 +149,9 @@ const Post = ({ post, setReload }) => {
               )}
             </div>
 
-            {user_id == post.user_id._id ? (
+            {user_id !== pid ? (
+              <></>
+            ) : (
               <div>
                 <button
                   data-cy="delete-button"
@@ -158,11 +161,11 @@ const Post = ({ post, setReload }) => {
                   Delete
                 </button>
               </div>
-            ) : (
-              <></>
             )}
-
-            {user_id == post.user_id._id ? (
+            {console.log(post.user_id)}
+            {user_id !== pid ? (
+              <></>
+            ) : (
               <div>
                 <button
                   data-cy="edit-button"
@@ -172,8 +175,6 @@ const Post = ({ post, setReload }) => {
                   Edit
                 </button>
               </div>
-            ) : (
-              <></>
             )}
             <div className={styles.likesNumber}>
               <div>

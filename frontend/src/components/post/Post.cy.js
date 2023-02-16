@@ -129,7 +129,7 @@ describe('Post', () => {
   });
 
   describe('delete button', () => {
-    xit('displays delete buttons', () => {
+    it('displays delete buttons', () => {
       cy.mount(
         <Post
           post={{
@@ -143,7 +143,7 @@ describe('Post', () => {
       cy.get('[data-cy=delete-button]').should('exist');
     });
 
-    xit('deletes post', () => {
+    it('deletes post', () => {
       window.localStorage.setItem('token', 'fakeToken');
       window.localStorage.setItem('user_id', 'fakeId');
       cy.intercept({
@@ -167,7 +167,7 @@ describe('Post', () => {
   });
 
   describe('edit button', () => {
-    xit('displays edit button', () => {
+    it('displays edit button', () => {
       cy.mount(
         <Post
           post={{
@@ -182,7 +182,7 @@ describe('Post', () => {
       cy.get('[data-cy=edit-button]').should('exist');
     });
 
-    xit('allows editing of post', () => {
+    it('allows editing of post', () => {
       window.localStorage.setItem('token', 'fakeToken');
       window.localStorage.setItem('user_id', 'fakeId');
       cy.intercept({
