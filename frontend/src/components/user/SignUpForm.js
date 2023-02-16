@@ -52,7 +52,7 @@ return (
     <div>
     <nav className="nav">
         <a href="/posts" className="site-title">
-            Acebook
+            acebook
         </a>
         <ul>
              <a href="/login"> Login </a>
