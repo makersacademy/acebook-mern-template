@@ -89,7 +89,7 @@ const Feed = ({ navigate }) => {
           firstName: data.user.firstName,
           lastName: data.user.lastName,
           userId: data.user._id,
-          profilePic: data.profilePicture
+          profilePicture: data.user.profilePicture
         };
         setUser(userData);
       } catch (error) {
@@ -97,13 +97,20 @@ const Feed = ({ navigate }) => {
       }
     };
     fetchUser();
+    
   }, []);
-
+  
+  useEffect(() => {
+    console.log(user);
+  }, [user]);
+  
   const handleSubmitPost = async (event, imageURL) => {
+    console.log(user.profilePic)
     // event.preventDefault(); 
     const postBody = {
       message: message, 
       userName: `${user.firstName} ${user.lastName}`,
+      profilePicture: `${user.profilePicture}`
     };
 
     if (imageURL) {
@@ -161,7 +168,7 @@ const Feed = ({ navigate }) => {
           </nav>
           <div id="feedComponent">
             <h2>Posts</h2>
-            <form onSubmit={(event) => handleSubmitPost(event, imageURL)}>
+            <form onSubmit={(event) => handleSubmitPost(event, imageURL, user)}>
               <textarea
                 placeholder="Write your post here"
                 id="message"
@@ -189,7 +196,7 @@ const Feed = ({ navigate }) => {
                     </div>
                   </div>
                   <div data-cy="profilePicDiv" class="profilePicDiv">
-                      <img class="profilePic" src='graphics-avatar.jpeg' alt=''/>
+                      <img class="profilePic" src={post.profilePicture} alt=''/>
                   </div>
 
                   <Post
@@ -202,6 +209,7 @@ const Feed = ({ navigate }) => {
                     navigate={navigate}
                     onAddComment={(comment) => handleAddComment(post._id, comment)}
                     imageURL={imageURL}
+                    authorProfilePic={post.profilePic}
                   />
                 </div>
               ))}
