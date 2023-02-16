@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import styles from './Post.module.css';
 import ReactTimeAgo from 'react-time-ago';
@@ -18,6 +18,7 @@ const Post = ({ post, setReload }) => {
   const [isLiked, toggleIsLiked] = useState(isPostLikedByUser);
   const [details, setDetails] = useState(false);
   const [isEditable, setIsEditable] = useState(false);
+  const messageRef = useRef(null);
 
   const handleDelete = async () => {
     if (user_id) {
@@ -61,6 +62,11 @@ const Post = ({ post, setReload }) => {
 
   const handleEdit = () => {
     setIsEditable(!isEditable);
+    if (!isEditable) {
+      setTimeout(() => {
+        messageRef.current.focus();
+      }, 0);
+    }
   };
 
   const handleLikeToggle = async () => {
@@ -140,7 +146,7 @@ const Post = ({ post, setReload }) => {
           </div>
         </div>
         <article className={styles.content} data-cy='post' key={post._id}>
-          <p id='text-value' contentEditable={isEditable}>
+          <p id='text-value' contentEditable={isEditable} ref={messageRef}>
             {messageExpander(post.message)}
           </p>
 
