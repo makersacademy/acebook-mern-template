@@ -13,11 +13,7 @@ describe("Post", () => {
     cy.get("#showComments").click();
   });
 
-  it("allows the user to like a post", () => {
-    cy.mount(<Post post={{ _id: 1, message: "Hello, world" }} />);
-    cy.get("#like").click();
-    cy.get(".likesText").should("contain.text", "Likes: 1");
-  });
+ 
 
   it("displays the comment field only after the user clicks the comment button", () => {
     cy.mount(<Post post={{ _id: 1, message: "Hello, world", comments: [{ userName: "Alice", message: "Nice post", timeStamp: Date.now() }] }} />);

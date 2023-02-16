@@ -42,21 +42,66 @@ const PostsController = {
       res.status(500).json({ error: error.message });
     }
   },
-  AddComment: async (req, res) => {
-    try {
-      const postId = req.params.id;
-      const message = req.body.message;
-      const userName = req.body.userName;
-      await Post.updateOne(
-        { _id: postId },
-        {
-          $push: {
-            comments: {
-              userName: userName,
-              timeStamp: Date.now(),
-              message: message,
-            },
+  
+  Addlike: (req, res) => {
+    console.log(req.body.postId, req.body.userId);
+    Post.findById(req.body.postId, (err, post) => {
+        if (err) {
+            return res.status(422).json({ error: err });
+        }
+        if (post.likes.includes(req.body.userId)) {
+            return res.status(422).json({ error: 'User has already liked this post' });
+        }
+        Post.findByIdAndUpdate(req.body.postId, {
+            $push: { likes: req.body.userId }
+        }, {
+            new: true
+        }).exec((err, result) => {
+            if (err) {
+                return res.status(422).json({ error: err });
+            } else {
+                res.json(result);
+            }
+        });
+    });
+},
+
+
+Unlike: (req, res) => {
+  console.log(req.body.postId,req.body.userId);
+  Post.findByIdAndUpdate(req.body.postId,{
+    $pull:{likes:req.body.userId}
+  },{
+    new:true
+  }).exec((err,result) => {
+      if(err){
+        return res.status(422).json({error:err})
+      }else{
+        res.json(result)
+      }
+  })
+},
+
+
+
+  AddComment: (req, res) => {
+    const postId = req.params.id;
+    const message = req.body.message;
+    const userName = req.body.userName;
+    Post.updateOne(
+      { _id: postId },
+      {
+        $push: {
+          comments: {
+            userName: userName,
+            timeStamp: Date.now(),
+            message: message,
           },
+        },
+      },
+      async (err) => {
+        if (err) {
+          throw err;
         }
       );
       const token = await TokenGenerator.jsonwebtoken(req.user_id);
@@ -67,6 +112,7 @@ const PostsController = {
       console.error(error);
       res.status(500).json({ error: error.message });
     }
+    
   },
   AddImage: async (req, res) => {
     try {

@@ -1,4 +1,5 @@
 const mongoose = require("mongoose");
+const { ObjectId } = mongoose.Types;
 
 const PostSchema = new mongoose.Schema(
   {
@@ -6,6 +7,7 @@ const PostSchema = new mongoose.Schema(
     userName: String,
     comments: [{ userName: String, timeStamp: Date, message: String }],
     imageURL: String,
+    likes: [{}]        
   },
   { timestamps: true }
 );

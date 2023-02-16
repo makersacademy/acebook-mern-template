@@ -84,8 +84,9 @@ const Feed = ({ navigate }) => {
           email: data.user.email,
           firstName: data.user.firstName,
           lastName: data.user.lastName,
+          userId: data.user._id
         };
-
+        console.log(data)
         setUser(userData);
       } catch (error) {
         console.error(error);
@@ -149,6 +150,7 @@ const Feed = ({ navigate }) => {
               acebook
             </a>
             <ul>
+              <button onClick={profile}>Profile</button>
               <button onClick={logout}>Logout</button>
               <br></br>
             </ul>

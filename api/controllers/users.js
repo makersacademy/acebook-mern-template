@@ -12,6 +12,22 @@ const UsersController = {
     });
   },
 
+  UpdateBio: (req, res) => {
+    const userId = req.params.id
+    const bio = req.body.bio;
+    if (bio === undefined || bio === null) {
+      res.status(400).json({ message: "Bad request: bio is null or undefined" });
+      return;
+    }
+    User.updateOne({ _id: userId }, { bio: bio }, (err) => {
+      if (err) {
+        res.status(400).json({ message: "Bad request" });
+      } else {
+        res.status(200).json({ message: "OK" });
+      }
+    });
+  },
+
   Find: (req, res) => {
     const email = req.query.email;
     User.findOne({ email: email }, "-password", (err, user) => {
@@ -24,6 +40,8 @@ const UsersController = {
       }
     });
   },
+
+
 };
 
 module.exports = UsersController;
