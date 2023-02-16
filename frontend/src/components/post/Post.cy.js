@@ -134,6 +134,39 @@ describe('Post', () => {
     cy.get('[data-cy="expand-button"]').should('not.exist');
   });
 
+  it('after clicking expand button, all comments are visible', () => {
+    cy.mount(
+      <Post
+        post={{
+          _id: 1,
+          message: 'Hello world again',
+          likes: [],
+          comments: [
+            { message: 'another message', user_id: 1, post_id: 1, likes: [] },
+            {
+              message: 'another hello world',
+              user_id: 2,
+              post_id: 1,
+              likes: [],
+            },
+            { message: 'third message', user_id: 3, post_id: 1, likes: [] },
+            {
+              message: 'fourth message',
+              user_id: 4,
+              post_id: 1,
+              likes: [],
+            },
+          ],
+          createdAt: '2023-02-14T11:44:40.970Z',
+        }}
+        setReload={setReload}
+      />
+    );
+    cy.get('[data-cy="comment"]').should('not.contain.text', 'fourth message');
+    cy.get('[data-cy="expand-button"]').click();
+    cy.get('[data-cy="comment"]').should('contain.text', 'fourth message');
+  });
+
   describe('like button', () => {
     it('Calls the /like endpoin and toggles likes on and off', () => {
       window.localStorage.setItem('token', 'fakeToken');
