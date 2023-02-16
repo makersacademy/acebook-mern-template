@@ -36,7 +36,6 @@ const CommentFeed = ({ navigate }) => {
     if(token) {
         return(
             <>
-                <h1>Test</h1>
                 <h2>{post}</h2>
                 <CreateCommentForm callback={(value) => setIsUpdated(value)}/>
                 <div id='feed' role="feed">
