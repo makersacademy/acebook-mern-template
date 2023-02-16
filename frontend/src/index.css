@@ -253,3 +253,7 @@ input::placeholder {
 #friendsListTitle {
   margin-top: 20px;
 }
+
+#changeProfilePictureButton {
+  margin-top: 10px;
+}

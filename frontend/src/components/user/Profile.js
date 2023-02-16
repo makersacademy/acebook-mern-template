@@ -1,11 +1,13 @@
 import React, { useEffect, useState } from "react";
-import Post from "../post/Post";
 
 const Profile = ({ navigate }) => {
   const [token, setToken] = useState(window.localStorage.getItem("token"));
   const [user, setUser] = useState({});
   const [isEditingBio, setIsEditingBio] = useState(false);
   const [bioInput, setBioInput] = useState("");
+
+  const [showUpload, setShowUpload] = useState(false);
+  const [imageURL, setImageURL] = useState(user.profilePicture);
 
   const logout = () => {
     window.localStorage.removeItem("token");
@@ -40,6 +42,7 @@ const Profile = ({ navigate }) => {
           lastName: data.user.lastName,
           userId: data.user._id,
           bio: data.user.bio,
+          profilePicture: data.user.profilePicture
         };
         setUser(userData);
       } catch (error) {
@@ -81,7 +84,40 @@ const Profile = ({ navigate }) => {
       console.error(error);
     }
   };
+
+  const handleProfileImageUpdate = async (event) => {
+    const file = event.target.files[0];
   
+    try {
+      const formData = new FormData();
+      formData.append("image", file);
+  
+      const response = await fetch(`/users/profile-picture/${user.userId}`, {
+        method: "POST",
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+        body: formData,
+      });
+  
+      const data = await response.json()
+      const imageURL = data.url.toString(); // convert to string
+      setImageURL(imageURL);
+  
+      await fetch(`/users/profile-picture/${user.userId}`, {
+        method: "PUT",
+        headers: {
+          Authorization: `Bearer ${token}`,
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ profilePicture: imageURL }),
+      });
+  
+    } catch (error) {
+      console.error(error);
+    }
+    await fetchUser()
+  };
 
   if (token) {
     return (
@@ -99,7 +135,18 @@ const Profile = ({ navigate }) => {
           </nav>
           <div id="feedComponent">
             <h1>{`${user.firstName} ${user.lastName}'s Profile Page`}</h1>
-            <img class="profilePagePicture" src="graphics-avatar.jpeg" alt="profile" ></img>
+            <img
+              className="profilePagePicture"
+              src={user.profilePicture ? user.profilePicture : "graphics-avatar.jpeg"}
+              alt="profile"
+            />
+            <button id="changeProfilePictureButton" onClick={() => setShowUpload(true)}>Change Profile Picture</button>
+            {showUpload && (
+              <div>
+                <input type="file" accept="image/*" onChange={handleProfileImageUpdate} />
+                <button onClick={() => setShowUpload(false)}>Submit</button>
+              </div>
+            )}
           </div>
           <h3 id="bioTitle">Bio</h3>
           <div id="profileBio">
@@ -115,14 +162,18 @@ const Profile = ({ navigate }) => {
               </>
             ) : (
               <>
-                <div id="bioText">{user.bio ? user.bio : "You have no bio, please write one!"}</div>
+                <div id="bioText">
+                  {user.bio ? user.bio : "You have no bio, please write one!"}
+                </div>
                 <button onClick={handleEditBio}>Edit Bio</button>
               </>
             )}
           </div>
           <h3 id="friendsListTitle">Friends List</h3>
           <div id="friendsList">
-            <div class="friendElement">You currently have no friends....that's ok if you prefer to keep it simple!</div>
+            <div class="friendElement">
+              You currently have no friends....that's ok if you prefer to keep it simple!
+            </div>
           </div>
         </div>
       </>

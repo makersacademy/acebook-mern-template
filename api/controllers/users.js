@@ -1,4 +1,5 @@
 const User = require("../models/user");
+const cloudinary = require("cloudinary").v2;
 
 const UsersController = {
   Create: (req, res) => {
@@ -26,6 +27,42 @@ const UsersController = {
         res.status(200).json({ message: "OK" });
       }
     });
+  },
+
+  UploadProfilePicture: async (req, res) => {
+    try {
+      if (!req.file) {
+        throw new Error("No file uploaded");
+      }
+
+      const result = await cloudinary.uploader.upload(req.file.path);
+      res.json({message : "Image uploaded successfully", url: result.secure_url })
+      return result.secure_url
+
+    } catch (error) {
+      console.error(error);
+      res.status(500).json({ error: error.message });
+    }
+  },
+
+  UpdateProfilePictureURL: async (req, res) => {
+    try {
+      const userId = req.params.id;
+      const imageURL = req.body.profilePicture;
+
+      User.updateOne({ _id: userId }, { profilePicture: imageURL }, (err) => {
+        if (err) {
+          res.status(400).json({ message: "Bad request" });
+        } else {
+          res.status(200).json({ message: "OK" });
+        }
+      });
+      
+  
+    } catch (error) {
+      console.error(error);
+      res.status(500).json({ error: error.message });
+    }
   },
 
   Find: (req, res) => {
