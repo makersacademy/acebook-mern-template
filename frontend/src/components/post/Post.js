@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-
 import styles from './Post.module.css';
 import ReactTimeAgo from 'react-time-ago';
 import TimeAgo from 'javascript-time-ago';
@@ -14,10 +13,58 @@ const Post = ({ post, setReload }) => {
   const token = window.localStorage.getItem('token');
 
   const isPostLikedByUser = post.likes.includes(user_id);
-
-  const [isLiked, toggleIsLiked] = useState(isPostLikedByUser);
   const [isExpanded, toggleExpansion] = useState(false);
+  const [isLiked, toggleIsLiked] = useState(isPostLikedByUser);
 
+  const [isEditable, setIsEditable] = useState('false');
+
+  const handleDelete = async () => {
+    if (user_id) {
+      let response = await fetch('/posts', {
+        method: 'DELETE',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify({ _id: post._id }),
+      });
+      if (response.status !== 204) {
+        console.log(response.error);
+      } else {
+        setReload(true);
+      }
+    }
+  };
+
+  const submitEdit = async () => {
+    if (user_id) {
+      let response = await fetch('/posts', {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify({
+          message: document.querySelector('#text-value').innerHTML,
+          _id: post._id,
+        }),
+      });
+      if (response.status !== 204) {
+        console.log(response.error);
+      } else {
+        setIsEditable('false');
+        setReload(true);
+      }
+    }
+  };
+
+  const handleEdit = () => {
+    if (isEditable === 'false') {
+      setIsEditable('true');
+    } else {
+      setIsEditable('false');
+    }
+  };
   const handleLikeToggle = async () => {
     toggleIsLiked((likeState) => !likeState);
     console.log(post);
@@ -74,8 +121,14 @@ const Post = ({ post, setReload }) => {
             </p>
           </div>
         </div>
-        <article className={styles.content} data-cy='post' key={post._id}>
-          {post.message}
+        <article
+          className={styles.content}
+          data-cy='post'
+          key={post._id}
+          contenteditable={isEditable}
+        >
+          <p id='text-value'>{post.message}</p>
+
           <div className='comment-section'>
             {isExpanded && (
               <CreateCommentForm
@@ -98,6 +151,18 @@ const Post = ({ post, setReload }) => {
           </div>
         </article>
 
+        {isEditable === 'true' ? (
+          <button
+            data-cy='edit-submit'
+            className={styles.editButton}
+            onClick={submitEdit}
+          >
+            Submit
+          </button>
+        ) : (
+          <></>
+        )}
+
         <div>
           <div className={styles.postFooter}>
             <div
@@ -111,6 +176,33 @@ const Post = ({ post, setReload }) => {
                 <img src='/images/thumbOutline.png' alt='like' />
               )}
             </div>
+            {user_id && user_id === post.user_id._id ? (
+              <div>
+                <button
+                  data-cy='delete-button'
+                  id='delete-button'
+                  className={styles.deleteButton}
+                  onClick={handleDelete}
+                >
+                  Delete
+                </button>
+              </div>
+            ) : (
+              <></>
+            )}
+            {user_id && user_id === post.user_id._id ? (
+              <div>
+                <button
+                  data-cy='edit-button'
+                  className={styles.editButton}
+                  onClick={handleEdit}
+                >
+                  Edit
+                </button>
+              </div>
+            ) : (
+              <></>
+            )}
             <div className={styles.likesNumber}>
               <div>
                 <img src='/images/likes.jpg' alt='Number of likes' />

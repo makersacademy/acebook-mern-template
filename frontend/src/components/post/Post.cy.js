@@ -36,6 +36,9 @@ describe('Post', () => {
           message: 'Hello, world',
           likes: [],
           createdAt: '2023-02-14T11:44:40.970Z',
+          user_id: {
+            _id: '63ee52ddb6e29209de11f059',
+          },
         }}
       />
     );
@@ -51,6 +54,9 @@ describe('Post', () => {
           likes: [],
           comments: twoComments,
           createdAt: '2023-02-14T11:44:40.970Z',
+          user_id: {
+            _id: '63ee52ddb6e29209de11f059',
+          },
         }}
       />
     );
@@ -66,7 +72,26 @@ describe('Post', () => {
           _id: 1,
           message: 'Hello world again',
           likes: [],
-          comments: fourComments,
+          comments: [
+            { message: 'another message', user_id: 1, post_id: 1, likes: [] },
+            {
+              message: 'another hello world',
+              user_id: 2,
+              post_id: 1,
+              likes: [],
+            },
+            { message: 'third message', user_id: 3, post_id: 1, likes: [] },
+            {
+              message: 'fourth message',
+              user_id: 4,
+              post_id: 1,
+              likes: [],
+            },
+          ],
+          user_id: {
+            _id: '63ee52ddb6e29209de11f059',
+          },
+
           createdAt: '2023-02-14T11:44:40.970Z',
         }}
       />
@@ -147,7 +172,7 @@ describe('Post', () => {
   });
 
   describe('like button', () => {
-    it('Calls the /like endpoin and toggles likes on and off', () => {
+    it('Calls the /like endpoint and toggles likes on and off', () => {
       window.localStorage.setItem('token', 'fakeToken');
       window.localStorage.setItem('user_id', 'fakeId');
 
@@ -168,6 +193,9 @@ describe('Post', () => {
             message: 'Hello, world',
             likes: [],
             createdAt: '2023-02-14T11:44:40.970Z',
+            user_id: {
+              _id: '63ee52ddb6e29209de11f059',
+            },
           }}
           setReload={setReload}
         />
@@ -195,6 +223,102 @@ describe('Post', () => {
         'src',
         '/images/thumbOutline.png'
       );
+    });
+  });
+
+  describe('delete button', () => {
+    it('displays delete buttons', () => {
+      window.localStorage.setItem('user_id', '63ee52ddb6e29209de11f059');
+
+      cy.mount(
+        <Post
+          post={{
+            _id: 1,
+            message: 'Hello, world',
+            likes: [],
+            createdAt: '2023-02-14T11:44:40.970Z',
+            user_id: {
+              _id: '63ee52ddb6e29209de11f059',
+            },
+          }}
+        />
+      );
+      cy.get('[data-cy=delete-button]').should('exist');
+    });
+
+    it('deletes post', () => {
+      window.localStorage.setItem('token', 'fakeToken');
+      window.localStorage.setItem('user_id', '63ee52ddb6e29209de11f059');
+      cy.intercept({
+        method: 'DELETE',
+        url: '/posts',
+      }).as('deletePost');
+      cy.mount(
+        <Post
+          post={{
+            _id: 1,
+            message: 'Hello, world',
+            likes: [],
+            createdAt: '2023-02-14T11:44:40.970Z',
+            user_id: {
+              _id: '63ee52ddb6e29209de11f059',
+            },
+          }}
+        />
+      );
+      cy.get('[data-cy=delete-button]').click();
+      cy.wait('@deletePost');
+      cy.contains('[data-cy="post"]').should('not.exist');
+    });
+  });
+
+  describe('edit button', () => {
+    it('displays edit button', () => {
+      window.localStorage.setItem('user_id', '63ee52ddb6e29209de11f059');
+
+      cy.mount(
+        <Post
+          post={{
+            _id: 1,
+            message: 'Hello, world',
+            likes: [],
+            createdAt: '2023-02-14T11:44:40.970Z',
+            user_id: {
+              _id: '63ee52ddb6e29209de11f059',
+            },
+          }}
+        />
+      );
+
+      cy.get('[data-cy=edit-button]').should('exist');
+    });
+
+    it('allows editing of post', () => {
+      window.localStorage.setItem('token', 'fakeToken');
+      window.localStorage.setItem('user_id', '63ee52ddb6e29209de11f059');
+      cy.intercept({
+        method: 'PUT',
+        url: '/posts',
+      }).as('putUpdate');
+      cy.mount(
+        <Post
+          post={{
+            _id: 1,
+            message: 'Hello, world',
+            likes: [],
+            createdAt: '2023-02-14T11:44:40.970Z',
+            user_id: {
+              _id: '63ee52ddb6e29209de11f059',
+            },
+          }}
+        />
+      );
+
+      cy.get('[data-cy=edit-button]').click();
+      cy.get('#text-value').innerHTML = 'testing';
+      cy.get('[data-cy=edit-submit]').click();
+      cy.wait('@putUpdate');
+      cy.get('#text-value').should('contain.text', 'Hello, world');
     });
   });
 });
