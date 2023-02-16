@@ -21,6 +21,7 @@ const PostSchema = new mongoose.Schema(
     },
     comments: {
       type: Array,
+      of: { type: mongoose.Types.ObjectId, ref: 'Comment' },
       default: [],
       required: false,
     },

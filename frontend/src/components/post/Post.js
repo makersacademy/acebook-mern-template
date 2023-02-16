@@ -79,7 +79,7 @@ const Post = ({ post, setReload }) => {
                 data-cy='expand-button'
                 onClick={handleCommentExpansionToggle}
               >
-                Expand!
+                Comment
               </button>
             }
           </div>

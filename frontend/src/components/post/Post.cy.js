@@ -128,6 +128,23 @@ describe('Post', () => {
     cy.get('[data-cy="comment"]').should('not.contain.text', 'fourth message');
   });
 
+  // it('after clicking comment button, comment input form is displayed', () => {
+  //   cy.mount(
+  //     <Post
+  //       post={{
+  //         _id: 1,
+  //         message: 'Hello world again',
+  //         likes: [],
+  //         comments: fourComments,
+  //         createdAt: '2023-02-14T11:44:40.970Z',
+  //       }}
+  //       setReload={setReload}
+  //     />
+  //   );
+  //   cy.get('[data-cy="comment"]').should('not.contain.text', 'fourth message');
+  //   cy.get('[data-cy="expand-button"]').click();
+  // });
+
   describe('like button', () => {
     it('Calls the /like endpoin and toggles likes on and off', () => {
       window.localStorage.setItem('token', 'fakeToken');

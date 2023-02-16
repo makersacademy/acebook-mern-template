@@ -5,6 +5,7 @@ const PostsController = {
   Index: (req, res) => {
     Post.find({})
       .populate('user_id')
+      .populate('comments')
       .exec(async (err, posts) => {
         if (err) {
           throw err;
