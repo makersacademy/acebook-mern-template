@@ -48,7 +48,7 @@
 
 .logo img{
     padding-right: 8px;
-    width:44px;
+    width:60px;
     margin-bottom: -4px; 
 }
 .logo a{
@@ -56,10 +56,23 @@
     color: #286ABA;
 
 }
+.profile{
+    position: relative;
+}
 
 .profile img{
     padding-right: 8px;
-    width:44px;
+    width:56px;
     margin-left: 6px;
     margin-top: 6px;
+    cursor: pointer;
+}
+.menu{
+    position:absolute;
+    top:80px;
+    background-color: #fff;
+    right:0%;
+}
+.menu img{
+    width: 44px;
 }

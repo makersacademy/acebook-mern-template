@@ -1,0 +1,80 @@
+.menu {
+    overflow: hidden;
+    max-height: 0;
+    transition: 0.3s ease;
+    border-radius: 6px;
+    width: 160px;
+    border-top: none;
+
+  }
+
+  .menuOpen {
+    max-height: 200px;
+    transition: 0.3s;
+    border-radius: 6px;
+    width: 160px;
+    border-top: none;
+
+  }
+  .menu ul{
+    list-style-type: none;
+    display:flex;
+    flex-direction: column;
+    list-style-type: none; 
+    margin: 0;
+    padding: 18px;
+
+  }
+  .menuOpen ul{
+    display:flex;
+    flex-direction: column;
+    list-style-type: none; 
+    margin: 0;
+    padding: 18px;
+
+  }
+  .menuOpen li{
+    display: flex;
+  }
+  .menuOpen a{
+    color: #000;
+    display: flex;
+    align-self: baseline;
+    text-decoration: none;
+    transition: all .1s ease-in-out
+  }
+  .menuOpen a:hover{
+    transform: scale(1.1);
+  }
+  .menu ul{
+    display:flex;
+    flex-direction: column;
+    list-style-type: none; 
+    margin: 0;
+    padding: 18px;
+
+  }
+  .menu li{
+    display: flex;
+  }
+  .menu a{
+    color: #000;
+    display: flex;
+    align-self: baseline;
+    text-decoration: none;
+  }
+  .menu a:hover{
+    transform: scale(1.1);
+  }
+  .menu a:hover{
+    transform: scale(1.1);
+  }
+  .menuOpen span{
+    align-self: center;
+  }
+  .menu span{
+    align-self: center;
+  }
+  .m{
+    max-width: 200px;
+  }

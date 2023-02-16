@@ -1,0 +1,42 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Titillium+Web&display=swap');
+
+.homeContainer{
+    padding: 22px;
+}
+.homeContainer img{
+    max-width: 100%;
+}
+.homeContainer button{
+width: 78px;
+background-color: #286ABA;
+color: #fff;
+
+}
+.links{
+    display:flex;
+justify-content: center;}
+.links a{
+    color: #fff;
+    font-weight: bolder;
+    padding: 8px 12px;
+    text-decoration: none;
+    cursor: pointer;
+    border-radius: 4px;
+    margin-left: 12px;
+}
+
+.links a:hover{
+    color: #000;
+    font-weight: bolder;
+}
+
+.links ul{
+    display: flex;  
+    width: 100%;
+}
+
+.links li{
+    list-style-type: none;
+}
+

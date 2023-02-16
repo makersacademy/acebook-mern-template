@@ -1,27 +1,28 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
 
-const LogInForm = ({ navigate }) => {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+const LogInForm = ({ navigate, token }) => {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
 
   const handleSubmit = async (event) => {
     event.preventDefault();
 
-    let response = await fetch('/tokens', {
-      method: 'post',
+    let response = await fetch("/tokens", {
+      method: "post",
       headers: {
-        'Content-Type': 'application/json',
+        "Content-Type": "application/json",
       },
       body: JSON.stringify({ email: email, password: password }),
     });
 
     if (response.status !== 201) {
-      navigate('/login');
+      navigate("/login");
     } else {
       let data = await response.json();
-      window.localStorage.setItem('token', data.token);
-      window.localStorage.setItem('user_id', data.user_id);
-      navigate('/posts');
+      window.localStorage.setItem("token", data.token);
+      window.localStorage.setItem("user_id", data.user_id);
+      token(data.token);
+      navigate("/posts");
     }
   };
 
@@ -36,20 +37,20 @@ const LogInForm = ({ navigate }) => {
   return (
     <form onSubmit={handleSubmit}>
       <input
-        placeholder='Email'
-        id='email'
-        type='text'
+        placeholder="Email"
+        id="email"
+        type="text"
         value={email}
         onChange={handleEmailChange}
       />
       <input
-        placeholder='Password'
-        id='password'
-        type='password'
+        placeholder="Password"
+        id="password"
+        type="password"
         value={password}
         onChange={handlePasswordChange}
       />
-      <input role='submit-button' id='submit' type='submit' value='Submit' />
+      <input role="submit-button" id="submit" type="submit" value="Submit" />
     </form>
   );
 };
