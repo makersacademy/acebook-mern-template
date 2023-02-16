@@ -48,7 +48,7 @@ const Post = ({ post, setReload }) => {
     const finalIndex = isExpanded ? post.comments.length : 3;
     return post.comments
       .slice(0, finalIndex)
-      .map((comment) => <Comment comment={comment} />);
+      .map((comment) => <Comment comment={comment} setReload={setReload} />);
   };
 
   return (

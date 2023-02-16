@@ -27,8 +27,8 @@ const CreateCommentForm = ({
       navigate('/posts');
     } else {
       setMessage('');
-      navigate('/posts');
       setReload(true);
+      navigate('/posts');
     }
   };
   return (

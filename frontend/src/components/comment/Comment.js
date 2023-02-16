@@ -3,7 +3,7 @@ const apiUrl = require('../../apiUrl');
 const Comment = ({ comment, setReload }) => {
   const user_id = window.localStorage.getItem('user_id');
   const token = window.localStorage.getItem('token');
-  debugger;
+
   const isCommentLikedByUser = comment.likes.includes(user_id);
 
   const [isLiked, toggleIsLiked] = useState(isCommentLikedByUser);
