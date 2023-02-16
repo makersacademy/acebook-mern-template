@@ -25,6 +25,7 @@
     "method-override": "^3.0.0",
     "mongodb": "^3.4.1",
     "mongoose": "^6.9.1",
+    "mongoose-unique-validator": "^3.1.0",
     "morgan": "~1.9.1",
     "nodemon": "^2.0.15",
     "superagent": "^8.0.0",
