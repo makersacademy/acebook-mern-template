@@ -82,38 +82,32 @@ Unlike: (req, res) => {
   })
 },
 
-
-
-  AddComment: (req, res) => {
-    const postId = req.params.id;
-    const message = req.body.message;
-    const userName = req.body.userName;
-    Post.updateOne(
-      { _id: postId },
-      {
-        $push: {
-          comments: {
-            userName: userName,
-            timeStamp: Date.now(),
-            message: message,
+  AddComment: async (req, res) => {
+    try {
+      const postId = req.params.id;
+      const message = req.body.message;
+      const userName = req.body.userName;
+      await Post.updateOne(
+        { _id: postId },
+        {
+          $push: {
+            comments: {
+              userName: userName,
+              timeStamp: Date.now(),
+              message: message,
+            },
           },
-        },
-      },
-      async (err) => {
-        if (err) {
-          throw err;
         }
       );
       const token = await TokenGenerator.jsonwebtoken(req.user_id);
-      res
-        .status(200)
-        .json({ message: "Comment added successfully", token: token });
+      res.status(200).json({ message: "Comment added successfully", token: token });
     } catch (error) {
       console.error(error);
-      res.status(500).json({ error: error.message });
+      res.status(500).json({ error: error.message })
     }
-    
   },
+
+
   AddImage: async (req, res) => {
     try {
       if (!req.file) {

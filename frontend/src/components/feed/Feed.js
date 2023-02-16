@@ -29,6 +29,10 @@ const Feed = ({ navigate }) => {
     navigate("/login");
   };
 
+  const profile = () => {
+    navigate("/profile");
+  };
+
   const handleImageUpload = async (event) => {
     const file = event.target.files[0];
     
@@ -86,7 +90,6 @@ const Feed = ({ navigate }) => {
           lastName: data.user.lastName,
           userId: data.user._id
         };
-        console.log(data)
         setUser(userData);
       } catch (error) {
         console.error(error);

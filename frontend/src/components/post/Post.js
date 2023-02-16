@@ -95,7 +95,6 @@ useEffect(() => {
   fetchLikesCount();
 }, [post._id, token]);
 
-console.log(user)
 
 const handleLike = async () => {
   try {
