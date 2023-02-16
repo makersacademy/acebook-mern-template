@@ -16,12 +16,18 @@ describe('Profile', () => {
               message: 'Hello, world',
               likes: [],
               createdAt: '2023-02-14T11:44:40.970Z',
+              user_id: {
+                _id: '63ee52ddb6e29209de11f059',
+              },
             },
             {
               _id: 2,
               message: 'Hello again, world',
               likes: [],
               createdAt: '2023-02-14T11:44:40.970Z',
+              user_id: {
+                _id: '63ee52ddb6e29209de11f059',
+              },
             },
           ],
         },

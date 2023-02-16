@@ -11,6 +11,9 @@ describe('Post', () => {
           message: 'Hello, world',
           likes: [],
           createdAt: '2023-02-14T11:44:40.970Z',
+          user_id: {
+            _id: '63ee52ddb6e29209de11f059',
+          },
         }}
       />
     );
@@ -34,6 +37,9 @@ describe('Post', () => {
             },
           ],
           createdAt: '2023-02-14T11:44:40.970Z',
+          user_id: {
+            _id: '63ee52ddb6e29209de11f059',
+          },
         }}
       />
     );
@@ -65,6 +71,9 @@ describe('Post', () => {
               likes: [],
             },
           ],
+          user_id: {
+            _id: '63ee52ddb6e29209de11f059',
+          },
           createdAt: '2023-02-14T11:44:40.970Z',
         }}
       />
@@ -98,6 +107,9 @@ describe('Post', () => {
             message: 'Hello, world',
             likes: [],
             createdAt: '2023-02-14T11:44:40.970Z',
+            user_id: {
+              _id: '63ee52ddb6e29209de11f059',
+            },
           }}
           setReload={setReload}
         />
@@ -130,6 +142,8 @@ describe('Post', () => {
 
   describe('delete button', () => {
     it('displays delete buttons', () => {
+      window.localStorage.setItem('user_id', '63ee52ddb6e29209de11f059');
+
       cy.mount(
         <Post
           post={{
@@ -137,6 +151,9 @@ describe('Post', () => {
             message: 'Hello, world',
             likes: [],
             createdAt: '2023-02-14T11:44:40.970Z',
+            user_id: {
+              _id: '63ee52ddb6e29209de11f059',
+            },
           }}
         />
       );
@@ -145,7 +162,7 @@ describe('Post', () => {
 
     it('deletes post', () => {
       window.localStorage.setItem('token', 'fakeToken');
-      window.localStorage.setItem('user_id', 'fakeId');
+      window.localStorage.setItem('user_id', '63ee52ddb6e29209de11f059');
       cy.intercept({
         method: 'DELETE',
         url: '/posts',
@@ -157,17 +174,22 @@ describe('Post', () => {
             message: 'Hello, world',
             likes: [],
             createdAt: '2023-02-14T11:44:40.970Z',
+            user_id: {
+              _id: '63ee52ddb6e29209de11f059',
+            },
           }}
         />
       );
       cy.get('[data-cy=delete-button]').click();
       cy.wait('@deletePost');
-      cy.get('[data-cy=delete-button]').should('not.exist');
+      cy.contains('[data-cy="post"]').should('not.exist');
     });
   });
 
   describe('edit button', () => {
     it('displays edit button', () => {
+      window.localStorage.setItem('user_id', '63ee52ddb6e29209de11f059');
+
       cy.mount(
         <Post
           post={{
@@ -175,6 +197,9 @@ describe('Post', () => {
             message: 'Hello, world',
             likes: [],
             createdAt: '2023-02-14T11:44:40.970Z',
+            user_id: {
+              _id: '63ee52ddb6e29209de11f059',
+            },
           }}
         />
       );
@@ -184,7 +209,7 @@ describe('Post', () => {
 
     it('allows editing of post', () => {
       window.localStorage.setItem('token', 'fakeToken');
-      window.localStorage.setItem('user_id', 'fakeId');
+      window.localStorage.setItem('user_id', '63ee52ddb6e29209de11f059');
       cy.intercept({
         method: 'PUT',
         url: '/posts',
@@ -196,6 +221,9 @@ describe('Post', () => {
             message: 'Hello, world',
             likes: [],
             createdAt: '2023-02-14T11:44:40.970Z',
+            user_id: {
+              _id: '63ee52ddb6e29209de11f059',
+            },
           }}
         />
       );
