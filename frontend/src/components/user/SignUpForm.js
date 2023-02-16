@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-const apiUrl = require('../../apiUrl');
 const SignUpForm = ({ navigate }) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -7,7 +6,7 @@ const SignUpForm = ({ navigate }) => {
   const handleSubmit = async (event) => {
     event.preventDefault();
 
-    fetch(`${apiUrl}/users`, {
+    fetch(`${process.env.REACT_APP_API_URL}/users`, {
       method: 'post',
       headers: {
         'Content-Type': 'application/json',

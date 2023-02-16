@@ -2,8 +2,6 @@ import React, { useEffect, useState } from 'react';
 import CreatePostForm from '../createPostForm/createPostForm';
 import Post from '../post/Post';
 
-const apiUrl = require('../../apiUrl');
-
 const Feed = ({ navigate, path, setReload, reload }) => {
   const [posts, setPosts] = useState([]);
   const [token, setToken] = useState(window.localStorage.getItem('token'));
@@ -11,11 +9,16 @@ const Feed = ({ navigate, path, setReload, reload }) => {
 
   useEffect(() => {
     if (token) {
-      fetch(path ? `${apiUrl}/${path}` : `${apiUrl}/posts`, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      })
+      fetch(
+        path
+          ? `${process.env.REACT_APP_API_URL}/${path}`
+          : `${process.env.REACT_APP_API_URL}/posts`,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      )
         .then((response) => response.json())
         .then(async (data) => {
           window.localStorage.setItem('token', data.token);
