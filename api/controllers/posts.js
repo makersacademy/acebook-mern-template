@@ -40,9 +40,11 @@ const PostsController = {
       }
     });
   },
+
   Update: (req, res) => {
     Post.updateOne(
-      { _id: req.body._id, message: req.body.message },
+      { _id: req.body._id },
+      { $set: { message: req.body.message } },
       async (err) => {
         if (err) {
           throw err;
