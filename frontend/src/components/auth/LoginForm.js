@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 const LogInForm = ({ navigate }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [error, setError] = useState(null);
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -16,12 +17,12 @@ const LogInForm = ({ navigate }) => {
     })
 
     if(response.status !== 201) {
-      console.log("yay")
-      navigate('/login')
+      setError("Incorrect login details, try again....");
+      return
     } else {
-      console.log("oop")
       let data = await response.json()
       window.localStorage.setItem("token", data.token)
+      window.localStorage.setItem("email", email)
       navigate('/posts');
     }
   }
@@ -35,12 +36,56 @@ const LogInForm = ({ navigate }) => {
   }
 
 
-    return (
-      <form onSubmit={handleSubmit}>
-        <input placeholder='Email' id="email" type='text' value={ email } onChange={handleEmailChange} />
+
+  return (
+    <div className="logInForm">
+      <br></br>
+    <nav className="nav">
+      
+        <a href="/posts" className="site-title">
+            Acebook
+        </a>
+        <ul>
+            <li>
+                <a href="/signup"> Signup </a>
+            </li>
+        </ul>
+   </nav>
+{/* )
+
+return ( */}
+        <b>
+          
+        </b>
+      {/* <form onSubmit={handleSubmit}>
+      <div></div><br /> */}
+        {/* <input placeholder='Email' id="email" type='text' value={ email } onChange={handleEmailChange} />
+        <div></div><br />
         <input placeholder='Password' id="password" type='password' value={ password } onChange={handlePasswordChange} />
-        <input role='submit-button' id='submit' type="submit" value="Submit" />
+        <div></div><br />
+        <input role='submit-button' id='submit' type="submit" value="Submit" /> */}
+      
+      <div class='bold-line'></div>
+<div class='container'>
+  <div class='window'>
+    <div class='overlay'></div>
+    <div class='content'>
+      <div class='welcome'>Hello There!</div>
+      <div class='subb'>Welcome to Acebook!</div>
+      <div class='subtitle'>Login Below</div>
+      <form onSubmit={handleSubmit}>
+      <div class='input-fields'>
+        <input type='email' placeholder='Email' class='input-line full-width' value={ email } onChange={handleEmailChange} ></input>
+        <input type='password' placeholder='Password' class='input-line full-width' value={ password } onChange={handlePasswordChange} ></input>
+      </div>
+      <div><button class='ghost-round full-width' id='submit' value="Submit">login</button></div>
       </form>
+    </div>
+  </div>
+</div>
+
+    </div>
+
     );
 }
 
