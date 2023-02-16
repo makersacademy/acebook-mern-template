@@ -105,7 +105,7 @@ input::placeholder {
   border: solid;
   border-width: 0.75px;
   width: 75%;
-  margin-top: 75px;
+  margin-top: 30px;
   margin-bottom: 10px;
   word-wrap: break-word;
   align-self: flex-end;
@@ -256,4 +256,22 @@ input::placeholder {
 
 #changeProfilePictureButton {
   margin-top: 10px;
+}
+
+.profilePicDiv {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  justify-content: flex-start;
+  align-items: center;
+  width: 500px;
+  margin-top: 10px;
+}
+
+.profilePic {
+  display: inline-block;
+  height: 50px;
+  width: 50px;
+  margin-right: 450px;
+  border-radius: 50%;
 }

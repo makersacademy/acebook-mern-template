@@ -137,7 +137,7 @@ const Profile = ({ navigate }) => {
             <h1>{`${user.firstName} ${user.lastName}'s Profile Page`}</h1>
             <img
               className="profilePagePicture"
-              src={user.profilePicture ? user.profilePicture : "graphics-avatar.jpeg"}
+              src={user.profilePicture}
               alt="profile"
             />
             <button id="changeProfilePictureButton" onClick={() => setShowUpload(true)}>Change Profile Picture</button>

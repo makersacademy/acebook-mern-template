@@ -88,7 +88,8 @@ const Feed = ({ navigate }) => {
           email: data.user.email,
           firstName: data.user.firstName,
           lastName: data.user.lastName,
-          userId: data.user._id
+          userId: data.user._id,
+          profilePic: data.profilePicture
         };
         setUser(userData);
       } catch (error) {
@@ -186,6 +187,9 @@ const Feed = ({ navigate }) => {
                     <div data-cy="timestamp" class="postTimestamp">
                       {post.createdAt && new Date(post.createdAt).toISOString().split('.')[0].replace('T', ' ')}
                     </div>
+                  </div>
+                  <div data-cy="profilePicDiv" class="profilePicDiv">
+                      <img class="profilePic" src='graphics-avatar.jpeg' alt=''/>
                   </div>
 
                   <Post
