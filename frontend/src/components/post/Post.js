@@ -1,10 +1,13 @@
-import React, { useState, useNavigate } from 'react';
+
+import React, { useState, useEffect } from 'react';
+import { useNavigate } from ‘react-router-dom’
 import styles from './Post.module.css';
 import ReactTimeAgo from 'react-time-ago';
 import TimeAgo from 'javascript-time-ago';
 import en from 'javascript-time-ago/locale/en';
 import Comment from '../comment/Comment';
-
+import CreateCommentForm from '../createCommentForm/CreateCommentForm';
+const apiUrl = require('../../apiUrl');
 TimeAgo.addLocale(en);
 
 const Post = ({ post, setReload }) => {
@@ -12,8 +15,9 @@ const Post = ({ post, setReload }) => {
   const token = window.localStorage.getItem('token');
 
   const isPostLikedByUser = post.likes.includes(user_id);
-
+  const [isExpanded, toggleExpansion] = useState(false);
   const [isLiked, toggleIsLiked] = useState(isPostLikedByUser);
+
   const [isEditable, setIsEditable] = useState('false');
 
   const handleDelete = async () => {
@@ -63,12 +67,11 @@ const Post = ({ post, setReload }) => {
       setIsEditable('false');
     }
   };
-
   const handleLikeToggle = async () => {
     toggleIsLiked((likeState) => !likeState);
     console.log(post);
     if (user_id) {
-      let url = isLiked ? '/posts/unlike' : '/posts/like';
+      let url = isLiked ? `${apiUrl}/posts/unlike` : `${apiUrl}/posts/like`;
       let response = await fetch(url, {
         method: 'PATCH',
         headers: {
@@ -84,6 +87,18 @@ const Post = ({ post, setReload }) => {
         setReload(true);
       }
     }
+  };
+
+  const handleCommentExpansionToggle = async () => {
+    toggleExpansion(!isExpanded);
+    setReload(true);
+  };
+
+  const displayComments = () => {
+    const finalIndex = isExpanded ? post.comments.length : 3;
+    return post.comments
+      .slice(0, finalIndex)
+      .map((comment) => <Comment comment={comment} setReload={setReload} />);
   };
 
   return (
@@ -114,11 +129,25 @@ const Post = ({ post, setReload }) => {
         >
           <p id="text-value">{post.message}</p>
 
-          <div className="comment-section">
-            {post.comments &&
-              post.comments
-                .slice(0, 3)
-                .map((comment) => <Comment comment={comment} />)}
+          <div className='comment-section'>
+            {isExpanded && (
+              <CreateCommentForm
+                navigate={useNavigate}
+                token={token}
+                user_id={user_id}
+                post_id={post._id}
+                setReload={setReload}
+              />
+            )}
+            {post.comments && displayComments()}
+            {
+              <button
+                data-cy='expand-button'
+                onClick={handleCommentExpansionToggle}
+              >
+                Comment
+              </button>
+            }
           </div>
         </article>
 
