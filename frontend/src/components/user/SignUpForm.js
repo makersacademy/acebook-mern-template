@@ -67,8 +67,8 @@ return (
     return ( */}
       <div className="signUpForm">
         <h1>Sign Up</h1>
-          <form onSubmit={handleSubmit}>
-            <div>
+          
+            {/* <div>
               <div>Email</div><br />
               <input placeholder="eg j.smith@email.com" id="email" type='text' value={ email } onChange={handleEmailChange} />
             </div>
@@ -88,10 +88,38 @@ return (
               <input placeholder="eg Smith" id="lastName" type='lastName' value={ lastName } onChange={handleLastNameChange} />
             </div>
             <br />
-          <input id='submit' type="submit" value="Submit" />
-        </form>
+          <input id='submit' type="submit" value="Submit" /> */}
+        {/* </form> */}
+        <div class='bold-line'></div>
+        
+<div class='container'>
+  <div class='window'>
+    <div class='overlay'></div>
+    <div class='content'>
+      <div class='welcome'>Hello There!</div>
+      <div class='subb'>Welcome to Acebook:</div>
+      <div class='subtitle'>We're almost done. Before using our services you need to create an account.</div>
+      <form onSubmit={handleSubmit}>
+      <div class='input-fields'>
+      
+        <input type='text' placeholder='First Name' class='input-line full-width' value={ firstName } onChange={handleFirstNameChange}></input>
+        <input type='text' placeholder='Last name' class='input-line full-width' value={ lastName } onChange={handleLastNameChange}></input>
+        <input type='email' placeholder='Email' class='input-line full-width' value={ email } onChange={handleEmailChange}></input>
+        <input type='password' placeholder='Password' class='input-line full-width' value={ password } onChange={handlePasswordChange}></input>
       </div>
+      <div><button class='ghost-round full-width' type="submit" id ='submit' value="Submit" >Create Account!</button></div>
+      </form>
+    </div>
+    
+  </div>
+  
+  
+</div>
+
       </div>
+      
+      </div>
+      
     );
 }
 console.log(SignUpForm)
