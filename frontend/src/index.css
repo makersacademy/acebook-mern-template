@@ -19,7 +19,6 @@ h2 {
 }
 
 .nav {
-  background-color: rgb(79, 79, 221);
   color: white;
   display: flex;
   justify-content: space-between;
@@ -36,7 +35,6 @@ h2 {
 .nav a {
   color: inherit;
   text-decoration: none;
-  background: linear-gradient(-45deg, #9652ee, #5b3ce7, #23a6d5, #b123d5);
   animation: gradient 15s ease infinite;
 }
 
@@ -44,6 +42,7 @@ h2 {
   text-align: center;
   padding-top: px 40;
   margin-top: px 40;
+  border-radius: 30px;
 }
 
 
@@ -51,6 +50,7 @@ h2 {
   text-align: center;
   padding-top: px 40;
   margin-top: px 40;
+  border-radius: 30px;
 }
 
 #message {
@@ -68,6 +68,12 @@ input {
 
 input::placeholder {
   text-align: left;
+}
+
+.title-posts {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
+    monospace;
+    color: #fff;
 }
 
 #feedComponent {
@@ -486,6 +492,7 @@ body {
     width: 360px;
     background: #fff;
     background: url('https://pexels.imgix.net/photos/27718/pexels-photo-27718.jpg?fit=crop&w=1280&h=823') top left no-repeat;
+    border-radius: 30px;
   }
   
   .overlay {
@@ -497,6 +504,7 @@ body {
     position: absolute;
     width: 360px;
     z-index: 1;
+    border-radius: 30px;
   }
   
   .bold-line {

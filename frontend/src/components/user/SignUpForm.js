@@ -55,9 +55,7 @@ return (
             Acebook
         </a>
         <ul>
-            <li>
-                <a href="/login"> Login </a>
-            </li>
+             <a href="/login"> Login </a>
         </ul>
    </nav>
 
@@ -66,7 +64,7 @@ return (
     {/* // returning of jsx, this is what shows on the page
     return ( */}
       <div className="signUpForm">
-        <h1>Sign Up</h1>
+        <h1></h1>
           
             {/* <div>
               <div>Email</div><br />

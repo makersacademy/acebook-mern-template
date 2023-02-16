@@ -41,6 +41,7 @@ const Profile = ({ navigate }) => {
           userId: data.user._id,
           bio: data.user.bio,
         };
+        console.log(data)
         setUser(userData);
       } catch (error) {
         console.error(error);

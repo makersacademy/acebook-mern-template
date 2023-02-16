@@ -46,9 +46,7 @@ const LogInForm = ({ navigate }) => {
             Acebook
         </a>
         <ul>
-            <li>
                 <a href="/signup"> Signup </a>
-            </li>
         </ul>
    </nav>
 {/* )
@@ -78,8 +76,10 @@ return ( */}
         <input type='email' placeholder='Email' class='input-line full-width' value={ email } onChange={handleEmailChange} ></input>
         <input type='password' placeholder='Password' class='input-line full-width' value={ password } onChange={handlePasswordChange} ></input>
       </div>
-      <div><button class='ghost-round full-width' id='submit' value="Submit">login</button></div>
+      <div><button class='ghost-round full-width' id='submit' value="Submit">Login</button></div>
       </form>
+      {/* <div><button class='ghost-round full-width' id='signup' href="/signup"> Signup </button></div> */}
+      
     </div>
   </div>
 </div>
