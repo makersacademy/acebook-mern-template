@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import '../user/signUpForm.css';
+import logo from '../../resources/Acebook-logos/Acebook-logos.jpeg';
 
 const LogInForm = ({ navigate }) => {
   const [email, setEmail] = useState("");
@@ -17,10 +18,10 @@ const LogInForm = ({ navigate }) => {
     })
 
     if(response.status !== 201) {
-      console.log("yay")
+      console.log("oops")
       navigate('/login')
     } else {
-      console.log("oop")
+      console.log("yay")
       let data = await response.json()
       window.localStorage.setItem("token", data.token)
       navigate('/posts');
@@ -38,13 +39,24 @@ const LogInForm = ({ navigate }) => {
 
     return (
       <main>
-        <img alt='middleLogo' className='middleLogo' />
-        <h2>Login pls!</h2>
-        <form className='signUpLoginForm' onSubmit={handleSubmit}>
-          <input placeholder='Email' id="email" type='text' value={ email } onChange={handleEmailChange} />
-          <input placeholder='Password' id="password" type='password' value={ password } onChange={handlePasswordChange} />
-          <input role='submit-button' id='submit' type="submit" value="Login" />
-        </form>
+        <img alt='middleLogo' className='middleLogo' src={ logo }/>
+        <h2 id='login-title'>Login to see posts!</h2>
+        <div className="container">
+          <form className='signUpLoginForm' onSubmit={handleSubmit}>
+            <div className="input-box">
+              <input className='form_field' id="email" type='text' value={ email } onChange={handleEmailChange} />
+              <label id='form_label' for='email'>Email</label >
+              <i></i>
+              
+            </div>
+            <div className="input-box">
+              <input className='form_field' id="password" type='password' value={ password } onChange={handlePasswordChange} />
+              <label id='form_label' for='password'>Password</label>
+              <i></i>
+            </div> 
+            <input id='submit' type="submit" value="Login" />
+          </form>
+          </div>
       </main>
     );
 }
