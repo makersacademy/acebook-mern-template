@@ -8,8 +8,4 @@ const Comment = ({comment}) => {
     )
 }
 
-<<<<<<< HEAD
 export default Comment;
-=======
-export default Comment;
->>>>>>> e716172e854d4b79b76b5f5feecbaf7ce9959863

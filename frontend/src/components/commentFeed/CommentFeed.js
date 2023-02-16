@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
-// import CreateCommentForm from '../createCommentForm/createCommentForm';
-import Post from '../post/Post'
+import CreateCommentForm from '../createCommentForm/createCommentForm';
 import Comment from '../comment/Comment'
 
 const CommentFeed = ({ navigate }) => {
@@ -9,8 +8,10 @@ const CommentFeed = ({ navigate }) => {
   const [token, setToken] = useState(window.localStorage.getItem("token"));
   const [isUpdated, setIsUpdated] = useState(false);
 
+
   useEffect(() => {
-      if(token && (isUpdated || post.length === 0)) {
+      if(token && (isUpdated || comments.length === 0)) {
+        console.log(token);
         fetch(window.location.pathname, {
           headers: {
             'Authorization': `Bearer ${token}`
@@ -18,33 +19,40 @@ const CommentFeed = ({ navigate }) => {
         })
           .then(response => response.json())
           .then(async data => {
-            console.log(data)
+            console.log(data.post.message);
             window.localStorage.setItem("token", data.token)
             setToken(window.localStorage.getItem("token"))
-            setPost(data.post);
+            setPost(data.post.message);
+            setComments(data.post.comments);
             setIsUpdated(false);
           })
       }
-  }, [token, post, isUpdated]);
+  }, [token, comments, isUpdated]);
+
+  const logout = () => {
+    window.localStorage.removeItem("token")
+    navigate('/login')
+  }
 
   if(token) {
     return(
       <>
-        <h1>Test</h1>
-        {console.log(post)}
-        <h2>{post.message}</h2>
-        {/* <h2><Post post={ post } key={ post._id } /></h2> */}
-
+        <h2>{post}</h2>
+        <CreateCommentForm callback={(value) => {
+              setIsUpdated(value); 
+        }}/>
         <div id='feed' role="feed">
-          {post.comments.map(
-            (comment) => ( 
-              <p>{comment.content}</p>
-              // <Comment comment={ comment } key={ comment._id } />
-            )
+          {comments.map(
+            (comment) => ( <Comment comment={ comment } key={ comment._id } /> )
           )}
         </div>
+        <button onClick={logout}>
+              Logout
+        </button>
       </>
     )
+  } else {
+    navigate('/login')
   }
 }
 
