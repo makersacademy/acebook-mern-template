@@ -4,7 +4,7 @@ import ReactTimeAgo from 'react-time-ago';
 import TimeAgo from 'javascript-time-ago';
 import en from 'javascript-time-ago/locale/en';
 import Comment from '../comment/Comment';
-
+const apiUrl = require('../../apiUrl');
 TimeAgo.addLocale(en);
 
 const Post = ({ post, setReload }) => {
@@ -20,7 +20,7 @@ const Post = ({ post, setReload }) => {
     toggleIsLiked((likeState) => !likeState);
     console.log(post);
     if (user_id) {
-      let url = isLiked ? '/posts/unlike' : '/posts/like';
+      let url = isLiked ? `${apiUrl}/posts/unlike` : `${apiUrl}/posts/like`;
       let response = await fetch(url, {
         method: 'PATCH',
         headers: {

@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import CreatePostForm from '../createPostForm/createPostForm';
-
 import Post from '../post/Post';
+
+const apiUrl = require('../../apiUrl');
 
 const Feed = ({ navigate, path, setReload, reload }) => {
   const [posts, setPosts] = useState([]);
@@ -10,7 +11,7 @@ const Feed = ({ navigate, path, setReload, reload }) => {
 
   useEffect(() => {
     if (token) {
-      fetch(path || '/posts', {
+      fetch(path ? `${apiUrl}/${path}` : `${apiUrl}/posts`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },

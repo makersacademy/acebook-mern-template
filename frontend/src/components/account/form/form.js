@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-
+const apiUrl = require('../../../apiUrl');
 const Form = ({ form_type, token, setShowForm }) => {
   const [inputValue, setInputValue] = useState('');
   const [file, setFile] = useState(null);
@@ -24,7 +24,7 @@ const Form = ({ form_type, token, setShowForm }) => {
       formData.append('image', file);
     }
 
-    fetch('/account', {
+    fetch(`${apiUrl}/account`, {
       method: 'put',
       headers: {
         Authorization: `Bearer ${token}`,
