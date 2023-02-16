@@ -3,13 +3,15 @@ const express = require("express");
 const path = require("path");
 const logger = require("morgan");
 const JWT = require("jsonwebtoken");
+require('dotenv').config();
+require('dotenv-safe').config();
 
 const postsRouter = require("./routes/posts");
 const tokensRouter = require("./routes/tokens");
 const usersRouter = require("./routes/users");
 const cloudinary = require('cloudinary').v2;
-const cloudinaryApiKey = require("./cloudinaryApiKey")
-const cloudinarySecret = require("./cloudinarySecret")
+// const cloudinaryApiKey = require("./cloudinaryApiKey")
+// const cloudinarySecret = require("./cloudinarySecret")
 const app = express();
 
 // setup for receiving JSON
@@ -63,8 +65,8 @@ app.use((err, req, res) => {
   // cloudinary connection details
   cloudinary.config({
     cloud_name: 'did9lgedz',
-    api_key: cloudinaryApiKey,
-    api_secret: cloudinarySecret,
+    api_key: process.env.CLOUDINARY_API_KEY,
+    api_secret: process.env.CLOUDINARY_API_SECRET,
     });
 
 
