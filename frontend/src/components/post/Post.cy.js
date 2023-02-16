@@ -77,7 +77,7 @@ describe('Post', () => {
   });
 
   describe('like button', () => {
-    it('Calls the /like endpoin and toggles likes on and off', () => {
+    it('Calls the /like endpoint and toggles likes on and off', () => {
       window.localStorage.setItem('token', 'fakeToken');
       window.localStorage.setItem('user_id', 'fakeId');
 
@@ -125,6 +125,86 @@ describe('Post', () => {
         'src',
         '/images/thumbOutline.png'
       );
+    });
+  });
+
+  describe('delete button', () => {
+    xit('displays delete buttons', () => {
+      cy.mount(
+        <Post
+          post={{
+            _id: 1,
+            message: 'Hello, world',
+            likes: [],
+            createdAt: '2023-02-14T11:44:40.970Z',
+          }}
+        />
+      );
+      cy.get('[data-cy=delete-button]').should('exist');
+    });
+
+    xit('deletes post', () => {
+      window.localStorage.setItem('token', 'fakeToken');
+      window.localStorage.setItem('user_id', 'fakeId');
+      cy.intercept({
+        method: 'DELETE',
+        url: '/posts',
+      }).as('deletePost');
+      cy.mount(
+        <Post
+          post={{
+            _id: 1,
+            message: 'Hello, world',
+            likes: [],
+            createdAt: '2023-02-14T11:44:40.970Z',
+          }}
+        />
+      );
+      cy.get('[data-cy=delete-button]').click();
+      cy.wait('@deletePost');
+      cy.get('[data-cy=delete-button]').should('not.exist');
+    });
+  });
+
+  describe('edit button', () => {
+    xit('displays edit button', () => {
+      cy.mount(
+        <Post
+          post={{
+            _id: 1,
+            message: 'Hello, world',
+            likes: [],
+            createdAt: '2023-02-14T11:44:40.970Z',
+          }}
+        />
+      );
+
+      cy.get('[data-cy=edit-button]').should('exist');
+    });
+
+    xit('allows editing of post', () => {
+      window.localStorage.setItem('token', 'fakeToken');
+      window.localStorage.setItem('user_id', 'fakeId');
+      cy.intercept({
+        method: 'PUT',
+        url: '/posts',
+      }).as('putUpdate');
+      cy.mount(
+        <Post
+          post={{
+            _id: 1,
+            message: 'Hello, world',
+            likes: [],
+            createdAt: '2023-02-14T11:44:40.970Z',
+          }}
+        />
+      );
+
+      cy.get('[data-cy=edit-button]').click();
+      cy.get('#text-value').innerHTML = 'testing';
+      cy.get('[data-cy=edit-submit]').click();
+      cy.wait('@putUpdate');
+      cy.get('#text-value').should('contain.text', 'Hello, world');
     });
   });
 });

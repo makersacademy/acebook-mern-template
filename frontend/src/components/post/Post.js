@@ -50,6 +50,7 @@ const Post = ({ post, setReload }) => {
       if (response.status !== 204) {
         console.log(response.error);
       } else {
+        setIsEditable('false');
         setReload(true);
       }
     }
@@ -121,9 +122,17 @@ const Post = ({ post, setReload }) => {
           </div>
         </article>
 
-        <button className={styles.editButton} onClick={submitEdit}>
-          Submit
-        </button>
+        {isEditable === 'true' ? (
+          <button
+            data-cy="edit-submit"
+            className={styles.editButton}
+            onClick={submitEdit}
+          >
+            Submit
+          </button>
+        ) : (
+          <></>
+        )}
 
         <div>
           <div className={styles.postFooter}>
@@ -139,16 +148,33 @@ const Post = ({ post, setReload }) => {
               )}
             </div>
 
-            <div>
-              <button className={styles.deleteButton} onClick={handleDelete}>
-                Delete
-              </button>
-            </div>
-            <div>
-              <button className={styles.deleteButton} onClick={handleEdit}>
-                Edit
-              </button>
-            </div>
+            {user_id == post.user_id._id ? (
+              <div>
+                <button
+                  data-cy="delete-button"
+                  className={styles.deleteButton}
+                  onClick={handleDelete}
+                >
+                  Delete
+                </button>
+              </div>
+            ) : (
+              <></>
+            )}
+
+            {user_id == post.user_id._id ? (
+              <div>
+                <button
+                  data-cy="edit-button"
+                  className={styles.editButton}
+                  onClick={handleEdit}
+                >
+                  Edit
+                </button>
+              </div>
+            ) : (
+              <></>
+            )}
             <div className={styles.likesNumber}>
               <div>
                 <img src="/images/likes.jpg" alt="Number of likes" />
