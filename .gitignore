@@ -63,3 +63,7 @@ typings/
 # cypress.io
 cypress/screenshots
 cypress/videos
+
+# cloudinary
+api/cloudinaryApiKey.js
+api/cloudinarySecret.js

@@ -6,6 +6,7 @@ const PostSchema = new mongoose.Schema(
     message: String,
     userName: String,
     comments: [{ userName: String, timeStamp: Date, message: String }],
+    imageURL: String,
     likes: [{}]        
   },
   { timestamps: true }

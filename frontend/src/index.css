@@ -89,6 +89,13 @@ input::placeholder {
   position: relative;
 }
 
+.postImage {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
 .postContent {
   display: flex;
   flex-direction: column;
@@ -97,7 +104,7 @@ input::placeholder {
   border-radius: 10px;
   border: solid;
   border-width: 0.75px;
-  width: 300px;
+  width: 75%;
   margin-top: 75px;
   margin-bottom: 10px;
   word-wrap: break-word;

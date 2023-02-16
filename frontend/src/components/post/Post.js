@@ -1,10 +1,8 @@
 import React, { useState, useEffect } from "react";
 
-const Post = ({ navigate, post, setPosts, posts, token, user, onAddComment }) => {
+const Post = ({ navigate, post, setPosts, posts, token, user, onAddComment, imageURL }) => {
   const [comment, setComment] = useState("");
   const [showComments, setShowComments] = useState(false);
-
-  // const [likes, setLikes] = useState(post.likes || 0);  changed by chatgp for the below
   const [likes, setLikes] = useState(post.likes ? post.likes.length : 0);
 
 
@@ -97,7 +95,6 @@ useEffect(() => {
   fetchLikesCount();
 }, [post._id, token]);
 
-console.log(user)
 
 const handleLike = async () => {
   try {
@@ -154,7 +151,11 @@ const handleUnLike = async () => {
 
   return (
     <>
-      <div class="postContent">{post.message}</div>
+    <div data-cy="post" class="postContent">
+      {post.message}
+      
+    </div>
+    <div data-cy="postImage" class="postImage"> {post.imageURL && <img src={post.imageURL} alt="" height="300" width="" />}</div>
 
       <div class="postButtons">
       

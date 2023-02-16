@@ -6,7 +6,8 @@ const Feed = ({ navigate }) => {
   const [token, setToken] = useState(window.localStorage.getItem("token"));
   const [message, setMessage] = useState("");
   const [user, setUser] = useState({});
-
+  const [imageURL, setImageURL] = useState(null);
+  
   useEffect(() => {
     if (token) {
       fetch("/posts", {
@@ -30,6 +31,34 @@ const Feed = ({ navigate }) => {
 
   const profile = () => {
     navigate("/profile");
+  };
+
+  const handleImageUpload = async (event) => {
+    const file = event.target.files[0];
+    
+    try {
+    const formData = new FormData();
+    formData.append("image", file);
+    console.log(file)
+    console.log(formData)
+    
+    
+    const response = await fetch("/posts/image", {
+      method: "POST",
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+      body: formData,
+    });
+  
+    const data = await response.json()
+    console.log(data);
+    setImageURL(data.url);
+    
+    } catch (error) {
+      console.error(error);
+    }
+    console.log(imageURL)
   };
 
   const post = () => {};
@@ -61,7 +90,6 @@ const Feed = ({ navigate }) => {
           lastName: data.user.lastName,
           userId: data.user._id
         };
-        console.log(data)
         setUser(userData);
       } catch (error) {
         console.error(error);
@@ -70,8 +98,16 @@ const Feed = ({ navigate }) => {
     fetchUser();
   }, []);
 
-  const handleSubmitPost = async (event) => {
-    // event.preventDefault(); This line stops the page refreshing automatically so it has been commented out
+  const handleSubmitPost = async (event, imageURL) => {
+    // event.preventDefault(); 
+    const postBody = {
+      message: message, 
+      userName: `${user.firstName} ${user.lastName}`,
+    };
+
+    if (imageURL) {
+      postBody.imageURL = imageURL;
+    }
 
     fetch("/posts", {
       method: "post",
@@ -79,10 +115,7 @@ const Feed = ({ navigate }) => {
         Authorization: `Bearer ${token}`,
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({
-        message: message,
-        userName: `${user.firstName} ${user.lastName}`,
-      }),
+      body: JSON.stringify(postBody),
     }).then((response) => {
       if (response.status === 201) {
         navigate("/posts");
@@ -127,7 +160,7 @@ const Feed = ({ navigate }) => {
           </nav>
           <div id="feedComponent">
             <h2>Posts</h2>
-            <form onSubmit={handleSubmitPost}>
+            <form onSubmit={(event) => handleSubmitPost(event, imageURL)}>
               <textarea
                 placeholder="Write your post here"
                 id="message"
@@ -139,13 +172,18 @@ const Feed = ({ navigate }) => {
               <input id="submitPost" type="submit" value="Submit" />
             </form>
 
+            <div>
+              <form class="chooseFile">
+                <input type="file" accept="image/*" onChange={handleImageUpload} />
+              </form>
+            </div>
+
             <div id="feed" role="feed">
               {posts.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt)).map((post) => (
                 <div class="post" key={post._id} data-cy="post">
                   <div data-cy="userName" class="postUserName">
                     {post.userName}
                     <div data-cy="timestamp" class="postTimestamp">
-                      {console.log(post)}
                       {post.createdAt && new Date(post.createdAt).toISOString().split('.')[0].replace('T', ' ')}
                     </div>
                   </div>
@@ -159,6 +197,7 @@ const Feed = ({ navigate }) => {
                     setUser={setUser}
                     navigate={navigate}
                     onAddComment={(comment) => handleAddComment(post._id, comment)}
+                    imageURL={imageURL}
                   />
                 </div>
               ))}
