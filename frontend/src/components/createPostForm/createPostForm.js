@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-const apiUrl = require('../../apiUrl');
 //userid for post
 
 const CreatePostForm = ({ navigate, token, id, setReload }) => {
@@ -7,7 +6,7 @@ const CreatePostForm = ({ navigate, token, id, setReload }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    let response = await fetch(`${apiUrl}/posts`, {
+    let response = await fetch(`${process.env.REACT_APP_API_URL}/posts`, {
       method: 'post',
       headers: {
         Authorization: `Bearer ${token}`,

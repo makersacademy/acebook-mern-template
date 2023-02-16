@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-const apiUrl = require('../../apiUrl');
 const LogInForm = ({ navigate, token }) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -7,7 +6,7 @@ const LogInForm = ({ navigate, token }) => {
   const handleSubmit = async (event) => {
     event.preventDefault();
 
-    let response = await fetch(`${apiUrl}/tokens`, {
+    let response = await fetch(`${process.env.REACT_APP_API_URL}/tokens`, {
       method: 'post',
       headers: {
         'Content-Type': 'application/json',
