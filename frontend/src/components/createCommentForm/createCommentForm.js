@@ -9,14 +9,15 @@ const CreateCommentForm = ({callback}) => {
 
     const handleSubmit = async (event) => {
         event.preventDefault();
+        console.log(window.location)
         if (textArea !== '') {
-            let response = await fetch(window.location.pathname, {
+            let response = await fetch(window.location.pathname + '/comment', {
                 method: 'post',
                 headers: {
                     'Authorization': "Bearer " + window.localStorage.getItem('token'),
                     'Content-Type': 'application/json',
                 },
-                body: JSON.stringify({ user_id: window.localStorage.getItem('user_id'), message: textArea})
+                body: JSON.stringify({ user_id: window.localStorage.getItem('user_id'), content: textArea})
             })
 
             const data = await response.json()

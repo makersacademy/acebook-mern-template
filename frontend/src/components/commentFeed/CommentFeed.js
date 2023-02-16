@@ -8,8 +8,10 @@ const CommentFeed = ({ navigate }) => {
     const [token, setToken] = useState(window.localStorage.getItem("token"));
     const [isUpdated, setIsUpdated] = useState(false);
 
+    console.log(token)
+
     useEffect(() => {
-        if(token && (isUpdated || comments.length === 0)) {
+        if(token && (isUpdated || post.length === 0)) {
             fetch(window.location.pathname, {
                 headers: {
                   'Authorization': `Bearer ${token}`
@@ -34,6 +36,7 @@ const CommentFeed = ({ navigate }) => {
     if(token) {
         return(
             <>
+                <h1>Test</h1>
                 <h2>{post}</h2>
                 <CreateCommentForm callback={(value) => setIsUpdated(value)}/>
                 <div id='feed' role="feed">
