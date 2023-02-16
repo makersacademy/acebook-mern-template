@@ -1,9 +1,10 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useNavigate } from 'react';
 import styles from './Post.module.css';
 import ReactTimeAgo from 'react-time-ago';
 import TimeAgo from 'javascript-time-ago';
 import en from 'javascript-time-ago/locale/en';
 import Comment from '../comment/Comment';
+import CreateCommentForm from '../createCommentForm/CreateCommentForm';
 const apiUrl = require('../../apiUrl');
 TimeAgo.addLocale(en);
 
@@ -47,7 +48,7 @@ const Post = ({ post, setReload }) => {
     const finalIndex = isExpanded ? post.comments.length : 3;
     return post.comments
       .slice(0, finalIndex)
-      .map((comment) => <Comment comment={comment} />);
+      .map((comment) => <Comment comment={comment} setReload={setReload} />);
   };
 
   return (
@@ -73,6 +74,15 @@ const Post = ({ post, setReload }) => {
         <article className={styles.content} data-cy='post' key={post._id}>
           {post.message}
           <div className='comment-section'>
+            {isExpanded && (
+              <CreateCommentForm
+                navigate={useNavigate}
+                token={token}
+                user_id={user_id}
+                post_id={post._id}
+                setReload={setReload}
+              />
+            )}
             {post.comments && displayComments()}
             {
               <button

@@ -1,15 +1,19 @@
 import './App.css';
 import LoginForm from '../auth/LoginForm';
 import SignUpForm from '../user/SignUpForm';
+
 import React, { useState, useEffect } from 'react';
+
 import Feed from '../feed/Feed';
 import Home from '../home/Home';
 import Navbar from '../navbar/Navbar';
 import { useNavigate, Routes, Route } from 'react-router-dom';
 import Profile from '../profile/Profile';
+
 import Account from '../account/account';
 import TimeAgo from 'javascript-time-ago';
 import Posts from '../posts/Posts';
+
 
 import en from 'javascript-time-ago/locale/en.json';
 
@@ -19,7 +23,9 @@ const App = () => {
 
   return (
     <div className='app-container'>
-      <Navbar navigate={useNavigate} token={token} setToken={setToken} />
+
+      <Navbar token={token} setToken={setToken} navigate={useNavigate} />
+
       <Routes>
         <Route path='/' element={<Home navigate={useNavigate()} />} />
         <Route path='/account' element={<Account navigate={useNavigate()} />} />
