@@ -74,14 +74,14 @@ const Post = ({ post, setReload }) => {
           {post.message}
           <div className='comment-section'>
             {post.comments && displayComments()}
-            {post.comments && post.comments.length > 3 && (
+            {
               <button
                 data-cy='expand-button'
                 onClick={handleCommentExpansionToggle}
               >
                 Expand!
               </button>
-            )}
+            }
           </div>
         </article>
 
