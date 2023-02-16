@@ -19,14 +19,6 @@ const Post = ({ post, setReload }) => {
   const [details, setDetails] = useState(false);
   const [isEditable, setIsEditable] = useState(false);
 
-  useEffect(() => {
-    if (user_id && post.user_id && user_id === post.user_id._id) {
-      setIsEditable(true);
-    } else {
-      setIsEditable(false);
-    }
-  }, [user_id, post]);
-
   const handleDelete = async () => {
     if (user_id) {
       let response = await fetch(`${process.env.REACT_APP_API_URL}/posts`, {
@@ -62,6 +54,7 @@ const Post = ({ post, setReload }) => {
         console.log(response.error);
       } else {
         setReload(true);
+        setIsEditable(false);
       }
     }
   };
@@ -146,13 +139,10 @@ const Post = ({ post, setReload }) => {
             </p>
           </div>
         </div>
-        <article
-          className={styles.content}
-          data-cy='post'
-          key={post._id}
-          contentEditable={isEditable}
-        >
-          <p id='text-value'>{messageExpander(post.message)}</p>
+        <article className={styles.content} data-cy='post' key={post._id}>
+          <p id='text-value' contentEditable={isEditable}>
+            {messageExpander(post.message)}
+          </p>
 
           <div className='comment-section'>
             {isExpanded && (
@@ -176,7 +166,7 @@ const Post = ({ post, setReload }) => {
           </div>
         </article>
 
-        {isEditable === 'true' ? (
+        {isEditable ? (
           <button
             data-cy='edit-submit'
             className={styles.editButton}
@@ -184,9 +174,7 @@ const Post = ({ post, setReload }) => {
           >
             Submit
           </button>
-        ) : (
-          <></>
-        )}
+        ) : null}
 
         <div>
           <div className={styles.postFooter}>
@@ -215,19 +203,15 @@ const Post = ({ post, setReload }) => {
             ) : (
               <></>
             )}
-            {user_id && user_id === post.user_id._id ? (
-              <div>
-                <button
-                  data-cy='edit-button'
-                  className={styles.editButton}
-                  onClick={handleEdit}
-                >
-                  Edit
-                </button>
-              </div>
-            ) : (
-              <></>
-            )}
+            {!isEditable && user_id && user_id === post.user_id._id ? (
+              <button
+                data-cy='edit-button'
+                className={styles.editButton}
+                onClick={handleEdit}
+              >
+                Edit
+              </button>
+            ) : null}
             <div className={styles.likesNumber}>
               <div>
                 <img src='/images/likes.jpg' alt='Number of likes' />
