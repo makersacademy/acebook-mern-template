@@ -57,14 +57,33 @@ return ( */}
         <b>
           
         </b>
-      <form onSubmit={handleSubmit}>
-      <div></div><br />
-        <input placeholder='Email' id="email" type='text' value={ email } onChange={handleEmailChange} />
+      {/* <form onSubmit={handleSubmit}>
+      <div></div><br /> */}
+        {/* <input placeholder='Email' id="email" type='text' value={ email } onChange={handleEmailChange} />
         <div></div><br />
         <input placeholder='Password' id="password" type='password' value={ password } onChange={handlePasswordChange} />
         <div></div><br />
-        <input role='submit-button' id='submit' type="submit" value="Submit" />
+        <input role='submit-button' id='submit' type="submit" value="Submit" /> */}
+      
+      <div class='bold-line'></div>
+<div class='container'>
+  <div class='window'>
+    <div class='overlay'></div>
+    <div class='content'>
+      <div class='welcome'>Hello There!</div>
+      <div class='subb'>Welcome to Acebook!</div>
+      <div class='subtitle'>Login Below</div>
+      <form onSubmit={handleSubmit}>
+      <div class='input-fields'>
+        <input type='email' placeholder='Email' class='input-line full-width' value={ email } onChange={handleEmailChange} ></input>
+        <input type='password' placeholder='Password' class='input-line full-width' value={ password } onChange={handlePasswordChange} ></input>
+      </div>
+      <div><button class='ghost-round full-width' id='submit' value="Submit">login</button></div>
       </form>
+    </div>
+  </div>
+</div>
+
     </div>
 
     );
