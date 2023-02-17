@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import styles from './Post.module.css';
 import ReactTimeAgo from 'react-time-ago';
@@ -6,6 +6,7 @@ import TimeAgo from 'javascript-time-ago';
 import en from 'javascript-time-ago/locale/en';
 import Comment from '../comment/Comment';
 import CreateCommentForm from '../createCommentForm/CreateCommentForm';
+
 TimeAgo.addLocale(en);
 
 const Post = ({ post, setReload }) => {
@@ -16,7 +17,8 @@ const Post = ({ post, setReload }) => {
   const [isExpanded, toggleExpansion] = useState(false);
   const [isLiked, toggleIsLiked] = useState(isPostLikedByUser);
   const [details, setDetails] = useState(false);
-  const [isEditable, setIsEditable] = useState('false');
+  const [isEditable, setIsEditable] = useState(false);
+  const messageRef = useRef(null);
 
   const handleDelete = async () => {
     if (user_id) {
@@ -52,22 +54,23 @@ const Post = ({ post, setReload }) => {
       if (response.status !== 204) {
         console.log(response.error);
       } else {
-        setIsEditable('false');
         setReload(true);
+        setIsEditable(false);
       }
     }
   };
 
   const handleEdit = () => {
-    if (isEditable === 'false') {
-      setIsEditable('true');
-    } else {
-      setIsEditable('false');
+    setIsEditable(!isEditable);
+    if (!isEditable) {
+      setTimeout(() => {
+        messageRef.current.focus();
+      }, 0);
     }
   };
+
   const handleLikeToggle = async () => {
     toggleIsLiked((likeState) => !likeState);
-    console.log(post);
     if (user_id) {
       let url = isLiked
         ? `${process.env.REACT_APP_API_URL}/posts/unlike`
@@ -142,13 +145,10 @@ const Post = ({ post, setReload }) => {
             </p>
           </div>
         </div>
-        <article
-          className={styles.content}
-          data-cy='post'
-          key={post._id}
-          contenteditable={isEditable}
-        >
-          <p id='text-value'>{messageExpander(post.message)}</p>
+        <article className={styles.content} data-cy='post' key={post._id}>
+          <p id='text-value' contentEditable={isEditable} ref={messageRef}>
+            {messageExpander(post.message)}
+          </p>
 
           <div className='comment-section'>
             {isExpanded && (
@@ -172,7 +172,7 @@ const Post = ({ post, setReload }) => {
           </div>
         </article>
 
-        {isEditable === 'true' ? (
+        {isEditable ? (
           <button
             data-cy='edit-submit'
             className={styles.editButton}
@@ -180,9 +180,7 @@ const Post = ({ post, setReload }) => {
           >
             Submit
           </button>
-        ) : (
-          <></>
-        )}
+        ) : null}
 
         <div>
           <div className={styles.postFooter}>
@@ -211,19 +209,15 @@ const Post = ({ post, setReload }) => {
             ) : (
               <></>
             )}
-            {user_id && user_id === post.user_id._id ? (
-              <div>
-                <button
-                  data-cy='edit-button'
-                  className={styles.editButton}
-                  onClick={handleEdit}
-                >
-                  Edit
-                </button>
-              </div>
-            ) : (
-              <></>
-            )}
+            {!isEditable && user_id && user_id === post.user_id._id ? (
+              <button
+                data-cy='edit-button'
+                className={styles.editButton}
+                onClick={handleEdit}
+              >
+                Edit
+              </button>
+            ) : null}
             <div className={styles.likesNumber}>
               <div>
                 <img src='/images/likes.jpg' alt='Number of likes' />
