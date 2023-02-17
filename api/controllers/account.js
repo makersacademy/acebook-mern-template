@@ -14,7 +14,9 @@ const AccountController = {
 
         res.status(200).json({ posts: posts, token: token });
       }
-    }).populate('user_id');
+    })
+      .populate('user_id')
+      .populate('comments');
   },
 
   Update: (req, res) => {
