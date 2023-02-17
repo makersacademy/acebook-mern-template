@@ -76,3 +76,9 @@
 .likesNumber img{
     width: 100%;
 }
+
+a{
+    color: #0077cc;
+    text-decoration: underline;
+    cursor:pointer
+}
