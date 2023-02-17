@@ -161,9 +161,9 @@ input::placeholder {
   box-shadow: 0 10px 20px -8px rgba(0, 0, 0, 0.7);
   cursor: pointer;
   transition: 0.5s;
-    content: "»";
-    opacity: 0;
-  }
+  content: "»";
+  opacity: 0;
+}
 
 .likesDiv {
   display: flex;
@@ -768,6 +768,14 @@ button:focus {
   z-index: 1;
 }
 
+#changeProfilePictureButton {
+  margin-top: 30px;
+}
+
+#profile-title {
+  color: white;
+}
+
 .bold-line {
   background: #e7e7e7;
   position: absolute;
@@ -792,4 +800,15 @@ button:focus {
     width: 100%;
     height: 100%;
   }
+}
+
+/* Nav buttons */
+
+#profile-nav {
+  margin-right: 20px;
+  font-size: 1.5rem;
+}
+
+#logout-nav {
+  font-size: 1.5rem;
 }

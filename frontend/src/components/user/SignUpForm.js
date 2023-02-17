@@ -59,35 +59,8 @@ return (
         </ul>
    </nav>
 
-  
-
-    {/* // returning of jsx, this is what shows on the page
-    return ( */}
       <div className="signUpForm">
         <h1></h1>
-          
-            {/* <div>
-              <div>Email</div><br />
-              <input placeholder="eg j.smith@email.com" id="email" type='text' value={ email } onChange={handleEmailChange} />
-            </div>
-            <br />
-            <div>
-              <div>Password</div><br />
-              <input placeholder="eg securepassword" id="password" type='password' value={ password } onChange={handlePasswordChange} />
-            </div>
-            <br />
-            <div>
-              <div>First Name</div><br /> 
-              <input placeholder="eg John" id="firstName" type='firstName' value={ firstName } onChange={handleFirstNameChange} />
-            </div>
-            <br />
-            <div>
-              <div>Last Name</div><br />
-              <input placeholder="eg Smith" id="lastName" type='lastName' value={ lastName } onChange={handleLastNameChange} />
-            </div>
-            <br />
-          <input id='submit' type="submit" value="Submit" /> */}
-        {/* </form> */}
         <div class='bold-line'></div>
         
 <div class='container'>

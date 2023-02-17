@@ -128,13 +128,13 @@ const Profile = ({ navigate }) => {
               acebook
             </a>
             <ul>
-              <button onClick={profile}>Profile</button>
-              <button onClick={logout}>Logout</button>
+              <a href="/profile" id="profile-nav" onClick={profile}>Profile</a>
+              <a href="/login" id="logout-nav"onClick={logout}>Logout</a>
               <br></br>
             </ul>
           </nav>
           <div id="feedComponent">
-            <h1>{`${user.firstName} ${user.lastName}'s Profile Page`}</h1>
+            <h1 id="profile-title">{`${user.firstName} ${user.lastName}'s Profile Page`}</h1>
             <img
               className="profilePagePicture"
               src={user.profilePicture ? user.profilePicture : "graphics-avatar.jpeg"}
@@ -179,7 +179,7 @@ const Profile = ({ navigate }) => {
       </>
     );
   } else {
-    navigate("/signin");
+    navigate("/login");
   }
 };
 
