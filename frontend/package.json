@@ -5,6 +5,7 @@
   "proxy": "http://localhost:8080",
   "dependencies": {
     "clean": "^4.0.2",
+    "cypress-file-upload": "^5.0.8",
     "eslint": "^8.23.0",
     "javascript-time-ago": "^2.5.9",
     "react": "^18.2.0",
@@ -13,8 +14,7 @@
     "react-router-dom": "^6.3.0",
     "react-scripts": "^5.0.1",
     "react-time-ago": "^7.2.1",
-    "web-vitals": "^2.1.4",
-    "cypress-file-upload": "^5.0.8"
+    "web-vitals": "^2.1.4"
   },
   "scripts": {
     "start": "react-scripts --openssl-legacy-provider start",
@@ -30,7 +30,8 @@
   "eslintConfig": {
     "extends": [
       "react-app",
-      "react-app/jest"
+      "react-app/jest",
+      "plugin:cypress/recommended"
     ]
   },
   "browserslist": {
@@ -47,6 +48,7 @@
   },
   "devDependencies": {
     "cypress-file-upload": "^5.0.8",
+    "eslint-plugin-cypress": "^2.12.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-scripts": "^5.0.1"
