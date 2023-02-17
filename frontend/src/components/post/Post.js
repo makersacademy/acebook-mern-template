@@ -47,7 +47,7 @@ const Post = ({ post, setReload }) => {
           Authorization: `Bearer ${token}`,
         },
         body: JSON.stringify({
-          message: document.querySelector('#text-value').innerHTML,
+          message: document.querySelector('#text-value').textContent,
           _id: post._id,
         }),
       });
