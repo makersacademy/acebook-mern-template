@@ -11,7 +11,7 @@ const CreateCommentForm = ({
   const [message, setMessage] = useState('');
   const handleSubmit = async (e) => {
     e.preventDefault();
-    let response = await fetch('/comments', {
+    let response = await fetch(`${process.env.REACT_APP_API_URL}/comments`, {
       method: 'post',
       headers: {
         Authorization: `Bearer ${token}`,
