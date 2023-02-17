@@ -18,7 +18,6 @@ const LogInForm = ({ navigate }) => {
 
     if(response.status !== 201) {
       setError("Incorrect login details, try again....");
-      return
     } else {
       let data = await response.json()
       window.localStorage.setItem("token", data.token)
@@ -64,6 +63,7 @@ const LogInForm = ({ navigate }) => {
       <div class='input-fields'>
         <input type='email' placeholder='Email' class='input-line full-width' value={ email } onChange={handleEmailChange} ></input>
         <input type='password' placeholder='Password' class='input-line full-width' value={ password } onChange={handlePasswordChange} ></input>
+        { error != null ? error : null }
       </div>
       <div class="login-button"><button class='ghost-round full-width' id='submit' value="Submit">Login</button></div>
       </form>
