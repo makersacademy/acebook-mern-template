@@ -107,9 +107,11 @@ const Post = ({ post, setReload }) => {
   const messageExpander = (message) => {
     const button = (
       <>
-        <button data-cy="text-expand" onClick={() => setDetails(!details)}>
+
+        <a data-cy='text-expand' onClick={() => setDetails(!details)}>
+
           {details ? 'Show less' : 'Show more'}
-        </button>
+        </a>
       </>
     );
     if (post.message.split(' ').length >= 30) {
