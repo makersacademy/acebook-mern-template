@@ -6,7 +6,7 @@ const UserSchema = new mongoose.Schema({
   firstName: { type: String, required: true },
   lastName: { type: String, required: true },
   bio: String,
-  profilePicture: String,
+  profilePicture: { type: String, default: 'https://res.cloudinary.com/did9lgedz/image/upload/v1676564304/ywbm1mao75svek7qsjoy.png' }
 });
 
 const User = mongoose.model("User", UserSchema);

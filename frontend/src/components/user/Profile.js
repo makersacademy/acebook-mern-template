@@ -35,28 +35,27 @@ const Profile = ({ navigate }) => {
           throw new Error(response.statusText);
         }
 
-        const data = await response.json();
-        const userData = {
-          email: data.user.email,
-          firstName: data.user.firstName,
-          lastName: data.user.lastName,
-          userId: data.user._id,
-          bio: data.user.bio,
-          profilePicture: data.user.profilePicture
-        };
-        console.log(data)
-        setUser(userData);
-      } catch (error) {
-        console.error(error);
-      }
-    };
-    
+      const data = await response.json();
+      const userData = {
+        email: data.user.email,
+        firstName: data.user.firstName,
+        lastName: data.user.lastName,
+        userId: data.user._id,
+        bio: data.user.bio,
+        profilePicture: data.user.profilePicture
+      };
+      setUser(userData);
+    } catch (error) {
+      console.error(error);
+    }
+  };
 
-    const handleEditBio = () => {
-      setIsEditingBio(true);
-      setBioInput(user.bio);
-    };
-    
+
+  const handleEditBio = () => {
+    setIsEditingBio(true);
+    setBioInput(user.bio);
+  };
+
 
   useEffect(() => {
     fetchUser();
@@ -88,11 +87,11 @@ const Profile = ({ navigate }) => {
 
   const handleProfileImageUpdate = async (event) => {
     const file = event.target.files[0];
-  
+
     try {
       const formData = new FormData();
       formData.append("image", file);
-  
+
       const response = await fetch(`/users/profile-picture/${user.userId}`, {
         method: "POST",
         headers: {
@@ -100,11 +99,11 @@ const Profile = ({ navigate }) => {
         },
         body: formData,
       });
-  
+
       const data = await response.json()
       const imageURL = data.url.toString(); // convert to string
       setImageURL(imageURL);
-  
+
       await fetch(`/users/profile-picture/${user.userId}`, {
         method: "PUT",
         headers: {
@@ -113,7 +112,7 @@ const Profile = ({ navigate }) => {
         },
         body: JSON.stringify({ profilePicture: imageURL }),
       });
-  
+
     } catch (error) {
       console.error(error);
     }
@@ -129,16 +128,16 @@ const Profile = ({ navigate }) => {
               acebook
             </a>
             <ul>
-              <button onClick={profile}>Profile</button>
-              <button onClick={logout}>Logout</button>
+              <a href="/profile" id="profile-nav" onClick={profile}>Profile</a>
+              <a href="/login" id="logout-nav"onClick={logout}>Logout</a>
               <br></br>
             </ul>
           </nav>
           <div id="feedComponent">
-            <h1>{`${user.firstName} ${user.lastName}'s Profile Page`}</h1>
+            <h1 id="profile-title">{`${user.firstName} ${user.lastName}'s Profile Page`}</h1>
             <img
               className="profilePagePicture"
-              src={user.profilePicture ? user.profilePicture : "graphics-avatar.jpeg"}
+              src={user.profilePicture}
               alt="profile"
             />
             <button id="changeProfilePictureButton" onClick={() => setShowUpload(true)}>Change Profile Picture</button>
@@ -180,7 +179,7 @@ const Profile = ({ navigate }) => {
       </>
     );
   } else {
-    navigate("/signin");
+    navigate("/login");
   }
 };
 

@@ -16,12 +16,13 @@ const PostsController = {
   },
   Create: async (req, res) => {
     try {
-      const { message, imageURL, userName } = req.body;
+      const { message, imageURL, userName, profilePicture } = req.body;
   
       const post = new Post({
         message: message,
         userName: userName,
-        imageURL: imageURL });
+        imageURL: imageURL,
+        profilePicture: profilePicture });
 
       await post.save();
       const token = await TokenGenerator.jsonwebtoken(req.user_id);

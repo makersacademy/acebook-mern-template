@@ -433,6 +433,9 @@ input::placeholder {
   justify-content: flex-start;
   align-items: center;
   margin: 0 auto;
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
+    monospace;
+  color: white;
 }
 
 #bioTitle {
@@ -471,6 +474,10 @@ input::placeholder {
   padding: 40px;
   justify-content: space-between;
   align-items: center;
+}
+
+.biobutton {
+  margin-top: 20px;
 }
 
 #friendsListTitle {
@@ -868,10 +875,6 @@ button:focus {
   margin-top: 25px;
 }
 
-.input-fields-signup {
-  margin-top: 0px;
-}
-
 .container {
   display: -webkit-box;
   display: -webkit-flex;
@@ -970,6 +973,14 @@ button:focus {
   z-index: 1;
 }
 
+#changeProfilePictureButton {
+  margin-top: 30px;
+}
+
+#profile-title {
+  color: white;
+}
+
 #signup-overlay {
   height: 800px;
 }
@@ -1004,7 +1015,28 @@ button:focus {
   }
 }
 
-#changeProfilePictureButton {
+/* Nav buttons */
+
+#profile-nav {
+  margin-right: 20px;
+  font-size: 1.5rem;
+}
+
+#logout-nav {
+  font-size: 1.5rem;
+
+  #changeProfilePictureButton {
+    margin-top: 10px;
+  }
+}
+
+.profilePicDiv {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  justify-content: flex-start;
+  align-items: center;
+  width: 500px;
   margin-top: 10px;
 }
 
@@ -1012,4 +1044,11 @@ button:focus {
   color: white;
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
+
+.profilePic {
+  display: inline-block;
+  height: 50px;
+  width: 50px;
+  margin-right: 450px;
+  border-radius: 50%;
 }
