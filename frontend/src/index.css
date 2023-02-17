@@ -137,7 +137,9 @@ input::placeholder {
   border: 5px;
   border-color: #2e4357;
   border-radius: 6px;
-  background-color:  #3d6890;
+  background: transparent;
+  outline: auto;
+  outline-color:  #3d6890;
   border: none;
   color: white;
   font-size: 15px;
@@ -218,7 +220,32 @@ input::placeholder {
 #like,
 #unlike,
 #delete {
+  text-align: center;
+  margin-left: auto;
   box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
+  margin-right: auto;
+  position: relative;
+  display: flex;
+  border: 5px;
+  border-color: #2e4357;
+  border-radius: 6px;
+  background: transparent;
+  outline: auto;
+  outline-color:  #3d6890;
+  border: none;
+  color: white;
+  font-size: 15px;
+  transition: all 0.5s;
+  cursor: pointer;
+  box-shadow: 0 10px 20px -8px rgba(0, 0, 0, 0.7);
+  cursor: pointer;
+  transition: 0.5s;
+   {
+    content: "»";
+    opacity: 0;
+  }
+}
+  /* box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
   margin-right: 10px;
   position: relative;
   display: flex;
@@ -235,8 +262,8 @@ input::placeholder {
    {
     content: "»";
     opacity: 0;
-  }
-}
+  } */
+
 
 
 .likesDiv {
@@ -305,14 +332,18 @@ input::placeholder {
   background: transparent;
 }
 #commentButton {
+  text-align: center;
+  margin-left: auto;
   box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
-  margin-right: 10px;
+  margin-right: auto;
   position: relative;
   display: flex;
   border: 5px;
   border-color: #2e4357;
   border-radius: 6px;
-  background-color:  #3d6890;
+  background: transparent;
+  outline: auto;
+  outline-color:  #3d6890;
   border: none;
   color: white;
   font-size: 15px;
@@ -325,8 +356,8 @@ input::placeholder {
     content: "»";
     opacity: 0;
   }
-  
 }
+
 #comment {
   width: 145%;
   box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
@@ -353,7 +384,32 @@ input::placeholder {
 
 #showComments {
   margin-bottom: 10px;
+  text-align: center;
+  margin-left: auto;
   box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
+  margin-right: auto;
+  position: relative;
+  display: flex;
+  border: 5px;
+  border-color: #2e4357;
+  border-radius: 6px;
+  background: transparent;
+  outline: auto;
+  outline-color:  #3d6890;
+  border: none;
+  color: white;
+  font-size: 15px;
+  transition: all 0.5s;
+  cursor: pointer;
+  box-shadow: 0 10px 20px -8px rgba(0, 0, 0, 0.7);
+  cursor: pointer;
+  transition: 0.5s;
+   {
+    content: "»";
+    opacity: 0;
+  }
+}
+  /* box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
   margin-right: 10px;
   position: relative;
   display: flex;
@@ -371,7 +427,7 @@ input::placeholder {
     content: "»";
     opacity: 0;
   }
-}
+} */
 
 .profilePagePicture {
   display: flex;
