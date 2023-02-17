@@ -9,7 +9,7 @@ function Profile({ navigate }) {
       <h2>Profile</h2>
       <Feed
         navigate={navigate}
-        path={'/account'}
+        path={'account'}
         reload={reload}
         setReload={setReload}
       ></Feed>
