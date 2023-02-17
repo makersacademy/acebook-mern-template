@@ -9,7 +9,6 @@
     "extends": [
       "eslint:recommended",
       "plugin:node/recommended",
-      "plugin:cypress/recommended"
     ],
     "globals": {
         "Atomics": "readonly",
