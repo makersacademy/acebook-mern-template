@@ -11,15 +11,13 @@ describe('Visiting account page', () => {
     cy.get('h2').contains('Edit your Account Details');
   });
 
-
   it('it display edit buttons', () => {
     cy.login('useraccount@email.com', '12345678');
     cy.visit('/account');
-    cy.get('button').contains('Edit display name');
-    cy.get('button').contains('Edit email');
-    cy.get('button').contains('Edit bio');
-    cy.get('button').contains('Upload image');
-    cy.get('button').contains('Edit password');
+    cy.get('#display-button');
+    cy.get('#email-button');
+    cy.get('#bio-button');
+    cy.get('#password-button');
   });
 
   it('changes display name', () => {
@@ -32,7 +30,6 @@ describe('Visiting account page', () => {
       expect(t).to.contains('display changed');
     });
   });
-
 
   // it('changes email', () => {
   //   cy.login('useraccount@email.com', '12345678');
