@@ -32,18 +32,9 @@ const Feed = ({ navigate, path, setReload, reload }) => {
     }
   }, [reload]);
 
-  const logout = () => {
-    window.localStorage.removeItem('token');
-    navigate('/login');
-  };
-
   if (token) {
     return (
       <>
-        <button id='logout-button' onClick={logout}>
-          Logout
-        </button>
-
         <div id='feed' role='feed'>
           {posts ? (
             posts

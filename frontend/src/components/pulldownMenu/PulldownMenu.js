@@ -27,7 +27,7 @@ const PulldownMenu = ({
               <span>Account</span>
             </Link>
           </li>
-          <li onClick={logout}>
+          <li id='logout-button' onClick={logout}>
             <a>
               {' '}
               <img src='/images/buttons/logout-button.svg' />

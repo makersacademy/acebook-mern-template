@@ -38,9 +38,15 @@ const Navbar = ({ navigate, token, setToken }) => {
       {token ? (
         <div className={styles.profile}>
           {token && profileImage ? (
-            <img src={profileImage} alt='logo' onClick={toggleMenu} />
+            <img
+              id='avatar-img'
+              src={profileImage}
+              alt='logo'
+              onClick={toggleMenu}
+            />
           ) : (
             <img
+              id='avatar-img'
               src='/images/buttons/account-button.svg'
               alt='logo'
               onClick={toggleMenu}
