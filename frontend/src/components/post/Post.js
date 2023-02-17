@@ -15,12 +15,12 @@ const Post = ({ post, setReload }) => {
   const isPostLikedByUser = post.likes.includes(user_id);
   const [isExpanded, toggleExpansion] = useState(false);
   const [isLiked, toggleIsLiked] = useState(isPostLikedByUser);
-
+  const [details, setDetails] = useState(false);
   const [isEditable, setIsEditable] = useState('false');
 
   const handleDelete = async () => {
     if (user_id) {
-      let response = await fetch('/posts', {
+      let response = await fetch(`${process.env.REACT_APP_API_URL}/posts`, {
         method: 'DELETE',
         headers: {
           'Content-Type': 'application/json',
@@ -38,7 +38,7 @@ const Post = ({ post, setReload }) => {
 
   const submitEdit = async () => {
     if (user_id) {
-      let response = await fetch('/posts', {
+      let response = await fetch(`${process.env.REACT_APP_API_URL}/posts`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
@@ -101,6 +101,27 @@ const Post = ({ post, setReload }) => {
       .map((comment) => <Comment comment={comment} setReload={setReload} />);
   };
 
+  const messageExpander = (message) => {
+    const button = (
+      <>
+        <button data-cy='text-expand' onClick={() => setDetails(!details)}>
+          {details ? 'Show less' : 'Show more'}
+        </button>
+      </>
+    );
+    if (post.message.split(' ').length >= 30) {
+      let formatted = message.split(' ').slice(0, 30).join(' ');
+      return (
+        <>
+          {details ? message + ' ' : formatted + '... '}
+          {button}
+        </>
+      );
+    } else {
+      return message;
+    }
+  };
+
   return (
     <>
       <div className={styles.container}>
@@ -127,7 +148,7 @@ const Post = ({ post, setReload }) => {
           key={post._id}
           contenteditable={isEditable}
         >
-          <p id='text-value'>{post.message}</p>
+          <p id='text-value'>{messageExpander(post.message)}</p>
 
           <div className='comment-section'>
             {isExpanded && (

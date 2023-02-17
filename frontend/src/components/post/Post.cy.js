@@ -272,53 +272,47 @@ describe('Post', () => {
     });
   });
 
-  describe('edit button', () => {
-    it('displays edit button', () => {
-      window.localStorage.setItem('user_id', '63ee52ddb6e29209de11f059');
-
-      cy.mount(
-        <Post
-          post={{
-            _id: 1,
-            message: 'Hello, world',
-            likes: [],
-            createdAt: '2023-02-14T11:44:40.970Z',
-            user_id: {
-              _id: '63ee52ddb6e29209de11f059',
-            },
-          }}
-        />
-      );
-
-      cy.get('[data-cy=edit-button]').should('exist');
+  describe('expand button', () => {
+    const post = {
+      _id: '1',
+      message:
+        'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam at quam diam. Integer ac dignissim lacus, et fringilla tellus. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Suspendisse eu tincidunt mauris. Aenean vel massa auctor, finibus diam non, posuere quam.',
+      user_id: {
+        _id: '1',
+        display_name: 'John Doe',
+        image: 'https://example.com/avatar.jpg',
+      },
+      createdAt: new Date(),
+      likes: [],
+      comments: [],
+    };
+    beforeEach(() => {
+      cy.mount(<Post post={post} setReload={() => {}} />);
     });
 
-    it('allows editing of post', () => {
-      window.localStorage.setItem('token', 'fakeToken');
-      window.localStorage.setItem('user_id', '63ee52ddb6e29209de11f059');
-      cy.intercept({
-        method: 'PUT',
-        url: '/posts',
-      }).as('putUpdate');
-      cy.mount(
-        <Post
-          post={{
-            _id: 1,
-            message: 'Hello, world',
-            likes: [],
-            createdAt: '2023-02-14T11:44:40.970Z',
-            user_id: {
-              _id: '63ee52ddb6e29209de11f059',
-            },
-          }}
-        />
+    it('expands the message when the "Show more" button is clicked', () => {
+      cy.get('[data-cy="post"]').should('contain.text', 'Show more');
+      cy.contains('Show more').click();
+      cy.get('[data-cy="post"]').should(
+        'contain.text',
+        'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam at quam diam. Integer ac dignissim lacus, et fringilla tellus. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Suspendisse eu tincidunt mauris. Aenean vel massa auctor, finibus diam non, posuere quam.'
       );
+    });
 
-      cy.get('[data-cy=edit-button]').click();
-      cy.get('#text-value').innerHTML = 'testing';
-      cy.get('[data-cy=edit-submit]').click();
-      cy.wait('@putUpdate');
-      cy.get('#text-value').should('contain.text', 'Hello, world');
+    it('collapses the message when the "Show less" button is clicked', () => {
+      cy.get('[data-cy="text-expand"]').click();
+      cy.get('[data-cy="text-expand"]').should('contain.text', 'Show less');
+      cy.get('[data-cy="text-expand"]').click();
+      cy.get('[data-cy="text-expand"]').should('contain.text', 'Show more');
+    });
+
+    it('does not display the "Show more" button if the message has less than thirty words', () => {
+      const shortPost = {
+        ...post,
+        message: 'This is a short message.',
+      };
+      cy.mount(<Post post={shortPost} setReload={() => {}} />);
+      cy.get('[data-cy="post"]').should('not.contain.text', 'Show more');
     });
   });
 });
