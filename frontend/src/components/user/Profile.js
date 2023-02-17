@@ -44,6 +44,7 @@ const Profile = ({ navigate }) => {
           bio: data.user.bio,
           profilePicture: data.user.profilePicture
         };
+        console.log(data)
         setUser(userData);
       } catch (error) {
         console.error(error);

@@ -159,7 +159,7 @@ const Feed = ({ navigate }) => {
             </ul>
           </nav>
           <div id="feedComponent">
-            <h2>Posts</h2>
+           <div className='title-posts'></div><h2>Posts</h2>
             <form onSubmit={(event) => handleSubmitPost(event, imageURL)}>
               <textarea
                 placeholder="Write your post here"
