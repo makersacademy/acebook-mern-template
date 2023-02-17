@@ -197,9 +197,9 @@ const handleUnLike = async () => {
             {post.comments.length > 0 ? (
               post.comments.map((comment) => (
                 <div data-cy="comment" class="comment">
-                  {comment.userName}
+                  <p id="commentUserName">{comment.userName}</p>
                   <br />
-                  {comment.message}
+                  <div class="commentMessage">{comment.message}</div>
                   <br />
                   {formattedDate(comment.timeStamp)}
                 </div>

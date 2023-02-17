@@ -59,6 +59,11 @@ h2 {
   border-radius: 30px;
 }
 
+.postForm {
+  margin-top: 0;
+  padding-top: 0;
+}
+
 #message {
   height: 100px;
   width: 500px;
@@ -76,7 +81,6 @@ input::placeholder {
   text-align: left;
 }
 
-
 #feedComponent {
   padding-left: 55px;
   padding-top: 20px;
@@ -88,10 +92,11 @@ input::placeholder {
   width: 600px;
   margin: 0 auto;
 }
+
 #feedComponent textarea {
   display: block;
-  width: 800px;
-  margin-top: 100px;
+  width: 600px;
+  margin-top: 20px;
   margin-left: auto;
   margin-right: auto;
   flex-direction: column;
@@ -101,15 +106,15 @@ input::placeholder {
   border: 0;
   outline: 0;
   border-bottom: 1px soild #ccc;
-  background: -webkit-linear-gradient(#8CA6DB, #B993D6);
-  background: linear-gradient(#8CA6DB, #B993D6);
+  background: -webkit-linear-gradient(#8ca6db, #b993d6);
+  background: linear-gradient(#8ca6db, #b993d6);
 }
-
 
 #deleteButton {
   text-align: center;
   margin-left: 8px;
-  box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
+  box-shadow: 0 12px 16px 0 rgba(0, 0, 0, 0.24),
+    0 17px 50px 0 rgba(0, 0, 0, 0.19);
   margin-right: auto;
   position: relative;
   display: flex;
@@ -118,7 +123,7 @@ input::placeholder {
   border-radius: 6px;
   background: transparent;
   outline: auto;
-  outline-color:  white;
+  outline-color: white;
   border: none;
   color: white;
   font-size: 15px;
@@ -126,16 +131,11 @@ input::placeholder {
   cursor: pointer;
   box-shadow: 0 10px 20px -8px rgba(0, 0, 0, 0.7);
   cursor: pointer;
-  transition: 0.5s;
-   {
-    content: "»";
-    opacity: 0;
-  }
 }
 
-
 .chooseFile {
-  box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
+  box-shadow: 0 12px 16px 0 rgba(0, 0, 0, 0.24),
+    0 17px 50px 0 rgba(0, 0, 0, 0.19);
   margin-right: 10px;
   position: relative;
   display: flex;
@@ -150,17 +150,12 @@ input::placeholder {
   cursor: pointer;
   box-shadow: 0 10px 20px -8px rgba(0, 0, 0, 0.7);
   cursor: pointer;
-  transition: 0.5s;
-   {
-    content: "»";
-    opacity: 0;
-  }
-  
 }
 #submitPost {
   text-align: center;
   margin-left: auto;
-  box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
+  box-shadow: 0 12px 16px 0 rgba(0, 0, 0, 0.24),
+    0 17px 50px 0 rgba(0, 0, 0, 0.19);
   margin-right: auto;
   position: relative;
   display: flex;
@@ -169,7 +164,7 @@ input::placeholder {
   border-radius: 6px;
   background: transparent;
   outline: auto;
-  outline-color:  white;
+  outline-color: white;
   border: none;
   color: white;
   font-size: 15px;
@@ -177,11 +172,6 @@ input::placeholder {
   cursor: pointer;
   box-shadow: 0 10px 20px -8px rgba(0, 0, 0, 0.7);
   cursor: pointer;
-  transition: 0.5s;
-   {
-    content: "»";
-    opacity: 0;
-  }
 }
 
 #feed {
@@ -191,7 +181,6 @@ input::placeholder {
   padding: 20px;
   color: white;
   margin: 20px 0;
-
 }
 .post {
   display: flex;
@@ -199,14 +188,14 @@ input::placeholder {
   justify-content: space-between;
   align-items: flex-end;
   padding: 5px;
-  background: -webkit-linear-gradient(#8CA6DB, #B993D6);
-  background: linear-gradient(#8CA6DB, #B993D6);
+  background: -webkit-linear-gradient(#8ca6db, #b993d6);
+  background: linear-gradient(#8ca6db, #b993d6);
   border-radius: 10px;
   border: 0;
   border-width: 1px;
   margin-bottom: 15px;
   margin-top: 15px;
-  width: 500px;
+  width: 600px;
   height: 100%;
   position: relative;
 }
@@ -226,7 +215,7 @@ input::placeholder {
   border-radius: 10px;
   border: solid;
   border-width: 0.75px;
-  width: 75%;
+  width: 480px;
   margin-top: 75px;
   margin-bottom: 10px;
   word-wrap: break-word;
@@ -236,7 +225,7 @@ input::placeholder {
 .postTimestamp {
   display: flex;
   align-self: flex-end;
-  margin-left: 250px;
+  margin-left: 350px;
 }
 
 .postButtons {
@@ -252,7 +241,8 @@ input::placeholder {
 #delete {
   text-align: center;
   margin-left: 8px;
-  box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
+  box-shadow: 0 12px 16px 0 rgba(0, 0, 0, 0.24),
+    0 17px 50px 0 rgba(0, 0, 0, 0.19);
   margin-right: auto;
   position: relative;
   display: flex;
@@ -261,7 +251,7 @@ input::placeholder {
   border-radius: 6px;
   background: transparent;
   outline: auto;
-  outline-color:  white;
+  outline-color: white;
   border: none;
   color: white;
   font-size: 15px;
@@ -269,14 +259,7 @@ input::placeholder {
   cursor: pointer;
   box-shadow: 0 10px 20px -8px rgba(0, 0, 0, 0.7);
   cursor: pointer;
-  transition: 0.5s;
-   {
-    content: "»";
-    opacity: 0;
-  }
 }
-
-
 
 .likesDiv {
   display: flex;
@@ -310,31 +293,48 @@ input::placeholder {
   margin-bottom: 20px;
 }
 
-.comment {
+/* .comment {
   display: block;
   flex-direction: column;
   align-self: flex-start;
   margin-bottom: 20px;
   margin-left: auto;
   margin-right: auto;
-  box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
+  box-shadow: 0 12px 16px 0 rgba(0, 0, 0, 0.24),
+    0 17px 50px 0 rgba(0, 0, 0, 0.19);
   margin-right: auto;
   position: relative;
   display: flex;
+  outline: auto;
+  outline-color: white;
   border-radius: 4px;
-  background-color: #2e4357;
+  background-color: transparent;
   border: none;
   color: #fff;
   font-size: 10px;
   transition: all 0.5s;
   cursor: pointer;
-  transition: 0.5s;{
-  content: '»';
-  opacity: 0; 
-}
-}
+  width: 400px;
+  height: 100px;
+} */
 .comment > * {
   width: 100%;
+}
+
+.comment {
+  display: flex;
+  flex-direction: column;
+  padding: 60px;
+  background-color: transparent;
+  border-radius: 10px;
+  border: solid;
+  border-width: 0.2px;
+  width: 400px;
+  height: 20px;
+  margin-top: 75px;
+  margin-bottom: 10px;
+  word-wrap: break-word;
+  align-self: flex-end;
 }
 
 .commentField {
@@ -342,11 +342,15 @@ input::placeholder {
   align-self: flex-end;
   margin-left: 10px;
   background: transparent;
+  border-radius: 4px;
+  outline: auto;
+  outline-color: white;
 }
 #commentButton {
   text-align: center;
   margin-left: 8px;
-  box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
+  box-shadow: 0 12px 16px 0 rgba(0, 0, 0, 0.24),
+    0 17px 50px 0 rgba(0, 0, 0, 0.19);
   margin-right: auto;
   position: relative;
   display: flex;
@@ -363,16 +367,12 @@ input::placeholder {
   cursor: pointer;
   box-shadow: 0 10px 20px -8px rgba(0, 0, 0, 0.7);
   cursor: pointer;
-  transition: 0.5s;
-   {
-    content: "»";
-    opacity: 0;
-  }
 }
 
 #comment {
   width: 145%;
-  box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
+  box-shadow: 0 12px 16px 0 rgba(0, 0, 0, 0.24),
+    0 17px 50px 0 rgba(0, 0, 0, 0.19);
   margin-right: 10px;
   position: relative;
   display: flex;
@@ -388,17 +388,14 @@ input::placeholder {
   box-shadow: 0 10px 20px -8px rgba(0, 0, 0, 0.7);
   cursor: pointer;
   transition: 0.5s;
-   {
-    content: "»";
-    opacity: 0;
-  }
 }
 
 #showComments {
   margin-bottom: 10px;
   text-align: center;
   margin-left: auto;
-  box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
+  box-shadow: 0 12px 16px 0 rgba(0, 0, 0, 0.24),
+    0 17px 50px 0 rgba(0, 0, 0, 0.19);
   margin-right: auto;
   position: relative;
   display: flex;
@@ -407,7 +404,7 @@ input::placeholder {
   border-radius: 6px;
   background: transparent;
   outline: auto;
-  outline-color:  white;
+  outline-color: white;
   border: none;
   color: white;
   font-size: 15px;
@@ -415,11 +412,6 @@ input::placeholder {
   cursor: pointer;
   box-shadow: 0 10px 20px -8px rgba(0, 0, 0, 0.7);
   cursor: pointer;
-  transition: 0.5s;
-   {
-    content: "»";
-    opacity: 0;
-  }
 }
 
 .profilePagePicture {
@@ -722,7 +714,6 @@ button:focus {
   position: absolute;
   width: 360px;
   z-index: 1;
-  
 }
 
 .bold-line {
@@ -1011,8 +1002,14 @@ button:focus {
     width: 100%;
     height: 100%;
   }
+}
 
 #changeProfilePictureButton {
   margin-top: 10px;
 }
+
+#feedTitle {
+  color: white;
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
+    monospace;
 }
