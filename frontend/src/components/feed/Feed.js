@@ -88,7 +88,8 @@ const Feed = ({ navigate }) => {
           email: data.user.email,
           firstName: data.user.firstName,
           lastName: data.user.lastName,
-          userId: data.user._id
+          userId: data.user._id,
+          profilePicture: data.user.profilePicture
         };
         setUser(userData);
       } catch (error) {
@@ -96,13 +97,20 @@ const Feed = ({ navigate }) => {
       }
     };
     fetchUser();
+    
   }, []);
-
+  
+  useEffect(() => {
+    console.log(user);
+  }, [user]);
+  
   const handleSubmitPost = async (event, imageURL) => {
+    console.log(user.profilePic)
     // event.preventDefault(); 
     const postBody = {
       message: message, 
       userName: `${user.firstName} ${user.lastName}`,
+      profilePicture: `${user.profilePicture}`
     };
 
     if (imageURL) {
@@ -159,8 +167,8 @@ const Feed = ({ navigate }) => {
             </ul>
           </nav>
           <div id="feedComponent">
-           <div className='title-posts'></div><h2>Posts</h2>
-            <form onSubmit={(event) => handleSubmitPost(event, imageURL)}>
+            <div className='title-posts'></div><h2>Posts</h2>
+            <form onSubmit={(event) => handleSubmitPost(event, imageURL, user)}>
               <textarea
                 placeholder="Write your post here"
                 id="message"
@@ -187,6 +195,9 @@ const Feed = ({ navigate }) => {
                       {post.createdAt && new Date(post.createdAt).toISOString().split('.')[0].replace('T', ' ')}
                     </div>
                   </div>
+                  <div data-cy="profilePicDiv" class="profilePicDiv">
+                      <img class="profilePic" src={post.profilePicture} alt=''/>
+                  </div>
 
                   <Post
                     post={post}
@@ -198,6 +209,7 @@ const Feed = ({ navigate }) => {
                     navigate={navigate}
                     onAddComment={(comment) => handleAddComment(post._id, comment)}
                     imageURL={imageURL}
+                    authorProfilePic={post.profilePic}
                   />
                 </div>
               ))}
