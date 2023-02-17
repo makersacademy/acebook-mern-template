@@ -9,26 +9,35 @@ const NavBar = () => {
         token = window.localStorage.getItem("token");
     });
 
-    return(
-        <>
-            <nav className='nav'>
-                <div className='nav-container'>
-                    <Link to="/" className='site-title'>AceBook</Link>
-                    <ul>
-                        {token ? 
-                            [
-                                <CustomLink to="/posts">Posts</CustomLink>,
-                                <Link to="/login" onClick={() => window.localStorage.removeItem("token")}>Logout</Link>
-                            ] : [
-                                <CustomLink to="/login">Login</CustomLink>,
-                                <CustomLink to="/signup">Sign-up</CustomLink>
-                            ]
-                        }    
-                    </ul>
-                </div>
-            </nav>
-        </>
-    )
+    if (token) {
+        return(
+            <>
+                <nav className='nav'>
+                    <div className='nav-container'>
+                        <Link to="/" className='site-title'>AceBook</Link>
+                        <ul>
+                            <CustomLink to="/posts">Posts</CustomLink>,
+                            <Link to="/login" onClick={() => window.localStorage.removeItem("token")}>Logout</Link>  
+                        </ul>
+                    </div>
+                </nav>
+            </>
+        )
+    } else {
+        return(
+            <>
+                <nav className='nav'>
+                    <div className='nav-container'>
+                        <Link to="/" className='site-title'>AceBook</Link>
+                        <ul>
+                            <CustomLink to="/login">Login</CustomLink>,
+                            <CustomLink to="/signup">Sign-up</CustomLink>   
+                        </ul>
+                    </div>
+                </nav>
+            </>
+        )
+    }
 }
 
 const CustomLink = ({to, children}) => {
