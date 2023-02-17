@@ -173,7 +173,7 @@ const Feed = ({ navigate }) => {
 
             <div>
               <form class="chooseFile">
-                <input type="file" accept="image/*" onChange={handleImageUpload} />
+                <input  type="file" accept="image/*" onChange={handleImageUpload} />
               </form>
             </div>
 

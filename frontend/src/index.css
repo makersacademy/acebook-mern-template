@@ -104,15 +104,17 @@ input::placeholder {
   background: -webkit-linear-gradient(#8CA6DB, #B993D6);
   background: linear-gradient(#8CA6DB, #B993D6);
 }
+
+
 #deleteButton {
   text-align: center;
-  margin-left: auto;
+  margin-left: 8px;
   box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
   margin-right: auto;
   position: relative;
   display: flex;
-  /* border: 5px; */
-  /* border-color: #2e4357; */
+  border: 5px;
+  border-color: #2e4357;
   border-radius: 6px;
   background: transparent;
   outline: auto;
@@ -249,7 +251,7 @@ input::placeholder {
 #unlike,
 #delete {
   text-align: center;
-  margin-left: auto;
+  margin-left: 8px;
   box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
   margin-right: auto;
   position: relative;
@@ -343,7 +345,7 @@ input::placeholder {
 }
 #commentButton {
   text-align: center;
-  margin-left: auto;
+  margin-left: 8px;
   box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
   margin-right: auto;
   position: relative;
