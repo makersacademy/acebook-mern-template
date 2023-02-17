@@ -358,10 +358,11 @@ describe('Post', () => {
       );
 
       cy.get('[data-cy=edit-button]').click();
-      cy.get('#text-value').innerHTML = 'testing';
+
+      cy.get('#text-value').type('testing');
       cy.get('[data-cy=edit-submit]').click();
       cy.wait('@putUpdate');
-      cy.get('#text-value').should('contain.text', 'Hello, world');
+      cy.get('#text-value').should('contain', 'testing');
     });
   });
 });
