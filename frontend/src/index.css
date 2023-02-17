@@ -76,7 +76,7 @@ input::placeholder {
   text-align: left;
 }
 
-#feedComponent .title-posts {
+#feedComponent title-posts {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
   color: #fff;
@@ -104,7 +104,6 @@ input::placeholder {
   border-bottom: 1px soild #ccc;
   background: -webkit-linear-gradient(#8CA6DB, #B993D6);
   background: linear-gradient(#8CA6DB, #B993D6);
-  box-shadow: 10px 10px 5px lightgray;
 }
 
 #submitPost {
@@ -130,7 +129,7 @@ input::placeholder {
   background: -webkit-linear-gradient(#8CA6DB, #B993D6);
   background: linear-gradient(#8CA6DB, #B993D6);
   border-radius: 10px;
-  border: solid;
+  border: 0;
   border-width: 1px;
   margin-bottom: 15px;
   margin-top: 15px;
@@ -159,7 +158,6 @@ input::placeholder {
   margin-bottom: 10px;
   word-wrap: break-word;
   align-self: flex-end;
-  box-shadow: 10px 10px 5px lightgray inset;
 }
 
 .postTimestamp {
