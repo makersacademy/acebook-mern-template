@@ -315,4 +315,54 @@ describe('Post', () => {
       cy.get('[data-cy="post"]').should('not.contain.text', 'Show more');
     });
   });
+  describe('edit button', () => {
+    it('displays edit button', () => {
+      window.localStorage.setItem('user_id', '63ee52ddb6e29209de11f059');
+
+      cy.mount(
+        <Post
+          post={{
+            _id: 1,
+            message: 'Hello, world',
+            likes: [],
+            createdAt: '2023-02-14T11:44:40.970Z',
+            user_id: {
+              _id: '63ee52ddb6e29209de11f059',
+            },
+          }}
+        />
+      );
+
+      cy.get('[data-cy=edit-button]').should('exist');
+    });
+
+    it('allows editing of post', () => {
+      window.localStorage.setItem('token', 'fakeToken');
+      window.localStorage.setItem('user_id', '63ee52ddb6e29209de11f059');
+      cy.intercept({
+        method: 'PUT',
+        url: '/posts',
+      }).as('putUpdate');
+      cy.mount(
+        <Post
+          post={{
+            _id: 1,
+            message: 'Hello, world',
+            likes: [],
+            createdAt: '2023-02-14T11:44:40.970Z',
+            user_id: {
+              _id: '63ee52ddb6e29209de11f059',
+            },
+          }}
+        />
+      );
+
+      cy.get('[data-cy=edit-button]').click();
+
+      cy.get('#text-value').type('testing');
+      cy.get('[data-cy=edit-submit]').click();
+      cy.wait('@putUpdate');
+      cy.get('#text-value').should('contain', 'testing');
+    });
+  });
 });
