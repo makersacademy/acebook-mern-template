@@ -7,7 +7,6 @@ const Account = () => {
   const [showForm, setShowForm] = useState(false);
   const [formType, setFormType] = useState('');
   const [token, setToken] = useState(window.localStorage.getItem('token'));
-  // const [id, setId] = useState(window.localStorage.getItem('user_id'));
 
   return (
     <>

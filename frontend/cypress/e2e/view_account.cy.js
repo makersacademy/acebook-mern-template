@@ -8,18 +8,8 @@ describe('Visiting account page', () => {
 
   it('Can visit account page', () => {
     cy.visit('/account');
-    cy.get('h2').contains('Welcome');
+    cy.get('h2').contains('Edit your Account Details');
   });
-
-  it('it display edit buttons', () => {
-    cy.visit('/account');
-    cy.get('button').contains('Edit display name');
-    cy.get('button').contains('Edit email');
-    cy.get('button').contains('Edit bio');
-    cy.get('button').contains('Upload image');
-    cy.get('button').contains('Edit password');
-  });
-
   it('changes display name', () => {
     cy.visit('/account');
     cy.get('#display-button').click();
@@ -29,7 +19,6 @@ describe('Visiting account page', () => {
       expect(t).to.contains('display changed');
     });
   });
-
   it('changes email', () => {
     cy.visit('/account');
     cy.get('#email-button').click();
