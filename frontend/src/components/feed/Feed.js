@@ -167,8 +167,9 @@ const Feed = ({ navigate }) => {
             </ul>
           </nav>
           <div id="feedComponent">
-            <div className='title-posts'></div><h2>Posts</h2>
-            <form onSubmit={(event) => handleSubmitPost(event, imageURL, user)}>
+          <h2 id="feedTitle">Feed Page</h2>
+            <form class='postForm' onSubmit={(event) => handleSubmitPost(event, imageURL)}>
+              <div>
               <textarea
                 placeholder="Write your post here"
                 id="message"
@@ -176,13 +177,14 @@ const Feed = ({ navigate }) => {
                 defaultValue={post}
                 onChange={handleMessageChange}
               />
+              </div>
               <br />
               <input id="submitPost" type="submit" value="Submit" />
             </form>
 
             <div>
               <form class="chooseFile">
-                <input type="file" accept="image/*" onChange={handleImageUpload} />
+                <input  type="file" accept="image/*" onChange={handleImageUpload} />
               </form>
             </div>
 

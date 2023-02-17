@@ -165,7 +165,7 @@ const handleUnLike = async () => {
         <button id="unlike" onClick={() => handleUnLike(post._id)}>Unlike</button>
         
 
-        <button onClick={() => handleDeletePost(post._id)}>Delete</button>
+        <button id='deleteButton' onClick={() => handleDeletePost(post._id)}>Delete</button>
         
         <label htmlFor="comment">
           <button onClick={() => handleCommentPost(post._id)} id="commentButton" type="submit">
@@ -198,9 +198,9 @@ const handleUnLike = async () => {
             {post.comments.length > 0 ? (
               post.comments.map((comment) => (
                 <div data-cy="comment" class="comment">
-                  {comment.userName}
+                  <p id="commentUserName">{comment.userName}</p>
                   <br />
-                  {comment.message}
+                  <div class="commentMessage">{comment.message}</div>
                   <br />
                   {formattedDate(comment.timeStamp)}
                 </div>
