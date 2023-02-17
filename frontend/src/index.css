@@ -76,11 +76,6 @@ input::placeholder {
   text-align: left;
 }
 
-/* #feedComponent title-posts {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
-    monospace;
-  color: #fff;
-} */
 
 #feedComponent {
   padding-left: 55px;
@@ -109,6 +104,29 @@ input::placeholder {
   background: linear-gradient(#8CA6DB, #B993D6);
 }
 
+.chooseFile {
+  box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
+  margin-right: 10px;
+  position: relative;
+  display: flex;
+  border: 5px;
+  border-color: #2e4357;
+  border-radius: 6px;
+  background-color: transparent;
+  border: none;
+  color: white;
+  font-size: 15px;
+  transition: all 0.5s;
+  cursor: pointer;
+  box-shadow: 0 10px 20px -8px rgba(0, 0, 0, 0.7);
+  cursor: pointer;
+  transition: 0.5s;
+   {
+    content: "»";
+    opacity: 0;
+  }
+  
+}
 #submitPost {
   text-align: center;
   margin-left: auto;
