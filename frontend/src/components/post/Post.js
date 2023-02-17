@@ -107,7 +107,7 @@ const Post = ({ post, setReload }) => {
   const messageExpander = (message) => {
     const button = (
       <>
-        <button data-cy='text-expand' onClick={() => setDetails(!details)}>
+        <button data-cy="text-expand" onClick={() => setDetails(!details)}>
           {details ? 'Show less' : 'Show more'}
         </button>
       </>
@@ -130,7 +130,7 @@ const Post = ({ post, setReload }) => {
       <div className={styles.container}>
         <div className={styles.postHeader}>
           <div className={styles.avatar}>
-            <img alt='avatar' src={post.user_id && post.user_id.image} />
+            <img alt="avatar" src={post.user_id && post.user_id.image} />
           </div>
           <div>
             <h1> {post.user_id && post.user_id.display_name}</h1>
@@ -138,19 +138,21 @@ const Post = ({ post, setReload }) => {
               Posted{' '}
               <ReactTimeAgo
                 date={post.createdAt}
-                locale='en-US'
-                timeStyle='twitter'
+                locale="en-US"
+                timeStyle="twitter"
               />{' '}
-              ago
+              {Date.parse(post.createdAt) > Date.now() - 86400000
+                ? 'ago'
+                : null}{' '}
             </p>
           </div>
         </div>
-        <article className={styles.content} data-cy='post' key={post._id}>
-          <p id='text-value' contentEditable={isEditable} ref={messageRef}>
+        <article className={styles.content} data-cy="post" key={post._id}>
+          <p id="text-value" contentEditable={isEditable} ref={messageRef}>
             {messageExpander(post.message)}
           </p>
 
-          <div className='comment-section'>
+          <div className="comment-section">
             {isExpanded && (
               <CreateCommentForm
                 navigate={useNavigate}
@@ -163,7 +165,7 @@ const Post = ({ post, setReload }) => {
             {post.comments && displayComments()}
             {
               <button
-                data-cy='expand-button'
+                data-cy="expand-button"
                 onClick={handleCommentExpansionToggle}
               >
                 Comment
@@ -174,7 +176,7 @@ const Post = ({ post, setReload }) => {
 
         {isEditable ? (
           <button
-            data-cy='edit-submit'
+            data-cy="edit-submit"
             className={styles.editButton}
             onClick={submitEdit}
           >
@@ -186,20 +188,20 @@ const Post = ({ post, setReload }) => {
           <div className={styles.postFooter}>
             <div
               className={styles.like}
-              data-cy='like-button'
+              data-cy="like-button"
               onClick={handleLikeToggle}
             >
               {isLiked ? (
-                <img src='/images/thumbFilled.png' alt='like' />
+                <img src="/images/thumbFilled.png" alt="like" />
               ) : (
-                <img src='/images/thumbOutline.png' alt='like' />
+                <img src="/images/thumbOutline.png" alt="like" />
               )}
             </div>
             {user_id && user_id === post.user_id._id ? (
               <div>
                 <button
-                  data-cy='delete-button'
-                  id='delete-button'
+                  data-cy="delete-button"
+                  id="delete-button"
                   className={styles.deleteButton}
                   onClick={handleDelete}
                 >
@@ -211,7 +213,7 @@ const Post = ({ post, setReload }) => {
             )}
             {!isEditable && user_id && user_id === post.user_id._id ? (
               <button
-                data-cy='edit-button'
+                data-cy="edit-button"
                 className={styles.editButton}
                 onClick={handleEdit}
               >
@@ -220,7 +222,7 @@ const Post = ({ post, setReload }) => {
             ) : null}
             <div className={styles.likesNumber}>
               <div>
-                <img src='/images/likes.jpg' alt='Number of likes' />
+                <img src="/images/likes.jpg" alt="Number of likes" />
               </div>
               <p>{post.likes.length}</p>
             </div>
