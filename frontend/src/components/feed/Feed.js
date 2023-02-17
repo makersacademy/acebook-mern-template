@@ -161,8 +161,8 @@ const Feed = ({ navigate }) => {
               acebook
             </a>
             <ul>
-              <button onClick={profile}>Profile</button>
-              <button onClick={logout}>Logout</button>
+              <a href="/profile" id="profile-nav" onClick={profile}>Profile</a>
+              <a href="/login" id="logout-nav"onClick={logout}>Logout</a>
               <br></br>
             </ul>
           </nav>
