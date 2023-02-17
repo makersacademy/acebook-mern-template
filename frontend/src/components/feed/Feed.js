@@ -23,20 +23,11 @@ const Feed = ({ navigate }) => {
         })
     }
   }, [token, posts, isUpdated]);
-    
-
-  const logout = () => {
-    window.localStorage.removeItem("token")
-    navigate('/login')
-  }
   
     if(token) {
       return(
         <>
           <h2>Posts</h2>
-            <button onClick={logout}>
-              Logout
-            </button>
             <CreatePostForm callback={(value) => {
               setIsUpdated(value); 
             }}/>

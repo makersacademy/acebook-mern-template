@@ -28,11 +28,6 @@ const CommentFeed = ({ navigate }) => {
         }
     }, [token, comments, isUpdated]);
 
-    const logout = () => {
-      window.localStorage.removeItem("token")
-      navigate('/login')
-    }
-
     if(token) {
         return(
             <>
@@ -41,7 +36,6 @@ const CommentFeed = ({ navigate }) => {
                 <div id='feed' role="feed">
                     {comments.map((comment) => ( <Comment comment={ comment } key={ comment._id } /> ))}
                 </div>
-                <button onClick={logout}>Logout</button>
             </>
         )
     } else {
