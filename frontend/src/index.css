@@ -35,6 +35,10 @@ h2 {
   font-size: 2rem;
 }
 
+.login-button {
+  font-size: 2rem;
+}
+
 .nav a {
   color: inherit;
   text-decoration: none;
@@ -125,7 +129,7 @@ input::placeholder {
   border: solid;
   border-width: 0.75px;
   width: 75%;
-  margin-top: 75px;
+  margin-top: 30px;
   margin-bottom: 10px;
   word-wrap: break-word;
   align-self: flex-end;
@@ -161,8 +165,10 @@ input::placeholder {
   box-shadow: 0 10px 20px -8px rgba(0, 0, 0, 0.7);
   cursor: pointer;
   transition: 0.5s;
-  content: "»";
-  opacity: 0;
+   {
+    content: "»";
+    opacity: 0;
+  }
 }
 
 .likesDiv {
@@ -453,30 +459,44 @@ button:focus {
 }
 
 .welcome {
-  font-weight: 200;
+  font-weight: 300;
   margin-top: 75px;
   text-align: center;
   font-size: 40px;
-  font-size: 3rem;
+  font-size: 4rem;
   letter-spacing: 0px;
   letter-spacing: 0.05rem;
 }
 
-.subb {
+.welcome-signup {
+  font-weight: 300;
+  margin-top: 50px;
   text-align: center;
+  font-size: 40px;
+  font-size: 4rem;
+  letter-spacing: 0px;
+  letter-spacing: 0.05rem;
+}
+
+.subb-signup {
+  text-align: center;
+  margin-top: 30px;
+  margin-bottom: 10px;
   line-height: 1em;
   font-weight: 100;
   font-size: 20px;
+  font-size: 3rem;
   letter-spacing: 0px;
   letter-spacing: 0.02rem;
 }
 
-.subtitle {
+.subtitle-signup {
   text-align: center;
   line-height: 1em;
   font-weight: 100;
   letter-spacing: 0px;
   letter-spacing: 0.02rem;
+  font-size: 1.5rem;
 }
 
 .menu {
@@ -499,8 +519,8 @@ button:focus {
   flex-flow: column;
   box-shadow: 0px 15px 50px 10px rgba(0, 0, 0, 0.2);
   box-sizing: border-box;
-  height: 560px;
-  width: 360px;
+  height: 700px;
+  width: 600px;
   background: #fff;
   background: url("https://pexels.imgix.net/photos/27718/pexels-photo-27718.jpg?fit=crop&w=1280&h=823")
     top left no-repeat;
@@ -676,6 +696,7 @@ button:focus {
   display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
+  margin-top: 25px;
   -webkit-box-align: center;
   -webkit-align-items: center;
   -ms-flex-align: center;
@@ -774,6 +795,13 @@ button:focus {
 
 #profile-title {
   color: white;
+
+#signup-overlay {
+  height: 800px;
+}
+
+#signup-submit {
+  margin-top: 20px;
 }
 
 .bold-line {
@@ -811,4 +839,26 @@ button:focus {
 
 #logout-nav {
   font-size: 1.5rem;
+
+  #changeProfilePictureButton {
+    margin-top: 10px;
+  }
+}
+
+.profilePicDiv {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  justify-content: flex-start;
+  align-items: center;
+  width: 500px;
+  margin-top: 10px;
+}
+
+.profilePic {
+  display: inline-block;
+  height: 50px;
+  width: 50px;
+  margin-right: 450px;
+  border-radius: 50%;
 }

@@ -18,22 +18,22 @@ const Profile = ({ navigate }) => {
     navigate("/profile");
   };
 
-  const fetchUser = async () => {
-    const email = window.localStorage.getItem("email");
-    const url = `/users?email=${email}`;
+    const fetchUser = async () => {
+      const email = window.localStorage.getItem("email");
+      const url = `/users?email=${email}`;
 
-    try {
-      const response = await fetch(url, {
-        method: "get",
-        headers: {
-          Authorization: `Bearer ${token}`,
-          "Content-Type": "application/json",
-        },
-      });
+      try {
+        const response = await fetch(url, {
+          method: "get",
+          headers: {
+            Authorization: `Bearer ${token}`,
+            "Content-Type": "application/json",
+          },
+        });
 
-      if (!response.ok) {
-        throw new Error(response.statusText);
-      }
+        if (!response.ok) {
+          throw new Error(response.statusText);
+        }
 
       const data = await response.json();
       const userData = {
@@ -137,7 +137,7 @@ const Profile = ({ navigate }) => {
             <h1 id="profile-title">{`${user.firstName} ${user.lastName}'s Profile Page`}</h1>
             <img
               className="profilePagePicture"
-              src={user.profilePicture ? user.profilePicture : "graphics-avatar.jpeg"}
+              src={user.profilePicture}
               alt="profile"
             />
             <button id="changeProfilePictureButton" onClick={() => setShowUpload(true)}>Change Profile Picture</button>

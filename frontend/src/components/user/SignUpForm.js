@@ -55,7 +55,7 @@ return (
             acebook
         </a>
         <ul>
-             <a href="/login"> Login </a>
+           <a class="login-button" href="/login"> Login </a>
         </ul>
    </nav>
 
@@ -84,7 +84,29 @@ return (
     
   </div>
   
-  
+
+      <div className="signUpForm">
+        <div class='bold-line'></div>
+        
+<div class='container'>
+  <div class='window'>
+    <div id="signup-overlay" class='overlay'></div>
+    <div class='content'>
+      <div class='welcome-signup'>Hello there!</div>
+      <div class='subb-signup'>Welcome to Acebook</div>
+      <div class='subtitle-signup'>Please signup below</div>
+      <form onSubmit={handleSubmit}>
+      <div class='input-fields-signup'>
+      
+        <input type='text' placeholder='First Name' class='input-line full-width' value={ firstName } onChange={handleFirstNameChange}></input>
+        <input type='text' placeholder='Last name' class='input-line full-width' value={ lastName } onChange={handleLastNameChange}></input>
+        <input type='email' placeholder='Email' class='input-line full-width' value={ email } onChange={handleEmailChange}></input>
+        <input type='password' placeholder='Password' class='input-line full-width' value={ password } onChange={handlePasswordChange}></input>
+      </div>
+      <div><button class='ghost-round full-width' type="submit" id ='signup-submit' value="Submit" >Create Account!</button></div>
+      </form>
+    </div>
+  </div>
 </div>
 
       </div>
