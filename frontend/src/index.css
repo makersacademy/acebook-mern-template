@@ -819,6 +819,7 @@ button:focus {
     height: 100%;
   }
 
-#changeProfilePictureButton {
-  margin-top: 10px;
+  #changeProfilePictureButton {
+    margin-top: 10px;
+  }
 }
