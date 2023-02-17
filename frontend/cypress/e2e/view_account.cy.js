@@ -8,8 +8,9 @@ describe('Visiting account page', () => {
   it('Can visit account page', () => {
     cy.login('useraccount@email.com', '12345678');
     cy.visit('/account');
-    cy.get('h2').contains('Welcome');
+    cy.get('h2').contains('Edit your Account Details');
   });
+
 
   it('it display edit buttons', () => {
     cy.login('useraccount@email.com', '12345678');
@@ -31,6 +32,7 @@ describe('Visiting account page', () => {
       expect(t).to.contains('display changed');
     });
   });
+
 
   // it('changes email', () => {
   //   cy.login('useraccount@email.com', '12345678');

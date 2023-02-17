@@ -1,30 +1,28 @@
 import Account from './account';
+import { MemoryRouter } from 'react-router';
 const navigate = () => {};
 
 describe('Visiting account page', () => {
   it('Can visit account page', () => {
     window.localStorage.setItem('token', 'fakeToken');
 
-    cy.mount(<Account navigate={navigate} />);
+    cy.mount(<MemoryRouter><Account navigate={navigate} /></MemoryRouter>);
 
-    cy.get('h2').contains('Welcome');
+    cy.get('h2').contains('Edit your Account Details');
   });
 
-  it('it display edit buttons', () => {
+  describe('it display edit buttons', () => {
     window.localStorage.setItem('token', 'fakeToken');
+    it("finds upload img button", () => {
+      cy.mount(<MemoryRouter><Account/></MemoryRouter>)
+      
+      cy.get('[alt="upload image button"]');
+    });
 
-    cy.mount(<Account navigate={navigate} />);
-
-    cy.get('button').contains('Edit display name');
-    cy.get('button').contains('Edit email');
-    cy.get('button').contains('Edit bio');
-    cy.get('button').contains('Upload image');
-    cy.get('button').contains('Edit password');
+    it("finds bio button", () => {
+      cy.mount(<MemoryRouter><Account/></MemoryRouter>)
+      
+      cy.get('[alt="bio button"]');
+    });
   });
 });
-//   xit('sends put request to endpoint', () => {
-//     cy.mount(<Account navigate={navigate} />);
-//     window.localStorage.setItem('token', 'fakeToken');
-//     cy.intercept("PUT, '/tokens", { token: 'fakeToken' }.as(''));
-//   });
-// });
