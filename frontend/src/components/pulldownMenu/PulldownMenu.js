@@ -2,14 +2,19 @@ import React from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import styles from './PulldownMenu.module.css';
 
-const PulldownMenu = ({ toggleMenu, isMenuOpen, setToken, setProfile }) => {
+const PulldownMenu = ({
+  toggleMenu,
+  isMenuOpen,
+  setToken,
+  setProfileImage,
+}) => {
   const navigate = useNavigate();
 
   const logout = () => {
     window.localStorage.removeItem('token');
     toggleMenu();
     setToken(null);
-    setProfile(null);
+    setProfileImage(null);
     navigate('/');
   };
   return (

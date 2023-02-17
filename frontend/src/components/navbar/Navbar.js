@@ -4,7 +4,7 @@ import PulldownMenu from '../pulldownMenu/PulldownMenu';
 import styles from './Navbar.module.css';
 const Navbar = ({ navigate, token, setToken }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [profile, setProfile] = useState();
+  const [profileImage, setProfileImage] = useState();
 
   useEffect(() => {
     if (token) {
@@ -17,8 +17,8 @@ const Navbar = ({ navigate, token, setToken }) => {
         .then(async (data) => {
           window.localStorage.setItem('token', data.token);
           setToken(window.localStorage.getItem('token'));
-          console.log(data.posts[0].user_id.image);
-          setProfile(data);
+          console.log(data.user.image);
+          setProfileImage(data.user.image);
         });
     } else {
     }
@@ -31,22 +31,18 @@ const Navbar = ({ navigate, token, setToken }) => {
     <div className={styles.navbar}>
       <div className={styles.logo}>
         <Link to={token ? '/posts' : '/'}>
-          <img src="/images/Acebook.svg" alt="logo" />
+          <img src='/images/Acebook.svg' alt='logo' />
           Acebook-Air
         </Link>
       </div>
       {token ? (
         <div className={styles.profile}>
-          {token && profile ? (
-            <img
-              src={profile.posts[0].user_id.image}
-              alt="logo"
-              onClick={toggleMenu}
-            />
+          {token && profileImage ? (
+            <img src={profileImage} alt='logo' onClick={toggleMenu} />
           ) : (
             <img
-              src="/images/buttons/account-button.svg"
-              alt="logo"
+              src='/images/buttons/account-button.svg'
+              alt='logo'
               onClick={toggleMenu}
             />
           )}
@@ -57,7 +53,7 @@ const Navbar = ({ navigate, token, setToken }) => {
               toggleMenu={toggleMenu}
               isMenuOpen={isMenuOpen}
               setToken={setToken}
-              setProfile={setProfile}
+              setProfileImage={setProfileImage}
             />
           </div>
         </div>
