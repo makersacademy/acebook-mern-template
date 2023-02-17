@@ -18,44 +18,44 @@ const Profile = ({ navigate }) => {
     navigate("/profile");
   };
 
-    const fetchUser = async () => {
-      const email = window.localStorage.getItem("email");
-      const url = `/users?email=${email}`;
+  const fetchUser = async () => {
+    const email = window.localStorage.getItem("email");
+    const url = `/users?email=${email}`;
 
-      try {
-        const response = await fetch(url, {
-          method: "get",
-          headers: {
-            Authorization: `Bearer ${token}`,
-            "Content-Type": "application/json",
-          },
-        });
+    try {
+      const response = await fetch(url, {
+        method: "get",
+        headers: {
+          Authorization: `Bearer ${token}`,
+          "Content-Type": "application/json",
+        },
+      });
 
-        if (!response.ok) {
-          throw new Error(response.statusText);
-        }
-
-        const data = await response.json();
-        const userData = {
-          email: data.user.email,
-          firstName: data.user.firstName,
-          lastName: data.user.lastName,
-          userId: data.user._id,
-          bio: data.user.bio,
-          profilePicture: data.user.profilePicture
-        };
-        setUser(userData);
-      } catch (error) {
-        console.error(error);
+      if (!response.ok) {
+        throw new Error(response.statusText);
       }
-    };
-    
 
-    const handleEditBio = () => {
-      setIsEditingBio(true);
-      setBioInput(user.bio);
-    };
-    
+      const data = await response.json();
+      const userData = {
+        email: data.user.email,
+        firstName: data.user.firstName,
+        lastName: data.user.lastName,
+        userId: data.user._id,
+        bio: data.user.bio,
+        profilePicture: data.user.profilePicture
+      };
+      setUser(userData);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+
+  const handleEditBio = () => {
+    setIsEditingBio(true);
+    setBioInput(user.bio);
+  };
+
 
   useEffect(() => {
     fetchUser();
@@ -87,11 +87,11 @@ const Profile = ({ navigate }) => {
 
   const handleProfileImageUpdate = async (event) => {
     const file = event.target.files[0];
-  
+
     try {
       const formData = new FormData();
       formData.append("image", file);
-  
+
       const response = await fetch(`/users/profile-picture/${user.userId}`, {
         method: "POST",
         headers: {
@@ -99,11 +99,11 @@ const Profile = ({ navigate }) => {
         },
         body: formData,
       });
-  
+
       const data = await response.json()
       const imageURL = data.url.toString(); // convert to string
       setImageURL(imageURL);
-  
+
       await fetch(`/users/profile-picture/${user.userId}`, {
         method: "PUT",
         headers: {
@@ -112,7 +112,7 @@ const Profile = ({ navigate }) => {
         },
         body: JSON.stringify({ profilePicture: imageURL }),
       });
-  
+
     } catch (error) {
       console.error(error);
     }
