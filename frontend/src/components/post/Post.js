@@ -164,7 +164,7 @@ const handleUnLike = async () => {
         <button id="unlike" onClick={() => handleUnLike(post._id)}>Unlike</button>
         
 
-        <button onClick={() => handleDeletePost(post._id)}>Delete</button>
+        <button id='deleteButton' onClick={() => handleDeletePost(post._id)}>Delete</button>
         
         <label htmlFor="comment">
           <button onClick={() => handleCommentPost(post._id)} id="commentButton" type="submit">
