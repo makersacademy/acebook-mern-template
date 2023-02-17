@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 const LogInForm = ({ navigate }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [error, setError] = useState(null);
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -16,12 +17,11 @@ const LogInForm = ({ navigate }) => {
     })
 
     if(response.status !== 201) {
-      console.log("yay")
-      navigate('/login')
+      setError("Incorrect login details, try again....");
     } else {
-      console.log("oop")
       let data = await response.json()
       window.localStorage.setItem("token", data.token)
+      window.localStorage.setItem("email", email)
       navigate('/posts');
     }
   }
@@ -35,12 +35,42 @@ const LogInForm = ({ navigate }) => {
   }
 
 
-    return (
+
+  return (
+    <div className="logInForm">
+
+    <nav className="nav">
+      
+        <a href="/posts" className="site-title">
+            acebook
+        </a>
+        <ul>
+                <a class="signup-button" href="/signup"> Signup </a>
+        </ul>
+   </nav>
+ 
+
+      
+      <div class='bold-line'></div>
+<div class='container'>
+  <div class='window'>
+    <div class='overlay'></div>
+    <div class='content'>
+      <div id='welcome-login'>Hello there!</div>
+      <div id='subb-login'>Welcome to acebook!</div>
+      <div id='subtitle-login'>Login below</div>
       <form onSubmit={handleSubmit}>
-        <input placeholder='Email' id="email" type='text' value={ email } onChange={handleEmailChange} />
-        <input placeholder='Password' id="password" type='password' value={ password } onChange={handlePasswordChange} />
-        <input role='submit-button' id='submit' type="submit" value="Submit" />
+      <div class='input-fields'>
+        <input type='email' placeholder='Email' class='input-line full-width' value={ email } onChange={handleEmailChange} ></input>
+        <input type='password' placeholder='Password' class='input-line full-width' value={ password } onChange={handlePasswordChange} ></input>
+        { error != null ? error : null }
+      </div>
+      <div class="login-button"><button class='ghost-round full-width' id='submit' value="Submit">Login</button></div>
       </form>
+    </div>
+  </div>
+</div>
+    </div>
     );
 }
 
