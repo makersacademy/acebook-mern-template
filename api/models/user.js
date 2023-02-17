@@ -9,10 +9,10 @@ const validateEmail = (email) => {
 const UserSchema = new mongoose.Schema({
   email: {
     type: String,
-    required: true,
-    validate: [validateEmail, "Please use a valid email address"],
+    required: [true, 'required'],
+    validate: [validateEmail, "please use a valid email address"],
   },
-  password: { type: String, required: true, minlength: 4, maxlength: 10 },
+  password: { type: String, required: [true, 'required'], minlength: [4, 'must be at least 4 characters long'], maxlength: 10 },
 });
 
 const User = mongoose.model("User", UserSchema);

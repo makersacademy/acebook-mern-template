@@ -128,4 +128,17 @@ main {
     border-radius: 6px;
     box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.25);
 }
+
+div.error  {
+    padding: 10px;
+    background: #ffefef;
+    border: 1px solid #e7195a;
+    color: #e7195a;
+    border-radius: 4px;
+    margin: 20px 0;
+  }
+  
+  input.error {
+      border: 1px solid #e7195a;
+  }
   

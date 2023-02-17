@@ -6,24 +6,30 @@ const SignUpForm = ({ navigate }) => {
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [error, setError] = useState(null);
 
   const handleSubmit = async (event) => {
     event.preventDefault();
 
-    fetch( '/users', {
-      method: 'post',
+    const response = await fetch('/users', {
+      method: 'POST',
+      body: JSON.stringify({email: email, password: password}),
       headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({ email: email, password: password })
+        'Content-Type': 'application/json'
+      }
     })
-      .then(response => {
-        if(response.status === 201) {
-          navigate('/login')
-        } else {
-          navigate('/signup')
-        }
-      })
+
+    const json = await response.json()
+
+    if (!response.ok) {
+      setError(json.message)
+    }
+
+    if (response.ok) {
+      { navigate('/login')}
+      setError(null)
+      console.log('Request Submitted')
+    }
   }
 
   const handleEmailChange = (event) => {
@@ -54,24 +60,10 @@ const SignUpForm = ({ navigate }) => {
             </div> 
             <input id='submit' type="submit" value="Sign Up" />
           </form>
+          {error && <div className="error">{error}</div>}
           </div>
       </main>
     );
 }
 
 export default SignUpForm;
-
-/*<div class="container">
-  <div class="form">
-    <div class="input-box">
-      <input type="text" required>
-      <span>Username</span>
-      <i></i>
-    </div>
-    <div class="input-box">
-      <input type="text" required>
-      <span>Password</span>
-      <i></i>
-    </div>
-  </div>
-</div>*/
