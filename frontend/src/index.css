@@ -1024,10 +1024,10 @@ button:focus {
 
 #logout-nav {
   font-size: 1.5rem;
+}
 
-  #changeProfilePictureButton {
-    margin-top: 10px;
-  }
+#changeProfilePictureButton {
+  margin-top: 10px;
 }
 
 .profilePicDiv {
@@ -1044,6 +1044,7 @@ button:focus {
   color: white;
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
+}
 
 .profilePic {
   display: inline-block;
