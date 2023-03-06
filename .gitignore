@@ -63,3 +63,7 @@ typings/
 # cypress.io
 cypress/screenshots
 cypress/videos
+
+# intellij
+/api/requests.http
+.idea
