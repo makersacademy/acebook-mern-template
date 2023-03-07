@@ -1,4 +1,4 @@
-var mongoose = require("mongoose");
+const mongoose = require("mongoose");
 
 beforeAll(function (done) {
   mongoose.connect("mongodb://0.0.0.0/acebook_test", {
@@ -6,7 +6,7 @@ beforeAll(function (done) {
     useUnifiedTopology: true,
   });
 
-  var db = mongoose.connection;
+  const db = mongoose.connection;
   db.on("error", console.error.bind(console, "MongoDB connection error:"));
   db.on("open", function () {
     done();
