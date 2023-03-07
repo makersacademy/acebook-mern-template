@@ -4,7 +4,7 @@ const TokenGenerator = require("../models/token_generator");
 const PostsController = {
   Index: (req, res) => {
     Post.find()
-      .populate("user", "email")
+      .populate("user", "name")
       .exec(async (err, posts) => {
         console.log(posts);
         if (err) {
