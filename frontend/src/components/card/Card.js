@@ -13,7 +13,7 @@ const Card = () => {
       </div>
       <div className="card">
         <div>
-          <h2 className="font-bold text-2xl">Alex Morrison</h2>
+          <h2 className="font-bold text-3xl">Alex Morrison</h2>
           <p className="text-gray-400">Senior Journalist</p>
         </div>
         <div className="flex p-4 bg-slate-100 rounded-lg justify-between">
