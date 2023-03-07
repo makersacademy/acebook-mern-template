@@ -12,13 +12,20 @@ import {
 import Navbar from '../navbar/Navbar';
 
 const App = () => {
+  const [token, setToken] = useState(window.localStorage.getItem("token"));
+
+  const logout = () => {
+      setToken('');
+      window.localStorage.removeItem("token")
+    }
+
     return (
       <>
-        <Navbar></Navbar>
+        <Navbar logoutHandle={logout} token={token}/>
         <Routes>
           <Route path='/'  element={<Homepage navigate={ useNavigate() }/>}/>
           <Route path='/posts'  element={<Feed navigate={ useNavigate() }/>}/>
-          <Route path='/login'  element={<LoginForm  navigate={ useNavigate() }/>}/>
+          <Route path='/login'  element={<LoginForm  navigate={ useNavigate() } setToken={setToken}/>}/>
           <Route path='/signup' element={<SignUpForm navigate={ useNavigate() }/>}/>
         </Routes>
       </>

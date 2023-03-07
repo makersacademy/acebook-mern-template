@@ -1,17 +1,18 @@
 import React, { useEffect, useState } from 'react';
 
-const Navbar = () => {
-
-    const [token, setToken] = useState(window.localStorage.getItem("token"));
+const Navbar = ({logoutHandle, token}) => {
+    // const [token, setToken] = useState(window.localStorage.getItem("token"));
 
     // useEffect(() => {
-    //     setToken(window.localStorage.getItem("token"))
-    //       })}, [])
+    //     setToken(window.localStorage.getItem("token")
+    // }, [])
+    
 
-    const logout = () => {
-        setToken('');
-        window.localStorage.removeItem("token")
-      }
+
+    // const logout = () => {
+    //     setToken('');
+    //     window.localStorage.removeItem("token")
+    //   }
 
     return (
     <>
@@ -26,10 +27,10 @@ const Navbar = () => {
                     <li className="nav-item">
                         <a className="nav-link active" aria-current="page" href="posts">Home</a>
                     </li>
-
+                    {/* Conditional operator to check if a token exists to decide which buttons to render */}
                     {token ? 
                     <>
-                    <button onClick={logout}>
+                    <button onClick={logoutHandle}>
                         Logout
                     </button>
                     </> 
