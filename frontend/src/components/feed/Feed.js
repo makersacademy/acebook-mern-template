@@ -23,7 +23,6 @@ const Feed = ({ navigate }) => {
 
   const logout = () => {
     window.localStorage.removeItem("token");
-    window.localStorage.removeItem("user");
     navigate("/login");
   };
 
