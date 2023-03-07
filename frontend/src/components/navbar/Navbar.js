@@ -24,9 +24,7 @@ const Navbar = ({logoutHandle, token}) => {
             </button>
             <div className="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul className="navbar-nav me-auto mb-2 mb-lg-0">
-                    <li className="nav-item">
-                        <a className="nav-link active" aria-current="page" href="posts">Home</a>
-                    </li>
+
                     {/* Conditional operator to check if a token exists to decide which buttons to render */}
                     {token ? 
                     <>
