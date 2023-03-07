@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import PropTypes from "prop-types";
 
 const LogInForm = ({ navigate }) => {
   const [email, setEmail] = useState("");
@@ -16,10 +17,8 @@ const LogInForm = ({ navigate }) => {
     });
 
     if (response.status !== 201) {
-      console.log("yay");
       navigate("/login");
     } else {
-      console.log("oop");
       const data = await response.json();
       window.localStorage.setItem("token", data.token);
       navigate("/posts");
@@ -50,9 +49,13 @@ const LogInForm = ({ navigate }) => {
         value={password}
         onChange={handlePasswordChange}
       />
-      <input role="submit-button" id="submit" type="submit" value="Submit" />
+      <input id="submit" type="submit" value="Submit" />
     </form>
   );
+};
+
+LogInForm.propTypes = {
+  navigate: PropTypes.func.isRequired,
 };
 
 export default LogInForm;

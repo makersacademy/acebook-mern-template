@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import PropTypes from "prop-types";
 
 const SignUpForm = ({ navigate }) => {
   const [email, setEmail] = useState("");
@@ -49,6 +50,10 @@ const SignUpForm = ({ navigate }) => {
       <input id="submit" type="submit" value="Submit" />
     </form>
   );
+};
+
+SignUpForm.propTypes = {
+  navigate: PropTypes.func.isRequired,
 };
 
 export default SignUpForm;

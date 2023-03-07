@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import PropTypes from "prop-types";
 import Post from "../post/Post";
 
 const Feed = ({ navigate }) => {
@@ -30,7 +31,9 @@ const Feed = ({ navigate }) => {
     return (
       <>
         <h2>Posts</h2>
-        <button onClick={logout}>Logout</button>
+        <button type="button" onClick={logout}>
+          Logout
+        </button>
         <div id="feed" role="feed">
           {posts.map((post) => (
             <Post post={post} key={post._id} />
@@ -40,6 +43,11 @@ const Feed = ({ navigate }) => {
     );
   }
   navigate("/signin");
+  return <span />;
+};
+
+Feed.propTypes = {
+  navigate: PropTypes.func.isRequired,
 };
 
 export default Feed;

@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 
 const Post = ({ post }) => {
   return (
@@ -6,6 +7,13 @@ const Post = ({ post }) => {
       {post.message}
     </article>
   );
+};
+
+Post.propTypes = {
+  post: PropTypes.shape({
+    _id: PropTypes.number,
+    message: PropTypes.string,
+  }).isRequired,
 };
 
 export default Post;
