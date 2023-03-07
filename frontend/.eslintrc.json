@@ -17,11 +17,7 @@
     "ecmaVersion": "latest",
     "sourceType": "module"
   },
-  "plugins": [
-    "react",
-    "prettier",
-    "cypress"
-  ],
+  "plugins": ["react", "prettier", "cypress"],
   "rules": {
     "react/function-component-definition": [
       2,
@@ -33,11 +29,9 @@
     "react/jsx-filename-extension": [
       0,
       {
-        "extensions": [
-          ".js",
-          ".jsx"
-        ]
+        "extensions": [".js", ".jsx"]
       }
-    ]
+    ],
+    "no-underscore-dangle": "off"
   }
 }
