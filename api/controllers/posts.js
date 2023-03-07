@@ -6,7 +6,6 @@ const PostsController = {
     Post.find()
       .populate("user", "name")
       .exec(async (err, posts) => {
-        console.log(posts);
         if (err) {
           throw err;
         }
