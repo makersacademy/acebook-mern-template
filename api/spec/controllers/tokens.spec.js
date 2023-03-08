@@ -4,7 +4,7 @@ require("../mongodb_helper");
 const User = require("../../models/user");
 
 describe("/tokens", () => {
-  beforeAll(() => {
+  beforeEach(() => {
     const user = new User({
       email: "test@test.com",
       password: "12345678",
@@ -13,7 +13,7 @@ describe("/tokens", () => {
     user.save();
   });
 
-  afterAll(async () => {
+  afterEach(async () => {
     await User.deleteMany({});
   });
 
