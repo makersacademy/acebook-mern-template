@@ -41,6 +41,7 @@ const LogInForm = ({ navigate }) => {
         <input placeholder='Password' id="password" type='password' value={ password } onChange={handlePasswordChange} />
         <input role='submit-button' id='submit' type="submit" value="Submit" />
       </form>
+
     );
 }
 
