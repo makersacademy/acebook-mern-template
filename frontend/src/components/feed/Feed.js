@@ -31,9 +31,11 @@ const Feed = ({ navigate }) => {
       return(
         <>
           <h2>Posts</h2>
-            <button onClick={logout}>
+            {/* <button onClick={logout}>
               Logout
-            </button>
+            </button> */}
+
+
           <div id='feed' role="feed">
               {posts.map(
                 (post) => ( <Post post={ post } key={ post._id } /> )
@@ -42,7 +44,7 @@ const Feed = ({ navigate }) => {
         </>
       )
     } else {
-      navigate('/signin')
+      console.log('token does not exist');
     }
 }
 
