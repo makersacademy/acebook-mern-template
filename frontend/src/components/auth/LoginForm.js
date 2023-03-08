@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
-import { ReactComponent as Logo } from "./icon.svg";
+import { ReactComponent as Logo } from "../logo/logo.svg";
 
 const LogInForm = ({ navigate }) => {
   const [email, setEmail] = useState("");
