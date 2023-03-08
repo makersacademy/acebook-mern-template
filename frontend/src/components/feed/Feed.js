@@ -32,7 +32,13 @@ const Feed = ({ navigate }) => {
     return (
       <>
         <h2>Posts</h2>
-        <Button text="Logout" fc={logout} />
+        <Button
+          text="Logout"
+          clickCallback={logout}
+          type="button"
+          id="logout"
+          className="max-w-sm"
+        />
         <div id="feed" role="feed">
           {posts.map((post) => (
             <Post post={post} key={post._id} />
