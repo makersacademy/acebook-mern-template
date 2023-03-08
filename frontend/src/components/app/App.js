@@ -10,6 +10,7 @@ import {
   Route,
 } from "react-router-dom";
 import Navbar from '../navbar/Navbar';
+import CreatePost from '../CreatePost/CreatePost';
 
 const App = () => {
 
@@ -32,6 +33,7 @@ const App = () => {
           <Route path='/posts'  element={<Feed navigate={ useNavigate() }/>}/>
           <Route path='/login'  element={<LoginForm  navigate={ useNavigate() } setToken={setToken}/>}/>
           <Route path='/signup' element={<SignUpForm navigate={ useNavigate() }/>}/>
+          <Route path='/create-post' element={<CreatePost/>}/>
         </Routes>
       </>
     );
