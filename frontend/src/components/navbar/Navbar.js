@@ -1,18 +1,8 @@
 import React, { useEffect, useState } from 'react';
 
 const Navbar = ({logoutHandle, token}) => {
-    // const [token, setToken] = useState(window.localStorage.getItem("token"));
-
-    // useEffect(() => {
-    //     setToken(window.localStorage.getItem("token")
-    // }, [])
-    
-
-
-    // const logout = () => {
-    //     setToken('');
-    //     window.localStorage.removeItem("token")
-    //   }
+  
+    // Navbar uses classes from boostrap for basic styling
 
     return (
     <>
@@ -27,12 +17,14 @@ const Navbar = ({logoutHandle, token}) => {
 
                     {/* Conditional operator to check if a token exists to decide which buttons to render */}
                     {token ? 
+                    // If token exists, renders the logout button which calls logoutHandle on click
                     <>
                     <button onClick={logoutHandle}>
                         Logout
                     </button>
                     </> 
                     :
+                    // If token doesn't exist, render the login and signup buttons
                     <>
                     <li className="nav-item">
                         <a className="nav-link" href="login">Login</a>

@@ -12,6 +12,11 @@ import {
 import Navbar from '../navbar/Navbar';
 
 const App = () => {
+
+  // Token is declared here because it is needed in multiple components
+  // setToken is passed into the login component so that token can be changed when the user signs in
+  // Token is also needed in the navbar component for conditional rendering
+  
   const [token, setToken] = useState(window.localStorage.getItem("token"));
 
   const logout = () => {
