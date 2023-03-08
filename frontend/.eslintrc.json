@@ -7,7 +7,8 @@
   "extends": [
     "plugin:react/recommended",
     "airbnb",
-    "plugin:prettier/recommended"
+    "plugin:prettier/recommended",
+    "plugin:tailwindcss/recommended"
   ],
   "globals": {
     "Atomics": "readonly",
@@ -17,7 +18,11 @@
     "ecmaVersion": "latest",
     "sourceType": "module"
   },
-  "plugins": ["react", "prettier", "cypress"],
+  "plugins": [
+    "react",
+    "prettier",
+    "cypress"
+  ],
   "rules": {
     "react/function-component-definition": [
       2,
@@ -29,7 +34,10 @@
     "react/jsx-filename-extension": [
       0,
       {
-        "extensions": [".js", ".jsx"]
+        "extensions": [
+          ".js",
+          ".jsx"
+        ]
       }
     ],
     "no-underscore-dangle": "off"
