@@ -28,7 +28,7 @@ const App = () => {
       <>
         <Navbar logoutHandle={logout} token={token}/>
         <Routes>
-          <Route path='/'  element={<Homepage navigate={ useNavigate() }/>}/>
+          <Route path='/'  element={<Feed navigate={ useNavigate() }/>}/>
           <Route path='/posts'  element={<Feed navigate={ useNavigate() }/>}/>
           <Route path='/login'  element={<LoginForm  navigate={ useNavigate() } setToken={setToken}/>}/>
           <Route path='/signup' element={<SignUpForm navigate={ useNavigate() }/>}/>
