@@ -7,6 +7,10 @@ const LogInForm = ({ navigate, setToken }) => {
 
 
 
+  const setUserInfo = () => {
+    
+  }
+
   const handleSubmit = async (event) => {
     event.preventDefault();
 
@@ -28,6 +32,7 @@ const LogInForm = ({ navigate, setToken }) => {
       console.log(response.status);
       let data = await response.json()
       window.localStorage.setItem("token", data.token)
+      window.localStorage.setItem("email", email)
       setToken(data.token)
       navigate('/');
     }
