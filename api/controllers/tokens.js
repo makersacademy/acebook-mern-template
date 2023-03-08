@@ -15,7 +15,7 @@ const SessionsController = {
         res.status(401).json({ message: "auth error" });
       } else {
         const token = await TokenGenerator.jsonwebtoken(user.id);
-        res.status(201).json({ token: token, message: "OK" });
+        res.status(201).json({ token: token, message: "OK", user: user.id });
       }
     });
   },

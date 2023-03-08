@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from "react";
 import Post from "../post/Post";
+import CreatePost from "../create-post/CreatePost";
 
 const Feed = ({ navigate }) => {
   const [posts, setPosts] = useState([]);
   const [token, setToken] = useState(window.localStorage.getItem("token"));
-
+  
   useEffect(() => {
     if (token) {
       fetch("/posts", {
@@ -23,6 +24,7 @@ const Feed = ({ navigate }) => {
 
   const logout = () => {
     window.localStorage.removeItem("token");
+    window.localStorage.removeItem("user_id");
     navigate("/login");
   };
 
@@ -31,6 +33,7 @@ const Feed = ({ navigate }) => {
       <>
         <h2>Posts</h2>
         <button onClick={logout}>Logout</button>
+        <CreatePost/>
         <div id="feed" role="feed">
           {posts.map((post) => (
             <Post post={post} key={post._id} />
