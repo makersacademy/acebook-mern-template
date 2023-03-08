@@ -8,7 +8,7 @@ function CreatePost() {
     event.preventDefault();
     const token = localStorage.getItem("jwt");
 
-    fetch('/post', {
+    fetch('/posts', {
       method: 'POST',
       body: JSON.stringify({postMessage}),
       headers: {
@@ -24,7 +24,7 @@ function CreatePost() {
       }
     })
     .catch(error => {
-      console.log(`Error: ${error}`)
+      console.log(error)
     })
 
     setPostMessage("");
