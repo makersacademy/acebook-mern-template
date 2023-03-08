@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
 import Post from "../post/Post";
+import NewPost from "../newPost/NewPost";
 
 const Feed = ({ navigate }) => {
   const [posts, setPosts] = useState([]);
@@ -31,6 +32,7 @@ const Feed = ({ navigate }) => {
     return (
       <>
         <h2>Posts</h2>
+        <NewPost />
         <button type="button" onClick={logout}>
           Logout
         </button>
