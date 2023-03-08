@@ -10,12 +10,13 @@
 //
 //
 // -- This is a parent command --
-Cypress.Commands.add('signup', (email, password) => {
+Cypress.Commands.add("signup", (email, password, name) => {
   cy.visit("/signup");
   cy.get("#email").type(email);
   cy.get("#password").type(password);
+  cy.get("#name").type(name);
   cy.get("#submit").click();
-})
+});
 //
 //
 // -- This is a child command --
