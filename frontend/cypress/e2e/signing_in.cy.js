@@ -28,4 +28,11 @@ describe("Signing in", () => {
 
     cy.url().should("include", "/login");
   });
+
+  it('redirects to /signup when sign up button is clicked',()=>{
+    cy.visit('/login')
+    cy.get("#signup").should('exist')
+    cy.get("#signup").click()
+    cy.url().should('include','/signup')
+  })
 });
