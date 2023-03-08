@@ -46,6 +46,7 @@ const LogInForm = ({ navigate }) => {
         <input role='submit-button' id='submit' type="submit" value="Log In" />
         <input role='signup-button' id='signup' type="button" value="Sign Up" onClick={handleSignUp} />
       </form>
+
     );
 }
 
