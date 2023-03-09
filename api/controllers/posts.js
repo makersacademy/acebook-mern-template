@@ -13,7 +13,9 @@ const getAllPosts = async (req, res) => {
 
 const createPost = async (req, res) => {
   try {
-    await Post.create(req.body);
+    const post = new Post(req.body);
+    post.author = req.userId;
+    await post.save();
     const token = await generateToken(req.userId);
     res.status(201).json({ message: "OK", token });
   } catch (error) {
