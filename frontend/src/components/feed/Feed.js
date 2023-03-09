@@ -38,14 +38,14 @@ const Feed = ({ navigate }) => {
         <button onClick={logout}>Logout</button>
         <CreatePost fetchData={fetchData} />
         <div id="feed" role="feed">
-          {[...posts].reverse().map(
-            (post) => ( <Post post={post} key={post._id} />)
-          )}
+          {[...posts].reverse().map((post) => (
+            <Post post={post} key={post._id} />
+          ))}
         </div>
       </>
     );
   } else {
-    navigate("/signin");
+    navigate("/login");
   }
 };
 
