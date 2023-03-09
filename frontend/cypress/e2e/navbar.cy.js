@@ -49,4 +49,20 @@ describe('Navbar', () => {
     cy.get('[data-cy="logoutButton"]').click();
     cy.url().should('include', '/login')
   })
+
+  it('shows first name in nav bar', () => {
+    cy.visit("/signup")
+    cy.get('nav').should('not.exist')
+    cy.signup("name", "surname", "someone@example.com", "password");
+
+    cy.visit("/login");
+    cy.get('nav').should('not.exist')
+    cy.get("#email").type("someone@example.com");
+    cy.get("#password").type("password");
+    cy.get("#submit").click();
+    cy.wait(1000)
+    cy.get('nav').should('exist').and('contain','Home')
+
+    cy.get('[data-cy="user-first-name"]').should('contain.text', 'name')
+  })
 })

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-const LogInForm = ({ navigate }) => {
+const LogInForm = ({ navigate,storeUserData }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
@@ -22,6 +22,9 @@ const LogInForm = ({ navigate }) => {
       console.log("oop")
       let data = await response.json()
       window.localStorage.setItem("token", data.token)
+      console.log('User:',data.user)
+      storeUserData(data.user)
+      console.log('Token:',data.token)
       navigate('/posts');
     }
   }
