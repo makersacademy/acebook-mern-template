@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import Post from '../post/Post'
 import CreatePost from '../CreatePost/CreatePost';
+import './Feed.css'
 
 const Feed = ({ navigate }) => {
   const [posts, setPosts] = useState([]);
@@ -34,14 +35,13 @@ const Feed = ({ navigate }) => {
 
         <CreatePost />
 
-        <h2>Posts</h2>
         {/* <button onClick={logout}>
               Logout
             </button> */}
 
 
         <div id='feed' role="feed">
-          {posts.map(
+            {posts.map(
             (post) => (<Post post={post} key={post._id} />)
           )}
         </div>

@@ -12,6 +12,7 @@ import {
 import Navbar from '../navbar/Navbar';
 import CreatePost from '../CreatePost/CreatePost';
 import 'bootstrap/dist/css/bootstrap.css';
+import './App.css'
 
 const App = () => {
 
@@ -24,6 +25,7 @@ const App = () => {
   const logout = () => {
       setToken('');
       window.localStorage.removeItem("token")
+      window.location.reload(true);
     }
 
     return (
