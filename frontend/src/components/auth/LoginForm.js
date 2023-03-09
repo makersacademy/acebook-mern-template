@@ -22,9 +22,7 @@ const LogInForm = ({ navigate,storeUserData }) => {
       console.log("oop")
       let data = await response.json()
       window.localStorage.setItem("token", data.token)
-      console.log('User:',data.user)
       storeUserData(data.user)
-      console.log('Token:',data.token)
       navigate('/posts');
     }
   }
