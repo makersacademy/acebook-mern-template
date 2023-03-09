@@ -7,7 +7,6 @@ const Homepage = ({ navigate }) => {
 
     return (
         <>
-        <br></br>
         <Feed navigate={ useNavigate() }/>
         </>
     )

@@ -38,13 +38,14 @@ function CreatePost() {
       <label htmlFor="post-text" className="post-label">What's on your mind?</label>
       <textarea
         className="post-input"
+        id="post-input"
         value={postMessage}
         onChange={(event) => {
           setPostMessage(event.target.value)
           //console.log(event.target.value)
         }}
       />
-      <button className="submit-button">Post</button>
+      <button id="submit" className="submit-button">Post</button>
     </form>
   );
 }
