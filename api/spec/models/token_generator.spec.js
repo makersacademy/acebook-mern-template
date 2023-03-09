@@ -1,14 +1,12 @@
-const JWT = require("jsonwebtoken");
-const TokenGenerator = require("../../models/token_generator");
+const jwt = require("jsonwebtoken");
+const generateToken = require("../../models/token_generator");
 
-describe("TokenGenerator", () => {
-  describe("jsonwebtoken", () => {
-    test("returns a token containing user_id that is valid for 10 minutes", () => {
-      const user_id = 1;
-      const token = TokenGenerator.jsonwebtoken(user_id);
-      const payload = JWT.decode(token, process.env.JWT_SECRET);
-      expect(payload.user_id).toEqual(user_id);
-      expect(payload.exp - payload.iat).toEqual(600);
-    });
+describe("generateToken", () => {
+  test("returns a token containing userId that is valid for 10 minutes", () => {
+    const userId = 1;
+    const token = generateToken(userId);
+    const payload = jwt.decode(token, process.env.JWT_SECRET);
+    expect(payload.userId).toEqual(userId);
+    expect(payload.exp - payload.iat).toEqual(600);
   });
 });

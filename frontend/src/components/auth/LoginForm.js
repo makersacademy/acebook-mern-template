@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
 import { ReactComponent as Logo } from "../logo/logo.svg";
+import Button from "../button/Button";
 
 const LogInForm = ({ navigate }) => {
   const [email, setEmail] = useState("");
@@ -65,13 +66,14 @@ const LogInForm = ({ navigate }) => {
               className="relative block w-full rounded-b-md border-0 py-1.5 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:z-10 focus:ring-2 focus:ring-inset focus:ring-blue-600"
             />
           </div>
-          <button
+          <Button text="Sign in" type="submit" id="submit" />
+          {/* <button
             className="group relative flex w-full justify-center rounded-md bg-blue-600 py-2 px-3 text-sm font-semibold text-white hover:bg-blue-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600"
             id="submit"
             type="submit"
           >
             Sign in
-          </button>
+          </button> */}
         </form>
         <div>
           <p className="text-center text-sm text-gray-600">

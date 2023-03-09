@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 
 const Post = ({ post }) => {
   return (
-    <article data-cy="post" key={post._id}>
+    <article data-cy="post" key={post.id}>
       {post.message}
     </article>
   );
@@ -11,7 +11,7 @@ const Post = ({ post }) => {
 
 Post.propTypes = {
   post: PropTypes.shape({
-    _id: PropTypes.number,
+    id: PropTypes.number,
     message: PropTypes.string,
   }).isRequired,
 };
