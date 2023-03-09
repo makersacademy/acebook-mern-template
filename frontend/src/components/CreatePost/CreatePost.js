@@ -1,19 +1,20 @@
+import { Navigate } from 'react-router-dom';
+import React, { useContext, useState } from "react";
+import { UserContext } from '../../context/UserContext';
 
-import React, { useState } from "react";
-
-function CreatePost() {
+function CreatePost(props) {
   const [postMessage, setPostMessage] = useState("");
+  const { userInfo } = useContext(UserContext)
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    //const token = localStorage.getItem("jwt");
     const token = window.localStorage.getItem("token");
 
-    const formattedMessge = { "message":  postMessage }
+    const formattedMessage = { "message":  postMessage, "poster": userInfo._id }
 
     fetch('/posts', {
       method: 'POST',
-      body: JSON.stringify(formattedMessge),
+      body: JSON.stringify(formattedMessage),
       headers: {
         'Content-Type': 'application/json',
         'Authorization': `Bearer ${token}`
@@ -31,6 +32,7 @@ function CreatePost() {
     })
 
     setPostMessage("");
+    props.refreshPosts();
   };
 
   return (
@@ -42,7 +44,6 @@ function CreatePost() {
         value={postMessage}
         onChange={(event) => {
           setPostMessage(event.target.value)
-          //console.log(event.target.value)
         }}
       />
       <button id="submit" className="submit-button">Post</button>
