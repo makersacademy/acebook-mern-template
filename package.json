@@ -1,0 +1,5 @@
+{
+  "dependencies": {
+    "react-timeago": "^7.1.0"
+  }
+}
