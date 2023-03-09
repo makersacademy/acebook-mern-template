@@ -37,6 +37,7 @@ Post.propTypes = {
     message: PropTypes.string,
     authorId: PropTypes.string,
     createdAt: PropTypes.string,
+    userName: PropTypes.string,
     author: PropTypes.shape({
       userName: PropTypes.string,
     }),
