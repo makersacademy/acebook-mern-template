@@ -6,11 +6,16 @@ function CreatePost() {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    const token = localStorage.getItem("jwt");
+    //const token = localStorage.getItem("jwt");
+    const token = window.localStorage.getItem("token");
 
+    const formattedMessge = { "message":  postMessage }
+    // console.log(JSON.stringify(formattedMessge));
+    // console.log(postMessage)
     fetch('/posts', {
       method: 'POST',
-      body: JSON.stringify({postMessage}),
+      body: JSON.stringify(formattedMessge),
+      //body: JSON.stringify({postMessage}),
       headers: {
         'Content-Type': 'application/json',
         'Authorization': `Bearer ${token}`
@@ -38,6 +43,7 @@ function CreatePost() {
         value={postMessage}
         onChange={(event) => {
           setPostMessage(event.target.value)
+          //console.log(event.target.value)
         }}
       />
       <button className="submit-button">Post</button>
