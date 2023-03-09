@@ -3,8 +3,9 @@ describe("Signing up", () => {
     cy.visit("/signup");
     cy.get("#email").type("someone@example.com");
     cy.get("#password").type("password");
+    cy.get("#firstName").type("Poppy");
+    cy.get("#lastName").type("Smith");
     cy.get("#submit").click();
-
     cy.url().should("include", "/login");
   });
 
@@ -12,7 +13,6 @@ describe("Signing up", () => {
     cy.visit("/signup");
     cy.get("#email").type("someone@example.com");
     cy.get("#submit").click();
-
     cy.url().should("include", "/signup");
   });
 
@@ -20,7 +20,15 @@ describe("Signing up", () => {
     cy.visit("/signup");
     cy.get("#password").type("password");
     cy.get("#submit").click();
+    cy.url().should("include", "/signup");
+  });
 
+  it("with missing firstName, redirects to '/signup'", () => {
+    cy.visit("/signup");
+    cy.get("#email").type("someone@example.com");
+    cy.get("#password").type("password");
+    cy.get("#lastName").type("Smith");
+    cy.get("#submit").click();
     cy.url().should("include", "/signup");
   });
 });
