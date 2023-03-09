@@ -22,7 +22,7 @@ const generateBackdatedToken = (userId) =>
 describe("/posts", () => {
   beforeAll(async () => {
     const user = new User({
-      userName: "testuser",
+      username: "testuser",
       email: "test@test.com",
       password: "12345678",
     });

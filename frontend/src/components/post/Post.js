@@ -21,7 +21,7 @@ const Post = ({ post }) => {
           className="mx-2 h-10 w-10 rounded-full"
         />
         <div className="">
-          <p className="text-lg font-semibold">{post.author.userName}</p>
+          <p className="text-lg font-semibold">{post.author.username}</p>
           <p className="text-sm text-gray-500">{formatDate()}</p>
         </div>
       </div>
@@ -37,9 +37,8 @@ Post.propTypes = {
     message: PropTypes.string,
     authorId: PropTypes.string,
     createdAt: PropTypes.string,
-    userName: PropTypes.string,
     author: PropTypes.shape({
-      userName: PropTypes.string,
+      username: PropTypes.string,
     }),
   }).isRequired,
 };
