@@ -67,13 +67,6 @@ const LogInForm = ({ navigate }) => {
             />
           </div>
           <Button text="Sign in" type="submit" id="submit" />
-          {/* <button
-            className="group relative flex w-full justify-center rounded-md bg-blue-600 py-2 px-3 text-sm font-semibold text-white hover:bg-blue-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600"
-            id="submit"
-            type="submit"
-          >
-            Sign in
-          </button> */}
         </form>
         <div>
           <p className="text-center text-sm text-gray-600">
