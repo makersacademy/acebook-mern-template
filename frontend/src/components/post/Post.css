@@ -1,0 +1,12 @@
+article {
+  background-color: rgba(186, 205, 255, 0.241);
+  display:grid;
+  margin-top: 2%;
+  margin-left: auto;
+  margin-right: auto;
+  width: 60%;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgb(84, 113, 185);
+  padding: 20px;
+  height: auto;
+}

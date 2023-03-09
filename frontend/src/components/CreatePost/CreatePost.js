@@ -1,15 +1,17 @@
 import { Navigate } from 'react-router-dom';
 import React, { useContext, useState } from "react";
 import { UserContext } from '../../context/UserContext';
+import './CreatePost.css'
 
 function CreatePost(props) {
+
   const [postMessage, setPostMessage] = useState("");
   const { userInfo } = useContext(UserContext)
 
   const handleSubmit = (event) => {
     event.preventDefault();
     const token = window.localStorage.getItem("token");
-
+    
     const formattedMessage = { "message":  postMessage, "poster": userInfo._id }
 
     fetch('/posts', {
@@ -20,33 +22,33 @@ function CreatePost(props) {
         'Authorization': `Bearer ${token}`
       },
     })
-    .then(response => {
-      if (response.ok) {
-        console.log('Success.')
-      } else {
-        throw new Error('Something went wrong.');
-      }
-    })
-    .catch(error => {
-      console.log(error)
-    })
+      .then(response => {
+        if (response.ok) {
+          console.log('Success.')
+        } else {
+          throw new Error('Something went wrong.');
+        }
+      })
+      .catch(error => {
+        console.log(error)
+      })
 
     setPostMessage("");
     props.refreshPosts();
   };
 
   return (
-    <form onSubmit={handleSubmit} className='post-form'>
+    <form id='formCreatePost' onSubmit={handleSubmit} className='post-form'>
       <label htmlFor="post-text" className="post-label">What's on your mind?</label>
       <textarea
         className="post-input"
-        id="post-input"
+        id="textCreatePost"
         value={postMessage}
         onChange={(event) => {
           setPostMessage(event.target.value)
         }}
       />
-      <button id="submit" className="submit-button">Post</button>
+      <button id="submitButton" className="submit-button">Post</button>
     </form>
   );
 }

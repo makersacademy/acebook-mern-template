@@ -10,6 +10,9 @@ import {
 } from "react-router-dom";
 import Navbar from '../navbar/Navbar';
 import { UserContext } from '../../context/UserContext';
+import CreatePost from '../CreatePost/CreatePost';
+import 'bootstrap/dist/css/bootstrap.css';
+import './App.css'
 
 const App = () => {
   const { handleUserInfo, userInfo } = useContext(UserContext)
