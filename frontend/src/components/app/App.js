@@ -9,6 +9,7 @@ import {
   Route,
 } from "react-router-dom";
 import CreatePost from '../CreatePost/CreatePost';
+import 'bootstrap/dist/css/bootstrap.css';
 
 const App = () => {
 
