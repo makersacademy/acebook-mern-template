@@ -1,9 +1,9 @@
 const User = require("../models/user");
 
 const UsersController = {
-  Create: (req, res) => {
+  Create: async (req, res) => {
     const user = new User(req.body);
-    user.save((err) => {
+    await user.save((err) => {
       if (err) {
         res.status(400).json({message: 'Bad request'})
       } else {
