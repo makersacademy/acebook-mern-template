@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import Post from '../post/Post'
+import CreatePost from '../CreatePost/CreatePost';
 
 const Feed = ({ navigate }) => {
   const [posts, setPosts] = useState([]);
@@ -19,7 +20,7 @@ const Feed = ({ navigate }) => {
           setPosts(data.posts);
         })
     }
-  }, [])
+  }, [[posts]])
     
 
   const logout = () => {
@@ -30,6 +31,9 @@ const Feed = ({ navigate }) => {
     if(token) {
       return(
         <>
+
+      <CreatePost/>
+
           <h2>Posts</h2>
             {/* <button onClick={logout}>
               Logout
