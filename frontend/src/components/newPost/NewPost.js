@@ -1,10 +1,10 @@
 import React, { useState } from "react";
+import PropTypes from "prop-types";
+import Button from "../button/Button";
 
-const NewPost = () => {
+const NewPost = ({ getPosts }) => {
   const [message, setMessage] = useState("");
   const [token, setToken] = useState(window.localStorage.getItem("token"));
-  // temporary author
-  const [author] = useState("6404b4c6c8a91aca3bb4a2d9");
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -15,7 +15,7 @@ const NewPost = () => {
         "Content-Type": "application/json",
         Authorization: `Bearer ${token}`,
       },
-      body: JSON.stringify({ message, author }),
+      body: JSON.stringify({ message }),
     });
 
     if (response.status !== 201) {
@@ -25,7 +25,7 @@ const NewPost = () => {
       const data = await response.json();
       window.localStorage.setItem("token", data.token);
       setToken(data.token);
-      // navigate("/posts");
+      getPosts();
     }
   };
 
@@ -34,20 +34,25 @@ const NewPost = () => {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <input
-        id="message"
-        placeholder="What's on your mind?"
-        type="text"
-        required
-        value={message}
-        onChange={handleMessageChange}
-      />
-      <button id="submit" type="submit">
-        Post
-      </button>
-    </form>
+    <div className="max-w-sm">
+      <form onSubmit={handleSubmit}>
+        <input
+          id="message"
+          placeholder="What's on your mind?"
+          type="text"
+          required
+          value={message}
+          onChange={handleMessageChange}
+          className="w-full"
+        />
+        <Button text="Post" type="submit" id="submit" />
+      </form>
+    </div>
   );
+};
+
+NewPost.propTypes = {
+  getPosts: PropTypes.func.isRequired,
 };
 
 export default NewPost;

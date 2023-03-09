@@ -1,11 +1,12 @@
 const mongoose = require("mongoose");
 
 const PostSchema = new mongoose.Schema({
-  message: String,
+  message: { type: String, required: true },
   author: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "User",
     immutable: true,
+    required: true,
   },
   createdAt: { type: Date, default: () => Date.now(), immutable: true },
   likes: [{ type: mongoose.Schema.Types.ObjectId, ref: "User" }],
