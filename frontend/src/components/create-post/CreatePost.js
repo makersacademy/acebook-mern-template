@@ -2,7 +2,7 @@ import React, { useState } from "react";
 
 const CreatePost = () => {
   const [message, setMessage] = useState("");
-  
+
   const handleSubmit = async (event) => {
     event.preventDefault();
 
@@ -10,18 +10,18 @@ const CreatePost = () => {
       method: "post",
       headers: {
         "Content-Type": "application/json",
-        Authorization: `Bearer ${window.localStorage.getItem("token")}`
+        Authorization: `Bearer ${window.localStorage.getItem("token")}`,
       },
-      body: JSON.stringify({ message: message, user: window.localStorage.getItem("user_id") }),
+      body: JSON.stringify({ message: message }),
     });
-  
+
     if (response.status === 201) {
-      console.log('post is successful');
-      window.location.reload()
+      console.log("post is successful");
+      window.location.reload();
     } else {
-      console.log('post did not complete')
-    } 
-  }; 
+      console.log("post did not complete");
+    }
+  };
 
   const handleMessageChange = (event) => {
     setMessage(event.target.value);
