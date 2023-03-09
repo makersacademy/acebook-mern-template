@@ -25,6 +25,7 @@ const NewPost = ({ getPosts }) => {
       const data = await response.json();
       window.localStorage.setItem("token", data.token);
       setToken(data.token);
+      setMessage("");
       getPosts();
     }
   };
@@ -34,8 +35,8 @@ const NewPost = ({ getPosts }) => {
   };
 
   return (
-    <div className="max-w-sm">
-      <form onSubmit={handleSubmit}>
+    <div className="max-w-sm rounded-2xl border p-4 shadow-sm">
+      <form onSubmit={handleSubmit} className="space-y-4">
         <input
           id="message"
           placeholder="What's on your mind?"
@@ -43,7 +44,7 @@ const NewPost = ({ getPosts }) => {
           required
           value={message}
           onChange={handleMessageChange}
-          className="w-full"
+          className="relative block w-full rounded-md border-0 py-1.5 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:z-10 focus:ring-2 focus:ring-inset focus:ring-blue-600"
         />
         <Button text="Post" type="submit" id="submit" />
       </form>
