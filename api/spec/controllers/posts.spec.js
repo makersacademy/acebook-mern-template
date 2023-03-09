@@ -1,29 +1,33 @@
 const request = require("supertest");
+const jwt = require("jsonwebtoken");
 const app = require("../../app");
 require("../mongodb_helper");
 const Post = require("../../models/post");
 const User = require("../../models/user");
-const JWT = require("jsonwebtoken");
-
-const secret = process.env.JWT_SECRET;
 
 let token;
 
+const generateBackdatedToken = (userId) =>
+  jwt.sign(
+    {
+      userId,
+      // Backdate this token of 5 minutes
+      iat: Math.floor(Date.now() / 1000) - 5 * 60,
+      // Set the JWT token to expire in 10 minutes
+      exp: Math.floor(Date.now() / 1000) + 10 * 60,
+    },
+    process.env.JWT_SECRET
+  );
+
 describe("/posts", () => {
   beforeAll(async () => {
-    const user = new User({ email: "test@test.com", password: "12345678" });
+    const user = new User({
+      userName: "testuser",
+      email: "test@test.com",
+      password: "12345678",
+    });
     await user.save();
-
-    token = JWT.sign(
-      {
-        user_id: user.id,
-        // Backdate this token of 5 minutes
-        iat: Math.floor(Date.now() / 1000) - 5 * 60,
-        // Set the JWT token to expire in 10 minutes
-        exp: Math.floor(Date.now() / 1000) + 10 * 60,
-      },
-      secret
-    );
+    token = generateBackdatedToken(user.id);
   });
 
   beforeEach(async () => {
@@ -59,11 +63,11 @@ describe("/posts", () => {
         .post("/posts")
         .set("Authorization", `Bearer ${token}`)
         .send({ message: "hello world", token });
-      const newPayload = JWT.decode(
+      const newPayload = jwt.decode(
         response.body.token,
         process.env.JWT_SECRET
       );
-      const originalPayload = JWT.decode(token, process.env.JWT_SECRET);
+      const originalPayload = jwt.decode(token, process.env.JWT_SECRET);
       expect(newPayload.iat > originalPayload.iat).toEqual(true);
     });
   });
@@ -125,11 +129,11 @@ describe("/posts", () => {
         .get("/posts")
         .set("Authorization", `Bearer ${token}`)
         .send({ token });
-      const newPayload = JWT.decode(
+      const newPayload = jwt.decode(
         response.body.token,
         process.env.JWT_SECRET
       );
-      const originalPayload = JWT.decode(token, process.env.JWT_SECRET);
+      const originalPayload = jwt.decode(token, process.env.JWT_SECRET);
       expect(newPayload.iat > originalPayload.iat).toEqual(true);
     });
   });
