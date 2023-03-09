@@ -10,12 +10,10 @@ function CreatePost() {
     const token = window.localStorage.getItem("token");
 
     const formattedMessge = { "message":  postMessage }
-    // console.log(JSON.stringify(formattedMessge));
-    // console.log(postMessage)
+
     fetch('/posts', {
       method: 'POST',
       body: JSON.stringify(formattedMessge),
-      //body: JSON.stringify({postMessage}),
       headers: {
         'Content-Type': 'application/json',
         'Authorization': `Bearer ${token}`

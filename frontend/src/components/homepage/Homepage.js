@@ -7,7 +7,6 @@ const Homepage = ({ navigate }) => {
 
     return (
         <>
-        <CreatePost></CreatePost>
         <br></br>
         <Feed navigate={ useNavigate() }/>
         </>
