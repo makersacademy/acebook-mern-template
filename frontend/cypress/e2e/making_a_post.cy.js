@@ -1,9 +1,12 @@
 describe("Make a new post", () => {
+  before(() => {
+    cy.signup("name", "surname", "someone@example.com", "password");
+  });
   it("sign up, login and make a new post", () => {
-    cy.visit("/signup");
-    cy.get("#email").type("someone@example.com");
-    cy.get("#password").type("password");
-    cy.get("#submit").click();
+    // cy.visit("/signup");
+    // cy.get("#email").type("someone@example.com");
+    // cy.get("#password").type("password");
+    // cy.get("#submit").click();
     cy.wait(1000);
     cy.get("#email").type("someone@example.com");
     cy.get("#password").type("password");
@@ -15,4 +18,3 @@ describe("Make a new post", () => {
     cy.get('[data-cy="post"]').should("contain.text", "This is a new post");
   });
 });
-
