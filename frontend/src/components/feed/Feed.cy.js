@@ -2,7 +2,7 @@ import Feed from "./Feed";
 const navigate = () => {};
 
 describe("Feed", () => {
-  it("Calls the /posts endpoint and lists all the posts", () => {
+  it("Calls the /posts endpoint and lists all the posts in reverse chronological order", () => {
     window.localStorage.setItem("token", "fakeToken");
 
     cy.intercept("GET", "/posts", (req) => {
@@ -25,8 +25,11 @@ describe("Feed", () => {
 
     cy.wait("@getPosts").then(() => {
       cy.get('[data-cy="post"]')
-        .should("contain.text", "Post from someone:Hello, world")
-        .and("contain.text", "Post from someone else:Hello again, world");
+        .should("have.length", 2)
+        .first()
+        .should("contain.text", "Post from someone else:Hello again, world")
+        .next()
+        .should("contain.text", "Post from someone:Hello, world");
     });
   });
 });
