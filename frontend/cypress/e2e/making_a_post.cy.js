@@ -15,3 +15,4 @@ describe("Make a new post", () => {
     cy.get('[data-cy="post"]').should("contain.text", "This is a new post");
   });
 });
+
