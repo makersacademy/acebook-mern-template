@@ -11,6 +11,7 @@ import {
 } from "react-router-dom";
 import Navbar from '../navbar/Navbar';
 import CreatePost from '../CreatePost/CreatePost';
+import 'bootstrap/dist/css/bootstrap.css';
 
 const App = () => {
 
