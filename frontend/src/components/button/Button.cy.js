@@ -39,11 +39,11 @@ describe("Button component", () => {
       const functionMock = {
         click: () => {},
       };
-      cy.spy(functionMock, "click").as("clickFunction");
+      cy.spy(functionMock, "click").as("clickFunctionMock");
       cy.mount(<Button clickCallback={functionMock.click} />);
 
       cy.get("button").click();
-      cy.get("@clickFunction").should("have.been.called");
+      cy.get("@clickFunctionMock").should("have.been.called");
     });
 
     it("should have a 'submit' type when a props is passed in", () => {
