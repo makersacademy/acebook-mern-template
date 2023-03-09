@@ -8,4 +8,6 @@ const UserSchema = new mongoose.Schema({
 
 const User = mongoose.model("User", UserSchema);
 
+User.createIndexes({ username: 1, email: 1 });
+
 module.exports = User;
