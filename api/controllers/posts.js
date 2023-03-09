@@ -3,7 +3,7 @@ const generateToken = require("../models/token_generator");
 
 const getAllPosts = async (req, res) => {
   try {
-    const posts = await Post.find();
+    const posts = await Post.find().sort({ createdAt: -1 }).populate("author");
     const token = await generateToken(req.userId);
     res.status(200).json({ posts, token });
   } catch (error) {
