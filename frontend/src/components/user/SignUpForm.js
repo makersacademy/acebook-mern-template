@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import PropTypes from "prop-types";
 
 const SignUpForm = ({ navigate }) => {
+  const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
@@ -13,7 +14,7 @@ const SignUpForm = ({ navigate }) => {
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({ email, password }),
+      body: JSON.stringify({ username, email, password }),
     }).then((response) => {
       if (response.status === 201) {
         navigate("/login");
@@ -21,6 +22,10 @@ const SignUpForm = ({ navigate }) => {
         navigate("/signup");
       }
     });
+  };
+
+  const handleUsernameChange = (event) => {
+    setUsername(event.target.value);
   };
 
   const handleEmailChange = (event) => {
@@ -33,6 +38,13 @@ const SignUpForm = ({ navigate }) => {
 
   return (
     <form onSubmit={handleSubmit}>
+      <input
+        placeholder="Username"
+        id="username"
+        type="text"
+        value={username}
+        onChange={handleUsernameChange}
+      />
       <input
         placeholder="Email"
         id="email"
