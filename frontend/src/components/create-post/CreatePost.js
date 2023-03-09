@@ -1,11 +1,9 @@
 import React, { useState } from "react";
 
-const CreatePost = () => {
+const CreatePost = ({ fetchData }) => {
   const [message, setMessage] = useState("");
 
   const handleSubmit = async (event) => {
-    event.preventDefault();
-
     let response = await fetch("/posts", {
       method: "post",
       headers: {
@@ -17,7 +15,7 @@ const CreatePost = () => {
 
     if (response.status === 201) {
       console.log("post is successful");
-      window.location.reload();
+      fetchData();
     } else {
       console.log("post did not complete");
     }
