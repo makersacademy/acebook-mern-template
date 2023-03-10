@@ -33,9 +33,9 @@ const Feed = ({ navigate }) => {
         <button onClick={logout}>Logout</button>
         <div id="feed" role="feed">
           {Array.isArray(posts) &&
-            [...posts].reverse().map((post) => (
-              <Post post={post} key={post._id} />
-            ))}
+            [...posts]
+              .reverse()
+              .map((post) => <Post post={post} key={post._id} />)}
         </div>
       </>
     );
