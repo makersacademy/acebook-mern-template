@@ -61,6 +61,7 @@ describe("/images", () => {
       expect(imagesId).toEqual(["1234", "2345"]);
     });
   });
+
   describe("GET, when token is missing", () => {
     it("should not return anything without the token", async () => {
       // create 2 fake image records on the db
@@ -79,6 +80,40 @@ describe("/images", () => {
       expect(response.body.token).toEqual(undefined);
     });
   });
-  describe("POST, when token is present", () => {});
+
+  describe("POST, when token is present", () => {
+    // make a re
+  });
+
   describe("POST, when token is missing", () => {});
+
+  // Chat GPT:
+  // describe("POST /images", () => {
+  //   test("should upload image and return public_id", async () => {
+  //     const req = {
+  //       file: "test_file",
+  //       userId: user.id,
+  //     };
+  //     const res = {
+  //       status: jest.fn().mockReturnThis(),
+  //       json: jest.fn(),
+  //     };
+
+  //     const response = await request(app)
+  //       .post("/images")
+  //       .set("Authorization", `Bearer ${token}`)
+  //       .field("upload_preset", "llzecft2")
+  //       // .attach("file", req.file);
+  //       .attach("file", Buffer.from("mock file content"), "filename.png");
+
+  //     // console.log(response);
+
+  //     expect(res.status).toHaveBeenCalledWith(200);
+  //     expect(res.json).toHaveBeenCalledWith({
+  //       image: expect.any(Object),
+  //       token: expect.any(String),
+  //       public_id: expect.any(String),
+  //     });
+  //   });
+  // });
 });
