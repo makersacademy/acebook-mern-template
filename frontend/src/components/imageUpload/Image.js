@@ -1,12 +1,21 @@
 import React, { useState } from "react";
+import { AdvancedImage } from "@cloudinary/react";
+import { Cloudinary } from "@cloudinary/url-gen";
+// import { CloudinaryContext } from "../../contexts/cloudinaryContext";
 
-// localhost:3000/image
-// localhost:8080/images
+const cld = new Cloudinary({
+  cloud: {
+    cloudName: "ddav2oh8j",
+  },
+});
 
 const Image = () => {
   const [inputValue, setInputValue] = useState("");
   const [imageResponse, setimageResponse] = useState("");
   const [token, setToken] = useState(window.localStorage.getItem("token"));
+  // const { cld } = useContext(CloudinaryContext);
+
+  const myImage = cld.image(imageResponse.public_id);
 
   const submitHandler = async (event) => {
     // 1. prevent React app to refresh
@@ -54,6 +63,9 @@ const Image = () => {
         <input type="submit" />
       </form>
       <p>{imageResponse.public_id}</p>
+      <div>
+        <AdvancedImage cldImg={myImage} />
+      </div>
     </>
   );
 };
