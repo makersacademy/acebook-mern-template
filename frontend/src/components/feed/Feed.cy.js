@@ -12,8 +12,18 @@ describe("Feed", () => {
         statusCode: 200,
         body: {
           posts: [
-            { _id: 1, message: "Hello, world" },
-            { _id: 2, message: "Hello again, world" },
+            {
+              _id: 1,
+              message: "Hello, world",
+              author: { username: "chris" },
+              createdAt: "2022-01-01",
+            },
+            {
+              _id: 2,
+              message: "Hello again, world",
+              author: { username: "chris" },
+              createdAt: "2023-03-08",
+            },
           ],
         },
       });
@@ -23,8 +33,8 @@ describe("Feed", () => {
 
     cy.wait("@getPosts").then(() => {
       cy.get('[data-cy="post"]')
-        .should("contain.text", "Hello, world")
-        .and("contain.text", "Hello again, world");
+        .should("contain.text", "Hello again, world")
+        .and("contain.text", "Hello, world");
     });
   });
 });

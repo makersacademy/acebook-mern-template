@@ -1,14 +1,20 @@
 import React from "react";
+import { BrowserRouter as Router } from "react-router-dom";
 import SignUpForm from "./SignUpForm";
 
 const navigate = () => {};
 
 describe("Signing up", () => {
   it("calls the /users endpoint", () => {
-    cy.mount(<SignUpForm navigate={navigate} />);
+    cy.mount(
+      <Router>
+        <SignUpForm navigate={navigate} />
+      </Router>
+    );
 
     cy.intercept("POST", "/users", { message: "OK" }).as("signUpRequest");
 
+    cy.get("#username").type("someone");
     cy.get("#email").type("someone@example.com");
     cy.get("#password").type("password");
     cy.get("#submit").click();

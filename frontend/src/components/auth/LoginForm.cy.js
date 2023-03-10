@@ -1,11 +1,16 @@
 import React from "react";
+import { BrowserRouter as Router } from "react-router-dom";
 import LoginForm from "./LoginForm";
 
 const navigate = () => {};
 
 describe("Logging in", () => {
   it("calls the /tokens endpoint", () => {
-    cy.mount(<LoginForm navigate={navigate} />);
+    cy.mount(
+      <Router>
+        <LoginForm navigate={navigate} />
+      </Router>
+    );
 
     cy.intercept("POST", "/tokens", { token: "fakeToken" }).as("loginRequest");
 
