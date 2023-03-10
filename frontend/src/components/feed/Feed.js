@@ -1,10 +1,12 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import PropTypes from "prop-types";
 import Post from "../post/Post";
 import NewPost from "../newPost/NewPost";
 import Button from "../button/Button";
+import ModalContext from "../modalContext/ModalContext";
 
 const Feed = ({ navigate }) => {
+  const { pushModal } = useContext(ModalContext);
   const [posts, setPosts] = useState([]);
   const [token, setToken] = useState(window.localStorage.getItem("token"));
 
@@ -33,6 +35,10 @@ const Feed = ({ navigate }) => {
 
   const logout = () => {
     window.localStorage.removeItem("token");
+    pushModal({
+      message: "Successfully logged out",
+      style: "success",
+    });
     navigate("/login");
   };
 
