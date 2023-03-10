@@ -1,7 +1,15 @@
 import React from "react";
 import PropTypes from "prop-types";
 
-const Button = ({ text, clickCallback, type, className, id, buttonStyle }) => {
+const Button = ({
+  text,
+  clickCallback,
+  type,
+  className,
+  id,
+  buttonStyle,
+  isDisabled,
+}) => {
   const checkStyle = () => {
     if (buttonStyle === "outline") {
       // default outline style
@@ -16,10 +24,11 @@ const Button = ({ text, clickCallback, type, className, id, buttonStyle }) => {
 
   return (
     <button
-      className={`${checkStyle()} w-full rounded-lg p-2 text-sm font-bold transition-all ${className}`}
+      className={`${checkStyle()} w-full rounded-lg p-2 text-sm font-bold transition-all disabled:bg-gray-500 ${className}`}
       type={type === "submit" ? "submit" : "button"}
       onClick={clickCallback}
       id={id}
+      disabled={isDisabled}
     >
       {text}
     </button>
@@ -33,6 +42,7 @@ Button.propTypes = {
   className: PropTypes.string,
   id: PropTypes.string.isRequired,
   buttonStyle: PropTypes.string,
+  isDisabled: PropTypes.bool,
 };
 
 Button.defaultProps = {
@@ -41,6 +51,7 @@ Button.defaultProps = {
   type: "button",
   className: "",
   buttonStyle: "solid",
+  isDisabled: false,
 };
 
 export default Button;
