@@ -7,6 +7,9 @@ const Button = ({ text, clickCallback, type, className, id, buttonStyle }) => {
       // default outline style
       return "border-2 border-blue-500 text-blue-500 hover:bg-blue-500 hover:text-white";
     }
+    if (buttonStyle === "cancel") {
+      return "bg-red-600 text-white hover:bg-red-500";
+    }
     // default solid style
     return "bg-blue-600 text-white hover:bg-blue-500";
   };

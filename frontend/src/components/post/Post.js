@@ -3,11 +3,19 @@ import PropTypes from "prop-types";
 import avatar from "./avatar.png";
 
 const Post = ({ post }) => {
+  const datePadder = (datePartString) => {
+    return datePartString < 10 ? `0${datePartString}` : datePartString;
+  };
+
   const formatDate = () => {
     const date = new Date(post.createdAt);
-    return `${date.getFullYear()}/${date.getMonth() + 1}
-      /${date.getDay()} ${date.getHours()}:${date.getMinutes()}`;
+    return `${date.getFullYear()}/${datePadder(
+      date.getMonth() + 1
+    )}/${datePadder(date.getDate())} ${datePadder(
+      date.getHours()
+    )}:${datePadder(date.getMinutes())}`;
   };
+
   return (
     <article
       data-cy="post"

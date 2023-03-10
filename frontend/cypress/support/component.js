@@ -22,6 +22,8 @@ import "cypress-real-events";
 
 import { mount } from "cypress/react18";
 
+// import "tailwindcss";
+
 Cypress.Commands.add("mount", mount);
 
 // Example use:
