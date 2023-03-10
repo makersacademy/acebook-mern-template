@@ -10,17 +10,20 @@ const Feed = ({ navigate }) => {
 
   const getPosts = async () => {
     if (token) {
-      fetch("/posts", {
+      const response = await fetch("/posts", {
         headers: {
           Authorization: `Bearer ${token}`,
         },
-      })
-        .then((response) => response.json())
-        .then(async (data) => {
-          window.localStorage.setItem("token", data.token);
-          setToken(window.localStorage.getItem("token"));
-          setPosts(data.posts);
-        });
+      });
+
+      if (response.status !== 200) {
+        // error
+      } else {
+        const data = await response.json();
+        window.localStorage.setItem("token", data.token);
+        setToken(data.token);
+        setPosts(data.posts);
+      }
     }
   };
 
