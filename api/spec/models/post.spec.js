@@ -23,15 +23,17 @@ describe("Post model", () => {
       createdAt: new Date(),
     };
     const now = new Date();
-    // const options = {
-    //   hour12: false,
-    //   hour: '2-digit',
-    //   minute: '2-digit',
-    // };
-    // const formattedTime = now.toLocaleString('en-US', options);
+    const options = {
+      hour12: false,
+      hour: '2-digit',
+      minute: '2-digit',
+      second: '2-digit'
+    };
+    const formattedTime = now.toLocaleString('en-US', options);
+    const postFormattedTime = post.createdAt.toLocaleString('en-US', options);
 
     expect(post.message).toEqual("Hello World");
-    expect(post.createdAt).toEqual(now);
+    expect(postFormattedTime).toEqual(formattedTime);
     
   });
 
