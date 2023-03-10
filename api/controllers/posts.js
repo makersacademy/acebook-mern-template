@@ -14,7 +14,9 @@ const PostsController = {
       });
   },
   Create: (req, res) => {
-    const post = new Post(req.body);
+    //injecting user_id here
+    let postContent = { ...req.body, user: req.user_id };
+    const post = new Post(postContent);
     post.save(async (err) => {
       if (err) {
         throw err;

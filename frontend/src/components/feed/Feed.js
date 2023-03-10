@@ -1,11 +1,16 @@
 import React, { useEffect, useState } from "react";
 import Post from "../post/Post";
+import CreatePost from "../create-post/CreatePost";
 
 const Feed = ({ navigate }) => {
   const [posts, setPosts] = useState([]);
   const [token, setToken] = useState(window.localStorage.getItem("token"));
 
   useEffect(() => {
+    fetchData();
+  }, []);
+
+  const fetchData = () => {
     if (token) {
       fetch("/posts", {
         headers: {
@@ -19,7 +24,7 @@ const Feed = ({ navigate }) => {
           setPosts(data.posts);
         });
     }
-  }, []);
+  };
 
   const logout = () => {
     window.localStorage.removeItem("token");
@@ -31,17 +36,16 @@ const Feed = ({ navigate }) => {
       <>
         <h2>Posts</h2>
         <button onClick={logout}>Logout</button>
+        <CreatePost fetchData={fetchData} />
         <div id="feed" role="feed">
-          {Array.isArray(posts) &&
-            [...posts]
-              .reverse()
-              .map((post) => <Post post={post} key={post._id} />)}
+          {[...posts].reverse().map((post) => (
+            <Post post={post} key={post._id} />
+          ))}
         </div>
       </>
     );
   } else {
-    navigate("/signin");
-    return null;
+    navigate("/login");
   }
 };
 
