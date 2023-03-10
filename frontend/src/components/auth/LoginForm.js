@@ -1,32 +1,14 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
 import { ReactComponent as Logo } from "../logo/logo.svg";
 import Button from "../button/Button";
-import Modal from "../modal/Modal";
-
-const SuccessModal = () => (
-  <Modal
-    title="Success"
-    subText="You have logged in succesfully"
-    type="success"
-    id="success-modal"
-  />
-);
-
-const FailModal = () => (
-  <Modal
-    title="Login Failed"
-    subText="Sorry, we weren't able to log you in"
-    type="fail"
-    id="fail-modal"
-  />
-);
+import ModalContext from "../modalContext/ModalContext";
 
 const LogInForm = ({ navigate }) => {
+  const { pushModal } = useContext(ModalContext);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [isLoggedIn, setIsLoggedIn] = useState(null);
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -39,19 +21,21 @@ const LogInForm = ({ navigate }) => {
       body: JSON.stringify({ email, password }),
     });
 
-    if (response.status !== 201) {
-      setIsLoggedIn(false);
-      setTimeout(() => {
-        navigate("/login");
-      });
-    } else {
-      const data = await response.json();
-      window.localStorage.setItem("token", data.token);
-      setIsLoggedIn(true);
+    const data = await response.json();
 
-      setTimeout(() => {
-        navigate("/posts");
-      }, 2000);
+    if (response.status !== 201) {
+      pushModal({
+        message: data.message,
+        style: "error",
+      });
+      navigate("/login");
+    } else {
+      window.localStorage.setItem("token", data.token);
+      pushModal({
+        message: "Login succeeded!",
+        style: "success",
+      });
+      navigate("/posts");
     }
   };
 
@@ -67,8 +51,6 @@ const LogInForm = ({ navigate }) => {
 
   return (
     <div>
-      {isLoggedIn && <SuccessModal />}
-      {isLoggedIn === false && <FailModal />}
       <div className="flex min-h-full items-center justify-center py-12 px-4">
         <div className="w-full max-w-md space-y-8">
           <div>

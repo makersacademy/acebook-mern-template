@@ -1,19 +1,37 @@
 import "./App.css";
-import React from "react";
+import React, { useState } from "react";
 import { useNavigate, Routes, Route } from "react-router-dom";
 import LoginForm from "../auth/LoginForm";
 import SignUpForm from "../user/SignUpForm";
 import Feed from "../feed/Feed";
 import Card from "../card/Card";
+import ModalView from "../modalView/ModalView";
+import ModalContext from "../modalContext/ModalContext";
 
 const App = () => {
+  const [modals, setModals] = useState([]);
+
+  const pushModal = (modal) => {
+    const id = new Date().getTime().toString();
+    setModals((currentModals) => [...currentModals, { ...modal, id }]);
+    setTimeout(() => {
+      setModals((currentModals) => currentModals.slice(1));
+    }, 3000);
+  };
+
   return (
-    <Routes>
-      <Route path="/posts" element={<Feed navigate={useNavigate()} />} />
-      <Route path="/login" element={<LoginForm navigate={useNavigate()} />} />
-      <Route path="/signup" element={<SignUpForm navigate={useNavigate()} />} />
-      <Route path="/card" element={<Card />} />
-    </Routes>
+    <ModalContext.Provider value={{ pushModal }}>
+      <ModalView modals={modals} />
+      <Routes>
+        <Route path="/posts" element={<Feed navigate={useNavigate()} />} />
+        <Route path="/login" element={<LoginForm navigate={useNavigate()} />} />
+        <Route
+          path="/signup"
+          element={<SignUpForm navigate={useNavigate()} />}
+        />
+        <Route path="/card" element={<Card />} />
+      </Routes>
+    </ModalContext.Provider>
   );
 };
 
