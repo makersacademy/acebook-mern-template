@@ -15,6 +15,29 @@ describe("Post model", () => {
     expect(post.message).toEqual("some message");
   });
 
+  it("has a timestamp for when created ", () => {
+    const post = {
+      _id: "1",
+      message: "Hello World",
+      user: "John",
+      createdAt: new Date(),
+    };
+    const now = new Date();
+    const options = {
+      hour12: false,
+      hour: '2-digit',
+      minute: '2-digit',
+      second: '2-digit'
+    };
+    const formattedTime = now.toLocaleString('en-US', options);
+    const postFormattedTime = post.createdAt.toLocaleString('en-US', options);
+
+    expect(post.message).toEqual("Hello World");
+    expect(postFormattedTime).toEqual(formattedTime);
+    
+  });
+
+
   it("can list all posts", (done) => {
     Post.find((err, posts) => {
       expect(err).toBeNull();
