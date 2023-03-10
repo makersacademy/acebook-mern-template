@@ -1,19 +1,22 @@
-import React, { useState } from "react";
+import { Navigate } from 'react-router-dom';
+import React, { useContext, useState } from "react";
+import { UserContext } from '../../context/UserContext';
 import './CreatePost.css'
 
-function CreatePost() {
+function CreatePost(props) {
+
   const [postMessage, setPostMessage] = useState("");
+  const { userInfo } = useContext(UserContext)
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    //const token = localStorage.getItem("jwt");
     const token = window.localStorage.getItem("token");
-
-    const formattedMessge = { "message": postMessage }
+    
+    const formattedMessage = { "message":  postMessage, "poster": userInfo._id }
 
     fetch('/posts', {
       method: 'POST',
-      body: JSON.stringify(formattedMessge),
+      body: JSON.stringify(formattedMessage),
       headers: {
         'Content-Type': 'application/json',
         'Authorization': `Bearer ${token}`
@@ -31,11 +34,20 @@ function CreatePost() {
       })
 
     setPostMessage("");
+    props.refreshPosts();
   };
 
   return (
     <form id='formCreatePost' onSubmit={handleSubmit} className='post-form'>
-      <textarea id="textCreatePost" className="post-input" placeholder="What's on your mind?" value={postMessage} onChange={(event) => { setPostMessage(event.target.value) }}></textarea>
+      <label htmlFor="post-text" className="post-label">What's on your mind?</label>
+      <textarea
+        className="post-input"
+        id="textCreatePost"
+        value={postMessage}
+        onChange={(event) => {
+          setPostMessage(event.target.value)
+        }}
+      />
       <button id="submitButton" className="submit-button">Post</button>
     </form>
   );

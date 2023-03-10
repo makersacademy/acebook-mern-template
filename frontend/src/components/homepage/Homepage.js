@@ -1,13 +1,13 @@
-import CreatePost from "../CreatePost/CreatePost";
 import Feed from "../feed/Feed";
-import { useNavigate} from "react-router-dom";
+import { useContext } from 'react'
+import { UserContext } from '../../context/UserContext';
 
-const Homepage = ({ navigate }) => {
-
+const Homepage = (props) => {
+    const {userInfo} = useContext(UserContext);
 
     return (
         <>
-        <Feed navigate={ useNavigate() }/>
+            {userInfo ? <Feed navigate={props.navigate}/> : <div>You need an account to view and create posts.</div>}
         </>
     )
 }

@@ -7,33 +7,36 @@ const Feed = ({ navigate }) => {
   const [posts, setPosts] = useState([]);
   const [token, setToken] = useState(window.localStorage.getItem("token"));
 
-  useEffect(() => {
-    if (token) {
+  const refreshPosts = () => {
+    if(token) {
       fetch("/posts", {
         headers: {
           'Authorization': `Bearer ${token}`
         }
       })
         .then(response => response.json())
-        .then(async data => {
+        .then((data) => {
           window.localStorage.setItem("token", data.token)
           setToken(window.localStorage.getItem("token"))
           setPosts(data.posts);
         })
+        .catch(error => console.log(error))
     }
-  }, [])
+  }
 
-
+  useEffect(() => {
+    refreshPosts()
+  },[])
+    
   const logout = () => {
     window.localStorage.removeItem("token")
     navigate('/login')
   }
-
-  if (token) {
-    return (
-      <>
-
-        <CreatePost />
+  
+    if(token) {
+      return(
+        <>
+          <CreatePost refreshPosts={refreshPosts}/>
 
         {/* <button onClick={logout}>
               Logout

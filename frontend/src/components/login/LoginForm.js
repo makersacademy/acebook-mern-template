@@ -1,15 +1,11 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
+import { UserContext } from '../../context/UserContext';
 
-const LogInForm = ({ navigate, setToken }) => {
+const LoginForm = ({ navigate, setToken }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [errorMessage, setErrorMessage] = useState(false);
-
-
-
-  const setUserInfo = () => {
-    
-  }
+  const { handleUserInfo } = useContext(UserContext)
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -30,10 +26,19 @@ const LogInForm = ({ navigate, setToken }) => {
     } else {
       console.log("logged in")
       console.log(response.status);
-      let data = await response.json()
+      const data = await response.json()
       window.localStorage.setItem("token", data.token)
-      window.localStorage.setItem("email", email)
+      window.localStorage.setItem("userInfo", data)
+      console.log(window.localStorage.getItem("userInfo"))
       setToken(data.token)
+
+      handleUserInfo({
+        _id: data._id,
+        firstName: data.firstName,
+        lastName: data.lastName,
+        email: data.email
+      })
+
       navigate('/');
     }
   }
@@ -69,4 +74,4 @@ const LogInForm = ({ navigate, setToken }) => {
     );
 }
 
-export default LogInForm;
+export default LoginForm;
