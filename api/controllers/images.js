@@ -2,8 +2,6 @@
 const Image = require("../models/image");
 const generateToken = require("../models/token_generator");
 
-const cloudName = "ddav2oh8j";
-
 // returns all images from the db
 const getAllImages = async (req, res) => {
   try {
@@ -20,15 +18,8 @@ const getAllImages = async (req, res) => {
 // gets the file from frontend and returns a public_id
 const uploadImage = async (req, res) => {
   try {
-    // passes the req body to the Cloudinary API
-    const formData = new FormData();
-    formData.append("file", req.file);
-    formData.append("upload_preset", "llzecft2");
-    // exracts the public_id from the data
-    const response = await fetch(
-      `https://api.cloudinary.com/v1_1/${cloudName}/image/upload`
-    );
-    const publicId = response.data.public_id;
+    console.log(req.body);
+    const { publicId } = req.body;
     // save the public_id to the db
     const newImage = await Image.create({ publicId, userId: req.userId });
     // new token
