@@ -3,7 +3,7 @@ import Post from '../post/Post'
 import Navbar from '../navbar/Navbar';
 import './Feed.css'
 
-const Feed = ({ navigate,userData }) => {
+const Feed = ({ navigate,userData,storeUserData }) => {
   const [posts, setPosts] = useState([]);
   const [token, setToken] = useState(window.localStorage.getItem("token"));
   const [newPost, setNewPost] = useState("");
@@ -43,7 +43,7 @@ const Feed = ({ navigate,userData }) => {
   if (token) {
     return (
       <>
-        <Navbar navigate={navigate} userData={userData} />
+        <Navbar navigate={navigate} userData={userData} storeUserData={storeUserData}/>
         <h2>Posts</h2>
         <form onSubmit={handleSubmit}>
           <label>

@@ -14,8 +14,9 @@ describe('Navbar', () => {
   })
 
   it('displays name', () => {
-    cy.mount(<Navbar/>)
+    cy.mount(<Navbar userData={{firstName:'Jenny'}}/>)
     cy.get('nav').should('exist')
     cy.get('[data-cy="user-first-name"]').should('exist')
+    cy.get('[data-cy="user-first-name"]').should('contain','Jenny')
   })
 })

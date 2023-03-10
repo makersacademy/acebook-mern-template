@@ -1,6 +1,7 @@
-const Navbar = ({navigate,userData}) => {
+const Navbar = ({navigate,userData,storeUserData}) => {
   const logout = () => {
     window.localStorage.removeItem("token");
+    storeUserData(null);
     navigate("/login");
   };
 
