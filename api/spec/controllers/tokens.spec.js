@@ -21,6 +21,7 @@ describe("/tokens", () => {
     expect(response.status).toEqual(201)
     expect(response.body.token).not.toEqual(undefined)
     expect(response.body.message).toEqual("OK")
+    expect(response.body.user.firstName).toEqual("testandra")
   })
 
 
