@@ -24,7 +24,6 @@
     "mongodb": "^3.4.1",
     "mongoose": "^5.8.11",
     "morgan": "~1.9.1",
-    "node-fetch": "^3.3.0",
     "nodemon": "^2.0.15",
     "superagent": "^8.0.0",
     "supertest": "^6.2.4"
