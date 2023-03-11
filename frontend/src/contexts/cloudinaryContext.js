@@ -1,5 +1,6 @@
 import React, { createContext } from "react";
 import { Cloudinary } from "@cloudinary/url-gen";
+import PropTypes from "prop-types";
 
 export const CloudinaryContext = createContext(null);
 
@@ -11,9 +12,15 @@ export const cld = new Cloudinary({
 });
 
 const CloudinaryContextProvider = ({ children }) => {
-  <CloudinaryContext.Provider value={cld}>
-    {children}
-  </CloudinaryContext.Provider>;
+  return (
+    <CloudinaryContext.Provider value={cld}>
+      {children}
+    </CloudinaryContext.Provider>
+  );
+};
+
+CloudinaryContextProvider.propTypes = {
+  children: PropTypes.element.isRequired,
 };
 
 export default CloudinaryContextProvider;

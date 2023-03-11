@@ -4,15 +4,15 @@ import "./index.css";
 import { BrowserRouter } from "react-router-dom";
 import App from "./components/app/App";
 import reportWebVitals from "./reportWebVitals";
-// import CloudinaryContextProvider from "./contexts/cloudinaryContext";
+import CloudinaryContextProvider from "./contexts/cloudinaryContext";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <BrowserRouter>
     <React.StrictMode>
-      {/* <CloudinaryContextProvider> */}
-      <App />
-      {/* </CloudinaryContextProvider> */}
+      <CloudinaryContextProvider>
+        <App />
+      </CloudinaryContextProvider>
     </React.StrictMode>
   </BrowserRouter>
 );

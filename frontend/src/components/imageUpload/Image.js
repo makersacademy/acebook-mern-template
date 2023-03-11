@@ -1,23 +1,19 @@
-import React, { useState } from "react";
+/* eslint-disable react/destructuring-assignment */
+import React, { useState, useContext } from "react";
 import { AdvancedImage } from "@cloudinary/react";
-import { Cloudinary } from "@cloudinary/url-gen";
-// import { CloudinaryContext } from "../../contexts/cloudinaryContext";
-
-const cld = new Cloudinary({
-  cloud: {
-    cloudName: "ddav2oh8j",
-  },
-});
+import { CloudinaryContext } from "../../contexts/cloudinaryContext";
 
 const Image = () => {
-  const [inputValue, setInputValue] = useState("");
+  const [isError, setIsError] = useState(false);
+  const [inputValue, setInputValue] = useState(null);
   const [imageResponse, setimageResponse] = useState("");
   const [token, setToken] = useState(window.localStorage.getItem("token"));
-  // const { cld } = useContext(CloudinaryContext);
+  const cld = useContext(CloudinaryContext);
 
   const myImage = cld.image(imageResponse.public_id);
 
   const submitHandler = async (event) => {
+    setIsError(false);
     // 1. prevent React app to refresh
     event.preventDefault();
 
@@ -25,7 +21,7 @@ const Image = () => {
     const formData = new FormData();
     formData.append("file", inputValue);
     formData.append("upload_preset", "llzecft2");
-    if (token) {
+    if (token !== "undefined" && inputValue) {
       const response = await fetch(
         "https://api.cloudinary.com/v1_1/ddav2oh8j/image/upload",
         {
@@ -34,7 +30,6 @@ const Image = () => {
         }
       );
       const data = await response.json();
-      console.log(data);
 
       // 3. save the publicId to the database
       const imageRes = await fetch("/images", {
@@ -51,9 +46,8 @@ const Image = () => {
       setToken(window.localStorage.getItem("token"));
       setimageResponse(imageData);
     } else {
-      console.log("You don't have a token!");
+      setIsError(true);
     }
-    // console.log(response)
   };
 
   return (
@@ -62,6 +56,9 @@ const Image = () => {
         <input onChange={(e) => setInputValue(e.target.files[0])} type="file" />
         <input type="submit" />
       </form>
+      {isError && (
+        <p className="text-red-500">You must have a token and file.</p>
+      )}
       <p>{imageResponse.public_id}</p>
       <div>
         <AdvancedImage cldImg={myImage} />
