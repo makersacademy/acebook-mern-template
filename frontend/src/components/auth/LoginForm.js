@@ -26,14 +26,14 @@ const LogInForm = ({ navigate }) => {
     if (response.status !== 201) {
       pushModal({
         message: data.message,
-        style: "error",
+        type: "error",
       });
       navigate("/login");
     } else {
       window.localStorage.setItem("token", data.token);
       pushModal({
         message: "Login succeeded!",
-        style: "success",
+        type: "success",
       });
       navigate("/posts");
     }

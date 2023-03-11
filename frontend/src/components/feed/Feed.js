@@ -37,7 +37,7 @@ const Feed = ({ navigate }) => {
     window.localStorage.removeItem("token");
     pushModal({
       message: "Successfully logged out",
-      style: "success",
+      type: "success",
     });
     navigate("/login");
   };
