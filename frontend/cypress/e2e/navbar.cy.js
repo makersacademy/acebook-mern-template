@@ -19,7 +19,7 @@ describe("Signing in", () => {
       });
 
     
-      it("Displays the navbar after logging in", () => {
+      it("Displays logout in navbar after logging in", () => {
         cy.visit("/login");
         cy.get("#email").type("someone@example.com");
         cy.get("#password").type("password");
