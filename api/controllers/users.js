@@ -23,6 +23,18 @@ const UsersController = {
       }
     });
   },
+
+  showUser: (req, res) => {
+    const user_id = req.user_id
+
+    User.findById(user_id).then(async (user) => {
+      if(error) {
+        throw error;
+      } else {
+        res.status(201).json({username, firstName, lastName, _id})
+      }
+    })
+  }
 };
 
 module.exports = UsersController;
