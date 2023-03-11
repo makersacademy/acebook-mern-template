@@ -13,9 +13,10 @@ const App = () => {
 
   const pushModal = (modal) => {
     const id = new Date().getTime().toString();
-    setModals((currentModals) => [...currentModals, { ...modal, id }]);
+    const newModal = { ...modal, id };
+    setModals((prevState) => prevState.concat(newModal));
     setTimeout(() => {
-      setModals((currentModals) => currentModals.slice(1));
+      setModals((prevState) => prevState.slice(1));
     }, 3000);
   };
 
