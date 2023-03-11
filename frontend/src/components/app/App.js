@@ -20,8 +20,9 @@ const App = () => {
   };
 
   return (
-    <ModalContext.Provider value={{ pushModal }}>
-      <ModalView modals={modals} />
+    // eslint-disable-next-line react/jsx-no-constructed-context-values
+    <ModalContext.Provider value={{ modals, pushModal }}>
+      <ModalView />
       <Routes>
         <Route path="/posts" element={<Feed navigate={useNavigate()} />} />
         <Route path="/login" element={<LoginForm navigate={useNavigate()} />} />
