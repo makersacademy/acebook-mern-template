@@ -23,7 +23,7 @@ const generateBackdatedToken = (userId) =>
 describe("/images", () => {
   beforeAll(async () => {
     user = new User({
-      userName: "testuser",
+      username: "testuser",
       email: "test@test.com",
       password: "12345678",
     });
@@ -52,8 +52,7 @@ describe("/images", () => {
       const serverMock = request(app);
       const response = await serverMock
         .get("/images")
-        .set("Authorization", `Bearer ${token}`)
-        .send({ token });
+        .set("Authorization", `Bearer ${token}`);
       const imagesId = response.body.images.map((image) => image.publicId);
 
       // assert
@@ -82,38 +81,30 @@ describe("/images", () => {
   });
 
   describe("POST, when token is present", () => {
-    // make a re
+    it("should return an object with public_id, token and new image record", async () => {
+      const serverMock = request(app);
+      const response = await serverMock
+        .post("/images")
+        .set("Authorization", `Bearer ${token}`)
+        .send({ publicId: "1234567" });
+      expect(response.status).toEqual(200);
+      expect(response.body.image).toBeDefined();
+      expect(response.body.token).toBeDefined();
+      expect(response.body.public_id).toEqual("1234567");
+    });
   });
 
-  describe("POST, when token is missing", () => {});
+  describe("POST, when token is missing", () => {
+    it("should return an object with public_id, token and new image record", async () => {
+      const serverMock = request(app);
+      const response = await serverMock
+        .post("/images")
+        .send({ publicId: "1234567" });
 
-  // Chat GPT:
-  // describe("POST /images", () => {
-  //   test("should upload image and return public_id", async () => {
-  //     const req = {
-  //       file: "test_file",
-  //       userId: user.id,
-  //     };
-  //     const res = {
-  //       status: jest.fn().mockReturnThis(),
-  //       json: jest.fn(),
-  //     };
-
-  //     const response = await request(app)
-  //       .post("/images")
-  //       .set("Authorization", `Bearer ${token}`)
-  //       .field("upload_preset", "llzecft2")
-  //       // .attach("file", req.file);
-  //       .attach("file", Buffer.from("mock file content"), "filename.png");
-
-  //     // console.log(response);
-
-  //     expect(res.status).toHaveBeenCalledWith(200);
-  //     expect(res.json).toHaveBeenCalledWith({
-  //       image: expect.any(Object),
-  //       token: expect.any(String),
-  //       public_id: expect.any(String),
-  //     });
-  //   });
-  // });
+      expect(response.status).toEqual(401);
+      expect(response.body.image).toEqual(undefined);
+      expect(response.body.token).toEqual(undefined);
+      expect(response.body.public_id).toEqual(undefined);
+    });
+  });
 });

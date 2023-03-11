@@ -18,7 +18,6 @@ const getAllImages = async (req, res) => {
 // gets the file from frontend and returns a public_id
 const uploadImage = async (req, res) => {
   try {
-    console.log(req.body);
     const { publicId } = req.body;
     // save the public_id to the db
     const newImage = await Image.create({ publicId, userId: req.userId });
