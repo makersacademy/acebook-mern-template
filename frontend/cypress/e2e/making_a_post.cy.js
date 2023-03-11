@@ -15,5 +15,6 @@ describe("Make new post", () => {
         cy.wait(2000);
         cy.reload();
         cy.get("div:contains(hello world)").should("be.visible");
+        cy.get("div:contains(posted at:)").should("be.visible");
         });
 });
