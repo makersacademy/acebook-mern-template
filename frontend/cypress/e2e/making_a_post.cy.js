@@ -1,11 +1,11 @@
 describe("Make new post", () => {
 
     before(() => {
-      cy.signup("user@email.com", "12345678");
-      cy.visit("/login");
-      cy.get("#email").type("someone@example.com");
-      cy.get("#password").type("password");
-      cy.get("#submit").click();
+        cy.signup("user@email.com", "12345678");
+        cy.visit("/login");
+        cy.get("#email").type("someone@example.com");
+        cy.get("#password").type("password");
+        cy.get("#submit").click();
     })
 
     it("Posts a new message", () => {
@@ -15,5 +15,5 @@ describe("Make new post", () => {
         cy.wait(2000);
         cy.reload();
         cy.get("div:contains(hello world)").should("be.visible");
-    });
+        });
 });
