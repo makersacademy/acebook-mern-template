@@ -29,7 +29,6 @@ const Post = ({post}) => {
   const handleLike = async () => {
     const token = window.localStorage.getItem("token");
 
-
     let formattedBody = { "postId": post._id, "userId": userInfo._id }
 
     const response = await fetch(`/posts/${post._id}/like`, {
@@ -42,6 +41,23 @@ const Post = ({post}) => {
     })
 
     console.log(response);
+}
+
+const handleUnlike = async () => {
+  const token = window.localStorage.getItem("token");
+
+  let formattedBody = { "postId": post._id, "userId": userInfo._id }
+
+  const response = await fetch(`/posts/${post._id}/unlike`, {
+    method: "put",
+    body: JSON.stringify(formattedBody),
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${token}`
+    },
+  })
+
+  console.log(response);
 }
 
 
@@ -57,10 +73,9 @@ const Post = ({post}) => {
       {postDate} posted at: {postTime} {numLikes} Likes
 
       {alreadyLiked == true ?
-        <button type="button" class="btn btn-primary btn-sm" id="like-button" >unlike</button>
+        <button type="button" class="btn btn-primary btn-sm" id="like-button" onClick={() => handleUnlike(post._id)} >unlike</button>
         :
         <button type="button" class="btn btn-primary btn-sm" id="like-button" onClick={() => handleLike(post._id)}>Like</button>
-
     }
       </article>
     </>

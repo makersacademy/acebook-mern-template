@@ -54,12 +54,27 @@ const TokenGenerator = require("../models/token_generator");
           });
         }
       });
-    }
+    },
 
-
-
-
-
+    Unlike: (req, res) => {
+      Post.findById(req.body.postId, (err, post) => {
+        if (err) {
+          throw err;
+        } else {
+          const alreadyLiked = post.likes.includes(req.body.userId);
+          if (alreadyLiked) {
+            const index = post.likes.indexOf(req.body.userId);
+            post.likes.splice(index, 1);
+            post.save((err) => {
+              if (err) {
+                throw err;
+              } else {
+                res.status(201).json({ message: 'Unlike successful' });
+              }
+            })
+          }
+        }}
+      )}
 };
 
 module.exports = PostsController;
