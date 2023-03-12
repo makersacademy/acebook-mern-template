@@ -34,6 +34,9 @@ const App = () => {
       handleUserInfo(null)
     }
 
+    console.log("user context is: ", UserContext)
+    console.log("user info is: ", userInfo)
+
     return (
       <>
           <Navbar logoutHandle={logout} token={token}/>
