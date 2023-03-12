@@ -37,4 +37,22 @@ describe("Post model", () => {
       });
     });
   });
+
+  test('should be an array', () => {
+    let post = new Post({ message: "some message", likes: [] });
+    expect(Array.isArray(post.likes)).toBe(true);
+  });
+
+  it("should have an empty array to store likes", () => {
+    let post = new Post({ message: "some message", likes: [] });
+    expect(Array.isArray(post.likes)).toBe(true);
+  })
+
+  it("can add a new like to a post", (done) => {
+    const user = { _id: '1234567890abcdef12345678' };
+    let post = new Post({ message: "some message", likes: [] });
+    post.likes.push(user._id);
+    expect(post.likes.length).toEqual(1);
+    done();
+  })
 });

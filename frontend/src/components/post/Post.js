@@ -1,5 +1,7 @@
 import React from 'react';
 import './Post.css'
+import { useContext } from 'react';
+import { UserContext } from '../../context/UserContext';
 
 
 const Post = ({post}) => {
@@ -15,6 +17,30 @@ const Post = ({post}) => {
   const postDate = (day + "-" + month + "-" + year)
   const postTime = (hours + ":" + minutes)
 
+  const { userInfo } = useContext(UserContext)
+
+
+  console.log(post);
+
+  const handleLike = async () => {
+    const token = window.localStorage.getItem("token");
+
+
+    let formattedBody = { "postId": post._id, "userId": userInfo._id }
+
+    const response = await fetch(`/posts/${post._id}/like`, {
+      method: "put",
+      body: JSON.stringify(formattedBody),
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${token}`
+      },
+    })
+
+    console.log(response);
+
+}
+
 
   return(
     <>
@@ -23,8 +49,10 @@ const Post = ({post}) => {
       data-cy="post" 
       key={ post._id }
       className="row-span-1 m-3 py-8 bg-white rounded-xl shadow-lg space-y-2"
-      >{ post.message }<br/>
-      {postDate} posted at: {postTime}
+      >{post.poster.firstName}<br/>
+        { post.message }<br/>
+      {postDate} posted at: {postTime}  
+      <button type="button" class="btn btn-primary btn-sm" id="like-button" onClick={() => handleLike(post._id)}>Like</button>
       </article>
     </>
   )

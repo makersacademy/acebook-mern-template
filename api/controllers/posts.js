@@ -40,7 +40,7 @@ const TokenGenerator = require("../models/token_generator");
     },
 
     NewLike: (req, res) => {
-      Post.findById(req.body._id, (err, post) => {
+      Post.findById(req.body.postId, (err, post) => {
         if (err) {
           throw err;
         } else {
