@@ -1,6 +1,7 @@
 import React from 'react';
 import './Post.css'
 import { useContext } from 'react';
+import { useState } from 'react';
 import { UserContext } from '../../context/UserContext';
 
 
@@ -14,10 +15,13 @@ const Post = ({post}) => {
   const hours = date.getHours();
   const minutes = date.getMinutes();
 
-  const postDate = (day + "-" + month + "-" + year)
-  const postTime = (hours + ":" + minutes)
 
   const { userInfo } = useContext(UserContext)
+  const postDate = (day + "-" + month + "-" + year)
+  const postTime = (hours + ":" + minutes)
+  const [numLikes, setnumLikes] = useState(post.likes ? post.likes.length : 0);
+  const [alreadyLiked, setalreadyLiked] = useState(post.likes.includes(userInfo._id) ? true : false)
+
 
 
   console.log(post);
@@ -38,7 +42,6 @@ const Post = ({post}) => {
     })
 
     console.log(response);
-
 }
 
 
@@ -51,8 +54,14 @@ const Post = ({post}) => {
       className="row-span-1 m-3 py-8 bg-white rounded-xl shadow-lg space-y-2"
       >{post.poster.firstName}<br/>
         { post.message }<br/>
-      {postDate} posted at: {postTime}  
-      <button type="button" class="btn btn-primary btn-sm" id="like-button" onClick={() => handleLike(post._id)}>Like</button>
+      {postDate} posted at: {postTime} {numLikes} Likes
+
+      {alreadyLiked == true ?
+        <button type="button" class="btn btn-primary btn-sm" id="like-button" >unlike</button>
+        :
+        <button type="button" class="btn btn-primary btn-sm" id="like-button" onClick={() => handleLike(post._id)}>Like</button>
+
+    }
       </article>
     </>
   )
