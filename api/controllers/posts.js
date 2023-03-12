@@ -38,6 +38,28 @@ const TokenGenerator = require("../models/token_generator");
         res.status(201).json({ message: 'OK', token: token });
       });
     },
+
+    NewLike: (req, res) => {
+      Post.findById(req.body._id, (err, post) => {
+        if (err) {
+          throw err;
+        } else {
+          post.likes.push(req.body.userId);
+          post.save((err) => {
+            if (err) {
+              throw err;
+            } else {
+              res.status(201).json({ message: 'Like added' });
+            }
+          });
+        }
+      });
+    }
+
+
+
+
+
 };
 
 module.exports = PostsController;
