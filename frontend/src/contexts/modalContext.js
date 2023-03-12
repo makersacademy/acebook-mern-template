@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useMemo } from "react";
 import PropTypes from "prop-types";
 
 export const ModalContext = React.createContext();
@@ -15,11 +15,10 @@ const ModalContextProvider = ({ children }) => {
     }, 3000);
   };
 
+  const context = useMemo(() => ({ modals, pushModal }), [modals]);
+
   return (
-    // eslint-disable-next-line react/jsx-no-constructed-context-values
-    <ModalContext.Provider value={{ modals, pushModal }}>
-      {children}
-    </ModalContext.Provider>
+    <ModalContext.Provider value={context}>{children}</ModalContext.Provider>
   );
 };
 
