@@ -5,7 +5,7 @@ import { useState } from 'react';
 import { UserContext } from '../../context/UserContext';
 
 
-const Post = ({post}) => {
+const Post = ({post, props}) => {
 
   const postedAt = post.createdAt;
   const date = new Date(postedAt);
@@ -41,6 +41,7 @@ const Post = ({post}) => {
     })
 
     console.log(response);
+    props.refreshPosts();
 }
 
 const handleUnlike = async () => {
@@ -58,6 +59,7 @@ const handleUnlike = async () => {
   })
 
   console.log(response);
+  props.refreshPosts();
 }
 
 

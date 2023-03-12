@@ -41,6 +41,10 @@ const TokenGenerator = require("../models/token_generator");
 
     NewLike: (req, res) => {
       Post.findById(req.body.postId, (err, post) => {
+        const alreadyLiked = post.likes.includes(req.body.userId);
+        if(alreadyLiked){
+          res.status(401).json({ message: "post already liked"})
+        }
         if (err) {
           throw err;
         } else {
@@ -72,6 +76,8 @@ const TokenGenerator = require("../models/token_generator");
                 res.status(201).json({ message: 'Unlike successful' });
               }
             })
+          } else {
+            res.status(404).json({ message: "post already unliked"})
           }
         }}
       )}
