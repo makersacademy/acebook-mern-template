@@ -1,8 +1,10 @@
-import React from "react";
-import PropTypes from "prop-types";
+import React, { useContext } from "react";
 import Modal from "../modal/Modal";
+import { ModalContext } from "../../contexts/modalContext";
 
-const ModalList = ({ modals }) => {
+const ModalList = () => {
+  const { modals } = useContext(ModalContext);
+
   return (
     <div
       data-cy="modal-list"
@@ -17,11 +19,6 @@ const ModalList = ({ modals }) => {
       </div>
     </div>
   );
-};
-
-ModalList.propTypes = {
-  // eslint-disable-next-line react/forbid-prop-types
-  modals: PropTypes.array.isRequired,
 };
 
 export default ModalList;
