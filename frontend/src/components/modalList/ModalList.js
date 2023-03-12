@@ -2,7 +2,7 @@ import React, { useContext } from "react";
 import Modal from "../modal/Modal";
 import { ModalContext } from "../../contexts/modalContext";
 
-const ModalView = () => {
+const ModalList = () => {
   const { modals } = useContext(ModalContext);
 
   return (
@@ -18,4 +18,4 @@ const ModalView = () => {
   );
 };
 
-export default ModalView;
+export default ModalList;

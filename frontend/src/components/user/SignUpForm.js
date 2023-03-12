@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
-import { ReactComponent as Logo } from "../logo/logo.svg";
+import { ReactComponent as Logo } from "../../assets/logo.svg";
 import Button from "../button/Button";
 
 const SignUpForm = ({ navigate }) => {
