@@ -10,7 +10,7 @@ const ModalContextProvider = ({ children }) => {
   const pushModal = (modal) => {
     const id = new Date().getTime().toString();
     const newModal = { ...modal, id };
-    setModals([...modals, newModal]);
+    setModals((prevState) => prevState.concat(newModal));
     setTimeout(() => {
       setModals((prevState) => prevState.slice(1));
     }, 3000);
