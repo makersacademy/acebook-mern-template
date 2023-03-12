@@ -1,6 +1,5 @@
 import React, { useState, useMemo } from "react";
 import PropTypes from "prop-types";
-import ModalList from "../components/modalList/ModalList";
 
 export const ModalContext = React.createContext();
 
@@ -19,10 +18,7 @@ const ModalContextProvider = ({ children }) => {
   const context = useMemo(() => ({ modals, pushModal }), [modals]);
 
   return (
-    <ModalContext.Provider value={context}>
-      <ModalList modals={modals} />
-      {children}
-    </ModalContext.Provider>
+    <ModalContext.Provider value={context}>{children}</ModalContext.Provider>
   );
 };
 
