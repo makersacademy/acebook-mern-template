@@ -1,12 +1,13 @@
-import React, { useContext } from "react";
+import React from "react";
+import PropTypes from "prop-types";
 import Modal from "../modal/Modal";
-import { ModalContext } from "../../contexts/modalContext";
 
-const ModalList = () => {
-  const { modals } = useContext(ModalContext);
-
+const ModalList = ({ modals }) => {
   return (
-    <div className="pointer-events-none fixed inset-0 z-10 overflow-y-auto">
+    <div
+      data-cy="modal-list"
+      className="pointer-events-none fixed inset-0 z-10 overflow-y-auto"
+    >
       <div className="flex min-h-full items-end justify-center p-4 text-center">
         <div>
           {modals.map(({ message, type, id }) => (
@@ -16,6 +17,11 @@ const ModalList = () => {
       </div>
     </div>
   );
+};
+
+ModalList.propTypes = {
+  // eslint-disable-next-line react/forbid-prop-types
+  modals: PropTypes.array.isRequired,
 };
 
 export default ModalList;
