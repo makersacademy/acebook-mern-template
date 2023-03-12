@@ -5,7 +5,7 @@ import { useState } from 'react';
 import { UserContext } from '../../context/UserContext';
 
 
-const Post = ({post, props}) => {
+const Post = ({post}) => {
 
   const postedAt = post.createdAt;
   const date = new Date(postedAt);
@@ -22,9 +22,8 @@ const Post = ({post, props}) => {
   const [numLikes, setnumLikes] = useState(post.likes ? post.likes.length : 0);
   const [alreadyLiked, setalreadyLiked] = useState(post.likes.includes(userInfo._id) ? true : false)
 
+  
 
-
-  console.log(post);
 
   const handleLike = async () => {
     const token = window.localStorage.getItem("token");
@@ -40,8 +39,14 @@ const Post = ({post, props}) => {
       },
     })
 
+    if (response.ok) {
+      setnumLikes(numLikes + 1);
+      setalreadyLiked(true);
+      //refreshPosts();
+    }
+
     console.log(response);
-    props.refreshPosts();
+    //props.refreshPosts();
 }
 
 const handleUnlike = async () => {
@@ -56,10 +61,17 @@ const handleUnlike = async () => {
       'Content-Type': 'application/json',
       'Authorization': `Bearer ${token}`
     },
+
   })
 
+  if (response.ok) {
+    setnumLikes(numLikes - 1);
+    setalreadyLiked(false);
+    //refreshPosts();
+  }
+
   console.log(response);
-  props.refreshPosts();
+  //props.refreshPosts();
 }
 
 
