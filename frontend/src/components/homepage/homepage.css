@@ -1,0 +1,92 @@
+.loginForm {
+  position: absolute;
+  margin-left: 65%;
+  margin-top: 10%;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-weight: bold;
+  max-width: 400px;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-shadow: 2px 2px 5px #999;
+  height: 405px;
+}
+
+.form-input {
+  display: block;
+  margin-top: 5%;
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 16px;
+}
+
+.buttonLogin {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-weight: bold;
+  display: block;
+  width: 100%;
+  color: #fff;
+  font-size: 15px;
+  cursor: pointer;
+  background-color: #1877f2;
+  border: none;
+  border-radius: 6px;
+  font-size: 20px;
+  line-height: 48px;
+  padding: 0 16px;
+  width: 332px;
+  margin-top: 10%;
+  margin-bottom: 20px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.buttonSignUp {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-weight: bold;
+  display: block;
+  width: 100%;
+  padding: 10px;
+  background-color: #f44336;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  font-size: 17px;
+  cursor: pointer;
+  background-color: #42b72a;
+  border-color: #42b72a;
+  margin-top: 9%;
+}
+
+
+.buttonLogin:hover, .buttonSignUp:hover {
+  opacity: 0.9;
+}
+
+.linkForgottenPassword {
+  display: block;
+  text-align: center;
+  font-size:small
+}
+
+.lineBreak {
+  align-items: center;
+  border-bottom: 1px solid #dadde1;
+  display: flex;
+  margin: 20px 16px;
+  text-align: center;
+}
+
+.recentLogins {
+  position: absolute;
+  margin-top: 12%;
+  margin-left: 20%;
+}
+
+.title {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-weight: bold;
+}
