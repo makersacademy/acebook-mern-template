@@ -21,6 +21,7 @@ const Post = ({ post }) => {
 
       if (response.status !== 200) {
         console.log(response);
+        // Render Modal with generic error message
       } else {
         const data = await response.json();
         window.localStorage.setItem("token", data.token);
