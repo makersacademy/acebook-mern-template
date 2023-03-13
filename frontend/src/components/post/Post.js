@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import PropTypes from "prop-types";
 import jwtDecode from "jwt-decode";
 
+import { ReactComponent as LikeBtn } from "../../assets/like.svg";
+import { ReactComponent as FilledLikeBtn } from "../../assets/fillLike.svg";
 import avatar from "./avatar.png";
 
 const Post = ({ post }) => {
@@ -52,7 +54,7 @@ const Post = ({ post }) => {
   };
 
   return (
-    <article data-cy="post" className="flex flex-col rounded-md shadow-md">
+    <article data-cy="post" className="flex flex-col rounded-lg p-6 shadow-md">
       <div className="m-2 flex">
         <img
           src={avatar}
@@ -67,13 +69,18 @@ const Post = ({ post }) => {
 
       <div className="p-2 text-base">{post.message}</div>
       <div className="m-2 flex items-center gap-4">
-        <button
-          onClick={likeHandler}
-          className="border p-2 hover:bg-black hover:text-white"
-          type="button"
-        >
-          {checkIsLiked() ? "Dislike" : "Like"}
-        </button>
+        {checkIsLiked() ? (
+          <FilledLikeBtn
+            type="button"
+            className="h-8 w-auto cursor-pointer fill-red-500"
+          />
+        ) : (
+          <LikeBtn
+            onClick={likeHandler}
+            type="button"
+            className="h-8 w-auto cursor-pointer fill-black"
+          />
+        )}
         <p>{`${likes.length}`} Likes</p>
       </div>
     </article>

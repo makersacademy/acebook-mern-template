@@ -57,7 +57,7 @@ const Feed = ({ navigate }) => {
 
         <NewPost getPosts={getPosts} />
 
-        <div id="feed" role="feed">
+        <div id="feed" className="flex flex-col gap-4" role="feed">
           {posts.map((post) => (
             <Post post={post} key={post._id} />
           ))}
