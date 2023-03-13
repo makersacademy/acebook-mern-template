@@ -5,6 +5,7 @@ import LoginForm from "../auth/LoginForm";
 import SignUpForm from "../user/SignUpForm";
 import Feed from "../feed/Feed";
 import Card from "../card/Card";
+import Image from "../imageUpload/Image";
 import ModalList from "../modalList/ModalList";
 
 const App = () => {
@@ -19,6 +20,7 @@ const App = () => {
           element={<SignUpForm navigate={useNavigate()} />}
         />
         <Route path="/card" element={<Card />} />
+        <Route path="/image" element={<Image />} />
       </Routes>
     </>
   );
