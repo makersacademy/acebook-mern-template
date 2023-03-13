@@ -6,20 +6,27 @@ import SignUpForm from "../user/SignUpForm";
 import Feed from "../feed/Feed";
 import Card from "../card/Card";
 import ModalList from "../modalList/ModalList";
-import NavBar from "../navBar/NavBar";
+import WithoutNav from "../withoutNav/WithoutNav";
+import WithNav from "../withNav/WithNav";
 
 const App = () => {
   return (
     <>
       <ModalList />
-      <NavBar />
       <Routes>
-        <Route path="/posts" element={<Feed navigate={useNavigate()} />} />
-        <Route path="/login" element={<LoginForm navigate={useNavigate()} />} />
-        <Route
-          path="/signup"
-          element={<SignUpForm navigate={useNavigate()} />}
-        />
+        <Route element={<WithNav />}>
+          <Route path="/posts" element={<Feed navigate={useNavigate()} />} />
+        </Route>
+        <Route element={<WithoutNav />}>
+          <Route
+            path="/login"
+            element={<LoginForm navigate={useNavigate()} />}
+          />
+          <Route
+            path="/signup"
+            element={<SignUpForm navigate={useNavigate()} />}
+          />
+        </Route>
         <Route path="/card" element={<Card />} />
       </Routes>
     </>
