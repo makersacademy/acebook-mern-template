@@ -1,5 +1,5 @@
 import Feed from "../feed/Feed";
-import { useContext } from 'react'
+import { useContext, useState } from 'react'
 import { UserContext } from '../../context/UserContext';
 import '../homepage/homepage.css'
 
@@ -12,6 +12,9 @@ const Homepage = (props) => {
                 <Feed navigate={props.navigate} />
                 :
                 <>
+                    <video id="video-background" autoPlay muted loop>
+                        <source src="https://makers.tech/wp-content/uploads/2018/06/makers-video.mp4" type="video/mp4"></source>
+                    </video>
                     <div className="recentLogins">
                         <div className="logo">
                             <h1>Recent Logins</h1>
