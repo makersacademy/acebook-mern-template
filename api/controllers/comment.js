@@ -17,7 +17,7 @@ const TokenGenerator = require("../models/token_generator");
     GetCommentByPost: async (req, res) => {
         const postId = req.post;
         try {
-            const comments = await Comment.find({ post: postId }).populate('poster', 'username').exec();
+            const comments = await Comment.find({ post: req.postId }).populate('poster', 'username').exec();
             res.status(200).json({ comments: comments, message: "comments retrieved" });
         } catch (err) {
             res.status(500).json({ error: err.message });
