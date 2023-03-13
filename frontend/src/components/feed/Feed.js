@@ -1,9 +1,9 @@
-import React, { useEffect, useState } from 'react';
-import Post from '../post/Post'
-import Navbar from '../navbar/Navbar';
-import './Feed.css'
+import React, { useEffect, useState } from "react";
+import Post from "../post/Post";
+import Navbar from "../navbar/Navbar";
+import "./Feed.css";
 
-const Feed = ({ navigate,userData,storeUserData }) => {
+const Feed = ({ navigate, userData, storeUserData }) => {
   const [posts, setPosts] = useState([]);
   const [token, setToken] = useState(window.localStorage.getItem("token"));
   const [newPost, setNewPost] = useState("");
@@ -39,11 +39,14 @@ const Feed = ({ navigate,userData,storeUserData }) => {
     navigate(0);
   };
 
-
   if (token) {
     return (
       <>
-        <Navbar navigate={navigate} userData={userData} storeUserData={storeUserData}/>
+        <Navbar
+          navigate={navigate}
+          userData={userData}
+          storeUserData={storeUserData}
+        />
         <h2>Posts</h2>
         <form onSubmit={handleSubmit}>
           <label>
@@ -69,7 +72,6 @@ const Feed = ({ navigate,userData,storeUserData }) => {
   } else {
     navigate("/signin");
   }
-  
-}
+};
 
 export default Feed;
