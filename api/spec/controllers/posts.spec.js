@@ -166,4 +166,20 @@ describe("/posts", () => {
       expect(response.body.token).toEqual(undefined);
     });
   });
+
+  describe("POST /like, when token is present", () => {
+    it("should like a post", async () => {
+      const post = new Post({
+        message: "like this post!",
+        author: "640bee229b863616fb3a81df",
+      });
+      await post.save();
+      const res = await request(app)
+        .post("/posts/like")
+        .set("Authorization", `Bearer ${token}`)
+        .send({ postId: post.id });
+      expect(res.body.updatedPost.likes.length).toEqual(1);
+      expect(res.body.token).toBeDefined();
+    });
+  });
 });

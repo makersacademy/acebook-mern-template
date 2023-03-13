@@ -25,4 +25,28 @@ const createPost = async (req, res) => {
   }
 };
 
-module.exports = { getAllPosts, createPost };
+const likePost = async (req, res) => {
+  try {
+    // check userId to know who likes it
+    const { userId } = req;
+
+    // alter the database record
+    await Post.updateOne(
+      { _id: req.body.postId },
+      { $push: { likes: userId } }
+    );
+
+    // finds the latest record
+    const updatedPost = await Post.find({ _id: req.body.postId });
+
+    // refresh the token
+    const token = await generateToken(req.userId);
+
+    // send 201 status code back with the updated post and a refreshed token
+    res.status(201).json({ updatedPost: updatedPost[0], token });
+  } catch (error) {
+    res.status(500).json({ error });
+  }
+};
+
+module.exports = { getAllPosts, createPost, likePost };
