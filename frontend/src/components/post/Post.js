@@ -71,11 +71,13 @@ const Post = ({ post }) => {
       <div className="m-2 flex items-center gap-4">
         {checkIsLiked() ? (
           <FilledLikeBtn
+            data-cy="filled-like-button"
             type="button"
             className="h-8 w-auto cursor-pointer fill-red-500"
           />
         ) : (
           <LikeBtn
+            data-cy="like-button"
             onClick={likeHandler}
             type="button"
             className="h-8 w-auto cursor-pointer fill-black"
