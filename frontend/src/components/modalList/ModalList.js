@@ -1,12 +1,15 @@
 import React, { useContext } from "react";
 import Modal from "../modal/Modal";
-import ModalContext from "../modalContext/ModalContext";
+import { ModalContext } from "../../contexts/modalContext";
 
-const ModalView = () => {
+const ModalList = () => {
   const { modals } = useContext(ModalContext);
 
   return (
-    <div className="pointer-events-none fixed inset-0 z-10 overflow-y-auto">
+    <div
+      data-cy="modal-list"
+      className="pointer-events-none fixed inset-0 z-10 overflow-y-auto"
+    >
       <div className="flex min-h-full items-end justify-center p-4 text-center">
         <div>
           {modals.map(({ message, type, id }) => (
@@ -18,4 +21,4 @@ const ModalView = () => {
   );
 };
 
-export default ModalView;
+export default ModalList;

@@ -11,7 +11,7 @@ const Modal = ({ message, type }) => {
 
   return (
     <div
-      className={`${checkStyle()}} mb-4 rounded-lg p-4 text-sm`}
+      className={`${checkStyle()} mb-4 rounded-lg p-4 text-sm`}
       data-cy="modal"
     >
       {message}

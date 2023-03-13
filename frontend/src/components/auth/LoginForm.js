@@ -1,9 +1,9 @@
 import React, { useState, useContext } from "react";
 import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
-import { ReactComponent as Logo } from "../logo/logo.svg";
+import { ReactComponent as Logo } from "../../assets/logo.svg";
 import Button from "../button/Button";
-import ModalContext from "../modalContext/ModalContext";
+import { ModalContext } from "../../contexts/modalContext";
 
 const LogInForm = ({ navigate }) => {
   const { pushModal } = useContext(ModalContext);

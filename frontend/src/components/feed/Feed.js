@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import Post from "../post/Post";
 import NewPost from "../newPost/NewPost";
 import Button from "../button/Button";
-import ModalContext from "../modalContext/ModalContext";
+import { ModalContext } from "../../contexts/modalContext";
 
 const Feed = ({ navigate }) => {
   const { pushModal } = useContext(ModalContext);
