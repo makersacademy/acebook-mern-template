@@ -67,7 +67,7 @@ const LoginForm = ({ navigate, setToken }) => {
           Invalid Log In Details
         </div> : null
       }
-      <a className="linkForgottenPassword" href="">Forgotten password?</a>
+      <a className="linkForgottenPassword" href="/forgot-password">Forgotten password?</a>
       <div className="lineBreak"></div>
       <button type="button" className="buttonSignUp" href="/signup/">Sign Up</button>
     </form>
