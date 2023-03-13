@@ -181,5 +181,23 @@ describe("/posts", () => {
       expect(res.body.updatedPost.likes.length).toEqual(1);
       expect(res.body.token).toBeDefined();
     });
+
+    it("should prevent the same user to like the post again", async () => {
+      const post = new Post({
+        message: "like this post!",
+        author: "640bee229b863616fb3a81df",
+      });
+      await post.save();
+      await request(app)
+        .post("/posts/like")
+        .set("Authorization", `Bearer ${token}`)
+        .send({ postId: post.id });
+      const res = await request(app)
+        .post("/posts/like")
+        .set("Authorization", `Bearer ${token}`)
+        .send({ postId: post.id });
+      expect(res.body.updatedPost.likes.length).toEqual(1);
+      expect(res.body.token).toBeDefined();
+    });
   });
 });
