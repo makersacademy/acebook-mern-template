@@ -35,7 +35,7 @@ const Feed = ({ navigate }) => {
     return (
       <>
         <h2>Posts</h2>
-        <button onClick={logout}>Logout</button>
+        {/* <button onClick={logout}>Logout</button> */}
         <CreatePost fetchData={fetchData} />
         <div id="feed" role="feed">
           {[...posts].reverse().map((post) => (
