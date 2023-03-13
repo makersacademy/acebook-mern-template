@@ -1,10 +1,13 @@
 import React, { useState } from "react";
 import PropTypes from "prop-types";
+import jwtDecode from "jwt-decode";
+
 import avatar from "./avatar.png";
 
 const Post = ({ post }) => {
   const [token, setToken] = useState(window.localStorage.getItem("token"));
   const [likes, setLikes] = useState(post.likes);
+  const [userId] = useState(jwtDecode(token).userId);
 
   const datePadder = (datePartString) => {
     return datePartString < 10 ? `0${datePartString}` : datePartString;
@@ -43,6 +46,11 @@ const Post = ({ post }) => {
     }
   };
 
+  // returns a boolean if the user already liked the post
+  const checkIsLiked = () => {
+    return likes.includes(userId);
+  };
+
   return (
     <article data-cy="post" className="flex flex-col rounded-md shadow-md">
       <div className="m-2 flex">
@@ -64,7 +72,7 @@ const Post = ({ post }) => {
           className="border p-2 hover:bg-black hover:text-white"
           type="button"
         >
-          Like
+          {checkIsLiked() ? "Dislike" : "Like"}
         </button>
         <p>{`${likes.length}`} Likes</p>
       </div>
