@@ -63,8 +63,8 @@ const LoginForm = ({ navigate, setToken }) => {
       </div>
       <input role='submit-button' id='submit' type="submit" value="Login" className="loginButton" />
       {errorMessage ?
-        <div className="alert alert-danger" role="alert">
-          Invalid username or Password
+        <div id='alert' className="alert alert-danger" role="alert">
+          Invalid Log In Details
         </div> : null
       }
       <a className="linkForgottenPassword" href="">Forgotten password?</a>

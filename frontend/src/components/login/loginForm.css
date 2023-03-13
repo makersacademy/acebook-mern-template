@@ -56,3 +56,24 @@
 .form-control {
   margin-bottom: 8%;
 }
+
+#alert {
+  color: white;
+  position: fixed;
+  margin-left: auto;
+  margin-right: auto;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  width: 30%;
+  background-color: rgb(232, 121, 121);
+  text-align: center;
+  padding: 10px;
+  animation: alert-flash 0.5s linear 4;
+}
+
+@keyframes alert-flash {
+  0% { opacity: 1; }
+  50% { opacity: 0.5; }
+  100% { opacity: 1; }
+}
