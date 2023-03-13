@@ -2,7 +2,7 @@ import './App.css';
 import LoginForm from '../login/LoginForm'
 import SignUpForm from '../user/SignUpForm'
 import Homepage from '../homepage/Homepage'
-import React, { useState, useContext, useEffect } from 'react';
+import React, { useState, useContext, useEffect, createContext } from 'react';
 import {
   useNavigate,
   Routes,
@@ -13,6 +13,7 @@ import { UserContext } from '../../context/UserContext';
 import CreatePost from '../CreatePost/CreatePost';
 import 'bootstrap/dist/css/bootstrap.css';
 import './App.css'
+
 
 const App = () => {
   const { handleUserInfo, userInfo } = useContext(UserContext)
@@ -32,6 +33,9 @@ const App = () => {
       window.localStorage.removeItem("userInfo")
       handleUserInfo(null)
     }
+
+    console.log("user context is: ", UserContext)
+    console.log("user info is: ", userInfo)
 
     return (
       <>

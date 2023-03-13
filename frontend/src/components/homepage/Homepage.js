@@ -23,17 +23,17 @@ const Homepage = (props) => {
                                     <div className="addAccountLabel">Add Account</div>
                                 </a>
                             </div>
-                        </div>
+                        </div>w
                     </div>
 
                     <div id="homepage">
                         <div className="loginForm">
                             <form>
-                                <input type="email" id="email" name="email" class="form-input" placeholder="Email Address" required></input>
-                                <input type="password" id="password" name="password" class="form-input" placeholder="Password" required></input>
+                                <input type="email" id="email" name="email" className="form-input" placeholder="Email Address" required></input>
+                                <input type="password" id="password" name="password" className="form-input" placeholder="Password" required></input>
                                 <button type="submit" className="buttonLogin">Login</button>
                                 <a className="linkForgottenPassword" href="">Forgotten password?</a>
-                                <div class="lineBreak"></div>
+                                <div className="lineBreak"></div>
                                 <button type="button" className="buttonSignUp" href="/signup/">Sign Up</button>
                             </form>
                         </div>

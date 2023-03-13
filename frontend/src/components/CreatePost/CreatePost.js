@@ -13,6 +13,8 @@ function CreatePost(props) {
     const token = window.localStorage.getItem("token");
     
     const formattedMessage = { "message":  postMessage, "poster": userInfo._id }
+    console.log("JSON POST = ", JSON.stringify(formattedMessage));
+
 
     fetch('/posts', {
       method: 'POST',
