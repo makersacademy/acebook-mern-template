@@ -21,6 +21,8 @@ const Feed = ({ navigate, userData, storeUserData }) => {
           setToken(window.localStorage.getItem("token"));
           setPosts(data.posts);
         });
+    } else {
+      navigate("/login");
     }
   }, []);
 
@@ -69,8 +71,6 @@ const Feed = ({ navigate, userData, storeUserData }) => {
         </div>
       </>
     );
-  } else {
-    navigate("/signin");
   }
 };
 
