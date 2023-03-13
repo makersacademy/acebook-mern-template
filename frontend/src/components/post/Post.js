@@ -1,6 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
-import avatar from "./avatar.png";
+import avatar from "../../assets/avatar.png";
 
 const Post = ({ post }) => {
   const datePadder = (datePartString) => {

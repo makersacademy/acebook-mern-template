@@ -12,7 +12,7 @@ const createUser = async (req, res) => {
 
 const getUser = async (req, res) => {
   try {
-    const user = await User.findOne({ id: req.userId }, "username");
+    const user = await User.findOne({ id: req.userId }, "username name");
     const token = await generateToken(req.userId);
     res.status(200).json({ user, token });
   } catch (err) {

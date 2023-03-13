@@ -5,6 +5,7 @@ import { ReactComponent as Logo } from "../../assets/logo.svg";
 import Button from "../button/Button";
 
 const SignUpForm = ({ navigate }) => {
+  const [name, setName] = useState("");
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -17,7 +18,7 @@ const SignUpForm = ({ navigate }) => {
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({ username, email, password }),
+      body: JSON.stringify({ name, username, email, password }),
     }).then((response) => {
       if (response.status === 201) {
         navigate("/login");
@@ -29,6 +30,10 @@ const SignUpForm = ({ navigate }) => {
 
   const handleUsernameChange = (event) => {
     setUsername(event.target.value);
+  };
+
+  const handleNameChange = (event) => {
+    setName(event.target.value);
   };
 
   const handleEmailChange = (event) => {
@@ -50,6 +55,15 @@ const SignUpForm = ({ navigate }) => {
         </div>
         <form className="mt-8 space-y-6" onSubmit={handleSubmit}>
           <div className="space-y-4">
+            <input
+              placeholder="Name"
+              id="name"
+              type="text"
+              required
+              value={name}
+              onChange={handleNameChange}
+              className="relative block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:z-10 focus:ring-2 focus:ring-inset focus:ring-blue-600"
+            />
             <input
               placeholder="Username"
               id="username"
