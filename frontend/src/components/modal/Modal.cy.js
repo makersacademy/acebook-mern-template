@@ -3,28 +3,14 @@ import Modal from "./Modal";
 
 describe("Modal", () => {
   it("Renders a success modal on the screen", () => {
-    cy.mount(
-      <Modal
-        title="Success"
-        subText="You have logged in succesfully"
-        type="success"
-        id="success-modal"
-      />
-    );
-    cy.get('[data-cy="modal"]').contains("You have logged in succesfully");
+    cy.mount(<Modal message="Test success" type="success" />);
+    cy.get('[data-cy="modal"]').contains("Test success");
+    cy.get('[data-cy="modal"]').should("have.class", "bg-green-50");
   });
 
-  it("Renders a failed modal on the screen", () => {
-    cy.mount(
-      <Modal
-        title="Login Failed"
-        subText="Sorry, we weren't able to log you in"
-        type="fail"
-        id="fail-modal"
-      />
-    );
-    cy.get('[data-cy="modal"]').contains(
-      "Sorry, we weren't able to log you in"
-    );
+  it("Renders an error modal on the screen", () => {
+    cy.mount(<Modal message="Test error" type="error" />);
+    cy.get('[data-cy="modal"]').contains("Test error");
+    cy.get('[data-cy="modal"]').should("have.class", "bg-red-50");
   });
 });
