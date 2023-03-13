@@ -35,9 +35,10 @@ const createComment = async (req, res) => {
     await comment.save();
 
     const post = await Post.find({ _id: postId });
+    const token = await generateToken(req.userId);
 
     if (!post) {
-      return res.status(404).json({ error: "Post not found" });
+      return res.status(404).json({ error: "Post not found" }, token);
     }
 
     const updatedPost = await Post.findOneAndUpdate(
@@ -45,8 +46,6 @@ const createComment = async (req, res) => {
       { $push: { comments: comment.id } },
       { new: true }
     );
-
-    const token = await generateToken(req.userId);
 
     return res.status(201).json({ updatedPost: updatedPost || post[0], token });
   } catch (error) {
@@ -56,18 +55,23 @@ const createComment = async (req, res) => {
 
 const getPostComments = async (req, res) => {
   try {
+    // PostId is passed as a query parameter
     const { postId } = req.query;
 
     const comments = await Comment.find({ postId }).populate(
       "author",
       "username"
     );
+    const token = await generateToken(req.userId);
 
+    // If no comments are found, return an error
     if (!comments) {
-      return res.status(404).json({ error: "No comments found for this post" });
+      return res
+        .status(404)
+        .json({ error: "No comments found for this post" }, token);
     }
 
-    // return res.status(200).json({ comments });
+    // Map the comments to a new array with only the fields we want to return
     const postComments = comments.map((comment) => {
       return {
         id: comment.id,
@@ -76,7 +80,7 @@ const getPostComments = async (req, res) => {
         createdAt: comment.createdAt,
       };
     });
-    return res.status(200).json({ postComments });
+    return res.status(200).json({ postComments, token });
   } catch (error) {
     return res.status(500).json({ error });
   }
