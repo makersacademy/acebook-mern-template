@@ -59,7 +59,7 @@ const Feed = ({ navigate }) => {
 
         <div id="feed" role="feed">
           {posts.map((post) => (
-            <Post post={post} key={post.id} />
+            <Post post={post} key={post._id} />
           ))}
         </div>
       </>

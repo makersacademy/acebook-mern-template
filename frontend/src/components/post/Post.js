@@ -1,8 +1,11 @@
-import React from "react";
+import React, { useState } from "react";
 import PropTypes from "prop-types";
 import avatar from "./avatar.png";
 
 const Post = ({ post }) => {
+  const [token, setToken] = useState(window.localStorage.getItem("token"));
+  const [likes, setLikes] = useState(post.likes);
+
   const datePadder = (datePartString) => {
     return datePartString < 10 ? `0${datePartString}` : datePartString;
   };
@@ -16,12 +19,32 @@ const Post = ({ post }) => {
     )}:${datePadder(date.getMinutes())}`;
   };
 
+  const likeHandler = async () => {
+    if (token) {
+      const response = await fetch("/posts/like", {
+        method: "post",
+        body: JSON.stringify({
+          postId: post._id,
+        }),
+        headers: {
+          Authorization: `Bearer ${token}`,
+          "Content-Type": "application/json",
+        },
+      });
+
+      if (response.status !== 201) {
+        // error
+      } else {
+        const data = await response.json();
+        setLikes(data.updatedPost.likes);
+        window.localStorage.setItem("token", data.token);
+        setToken(data.token);
+      }
+    }
+  };
+
   return (
-    <article
-      data-cy="post"
-      key={post.id}
-      className="flex flex-col rounded-md shadow-md"
-    >
+    <article data-cy="post" className="flex flex-col rounded-md shadow-md">
       <div className="m-2 flex">
         <img
           src={avatar}
@@ -35,16 +58,27 @@ const Post = ({ post }) => {
       </div>
 
       <div className="p-2 text-base">{post.message}</div>
+      <div className="m-2 flex items-center gap-4">
+        <button
+          onClick={likeHandler}
+          className="border p-2 hover:bg-black hover:text-white"
+          type="button"
+        >
+          Like
+        </button>
+        <p>{`${likes.length}`} Likes</p>
+      </div>
     </article>
   );
 };
 
 Post.propTypes = {
   post: PropTypes.shape({
-    id: PropTypes.string,
+    _id: PropTypes.string,
     message: PropTypes.string,
     authorId: PropTypes.string,
     createdAt: PropTypes.string,
+    likes: PropTypes.arrayOf(PropTypes.string),
     author: PropTypes.shape({
       username: PropTypes.string,
     }),
