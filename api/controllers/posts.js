@@ -10,13 +10,11 @@ const PostsController = {
           throw err;
         }
         const token = await TokenGenerator.jsonwebtoken(req.user_id);
-        console.log(posts);
         posts = posts.map((post) => {
           let liked = post.likes.includes(req.user_id);
           post._doc = { ...post._doc, ...{ liked: liked } };
           return post;
         });
-        console.log(posts);
         res.status(200).json({ posts: posts, token: token });
       });
   },
