@@ -1,0 +1,46 @@
+.navigation {
+    height: 60px;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    position: relative;
+    padding: 0.5rem 0rem;
+    background-color: #f5f5f5;
+    color: black;
+    box-shadow: 0 2px 2px 2px rgba(9, 9, 9, 0.23);
+}
+.navigation::before {
+    content: "Acebook";
+    position: absolute;
+    top: -1vh;
+    left: 2vw;
+    font-size: clamp(2rem, 11vw, 6rem);
+    color: rgb(224, 100, 214);
+    font-weight: bold;
+    font-family: "quayside", sans-serif;
+}
+
+.brand-name {
+    text-decoration: none;
+    color: black;
+    font-size: 1.3rem;
+    margin-left: 1rem;
+}
+.navigation-menu {
+    margin-left: auto;
+}
+.navigation-menu ul {
+    display: flex;
+    padding: 0;
+}
+.navigation-menu li {
+   
+    list-style-type: none;
+    margin: 0 1rem;
+}
+.navigation-menu li a {
+ 
+    text-decoration: none;
+    display: block;
+    width: 100%;
+}

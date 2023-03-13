@@ -21,6 +21,7 @@ const LogInForm = ({ navigate }) => {
       let data = await response.json();
       window.localStorage.setItem("token", data.token);
       navigate("/posts");
+      window.location.reload();
     } else {
       console.log("oops");
       navigate("/login");
