@@ -1,5 +1,6 @@
 import React, { useState, useContext } from 'react';
 import { UserContext } from '../../context/UserContext';
+import '../login/loginForm.css'
 
 const LoginForm = ({ navigate, setToken }) => {
   const [email, setEmail] = useState("");
@@ -10,7 +11,7 @@ const LoginForm = ({ navigate, setToken }) => {
   const handleSubmit = async (event) => {
     event.preventDefault();
 
-    let response = await fetch( '/tokens', {
+    let response = await fetch('/tokens', {
       method: 'post',
       headers: {
         'Content-Type': 'application/json',
@@ -18,7 +19,7 @@ const LoginForm = ({ navigate, setToken }) => {
       body: JSON.stringify({ email: email, password: password })
     })
 
-    if(response.status !== 201) {
+    if (response.status !== 201) {
       console.log(response.status);
       setErrorMessage(true);
       console.log("failed")
@@ -51,27 +52,26 @@ const LoginForm = ({ navigate, setToken }) => {
     setPassword(event.target.value)
   }
 
-
-    return (
-      <form onSubmit={handleSubmit} className="container">
-        <div className ="mb-3">
-          <label for="email" className="form-label">Email address</label>
-          <input placeholder='Email' name="email" id="email" type='text' value={ email } onChange={handleEmailChange} className="form-control"/>
-         
-        </div>
-        <div className ="mb-3">
-          <label for="password" className="form-label">Password</label>
-          <input placeholder='Password' id="password" name="password" type='password' value={ password } onChange={handlePasswordChange} className="form-control" />
-
-        </div>
-          <input role='submit-button' id='submit' type="submit" value="Submit" className="btn btn-primary"/>
-          {errorMessage ?
-          <div className="alert alert-danger" role="alert">
+  return (
+    <form onSubmit={handleSubmit} className="loginContainer">
+      <div id='formLabel' className="form-label">Log in to Acebook</div>
+      <div className="mb-3">
+        <input placeholder='Email' name="email" id="email" type='text' value={email} onChange={handleEmailChange} className="form-control" />
+      </div>
+      <div className="mb-3">
+        <input placeholder='Password' id="password" name="password" type='password' value={password} onChange={handlePasswordChange} className="form-control" />
+      </div>
+      <input role='submit-button' id='submit' type="submit" value="Login" className="loginButton" />
+      {errorMessage ?
+        <div className="alert alert-danger" role="alert">
           Invalid username or Password
         </div> : null
-           }
-      </form>
-    );
+      }
+      <a className="linkForgottenPassword" href="">Forgotten password?</a>
+      <div className="lineBreak"></div>
+      <button type="button" className="buttonSignUp" href="/signup/">Sign Up</button>
+    </form>
+  );
 }
 
 export default LoginForm;

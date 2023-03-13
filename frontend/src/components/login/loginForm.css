@@ -1,0 +1,58 @@
+.loginContainer {
+  display: flexbox;
+  margin-top: 10%;
+  margin-bottom: auto;
+  margin-left: auto;
+  margin-right: auto;
+  font-weight: bold;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-shadow: 2px 2px 5px #999;
+  height: 450px;
+  width: 400px;
+}
+
+#formLabel {
+  display: block;
+  text-align: center;
+  font-size: larger;
+  margin-bottom: 10%;
+}
+
+.loginButton {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-weight: bold;
+  display: block;
+  width: 100%;
+  color: #fff;
+  font-size: 15px;
+  cursor: pointer;
+  background-color: #1877f2;
+  border: none;
+  border-radius: 6px;
+  font-size: 20px;
+  line-height: 48px;
+  padding: 0 16px;
+  width: 332px;
+  margin-top: 10%;
+  margin-bottom: 25px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+#submitLogin {
+  margin-bottom: 10%;
+}
+
+.lineBreak {
+  align-items: center;
+  border-bottom: 1px solid #dadde1;
+  display: flex;
+  margin: 20px 16px;
+  text-align: center;
+}
+
+.form-control {
+  margin-bottom: 8%;
+}
