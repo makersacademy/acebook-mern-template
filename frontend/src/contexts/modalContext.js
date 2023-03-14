@@ -10,12 +10,13 @@ const ModalContextProvider = ({ children }) => {
     const id = new Date().getTime().toString();
     const newModal = { ...modal, id };
     setModals((prevState) => prevState.concat(newModal));
-    setTimeout(() => {
-      setModals((prevState) => prevState.slice(1));
-    }, 3000);
   };
 
-  const context = useMemo(() => ({ modals, pushModal }), [modals]);
+  const removeModal = (id) => {
+    setModals((prevState) => prevState.filter((modal) => modal.id !== id));
+  };
+
+  const context = useMemo(() => ({ modals, pushModal, removeModal }), [modals]);
 
   return (
     <ModalContext.Provider value={context}>{children}</ModalContext.Provider>
