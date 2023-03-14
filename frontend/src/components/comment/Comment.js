@@ -1,19 +1,14 @@
 import React from "react";
 import PropTypes from "prop-types";
+
+import contextualTime from "../../helpers/contextualTime";
 import avatar from "../../assets/avatar.png";
 
 const Comment = ({ comment }) => {
-  const datePadder = (datePartString) => {
-    return datePartString < 10 ? `0${datePartString}` : datePartString;
-  };
-
   const formatDate = () => {
     const date = new Date(comment.createdAt);
-    return `${date.getFullYear()}/${datePadder(
-      date.getMonth() + 1
-    )}/${datePadder(date.getDate())} ${datePadder(
-      date.getHours()
-    )}:${datePadder(date.getMinutes())}`;
+    const formattedDate = contextualTime(date);
+    return <p className="text-sm text-gray-500">{formattedDate}</p>;
   };
 
   return (
@@ -26,7 +21,7 @@ const Comment = ({ comment }) => {
         />
         <div className="">
           <p className="text-lg font-semibold">{comment.authorName}</p>
-          <p className="text-sm text-gray-500">{formatDate()}</p>
+          {formatDate()}
         </div>
       </div>
       <div className="mx-2 p-2 text-base">{comment.message}</div>
