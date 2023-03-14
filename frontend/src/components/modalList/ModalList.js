@@ -1,7 +1,6 @@
 import React, { useContext, useEffect, useState, useRef } from "react";
 import Modal from "../modal/Modal";
 import { ModalContext } from "../../contexts/modalContext";
-import classNames from "../../helpers/classNames";
 
 const ModalList = () => {
   const { modals, removeModal } = useContext(ModalContext);
@@ -13,9 +12,7 @@ const ModalList = () => {
   useEffect(() => {
     // only transition when adding a modal
     setTransition(modals.length > modalCount);
-
     setHeight(ref.current.clientHeight);
-
     setModalCount(modals.length);
   }, [modals]);
 
@@ -29,7 +26,7 @@ const ModalList = () => {
           style={{
             height: `${height}px`,
           }}
-          className={classNames(transition && "transition-all", "ease-in-out")}
+          className={transition && "transition-all"}
         >
           <div ref={ref} className="space-y-2">
             {modals.map(({ message, type, id }) => (
