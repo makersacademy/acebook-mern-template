@@ -1,10 +1,11 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import PropTypes from "prop-types";
 import Button from "../button/Button";
+import { TokenContext } from "../../contexts/tokenContext";
 
 const NewPost = ({ getPosts }) => {
   const [message, setMessage] = useState("");
-  const [token, setToken] = useState(window.localStorage.getItem("token"));
+  const { token, setToken } = useContext(TokenContext);
 
   const handleSubmit = async (event) => {
     event.preventDefault();

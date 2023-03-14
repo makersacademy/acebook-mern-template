@@ -1,11 +1,11 @@
-import React, { useEffect, useState } from "react";
-import PropTypes from "prop-types";
+import React, { useEffect, useState, useContext } from "react";
 import Post from "../post/Post";
 import NewPost from "../newPost/NewPost";
+import { TokenContext } from "../../contexts/tokenContext";
 
-const Feed = ({ navigate }) => {
+const Feed = () => {
   const [posts, setPosts] = useState([]);
-  const [token, setToken] = useState(window.localStorage.getItem("token"));
+  const { token, setToken } = useContext(TokenContext);
 
   const getPosts = async () => {
     if (token) {
@@ -30,25 +30,17 @@ const Feed = ({ navigate }) => {
     getPosts();
   }, []);
 
-  if (token) {
-    return (
-      <>
-        <NewPost getPosts={getPosts} />
+  return (
+    <>
+      <NewPost getPosts={getPosts} />
 
-        <div id="feed" role="feed">
-          {posts.map((post) => (
-            <Post post={post} key={post.id} />
-          ))}
-        </div>
-      </>
-    );
-  }
-  navigate("/signin");
-  return <span />;
-};
-
-Feed.propTypes = {
-  navigate: PropTypes.func.isRequired,
+      <div id="feed" role="feed">
+        {posts.map((post) => (
+          <Post post={post} key={post.id} />
+        ))}
+      </div>
+    </>
+  );
 };
 
 export default Feed;

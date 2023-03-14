@@ -5,15 +5,18 @@ import { BrowserRouter } from "react-router-dom";
 import App from "./components/app/App";
 import reportWebVitals from "./reportWebVitals";
 import ModalContextProvider from "./contexts/modalContext";
+import TokenContextProvider from "./contexts/tokenContext";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <BrowserRouter>
-    <ModalContextProvider>
-      <React.StrictMode>
-        <App />
-      </React.StrictMode>
-    </ModalContextProvider>
+    <TokenContextProvider>
+      <ModalContextProvider>
+        <React.StrictMode>
+          <App />
+        </React.StrictMode>
+      </ModalContextProvider>
+    </TokenContextProvider>
   </BrowserRouter>
 );
 

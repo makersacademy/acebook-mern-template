@@ -4,8 +4,10 @@ import PropTypes from "prop-types";
 import { ReactComponent as Logo } from "../../assets/logo.svg";
 import Button from "../button/Button";
 import { ModalContext } from "../../contexts/modalContext";
+import { TokenContext } from "../../contexts/tokenContext";
 
 const LogInForm = ({ navigate }) => {
+  const { setToken } = useContext(TokenContext);
   const { pushModal } = useContext(ModalContext);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -31,6 +33,7 @@ const LogInForm = ({ navigate }) => {
       navigate("/login");
     } else {
       window.localStorage.setItem("token", data.token);
+      setToken(data.token);
       pushModal({
         message: "Login succeeded!",
         type: "success",
