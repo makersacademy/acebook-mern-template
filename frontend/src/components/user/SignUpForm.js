@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import '../user/SignUpForm.css'
 
 const SignUpForm = ({ navigate }) => {
 
@@ -10,7 +11,7 @@ const SignUpForm = ({ navigate }) => {
   const handleSubmit = async (event) => {
     event.preventDefault();
 
-    fetch( '/users', {
+    fetch('/users', {
       method: 'post',
       headers: {
         'Content-Type': 'application/json',
@@ -18,7 +19,7 @@ const SignUpForm = ({ navigate }) => {
       body: JSON.stringify({ email: email, password: password, firstName: firstName, lastName: lastName })
     })
       .then(response => {
-        if(response.status === 201) {
+        if (response.status === 201) {
           navigate('/login')
         } else {
           navigate('/signup')
@@ -43,27 +44,35 @@ const SignUpForm = ({ navigate }) => {
   }
 
 
-    return (
-      <form onSubmit={handleSubmit} className="container">
-      <div className ="mb-3">
-          <label for="email" className="form-label">Email address</label>
-          <input placeholder="Email" id="email" type='text' value={ email } onChange={handleEmailChange} className="form-control" />
+  return (
+    <>
+    <img className='animatedImage1' src='https://app.svgator.com/assets/svgator.webapp/log-in-girl.svg'></img>
+    <iframe className='animatedImage2' src="https://cdn.svgator.com/images/2022/09/animated-man-floating.svg"></iframe>
+    <form onSubmit={handleSubmit} className="signupContainer">
+      <div className='headerText'>
+        <h1>Create a new account</h1>
+        <h5>It's quick and easy</h5>
+        <div className="lineBreak"></div>
       </div>
-      <div className ="mb-3">
-        <label for="password" className="form-label">Password</label>
-        <input placeholder="Password" id="password" type='password' value={ password } onChange={handlePasswordChange} className="form-control" />
+      <div id='emailTextbox' className="mb-4">
+        <input placeholder="Email Address" id="email" type='text' value={email} onChange={handleEmailChange} className="form-control" />
       </div>
-      <div className ="mb-3">
-        <label for="firstName" className="form-label">First Name</label>
-        <input placeholder="First Name" id="firstName" type='text' value={ firstName } onChange={handlefirstNameChange} className="form-control" />
+      <div id='passwordTextbox' className="mb-4">
+        <input placeholder="Password" id="password" type='password' value={password} onChange={handlePasswordChange} className="form-control" />
       </div>
-      <div className ="mb-3">
-        <label for="lastName" className="form-label">Last Name</label>
-        <input placeholder="Last Name" id="lastName" type='text' value={ lastName } onChange={handlelastNameChange} className="form-control" />
+      <div id='firstNameTextbox' className="mb-4">
+        <input placeholder="First Name" id="firstName" type='text' value={firstName} onChange={handlefirstNameChange} className="form-control" />
       </div>
-        <input id='submit' type="submit" value="Submit" className="btn btn-primary" />
-      </form>
-    );
+      <div id='lastNameTextbox' className="mb-4">
+        <input placeholder="Last Name" id="lastName" type='text' value={lastName} onChange={handlelastNameChange} className="form-control" />
+      </div>
+      <input id='loginButton' type="submit" value="Sign Up" className="btn btn-primary" />
+      <div className='alreadyHaveAccountLink'>
+        <a href="/login">Already have an account?</a>
+      </div>
+    </form>
+    </>
+  );
 }
 
 export default SignUpForm;
