@@ -1,8 +1,8 @@
 const contextualTime = (date) => {
   const now = new Date();
   const diff = now - date;
-  // 1000 milliseconds = 1 second
-  if (diff < 1000) {
+  // 2000 milliseconds = 2 second
+  if (diff <= 2000) {
     return "a few seconds ago";
   }
   // 60000 milliseconds = 1 minute
