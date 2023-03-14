@@ -17,10 +17,16 @@ export default function Navbar() {
                 </a>
                 
                 <div className="navigation-menu">
-                    <li>
-                        <a href = "/" onClick={logOut} >Log Out</a>
+                   <ul>
+                   <li>
+                      <a href = "/posts"  >Feed</a>
+                      
                     </li>
-                    
+                    <li>
+                      <a href = "/" onClick={logOut} >Log Out</a>
+                      
+                    </li>
+                    </ul>
                 </div>
             </nav>
         );
