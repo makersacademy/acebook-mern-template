@@ -1,30 +1,54 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 import { ReactComponent as Logo } from "../../assets/logo.svg";
 import Button from "../button/Button";
+import { ModalContext } from "../../contexts/modalContext";
 
 const SignUpForm = ({ navigate }) => {
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const { pushModal } = useContext(ModalContext);
 
   const handleSubmit = async (event) => {
     event.preventDefault();
 
-    fetch("/users", {
-      method: "post",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ username, email, password }),
-    }).then((response) => {
+    // validation
+    //  - if email has been used
+    //  - if username has been used
+    //  - password strength: at 6 chars, at least 1 cap
+    //  - confirmedPassword == password
+
+    // if not okay:
+    //  - push a modal with a message
+
+    // if okay:
+    try {
+      const response = await fetch("/users", {
+        method: "post",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ username, email, password }),
+      });
+      const data = await response.json();
       if (response.status === 201) {
+        pushModal({
+          message: data.message,
+          type: "success",
+        });
         navigate("/login");
       } else {
+        pushModal({
+          message: "The username or email is in use",
+          type: "error",
+        });
         navigate("/signup");
       }
-    });
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   const handleUsernameChange = (event) => {
