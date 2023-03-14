@@ -8,7 +8,7 @@ const Post = ({ post }) => {
 
   return (
     <article data-cy="post" key={post._id} className="post-container">
-      Post from {post.user.name}: {post.message} ({result})
+      <strong>Post from {post.user.name}:</strong> {post.message} ({result})
     </article>
   );
 };
