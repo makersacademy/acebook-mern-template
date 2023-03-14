@@ -5,23 +5,48 @@ import { ReactComponent as Logo } from "../../assets/logo.svg";
 import Button from "../button/Button";
 import { ModalContext } from "../../contexts/modalContext";
 
+// returns a boolean if the passwrod is valid
+export const checkPassword = (passwordInput) => {
+  if (passwordInput.length >= 6 && /[A-Z]/.test(passwordInput)) {
+    return true;
+  }
+  return false;
+};
+
+export const passwordConfirmation = (password, passwordTwo) => {
+  return password === passwordTwo;
+};
+
 const SignUpForm = ({ navigate }) => {
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [passwordTwo, setPasswordTwo] = useState("");
   const { pushModal } = useContext(ModalContext);
 
   const handleSubmit = async (event) => {
     event.preventDefault();
 
     // validation
-    //  - if email has been used
-    //  - if username has been used
-    //  - password strength: at 6 chars, at least 1 cap
-    //  - confirmedPassword == password
 
-    // if not okay:
-    //  - push a modal with a message
+    //  check password strength: at 6 chars, at least 1 cap
+    if (!checkPassword(password)) {
+      pushModal({
+        message:
+          "Password must have at least 6 characters and 1 capital letter.",
+        type: "error",
+      });
+      return;
+    }
+
+    // check confirmedPassword == password
+    if (!passwordConfirmation(password, passwordTwo)) {
+      pushModal({
+        message: "Both passwords do not match",
+        type: "error",
+      });
+      return;
+    }
 
     // if okay:
     try {
@@ -63,6 +88,10 @@ const SignUpForm = ({ navigate }) => {
     setPassword(event.target.value);
   };
 
+  const handlePasswordTwoChange = (event) => {
+    setPasswordTwo(event.target.value);
+  };
+
   return (
     <div className="flex min-h-full items-center justify-center py-12 px-4">
       <div className="w-full max-w-md space-y-8">
@@ -99,6 +128,15 @@ const SignUpForm = ({ navigate }) => {
               required
               value={password}
               onChange={handlePasswordChange}
+              className="relative block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:z-10 focus:ring-2 focus:ring-inset focus:ring-blue-600"
+            />
+            <input
+              placeholder="Retype Password"
+              id="password2"
+              type="password"
+              required
+              value={passwordTwo}
+              onChange={handlePasswordTwoChange}
               className="relative block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:z-10 focus:ring-2 focus:ring-inset focus:ring-blue-600"
             />
           </div>
