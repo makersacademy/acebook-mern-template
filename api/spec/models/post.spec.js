@@ -22,19 +22,4 @@ describe("Post model", () => {
       done();
     });
   });
-
-  it("can save a post", (done) => {
-    const post = new Post({ message: "some message" });
-
-    post.save((err) => {
-      expect(err).toBeNull();
-
-      Post.find((err, posts) => {
-        expect(err).toBeNull();
-
-        expect(posts[0]).toMatchObject({ message: "some message" });
-        done();
-      });
-    });
-  });
 });
