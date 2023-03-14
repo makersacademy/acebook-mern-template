@@ -8,6 +8,7 @@ const tokenChecker = require("./middleware/token_checker");
 const postsRouter = require("./routes/posts");
 const tokensRouter = require("./routes/tokens");
 const usersRouter = require("./routes/users");
+const imagesRouter = require("./routes/images");
 
 const app = express();
 
@@ -22,6 +23,7 @@ app.use(express.static(path.join(__dirname, "public")));
 app.use("/posts", tokenChecker, postsRouter);
 app.use("/tokens", tokensRouter);
 app.use("/users", usersRouter);
+app.use("/images", tokenChecker, imagesRouter);
 
 // catch 404 and forward to error handler
 app.use((req, res, next) => {

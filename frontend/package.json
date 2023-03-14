@@ -4,6 +4,8 @@
   "private": true,
   "proxy": "http://localhost:8080",
   "dependencies": {
+    "@cloudinary/react": "^1.11.1",
+    "@cloudinary/url-gen": "^1.9.2",
     "@testing-library/jest-dom": "^5.16.5",
     "jwt-decode": "^3.1.2",
     "prop-types": "^15.8.1",

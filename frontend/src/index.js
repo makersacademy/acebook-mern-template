@@ -5,15 +5,18 @@ import { BrowserRouter } from "react-router-dom";
 import App from "./components/app/App";
 import reportWebVitals from "./reportWebVitals";
 import ModalContextProvider from "./contexts/modalContext";
+import CloudinaryContextProvider from "./contexts/cloudinaryContext";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <BrowserRouter>
-    <ModalContextProvider>
-      <React.StrictMode>
-        <App />
-      </React.StrictMode>
-    </ModalContextProvider>
+    <React.StrictMode>
+      <ModalContextProvider>
+        <CloudinaryContextProvider>
+          <App />
+        </CloudinaryContextProvider>
+      </ModalContextProvider>
+    </React.StrictMode>
   </BrowserRouter>
 );
 
