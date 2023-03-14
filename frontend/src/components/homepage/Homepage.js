@@ -35,7 +35,7 @@ const Homepage = (props) => {
                                 <input type="email" id="email" name="email" className="form-input" placeholder="Email Address" required></input>
                                 <input type="password" id="password" name="password" className="form-input" placeholder="Password" required></input>
                                 <button type="submit" className="buttonLogin">Login</button>
-                                <a className="linkForgottenPassword" href="">Forgotten password?</a>
+                                <a className="linkForgottenPassword" href="/forgot-password">Forgotten password?</a>
                                 <div className="lineBreak"></div>
                                 <button type="button" className="buttonSignUp" href="/signup/">Sign Up</button>
                             </form>
