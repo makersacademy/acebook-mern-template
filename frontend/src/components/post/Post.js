@@ -128,6 +128,8 @@ const handleComment = async (event) => {
   if (response.ok) {
     console.log("comment made")
     setnumComments(numComments + 1);
+    loadNumComments();
+    
   } else {
     console.log("response was, :", response);
   }
@@ -156,7 +158,7 @@ const handleCommentChange = (event) => {
       <button type="submit" className="btn btn-primary mb-2">Post Comment</button>
       </form>
 
-      {numComments>0 ? <CommentModal postID={ post._id}/> : <></>}
+      {numComments>0 ? <CommentModal postID={ post._id} loadComment={loadNumComments} comments={comments}/> : <></>}
 
       <br/>
       {alreadyLiked == true ?

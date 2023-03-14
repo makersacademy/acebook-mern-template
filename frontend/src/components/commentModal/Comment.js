@@ -7,7 +7,7 @@ import '../commentModal/Comment.css'
 
 const CommentModal = (props) => {
     const [show, setShow] = useState(false);
-    const [Comments, setComments] = useState([])
+    //const [Comments, setComments] = useState([])
 
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
@@ -15,10 +15,11 @@ const CommentModal = (props) => {
 
     const postId = props.postID;
 
+
     useEffect(() => {
         const token = window.localStorage.getItem("token");
         if(token){
-            loadComments()
+            props.loadComment()
           }
         }, [])
 
@@ -27,13 +28,11 @@ const CommentModal = (props) => {
         const json = await response.json();
 
         if(response.ok) {
-            setComments(json.comments);
+            //setComments(json.comments);
           }
     }
 
-    
-
-
+    let Comments = props.comments
   
     return (
 
