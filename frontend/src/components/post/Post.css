@@ -6,6 +6,7 @@
   padding: 15px;
   border: 1px solid #5e0368; 
   background-color: rgba(243, 150, 225, 0.318);
+  border-radius: 10px;
 }
 
 .post-container:not(:last-child) {
