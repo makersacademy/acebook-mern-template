@@ -47,7 +47,7 @@ const Post = ({ post }) => {
           methodArg === "post"
             ? "You've liked a post"
             : "You've disliked a post";
-        const type = methodArg === "post" ? "success" : "failed";
+        const type = methodArg === "post" ? "success" : "error";
         setLikes(data.updatedPost.likes);
         window.localStorage.setItem("token", data.token);
         setToken(data.token);
