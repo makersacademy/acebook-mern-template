@@ -1,15 +1,17 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import PropTypes from "prop-types";
 import jwtDecode from "jwt-decode";
 
 import { ReactComponent as LikeBtn } from "../../assets/like.svg";
 import { ReactComponent as FilledLikeBtn } from "../../assets/fillLike.svg";
 import avatar from "./avatar.png";
+import { ModalContext } from "../../contexts/modalContext";
 
 const Post = ({ post }) => {
   const [token, setToken] = useState(window.localStorage.getItem("token"));
   const [likes, setLikes] = useState(post.likes);
   const [userId] = useState(jwtDecode(token).userId);
+  const { pushModal } = useContext(ModalContext);
 
   const datePadder = (datePartString) => {
     return datePartString < 10 ? `0${datePartString}` : datePartString;
@@ -24,10 +26,10 @@ const Post = ({ post }) => {
     )}:${datePadder(date.getMinutes())}`;
   };
 
-  const likeHandler = async () => {
+  const likeHandler = async (methodArg) => {
     if (token) {
       const response = await fetch("/posts/like", {
-        method: "post",
+        method: methodArg,
         body: JSON.stringify({
           postId: post._id,
         }),
@@ -41,9 +43,18 @@ const Post = ({ post }) => {
         // error
       } else {
         const data = await response.json();
+        const message =
+          methodArg === "post"
+            ? "You've liked a post"
+            : "You've disliked a post";
+        const type = methodArg === "post" ? "success" : "failed";
         setLikes(data.updatedPost.likes);
         window.localStorage.setItem("token", data.token);
         setToken(data.token);
+        pushModal({
+          message,
+          type,
+        });
       }
     }
   };
@@ -73,12 +84,13 @@ const Post = ({ post }) => {
           <FilledLikeBtn
             data-cy="filled-like-button"
             type="button"
+            onClick={() => likeHandler("delete")}
             className="h-8 w-auto cursor-pointer fill-red-500"
           />
         ) : (
           <LikeBtn
             data-cy="like-button"
-            onClick={likeHandler}
+            onClick={() => likeHandler("post")}
             type="button"
             className="h-8 w-auto cursor-pointer fill-black"
           />
