@@ -200,4 +200,25 @@ describe("/posts", () => {
       expect(res.body.token).toBeDefined();
     });
   });
+
+  describe("DELETE /like, when token is present", () => {
+    it("should remove a like", async () => {
+      const post = new Post({
+        message: "like this post!",
+        author: "640bee229b863616fb3a81df",
+      });
+      await post.save();
+      const likeRes = await request(app)
+        .post("/posts/like")
+        .set("Authorization", `Bearer ${token}`)
+        .send({ postId: post.id });
+      expect(likeRes.body.updatedPost.likes.length).toEqual(1);
+      const dislikeRes = await request(app)
+        .delete("/posts/like")
+        .set("Authorization", `Bearer ${token}`)
+        .send({ postId: post.id });
+      expect(dislikeRes.body.updatedPost.likes.length).toEqual(0);
+      expect(dislikeRes.body.token).toBeDefined();
+    });
+  });
 });

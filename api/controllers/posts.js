@@ -48,4 +48,24 @@ const likePost = async (req, res) => {
   }
 };
 
-module.exports = { getAllPosts, createPost, likePost };
+const dislikePost = async (req, res) => {
+  try {
+    const { userId } = req;
+
+    const updatedPost = await Post.findOneAndUpdate(
+      { _id: req.body.postId, likes: userId },
+      { $pull: { likes: userId } },
+      { new: true }
+    );
+
+    // refresh the token
+    const token = await generateToken(req.userId);
+
+    // send 201 status code back with the updated post and a refreshed token
+    res.status(201).json({ updatedPost, token });
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
+
+module.exports = { getAllPosts, createPost, likePost, dislikePost };
