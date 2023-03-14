@@ -14,7 +14,6 @@ const TokenGenerator = require("../models/token_generator");
         );
         comment.save(async (err) => {
           if (err) {
-            console.log(err)
             throw err;
           }
 
@@ -26,10 +25,11 @@ const TokenGenerator = require("../models/token_generator");
 
     GetCommentByPost: async (req, res) => {
         const postId = req.params.post_id;
+
         try {
-            const comments = await Comment.find({ post: postId })
-            // .populate('poster', 'firstName');
-            res.status(200).json({ comments: comments, message: "comments retrieved" });
+            const comments = await Comment.find({ post: postId }).populate('poster', 'firstName');
+            console.log(comments)
+            res.status(200).json({ comments: comments });
         } catch (err) {
             res.status(500).json({ error: err.message });
         }

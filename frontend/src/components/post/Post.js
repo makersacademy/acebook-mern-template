@@ -34,12 +34,11 @@ const Post = ({post}) => {
     const token = window.localStorage.getItem("token");
 
     if(token) {
-      const response = await fetch(`/comments/${post._id}`)
+      const response = await fetch(`/comments/${post._id}`);
+      const json = await response.json();
 
       if(response.ok) {
-        console.log(response)
-        console.log(response.message)
-        setnumComments(response.comments.length);
+        setnumComments(json.comments.length);
       }
     }
   }
