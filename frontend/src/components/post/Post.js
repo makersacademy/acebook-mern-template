@@ -4,6 +4,7 @@ import { useContext } from 'react';
 import { useState } from 'react';
 import { UserContext } from '../../context/UserContext';
 import { useEffect } from 'react';
+import CommentModal from '../commentModal/Comment';
 
 
 const Post = ({post}) => {
@@ -23,6 +24,7 @@ const Post = ({post}) => {
   const [numLikes, setnumLikes] = useState(post.likes ? post.likes.length : 0);
   const [alreadyLiked, setalreadyLiked] = useState(post.likes.includes(userInfo._id) ? true : false)
   const [numComments, setnumComments] = useState(0)
+  const [comments, setComments] = useState()
 
 
   const [currentComment, setCurrentComment] = useState("");
@@ -39,6 +41,7 @@ const Post = ({post}) => {
 
       if(response.ok) {
         setnumComments(json.comments.length);
+        setComments(json.comments);
       }
     }
   }
@@ -125,6 +128,8 @@ const handleComment = async (event) => {
   if (response.ok) {
     console.log("comment made")
     setnumComments(numComments + 1);
+    loadNumComments();
+    
   } else {
     console.log("response was, :", response);
   }
@@ -141,10 +146,10 @@ const handleCommentChange = (event) => {
       id='eachPost'
       data-cy="post" 
       key={ post._id }
-      className="row-span-1 m-3 py-8 bg-white rounded-xl shadow-lg space-y-2"
+      className="row-span-1 m-3 py-8 bg-white rounded-xl center shadow-lg space-y-2"
       >{post.poster.firstName}<br/>
         { post.message }<br/>
-      {postDate} posted at: {postTime} {numLikes} Likes {numComments} Comments
+      {postDate} posted at: {postTime}<br/> {numLikes} Likes {numComments} Comments
 
       <form onSubmit={handleComment} className="form-inline">
       <div class="form-group mb-2">
@@ -153,6 +158,9 @@ const handleCommentChange = (event) => {
       <button type="submit" className="btn btn-primary mb-2">Post Comment</button>
       </form>
 
+      {numComments>0 ? <CommentModal postID={ post._id} loadComment={loadNumComments} comments={comments}/> : <></>}
+
+      <br/>
       {alreadyLiked == true ?
         <button type="button" class="btn btn-primary btn-sm" id="like-button" onClick={() => handleUnlike(post._id)} >unlike</button>
         :
