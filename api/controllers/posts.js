@@ -76,8 +76,9 @@ const getPostComments = async (req, res) => {
       return {
         id: comment.id,
         message: comment.message,
-        author: comment.author.username,
+        authorName: comment.author.username,
         createdAt: comment.createdAt,
+        likes: comment.likes,
       };
     });
     return res.status(200).json({ postComments, token });
