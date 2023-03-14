@@ -36,8 +36,9 @@ const Post = ({post}) => {
     if(token) {
       const response = await fetch(`/comments/${post._id}`)
 
-      if (response.ok) {
+      if(response.ok) {
         console.log(response)
+        console.log(response.message)
         setnumComments(response.comments.length);
       }
     }
@@ -109,7 +110,7 @@ const handleComment = async (event) => {
   event.preventDefault();
   setCurrentComment("");
 
-  let formattedBody = { comment: currentComment, "postId": post._id, "userId": userInfo._id }
+  let formattedBody = { "comment": currentComment, "post": post._id, "poster": userInfo._id }
   console.log(JSON.stringify(formattedBody));
     //console.log("current comment submitted: ", currentComment);
   const response = await fetch('/comments', {
