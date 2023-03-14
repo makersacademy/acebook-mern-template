@@ -5,9 +5,9 @@
     align-items: center;
     position: relative;
     padding: 0.5rem 0rem;
-    background-color: #f5f5f5;
+    background-color: #f5f5f565;
     color: black;
-    box-shadow: 0 2px 2px 2px rgba(9, 9, 9, 0.23);
+    box-shadow: 0 2px 2px 2px rgba(82, 34, 173, 0.23);
 }
 
 .brand-name {
@@ -19,7 +19,7 @@
     top: -1vh;
     left: 2vw;
     font-size: clamp(2rem, 11vw, 6rem);
-    color: rgb(224, 100, 214);
+    color: rgb(211, 83, 200);
     font-weight: bold;
     font-family: "quayside", sans-serif;
 }
