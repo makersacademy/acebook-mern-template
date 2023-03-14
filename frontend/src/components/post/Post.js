@@ -1,39 +1,15 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import PropTypes from "prop-types";
-import avatar from "./avatar.png";
-import NewComment from "../newComment/NewComment";
-import Comment from "../comment/Comment";
+import avatar from "../../assets/avatar.png";
+import Comments from "../comments/Comments";
+import { ReactComponent as CommentBtn } from "../../assets/comment.svg";
 
 const Post = ({ post }) => {
-  const [comments, setComments] = useState([]);
-  const [token, setToken] = useState(window.localStorage.getItem("token"));
+  const [showComments, setShowComments] = useState(false);
 
-  const getComments = async () => {
-    if (token) {
-      const response = await fetch(
-        `/posts/comment?${new URLSearchParams({ postId: post._id })}`,
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      );
-
-      if (response.status !== 200) {
-        console.log(response);
-        // Render Modal with generic error message
-      } else {
-        const data = await response.json();
-        window.localStorage.setItem("token", data.token);
-        setToken(data.token);
-        setComments(data.postComments);
-      }
-    }
+  const toggleComments = () => {
+    setShowComments(!showComments);
   };
-
-  useEffect(() => {
-    getComments();
-  }, []);
 
   const datePadder = (datePartString) => {
     return datePartString < 10 ? `0${datePartString}` : datePartString;
@@ -67,13 +43,12 @@ const Post = ({ post }) => {
       </div>
 
       <div className="p-2 text-base">{post.message}</div>
-      <div className="flex flex-col">
-        <p className="text-lg font-semibold">Comments</p>
-        {comments.map((comment) => (
-          <Comment comment={comment} id={comment._id} />
-        ))}
+      <div>
+        <button onClick={toggleComments} type="button">
+          <CommentBtn className="mx-auto h-5 w-5" />
+        </button>
       </div>
-      <NewComment getComments={getComments} postId={post._id} />
+      {showComments && <Comments postId={post._id} />}
     </article>
   );
 };
@@ -84,12 +59,11 @@ Post.propTypes = {
     message: PropTypes.string,
     authorId: PropTypes.string,
     createdAt: PropTypes.string,
+    comments: PropTypes.arrayOf(PropTypes.string),
+    likes: PropTypes.arrayOf(PropTypes.string),
     author: PropTypes.shape({
       username: PropTypes.string,
     }),
-  }).isRequired,
-  comment: PropTypes.shape({
-    id: PropTypes.string,
   }).isRequired,
 };
 

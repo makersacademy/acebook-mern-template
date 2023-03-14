@@ -1,6 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
-import avatar from "../post/avatar.png";
+import avatar from "../../assets/avatar.png";
 
 const Comment = ({ comment }) => {
   const datePadder = (datePartString) => {
@@ -17,11 +17,7 @@ const Comment = ({ comment }) => {
   };
 
   return (
-    <div
-      data-cy="comment"
-      key={comment.id}
-      className="m-4 flex flex-col shadow-sm"
-    >
+    <div data-cy="comment" className="m-4 flex flex-col shadow-sm">
       <div className="m-2 flex">
         <img
           src={avatar}
@@ -29,7 +25,7 @@ const Comment = ({ comment }) => {
           className="mx-2 h-10 w-10 rounded-full"
         />
         <div className="">
-          <p className="text-lg font-semibold">{comment.author}</p>
+          <p className="text-lg font-semibold">{comment.authorName}</p>
           <p className="text-sm text-gray-500">{formatDate()}</p>
         </div>
       </div>
@@ -43,7 +39,7 @@ Comment.propTypes = {
     id: PropTypes.string,
     message: PropTypes.string,
     createdAt: PropTypes.string,
-    author: PropTypes.string.isRequired,
+    authorName: PropTypes.string.isRequired,
   }).isRequired,
 };
 
