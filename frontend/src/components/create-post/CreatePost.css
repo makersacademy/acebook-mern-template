@@ -10,7 +10,7 @@
     box-shadow: 3px 3px 3px lightblue;
     background-repeat: no-repeat;
     background-position: 50px center;
-    width: 250px; 
+    width: 250px;
     
   }
   
@@ -30,3 +30,10 @@
       background-color: rgb(140, 28, 148);
     
   }
+
+  form {
+    margin: auto;
+    width: fit-content;
+    margin-top: 50px;
+    margin-bottom: 50px;
+}

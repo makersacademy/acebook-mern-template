@@ -5,8 +5,9 @@
   margin: 0 auto; 
   padding: 15px;
   border: 1px solid #5e0368; 
+  background-color: rgba(243, 150, 225, 0.318);
 }
 
 .post-container:not(:last-child) {
-  margin-bottom: 10px; /* add some space between posts */
+  margin-bottom: 20px; /* add some space between posts */
 }
