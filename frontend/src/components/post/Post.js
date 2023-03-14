@@ -95,7 +95,7 @@ const Post = ({ post }) => {
             className="h-8 w-auto cursor-pointer fill-black"
           />
         )}
-        <p>{`${likes.length}`} Likes</p>
+        <p data-cy="likes-length">{`${likes.length}`} Likes</p>
       </div>
     </article>
   );
