@@ -2,6 +2,8 @@ import Feed from "../feed/Feed";
 import { useContext, useState } from 'react'
 import { UserContext } from '../../context/UserContext';
 import '../homepage/homepage.css'
+import { Link, Navigate } from 'react-router-dom';
+
 
 const Homepage = (props) => {
     const { userInfo } = useContext(UserContext);
@@ -37,7 +39,9 @@ const Homepage = (props) => {
                                 <button type="submit" className="buttonLogin">Login</button>
                                 <a className="linkForgottenPassword" href="/forgot-password">Forgotten password?</a>
                                 <div className="lineBreak"></div>
-                                <button type="button" className="buttonSignUp" href="/signup/">Sign Up</button>
+                                <Link to="/signup">
+                                    <button type="button" className="buttonSignUp" href="/signup">Sign Up</button>
+                                </Link> 
                             </form>
                         </div>
                     </div>

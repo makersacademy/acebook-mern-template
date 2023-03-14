@@ -3,6 +3,7 @@ import './Post.css'
 import { useContext } from 'react';
 import { useState } from 'react';
 import { UserContext } from '../../context/UserContext';
+import { useEffect } from 'react';
 
 
 const Post = ({post}) => {
@@ -21,7 +22,36 @@ const Post = ({post}) => {
   const postTime = (hours + ":" + minutes)
   const [numLikes, setnumLikes] = useState(post.likes ? post.likes.length : 0);
   const [alreadyLiked, setalreadyLiked] = useState(post.likes.includes(userInfo._id) ? true : false)
+  const [numComments, setnumComments] = useState(0)
 
+
+  const [currentComment, setCurrentComment] = useState("");
+
+
+
+
+  const loadNumComments = async () => {
+    const token = window.localStorage.getItem("token");
+
+    if(token) {
+      const response = await fetch(`/comments/${post._id}`);
+      const json = await response.json();
+
+      if(response.ok) {
+        setnumComments(json.comments.length);
+      }
+    }
+  }
+  
+
+
+  useEffect(() => {
+    const token = window.localStorage.getItem("token");
+
+    if(token){
+      loadNumComments()
+    }
+  },[])
   
 
 
@@ -74,6 +104,36 @@ const handleUnlike = async () => {
   //props.refreshPosts();
 }
 
+const handleComment = async (event) => {
+  const token = window.localStorage.getItem("token");
+  event.preventDefault();
+  setCurrentComment("");
+
+  let formattedBody = { "comment": currentComment, "post": post._id, "poster": userInfo._id }
+  console.log(JSON.stringify(formattedBody));
+    //console.log("current comment submitted: ", currentComment);
+  const response = await fetch('/comments', {
+    method: "POST",
+    body: JSON.stringify(formattedBody),
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${token}`
+    },
+
+  })
+
+  if (response.ok) {
+    console.log("comment made")
+    setnumComments(numComments + 1);
+  } else {
+    console.log("response was, :", response);
+  }
+}
+
+
+const handleCommentChange = (event) => {
+  setCurrentComment(event.target.value)
+}
 
   return(
     <>
@@ -84,7 +144,14 @@ const handleUnlike = async () => {
       className="row-span-1 m-3 py-8 bg-white rounded-xl shadow-lg space-y-2"
       >{post.poster.firstName}<br/>
         { post.message }<br/>
-      {postDate} posted at: {postTime} {numLikes} Likes
+      {postDate} posted at: {postTime} {numLikes} Likes {numComments} Comments
+
+      <form onSubmit={handleComment} className="form-inline">
+      <div class="form-group mb-2">
+        <input type="text"value={ currentComment } onChange={handleCommentChange} className="form-control" id="comment" placeholder="Write a comment"/>
+      </div>
+      <button type="submit" className="btn btn-primary mb-2">Post Comment</button>
+      </form>
 
       {alreadyLiked == true ?
         <button type="button" class="btn btn-primary btn-sm" id="like-button" onClick={() => handleUnlike(post._id)} >unlike</button>
