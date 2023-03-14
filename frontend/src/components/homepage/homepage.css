@@ -1,13 +1,14 @@
 .loginForm {
+  background-color: rgba(255, 255, 255, 0.554);
   position: absolute;
   margin-left: 65%;
-  margin-top: 10%;
+  margin-top: 11%;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   font-weight: bold;
   max-width: 400px;
   padding: 20px;
   border: 1px solid #ccc;
-  border-radius: 5px;
+  border-radius: 6px;
   box-shadow: 2px 2px 5px #999;
   height: 405px;
 }
@@ -81,12 +82,34 @@
 }
 
 .recentLogins {
+  background-color: rgba(255, 255, 255, 0.51);
   position: absolute;
-  margin-top: 12%;
-  margin-left: 20%;
+  margin-left: 8%;
+  margin-top: 11%;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-weight: bold;
+  width: 40%;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  box-shadow: 2px 2px 5px #999;
+  height: 405px;
 }
 
 .title {
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   font-weight: bold;
+}
+
+#video-background {
+  position: fixed;
+  right: 0;
+  bottom: 0;
+  min-width: 100%; 
+  min-height: 100%;
+  z-index: -100;
+}
+
+#video-background video {
+  display: block;
 }
