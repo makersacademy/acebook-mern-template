@@ -13,6 +13,7 @@ export default function Navbar() {
         return (
             <nav className="navigation">
                 <a href="/" className="brand-name">
+                  Acebook
                 </a>
                 
                 <div className="navigation-menu">
