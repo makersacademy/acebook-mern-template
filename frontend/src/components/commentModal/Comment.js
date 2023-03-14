@@ -1,6 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
+import Card from 'react-bootstrap/Card';
+import '../commentModal/Comment.css'
+
 
 const CommentModal = (props) => {
     const [show, setShow] = useState(false);
@@ -28,9 +31,8 @@ const CommentModal = (props) => {
           }
     }
 
-    const commentDisplay = async () => {
-        
-    }
+    
+
 
   
     return (
@@ -51,7 +53,18 @@ const CommentModal = (props) => {
             <Modal.Title>Comments</Modal.Title>
           </Modal.Header>
           <Modal.Body>
-            {Comments.map((comment) => <div>{comment.poster.firstName} - {comment.comment}</div>)}
+            {Comments.map((comment) => 
+            <Card className='innerComments' style={{ width: '75%' }}>
+            <Card.Body>
+              <Card.Title>{comment.poster.firstName}</Card.Title>
+              <Card.Subtitle className="mb-2 text-muted">{comment.createdAt.split('T')[1].slice(0,5)} - {comment.createdAt.split('T')[0]} </Card.Subtitle>
+              <Card.Text>
+                {comment.comment}
+              </Card.Text>
+            </Card.Body>
+          </Card>
+            )}
+            
           </Modal.Body>
           <Modal.Footer>
             <Button variant="secondary" onClick={handleClose}>
