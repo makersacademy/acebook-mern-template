@@ -125,6 +125,7 @@ const handleComment = async (event) => {
 
   if (response.ok) {
     console.log("comment made")
+    setnumComments(numComments + 1);
   } else {
     console.log("response was, :", response);
   }
