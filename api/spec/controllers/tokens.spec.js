@@ -4,9 +4,9 @@ require("../mongodb_helper");
 const User = require('../../models/user');
 
 describe("/tokens", () => {
-  beforeAll( () => {
-    const user = new User({ email: "test@test.com", password: "12345678" })
-    user.save()
+  beforeAll( async () => {
+    const user = new User({ email: "test@test.com", password: "12345678", firstName: "Poppy", lastName: "test" })
+    await user.save()
   });
 
   afterAll( async () => {
@@ -14,6 +14,7 @@ describe("/tokens", () => {
   })
 
   test("a token is returned when creds are valid", async () => {
+    console.log("user is: " + User);
     let response = await request(app)
       .post("/tokens")
       .send({email: "test@test.com", password: "12345678"})

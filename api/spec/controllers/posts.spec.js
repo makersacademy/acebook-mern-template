@@ -10,7 +10,7 @@ let token;
 
 describe("/posts", () => {
   beforeAll( async () => {
-    const user = new User({email: "test@test.com", password: "12345678"});
+    const user = new User({email: "test@test.com", password: "12345678", firstName: "Poppy", lastName: "test"});
     await user.save();
 
     token = JWT.sign({
@@ -157,4 +157,17 @@ describe("/posts", () => {
       expect(response.body.token).toEqual(undefined);
     })
   })
+
+
+  // describe('NewLike', () => {
+  //   test('successfully likes a post', async (done) => {
+  //     let post1 = new Post({message: "hello world", likes: []})
+  //     await post1.save();
+  //     let response = await request(app)
+  //       .put(`/posts/${post1._id}/like`)
+  //     expect(response.body.message).toEqual('Like added');
+  //     expect(response.status).toEqual(201);
+  //     done();
+  //   })
+  // })
 });
