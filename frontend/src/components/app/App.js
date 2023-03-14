@@ -13,6 +13,7 @@ import { UserContext } from '../../context/UserContext';
 import CreatePost from '../CreatePost/CreatePost';
 import 'bootstrap/dist/css/bootstrap.css';
 import './App.css'
+import ForgottenPassword from '../forgottenPassword/forgottenPassword';
 
 
 const App = () => {
@@ -44,6 +45,7 @@ const App = () => {
             <Route path='/'  element={<Homepage navigate={ useNavigate() }/>}/>
             <Route path='/login'  element={<LoginForm  navigate={ useNavigate() } setToken={setToken}/>}/>
             <Route path='/signup' element={<SignUpForm navigate={ useNavigate() }/>}/>
+            <Route path='/forgot-password' element={<ForgottenPassword navigate={ useNavigate() } setToken={setToken}/>}/>
           </Routes>
       </>
     );

@@ -8,7 +8,7 @@ const Feed = ({ navigate }) => {
   const [token, setToken] = useState(window.localStorage.getItem("token"));
 
   const refreshPosts = () => {
-    if(token) {
+    if (token) {
       fetch("/posts", {
         headers: {
           'Authorization': `Bearer ${token}`
@@ -26,17 +26,17 @@ const Feed = ({ navigate }) => {
 
   useEffect(() => {
     refreshPosts()
-  },[])
-    
+  }, [])
+
   const logout = () => {
     window.localStorage.removeItem("token")
     navigate('/login')
   }
-  
-    if(token) {
-      return(
-        <>
-          <CreatePost refreshPosts={refreshPosts}/>
+
+  if (token) {
+    return (
+      <>
+        <CreatePost refreshPosts={refreshPosts} />
 
         {/* <button onClick={logout}>
               Logout
@@ -44,7 +44,7 @@ const Feed = ({ navigate }) => {
 
 
         <div id='feed' role="feed">
-            {posts.map(
+          {posts.map(
             (post) => (<Post refreshPosts={refreshPosts} post={post} key={post._id} />)
           )}
         </div>
