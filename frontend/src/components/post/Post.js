@@ -35,6 +35,7 @@ const Post = ({ post }) => {
       data-cy="post"
       key={post._id}
       className="flex flex-col rounded-md shadow-md"
+      id={post._id}
     >
       <div className="m-2 flex">
         <img
@@ -49,11 +50,12 @@ const Post = ({ post }) => {
       </div>
 
       <div className="p-2 text-base">{post.message}</div>
-      <div id="comments-btn" className="flex items-center">
+      <div id="comments-btn-container" className="flex items-center">
         <button
           className="flex items-center p-2"
           onClick={toggleComments}
           type="button"
+          id="comments-btn"
         >
           {showComments ? (
             <CommentFilledBtn className="mx-auto h-5 w-5 fill-blue-500 stroke-blue-500" />
