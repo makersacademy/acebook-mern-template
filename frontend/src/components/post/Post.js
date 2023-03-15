@@ -22,6 +22,7 @@ const Post = ({post}) => {
   const postDate = (day + "-" + month + "-" + year)
   const postTime = (hours + ":" + minutes)
   const [numLikes, setnumLikes] = useState(post.likes ? post.likes.length : 0);
+  const [likes, setLikes] = useState(post.likes)
   const [alreadyLiked, setalreadyLiked] = useState(post.likes.includes(userInfo._id) ? true : false)
   const [numComments, setnumComments] = useState(0)
   const [comments, setComments] = useState()
@@ -53,6 +54,7 @@ const Post = ({post}) => {
 
     if(token){
       loadNumComments()
+      console.log(likes);
     }
   },[])
   
