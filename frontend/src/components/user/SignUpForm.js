@@ -7,10 +7,7 @@ import { ModalContext } from "../../contexts/modalContext";
 
 // returns a boolean if the passwrod is valid
 export const checkPassword = (passwordInput) => {
-  if (passwordInput.length >= 6 && /[A-Z]/.test(passwordInput)) {
-    return true;
-  }
-  return false;
+  return passwordInput.length >= 6 && /[A-Z]/.test(passwordInput);
 };
 
 export const passwordConfirmation = (password, passwordTwo) => {
