@@ -43,7 +43,7 @@ const NewComment = ({ postId, getComments, updateCommentCount }) => {
         data-cy="new-comment-form"
       >
         <input
-          id="comment"
+          id="comment-input"
           type="text"
           placeholder="Want to comment?"
           required
@@ -55,7 +55,7 @@ const NewComment = ({ postId, getComments, updateCommentCount }) => {
         <Button
           text="Comment"
           type="submit"
-          id="submit"
+          id="submit-comment-btn"
           isDisabled={commentMessage.length === 0}
         />
       </form>
