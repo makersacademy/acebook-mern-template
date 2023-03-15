@@ -23,14 +23,13 @@ const AuthContextProvider = ({ children }) => {
         window.localStorage.setItem("token", data.token);
         setToken(data.token);
         setUser(data.user);
-        console.log(data.user);
       }
     }
   };
 
   useEffect(() => {
     getUser();
-  }, []);
+  }, [token]);
 
   const context = useMemo(() => ({ token, setToken, user }), [token]);
 

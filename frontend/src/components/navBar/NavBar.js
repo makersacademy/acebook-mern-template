@@ -1,4 +1,4 @@
-import React, { useEffect, useState, Fragment, useContext } from "react";
+import React, { Fragment, useContext } from "react";
 import { Menu, Transition } from "@headlessui/react";
 import { Link } from "react-router-dom";
 import { ReactComponent as Logo } from "../../assets/logo.svg";
@@ -8,32 +8,7 @@ import { AuthContext } from "../../contexts/AuthContext";
 
 const NavBar = () => {
   const { pushModal } = useContext(ModalContext);
-  const [user, setUser] = useState({});
-  const { token, setToken } = useContext(AuthContext);
-
-  const getUser = async () => {
-    if (token) {
-      const response = await fetch("/users", {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
-
-      const data = await response.json();
-
-      if (response.status !== 200) {
-        // error
-      } else {
-        window.localStorage.setItem("token", data.token);
-        setToken(data.token);
-        setUser(data.user);
-      }
-    }
-  };
-
-  useEffect(() => {
-    getUser();
-  }, []);
+  const { setToken, user } = useContext(AuthContext);
 
   const logout = () => {
     window.localStorage.removeItem("token");
