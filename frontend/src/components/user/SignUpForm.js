@@ -1,31 +1,44 @@
-import React, { useState } from "react";
-import PropTypes from "prop-types";
+import React, { useState, useContext } from "react";
 import { Link } from "react-router-dom";
 import { ReactComponent as Logo } from "../../assets/logo.svg";
 import Button from "../button/Button";
+import { AuthContext } from "../../contexts/AuthContext";
+import { ModalContext } from "../../contexts/ModalContext";
 
-const SignUpForm = ({ navigate }) => {
+const SignUpForm = () => {
   const [name, setName] = useState("");
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const { setToken } = useContext(AuthContext);
+  const { pushModal } = useContext(ModalContext);
 
   const handleSubmit = async (event) => {
     event.preventDefault();
 
-    fetch("/users", {
+    const response = await fetch("/users", {
       method: "post",
       headers: {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({ name, username, email, password }),
-    }).then((response) => {
-      if (response.status === 201) {
-        navigate("/login");
-      } else {
-        navigate("/signup");
-      }
     });
+
+    const data = await response.json();
+
+    if (response.status !== 201) {
+      pushModal({
+        message: data.message,
+        type: "error",
+      });
+    } else {
+      window.localStorage.setItem("token", data.token);
+      setToken(data.token);
+      pushModal({
+        message: "Account created!",
+        type: "success",
+      });
+    }
   };
 
   const handleUsernameChange = (event) => {
@@ -108,10 +121,6 @@ const SignUpForm = ({ navigate }) => {
       </div>
     </div>
   );
-};
-
-SignUpForm.propTypes = {
-  navigate: PropTypes.func.isRequired,
 };
 
 export default SignUpForm;

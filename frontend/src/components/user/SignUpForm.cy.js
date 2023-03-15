@@ -2,13 +2,11 @@ import React from "react";
 import { BrowserRouter as Router } from "react-router-dom";
 import SignUpForm from "./SignUpForm";
 
-const navigate = () => {};
-
 describe("Signing up", () => {
   it("calls the /users endpoint", () => {
     cy.mount(
       <Router>
-        <SignUpForm navigate={navigate} />
+        <SignUpForm />
       </Router>
     );
 

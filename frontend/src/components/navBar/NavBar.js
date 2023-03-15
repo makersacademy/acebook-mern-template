@@ -1,16 +1,15 @@
 import React, { useEffect, useState, Fragment, useContext } from "react";
 import { Menu, Transition } from "@headlessui/react";
-import { useNavigate, Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { ReactComponent as Logo } from "../../assets/logo.svg";
 import avatar from "../../assets/avatar.png";
-import { ModalContext } from "../../contexts/modalContext";
-import { TokenContext } from "../../contexts/tokenContext";
+import { ModalContext } from "../../contexts/ModalContext";
+import { AuthContext } from "../../contexts/AuthContext";
 
 const NavBar = () => {
   const { pushModal } = useContext(ModalContext);
   const [user, setUser] = useState({});
-  const { token, setToken } = useContext(TokenContext);
-  const navigate = useNavigate();
+  const { token, setToken } = useContext(AuthContext);
 
   const getUser = async () => {
     if (token) {
@@ -43,7 +42,6 @@ const NavBar = () => {
       message: "Successfully logged out",
       type: "success",
     });
-    navigate("/login");
   };
 
   const classNames = (...classes) => classes.filter(Boolean).join(" ");
@@ -53,7 +51,7 @@ const NavBar = () => {
       <div className="mx-auto px-2">
         <div className="relative flex h-16 items-center justify-between">
           <div className="flex shrink-0 items-center">
-            <Link to="/posts">
+            <Link to="/">
               <Logo className="mx-auto h-8 w-auto stroke-blue-600" />
             </Link>
           </div>
@@ -81,19 +79,19 @@ const NavBar = () => {
                 leaveTo="transform opacity-0 scale-95"
               >
                 <Menu.Items className="absolute right-0 z-10 mt-2 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
-                  <Menu.Item>
-                    {({ active }) => (
-                      <a
-                        href="#"
-                        className={classNames(
-                          active ? "bg-gray-100" : "",
-                          "block px-4 py-2 text-sm text-gray-700"
-                        )}
-                      >
-                        Your Profile
-                      </a>
-                    )}
-                  </Menu.Item>
+                  {/* <Menu.Item> */}
+                  {/*  {({ active }) => ( */}
+                  {/*    <a */}
+                  {/*      href="#" */}
+                  {/*      className={classNames( */}
+                  {/*        active ? "bg-gray-100" : "", */}
+                  {/*        "block px-4 py-2 text-sm text-gray-700" */}
+                  {/*      )} */}
+                  {/*    > */}
+                  {/*      Your Profile */}
+                  {/*    </a> */}
+                  {/*  )} */}
+                  {/* </Menu.Item> */}
                   <Menu.Item>
                     {({ active }) => (
                       <button

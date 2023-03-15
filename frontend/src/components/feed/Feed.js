@@ -1,11 +1,11 @@
 import React, { useEffect, useState, useContext } from "react";
 import Post from "../post/Post";
 import NewPost from "../newPost/NewPost";
-import { TokenContext } from "../../contexts/tokenContext";
+import { AuthContext } from "../../contexts/AuthContext";
 
 const Feed = () => {
   const [posts, setPosts] = useState([]);
-  const { token, setToken } = useContext(TokenContext);
+  const { token, setToken } = useContext(AuthContext);
 
   const getPosts = async () => {
     if (token) {
