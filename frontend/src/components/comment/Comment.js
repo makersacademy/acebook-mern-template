@@ -23,12 +23,12 @@ const Post = ({ post }) => {
     });
   };
   return (
-    <article data-cy="post" key={post._id}>
-      Post from {post.user.name}: {post.message} ({result})
-      <button onClick={toggleLike}>{isLiked ? "unlike" : "like"}</button>
+    <article data-cy="comment" key={comment._id}>
+      Comment from {comment.user.name}: {comment.message} ({result})
+      {/*<button onClick={toggleLike}>{isLiked ? "unlike" : "like"}</button>*/}
       Like count: {likes}
     </article>
   );
 };
 
-export default Post;
+export default Comment;
