@@ -149,6 +149,7 @@ describe("/posts/comment", () => {
     test("returns a new token", async () => {
       const response = await request(app)
         .get("/posts/comment")
+        .query({ postId: post.id })
         .set("Authorization", `Bearer ${token}`)
         .send({ token });
       const newPayload = jwt.decode(
