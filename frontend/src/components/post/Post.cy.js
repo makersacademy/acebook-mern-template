@@ -10,6 +10,7 @@ describe("Post", () => {
           message: "Hello, world",
           author: { username: "Abi" },
           createdAt: "2023-01-01T12:00:00.00+00:00",
+          comments: { length: 1 },
         }}
       />
     );

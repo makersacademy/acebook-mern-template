@@ -5,7 +5,6 @@ describe("Comments component", () => {
   describe("when post has no comments", () => {
     beforeEach(() => {
       window.localStorage.setItem("token", "fakeToken");
-
       cy.intercept(
         {
           pathname: "/posts/comment",
@@ -42,7 +41,6 @@ describe("Comments component", () => {
   describe("when comments are available", () => {
     beforeEach(() => {
       window.localStorage.setItem("token", "fakeToken");
-
       cy.intercept(
         {
           pathname: "/posts/comment",
@@ -75,7 +73,9 @@ describe("Comments component", () => {
     });
 
     it("should display the new comment form", () => {
-      cy.mount(<Comments postId="1" />);
+      cy.mount(
+        <Comments postId="1" updateCommentCount={{ updateCommentCount: 1 }} />
+      );
       cy.wait("@getMockComments").then(() => {
         cy.get('[data-cy="new-comment-form"]').should("exist");
       });

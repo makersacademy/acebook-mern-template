@@ -32,7 +32,7 @@ const Comments = ({ postId, updateCommentCount }) => {
 
   useEffect(() => {
     getComments();
-  }, []);
+  }, [postId]);
 
   return (
     <div id="comments-container">
