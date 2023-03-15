@@ -1,5 +1,4 @@
 import React from "react";
-import ModalContextProvider from "../../contexts/modalContext";
 import Post from "./Post";
 
 const token =
@@ -16,11 +15,7 @@ describe("Post", () => {
       createdAt: "2023-01-01T12:00:00.00+00:00",
       likes: [],
     };
-    cy.mount(
-      <ModalContextProvider>
-        <Post post={postContent} />
-      </ModalContextProvider>
-    );
+    cy.mount(<Post post={postContent} />);
   });
 
   it("renders a post with a message", () => {
@@ -31,11 +26,7 @@ describe("Post", () => {
       createdAt: "2023-01-01T12:00:00.00+00:00",
       likes: [],
     };
-    cy.mount(
-      <ModalContextProvider>
-        <Post post={postContent} />
-      </ModalContextProvider>
-    );
+    cy.mount(<Post post={postContent} />);
     cy.get('[data-cy="post"]').should("contain.text", "Hello, world");
   });
 
