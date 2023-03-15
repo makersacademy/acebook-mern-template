@@ -4,7 +4,7 @@ import Comment from "../comment/Comment";
 
 const CommentList = ({ comments }) => {
   return (
-    <div>
+    <div data-cy="comment-list">
       <div className="flex flex-col">
         <p className="text-lg font-semibold">Comments</p>
         {comments.map((comment) => (
