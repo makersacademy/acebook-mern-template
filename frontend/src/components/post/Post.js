@@ -17,8 +17,8 @@ const Post = ({ post }) => {
     });
     response.json().then(async (data) => {
       window.localStorage.setItem("token", data.token);
-      setLikes(data.likes);
-      setLiked(data.liked);
+      setLikes(data.likes); //JSON web token response which contains number of likes (toggleLike method in api Controller/posts)
+      setLiked(data.liked); //JSON web token response true/false
     });
   };
   return (
