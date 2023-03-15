@@ -48,6 +48,7 @@
     cursor: pointer;
     margin-top: 20px;
     width: clamp(100px, 5vw, 200px);
+    margin-right: 30px;
   }
   
   .login-form input[type="submit"]:hover {
