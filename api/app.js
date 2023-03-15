@@ -3,6 +3,7 @@ const express = require("express");
 const path = require("path");
 const logger = require("morgan");
 const JWT = require("jsonwebtoken");
+const bcrypt = require("bcryptjs")
 
 const postsRouter = require("./routes/posts");
 const tokensRouter = require("./routes/tokens");
@@ -38,10 +39,36 @@ const tokenChecker = (req, res, next) => {
   });
 };
 
-// route setup
+// bcrypt middleware function
+
+const bcryptPasswordHasher = (req, res, next) => {
+  // console.log(req)
+  const saltRounds = 10
+  const password = req.body.password
+  bcrypt.genSalt(saltRounds, function (saltError, salt) {
+    // console.log(saltError)
+    if (saltError) {
+      res.status(401).json({message: "saltError"})
+    } else {
+      bcrypt.hash(password, salt, function(hashError, hash) {
+        if (hashError) {
+          res.status(401).json({message: "hashError"})
+          // console.log(hashError)
+          throw hashError
+        } else {
+          req.body.password = hash
+          // 'next()' moves the program onto the Router once the middleware is complete
+          next(); 
+          // console.log(hash)
+        }
+      })
+    }
+  })  
+}  
+// route setup - route, follows to middleware (if exists) and then accesses server side Router
 app.use("/posts", tokenChecker, postsRouter);
 app.use("/tokens", tokensRouter);
-app.use("/users", usersRouter);
+app.use("/users", bcryptPasswordHasher, usersRouter);
 
 // catch 404 and forward to error handler
 app.use((req, res, next) => {
