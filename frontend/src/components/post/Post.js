@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { formatDistanceToNow } from "date-fns";
+import Comment from "../comment/Comment";
 
 const Post = ({ post }) => {
   // post is the
@@ -27,6 +28,12 @@ const Post = ({ post }) => {
       Post from {post.user.name}: {post.message} ({result})
       <button onClick={toggleLike}>{isLiked ? "unlike" : "like"}</button>
       Like count: {likes}
+      <div id="comments" role="comment">
+        {/* {[...post.comments].reverse().map((comment) => (
+          <Comment comment={comment} key={comment._id} />
+        ))} */}
+        {post.comments}
+      </div>
     </article>
   );
 };

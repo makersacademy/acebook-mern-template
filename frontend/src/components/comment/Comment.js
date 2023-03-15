@@ -22,13 +22,13 @@ const Post = ({ post }) => {
       setLiked(data.liked); //JSON web token updates 'like' status
     });
   };
-  return (
-    <article data-cy="comment" key={comment._id}>
-      Comment from {comment.user.name}: {comment.message} ({result})
-      {/*<button onClick={toggleLike}>{isLiked ? "unlike" : "like"}</button>*/}
-      Like count: {likes}
-    </article>
-  );
+  // return (
+  //   <article data-cy="comment" key={comment._id}>
+  //     Comment from {comment.user.name}: {comment.message} ({result})
+  //     {/*<button onClick={toggleLike}>{isLiked ? "unlike" : "like"}</button>*/}
+  //     Like count: {likes}
+  //   </article>
+  // );
 };
 
 export default Comment;
