@@ -59,9 +59,14 @@ const NavBar = () => {
             {/* Profile dropdown */}
             <Menu as="div" className="relative ml-3">
               <div>
-                <Menu.Button className="flex items-center rounded-full border border-gray-300 p-1 text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800">
+                <Menu.Button
+                  data-cy="profile_button"
+                  className="flex items-center rounded-full border border-gray-300 p-1 text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800"
+                >
                   <span className="sr-only">Open user menu</span>
-                  <p className="mx-2">{user.name}</p>
+                  <p data-cy="user" className="mx-2">
+                    {user.name}
+                  </p>
                   <img
                     className="h-8 w-8 rounded-full"
                     src={avatar}
@@ -78,7 +83,10 @@ const NavBar = () => {
                 leaveFrom="transform opacity-100 scale-100"
                 leaveTo="transform opacity-0 scale-95"
               >
-                <Menu.Items className="absolute right-0 z-10 mt-2 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
+                <Menu.Items
+                  data-cy="menu_items"
+                  className="absolute right-0 z-10 mt-2 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none"
+                >
                   {/* <Menu.Item> */}
                   {/*  {({ active }) => ( */}
                   {/*    <a */}
