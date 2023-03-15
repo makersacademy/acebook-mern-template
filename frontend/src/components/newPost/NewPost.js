@@ -66,7 +66,7 @@ const NewPost = ({ getPosts }) => {
           onChange={(e) => setImageInput(e.target.files[0])}
         />
         {isError && (
-          <p className="text-red-500">
+          <p data-cy="error-message" className="text-red-500">
             Message and Image can&apos;t both be empty.
           </p>
         )}

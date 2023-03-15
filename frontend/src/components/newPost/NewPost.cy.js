@@ -15,7 +15,7 @@ describe("NewPost component", () => {
       );
     });
 
-    it("should have a disabled post button", () => {
+    xit("should have a disabled post button", () => {
       cy.get("#submit").should("have.attr", "disabled");
     });
   });
@@ -50,9 +50,25 @@ describe("NewPost component", () => {
         });
       });
 
-      it("disables the post button", () => {
+      xit("disables the post button", () => {
         cy.get("#submit").should("have.attr", "disabled");
       });
+    });
+  });
+
+  // NewPost.cy.js
+  // 1. check if there is a input field in the form (DONE)
+  // 2. Empty message and file field should return an error message (DONE)
+  // 3. Message but no file field, user should be able to submit
+  // 4. File filed but no message, user should be able to submit
+  // 5. Both file and message is filled, user should be able to submit
+
+  describe("image-related-tests", () => {
+    it("should return an error message if the file and message are both empty", () => {
+      cy.get("#submit").click();
+      cy.get('[data-cy="error-message"]')
+        .invoke("text")
+        .should("contain", "Message and Image can't both be empty");
     });
   });
 });
