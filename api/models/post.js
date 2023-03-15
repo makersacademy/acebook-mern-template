@@ -13,6 +13,7 @@ const PostSchema = new mongoose.Schema({
   createdAt: { type: Date, default: () => Date.now(), immutable: true },
   likes: [{ type: mongoose.Schema.Types.ObjectId, ref: "User" }],
   comments: [{ type: mongoose.Schema.Types.ObjectId, ref: "Comment" }],
+  image: { type: mongoose.Schema.Types.ObjectId, ref: "Image" },
 });
 
 const Post = mongoose.model("Post", PostSchema);

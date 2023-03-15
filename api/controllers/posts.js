@@ -5,7 +5,8 @@ const getAllPosts = async (req, res) => {
   try {
     const posts = await Post.find()
       .sort({ createdAt: -1 })
-      .populate("author", "username");
+      .populate("author", "username")
+      .populate("image", "publicId");
     const token = await generateToken(req.userId);
     res.status(200).json({ posts, token });
   } catch (error) {
