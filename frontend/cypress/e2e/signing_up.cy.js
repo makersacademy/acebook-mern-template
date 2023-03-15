@@ -5,7 +5,7 @@ describe("Signing up", () => {
     cy.get("#password").type("password");
     cy.get("#firstName").type("Poppy");
     cy.get("#lastName").type("Smith");
-    cy.get("#submit").click();
+    cy.get("#loginbutton").click();
     cy.url().should("include", "/login");
   });
 
