@@ -4,34 +4,36 @@ import PropTypes from "prop-types";
 export const AuthContext = createContext();
 
 const AuthContextProvider = ({ children }) => {
-  const [token, setToken] = useState(window.localStorage.getItem("token"));
+  const [token, setToken] = useState(null);
   const [user, setUser] = useState({});
 
-  const getUser = async () => {
-    if (token) {
+  useEffect(() => {
+    const storedToken = window.localStorage.getItem("token");
+
+    const getUser = async () => {
       const response = await fetch("/users", {
         headers: {
-          Authorization: `Bearer ${token}`,
+          Authorization: `Bearer ${storedToken}`,
         },
       });
 
       const data = await response.json();
 
-      if (response.status !== 200) {
-        // error
-      } else {
+      if (response.ok) {
         window.localStorage.setItem("token", data.token);
         setToken(data.token);
         setUser(data.user);
+      } else {
+        setToken(null);
       }
+    };
+
+    if (storedToken) {
+      getUser();
     }
-  };
+  }, []);
 
-  useEffect(() => {
-    getUser();
-  }, [token]);
-
-  const context = useMemo(() => ({ token, setToken, user }), [token]);
+  const context = useMemo(() => ({ token, setToken, user, setUser }), [token]);
 
   return (
     <AuthContext.Provider value={context}>{children}</AuthContext.Provider>

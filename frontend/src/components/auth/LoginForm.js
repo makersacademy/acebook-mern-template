@@ -6,7 +6,7 @@ import { ModalContext } from "../../contexts/ModalContext";
 import { AuthContext } from "../../contexts/AuthContext";
 
 const LogInForm = () => {
-  const { setToken } = useContext(AuthContext);
+  const { setToken, setUser } = useContext(AuthContext);
   const { pushModal } = useContext(ModalContext);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -32,6 +32,7 @@ const LogInForm = () => {
     } else {
       window.localStorage.setItem("token", data.token);
       setToken(data.token);
+      setUser(data.user);
       pushModal({
         message: "Login succeeded!",
         type: "success",

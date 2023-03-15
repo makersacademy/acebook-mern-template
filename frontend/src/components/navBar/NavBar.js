@@ -9,10 +9,11 @@ import classNames from "../../helpers/classNames";
 
 const NavBar = () => {
   const { pushModal } = useContext(ModalContext);
-  const { setToken, user } = useContext(AuthContext);
+  const { user, setToken } = useContext(AuthContext);
 
   const logout = () => {
     window.localStorage.removeItem("token");
+    setToken(null);
     pushModal({
       message: "Successfully logged out",
       type: "success",
