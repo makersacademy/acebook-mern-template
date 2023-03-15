@@ -180,6 +180,12 @@ describe("/posts/comment", () => {
       await Comment.deleteMany({});
     });
 
+    afterAll(async () => {
+      await Post.deleteMany({});
+      await User.deleteMany({});
+      await Comment.deleteMany({});
+    });
+
     test("returns no comments", async () => {
       const response = await request(app).get("/posts/comment").query({
         postId: post.id,
