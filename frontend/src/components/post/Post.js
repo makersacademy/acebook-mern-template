@@ -137,6 +137,7 @@ const handleComment = async (event) => {
   }
 }
 
+const profileLink = `/profile/${post.poster._id}`
 
 const handleCommentChange = (event) => {
   setCurrentComment(event.target.value)
@@ -149,10 +150,9 @@ const handleCommentChange = (event) => {
       data-cy="post" 
       key={ post._id }
       className="row-span-1 m-3 py-8 bg-white rounded-xl center shadow-lg space-y-2"
-      >{post.poster.firstName}<br/>
+      ><a href={profileLink}>{post.poster.firstName}</a><br/>
         { post.message }<br/>
       {postDate} posted at: {postTime}<br/> {numLikes} Likes {numComments} Comments
-
       <form onSubmit={handleComment} className="form-inline">
       <div class="form-group mb-2">
         <input type="text"value={ currentComment } onChange={handleCommentChange} className="form-control" id="comment" placeholder="Write a comment"/>
