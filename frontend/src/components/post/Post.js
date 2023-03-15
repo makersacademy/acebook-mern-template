@@ -84,7 +84,7 @@ const Post = ({ post }) => {
         </div>
       </div>
       <div className="p-2 text-base">{post.message}</div>
-      <AdvancedImage className="w-[450px]" cldImg={myImage} />
+      <AdvancedImage data-cy="image" className="w-[450px]" cldImg={myImage} />
       <div className="m-2 flex items-center gap-4">
         {checkIsLiked() ? (
           <FilledLikeBtn
