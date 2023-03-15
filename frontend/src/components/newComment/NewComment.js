@@ -36,7 +36,11 @@ const NewComment = ({ postId, getComments }) => {
 
   return (
     <div className="max-w-sm rounded-xl border p-4 shadow-sm">
-      <form onSubmit={handleSubmit} className="space-y-4">
+      <form
+        onSubmit={handleSubmit}
+        className="space-y-4"
+        data-cy="new-comment-form"
+      >
         <input
           id="comment"
           type="text"
