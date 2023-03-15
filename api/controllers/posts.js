@@ -31,6 +31,38 @@ const PostsController = {
       res.status(201).json({ message: "OK", token: token });
     });
   },
+
+  CreateComment: (req, res) => {
+  /////// want to
+    Post.findOne({ _id: req.params.id }).then(async (post) => {
+      //Post comes from mongoose schema.findOne mongoose meth
+      let commented;
+      if (post.comments.includes(req.user_id)) {
+        //checks database  (likes array) for existing user_id removes a match -displays like removed
+        post.comments.splice(post.comment.indexOf(req.user_id), 1);
+        console.log("Comment deleted");
+        commented = false;
+      } else {
+        //saves user_id to database and displays- Like added
+        post.comments.push(req.user_id);
+        console.log("Comment added");
+        commented = true;
+      }
+      post.save(async (err, post) => {
+        if (err) {
+          throw err;
+        } //if successful  generates a new JWT which has following property
+
+        const token = await TokenGenerator.jsonwebtoken(req.user_id);
+        res.status(201).json({
+          token: token,
+          message: "OK",
+          comments: post.comments.length, //No of likes
+          comments: commented, //displays boolean  Liked status
+        });
+    });
+  },
+
   ToggleLike: (req, res) => {
     Post.findOne({ _id: req.params.id }).then(async (post) => {
       //Post comes from mongoose schema.findOne mong meth

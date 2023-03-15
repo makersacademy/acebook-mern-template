@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { formatDistanceToNow } from "date-fns";
 
 const Post = ({ post }) => {
+  // post is the
   const [likes, setLikes] = useState(post.likes.length || 0);
   const [isLiked, setLiked] = useState(post.liked);
   const createdAt = new Date(post.createdAt);
@@ -17,8 +18,8 @@ const Post = ({ post }) => {
     });
     response.json().then(async (data) => {
       window.localStorage.setItem("token", data.token);
-      setLikes(data.likes); //JSON web token response which contains number of likes (toggleLike method in api Controller/posts)
-      setLiked(data.liked); //JSON web token response true/false
+      setLikes(data.likes); //JSON web token response containing updated number of likes (toggleLike method in api Controller/posts)
+      setLiked(data.liked); //JSON web token updates 'like' status
     });
   };
   return (
