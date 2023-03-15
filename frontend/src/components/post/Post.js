@@ -24,9 +24,13 @@ const Post = ({ post }) => {
   };
   return (
     <article data-cy="post" key={post._id} className="post-container">
-      <strong>Post from {post.user.name}:</strong> {post.message} ({result})
-      <button onClick={toggleLike}>{isLiked ? "unlike" : "like"}</button>
-      Like count: {likes}
+      <strong>{post.user.name} ({result}):</strong> 
+      <p></p>
+      <div>{post.message} </div>
+
+      <div><button className="likes-container" onClick={toggleLike}>{isLiked ? "unlike" : "like"}</button>
+       Likes: {likes}</div>
+      
     </article>
   );
 };

@@ -6,8 +6,34 @@
   border: 1px solid #5e0368; 
   background-color: rgba(255, 255, 255, 0.318);
   border-radius: 10px;
+  
 }
 
+strong {
+  color: rgb(56, 81, 85)
+}
+#result {
+  background-color: rgba(241, 22, 22, 0.318);
+}
 .post-container:not(:last-child) {
   margin-bottom: 20px; 
+}
+
+.likes-container {
+ 
+  font-weight: bolder;
+    background-color: #e7565661;
+    color: #fff;
+    border-radius: 100px;
+    border: none;
+    padding: 2px 2px;
+    cursor: pointer;
+    margin-top: 20px;
+    width: clamp(75px, 5vw, 200px);
+    margin-left: 2px;
+    margin-right: 10px;
+}
+.likes-container:hover {
+  background-color: rgb(140, 28, 148);
+  
 }
