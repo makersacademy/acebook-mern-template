@@ -54,7 +54,7 @@ const Post = ({post}) => {
 
     if(token){
       loadNumComments()
-      console.log(likes);
+      
     }
   },[])
   
