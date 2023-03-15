@@ -8,6 +8,7 @@ import WithNav from "../withNav/WithNav";
 import LoginForm from "../auth/LoginForm";
 import SignUpForm from "../user/SignUpForm";
 import Feed from "../feed/Feed";
+import Profile from "../profile/Profile";
 
 import { AuthContext } from "../../contexts/AuthContext";
 
@@ -22,6 +23,10 @@ const App = () => {
           <Route
             path="/"
             element={token ? <Feed /> : <Navigate to="/login" />}
+          />
+          <Route
+            path="/profile"
+            element={token ? <Profile /> : <Navigate to="/login" />}
           />
         </Route>
 
