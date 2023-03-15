@@ -21,6 +21,7 @@ const UserInfo = () => {
         window.localStorage.setItem("token", data.token);
         setToken(data.token);
         setUser(data.user);
+        console.log(data.user);
       }
     }
   };
@@ -28,6 +29,8 @@ const UserInfo = () => {
   useEffect(() => {
     getUser();
   }, []);
+
+  return <div>Hello</div>;
 };
 
 export default UserInfo;
