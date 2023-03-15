@@ -37,11 +37,7 @@ const Comments = ({ postId }) => {
   return (
     <div id="comments-container">
       <CommentList comments={comments} />
-      <NewComment
-        getComments={getComments}
-        postId={postId}
-        data-cy="new-comment-form"
-      />
+      <NewComment getComments={getComments} postId={postId} />
     </div>
   );
 };
