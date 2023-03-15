@@ -7,9 +7,11 @@ const Post = ({ post }) => {
   const [isLiked, setLiked] = useState(post.liked);
   const createdAt = new Date(post.createdAt);
   const result = formatDistanceToNow(createdAt, { addSuffix: true });
+  const [comments, setComments] = useState(post.comments.length || 0);
+  const [isCommented, setCommented] = useState(post.commented);
 
   const toggleLike = async () => {
-    let url = "/posts/" + post._id + "/likes";
+    let url = "/posts/" + post._id + "/likes" + "/comments";
     let response = await fetch(url, {
       method: "post",
       headers: {
@@ -20,6 +22,8 @@ const Post = ({ post }) => {
       window.localStorage.setItem("token", data.token);
       setLikes(data.likes); //JSON web token response containing updated number of likes (toggleLike method in api Controller/posts)
       setLiked(data.liked); //JSON web token updates 'like' status
+      setComments(data.comments);
+      setCommented(data.commented);
     });
   };
   return (
