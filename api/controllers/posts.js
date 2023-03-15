@@ -10,6 +10,11 @@ const PostsController = {
           throw err;
         }
         const token = await TokenGenerator.jsonwebtoken(req.user_id);
+        posts = posts.map((post) => {
+          let liked = post.likes.includes(req.user_id);
+          post._doc = { ...post._doc, ...{ liked: liked } };
+          return post;
+        });
         res.status(200).json({ posts: posts, token: token });
       });
   },
@@ -24,6 +29,32 @@ const PostsController = {
 
       const token = await TokenGenerator.jsonwebtoken(req.user_id);
       res.status(201).json({ message: "OK", token: token });
+    });
+  },
+  ToggleLike: (req, res) => {
+    Post.findOne({ _id: req.params.id }).then(async (post) => {
+      let liked;
+      if (post.likes.includes(req.user_id)) {
+        post.likes.splice(post.likes.indexOf(req.user_id), 1);
+        console.log("Like removed");
+        liked = false;
+      } else {
+        post.likes.push(req.user_id);
+        console.log("Like added");
+        liked = true;
+      }
+      post.save(async (err, post) => {
+        if (err) {
+          throw err;
+        }
+        const token = await TokenGenerator.jsonwebtoken(req.user_id);
+        res.status(201).json({
+          token: token,
+          message: "OK",
+          likes: post.likes.length,
+          liked: liked,
+        });
+      });
     });
   },
 };
