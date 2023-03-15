@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-
+import "./CreatePost.css";
 const CreatePost = ({ fetchData }) => {
   const [message, setMessage] = useState("");
 

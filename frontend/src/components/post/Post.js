@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { formatDistanceToNow } from "date-fns";
+import "./Post.css";
 
 const Post = ({ post }) => {
   const [likes, setLikes] = useState(post.likes.length || 0);
@@ -22,10 +23,14 @@ const Post = ({ post }) => {
     });
   };
   return (
-    <article data-cy="post" key={post._id}>
-      Post from {post.user.name}: {post.message} ({result})
-      <button onClick={toggleLike}>{isLiked ? "unlike" : "like"}</button>
-      Like count: {likes}
+    <article data-cy="post" key={post._id} className="post-container">
+      <strong>{post.user.name} ({result}):</strong> 
+      <p></p>
+      <div>{post.message} </div>
+
+      <div><button className="likes-container" onClick={toggleLike}>{isLiked ? "unlike" : "like"}</button>
+       Likes: {likes}</div>
+      
     </article>
   );
 };

@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import "./LoginForm.css"
 
 const LogInForm = ({ navigate }) => {
   const [email, setEmail] = useState("");
@@ -20,6 +21,7 @@ const LogInForm = ({ navigate }) => {
       let data = await response.json();
       window.localStorage.setItem("token", data.token);
       navigate("/posts");
+      window.location.reload();
     } else {
       console.log("oops");
       navigate("/login");
@@ -35,7 +37,11 @@ const LogInForm = ({ navigate }) => {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
+    <form onSubmit={handleSubmit} className="login-form">
+      <h3>Welcome back 👋</h3>
+
+
+      
       <input
         placeholder="Email"
         id="email"
@@ -50,7 +56,7 @@ const LogInForm = ({ navigate }) => {
         value={password}
         onChange={handlePasswordChange}
       />
-      <input role="submit-button" id="submit" type="submit" value="Submit" />
+      <input role="submit-button" id="submit" type="submit" value="Login" />
     </form>
   );
 };
