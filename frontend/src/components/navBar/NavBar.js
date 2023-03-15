@@ -5,6 +5,7 @@ import { ReactComponent as Logo } from "../../assets/logo.svg";
 import avatar from "../../assets/avatar.png";
 import { ModalContext } from "../../contexts/ModalContext";
 import { AuthContext } from "../../contexts/AuthContext";
+import classNames from "../../helpers/classNames";
 
 const NavBar = () => {
   const { pushModal } = useContext(ModalContext);
@@ -37,14 +38,11 @@ const NavBar = () => {
 
   const logout = () => {
     window.localStorage.removeItem("token");
-    setToken(null);
     pushModal({
       message: "Successfully logged out",
       type: "success",
     });
   };
-
-  const classNames = (...classes) => classes.filter(Boolean).join(" ");
 
   return (
     <div className="shadow-md">
