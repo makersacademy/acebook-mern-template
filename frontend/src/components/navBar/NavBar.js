@@ -2,10 +2,10 @@ import React, { useEffect, useState, Fragment, useContext } from "react";
 import { Menu, Transition } from "@headlessui/react";
 import { Link } from "react-router-dom";
 import { ReactComponent as Logo } from "../../assets/logo.svg";
-import avatar from "../../assets/avatar.png";
 import { ModalContext } from "../../contexts/ModalContext";
 import { AuthContext } from "../../contexts/AuthContext";
 import classNames from "../../helpers/classNames";
+import ProfilePicture from "../profilePicture/ProfilePicture";
 
 const NavBar = () => {
   const { pushModal } = useContext(ModalContext);
@@ -48,11 +48,11 @@ const NavBar = () => {
     <div className="shadow-md">
       <div className="mx-auto px-2">
         <div className="relative flex h-16 items-center justify-between">
-          <div className="flex shrink-0 items-center">
-            <Link to="/">
-              <Logo className="mx-auto h-8 w-auto stroke-blue-600" />
-            </Link>
-          </div>
+          <Link className="flex shrink-0 items-center" to="/">
+            <Logo className="mx-2 h-8 w-auto stroke-blue-600" />
+            <span className="text-xl font-semibold text-blue-600">Acebook</span>
+          </Link>
+
           <div className="absolute inset-y-0 right-0 flex items-center pr-2">
             {/* Profile dropdown */}
             <Menu as="div" className="relative ml-3">
@@ -65,11 +65,7 @@ const NavBar = () => {
                   <p data-cy="user" className="mx-2">
                     {user.name}
                   </p>
-                  <img
-                    className="h-8 w-8 rounded-full"
-                    src={avatar}
-                    alt="Avatar"
-                  />
+                  <ProfilePicture className="h-8 w-8" publicId="" />
                 </Menu.Button>
               </div>
               <Transition
