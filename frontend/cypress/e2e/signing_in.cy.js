@@ -1,5 +1,5 @@
 describe("Signing in", () => {
-
+ 
   before(() => {
     cy.signup("@email.com", "12345678", "someone", "someone")
   })
@@ -25,7 +25,7 @@ describe("Signing in", () => {
     cy.visit("/login");
     cy.get("#password").type("password");
     cy.get("#submit").click();
-    cy.get("div:contains(Invalid username or Password)").should("be.visible");
+    cy.get("div:contains(Invalid Log In Details)").should("be.visible");
     cy.url().should("include", "/login");
   });
 });

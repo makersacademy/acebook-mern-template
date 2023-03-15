@@ -84,7 +84,7 @@ describe("/posts", () => {
       expect(response.body.token).toEqual(undefined);
     });
   })
-
+ 
   describe("GET, when token is present", () => {
     test("returns every post in the collection", async () => {
       let post1 = new Post({message: "howdy!"});
@@ -96,7 +96,7 @@ describe("/posts", () => {
         .set("Authorization", `Bearer ${token}`)
         .send({token: token});
       let messages = response.body.posts.map((post) => ( post.message ));
-      expect(messages).toEqual(["howdy!", "hola!"]);
+      expect(messages).toEqual(["hola!", "howdy!"]);
     })
 
     test("the response code is 200", async () => {
