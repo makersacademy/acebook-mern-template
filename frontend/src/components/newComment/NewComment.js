@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import PropTypes from "prop-types";
 import Button from "../button/Button";
 
-const NewComment = ({ postId, getComments }) => {
+const NewComment = ({ postId, getComments, updateCommentCount }) => {
   const [commentMessage, setCommentMessage] = useState("");
   const [token, setToken] = useState(window.localStorage.getItem("token"));
 
@@ -27,6 +27,7 @@ const NewComment = ({ postId, getComments }) => {
       setToken(data.token);
       setCommentMessage("");
       getComments();
+      updateCommentCount();
     }
   };
 
@@ -65,6 +66,7 @@ const NewComment = ({ postId, getComments }) => {
 NewComment.propTypes = {
   getComments: PropTypes.func.isRequired,
   postId: PropTypes.string.isRequired,
+  updateCommentCount: PropTypes.func.isRequired,
 };
 
 export default NewComment;

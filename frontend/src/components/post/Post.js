@@ -9,18 +9,20 @@ import avatar from "../../assets/avatar.png";
 
 const Post = ({ post }) => {
   const [showComments, setShowComments] = useState(false);
+  const [commentCounter, setCommentCounter] = useState(post.comments.length);
 
   const commentCount = () => {
-    const countComments = post.comments.length;
-    if (countComments >= 10) {
+    if (commentCounter >= 10) {
       return "10+";
     }
-    return countComments;
+    return commentCounter;
   };
 
   const toggleComments = () => {
     setShowComments(!showComments);
   };
+
+  const updateCommentCount = () => setCommentCounter(commentCounter + 1);
 
   const formatDate = () => {
     const date = new Date(post.createdAt);
@@ -61,7 +63,9 @@ const Post = ({ post }) => {
           <p className="px-2 text-sm text-gray-600">{commentCount()}</p>
         </button>
       </div>
-      {showComments && <Comments postId={post._id} />}
+      {showComments && (
+        <Comments postId={post._id} updateCommentCount={updateCommentCount} />
+      )}
     </article>
   );
 };
