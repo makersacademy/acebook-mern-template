@@ -1,13 +1,23 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import PropTypes from "prop-types";
 import Button from "../button/Button";
 
 const NewPost = ({ getPosts }) => {
-  const [message, setMessage] = useState("");
+  const messageInput = useRef();
+  const [isError, setIsError] = useState(false);
   const [token, setToken] = useState(window.localStorage.getItem("token"));
 
   const handleSubmit = async (event) => {
     event.preventDefault();
+    setIsError(false);
+
+    const message = messageInput.current.value.trim();
+
+    if (message.length === 0) {
+      setIsError(true);
+      messageInput.current.value = "";
+      return;
+    }
 
     const response = await fetch("/posts", {
       method: "post",
@@ -25,13 +35,9 @@ const NewPost = ({ getPosts }) => {
       const data = await response.json();
       window.localStorage.setItem("token", data.token);
       setToken(data.token);
-      setMessage("");
+      messageInput.current.value = "";
       getPosts();
     }
-  };
-
-  const handleMessageChange = (event) => {
-    setMessage(event.target.value);
   };
 
   return (
@@ -41,18 +47,14 @@ const NewPost = ({ getPosts }) => {
           id="message"
           placeholder="What's on your mind?"
           type="text"
-          required
-          value={message}
-          onChange={handleMessageChange}
+          ref={messageInput}
           data-cy="input"
           className="relative block w-full rounded-md border-0 py-1.5 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:z-10 focus:ring-2 focus:ring-inset focus:ring-blue-600"
         />
-        <Button
-          text="Post"
-          type="submit"
-          id="submit"
-          isDisabled={message.length === 0}
-        />
+        {isError && (
+          <p className="text-red-500">Message can&apos;t be empty.</p>
+        )}
+        <Button text="Post" type="submit" id="submit" />
       </form>
     </div>
   );
