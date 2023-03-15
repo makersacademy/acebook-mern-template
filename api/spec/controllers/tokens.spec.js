@@ -7,7 +7,7 @@ describe("/tokens", () => {
   beforeEach(() => {
     const user = new User({
       email: "test@test.com",
-      password: "12345678",
+      password: "$2a$04$p1Syk7r81OGoAZv0oY2Nw..sxJdURZ5EPDPxQ54P.OyyzSZcBBwbO",
       name: "test",
     });
     user.save();
@@ -24,7 +24,7 @@ describe("/tokens", () => {
   test("a token is returned when creds are valid", async () => {
     let response = await request(app)
       .post("/tokens")
-      .send({ email: "test@test.com", password: "12345678" });
+      .send({ email: "test@test.com", password: "makers1" });
     expect(response.status).toEqual(201);
     expect(response.body.token).not.toEqual(undefined);
     expect(response.body.message).toEqual("OK");
