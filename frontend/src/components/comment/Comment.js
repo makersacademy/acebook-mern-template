@@ -1,15 +1,15 @@
 import React, { useState } from "react";
 import { formatDistanceToNow } from "date-fns";
 
-const Post = ({ post }) => {
+const Comment = ({ comment }) => {
   // post is the
-  const [likes, setLikes] = useState(post.likes.length || 0);
-  const [isLiked, setLiked] = useState(post.liked);
-  const createdAt = new Date(post.createdAt);
+  const [likes, setLikes] = useState(comment.likes.length || 0);
+  const [isLiked, setLiked] = useState(comment.liked);
+  const createdAt = new Date(comment.createdAt);
   const result = formatDistanceToNow(createdAt, { addSuffix: true });
 
   const toggleLike = async () => {
-    let url = "/posts/" + post._id + "/likes" + "/comments";
+    let url = " ";
     let response = await fetch(url, {
       method: "post",
       headers: {
@@ -22,13 +22,13 @@ const Post = ({ post }) => {
       setLiked(data.liked); //JSON web token updates 'like' status
     });
   };
-  // return (
-  //   <article data-cy="comment" key={comment._id}>
-  //     Comment from {comment.user.name}: {comment.message} ({result})
-  //     {/*<button onClick={toggleLike}>{isLiked ? "unlike" : "like"}</button>*/}
-  //     Like count: {likes}
-  //   </article>
-  // );
+  return (
+    <article data-cy="comment" key={comment._id}>
+      Comment from {comment.user.name}: {comment.message} ({result})
+      {/*<button onClick={toggleLike}>{isLiked ? "unlike" : "like"}</button>*/}
+      Like count: {likes}
+    </article>
+  );
 };
 
 export default Comment;
