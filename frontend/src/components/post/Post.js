@@ -1,17 +1,23 @@
+/* eslint-disable react/destructuring-assignment */
 import React, { useContext, useState } from "react";
 import PropTypes from "prop-types";
 import jwtDecode from "jwt-decode";
 
+import { AdvancedImage } from "@cloudinary/react";
 import { ReactComponent as LikeBtn } from "../../assets/like.svg";
 import { ReactComponent as FilledLikeBtn } from "../../assets/fillLike.svg";
 import avatar from "./avatar.png";
 import { ModalContext } from "../../contexts/modalContext";
+import { CloudinaryContext } from "../../contexts/cloudinaryContext";
 
 const Post = ({ post }) => {
   const [token, setToken] = useState(window.localStorage.getItem("token"));
   const [likes, setLikes] = useState(post.likes);
   const [userId] = useState(jwtDecode(token).userId);
   const { pushModal } = useContext(ModalContext);
+  const cld = useContext(CloudinaryContext);
+
+  const myImage = cld.image(post.image);
 
   const datePadder = (datePartString) => {
     return datePartString < 10 ? `0${datePartString}` : datePartString;
@@ -77,8 +83,8 @@ const Post = ({ post }) => {
           <p className="text-sm text-gray-500">{formatDate()}</p>
         </div>
       </div>
-
       <div className="p-2 text-base">{post.message}</div>
+      <AdvancedImage className="w-[450px]" cldImg={myImage} />
       <div className="m-2 flex items-center gap-4">
         {checkIsLiked() ? (
           <FilledLikeBtn
@@ -111,6 +117,7 @@ Post.propTypes = {
     author: PropTypes.shape({
       username: PropTypes.string,
     }),
+    image: PropTypes.string,
   }).isRequired,
 };
 
