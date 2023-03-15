@@ -1,11 +1,12 @@
 import React, { useState, useContext } from "react";
 import { Link } from "react-router-dom";
-import PropTypes from "prop-types";
 import { ReactComponent as Logo } from "../../assets/logo.svg";
 import Button from "../button/Button";
-import { ModalContext } from "../../contexts/modalContext";
+import { ModalContext } from "../../contexts/ModalContext";
+import { AuthContext } from "../../contexts/AuthContext";
 
-const LogInForm = ({ navigate }) => {
+const LogInForm = () => {
+  const { setToken } = useContext(AuthContext);
   const { pushModal } = useContext(ModalContext);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -28,14 +29,13 @@ const LogInForm = ({ navigate }) => {
         message: data.message,
         type: "error",
       });
-      navigate("/login");
     } else {
       window.localStorage.setItem("token", data.token);
+      setToken(data.token);
       pushModal({
         message: "Login succeeded!",
         type: "success",
       });
-      navigate("/posts");
     }
   };
 
@@ -97,10 +97,6 @@ const LogInForm = ({ navigate }) => {
       </div>
     </div>
   );
-};
-
-LogInForm.propTypes = {
-  navigate: PropTypes.func.isRequired,
 };
 
 export default LogInForm;

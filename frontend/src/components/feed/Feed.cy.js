@@ -1,8 +1,6 @@
 import React from "react";
 import Feed from "./Feed";
 
-const navigate = () => {};
-
 describe("Feed", () => {
   it("Calls the /posts endpoint and lists all the posts", () => {
     window.localStorage.setItem("token", "fakeToken");
@@ -29,7 +27,7 @@ describe("Feed", () => {
       });
     }).as("getPosts");
 
-    cy.mount(<Feed navigate={navigate} />);
+    cy.mount(<Feed />);
 
     cy.wait("@getPosts").then(() => {
       cy.get('[data-cy="post"]')

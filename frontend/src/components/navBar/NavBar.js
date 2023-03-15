@@ -1,16 +1,16 @@
 import React, { useEffect, useState, Fragment, useContext } from "react";
 import { Menu, Transition } from "@headlessui/react";
-import { useNavigate, Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { ReactComponent as Logo } from "../../assets/logo.svg";
 import avatar from "../../assets/avatar.png";
-import { ModalContext } from "../../contexts/modalContext";
+import { ModalContext } from "../../contexts/ModalContext";
+import { AuthContext } from "../../contexts/AuthContext";
 import classNames from "../../helpers/classNames";
 
 const NavBar = () => {
   const { pushModal } = useContext(ModalContext);
   const [user, setUser] = useState({});
-  const [token, setToken] = useState(window.localStorage.getItem("token"));
-  const navigate = useNavigate();
+  const { token, setToken } = useContext(AuthContext);
 
   const getUser = async () => {
     if (token) {
@@ -42,7 +42,6 @@ const NavBar = () => {
       message: "Successfully logged out",
       type: "success",
     });
-    navigate("/login");
   };
 
   return (
@@ -50,7 +49,7 @@ const NavBar = () => {
       <div className="mx-auto px-2">
         <div className="relative flex h-16 items-center justify-between">
           <div className="flex shrink-0 items-center">
-            <Link to="/posts">
+            <Link to="/">
               <Logo className="mx-auto h-8 w-auto stroke-blue-600" />
             </Link>
           </div>
@@ -58,9 +57,14 @@ const NavBar = () => {
             {/* Profile dropdown */}
             <Menu as="div" className="relative ml-3">
               <div>
-                <Menu.Button className="flex items-center rounded-full border border-gray-300 p-1 text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800">
+                <Menu.Button
+                  data-cy="profile_button"
+                  className="flex items-center rounded-full border border-gray-300 p-1 text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800"
+                >
                   <span className="sr-only">Open user menu</span>
-                  <p className="mx-2">{user.name}</p>
+                  <p data-cy="user" className="mx-2">
+                    {user.name}
+                  </p>
                   <img
                     className="h-8 w-8 rounded-full"
                     src={avatar}
@@ -77,7 +81,10 @@ const NavBar = () => {
                 leaveFrom="transform opacity-100 scale-100"
                 leaveTo="transform opacity-0 scale-95"
               >
-                <Menu.Items className="absolute right-0 z-10 mt-2 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
+                <Menu.Items
+                  data-cy="menu_items"
+                  className="absolute right-0 z-10 mt-2 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none"
+                >
                   {/* <Menu.Item> */}
                   {/*  {({ active }) => ( */}
                   {/*    <a */}
