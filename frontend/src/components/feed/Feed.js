@@ -7,7 +7,11 @@ const Feed = ({ navigate }) => {
   const [token, setToken] = useState(window.localStorage.getItem("token"));
 
   useEffect(() => {
-    fetchData();
+    if (token) {
+      fetchData();
+    } else {
+      navigate("/login");
+    }
   }, []);
 
   const fetchData = () => {
@@ -26,16 +30,8 @@ const Feed = ({ navigate }) => {
     }
   };
 
-  const logout = () => {
-    window.localStorage.removeItem("token");
-    navigate("/login");
-  };
-
-  if (token) {
     return (
       <>
-       
-       
         <CreatePost fetchData={fetchData} />
         <div id="feed" role="feed">
           {[...posts].reverse().map((post) => (
@@ -44,9 +40,7 @@ const Feed = ({ navigate }) => {
         </div>
       </>
     );
-  } else {
-    navigate("/login");
-  }
+  
 };
 
 export default Feed;

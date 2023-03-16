@@ -13,6 +13,7 @@ const App = () => {
       <Route path="/login" element={<LoginForm navigate={useNavigate()} />} />
       <Route path="/signup" element={<SignUpForm navigate={useNavigate()} />} />
       <Route path="/user/:id" element={<UserProfile navigate={useNavigate()} />} />
+      <Route path="/" element={<Feed navigate={useNavigate()} />} />
     </Routes>
   );
 };

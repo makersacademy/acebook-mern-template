@@ -47,11 +47,15 @@ const UserProfile = ({ navigate }) => {
     };
 
     useEffect(() => {
-      fetchUser();
-      fetchPosts();
+      if (token) {
+        fetchUser();
+        fetchPosts();
+      } else {
+        navigate("/login");
+      };
     }, []);
 
-    if (token) {
+    
       return(
         <>
         <div id="username" role="username">
@@ -65,9 +69,7 @@ const UserProfile = ({ navigate }) => {
         </div>
         </>
       )    
-    } else {
-      navigate("/login");
-    };
+    
 }
 
 
