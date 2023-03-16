@@ -6,7 +6,7 @@ import contextualTime from "../../helpers/contextualTime";
 import { ReactComponent as CommentBtn } from "../../assets/comment.svg";
 import { ReactComponent as CommentFilledBtn } from "../../assets/comment-filled.svg";
 
-import { ReactComponent as LikeBtn } from "../.../../assets/assets/like.svg";
+import { ReactComponent as LikeBtn } from "../../assets/like.svg";
 import { ReactComponent as FilledLikeBtn } from "../../assets/fillLike.svg";
 import CommentList from "../commentList/CommentList";
 import NewComment from "../newComment/NewComment";
@@ -61,35 +61,6 @@ const Post = ({ post }) => {
     const date = new Date(post.createdAt);
     const formattedDate = contextualTime(date);
     return <p className="text-sm text-gray-500">{formattedDate}</p>;
-  };
-
-  const likeHandler = async (methodArg) => {
-    if (token) {
-      const response = await fetch("/posts/like", {
-        method: methodArg,
-        body: JSON.stringify({
-          postId: post._id,
-        }),
-        headers: {
-          Authorization: `Bearer ${token}`,
-          "Content-Type": "application/json",
-        },
-      });
-
-      if (response.status !== 201) {
-        // error
-      } else {
-        const data = await response.json();
-        setLikes(data.updatedPost.likes);
-        window.localStorage.setItem("token", data.token);
-        setToken(data.token);
-      }
-    }
-  };
-
-  // returns a boolean if the user already liked the post
-  const checkIsLiked = () => {
-    return likes.includes(userId);
   };
 
   const likeHandler = async (methodArg) => {
