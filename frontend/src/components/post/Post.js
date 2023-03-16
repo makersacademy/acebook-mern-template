@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { formatDistanceToNow } from "date-fns";
 import Comment from "../comment/Comment";
 import CreateComment from "../create-comment/CreateComment";
+import "./Post.css";
 
 const Post = ({ post }) => {
   // post is the
@@ -46,10 +47,20 @@ const Post = ({ post }) => {
   };
 
   return (
-    <article data-cy="post" key={post._id}>
-      Post from {post.user.name}: {post.message} ({result})
-      <button onClick={toggleLike}>{isLiked ? "unlike" : "like"}</button>
-      Like count: {likes}
+    <article data-cy="post" key={post._id} className="post-container">
+      <strong>
+        {post.user.name} ({result}):
+      </strong>
+      <p></p>
+      <div>{post.message} </div>
+
+      <div>
+        <button className="likes-container" onClick={toggleLike}>
+          {isLiked ? "unlike" : "like"}
+        </button>
+        Likes: {likes}
+      </div>
+
       <div id="comments" role="comment">
         <ul>
           {comments.reverse().map((comment) => (

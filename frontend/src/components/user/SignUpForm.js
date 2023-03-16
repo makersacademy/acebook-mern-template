@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import "./SignUpForm.css";
 
 const SignUpForm = ({ navigate }) => {
   const [email, setEmail] = useState("");
@@ -7,7 +8,7 @@ const SignUpForm = ({ navigate }) => {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-
+   
     fetch("/users", {
       method: "post",
       headers: {
@@ -36,30 +37,39 @@ const SignUpForm = ({ navigate }) => {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
+    <form onSubmit={handleSubmit} className="signup-form">
+      <h3>Create your account 🎉</h3>
+      
+     
       <input
         placeholder="Email"
         id="email"
-        type="text"
+        type="email"
         value={email}
         onChange={handleEmailChange}
+        className="input-field"
       />
+      
       <input
         placeholder="Password"
         id="password"
         type="password"
         value={password}
         onChange={handlePasswordChange}
+        className="input-field"
       />
+      
       <input
         placeholder="Name"
         id="name"
         type="text"
         value={name}
         onChange={handleNameChange}
+        className="input-field"
       />
-      <input id="submit" type="submit" value="Submit" />
+      <input id="submit" type="submit" value="Sign up" className="submit-button" />
     </form>
+   
   );
 };
 

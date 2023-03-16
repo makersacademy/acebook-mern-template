@@ -1,0 +1,40 @@
+#message {
+    background-size: 50px;
+    text-align: center;
+    padding: 7px;
+    margin: 5px;
+    border-radius: 5px;
+    border: none;
+    background-color: #f5f5f5;
+    width: clamp(200px, 50vw, 400px);
+    box-shadow: 3px 3px 3px lightblue;
+    background-repeat: no-repeat;
+    background-position: 50px center;
+    width: 350px;
+    
+  }
+  
+  #submit {
+    font-weight: bolder;
+      background-color: #ea00ff;
+      color: #fff;
+      border-radius: 100px;
+      border: none;
+      padding: 7px 7px;
+      cursor: pointer;
+      margin-top: 20px;
+      width: clamp(100px, 5vw, 200px);
+      margin-left: 25px;
+  }
+  
+  #submit:hover {
+      background-color: rgb(140, 28, 148);
+    
+  }
+
+  form {
+    margin: auto;
+    width: fit-content;
+    margin-top: 50px;
+    margin-bottom: 50px;
+}
