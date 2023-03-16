@@ -17,11 +17,8 @@
   "parserOptions": {
     "ecmaVersion": "latest"
   },
-  "plugins": [
-    "prettier",
-    "jest",
-    "node"
-  ],
+  "plugins": ["prettier", "jest", "node"],
   "rules": {
+    "no-underscore-dangle": "off"
   }
 }

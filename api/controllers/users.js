@@ -1,15 +1,20 @@
+const bcrypt = require("bcryptjs");
 const User = require("../models/user");
 const generateToken = require("../models/token_generator");
 
 const createUser = async (req, res) => {
   try {
-    const user = new User(req.body);
-    await user.save();
-
-    const newUser = req.body;
+    const { name, username, email, password } = req.body;
+    const newUser = new User({
+      name,
+      username,
+      email,
+      password: bcrypt.hashSync(password, bcrypt.genSaltSync()),
+    });
+    await newUser.save();
     delete newUser.password;
 
-    const token = generateToken(user._id);
+    const token = generateToken(newUser._id);
     res.status(201).json({
       token,
       user: newUser,
