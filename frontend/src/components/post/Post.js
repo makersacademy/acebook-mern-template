@@ -1,6 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
-import avatar from "../../assets/avatar.png";
+import ProfilePicture from "../profilePicture/ProfilePicture";
 
 const Post = ({ post }) => {
   const datePadder = (datePartString) => {
@@ -23,11 +23,7 @@ const Post = ({ post }) => {
       className="flex flex-col rounded-md shadow-md"
     >
       <div className="m-2 flex">
-        <img
-          src={avatar}
-          alt="Avatar"
-          className="mx-2 h-10 w-10 rounded-full"
-        />
+        <ProfilePicture className="h-10 w-10" publicId={post.author.imageId} />
         <div className="">
           <p className="text-lg font-semibold">{post.author.username}</p>
           <p className="text-sm text-gray-500">{formatDate()}</p>
@@ -47,6 +43,7 @@ Post.propTypes = {
     createdAt: PropTypes.string,
     author: PropTypes.shape({
       username: PropTypes.string,
+      imageId: PropTypes.string,
     }),
   }).isRequired,
 };
