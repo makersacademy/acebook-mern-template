@@ -5,8 +5,12 @@ const createUser = async (req, res) => {
   try {
     const user = new User(req.body);
     await user.save();
-    const token = generateToken(user.id);
-    res.status(201).json({ token, message: "OK" });
+
+    const newUser = req.body;
+    delete newUser.password;
+
+    const token = generateToken(user._id);
+    res.status(201).json({ token, user: newUser });
   } catch (err) {
     res.status(400).json({ message: "Bad request" });
   }

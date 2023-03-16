@@ -3,21 +3,16 @@ import { Menu, Transition } from "@headlessui/react";
 import { Link } from "react-router-dom";
 import { ReactComponent as Logo } from "../../assets/logo.svg";
 import avatar from "../../assets/avatar.png";
-import { ModalContext } from "../../contexts/ModalContext";
 import { AuthContext } from "../../contexts/AuthContext";
 import classNames from "../../helpers/classNames";
+import useLogout from "../../hooks/useLogout";
 
 const NavBar = () => {
-  const { pushModal } = useContext(ModalContext);
-  const { user, setToken } = useContext(AuthContext);
+  const { user } = useContext(AuthContext);
+  const { logout } = useLogout();
 
-  const logout = () => {
-    window.localStorage.removeItem("token");
-    setToken(null);
-    pushModal({
-      message: "Successfully logged out",
-      type: "success",
-    });
+  const handleClick = () => {
+    logout();
   };
 
   return (
@@ -59,7 +54,7 @@ const NavBar = () => {
               >
                 <Menu.Items
                   data-cy="menu_items"
-                  className="absolute right-0 z-10 mt-2 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none"
+                  className="absolute right-0 z-10 mt-2 w-max origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none"
                 >
                   <Menu.Item>
                     {({ active }) => (
@@ -78,7 +73,7 @@ const NavBar = () => {
                     {({ active }) => (
                       <button
                         type="button"
-                        onClick={logout}
+                        onClick={handleClick}
                         className={classNames(
                           active ? "bg-gray-100" : "",
                           "block w-full px-4 py-2 text-left text-sm text-gray-700"
