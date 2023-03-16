@@ -8,9 +8,6 @@ describe("Signing in", () => {
     cy.get("#email").type("user@email.com");
     cy.get("#password").type("12345678");
     cy.get("#submit").click();
-    cy.get("#success-modal").should("be.visible");
-
-    cy.wait(2500);
     cy.url().should("include", "/posts");
   });
 
@@ -35,9 +32,6 @@ describe("Signing in", () => {
     cy.get("#email").type("someone@example.com");
     cy.get("#password").type("12345678");
     cy.get("#submit").click();
-    cy.get("#fail-modal").should("be.visible");
-
-    cy.wait(2500);
     cy.url().should("include", "/login");
   });
 });

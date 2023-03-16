@@ -65,5 +65,5 @@ frontend/cypress/screenshots
 frontend/cypress/videos
 
 # intellij
-/api/requests.http
 .idea
+http

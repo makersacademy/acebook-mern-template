@@ -1,6 +1,6 @@
 import React from "react";
 import CloudinaryContextProvider from "../../contexts/cloudinaryContext";
-import ModalContextProvider from "../../contexts/modalContext";
+import ModalContextProvider from "../../contexts/ModalContext";
 import Post from "./Post";
 
 const token =
@@ -16,6 +16,7 @@ describe("Post", () => {
       author: { username: "Abi" },
       createdAt: "2023-01-01T12:00:00.00+00:00",
       likes: [],
+      comments: [],
     };
     cy.mount(
       <CloudinaryContextProvider>
@@ -26,14 +27,140 @@ describe("Post", () => {
     );
   });
 
-  describe("default render", () => {
-    it("renders a post with a message", () => {
-      cy.get('[data-cy="post"]').should("contain.text", "Hello, world");
+  it("renders a post with a message", () => {
+    const postContent = {
+      _id: 1,
+      message: "Hello, world",
+      author: { username: "Abi" },
+      createdAt: "2023-01-01T12:00:00.00+00:00",
+      comments: { length: 2 },
+      likes: [],
+    };
+    cy.mount(
+      <CloudinaryContextProvider>
+        <ModalContextProvider>
+          <Post post={postContent} />
+        </ModalContextProvider>
+      </CloudinaryContextProvider>
+    );
+    cy.get('[data-cy="post"]').should("contain.text", "Hello, world");
+    cy.get("#comments-btn-container").within(() => {
+      cy.get("#comment-count").should("contain.text", "2");
+    });
+  });
+
+  it("displays an unfilled heart when a post is created", () => {
+    cy.get('[data-cy="filled-like-button"]').should("not.exist");
+    cy.get('[data-cy="like-button"]').should("have.class", "fill-black");
+  });
+
+  it("shows 0 likes when the post is first created", () => {
+    cy.get('[data-cy="likes-length"]').invoke("text").should("contain", "0");
+  });
+
+  it("fills in red when the like button is clicked", () => {
+    // SETUP
+    cy.intercept("Post", "/posts/like", {
+      statusCode: 201,
+      body: {
+        updatedPost: {
+          likes: ["640bee229b863616fb3a81df"],
+        },
+        token,
+      },
     });
 
-    it("should not display any photo", () => {
-      cy.get('[data-cy="image"]').invoke("attr", "src").should("eq", "");
+    // ACTION
+    cy.get('[data-cy="like-button"]').click();
+
+    // ASSERT
+    cy.get('[data-cy="filled-like-button"]').should(
+      "have.class",
+      "fill-red-500"
+    );
+  });
+
+  it("shows 1 like when the post is liked", () => {
+    // SETUP
+    cy.intercept("Post", "/posts/like", {
+      statusCode: 201,
+      body: {
+        updatedPost: {
+          likes: ["640bee229b863616fb3a81df"],
+        },
+        token,
+      },
     });
+
+    // ACTION
+    cy.get('[data-cy="like-button"]').click();
+
+    // ASSERT
+    cy.get('[data-cy="likes-length"]').invoke("text").should("contain", "1");
+  });
+
+  it("returns to being unfilled when the button is clicked again", () => {
+    // SETUP
+    cy.intercept("Post", "/posts/like", {
+      statusCode: 201,
+      body: {
+        updatedPost: {
+          likes: ["640bee229b863616fb3a81df"],
+        },
+        token,
+      },
+    });
+
+    cy.intercept("Delete", "/posts/like", {
+      statusCode: 201,
+      body: {
+        updatedPost: {
+          likes: [],
+        },
+        token,
+      },
+    });
+
+    // ACTION
+    cy.get('[data-cy="like-button"]').click();
+    cy.get('[data-cy="filled-like-button"]').click();
+
+    // ASSERT
+    cy.get('[data-cy="filled-like-button"]').should("not.exist");
+    cy.get('[data-cy="like-button"]').should("have.class", "fill-black");
+  });
+
+  it("has 0 likes when the button is clicked again", () => {
+    // SETUP
+    cy.intercept("Post", "/posts/like", {
+      statusCode: 201,
+      body: {
+        updatedPost: {
+          likes: ["640bee229b863616fb3a81df"],
+        },
+        token,
+      },
+    });
+
+    cy.intercept("Delete", "/posts/like", {
+      statusCode: 201,
+      body: {
+        updatedPost: {
+          likes: [],
+        },
+        token,
+      },
+    });
+
+    // ACTION
+    cy.get('[data-cy="like-button"]').click();
+    cy.get('[data-cy="filled-like-button"]').click();
+
+    cy.get('[data-cy="likes-length"]').invoke("text").should("contain", "0");
+  });
+
+  it("should not display any photo", () => {
+    cy.get('[data-cy="image"]').invoke("attr", "src").should("eq", "");
   });
 
   describe("likes", () => {
@@ -157,6 +284,7 @@ describe("Post", () => {
         createdAt: "2023-01-01T12:00:00.00+00:00",
         image: "hzeebbbvegutndacqqxe",
         likes: [],
+        comments: [],
       };
       cy.mount(
         <CloudinaryContextProvider>

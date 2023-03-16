@@ -1,42 +1,18 @@
-import React, { useState, useContext } from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import PropTypes from "prop-types";
 import { ReactComponent as Logo } from "../../assets/logo.svg";
 import Button from "../button/Button";
-import { ModalContext } from "../../contexts/modalContext";
+import useLogin from "../../hooks/useLogin";
 
-const LogInForm = ({ navigate }) => {
-  const { pushModal } = useContext(ModalContext);
+const LogInForm = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const { login, isLoading } = useLogin();
 
   const handleSubmit = async (event) => {
     event.preventDefault();
 
-    const response = await fetch("/tokens", {
-      method: "post",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ email, password }),
-    });
-
-    const data = await response.json();
-
-    if (response.status !== 201) {
-      pushModal({
-        message: data.message,
-        type: "error",
-      });
-      navigate("/login");
-    } else {
-      window.localStorage.setItem("token", data.token);
-      pushModal({
-        message: "Login succeeded!",
-        type: "success",
-      });
-      navigate("/posts");
-    }
+    await login(email, password);
   };
 
   const handleEmailChange = (event) => {
@@ -80,7 +56,12 @@ const LogInForm = ({ navigate }) => {
                 className="relative block w-full rounded-b-md border-0 py-1.5 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:z-10 focus:ring-2 focus:ring-inset focus:ring-blue-600"
               />
             </div>
-            <Button text="Sign in" type="submit" id="submit" />
+            <Button
+              isDisabled={isLoading}
+              text="Sign in"
+              type="submit"
+              id="submit"
+            />
           </form>
           <div>
             <p className="text-center text-sm text-gray-600">
@@ -97,10 +78,6 @@ const LogInForm = ({ navigate }) => {
       </div>
     </div>
   );
-};
-
-LogInForm.propTypes = {
-  navigate: PropTypes.func.isRequired,
 };
 
 export default LogInForm;

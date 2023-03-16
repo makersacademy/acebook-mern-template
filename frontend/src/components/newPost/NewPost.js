@@ -1,7 +1,8 @@
-import React, { useRef, useState } from "react";
+import React, { useState, useContext, useRef } from "react";
 import PropTypes from "prop-types";
 import Button from "../button/Button";
 import useUpload from "../../hooks/useUpload";
+import { AuthContext } from "../../contexts/AuthContext";
 
 const NewPost = ({ getPosts }) => {
   const messageInputRef = useRef();
@@ -9,7 +10,7 @@ const NewPost = ({ getPosts }) => {
   const [imageInput, setImageInput] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
   const [isError, setIsError] = useState(false);
-  const [token, setToken] = useState(window.localStorage.getItem("token"));
+  const { token, setToken } = useContext(AuthContext);
   const upload = useUpload();
 
   const handleSubmit = async (event) => {
@@ -43,7 +44,6 @@ const NewPost = ({ getPosts }) => {
       // present error modal
     } else {
       const data = await response.json();
-      window.localStorage.setItem("token", data.token);
       setToken(data.token);
       messageInputRef.current.value = "";
       imageInputRef.current.value = null;

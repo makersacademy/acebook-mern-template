@@ -1,14 +1,18 @@
 import React from "react";
 import { BrowserRouter as Router } from "react-router-dom";
+import AuthContextProvider from "../../contexts/AuthContext";
+import ModalContextProvider from "../../contexts/ModalContext";
 import LoginForm from "./LoginForm";
-
-const navigate = () => {};
 
 describe("Logging in", () => {
   it("calls the /tokens endpoint", () => {
     cy.mount(
       <Router>
-        <LoginForm navigate={navigate} />
+        <AuthContextProvider>
+          <ModalContextProvider>
+            <LoginForm />
+          </ModalContextProvider>
+        </AuthContextProvider>
       </Router>
     );
 

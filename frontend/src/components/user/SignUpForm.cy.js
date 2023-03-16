@@ -1,10 +1,9 @@
 import React from "react";
 import { BrowserRouter as Router } from "react-router-dom";
-import ModalContextProvider from "../../contexts/modalContext";
+import ModalContextProvider from "../../contexts/ModalContext";
 import SignUpForm, { checkPassword, passwordConfirmation } from "./SignUpForm";
 import ModalList from "../modalList/ModalList";
-
-const navigate = () => {};
+import AuthContextProvider from "../../contexts/AuthContext";
 
 describe("Signing up", () => {
   describe("#checkPassword", () => {
@@ -39,10 +38,12 @@ describe("Signing up", () => {
     beforeEach(() => {
       cy.mount(
         <ModalContextProvider>
-          <Router>
-            <ModalList />
-            <SignUpForm navigate={navigate} />
-          </Router>
+          <AuthContextProvider>
+            <Router>
+              <ModalList />
+              <SignUpForm />
+            </Router>
+          </AuthContextProvider>
         </ModalContextProvider>
       );
     });
@@ -55,6 +56,7 @@ describe("Signing up", () => {
         },
       }).as("signUpRequest");
 
+      cy.get("#name").type("someone");
       cy.get("#username").type("someone");
       cy.get("#email").type("someone@example.com");
       cy.get("#password").type("Password");
@@ -69,6 +71,7 @@ describe("Signing up", () => {
 
     it("should display an error modal when the password is invalid", () => {
       // SETUP
+      cy.get("#name").type("someone");
       cy.get("#username").type("someone");
       cy.get("#email").type("someone@example.com");
       cy.get("#password").type("wrong-password");
@@ -86,6 +89,7 @@ describe("Signing up", () => {
 
     it("should display an error modal when password !== password2", () => {
       // SETUP
+      cy.get("#name").type("someone");
       cy.get("#username").type("someone");
       cy.get("#email").type("someone@example.com");
       cy.get("#password").type("Password");

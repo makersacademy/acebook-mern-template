@@ -1,28 +1,42 @@
 import "./App.css";
-import React from "react";
-import { useNavigate, Routes, Route } from "react-router-dom";
+import React, { useContext } from "react";
+import { Routes, Route, Navigate, BrowserRouter } from "react-router-dom";
+
+import ModalList from "../modalList/ModalList";
+import WithNav from "../withNav/WithNav";
 import LoginForm from "../auth/LoginForm";
 import SignUpForm from "../user/SignUpForm";
 import Feed from "../feed/Feed";
-import Card from "../card/Card";
-import Image from "../imageUpload/Image";
-import ModalList from "../modalList/ModalList";
+import NotFound from "../notFound/NotFound";
+
+import { AuthContext } from "../../contexts/AuthContext";
 
 const App = () => {
+  const { token } = useContext(AuthContext);
+
   return (
-    <>
+    <BrowserRouter>
       <ModalList />
       <Routes>
-        <Route path="/posts" element={<Feed navigate={useNavigate()} />} />
-        <Route path="/login" element={<LoginForm navigate={useNavigate()} />} />
+        <Route element={<WithNav />}>
+          <Route
+            path="/"
+            element={token ? <Feed /> : <Navigate to="/login" />}
+          />
+        </Route>
+
+        <Route
+          path="/login"
+          element={token ? <Navigate to="/" /> : <LoginForm />}
+        />
         <Route
           path="/signup"
-          element={<SignUpForm navigate={useNavigate()} />}
+          element={token ? <Navigate to="/" /> : <SignUpForm />}
         />
-        <Route path="/card" element={<Card />} />
-        <Route path="/image" element={<Image />} />
+
+        <Route path="*" element={<NotFound />} />
       </Routes>
-    </>
+    </BrowserRouter>
   );
 };
 
