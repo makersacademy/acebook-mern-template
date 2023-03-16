@@ -5,9 +5,14 @@ const createUser = async (req, res) => {
   try {
     const user = new User(req.body);
     await user.save();
-    const token = generateToken(user.id);
+
+    const newUser = req.body;
+    delete newUser.password;
+
+    const token = generateToken(user._id);
     res.status(201).json({
       token,
+      user: newUser,
       message: "You've successfully signed up. Please log in.",
     });
   } catch (err) {
@@ -17,7 +22,7 @@ const createUser = async (req, res) => {
 
 const getUser = async (req, res) => {
   try {
-    const user = await User.findOne({ _id: req.userId }, "username name");
+    const user = await User.findOne({ _id: req.userId }, "username name email");
     const token = generateToken(req.userId);
     res.status(200).json({ user, token });
   } catch (err) {

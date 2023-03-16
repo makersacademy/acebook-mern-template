@@ -1,58 +1,29 @@
-import React, { useEffect, useState, Fragment, useContext } from "react";
+import React, { Fragment, useContext } from "react";
 import { Menu, Transition } from "@headlessui/react";
 import { Link } from "react-router-dom";
 import { ReactComponent as Logo } from "../../assets/logo.svg";
-import avatar from "../../assets/avatar.png";
-import { ModalContext } from "../../contexts/ModalContext";
 import { AuthContext } from "../../contexts/AuthContext";
 import classNames from "../../helpers/classNames";
+import ProfilePicture from "../profilePicture/ProfilePicture";
+import useLogout from "../../hooks/useLogout";
 
 const NavBar = () => {
-  const { pushModal } = useContext(ModalContext);
-  const [user, setUser] = useState({});
-  const { token, setToken } = useContext(AuthContext);
+  const { user } = useContext(AuthContext);
+  const { logout } = useLogout();
 
-  const getUser = async () => {
-    if (token) {
-      const response = await fetch("/users", {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
-
-      const data = await response.json();
-
-      if (response.status !== 200) {
-        // error
-      } else {
-        window.localStorage.setItem("token", data.token);
-        setToken(data.token);
-        setUser(data.user);
-      }
-    }
-  };
-
-  useEffect(() => {
-    getUser();
-  }, []);
-
-  const logout = () => {
-    window.localStorage.removeItem("token");
-    pushModal({
-      message: "Successfully logged out",
-      type: "success",
-    });
+  const handleClick = () => {
+    logout();
   };
 
   return (
     <div className="shadow-md">
       <div className="mx-auto px-2">
         <div className="relative flex h-16 items-center justify-between">
-          <div className="flex shrink-0 items-center">
-            <Link to="/">
-              <Logo className="mx-auto h-8 w-auto stroke-blue-600" />
-            </Link>
-          </div>
+          <Link className="flex shrink-0 items-center" to="/">
+            <Logo className="mx-2 h-8 w-auto stroke-blue-600" />
+            <span className="text-xl font-semibold text-blue-600">Acebook</span>
+          </Link>
+
           <div className="absolute inset-y-0 right-0 flex items-center pr-2">
             {/* Profile dropdown */}
             <Menu as="div" className="relative ml-3">
@@ -65,11 +36,7 @@ const NavBar = () => {
                   <p data-cy="user" className="mx-2">
                     {user.name}
                   </p>
-                  <img
-                    className="h-8 w-8 rounded-full"
-                    src={avatar}
-                    alt="Avatar"
-                  />
+                  <ProfilePicture className="h-8 w-8" publicId={user.imageId} />
                 </Menu.Button>
               </div>
               <Transition
@@ -83,26 +50,26 @@ const NavBar = () => {
               >
                 <Menu.Items
                   data-cy="menu_items"
-                  className="absolute right-0 z-10 mt-2 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none"
+                  className="absolute right-0 z-10 mt-2 w-max origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none"
                 >
-                  {/* <Menu.Item> */}
-                  {/*  {({ active }) => ( */}
-                  {/*    <a */}
-                  {/*      href="#" */}
-                  {/*      className={classNames( */}
-                  {/*        active ? "bg-gray-100" : "", */}
-                  {/*        "block px-4 py-2 text-sm text-gray-700" */}
-                  {/*      )} */}
-                  {/*    > */}
-                  {/*      Your Profile */}
-                  {/*    </a> */}
-                  {/*  )} */}
-                  {/* </Menu.Item> */}
+                  <Menu.Item>
+                    {({ active }) => (
+                      <Link
+                        to="/profile"
+                        className={classNames(
+                          active ? "bg-gray-100" : "",
+                          "block px-4 py-2 text-sm text-gray-700"
+                        )}
+                      >
+                        Your Profile
+                      </Link>
+                    )}
+                  </Menu.Item>
                   <Menu.Item>
                     {({ active }) => (
                       <button
                         type="button"
-                        onClick={logout}
+                        onClick={handleClick}
                         className={classNames(
                           active ? "bg-gray-100" : "",
                           "block w-full px-4 py-2 text-left text-sm text-gray-700"

@@ -2,8 +2,8 @@ import React, { useContext, useState } from "react";
 import { Link } from "react-router-dom";
 import { ReactComponent as Logo } from "../../assets/logo.svg";
 import Button from "../button/Button";
-import { AuthContext } from "../../contexts/AuthContext";
 import { ModalContext } from "../../contexts/ModalContext";
+import useSignup from "../../hooks/useSignup";
 
 // returns a boolean if the passwrod is valid
 export const checkPassword = (passwordInput) => {
@@ -21,7 +21,7 @@ const SignUpForm = () => {
   const [password, setPassword] = useState("");
   const [passwordTwo, setPasswordTwo] = useState("");
   const { pushModal } = useContext(ModalContext);
-  const { setToken } = useContext(AuthContext);
+  const { signup, isLoading } = useSignup();
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -49,27 +49,7 @@ const SignUpForm = () => {
 
     // if okay:
 
-    const response = await fetch("/users", {
-      method: "post",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ name, username, email, password }),
-    });
-    const data = await response.json();
-    if (response.status !== 201) {
-      pushModal({
-        message: data.message,
-        type: "error",
-      });
-    } else {
-      window.localStorage.setItem("token", data.token);
-      setToken(data.token);
-      pushModal({
-        message: "Account created!",
-        type: "success",
-      });
-    }
+    await signup(name, username, email, password);
   };
 
   const handleUsernameChange = (event) => {
@@ -149,7 +129,12 @@ const SignUpForm = () => {
               className="relative block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:z-10 focus:ring-2 focus:ring-inset focus:ring-blue-600"
             />
           </div>
-          <Button text="Sign up" type="submit" id="submit" />
+          <Button
+            isDisabled={isLoading}
+            text="Sign up"
+            type="submit"
+            id="submit"
+          />
         </form>
         <div>
           <p className="text-center text-sm text-gray-600">

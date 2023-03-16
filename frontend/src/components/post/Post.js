@@ -4,7 +4,7 @@ import jwtDecode from "jwt-decode";
 
 import { ReactComponent as LikeBtn } from "../../assets/like.svg";
 import { ReactComponent as FilledLikeBtn } from "../../assets/fillLike.svg";
-import avatar from "../../assets/avatar.png";
+import ProfilePicture from "../profilePicture/ProfilePicture";
 
 const Post = ({ post }) => {
   const [token, setToken] = useState(window.localStorage.getItem("token"));
@@ -56,11 +56,7 @@ const Post = ({ post }) => {
   return (
     <article data-cy="post" className="flex flex-col rounded-lg p-6 shadow-md">
       <div className="m-2 flex">
-        <img
-          src={avatar}
-          alt="Avatar"
-          className="mx-2 h-10 w-10 rounded-full"
-        />
+        <ProfilePicture className="h-10 w-10" publicId={post.author.imageId} />
         <div className="">
           <p className="text-lg font-semibold">{post.author.username}</p>
           <p className="text-sm text-gray-500">{formatDate()}</p>
@@ -99,6 +95,7 @@ Post.propTypes = {
     likes: PropTypes.arrayOf(PropTypes.string),
     author: PropTypes.shape({
       username: PropTypes.string,
+      imageId: PropTypes.string,
     }),
   }).isRequired,
 };
