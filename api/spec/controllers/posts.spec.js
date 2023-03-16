@@ -6,6 +6,7 @@ const Post = require("../../models/post");
 const User = require("../../models/user");
 
 let token;
+let user;
 
 const generateBackdatedToken = (userId) =>
   jwt.sign(
@@ -21,7 +22,7 @@ const generateBackdatedToken = (userId) =>
 
 describe("/posts", () => {
   beforeAll(async () => {
-    const user = new User({
+    user = new User({
       username: "testuser",
       email: "test@test.com",
       password: "12345678",
@@ -96,14 +97,8 @@ describe("/posts", () => {
 
   describe("GET, when token is present", () => {
     test("returns every post in the collection", async () => {
-      const post1 = new Post({
-        message: "howdy!",
-        author: "640bee229b863616fb3a81df",
-      });
-      const post2 = new Post({
-        message: "hola!",
-        author: "640bee229b863616fb3a81df",
-      });
+      const post1 = new Post({ message: "howdy!", author: user.id });
+      const post2 = new Post({ message: "hola!", author: user.id });
       await post1.save();
       await post2.save();
       const response = await request(app)
@@ -115,14 +110,8 @@ describe("/posts", () => {
     });
 
     test("the response code is 200", async () => {
-      const post1 = new Post({
-        message: "howdy!",
-        author: "640bee229b863616fb3a81df",
-      });
-      const post2 = new Post({
-        message: "hola!",
-        author: "640bee229b863616fb3a81df",
-      });
+      const post1 = new Post({ message: "howdy!", author: user.id });
+      const post2 = new Post({ message: "hola!", author: user.id });
       await post1.save();
       await post2.save();
       const response = await request(app)
@@ -133,14 +122,8 @@ describe("/posts", () => {
     });
 
     test("returns a new token", async () => {
-      const post1 = new Post({
-        message: "howdy!",
-        author: "640bee229b863616fb3a81df",
-      });
-      const post2 = new Post({
-        message: "hola!",
-        author: "640bee229b863616fb3a81df",
-      });
+      const post1 = new Post({ message: "howdy!", author: user.id });
+      const post2 = new Post({ message: "hola!", author: user.id });
       await post1.save();
       await post2.save();
       const response = await request(app)
@@ -158,14 +141,8 @@ describe("/posts", () => {
 
   describe("GET, when token is missing", () => {
     test("returns no posts", async () => {
-      const post1 = new Post({
-        message: "howdy!",
-        author: "640bee229b863616fb3a81df",
-      });
-      const post2 = new Post({
-        message: "hola!",
-        author: "640bee229b863616fb3a81df",
-      });
+      const post1 = new Post({ message: "howdy!", author: user.id });
+      const post2 = new Post({ message: "hola!", author: user.id });
       await post1.save();
       await post2.save();
       const response = await request(app).get("/posts");
@@ -173,14 +150,8 @@ describe("/posts", () => {
     });
 
     test("the response code is 401", async () => {
-      const post1 = new Post({
-        message: "howdy!",
-        author: "640bee229b863616fb3a81df",
-      });
-      const post2 = new Post({
-        message: "hola!",
-        author: "640bee229b863616fb3a81df",
-      });
+      const post1 = new Post({ message: "howdy!", author: user.id });
+      const post2 = new Post({ message: "hola!", author: user.id });
       await post1.save();
       await post2.save();
       const response = await request(app).get("/posts");
@@ -188,14 +159,8 @@ describe("/posts", () => {
     });
 
     test("does not return a new token", async () => {
-      const post1 = new Post({
-        message: "howdy!",
-        author: "640bee229b863616fb3a81df",
-      });
-      const post2 = new Post({
-        message: "hola!",
-        author: "640bee229b863616fb3a81df",
-      });
+      const post1 = new Post({ message: "howdy!", author: user.id });
+      const post2 = new Post({ message: "hola!", author: user.id });
       await post1.save();
       await post2.save();
       const response = await request(app).get("/posts");

@@ -1,22 +1,22 @@
 const mongoose = require("mongoose");
 
 require("../mongodb_helper");
-const Post = require("../../models/post");
+const Comment = require("../../models/comment");
 
-describe("Post model", () => {
+describe("Comment model", () => {
   beforeEach((done) => {
-    mongoose.connection.collections.posts.drop(() => {
+    mongoose.connection.collections.comments.drop(() => {
       done();
     });
   });
 
   it("has a message", () => {
-    const post = new Post({ message: "some message" });
-    expect(post.message).toEqual("some message");
+    const comment = new Comment({ message: "some message" });
+    expect(comment.message).toEqual("some message");
   });
 
   it("can list all posts", (done) => {
-    Post.find((err, posts) => {
+    Comment.find((err, posts) => {
       expect(err).toBeNull();
       expect(posts).toEqual([]);
       done();

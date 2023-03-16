@@ -42,5 +42,10 @@
   },
   "nodemonConfig": {
     "ext": "js,hbs"
+  },
+  "majestic": {
+    "env": {
+      "JWT_SECRET": "SUPER_SECRET"
+    }
   }
 }

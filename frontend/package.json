@@ -7,7 +7,9 @@
     "@cloudinary/react": "^1.11.1",
     "@cloudinary/url-gen": "^1.9.2",
     "@headlessui/react": "^1.7.13",
+    "@tailwindcss/forms": "^0.5.3",
     "@testing-library/jest-dom": "^5.16.5",
+    "cypress-real-events": "^1.7.6",
     "jwt-decode": "^3.1.2",
     "prop-types": "^15.8.1",
     "react": "^18.2.0",
@@ -45,9 +47,7 @@
     ]
   },
   "devDependencies": {
-    "@tailwindcss/forms": "^0.5.3",
-    "cypress": "^12.7.0",
-    "cypress-real-events": "^1.7.6",
+    "cypress": "^12.8.0",
     "eslint": "^8.35.0",
     "eslint-config-airbnb": "^19.0.4",
     "eslint-config-node": "^4.1.0",

@@ -24,6 +24,11 @@ Cypress.Commands.add("login", (email, password) => {
   cy.get("#password").type(password);
   cy.get("#submit").click();
 });
+
+Cypress.Commands.add("createPost", (message) => {
+  cy.get("#message").type(message);
+  cy.get("#submit").click();
+});
 //
 //
 // -- This is a child command --
