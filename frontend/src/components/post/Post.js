@@ -48,9 +48,7 @@ const Post = ({ post }) => {
 
   return (
     <article data-cy="post" key={post._id} className="post-container">
-      <strong>
-        {post.user.name} ({result}):
-      </strong>
+      <strong><a href={"/user/" + post.user._id}>{post.user.name}</a> ({result}):</strong> 
       <p></p>
       <div>{post.message} </div>
 
