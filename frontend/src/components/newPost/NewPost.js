@@ -54,7 +54,7 @@ const NewPost = ({ getPosts }) => {
   };
 
   return (
-    <div className="max-w-sm rounded-2xl border p-4 shadow-sm">
+    <div className="rounded-2xl border border-gray-100 bg-white p-6">
       <form onSubmit={handleSubmit} className="space-y-4">
         <input
           id="message"
@@ -62,25 +62,32 @@ const NewPost = ({ getPosts }) => {
           type="text"
           ref={messageInputRef}
           data-cy="input"
-          className="relative block w-full rounded-md border-0 py-1.5 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:z-10 focus:ring-2 focus:ring-inset focus:ring-blue-600"
+          className="relative block w-full rounded-md border border-gray-100 p-4 text-gray-900 placeholder:text-gray-400 focus:outline-none focus:ring-transparent"
         />
-        <input
-          data-cy="file"
-          type="file"
-          ref={imageInputRef}
-          onChange={(e) => setImageInput(e.target.files[0])}
-        />
+        <div className="flex items-center gap-4">
+          <input
+            data-cy="file"
+            type="file"
+            ref={imageInputRef}
+            onChange={(e) => setImageInput(e.target.files[0])}
+          />
+          <Button
+            text={`${isLoading ? "Uploading..." : "Post"}`}
+            type="submit"
+            id="submit"
+            buttonStyle="outline"
+            className="max-w-xs"
+            isDisabled={isLoading}
+          />
+        </div>
         {isError && (
-          <p data-cy="error-message" className="text-red-500">
+          <p
+            data-cy="error-message"
+            className="rounded-md bg-red-50 p-4 text-red-500"
+          >
             Message and Image can&apos;t both be empty.
           </p>
         )}
-        <Button
-          text={`${isLoading ? "Uploading..." : "Post"}`}
-          type="submit"
-          id="submit"
-          isDisabled={isLoading}
-        />
       </form>
     </div>
   );
