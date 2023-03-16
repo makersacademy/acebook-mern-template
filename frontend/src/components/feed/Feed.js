@@ -19,7 +19,6 @@ const Feed = () => {
         // error
       } else {
         const data = await response.json();
-        window.localStorage.setItem("token", data.token);
         setToken(data.token);
         setPosts(data.posts);
       }
@@ -32,11 +31,13 @@ const Feed = () => {
 
   return (
     <>
+      <h2>Posts</h2>
+
       <NewPost getPosts={getPosts} />
 
-      <div id="feed" role="feed">
+      <div id="feed" className="flex flex-col gap-4" role="feed">
         {posts.map((post) => (
-          <Post post={post} key={post.id} />
+          <Post post={post} key={post._id} />
         ))}
       </div>
     </>

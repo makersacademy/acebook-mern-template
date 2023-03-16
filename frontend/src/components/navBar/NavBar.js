@@ -2,7 +2,6 @@ import React, { Fragment, useContext } from "react";
 import { Menu, Transition } from "@headlessui/react";
 import { Link } from "react-router-dom";
 import { ReactComponent as Logo } from "../../assets/logo.svg";
-import { ModalContext } from "../../contexts/ModalContext";
 import { AuthContext } from "../../contexts/AuthContext";
 import classNames from "../../helpers/classNames";
 import ProfilePicture from "../profilePicture/ProfilePicture";

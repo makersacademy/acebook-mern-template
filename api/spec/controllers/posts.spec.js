@@ -96,8 +96,14 @@ describe("/posts", () => {
 
   describe("GET, when token is present", () => {
     test("returns every post in the collection", async () => {
-      const post1 = new Post({ message: "howdy!" });
-      const post2 = new Post({ message: "hola!" });
+      const post1 = new Post({
+        message: "howdy!",
+        author: "640bee229b863616fb3a81df",
+      });
+      const post2 = new Post({
+        message: "hola!",
+        author: "640bee229b863616fb3a81df",
+      });
       await post1.save();
       await post2.save();
       const response = await request(app)
@@ -109,8 +115,14 @@ describe("/posts", () => {
     });
 
     test("the response code is 200", async () => {
-      const post1 = new Post({ message: "howdy!" });
-      const post2 = new Post({ message: "hola!" });
+      const post1 = new Post({
+        message: "howdy!",
+        author: "640bee229b863616fb3a81df",
+      });
+      const post2 = new Post({
+        message: "hola!",
+        author: "640bee229b863616fb3a81df",
+      });
       await post1.save();
       await post2.save();
       const response = await request(app)
@@ -121,8 +133,14 @@ describe("/posts", () => {
     });
 
     test("returns a new token", async () => {
-      const post1 = new Post({ message: "howdy!" });
-      const post2 = new Post({ message: "hola!" });
+      const post1 = new Post({
+        message: "howdy!",
+        author: "640bee229b863616fb3a81df",
+      });
+      const post2 = new Post({
+        message: "hola!",
+        author: "640bee229b863616fb3a81df",
+      });
       await post1.save();
       await post2.save();
       const response = await request(app)
@@ -140,8 +158,14 @@ describe("/posts", () => {
 
   describe("GET, when token is missing", () => {
     test("returns no posts", async () => {
-      const post1 = new Post({ message: "howdy!" });
-      const post2 = new Post({ message: "hola!" });
+      const post1 = new Post({
+        message: "howdy!",
+        author: "640bee229b863616fb3a81df",
+      });
+      const post2 = new Post({
+        message: "hola!",
+        author: "640bee229b863616fb3a81df",
+      });
       await post1.save();
       await post2.save();
       const response = await request(app).get("/posts");
@@ -149,8 +173,14 @@ describe("/posts", () => {
     });
 
     test("the response code is 401", async () => {
-      const post1 = new Post({ message: "howdy!" });
-      const post2 = new Post({ message: "hola!" });
+      const post1 = new Post({
+        message: "howdy!",
+        author: "640bee229b863616fb3a81df",
+      });
+      const post2 = new Post({
+        message: "hola!",
+        author: "640bee229b863616fb3a81df",
+      });
       await post1.save();
       await post2.save();
       const response = await request(app).get("/posts");
@@ -158,12 +188,111 @@ describe("/posts", () => {
     });
 
     test("does not return a new token", async () => {
-      const post1 = new Post({ message: "howdy!" });
-      const post2 = new Post({ message: "hola!" });
+      const post1 = new Post({
+        message: "howdy!",
+        author: "640bee229b863616fb3a81df",
+      });
+      const post2 = new Post({
+        message: "hola!",
+        author: "640bee229b863616fb3a81df",
+      });
       await post1.save();
       await post2.save();
       const response = await request(app).get("/posts");
       expect(response.body.token).toEqual(undefined);
+    });
+  });
+
+  describe("POST /like, when token is present", () => {
+    it("should like a post", async () => {
+      const post = new Post({
+        message: "like this post!",
+        author: "640bee229b863616fb3a81df",
+      });
+      await post.save();
+      const res = await request(app)
+        .post("/posts/like")
+        .set("Authorization", `Bearer ${token}`)
+        .send({ postId: post.id });
+      expect(res.statusCode).toBe(201);
+      expect(res.body.updatedPost.likes.length).toEqual(1);
+      expect(res.body.token).toBeDefined();
+    });
+
+    it("should prevent the same user to like the post again", async () => {
+      const post = new Post({
+        message: "like this post!",
+        author: "640bee229b863616fb3a81df",
+      });
+      await post.save();
+      await request(app)
+        .post("/posts/like")
+        .set("Authorization", `Bearer ${token}`)
+        .send({ postId: post.id });
+      const res = await request(app)
+        .post("/posts/like")
+        .set("Authorization", `Bearer ${token}`)
+        .send({ postId: post.id });
+      expect(res.statusCode).toBe(201);
+      expect(res.body.updatedPost.likes.length).toEqual(1);
+      expect(res.body.token).toBeDefined();
+    });
+  });
+
+  describe("POST /like, when token is missing", () => {
+    it("should throw an error", async () => {
+      const post = new Post({
+        message: "like this post!",
+        author: "640bee229b863616fb3a81df",
+      });
+      await post.save();
+      const res = await request(app)
+        .post("/posts/like")
+        .send({ postId: post.id });
+      expect(res.statusCode).toBe(401);
+      expect(res.body.token).not.toBeDefined();
+    });
+  });
+
+  describe("DELETE /like, when token is present", () => {
+    it("should remove a like", async () => {
+      const post = new Post({
+        message: "like this post!",
+        author: "640bee229b863616fb3a81df",
+      });
+      await post.save();
+      const likeRes = await request(app)
+        .post("/posts/like")
+        .set("Authorization", `Bearer ${token}`)
+        .send({ postId: post.id });
+      expect(likeRes.body.updatedPost.likes.length).toEqual(1);
+      const dislikeRes = await request(app)
+        .delete("/posts/like")
+        .set("Authorization", `Bearer ${token}`)
+        .send({ postId: post.id });
+      expect(dislikeRes.statusCode).toBe(201);
+      expect(dislikeRes.body.updatedPost.likes.length).toEqual(0);
+      expect(dislikeRes.body.token).toBeDefined();
+    });
+  });
+
+  describe("DELETE /like, when token is missing", () => {
+    it("should remove a like", async () => {
+      const post = new Post({
+        message: "like this post!",
+        author: "640bee229b863616fb3a81df",
+      });
+      await post.save();
+      const likeRes = await request(app)
+        .post("/posts/like")
+        .set("Authorization", `Bearer ${token}`)
+        .send({ postId: post.id });
+      expect(likeRes.body.updatedPost.likes.length).toEqual(1);
+      const dislikeRes = await request(app)
+        .delete("/posts/like")
+        .send({ postId: post.id });
+      expect(dislikeRes.statusCode).toBe(401);
+      expect(dislikeRes.body.token).not.toBeDefined();
     });
   });
 });

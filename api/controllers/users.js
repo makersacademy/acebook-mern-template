@@ -10,7 +10,11 @@ const createUser = async (req, res) => {
     delete newUser.password;
 
     const token = generateToken(user._id);
-    res.status(201).json({ token, user: newUser });
+    res.status(201).json({
+      token,
+      user: newUser,
+      message: "You've successfully signed up. Please log in.",
+    });
   } catch (err) {
     res.status(400).json({ message: "Bad request" });
   }
@@ -22,7 +26,7 @@ const getUser = async (req, res) => {
     const token = generateToken(req.userId);
     res.status(200).json({ user, token });
   } catch (err) {
-    res.status(400).json({ message: "Bad request" });
+    res.status(400).json({ message: err.message });
   }
 };
 
