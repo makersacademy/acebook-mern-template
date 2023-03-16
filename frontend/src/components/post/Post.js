@@ -7,14 +7,12 @@ import { AdvancedImage } from "@cloudinary/react";
 import { ReactComponent as LikeBtn } from "../../assets/like.svg";
 import { ReactComponent as FilledLikeBtn } from "../../assets/fillLike.svg";
 import avatar from "./avatar.png";
-import { ModalContext } from "../../contexts/modalContext";
 import { CloudinaryContext } from "../../contexts/cloudinaryContext";
 
 const Post = ({ post }) => {
   const [token, setToken] = useState(window.localStorage.getItem("token"));
   const [likes, setLikes] = useState(post.likes);
   const [userId] = useState(jwtDecode(token).userId);
-  const { pushModal } = useContext(ModalContext);
   const cld = useContext(CloudinaryContext);
 
   const myImage = cld.image(post.image);
@@ -49,18 +47,9 @@ const Post = ({ post }) => {
         // error
       } else {
         const data = await response.json();
-        const message =
-          methodArg === "post"
-            ? "You've liked a post"
-            : "You've disliked a post";
-        const type = methodArg === "post" ? "success" : "error";
         setLikes(data.updatedPost.likes);
         window.localStorage.setItem("token", data.token);
         setToken(data.token);
-        pushModal({
-          message,
-          type,
-        });
       }
     }
   };
