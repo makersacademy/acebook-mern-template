@@ -65,7 +65,7 @@ const NavBar = () => {
                   <p data-cy="user" className="mx-2">
                     {user.name}
                   </p>
-                  <ProfilePicture className="h-8 w-8" publicId="" />
+                  <ProfilePicture className="h-8 w-8" publicId={user.imageId} />
                 </Menu.Button>
               </div>
               <Transition
