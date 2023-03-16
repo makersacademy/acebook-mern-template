@@ -54,7 +54,7 @@ const Post = ({post}) => {
 
     if(token){
       loadNumComments()
-      
+      console.log("userInfo inside post ", userInfo._id)      
     }
   },[])
   
@@ -110,16 +110,18 @@ const handleUnlike = async () => {
 }
 
 const handleComment = async (event) => {
+  console.log(userInfo)
   const token = window.localStorage.getItem("token");
   event.preventDefault();
   setCurrentComment("");
 
-  let formattedBody = { "comment": currentComment, "post": post._id, "poster": userInfo._id }
-  console.log(JSON.stringify(formattedBody));
+  let commentBody = { "comment": currentComment, "post": post._id, "poster": userInfo._id }
+  console.log("formatted body: ", commentBody);
+  console.log("stringified json: ", JSON.stringify(commentBody));
     //console.log("current comment submitted: ", currentComment);
   const response = await fetch('/comments', {
     method: "POST",
-    body: JSON.stringify(formattedBody),
+    body: JSON.stringify(commentBody),
     headers: {
       'Content-Type': 'application/json',
       'Authorization': `Bearer ${token}`
