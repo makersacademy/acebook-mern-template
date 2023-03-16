@@ -19,7 +19,6 @@ const Feed = () => {
         // error
       } else {
         const data = await response.json();
-        window.localStorage.setItem("token", data.token);
         setToken(data.token);
         setPosts(data.posts);
       }

@@ -1,14 +1,22 @@
 import React from "react";
+import AuthContextProvider from "../../contexts/AuthContext";
 import Feed from "./Feed";
 
 describe("Feed", () => {
   it("Calls the /posts endpoint and lists all the posts", () => {
     window.localStorage.setItem("token", "fakeToken");
 
-    cy.intercept("GET", "/posts", (req) => {
+    cy.mount(
+      <AuthContextProvider>
+        <Feed />
+      </AuthContextProvider>
+    );
+
+    cy.intercept("get", "/posts", (req) => {
       req.reply({
         statusCode: 200,
         body: {
+          token: "fakeToken",
           posts: [
             {
               _id: 1,
@@ -26,8 +34,6 @@ describe("Feed", () => {
         },
       });
     }).as("getPosts");
-
-    cy.mount(<Feed />);
 
     cy.wait("@getPosts").then(() => {
       cy.get('[data-cy="post"]')
