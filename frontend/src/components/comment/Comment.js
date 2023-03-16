@@ -22,10 +22,18 @@ const Comment = ({ comment }) => {
     });
   };
   return (
-    <article data-cy="comment" key={comment._id}>
-      Comment from {comment.user.name}: {comment.comment} ({result})
-      <button onClick={toggleLike}>{isLiked ? "unlike" : "like"}</button>
-      Like count: {likes}
+    <article data-cy="comment" key={comment._id} className="post-container">
+      <strong>
+        {comment.user.name} ({result})
+      </strong>
+      <p></p>
+      <div>{comment.comment} </div>
+      <div>
+        <button className="likes-container" onClick={toggleLike}>
+          {isLiked ? "unlike" : "like"}
+        </button>
+        {likes} {likes !== 1 ? "likes" : "like"}
+      </div>
     </article>
   );
 };

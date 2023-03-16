@@ -58,7 +58,7 @@ const Post = ({ post }) => {
         <button className="likes-container" onClick={toggleLike}>
           {isLiked ? "unlike" : "like"}
         </button>
-        Likes: {likes}
+        {likes} {likes !== 1 ? "likes" : "like"}
       </div>
 
       <div id="comments" role="comment">
