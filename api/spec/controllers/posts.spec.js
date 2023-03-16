@@ -167,4 +167,97 @@ describe("/posts", () => {
       expect(response.body.token).toEqual(undefined);
     });
   });
+
+  describe("POST /like, when token is present", () => {
+    it("should like a post", async () => {
+      const post = new Post({
+        message: "like this post!",
+        author: "640bee229b863616fb3a81df",
+      });
+      await post.save();
+      const res = await request(app)
+        .post("/posts/like")
+        .set("Authorization", `Bearer ${token}`)
+        .send({ postId: post.id });
+      expect(res.statusCode).toBe(201);
+      expect(res.body.updatedPost.likes.length).toEqual(1);
+      expect(res.body.token).toBeDefined();
+    });
+
+    it("should prevent the same user to like the post again", async () => {
+      const post = new Post({
+        message: "like this post!",
+        author: "640bee229b863616fb3a81df",
+      });
+      await post.save();
+      await request(app)
+        .post("/posts/like")
+        .set("Authorization", `Bearer ${token}`)
+        .send({ postId: post.id });
+      const res = await request(app)
+        .post("/posts/like")
+        .set("Authorization", `Bearer ${token}`)
+        .send({ postId: post.id });
+      expect(res.statusCode).toBe(201);
+      expect(res.body.updatedPost.likes.length).toEqual(1);
+      expect(res.body.token).toBeDefined();
+    });
+  });
+
+  describe("POST /like, when token is missing", () => {
+    it("should throw an error", async () => {
+      const post = new Post({
+        message: "like this post!",
+        author: "640bee229b863616fb3a81df",
+      });
+      await post.save();
+      const res = await request(app)
+        .post("/posts/like")
+        .send({ postId: post.id });
+      expect(res.statusCode).toBe(401);
+      expect(res.body.token).not.toBeDefined();
+    });
+  });
+
+  describe("DELETE /like, when token is present", () => {
+    it("should remove a like", async () => {
+      const post = new Post({
+        message: "like this post!",
+        author: "640bee229b863616fb3a81df",
+      });
+      await post.save();
+      const likeRes = await request(app)
+        .post("/posts/like")
+        .set("Authorization", `Bearer ${token}`)
+        .send({ postId: post.id });
+      expect(likeRes.body.updatedPost.likes.length).toEqual(1);
+      const dislikeRes = await request(app)
+        .delete("/posts/like")
+        .set("Authorization", `Bearer ${token}`)
+        .send({ postId: post.id });
+      expect(dislikeRes.statusCode).toBe(201);
+      expect(dislikeRes.body.updatedPost.likes.length).toEqual(0);
+      expect(dislikeRes.body.token).toBeDefined();
+    });
+  });
+
+  describe("DELETE /like, when token is missing", () => {
+    it("should remove a like", async () => {
+      const post = new Post({
+        message: "like this post!",
+        author: "640bee229b863616fb3a81df",
+      });
+      await post.save();
+      const likeRes = await request(app)
+        .post("/posts/like")
+        .set("Authorization", `Bearer ${token}`)
+        .send({ postId: post.id });
+      expect(likeRes.body.updatedPost.likes.length).toEqual(1);
+      const dislikeRes = await request(app)
+        .delete("/posts/like")
+        .send({ postId: post.id });
+      expect(dislikeRes.statusCode).toBe(401);
+      expect(dislikeRes.body.token).not.toBeDefined();
+    });
+  });
 });

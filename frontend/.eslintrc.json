@@ -20,6 +20,7 @@
   },
   "plugins": ["react", "prettier", "cypress"],
   "rules": {
+    "no-underscore-dangle": "off",
     "react/function-component-definition": [
       2,
       {

@@ -1,20 +1,23 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 import "./index.css";
-import { BrowserRouter } from "react-router-dom";
 import App from "./components/app/App";
 import reportWebVitals from "./reportWebVitals";
-import ModalContextProvider from "./contexts/modalContext";
+import ModalContextProvider from "./contexts/ModalContext";
+import AuthContextProvider from "./contexts/AuthContext";
+import CloudinaryContextProvider from "./contexts/cloudinaryContext";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
-  <BrowserRouter>
-    <ModalContextProvider>
-      <React.StrictMode>
-        <App />
-      </React.StrictMode>
-    </ModalContextProvider>
-  </BrowserRouter>
+  <React.StrictMode>
+    <AuthContextProvider>
+      <ModalContextProvider>
+        <CloudinaryContextProvider>
+          <App />
+        </CloudinaryContextProvider>
+      </ModalContextProvider>
+    </AuthContextProvider>
+  </React.StrictMode>
 );
 
 // If you want to start measuring performance in your app, pass a function

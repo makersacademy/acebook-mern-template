@@ -1,16 +1,22 @@
 import React, { useState, useCallback, useMemo } from "react";
 import PropTypes from "prop-types";
+import jwtDecode from "jwt-decode";
 
 import contextualTime from "../../helpers/contextualTime";
 import { ReactComponent as CommentBtn } from "../../assets/comment.svg";
 import { ReactComponent as CommentFilledBtn } from "../../assets/comment-filled.svg";
-import avatar from "../../assets/avatar.png";
+
+import { ReactComponent as LikeBtn } from "../.../../assets/assets/like.svg";
+import { ReactComponent as FilledLikeBtn } from "../../assets/fillLike.svg";
 import CommentList from "../commentList/CommentList";
 import NewComment from "../newComment/NewComment";
+import ProfilePicture from "../profilePicture/ProfilePicture";
 
 const Post = ({ post }) => {
-  const [showComments, setShowComments] = useState(false);
   const [token, setToken] = useState(window.localStorage.getItem("token"));
+  const [likes, setLikes] = useState(post.likes);
+  const [userId] = useState(jwtDecode(token).userId);
+  const [showComments, setShowComments] = useState(false);
   const [comments, setComments] = useState(post.comments);
   const postId = post._id;
 
@@ -57,19 +63,73 @@ const Post = ({ post }) => {
     return <p className="text-sm text-gray-500">{formattedDate}</p>;
   };
 
+  const likeHandler = async (methodArg) => {
+    if (token) {
+      const response = await fetch("/posts/like", {
+        method: methodArg,
+        body: JSON.stringify({
+          postId: post._id,
+        }),
+        headers: {
+          Authorization: `Bearer ${token}`,
+          "Content-Type": "application/json",
+        },
+      });
+
+      if (response.status !== 201) {
+        // error
+      } else {
+        const data = await response.json();
+        setLikes(data.updatedPost.likes);
+        window.localStorage.setItem("token", data.token);
+        setToken(data.token);
+      }
+    }
+  };
+
+  // returns a boolean if the user already liked the post
+  const checkIsLiked = () => {
+    return likes.includes(userId);
+  };
+
+  const likeHandler = async (methodArg) => {
+    if (token) {
+      const response = await fetch("/posts/like", {
+        method: methodArg,
+        body: JSON.stringify({
+          postId: post._id,
+        }),
+        headers: {
+          Authorization: `Bearer ${token}`,
+          "Content-Type": "application/json",
+        },
+      });
+
+      if (response.status !== 201) {
+        // error
+      } else {
+        const data = await response.json();
+        setLikes(data.updatedPost.likes);
+        window.localStorage.setItem("token", data.token);
+        setToken(data.token);
+      }
+    }
+  };
+
+  // returns a boolean if the user already liked the post
+  const checkIsLiked = () => {
+    return likes.includes(userId);
+  };
+
   return (
     <article
       data-cy="post"
+      className="flex flex-col rounded-lg p-6 shadow-md"
       key={post._id}
-      className="flex flex-col rounded-md shadow-md"
       id={post._id}
     >
       <div className="m-2 flex items-center">
-        <img
-          src={avatar}
-          alt="Avatar"
-          className="mx-2 h-10 w-10 rounded-full"
-        />
+        <ProfilePicture className="h-10 w-10" publicId={post.author.imageId} />
         <div className="">
           <p className="text-lg font-semibold">{post.author.username}</p>
           {formatDate()}
@@ -77,6 +137,24 @@ const Post = ({ post }) => {
       </div>
 
       <div className="p-2 text-base">{post.message}</div>
+      <div className="m-2 flex items-center gap-4">
+        {checkIsLiked() ? (
+          <FilledLikeBtn
+            data-cy="filled-like-button"
+            type="button"
+            onClick={() => likeHandler("delete")}
+            className="h-8 w-auto cursor-pointer fill-red-500"
+          />
+        ) : (
+          <LikeBtn
+            data-cy="like-button"
+            onClick={() => likeHandler("post")}
+            type="button"
+            className="h-8 w-auto cursor-pointer fill-black"
+          />
+        )}
+        <p data-cy="likes-length">{`${likes.length}`} Likes</p>
+      </div>
       <div id="comments-btn-container" className="flex items-center">
         <button
           className="flex items-center p-2"
@@ -106,7 +184,7 @@ const Post = ({ post }) => {
 
 Post.propTypes = {
   post: PropTypes.shape({
-    _id: PropTypes.string.isRequired,
+    _id: PropTypes.string,
     message: PropTypes.string,
     authorId: PropTypes.string,
     createdAt: PropTypes.string,
@@ -114,6 +192,7 @@ Post.propTypes = {
     likes: PropTypes.arrayOf(PropTypes.string),
     author: PropTypes.shape({
       username: PropTypes.string,
+      imageId: PropTypes.string,
     }),
   }).isRequired,
 };

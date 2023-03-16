@@ -1,9 +1,14 @@
 import React from "react";
+import AuthContextProvider from "../../contexts/AuthContext";
 import NewPost from "./NewPost";
 
 describe("NewPost component", () => {
   beforeEach(() => {
-    cy.mount(<NewPost getPosts={() => {}} />);
+    cy.mount(
+      <AuthContextProvider>
+        <NewPost getPosts={() => {}} />
+      </AuthContextProvider>
+    );
   });
 
   describe("initially", () => {

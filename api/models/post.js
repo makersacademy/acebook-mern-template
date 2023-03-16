@@ -1,5 +1,7 @@
 const mongoose = require("mongoose");
 
+mongoose.set("useFindAndModify", false);
+
 const PostSchema = new mongoose.Schema({
   message: { type: String, required: true },
   author: {
