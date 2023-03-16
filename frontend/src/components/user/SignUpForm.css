@@ -1,0 +1,80 @@
+.signupContainer {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  display: flexbox;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 5%;
+  margin-bottom: auto;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-shadow: 2px 2px 5px #999;
+  width: 35%;
+  height: 600px;
+}
+
+.headerText h1 {
+  font-weight: 600;
+  font-size: 30px;
+  text-align: center;
+}
+
+.headerText h5 {
+  text-align: center;
+  color: #838383;
+}
+
+.mb-4 {
+  display: flexbox;
+  margin-left: auto;
+  margin-right: auto;
+  width: 90%;
+}
+
+#loginButton {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-weight: bold;
+  display: block;
+  width: 100%;
+  color: #fff;
+  font-size: 15px;
+  cursor: pointer;
+  background-color: #42b72a;
+  border: none;
+  border-radius: 6px;
+  font-size: 20px;
+  line-height: 48px;
+  padding: 0 16px;
+  width: 332px;
+  margin-top: 10%;
+  margin-bottom: 25px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.alreadyHaveAccountLink {
+  font-size: 18px;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-weight: bold;
+  text-align: center;
+}
+
+.animatedImage1 {
+  display: flexbox;
+  margin-top: 10%;
+  margin-right: 70%;
+  padding: 5px;
+  scale: 90%;
+  z-index: -100;
+  position: absolute;
+}
+
+.animatedImage2 {
+  scale: 120%;
+  display: flexbox;
+  margin-top: 16%;
+  margin-left: 68%;
+  padding: 5px;
+  z-index: -100;
+  position: absolute;
+}

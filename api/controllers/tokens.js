@@ -8,6 +8,7 @@ const SessionsController = {
     const password = req.body.password;
 
     User.findOne({ email: email }).then(async (user) => {
+
       if (!user) {
         console.log("auth error: user not found")
         res.status(401).json({ message: "auth error" });
@@ -16,10 +17,12 @@ const SessionsController = {
         res.status(401).json({ message: "auth error" });
       } else {
         const token = await TokenGenerator.jsonwebtoken(user.id)
-        res.status(201).json({ token: token, message: "OK" });
+        // res.status(201).json({token: token, user: user})
+        res.status(201).json({ token: token, email: user.email, firstName: user.firstName, lastName: user.lastName, _id: user._id, message: "OK"});
       }
     });
   }
 };
+
 
 module.exports = SessionsController;

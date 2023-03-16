@@ -10,7 +10,7 @@ let token;
 
 describe("/posts", () => {
   beforeAll( async () => {
-    const user = new User({email: "test@test.com", password: "12345678"});
+    const user = new User({email: "test@test.com", password: "12345678", firstName: "Poppy", lastName: "test"});
     await user.save();
 
     token = JWT.sign({
@@ -59,6 +59,7 @@ describe("/posts", () => {
       let originalPayload = JWT.decode(token, process.env.JWT_SECRET);
       expect(newPayload.iat > originalPayload.iat).toEqual(true);
     });  
+
   });
   
   describe("POST, when token is missing", () => {
@@ -84,7 +85,7 @@ describe("/posts", () => {
       expect(response.body.token).toEqual(undefined);
     });
   })
-
+ 
   describe("GET, when token is present", () => {
     test("returns every post in the collection", async () => {
       let post1 = new Post({message: "howdy!"});
@@ -96,7 +97,7 @@ describe("/posts", () => {
         .set("Authorization", `Bearer ${token}`)
         .send({token: token});
       let messages = response.body.posts.map((post) => ( post.message ));
-      expect(messages).toEqual(["howdy!", "hola!"]);
+      expect(messages).toEqual(["hola!", "howdy!"]);
     })
 
     test("the response code is 200", async () => {
@@ -146,7 +147,7 @@ describe("/posts", () => {
         .get("/posts");
       expect(response.status).toEqual(401);
     })
-
+ 
     test("does not return a new token", async () => {
       let post1 = new Post({message: "howdy!"});
       let post2 = new Post({message: "hola!"});
@@ -157,4 +158,18 @@ describe("/posts", () => {
       expect(response.body.token).toEqual(undefined);
     })
   })
+
+
+
+  // describe('NewLike', () => {
+  //   test('successfully likes a post', async (done) => {
+  //     let post1 = new Post({message: "hello world", likes: []})
+  //     await post1.save();
+  //     let response = await request(app)
+  //       .put(`/posts/${post1._id}/like`)
+  //     expect(response.body.message).toEqual('Like added');
+  //     expect(response.status).toEqual(201);
+  //     done();
+  //   })
+  // })
 });

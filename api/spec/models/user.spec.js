@@ -14,6 +14,8 @@ describe("User model", () => {
     const user = new User({
       email: "someone@example.com",
       password: "password",
+      firstName: "Poppy",
+      lastName: "test"
     });
     expect(user.email).toEqual("someone@example.com");
   });
@@ -38,6 +40,8 @@ describe("User model", () => {
     const user = new User({
       email: "someone@example.com",
       password: "password",
+      firstName: "Poppy",
+      lastName: "test"
     });
 
     user.save((err) => {
@@ -49,6 +53,8 @@ describe("User model", () => {
         expect(users[0]).toMatchObject({
           email: "someone@example.com",
           password: "password",
+          firstName: "Poppy",
+          lastName: "test"
         });
         done();
       });

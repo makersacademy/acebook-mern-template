@@ -4,9 +4,11 @@
   "private": true,
   "proxy": "http://localhost:8080",
   "dependencies": {
+    "bootstrap": "^5.2.3",
     "cypress": "^10.7.0",
     "eslint": "^8.23.0",
     "react": "^18.2.0",
+    "react-bootstrap": "^2.7.2",
     "react-dom": "^18.2.0",
     "react-router": "^6.3.0",
     "react-router-dom": "^6.3.0",
