@@ -33,13 +33,3 @@ strong {
 .likes-container:hover {
   background-color: rgb(140, 28, 148);
 }
-
-li {
-  padding: 10px;
-}
-
-
-img {
-  margin-right: 10px;
-  border-radius: 100px;
-}

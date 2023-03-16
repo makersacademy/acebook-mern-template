@@ -5,7 +5,6 @@
   margin-top: 30vh;
 }
 
-
 .signup-form input[type="email"] {
   background-image: url(mail.png);
   background-size: 20px;
@@ -19,7 +18,7 @@
   box-shadow: 3px 3px 3px lightblue;
   background-repeat: no-repeat;
   background-position: 10px center;
-  width: 300px; 
+  width: 300px;
 }
 
 .signup-form input#name {
@@ -35,7 +34,7 @@
   box-shadow: 3px 3px 3px lightblue;
   background-repeat: no-repeat;
   background-position: 10px center;
-  width: 300px; 
+  width: 300px;
 }
 
 .signup-form input[type="password"] {
@@ -51,7 +50,7 @@
   box-shadow: 3px 3px 3px lightblue;
   background-repeat: no-repeat;
   background-position: 10px center;
-  width: 300px; 
+  width: 300px;
 }
 
 .signup-form input[type="submit"] {
@@ -71,8 +70,6 @@
   background-color: rgb(140, 28, 148);
 }
 
-
-
 .signup-form .error-message {
   color: red;
   font-size: clamp(0.8rem, 2vw, 1rem);
@@ -81,7 +78,7 @@
 body {
   background-image: linear-gradient(to bottom right, #5d5de7, #fb36f4);
   background-size: cover;
-  height: 100vh;
+  height: 100%;
   background-repeat: no-repeat;
   background-position: top;
   font-size: clamp(0.8rem, 2vw, 1rem);
@@ -89,6 +86,4 @@ body {
 
 .signup-form h3 {
   color: rgb(255, 255, 255);
-
 }
-
