@@ -42,8 +42,8 @@ function CreatePost(props) {
 
   return (
     <form id='formCreatePost' onSubmit={handleSubmit} className='post-form'>
-      <label htmlFor="post-text" className="post-label">What's on your mind?</label>
       <textarea
+      placeholder='Whats on your mind? 🧐'
         className="post-input"
         id="textCreatePost"
         value={postMessage}

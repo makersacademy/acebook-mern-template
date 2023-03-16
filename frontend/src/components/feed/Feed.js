@@ -36,6 +36,7 @@ const Feed = ({ navigate }) => {
   if (token) {
     return (
       <>
+
         <CreatePost refreshPosts={refreshPosts} />
 
         {/* <button onClick={logout}>
