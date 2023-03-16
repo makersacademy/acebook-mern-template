@@ -30,9 +30,7 @@ const Feed = () => {
   }, []);
 
   return (
-    <>
-      <h2>Posts</h2>
-
+    <div className="flex flex-col gap-3 py-6">
       <NewPost getPosts={getPosts} />
 
       <div id="feed" className="flex flex-col gap-4" role="feed">
@@ -40,7 +38,7 @@ const Feed = () => {
           <Post post={post} key={post._id} />
         ))}
       </div>
-    </>
+    </div>
   );
 };
 

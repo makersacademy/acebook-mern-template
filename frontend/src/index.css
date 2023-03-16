@@ -2,6 +2,10 @@
 @tailwind components;
 @tailwind utilities;
 
+:root {
+  background-color: #f8f8f8;
+}
+
 @layer components {
   .card {
     @apply flex flex-1 flex-col gap-4 p-4;
