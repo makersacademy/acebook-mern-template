@@ -17,12 +17,12 @@ const SignUpForm = () => {
     await signup(name, username, email, password);
   };
 
-  const handleUsernameChange = (event) => {
-    setUsername(event.target.value);
-  };
-
   const handleNameChange = (event) => {
     setName(event.target.value);
+  };
+
+  const handleUsernameChange = (event) => {
+    setUsername(event.target.value);
   };
 
   const handleEmailChange = (event) => {

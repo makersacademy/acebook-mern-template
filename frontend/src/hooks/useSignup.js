@@ -7,7 +7,7 @@ export default () => {
   const { setToken, setUser } = useContext(AuthContext);
   const { pushModal } = useContext(ModalContext);
 
-  const signup = async (email, password, name, username) => {
+  const signup = async (name, username, email, password) => {
     setIsLoading(true);
 
     const response = await fetch("/users", {
