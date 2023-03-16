@@ -22,7 +22,6 @@ const Feed = ({ navigate }) => {
           window.localStorage.setItem("token", data.token);
           setToken(window.localStorage.getItem("token"));
           setPosts(data.posts);
-          console.log(data.posts);
         });
     }
   };

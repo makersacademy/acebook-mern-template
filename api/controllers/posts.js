@@ -1,15 +1,21 @@
 const Post = require("../models/post");
+const Comment = require("../models/comment");
 const TokenGenerator = require("../models/token_generator");
 
 const PostsController = {
   Index: (req, res) => {
     Post.find()
       .populate("user", "name")
-      .populate("comments.user", "name")
+      .populate("comments")
+      .populate({
+        path: "comments",
+        populate: { path: "user", model: "User", select: "name" },
+      })
       .exec(async (err, posts) => {
         if (err) {
           throw err;
         }
+        await Comment.populate("user", "name");
         const token = await TokenGenerator.jsonwebtoken(req.user_id);
         posts = posts.map((post) => {
           let liked = post.likes.includes(req.user_id);
@@ -17,6 +23,23 @@ const PostsController = {
           return post;
         });
         res.status(200).json({ posts: posts, token: token });
+      });
+  },
+
+  GetPost: (req, res) => {
+    Post.findOne({ _id: req.params.id })
+      .populate("user", "name")
+      .populate("comments")
+      .populate({
+        path: "comments",
+        populate: { path: "user", model: "User", select: "name" },
+      })
+      .exec(async (err, post) => {
+        if (err) {
+          throw err;
+        }
+        const token = await TokenGenerator.jsonwebtoken(req.user_id);
+        res.status(200).json({ post: post, token: token });
       });
   },
   Create: (req, res) => {
@@ -35,7 +58,12 @@ const PostsController = {
 
   CreateComment: (req, res) => {
     Post.findOne({ _id: req.params.id }).then(async (post) => {
-      const comment = { message: req.body.comment, user: req.user_id };
+      const comment = new Comment({
+        comment: req.body.comment,
+        user: req.user_id,
+      });
+      await comment.save();
+      console.log(comment);
       post.comments.push(comment);
       console.log("Comment added");
 

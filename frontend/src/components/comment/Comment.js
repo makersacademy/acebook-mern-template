@@ -2,14 +2,13 @@ import React, { useState } from "react";
 import { formatDistanceToNow } from "date-fns";
 
 const Comment = ({ comment }) => {
-  // post is the
   const [likes, setLikes] = useState(comment.likes.length || 0);
   const [isLiked, setLiked] = useState(comment.liked);
   const createdAt = new Date(comment.createdAt);
   const result = formatDistanceToNow(createdAt, { addSuffix: true });
 
   const toggleLike = async () => {
-    let url = " ";
+    let url = "/comments/" + comment._id + "/likes";
     let response = await fetch(url, {
       method: "post",
       headers: {
@@ -24,8 +23,8 @@ const Comment = ({ comment }) => {
   };
   return (
     <article data-cy="comment" key={comment._id}>
-      Comment from {comment.user.name}: {comment.message} ({result})
-      {/*<button onClick={toggleLike}>{isLiked ? "unlike" : "like"}</button>*/}
+      Comment from {comment.user.name}: {comment.comment} ({result})
+      <button onClick={toggleLike}>{isLiked ? "unlike" : "like"}</button>
       Like count: {likes}
     </article>
   );
