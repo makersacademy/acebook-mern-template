@@ -7,12 +7,14 @@ const NewPost = ({ getPosts }) => {
   const messageInputRef = useRef();
   const imageInputRef = useRef();
   const [imageInput, setImageInput] = useState(null);
+  const [isLoading, setIsLoading] = useState(false);
   const [isError, setIsError] = useState(false);
   const [token, setToken] = useState(window.localStorage.getItem("token"));
   const upload = useUpload();
 
   const handleSubmit = async (event) => {
     event.preventDefault();
+    setIsLoading(true);
     setIsError(false);
 
     const message = messageInputRef.current.value.trim();
@@ -21,6 +23,7 @@ const NewPost = ({ getPosts }) => {
       messageInputRef.current.value = "";
       imageInputRef.current.value = null;
       setImageInput(null);
+      setIsLoading(false);
       return;
     }
 
@@ -47,6 +50,8 @@ const NewPost = ({ getPosts }) => {
       setImageInput(null);
       getPosts();
     }
+
+    setIsLoading(false);
   };
 
   return (
@@ -70,7 +75,12 @@ const NewPost = ({ getPosts }) => {
             Message and Image can&apos;t both be empty.
           </p>
         )}
-        <Button text="Post" type="submit" id="submit" />
+        <Button
+          text={`${isLoading ? "Uploading..." : "Post"}`}
+          type="submit"
+          id="submit"
+          isDisabled={isLoading}
+        />
       </form>
     </div>
   );
