@@ -37,3 +37,8 @@ strong {
   background-color: rgb(140, 28, 148);
   
 }
+
+img {
+  margin-right: 10px;
+  border-radius: 100px;
+}
