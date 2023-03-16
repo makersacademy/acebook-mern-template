@@ -42,13 +42,14 @@ const Post = ({ post }) => {
           window.localStorage.setItem("token", data.token);
           setToken(window.localStorage.getItem("token"));
           setComments(data.comments);
+          console.log(post.user)
         });
     }
   };
 
   return (
     <article data-cy="post" key={post._id} className="post-container">
-      <img src={require(`../avatars/avatar-1.jpg`)} width='20' height='20' alt="Default Avatar" />
+      <img src={require(`../avatars/avatar-${post.user.avatar}.jpg`)} width='20' height='20' alt="Default Avatar" />
       <strong>
         {post.user.name} ({result}):
       </strong>

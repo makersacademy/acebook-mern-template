@@ -5,12 +5,12 @@ const TokenGenerator = require("../models/token_generator");
 const PostsController = {
   Index: (req, res) => {
     Post.find()
-      .populate("user", "name")
-      .populate("comments")
-      .populate({
-        path: "comments",
-        populate: { path: "user", model: "User", select: "name" },
-      })
+    .populate("user", "name avatar")
+    .populate("comments")
+    .populate({
+      path: "comments",
+      populate: { path: "user", model: "User", select: "name avatar" },
+    })
       .exec(async (err, posts) => {
         if (err) {
           throw err;
