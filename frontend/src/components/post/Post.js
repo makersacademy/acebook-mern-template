@@ -42,7 +42,7 @@ const Post = ({ post }) => {
           window.localStorage.setItem("token", data.token);
           setToken(window.localStorage.getItem("token"));
           setComments(data.comments);
-          console.log(post.user)
+          
         });
     }
   };
