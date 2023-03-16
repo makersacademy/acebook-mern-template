@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { formatDistanceToNow } from "date-fns";
 import Comment from "../comment/Comment";
 import CreateComment from "../create-comment/CreateComment";
@@ -11,6 +11,8 @@ const Post = ({ post }) => {
   const [token, setToken] = useState(window.localStorage.getItem("token"));
   const createdAt = new Date(post.createdAt);
   const result = formatDistanceToNow(createdAt, { addSuffix: true });
+
+  useEffect(() => {}, []);
 
   const toggleLike = async () => {
     let url = "/posts/" + post._id + "/likes";
