@@ -1,28 +1,55 @@
-import React, { useState } from "react";
+import React, { useState, useCallback, useMemo } from "react";
 import PropTypes from "prop-types";
 
-import Comments from "../comments/Comments";
 import contextualTime from "../../helpers/contextualTime";
 import { ReactComponent as CommentBtn } from "../../assets/comment.svg";
 import { ReactComponent as CommentFilledBtn } from "../../assets/comment-filled.svg";
 import avatar from "../../assets/avatar.png";
+import CommentList from "../commentList/CommentList";
+import NewComment from "../newComment/NewComment";
 
 const Post = ({ post }) => {
   const [showComments, setShowComments] = useState(false);
-  const [commentCounter, setCommentCounter] = useState(post.comments.length);
+  const [token, setToken] = useState(window.localStorage.getItem("token"));
+  const [comments, setComments] = useState(post.comments);
+  const postId = post._id;
 
-  const commentCount = () => {
-    if (commentCounter >= 10) {
+  // useCallback memoizes the function so that it is only called when the dependencies change. Preventing unnecessary re-renders
+  const getComments = useCallback(async () => {
+    if (token) {
+      const response = await fetch(
+        `/posts/comment?${new URLSearchParams({ postId })}`,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+
+      if (response.status !== 200) {
+        console.log(response);
+        // Render Modal with generic error message
+      } else {
+        const data = await response.json();
+        window.localStorage.setItem("token", data.token);
+        setToken(data.token);
+        setComments(data.postComments);
+      }
+    }
+  }, [token, postId]);
+
+  // useMemo memoizes the value so that it is only calculated when the dependencies change. Preventing unnecessary re-renders
+  const commentCount = useMemo(() => {
+    if (comments.length >= 10) {
       return "10+";
     }
-    return commentCounter;
-  };
+    return comments.length;
+  }, [comments]);
 
   const toggleComments = () => {
     setShowComments(!showComments);
+    getComments();
   };
-
-  const updateCommentCount = () => setCommentCounter(commentCounter + 1);
 
   const formatDate = () => {
     const date = new Date(post.createdAt);
@@ -37,7 +64,7 @@ const Post = ({ post }) => {
       className="flex flex-col rounded-md shadow-md"
       id={post._id}
     >
-      <div className="m-2 flex">
+      <div className="m-2 flex items-center">
         <img
           src={avatar}
           alt="Avatar"
@@ -62,11 +89,16 @@ const Post = ({ post }) => {
           ) : (
             <CommentBtn className="mx-auto h-5 w-5" />
           )}
-          <p className="px-2 text-sm text-gray-600">{commentCount()}</p>
+          <p className="px-2 text-sm text-gray-600" id="comment-count">
+            {commentCount}
+          </p>
         </button>
       </div>
       {showComments && (
-        <Comments postId={post._id} updateCommentCount={updateCommentCount} />
+        <div id="comments-container">
+          <CommentList comments={comments} />
+          <NewComment getComments={getComments} postId={postId} />
+        </div>
       )}
     </article>
   );

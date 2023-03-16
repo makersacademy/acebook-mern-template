@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import PropTypes from "prop-types";
 import Button from "../button/Button";
 
-const NewComment = ({ postId, getComments, updateCommentCount }) => {
+const NewComment = ({ postId, getComments }) => {
   const [commentMessage, setCommentMessage] = useState("");
   const [token, setToken] = useState(window.localStorage.getItem("token"));
 
@@ -27,8 +27,6 @@ const NewComment = ({ postId, getComments, updateCommentCount }) => {
       setToken(data.token);
       setCommentMessage("");
       getComments();
-      // Commented out to make test pass - need to investigate
-      updateCommentCount();
     }
   };
 
@@ -67,7 +65,6 @@ const NewComment = ({ postId, getComments, updateCommentCount }) => {
 NewComment.propTypes = {
   getComments: PropTypes.func.isRequired,
   postId: PropTypes.string.isRequired,
-  updateCommentCount: PropTypes.func.isRequired,
 };
 
 export default NewComment;
