@@ -22,6 +22,7 @@ const Post = ({post}) => {
   const postDate = (day + "-" + month + "-" + year)
   const postTime = (hours + ":" + minutes)
   const [numLikes, setnumLikes] = useState(post.likes ? post.likes.length : 0);
+  const [likes, setLikes] = useState(post.likes)
   const [alreadyLiked, setalreadyLiked] = useState(post.likes.includes(userInfo._id) ? true : false)
   const [numComments, setnumComments] = useState(0)
   const [comments, setComments] = useState()
@@ -53,6 +54,7 @@ const Post = ({post}) => {
 
     if(token){
       loadNumComments()
+      console.log("userInfo inside post ", userInfo._id)      
     }
   },[])
   
@@ -108,16 +110,18 @@ const handleUnlike = async () => {
 }
 
 const handleComment = async (event) => {
+  console.log(userInfo)
   const token = window.localStorage.getItem("token");
   event.preventDefault();
   setCurrentComment("");
 
-  let formattedBody = { "comment": currentComment, "post": post._id, "poster": userInfo._id }
-  console.log(JSON.stringify(formattedBody));
+  let commentBody = { "comment": currentComment, "post": post._id, "poster": userInfo._id }
+  console.log("formatted body: ", commentBody);
+  console.log("stringified json: ", JSON.stringify(commentBody));
     //console.log("current comment submitted: ", currentComment);
   const response = await fetch('/comments', {
     method: "POST",
-    body: JSON.stringify(formattedBody),
+    body: JSON.stringify(commentBody),
     headers: {
       'Content-Type': 'application/json',
       'Authorization': `Bearer ${token}`
@@ -135,6 +139,7 @@ const handleComment = async (event) => {
   }
 }
 
+const profileLink = `/profile/${post.poster._id}`
 
 const handleCommentChange = (event) => {
   setCurrentComment(event.target.value)
@@ -147,10 +152,9 @@ const handleCommentChange = (event) => {
       data-cy="post" 
       key={ post._id }
       className="row-span-1 m-3 py-8 bg-white rounded-xl center shadow-lg space-y-2"
-      >{post.poster.firstName}<br/>
+      ><a href={profileLink}>{post.poster.firstName}</a><br/>
         { post.message }<br/>
       {postDate} posted at: {postTime}<br/> {numLikes} Likes {numComments} Comments
-
       <form onSubmit={handleComment} className="form-inline">
       <div class="form-group mb-2">
         <input type="text"value={ currentComment } onChange={handleCommentChange} className="form-control" id="comment" placeholder="Write a comment"/>

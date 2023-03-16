@@ -2,6 +2,8 @@ import './App.css';
 import LoginForm from '../login/LoginForm'
 import SignUpForm from '../user/SignUpForm'
 import Homepage from '../homepage/Homepage'
+import Upload from '../user/UploadProfilePic';
+import Profile from '../profile/Profile';
 import React, { useState, useContext, useEffect, createContext } from 'react';
 import {
   useNavigate,
@@ -43,6 +45,8 @@ const App = () => {
           <Navbar logoutHandle={logout} token={token}/>
           <Routes>
             <Route path='/'  element={<Homepage navigate={ useNavigate() }/>}/>
+            <Route path="profile/:id" element={<Profile navigate={ useNavigate() } />} />
+            <Route path='/testupload' element={<Upload navigate={ useNavigate() }/>}/>
             <Route path='/login'  element={<LoginForm  navigate={ useNavigate() } setToken={setToken}/>}/>
             <Route path='/signup' element={<SignUpForm navigate={ useNavigate() }/>}/>
             <Route path='/forgot-password' element={<ForgottenPassword navigate={ useNavigate() } setToken={setToken}/>}/>

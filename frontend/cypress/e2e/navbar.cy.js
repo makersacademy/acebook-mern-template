@@ -1,7 +1,7 @@
 describe("Signing in", () => {
 
     before(() => {
-      cy.signup("user@email.com", "12345678")
+      cy.signup("user@email.com", "12345678", "someone", "surname")
     })
 
     it("Displays the navbar before logging in", () => {
@@ -30,8 +30,8 @@ describe("Signing in", () => {
           
       it("Displays the login / signup before logging in", () => {
         cy.visit("/");
-        cy.get("a:contains(Login)").should("be.visible");
-        cy.get("a:contains(Sign Up)").should("be.visible");
+        cy.get("button:contains(Login)").should("be.visible");
+        cy.get("button:contains(Sign Up)").should("be.visible");
       });
     
     });

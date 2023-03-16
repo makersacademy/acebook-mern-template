@@ -25,13 +25,17 @@ const UsersController = {
   },
 
   showUser: (req, res) => {
-    const user_id = req.user_id
+    const user_id = req.params.id
+    console.log("user ID is: ", user_id)
 
     User.findById(user_id).then(async (user) => {
-      if(error) {
-        throw error;
-      } else {
-        res.status(201).json({username, firstName, lastName, _id})
+      try {
+        // some code that might throw an error
+        res.status(201).json({user});
+      } catch (error) {
+        // handle the error
+        console.error(error);
+        res.status(500).json({error: "Internal server error"});
       }
     })
   }

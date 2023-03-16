@@ -59,6 +59,7 @@ describe("/posts", () => {
       let originalPayload = JWT.decode(token, process.env.JWT_SECRET);
       expect(newPayload.iat > originalPayload.iat).toEqual(true);
     });  
+
   });
   
   describe("POST, when token is missing", () => {
@@ -146,7 +147,7 @@ describe("/posts", () => {
         .get("/posts");
       expect(response.status).toEqual(401);
     })
-
+ 
     test("does not return a new token", async () => {
       let post1 = new Post({message: "howdy!"});
       let post2 = new Post({message: "hola!"});
@@ -157,6 +158,7 @@ describe("/posts", () => {
       expect(response.body.token).toEqual(undefined);
     })
   })
+
 
 
   // describe('NewLike', () => {

@@ -9,6 +9,7 @@ const UserProvider = (props) => {
     setUserInfo(value);
   };
 
+
   return <UserContext.Provider value={{userInfo, handleUserInfo}}>{props.children}</UserContext.Provider>;
 }
 
