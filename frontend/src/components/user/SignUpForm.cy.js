@@ -1,10 +1,8 @@
 import React from "react";
 import { BrowserRouter as Router } from "react-router-dom";
-import ModalContextProvider from "../../contexts/modalContext";
+import ModalContextProvider from "../../contexts/ModalContext";
 import SignUpForm, { checkPassword, passwordConfirmation } from "./SignUpForm";
 import ModalList from "../modalList/ModalList";
-
-const navigate = () => {};
 
 describe("Signing up", () => {
   describe("#checkPassword", () => {
@@ -41,7 +39,7 @@ describe("Signing up", () => {
         <ModalContextProvider>
           <Router>
             <ModalList />
-            <SignUpForm navigate={navigate} />
+            <SignUpForm />
           </Router>
         </ModalContextProvider>
       );

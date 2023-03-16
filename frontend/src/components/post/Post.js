@@ -4,7 +4,7 @@ import jwtDecode from "jwt-decode";
 
 import { ReactComponent as LikeBtn } from "../../assets/like.svg";
 import { ReactComponent as FilledLikeBtn } from "../../assets/fillLike.svg";
-import avatar from "./avatar.png";
+import avatar from "../../assets/avatar.png";
 
 const Post = ({ post }) => {
   const [token, setToken] = useState(window.localStorage.getItem("token"));

@@ -1,9 +1,9 @@
 import React, { useContext, useState } from "react";
-import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 import { ReactComponent as Logo } from "../../assets/logo.svg";
 import Button from "../button/Button";
-import { ModalContext } from "../../contexts/modalContext";
+import { AuthContext } from "../../contexts/AuthContext";
+import { ModalContext } from "../../contexts/ModalContext";
 
 // returns a boolean if the passwrod is valid
 export const checkPassword = (passwordInput) => {
@@ -14,12 +14,14 @@ export const passwordConfirmation = (password, passwordTwo) => {
   return password === passwordTwo;
 };
 
-const SignUpForm = ({ navigate }) => {
+const SignUpForm = () => {
+  const [name, setName] = useState("");
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [passwordTwo, setPasswordTwo] = useState("");
   const { pushModal } = useContext(ModalContext);
+  const { setToken } = useContext(AuthContext);
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -46,35 +48,36 @@ const SignUpForm = ({ navigate }) => {
     }
 
     // if okay:
-    try {
-      const response = await fetch("/users", {
-        method: "post",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ username, email, password }),
+
+    const response = await fetch("/users", {
+      method: "post",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ name, username, email, password }),
+    });
+    const data = await response.json();
+    if (response.status !== 201) {
+      pushModal({
+        message: data.message,
+        type: "error",
       });
-      const data = await response.json();
-      if (response.status === 201) {
-        pushModal({
-          message: data.message,
-          type: "success",
-        });
-        navigate("/login");
-      } else {
-        pushModal({
-          message: "The username or email is in use",
-          type: "error",
-        });
-        navigate("/signup");
-      }
-    } catch (error) {
-      console.log(error);
+    } else {
+      window.localStorage.setItem("token", data.token);
+      setToken(data.token);
+      pushModal({
+        message: "Account created!",
+        type: "success",
+      });
     }
   };
 
   const handleUsernameChange = (event) => {
     setUsername(event.target.value);
+  };
+
+  const handleNameChange = (event) => {
+    setName(event.target.value);
   };
 
   const handleEmailChange = (event) => {
@@ -100,6 +103,15 @@ const SignUpForm = ({ navigate }) => {
         </div>
         <form className="mt-8 space-y-6" onSubmit={handleSubmit}>
           <div className="space-y-4">
+            <input
+              placeholder="Name"
+              id="name"
+              type="text"
+              required
+              value={name}
+              onChange={handleNameChange}
+              className="relative block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:z-10 focus:ring-2 focus:ring-inset focus:ring-blue-600"
+            />
             <input
               placeholder="Username"
               id="username"
@@ -141,7 +153,7 @@ const SignUpForm = ({ navigate }) => {
         </form>
         <div>
           <p className="text-center text-sm text-gray-600">
-            Or{" "}
+            Or
             <Link
               to="/login"
               className="font-medium text-blue-600 hover:text-blue-500"
@@ -153,10 +165,6 @@ const SignUpForm = ({ navigate }) => {
       </div>
     </div>
   );
-};
-
-SignUpForm.propTypes = {
-  navigate: PropTypes.func.isRequired,
 };
 
 export default SignUpForm;
