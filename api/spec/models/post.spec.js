@@ -10,6 +10,10 @@ describe("Post model", () => {
     });
   });
 
+  afterAll(async () => {
+    Post.deleteMany({});
+  });
+
   it("has a message", () => {
     const post = new Post({ message: "some message" });
     expect(post.message).toEqual("some message");

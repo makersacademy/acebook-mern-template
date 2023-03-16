@@ -1,5 +1,6 @@
 const request = require("supertest");
 const jwt = require("jsonwebtoken");
+const bcrypt = require("bcryptjs");
 const app = require("../../app");
 require("../mongodb_helper");
 const Post = require("../../models/post");
@@ -23,9 +24,10 @@ const generateBackdatedToken = (userId) =>
 describe("/posts", () => {
   beforeAll(async () => {
     user = new User({
+      name: "testy mctestface",
       username: "testuser",
       email: "test@test.com",
-      password: "12345678",
+      password: bcrypt.hashSync("12345678", bcrypt.genSaltSync()),
     });
     await user.save();
     token = generateBackdatedToken(user.id);

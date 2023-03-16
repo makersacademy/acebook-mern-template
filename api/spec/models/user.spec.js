@@ -4,20 +4,26 @@ require("../mongodb_helper");
 const User = require("../../models/user");
 
 describe("User model", () => {
+  let user1;
+  let user2;
   beforeEach((done) => {
     mongoose.connection.collections.users.drop(() => {
       done();
     });
   });
 
-  const user = new User({
+  afterAll(async () => {
+    await User.deleteMany({});
+  });
+
+  user1 = new User({
     name: "Someone One",
     username: "someone",
     email: "someone@example.com",
     password: "password",
   });
 
-  const user1 = new User({
+  user2 = new User({
     name: "User One",
     username: "someone",
     email: "user1@example.com",
@@ -25,19 +31,19 @@ describe("User model", () => {
   });
 
   it("has an email address", () => {
-    expect(user.email).toEqual("someone@example.com");
+    expect(user1.email).toEqual("someone@example.com");
   });
 
   it("has a password", () => {
-    expect(user.password).toEqual("password");
+    expect(user1.password).toEqual("password");
   });
 
   it("has a username", () => {
-    expect(user.username).toEqual("someone");
+    expect(user1.username).toEqual("someone");
   });
 
   it("has a name", () => {
-    expect(user.name).toEqual("Someone One");
+    expect(user1.name).toEqual("Someone One");
   });
 
   it("can list all users", (done) => {
@@ -49,11 +55,11 @@ describe("User model", () => {
   });
 
   it("can save a user", (done) => {
-    user.save((err) => {
+    user1.save((err) => {
       expect(err).toBeNull();
 
-      User.find((err, users) => {
-        expect(err).toBeNull();
+      User.find((error, users) => {
+        expect(error).toBeNull();
 
         expect(users[0]).toMatchObject({
           name: "Someone One",
@@ -67,14 +73,14 @@ describe("User model", () => {
   });
 
   it("Throws an error when a user with a username that exists already", async () => {
-    const user = new User({
+    user1 = new User({
       name: "Someone One",
       username: "someone",
       email: "someone@example.com",
       password: "password",
     });
 
-    const user1 = new User({
+    user2 = new User({
       name: "User One",
       username: "someone",
       email: "user1@example.com",
@@ -82,8 +88,8 @@ describe("User model", () => {
     });
 
     try {
-      await user.save();
-      console.log(user);
+      await user1.save();
+      console.log(user1);
     } catch (error) {
       console.log(error);
       expect(error).toBeNull();
@@ -91,8 +97,8 @@ describe("User model", () => {
     }
 
     try {
-      await user1.save();
-      console.log(user1);
+      await user2.save();
+      console.log(user2);
     } catch (error) {
       console.log(error);
       expect(error).not.toBeNull();
