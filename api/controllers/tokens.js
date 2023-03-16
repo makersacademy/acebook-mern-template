@@ -22,7 +22,7 @@ const login = async (req, res) => {
   delete user._id;
   delete user.__v;
 
-  return res.status(201).json({ token, user });
+  return res.status(201).json({ token, user, message: "Login Successful" });
 };
 
 module.exports = { login };
