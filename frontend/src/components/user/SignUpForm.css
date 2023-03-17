@@ -87,3 +87,19 @@ body {
 .signup-form h3 {
   color: rgb(255, 255, 255);
 }
+
+.signup-form input#avatar {
+  background-image: url(avatar.png);
+  background-size: 20px;
+  text-align: center;
+  padding: 10px;
+  margin: 5px;
+  border-radius: 5px;
+  border: none;
+  background-color: #f5f5f5;
+  width: clamp(200px, 50vw, 400px);
+  box-shadow: 3px 3px 3px lightblue;
+  background-repeat: no-repeat;
+  background-position: 10px center;
+  width: 300px;
+}

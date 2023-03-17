@@ -5,7 +5,7 @@ const SignUpForm = ({ navigate }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [name, setName] = useState("");
-
+  const [avatar, setAvatar] = useState("");
   const handleSubmit = async (event) => {
     event.preventDefault();
    
@@ -14,7 +14,7 @@ const SignUpForm = ({ navigate }) => {
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({ email: email, password: password, name: name }),
+      body: JSON.stringify({ email: email, password: password, name: name, avatar: avatar }),
     }).then((response) => {
       if (response.status === 201) {
         navigate("/login");
@@ -34,6 +34,9 @@ const SignUpForm = ({ navigate }) => {
 
   const handleNameChange = (event) => {
     setName(event.target.value);
+  };
+  const handleAvatarChange = (event) => {
+    setAvatar(event.target.value);
   };
 
   return (
@@ -65,6 +68,14 @@ const SignUpForm = ({ navigate }) => {
         type="text"
         value={name}
         onChange={handleNameChange}
+        className="input-field"
+      />
+      <input
+        placeholder="Avatar Number (1-5)"
+        id="avatar"
+        type="text"
+        value={avatar}
+        onChange={handleAvatarChange}
         className="input-field"
       />
       <input id="submit" type="submit" value="Sign up" className="submit-button" />

@@ -14,7 +14,7 @@ const UsersController = {
   },
   Index: (req, res) => {
     User.findOne({_id: req.params.id})
-    .populate("user", "name")
+    .select("name avatar")
     .exec(async (err, user) => {
       if (err) {
         throw err;

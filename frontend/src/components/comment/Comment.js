@@ -23,6 +23,7 @@ const Comment = ({ comment }) => {
   };
   return (
     <article data-cy="comment" key={comment._id} className="post-container">
+      <img src={require(`../avatars/avatar-${comment.user.avatar}.jpg`)} width='20' height='20' alt="Default Avatar" />
       <strong>
         {comment.user.name} ({result})
       </strong>

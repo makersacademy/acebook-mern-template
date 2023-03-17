@@ -20,6 +20,7 @@ const LogInForm = ({ navigate }) => {
       console.log("yay");
       let data = await response.json();
       window.localStorage.setItem("token", data.token);
+      window.localStorage.setItem("user_id", data.user);
       navigate("/posts");
       window.location.reload();
     } else {

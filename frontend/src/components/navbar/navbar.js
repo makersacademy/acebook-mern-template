@@ -3,7 +3,7 @@ import "./navbar.css"
 
 export default function Navbar() {
     const isLoggedIn = window.localStorage.getItem("token");
-
+    const userId = window.localStorage.getItem("user_id")
     const logOut = () =>{
         window.localStorage.removeItem('token');
         window.localStorage.removeItem('user_id');
@@ -20,6 +20,10 @@ export default function Navbar() {
                    <ul>
                    <li>
                       <a href = "/posts"  >Feed</a>
+                      
+                    </li>
+                    <li>
+                      <a href = {"/user/"+ userId}  >Profile</a>
                       
                     </li>
                     <li>

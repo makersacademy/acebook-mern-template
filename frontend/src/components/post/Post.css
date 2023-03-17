@@ -36,4 +36,11 @@ strong {
 
 li {
   padding: 10px;
+  list-style: none
+}
+
+
+img {
+  margin-right: 10px;
+  border-radius: 100px;
 }
