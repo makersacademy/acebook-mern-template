@@ -4,9 +4,7 @@ const generateToken = require("../models/token_generator");
 
 const getAllPosts = async (req, res) => {
   try {
-    const posts = await Post.find()
-      .sort({ createdAt: -1 })
-      .populate("author", "username");
+    const posts = await Post.find().sort({ createdAt: -1 }).populate("author");
     const token = await generateToken(req.userId);
     res.status(200).json({ posts, token });
   } catch (error) {
@@ -23,6 +21,122 @@ const createPost = async (req, res) => {
     res.status(201).json({ message: "OK", token });
   } catch (error) {
     res.status(500).json({ error });
+  }
+};
+
+const getSinglePost = async (req, res) => {
+  try {
+    const { postId } = req.params;
+    const post = await Post.findById(postId).populate([
+      {
+        path: "author",
+        model: "User",
+        select: "name username imageId",
+      },
+      {
+        path: "comments",
+        model: "Comment",
+        populate: {
+          path: "author",
+          model: "User",
+          select: "name username imageId",
+        },
+      },
+    ]);
+
+    const postComments = post.comments;
+
+    const mapComments = postComments.map((comments) => {
+      return {
+        id: comments._id,
+        message: comments.message,
+        createdAt: comments.createdAt,
+        authorName: comments.author.name,
+        likes: comments.likes,
+      };
+    });
+
+    const mappedPost = {
+      id: post._id,
+      message: post.message,
+      createdAt: post.createdAt,
+      author: {
+        id: post.author._id,
+        name: post.author.name,
+        username: post.author.username,
+        imageId: post.author.imageId,
+      },
+      comments: mapComments,
+    };
+
+    const token = await generateToken(req.userId);
+    return res.status(200).json({ mappedPost, token });
+  } catch (error) {
+    return res.status(500).json({ error });
+  }
+};
+
+const createComment = async (req, res) => {
+  try {
+    const { userId, postId } = req;
+
+    const comment = new Comment(req.body);
+    comment.author = userId;
+    await comment.save();
+
+    const post = await Post.find({ _id: postId });
+    const token = await generateToken(req.userId);
+
+    if (!post) {
+      return res.status(404).json({ error: "Post not found" }, token);
+    }
+
+    const updatedPost = await Post.findOneAndUpdate(
+      { _id: req.body.postId },
+      { $push: { comments: comment.id } },
+      { new: true }
+    );
+
+    return res.status(201).json({ updatedPost: updatedPost || post[0], token });
+  } catch (error) {
+    return res.status(500).json({ error: error.message });
+  }
+};
+
+const getPostComments = async (req, res) => {
+  try {
+    // PostId is passed as a query parameter
+    const { postId } = req.params;
+
+    const postComments = await Comment.find({ postId }).populate({
+      path: "author",
+      model: "User",
+      select: "name username imageId",
+    });
+    const token = await generateToken(req.userId);
+
+    // If no comments are found, return an error
+    if (!postComments) {
+      return res
+        .status(404)
+        .json({ error: "No comments found for this post" }, token);
+    }
+
+    const comments = postComments.map((comment) => {
+      return {
+        commentId: comment.id,
+        postId: comment.postId,
+        message: comment.message,
+        authorName: comment.author.name,
+        createdAt: comment.createdAt,
+        likes: comment.likes,
+        imageId: comment.author.imageId,
+      };
+    });
+
+    return res.status(200).json({ comments, token });
+  } catch (error) {
+    return res.status(500).json({ error });
   }
 };
 
@@ -69,69 +183,9 @@ const dislikePost = async (req, res) => {
   }
 };
 
-const createComment = async (req, res) => {
-  try {
-    const { userId, postId } = req;
-
-    const comment = new Comment(req.body);
-    comment.author = userId;
-    await comment.save();
-
-    const post = await Post.find({ _id: postId });
-    const token = await generateToken(req.userId);
-
-    if (!post) {
-      return res.status(404).json({ error: "Post not found" }, token);
-    }
-
-    const updatedPost = await Post.findOneAndUpdate(
-      { _id: req.body.postId },
-      { $push: { comments: comment.id } },
-      { new: true }
-    );
-
-    return res.status(201).json({ updatedPost: updatedPost || post[0], token });
-  } catch (error) {
-    return res.status(500).json({ error: error.message });
-  }
-};
-
-const getPostComments = async (req, res) => {
-  try {
-    // PostId is passed as a query parameter
-    const { postId } = req.query;
-
-    const comments = await Comment.find({ postId }).populate(
-      "author",
-      "username"
-    );
-    const token = await generateToken(req.userId);
-
-    // If no comments are found, return an error
-    if (!comments) {
-      return res
-        .status(404)
-        .json({ error: "No comments found for this post" }, token);
-    }
-
-    // Map the comments to a new array with only the fields we want to return
-    const postComments = comments.map((comment) => {
-      return {
-        id: comment.id,
-        message: comment.message,
-        authorName: comment.author.username,
-        createdAt: comment.createdAt,
-        likes: comment.likes,
-      };
-    });
-    return res.status(200).json({ postComments, token });
-  } catch (error) {
-    return res.status(500).json({ error });
-  }
-};
-
 module.exports = {
   getAllPosts,
+  getSinglePost,
   createPost,
   createComment,
   getPostComments,

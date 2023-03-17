@@ -4,6 +4,7 @@ const router = express.Router();
 
 const {
   getAllPosts,
+  getSinglePost,
   createPost,
   createComment,
   getPostComments,
@@ -14,8 +15,9 @@ const {
 router.get("/", getAllPosts);
 router.post("/", createPost);
 router.post("/comment", createComment);
-router.get("/comment", getPostComments);
 router.post("/like", likePost);
 router.delete("/like", dislikePost);
+router.get("/:postId/comments", getPostComments);
+router.get("/:postId", getSinglePost);
 
 module.exports = router;

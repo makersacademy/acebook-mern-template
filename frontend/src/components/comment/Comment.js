@@ -2,6 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 
 import contextualTime from "../../helpers/contextualTime";
+// import ProfilePicture from "../profilePicture/ProfilePicture";
 import avatar from "../../assets/avatar.png";
 
 const Comment = ({ comment }) => {
@@ -12,14 +13,19 @@ const Comment = ({ comment }) => {
   };
 
   return (
-    <div data-cy="comment" className="m-4 flex flex-col shadow-sm">
-      <div className="m-2 flex">
+    <div data-cy="comment" className=" flex flex-col shadow-sm">
+      <div className="m-2 flex items-center">
+        {/* <ProfilePicture
+          className="mx-2 h-10 w-10"
+          publicId={comment.author.imageId}
+        /> */}
         <img
           src={avatar}
-          alt="Avatar"
-          className="mx-2 h-10 w-10 rounded-full"
+          alt="avatar"
+          className="m-2 h-10 w-auto rounded-full"
         />
-        <div className="">
+
+        <div className="items-center">
           <p className="text-lg font-semibold">{comment.authorName}</p>
           {formatDate()}
         </div>
@@ -34,7 +40,11 @@ Comment.propTypes = {
     id: PropTypes.string,
     message: PropTypes.string,
     createdAt: PropTypes.string,
-    authorName: PropTypes.string.isRequired,
+    authorName: PropTypes.string,
+    author: PropTypes.shape({
+      name: PropTypes.string,
+      imageId: PropTypes.string,
+    }),
   }).isRequired,
 };
 
