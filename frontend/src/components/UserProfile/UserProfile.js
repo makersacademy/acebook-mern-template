@@ -10,12 +10,12 @@ const UserProfile = ({ navigate }) => {
   const [posts, setPosts] = useState([]);
   const [token, setToken] = useState(window.localStorage.getItem("token"));
   const userid = useParams();
-  console.log(userid);
+  
 
   async function fetchUser() {
     
     const url = "/user/" + userid.id;
-    console.log(url)
+    // console.log(url)
     const response = await fetch(url, {
       headers: {
         Authorization: `Bearer ${token}`,
@@ -26,6 +26,7 @@ const UserProfile = ({ navigate }) => {
       window.localStorage.setItem("token", data.token);
       setToken(window.localStorage.getItem("token"))
       setUser(data.user);
+      console.log(user)
   }
 
     const fetchPosts = () => {
@@ -59,9 +60,10 @@ const UserProfile = ({ navigate }) => {
       return(
         <>
         <div id="username" role="username">
+        
           <h1>{user.name}</h1>
         </div>
-        <div>
+        <div><img src={require(`../avatars/avatar-${user.avatar ? user.avatar : "1"}.jpg`)} width='20' height='20' alt="Default Avatar" />
           <h1>{user.name}'s posts</h1>
             {[...posts].reverse().map((post) => (
               <Post post={post} key={post._id} />
