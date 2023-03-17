@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useContext } from "react";
-import Post from "../post/Post";
+import PostContainer from "../postContainer/PostContainer";
 import NewPost from "../newPost/NewPost";
 import { AuthContext } from "../../contexts/AuthContext";
 
@@ -35,7 +35,7 @@ const Feed = () => {
 
       <div id="feed" className="flex flex-col gap-4" role="feed">
         {posts.map((post) => (
-          <Post post={post} key={post._id} />
+          <PostContainer post={post} key={post._id} />
         ))}
       </div>
     </div>

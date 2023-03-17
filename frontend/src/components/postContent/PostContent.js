@@ -1,5 +1,5 @@
 /* eslint-disable react/destructuring-assignment */
-import React, { useState, useContext, useCallback, useMemo } from "react";
+import React, { useState, useContext, useMemo } from "react";
 import PropTypes from "prop-types";
 import jwtDecode from "jwt-decode";
 
@@ -16,46 +16,27 @@ import NewComment from "../newComment/NewComment";
 import ProfilePicture from "../profilePicture/ProfilePicture";
 import { CloudinaryContext } from "../../contexts/cloudinaryContext";
 
-const Post = ({ post }) => {
+const PostContent = ({ post, getComments, comments, defaultShowComments }) => {
   const { token, setToken } = useContext(AuthContext);
   const [likes, setLikes] = useState(post.likes);
   const [userId] = useState(jwtDecode(token).userId);
-  const [showComments, setShowComments] = useState(false);
-  const [comments, setComments] = useState(post.comments ?? []);
+  const [showComments, setShowComments] = useState(defaultShowComments);
   const postId = post._id;
   const cld = useContext(CloudinaryContext);
   const myImage = cld.image(post.image);
 
-  // useCallback memoizes the function so that it is only called when the dependencies change. Preventing unnecessary re-renders
-  const getComments = useCallback(async () => {
-    if (token) {
-      const response = await fetch(`/posts/${postId}/comments`, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
-
-      if (response.status !== 200) {
-        console.log(response);
-        // Render Modal with generic error message
-      } else {
-        const data = await response.json();
-        window.localStorage.setItem("token", data.token);
-        setToken(data.token);
-        setComments(data.comments);
-      }
-    }
-  }, [token, postId]);
+  const commentsLength = comments.length;
 
   // useMemo memoizes the value so that it is only calculated when the dependencies change. Preventing unnecessary re-renders
   const commentCount = useMemo(() => {
-    if (comments.length >= 10) {
+    if (commentsLength >= 10) {
       return "10+";
     }
-    return comments.length;
+    return commentsLength;
   }, [comments]);
 
-  const toggleComments = () => {
+  const toggleComments = (event) => {
+    event.stopPropagation();
     setShowComments(!showComments);
     if (!showComments) {
       getComments();
@@ -68,7 +49,19 @@ const Post = ({ post }) => {
     return <p className="text-sm text-gray-800">{formattedDate}</p>;
   };
 
-  const likeHandler = async (methodArg) => {
+  // returns a boolean if the user already liked the post
+  const checkIsLiked = () => {
+    return likes.includes(userId);
+  };
+
+  const likeHandler = async (event) => {
+    event.stopPropagation();
+    let methodArg;
+    if (checkIsLiked()) {
+      methodArg = "delete";
+    } else {
+      methodArg = "post";
+    }
     if (token) {
       const response = await fetch("/posts/like", {
         method: methodArg,
@@ -90,11 +83,6 @@ const Post = ({ post }) => {
         setToken(data.token);
       }
     }
-  };
-
-  // returns a boolean if the user already liked the post
-  const checkIsLiked = () => {
-    return likes.includes(userId);
   };
 
   return (
@@ -125,28 +113,26 @@ const Post = ({ post }) => {
           cldImg={myImage}
         />
       </div>
-      <div className="flex gap-3 px-6 py-2">
-        <div className="flex items-center gap-2">
-          {checkIsLiked() ? (
-            <FilledLikeBtn
-              data-cy="filled-like-button"
+      <div className="flex gap-3 px-6 py-2" id="btns-containers">
+        {!defaultShowComments && (
+          <div className="flex items-center gap-2" id="like-button-container">
+            <button
+              className="flex h-7 items-center"
+              onClick={likeHandler}
               type="button"
-              onClick={() => likeHandler("delete")}
-              className="h-7 w-auto cursor-pointer fill-red-500"
-            />
-          ) : (
-            <LikeBtn
-              data-cy="like-button"
-              onClick={() => likeHandler("post")}
-              type="button"
-              className="h-7 w-auto cursor-pointer fill-black"
-            />
-          )}
-          <p
-            data-cy="likes-length"
-            className="text-sm text-gray-500"
-          >{`${likes.length}`}</p>
-        </div>
+            >
+              {" "}
+              {checkIsLiked() ? (
+                <FilledLikeBtn className="h-7 w-auto cursor-pointer fill-red-500" />
+              ) : (
+                <LikeBtn className="h-7 w-auto cursor-pointer fill-black" />
+              )}
+              <p data-cy="likes-length" className="text-sm text-gray-500">
+                {likes.length}
+              </p>
+            </button>
+          </div>
+        )}
         <div id="comments-btn-container" className="flex items-center">
           <button
             className="flex items-center p-2"
@@ -179,7 +165,7 @@ const Post = ({ post }) => {
   );
 };
 
-Post.propTypes = {
+PostContent.propTypes = {
   post: PropTypes.shape({
     _id: PropTypes.string,
     message: PropTypes.string,
@@ -194,6 +180,20 @@ Post.propTypes = {
     }),
     image: PropTypes.string,
   }).isRequired,
+  getComments: PropTypes.func.isRequired,
+  comments: PropTypes.arrayOf(
+    PropTypes.shape({
+      _id: PropTypes.string,
+      message: PropTypes.string,
+      authorName: PropTypes.string,
+      createdAt: PropTypes.string,
+    })
+  ).isRequired,
+  defaultShowComments: PropTypes.bool,
 };
 
-export default Post;
+PostContent.defaultProps = {
+  defaultShowComments: false,
+};
+
+export default PostContent;

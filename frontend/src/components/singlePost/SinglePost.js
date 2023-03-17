@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
-import Post from "../post/Post";
+import PostContent from "../postContent/PostContent";
 import CommentList from "../commentList/CommentList";
 
 const SinglePost = ({ postId }) => {
   const [post, setPost] = useState(null);
-  const [comments, setComments] = useState([]);
+  const [comments, setComments] = useState(post);
 
   const getPost = async () => {
     const response = await fetch(`/posts/${postId}`);
@@ -25,8 +25,8 @@ const SinglePost = ({ postId }) => {
 
   return (
     <div>
-      <Post post={post} />
-      <CommentList comments={comments} />
+      <PostContent post={post} />
+      <CommentList comments={comments} showComments />
     </div>
   );
 };
