@@ -80,8 +80,17 @@ const SignUpForm = () => {
           <h2 className="mt-6 text-center text-3xl font-bold tracking-tight text-gray-900">
             Welcome to Acebook
           </h2>
+          <p
+            className="mt-2 text-center text-xl font-light text-gray-500
+          "
+          >
+            Create an account
+          </p>
         </div>
-        <form className="mt-8 space-y-6" onSubmit={handleSubmit}>
+        <form
+          className="mt-8 space-y-6 rounded-xl border border-gray-100 bg-white p-8"
+          onSubmit={handleSubmit}
+        >
           <div className="space-y-4">
             <input
               placeholder="Name"
@@ -90,7 +99,7 @@ const SignUpForm = () => {
               required
               value={name}
               onChange={handleNameChange}
-              className="relative block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:z-10 focus:ring-2 focus:ring-inset focus:ring-blue-600"
+              className="relative block w-full rounded-md border-0 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:z-10 focus:ring-2 focus:ring-inset focus:ring-blue-600"
             />
             <input
               placeholder="Username"
@@ -99,7 +108,7 @@ const SignUpForm = () => {
               required
               value={username}
               onChange={handleUsernameChange}
-              className="relative block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:z-10 focus:ring-2 focus:ring-inset focus:ring-blue-600"
+              className="relative block w-full rounded-md border-0 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:z-10 focus:ring-2 focus:ring-inset focus:ring-blue-600"
             />
             <input
               placeholder="Email"
@@ -108,7 +117,7 @@ const SignUpForm = () => {
               required
               value={email}
               onChange={handleEmailChange}
-              className="relative block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:z-10 focus:ring-2 focus:ring-inset focus:ring-blue-600"
+              className="relative block w-full rounded-md border-0 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:z-10 focus:ring-2 focus:ring-inset focus:ring-blue-600"
             />
             <input
               placeholder="Password"
@@ -117,7 +126,7 @@ const SignUpForm = () => {
               required
               value={password}
               onChange={handlePasswordChange}
-              className="relative block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:z-10 focus:ring-2 focus:ring-inset focus:ring-blue-600"
+              className="relative block w-full rounded-md border-0 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:z-10 focus:ring-2 focus:ring-inset focus:ring-blue-600"
             />
             <input
               placeholder="Retype Password"
@@ -126,7 +135,7 @@ const SignUpForm = () => {
               required
               value={passwordTwo}
               onChange={handlePasswordTwoChange}
-              className="relative block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:z-10 focus:ring-2 focus:ring-inset focus:ring-blue-600"
+              className="relative block w-full rounded-md border-0 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:z-10 focus:ring-2 focus:ring-inset focus:ring-blue-600"
             />
           </div>
           <Button
@@ -138,7 +147,7 @@ const SignUpForm = () => {
         </form>
         <div>
           <p className="text-center text-sm text-gray-600">
-            Or
+            Or{" "}
             <Link
               to="/login"
               className="font-medium text-blue-600 hover:text-blue-500"

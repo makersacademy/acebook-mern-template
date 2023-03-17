@@ -15,7 +15,7 @@ const CommentList = ({ comments }) => {
   };
   return (
     <div data-cy="comment-list">
-      <div className="flex flex-col">
+      <div className="my-6 flex flex-col gap-4">
         <p className="text-lg font-semibold">Comments</p>
         {comments.length > 0
           ? comments.map((comment) => (
