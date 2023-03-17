@@ -5,6 +5,7 @@ import jwtDecode from "jwt-decode";
 
 import { AdvancedImage } from "@cloudinary/react";
 import contextualTime from "../../helpers/contextualTime";
+import { AuthContext } from "../../contexts/AuthContext";
 
 import { ReactComponent as CommentBtn } from "../../assets/comment.svg";
 import { ReactComponent as CommentFilledBtn } from "../../assets/comment-filled.svg";
