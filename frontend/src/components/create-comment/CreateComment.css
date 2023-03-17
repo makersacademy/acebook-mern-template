@@ -30,9 +30,9 @@
   background-color: rgb(140, 28, 148);
 }
 
-form {
-  margin: auto;
+#comment-form {
+  /* margin: auto; */
   width: fit-content;
-  margin-top: 50px;
-  margin-bottom: 50px;
+  margin-top: 10px;
+  margin-bottom: 10px;
 }

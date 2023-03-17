@@ -27,7 +27,7 @@ const CreateComment = (props) => {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
+    <form id="comment-form" onSubmit={handleSubmit}>
       <input
         placeholder="Comment"
         id="comment"

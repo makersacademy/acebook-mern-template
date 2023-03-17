@@ -1,0 +1,18 @@
+h3 {
+  margin-left: 400px;
+  margin-top: 50px;
+  color: rgb(92, 18, 96);
+}
+
+#username {
+  color: rgb(92, 18, 96);
+  margin-left: 20px;
+  display: flex;
+ 
+}
+
+.avatar {
+  vertical-align: middle;
+  margin-top: 12px;
+  margin-right: 10px;
+}

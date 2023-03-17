@@ -3,6 +3,7 @@ import { formatDistanceToNow } from "date-fns";
 // import "./Post.css";
 import Post from "../post/Post"
 import { useParams } from "react-router";
+import "./UserProfile.css"
 
 
 const UserProfile = ({ navigate }) => {
@@ -60,11 +61,11 @@ const UserProfile = ({ navigate }) => {
       return(
         <>
         <div id="username" role="username">
-        
+        <img src={require(`../avatars/avatar-${user.avatar ? user.avatar : "1"}.jpg`)} width='50' height='50' alt="Default Avatar" className="avatar" />
           <h1>{user.name}</h1>
         </div>
-        <div><img src={require(`../avatars/avatar-${user.avatar ? user.avatar : "1"}.jpg`)} width='20' height='20' alt="Default Avatar" />
-          <h1>{user.name}'s posts</h1>
+        <div>
+          <h3>{user.name}'s posts</h3>
             {[...posts].reverse().map((post) => (
               <Post post={post} key={post._id} />
             ))}

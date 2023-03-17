@@ -15,29 +15,35 @@
     color: black;
     font-size: 1.3rem;
     margin-left: 1rem;
-    position: absolute;
+    /* position: absolute; */
     top: -1vh;
     left: 2vw;
     font-size: clamp(2rem, 11vw, 6rem);
     color: rgb(211, 83, 200);
     font-weight: bold;
     font-family: "quayside", sans-serif;
+    
 }
 .navigation-menu {
     margin-left: auto;
 }
 .navigation-menu ul {
     display: flex;
-    padding: 0;
+    padding: -1px;
+    margin-right: 20px;
 }
 .navigation-menu li {
    
     list-style-type: none;
-    margin: 0 1rem;
+    margin: 1px;
+    padding: 5px;
 }
 .navigation-menu li a {
- 
     text-decoration: none;
     display: block;
     width: 100%;
+}
+
+.navigation-menu li a:hover {
+    text-decoration: underline overline wavy rgb(241, 36, 186);
 }

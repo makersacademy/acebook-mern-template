@@ -18,15 +18,15 @@ export default function Navbar() {
                 
                 <div className="navigation-menu">
                    <ul>
-                   <li>
+                   <li id="1">
                       <a href = "/posts"  >Feed</a>
                       
                     </li>
-                    <li>
+                    <li id="2">
                       <a href = {"/user/"+ userId}  >Profile</a>
                       
                     </li>
-                    <li>
+                    <li id="3">
                       <a href = "/" onClick={logOut} >Log Out</a>
                       
                     </li>
