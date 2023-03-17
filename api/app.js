@@ -69,6 +69,7 @@ const bcryptPasswordHasher = (req, res, next) => {
 app.use("/posts", tokenChecker, postsRouter);
 app.use("/tokens", tokensRouter);
 app.use("/users", bcryptPasswordHasher, usersRouter);
+app.use("/user", usersRouter);
 app.use("/comments", tokenChecker, commentsRouter);
 
 // catch 404 and forward to error handler
