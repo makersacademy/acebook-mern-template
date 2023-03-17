@@ -6,7 +6,9 @@ export default () => {
   return (
     <>
       <NavBar />
-      <Outlet />
+      <div className="mx-auto max-w-2xl px-2">
+        <Outlet />
+      </div>
     </>
   );
 };

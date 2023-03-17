@@ -13,12 +13,11 @@ const Comment = ({ comment }) => {
   };
 
   return (
-    <div data-cy="comment" className=" flex flex-col shadow-sm">
-      <div className="m-2 flex items-center">
-        {/* <ProfilePicture
-          className="mx-2 h-10 w-10"
-          publicId={comment.author.imageId}
-        /> */}
+    <div
+      data-cy="comment"
+      className="flex flex-col rounded-md border border-gray-200 p-4 transition-all hover:bg-gray-100"
+    >
+      <div className="flex">
         <img
           src={avatar}
           alt="avatar"

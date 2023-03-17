@@ -1,17 +1,19 @@
-import React, { useState, useCallback, useMemo, useContext } from "react";
+/* eslint-disable react/destructuring-assignment */
+import React, { useState, useContext, useCallback, useMemo } from "react";
 import PropTypes from "prop-types";
 import jwtDecode from "jwt-decode";
 
+import { AdvancedImage } from "@cloudinary/react";
 import contextualTime from "../../helpers/contextualTime";
-import { AuthContext } from "../../contexts/AuthContext";
+
 import { ReactComponent as CommentBtn } from "../../assets/comment.svg";
 import { ReactComponent as CommentFilledBtn } from "../../assets/comment-filled.svg";
-
 import { ReactComponent as LikeBtn } from "../../assets/like.svg";
 import { ReactComponent as FilledLikeBtn } from "../../assets/fillLike.svg";
 import CommentList from "../commentList/CommentList";
 import NewComment from "../newComment/NewComment";
 import ProfilePicture from "../profilePicture/ProfilePicture";
+import { CloudinaryContext } from "../../contexts/cloudinaryContext";
 
 const Post = ({ post }) => {
   const { token, setToken } = useContext(AuthContext);
@@ -20,6 +22,8 @@ const Post = ({ post }) => {
   const [showComments, setShowComments] = useState(false);
   const [comments, setComments] = useState(post.comments ?? []);
   const postId = post._id;
+  const cld = useContext(CloudinaryContext);
+  const myImage = cld.image(post.image);
 
   // useCallback memoizes the function so that it is only called when the dependencies change. Preventing unnecessary re-renders
   const getComments = useCallback(async () => {
@@ -95,74 +99,81 @@ const Post = ({ post }) => {
   return (
     <article
       data-cy="post"
-      className="flex flex-col rounded-lg p-6 shadow-md"
+      className="flex flex-col rounded-lg border border-gray-100 bg-white"
       key={post._id}
     >
-      <div className="m-2 flex items-center">
-        <ProfilePicture
-          className="m-2 h-10 w-10"
-          publicId={post.author.imageId}
+      <div className="px-6 pt-4">
+        <div className="flex items-center gap-4">
+          <ProfilePicture
+            className="h-10 w-10"
+            publicId={post.author.imageId}
+          />
+          <div>
+            <p className="text-lg font-semibold capitalize">
+              {post.author.username}
+            </p>
+            {formatDate()}
+          </div>
+        </div>
+        <div className="my-2 mt-4 overflow-auto text-base">{post.message}</div>
+      </div>
+      <div className="flex max-h-[45vh] overflow-hidden">
+        <AdvancedImage
+          data-cy="image"
+          className="object-cover"
+          cldImg={myImage}
         />
-        <div className="">
-          <p className="text-lg font-semibold">{post.author.name}</p>
-          {formatDate()}
+      </div>
+      <div className="flex gap-3 px-6 py-2">
+        <div className="flex items-center gap-2">
+          {checkIsLiked() ? (
+            <FilledLikeBtn
+              data-cy="filled-like-button"
+              type="button"
+              onClick={() => likeHandler("delete")}
+              className="h-7 w-auto cursor-pointer fill-red-500"
+            />
+          ) : (
+            <LikeBtn
+              data-cy="like-button"
+              onClick={() => likeHandler("post")}
+              type="button"
+              className="h-7 w-auto cursor-pointer fill-black"
+            />
+          )}
+          <p
+            data-cy="likes-length"
+            className="text-sm text-gray-500"
+          >{`${likes.length}`}</p>
+        </div>
+        <div id="comments-btn-container" className="flex items-center">
+          <button
+            className="flex items-center p-2"
+            onClick={toggleComments}
+            type="button"
+            id="comments-btn"
+          >
+            {showComments ? (
+              <CommentFilledBtn className="h-7 fill-blue-500" />
+            ) : (
+              <CommentBtn className="h-7" />
+            )}
+            <p className="pl-3 text-sm text-gray-600" id="comment-count">
+              {commentCount}
+            </p>
+          </button>
         </div>
       </div>
-
-      <div className="p-2 text-base">{post.message}</div>
-      <div className="">
-        <div className="m-2 flex items-center gap-4">
-          <div className="flex items-center">
-            {checkIsLiked() ? (
-              <FilledLikeBtn
-                data-cy="filled-like-button"
-                type="button"
-                onClick={() => likeHandler("delete")}
-                className="h-8 w-auto cursor-pointer fill-red-500"
-              />
-            ) : (
-              <LikeBtn
-                data-cy="like-button"
-                onClick={() => likeHandler("post")}
-                type="button"
-                className="h-7 w-auto cursor-pointer fill-black"
-              />
-            )}
-            <p
-              data-cy="likes-length"
-              className="px-2 text-sm text-gray-800"
-            >{`${likes.length}`}</p>
-          </div>
-          <div className="flex items-center">
-            <div
-              id="comments-btn-container"
-              className="m-2 flex items-center gap-4"
-            >
-              <button
-                className="flex items-center px-2"
-                onClick={toggleComments}
-                type="button"
-                id="comments-btn"
-              >
-                {showComments ? (
-                  <CommentFilledBtn className="h-5 w-auto cursor-pointer fill-blue-500 stroke-blue-500" />
-                ) : (
-                  <CommentBtn className="h-5 w-auto cursor-pointer" />
-                )}
-                <p className="px-2 text-sm text-gray-800" id="comment-count">
-                  {commentCount}
-                </p>
-              </button>
-            </div>
-          </div>
-        </div>
-        {showComments && (
-          <div id="comments-container">
+      {showComments && (
+        <>
+          <hr />
+          <div id="comments-container" className="px-6 pb-6">
             <CommentList comments={comments} />
+            <hr />
             <NewComment getComments={getComments} postId={postId} />
           </div>
-        )}
-      </div>
+        </>
+      )}
     </article>
   );
 };
@@ -180,6 +191,7 @@ Post.propTypes = {
       username: PropTypes.string,
       imageId: PropTypes.string,
     }),
+    image: PropTypes.string,
   }).isRequired,
 };
 
