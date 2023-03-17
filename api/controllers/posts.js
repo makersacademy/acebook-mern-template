@@ -27,26 +27,26 @@ const createPost = async (req, res) => {
 const getSinglePost = async (req, res) => {
   try {
     const { postId } = req.params;
-    const post = await Post.findById(postId).populate([
-      {
-        path: "author",
-        model: "User",
-        select: "name username imageId",
-      },
-      {
-        path: "comments",
-        model: "Comment",
-        populate: {
+    const post = await Post.findById(postId)
+      .populate([
+        {
           path: "author",
           model: "User",
           select: "name username imageId",
         },
-      },
-    ]);
+        {
+          path: "comments",
+          model: "Comment",
+          populate: {
+            path: "author",
+            model: "User",
+            select: "name username imageId",
+          },
+        },
+      ])
+      .lean();
 
-    const postComments = post.comments;
-
-    const mapComments = postComments.map((comments) => {
+    const mapComments = post.comments.map((comments) => {
       return {
         id: comments._id,
         message: comments.message,
@@ -56,18 +56,7 @@ const getSinglePost = async (req, res) => {
       };
     });
 
-    const mappedPost = {
-      id: post._id,
-      message: post.message,
-      createdAt: post.createdAt,
-      author: {
-        id: post.author._id,
-        name: post.author.name,
-        username: post.author.username,
-        imageId: post.author.imageId,
-      },
-      comments: mapComments,
-    };
+    const mappedPost = { ...post, comments: mapComments };
 
     const token = await generateToken(req.userId);
     return res.status(200).json({ mappedPost, token });
