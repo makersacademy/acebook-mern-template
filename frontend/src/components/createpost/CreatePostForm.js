@@ -1,34 +1,33 @@
 import React, { useState } from 'react';
+import { getToken } from '../utils/auth';
+
 
 const CreatePostForm = ({ navigate }) => {
 
   const [message, setMessage] = useState(""); //change
+  const [token, setToken] = useState(window.localStorage.getItem("token"));
 
   const handleSubmit = async (event) => {
     event.preventDefault();
 
-    let response = await fetch( '/tokens', {
+    if(token) {
+    let response = await fetch( '/posts', {
       method: 'post',
       headers: {
         'Content-Type': 'application/json',
+        'Authorization': `Bearer ${token}`
+
       },
-      body: JSON.stringify({ email: email, password: password })
+      body: JSON.stringify({ message: message })
     })
 
     if(response.status !== 201) {
       console.log("yay")
-      navigate('/login')
+      navigate('/posts')
     } else {
       console.log("oop")
       let data = await response.json()
       window.localStorage.setItem("token", data.token)
-        fetch('/post', {
-          method: 'post',
-          headers: {
-            'Content-type': 'application/json',
-          },
-          body: JSON.stringify({ message: message })
-        })
       navigate('/posts'); // new post functionality to post here.
     }
   }
