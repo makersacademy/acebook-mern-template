@@ -26,6 +26,11 @@ const Feed = ({ navigate }) => {
     window.localStorage.removeItem("token")
     navigate('/login')
   }
+
+  const createpost = () => {
+    navigate('/createpost')
+  }
+
   
     if(token) {
       return(
@@ -33,6 +38,9 @@ const Feed = ({ navigate }) => {
           <h2>Posts</h2>
             <button onClick={logout}>
               Logout
+            </button>
+            <button onClick={createpost}>
+              Create Post
             </button>
           <div id='feed' role="feed">
               {posts.map(
