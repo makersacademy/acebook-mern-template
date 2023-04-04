@@ -1,0 +1,40 @@
+div {
+  width: 400px;
+  margin: 0 auto;
+  text-align: center;
+  margin-top: 150px;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  width: 400px;
+  margin: 0 auto;
+  margin-top: 50px;
+}
+
+input {
+  margin-bottom: 10px;
+  padding: 10px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  font-size: 16px;
+  color: #27296d;
+}
+
+button {
+  color: #27296d;
+  background-color: #a393eb;
+  padding: 10px;
+  border: none;
+  border-radius: 5px;
+  font-size: 16px;
+  margin-top: 10px;
+  margin-bottom: 20px;
+  cursor: pointer;
+}
+  
+button:hover {
+  background-color: #f5c7f7;
+  color: #27296d;
+}
