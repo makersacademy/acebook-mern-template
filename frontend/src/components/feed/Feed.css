@@ -1,0 +1,22 @@
+h2 {
+  color: #263849;
+}
+
+button {
+  color: #263849;
+  background-color: #35bcbf;
+  padding: 15px;
+  padding-left: 30px;
+  padding-right: 30px;
+  border: none;
+  border-radius: 5px;
+  font-size: 16px;
+  margin-top: 10px;
+  margin-bottom: 20px;
+  cursor: pointer;
+}
+  
+button:hover {
+  background-color: #90f6d7;
+  color: #263849;
+}
