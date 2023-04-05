@@ -7,6 +7,7 @@ import Form from 'react-bootstrap/Form';
 const SignUpForm = ({ navigate }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [name, setName] = useState("");
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -16,7 +17,7 @@ const SignUpForm = ({ navigate }) => {
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({ email: email, password: password }),
+      body: JSON.stringify({ email: email, password: password, name: name }),
     }).then((response) => {
       if (response.status === 201) {
         navigate("/login");
@@ -34,11 +35,23 @@ const SignUpForm = ({ navigate }) => {
     setPassword(event.target.value);
   };
 
+  const handleNameChange = (event) => {
+    setName(event.target.value);
+  };
+
   return (
     <Container>
       <div className="d-flex justify-content-center sign-up-form">
       <Form onSubmit={handleSubmit} className="">
         <Form.Group className="mb-3" controlId="formBasicEmail">
+        <Form.Label>Full Name</Form.Label>
+          <Form.Control
+            type="text"
+            placeholder="Enter full name"
+            id="name"
+            value={name}
+            onChange={handleNameChange}
+          />
           <Form.Label>Email address</Form.Label>
           <Form.Control
             type="email"
