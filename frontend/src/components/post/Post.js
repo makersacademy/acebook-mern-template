@@ -5,7 +5,7 @@ import { faThumbsUp } from '@fortawesome/free-solid-svg-icons/faThumbsUp'
 const Post = ({post}) => {
   return(
     <div>
-    <article data-cy="post" key={ post._id }>{ post.message }</article>
+    <article data-cy="post" key={ post._id }> <div>{ post.user.name }</div><div>{ post.message }</div> </article>
     <FontAwesomeIcon icon={faThumbsUp} />
     </div>
   )
