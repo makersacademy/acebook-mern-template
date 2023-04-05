@@ -4,7 +4,7 @@ import Form from "react-bootstrap/Form";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 
-const CreatePost = ({onNewPost}) => {
+const CreatePost = () => {
   const [message, setMessage] = useState("");
   const [token, setToken] = useState(window.localStorage.getItem("token"));
 
@@ -24,9 +24,6 @@ const CreatePost = ({onNewPost}) => {
       console.log("error saving your post");
     } else {
       console.log("your post saved to db");
-      const newPost = await response.json();
-      console.log(newPost)    
-      onNewPost(newPost);
     }
   }
 

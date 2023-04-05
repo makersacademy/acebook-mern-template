@@ -31,10 +31,6 @@ const Feed = ({ navigate }) => {
     navigate("/login");
   };
 
-  const handleNewPost = (newPost) => {
-    setPosts([...posts, newPost]);
-  };
-
   if (token) {
     return (
       <>
@@ -45,7 +41,7 @@ const Feed = ({ navigate }) => {
             <button onClick={logout}>Logout</button>
           </div>
           <div className="">
-            <CreatePost onNewPost={handleNewPost} />
+            <CreatePost/>
           </div>
           <Row className="justify-content-md-center mt-3">
             <Col md={8}>
