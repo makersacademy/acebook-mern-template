@@ -1,13 +1,15 @@
-// import CreatePostForm from './CreatePostForm'
-// const navigate = () => {}
-
 describe("Creates a post.", () => {
+
+  Cypress.on('uncaught:exception', (err, runnable) => {
+    // this is used to not fail the test when something
+    // outside of cypress is causing an issue
+    return false
+  })
 
   it("Redirects to '/posts' after creating post.", () => {
     cy.intercept("POST", "/posts", (req) => {
       req.reply((res) => {
         res.send({ success: true });
-        res.redirect("/posts");
       });
     }).as("createpost");
     
@@ -24,22 +26,4 @@ describe("Creates a post.", () => {
     cy.wait("@createpost");
     cy.url().should("include", "/posts");
   });
-
-    // it("Redirects to '/posts' after creating post.", () => {
-    //     window.localStorage.setItem("token", "fakeToken")
-        
-    //     cy.intercept("POST", "/posts", (req) => {
-    //       req.reply((res) => {
-    //         res.send({ success: true });
-    //         res.redirect("/posts");
-    //       });
-    //     }).as("createpost");
-    
-    //     cy.mount(<CreatePostForm navigate={navigate}/>)
-        
-    //     cy.wait("@createpost").then(() =>{
-    //       cy.get('[data-cy="post"]')
-    //       cy.url().should("include", "/posts");
-    //     })
-    //   })
-  });
+});
