@@ -5,7 +5,6 @@ import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import CreatePost from "../create/Create";
 
-
 const Feed = ({ navigate }) => {
   const [posts, setPosts] = useState([]);
   const [token, setToken] = useState(window.localStorage.getItem("token"));
@@ -35,16 +34,16 @@ const Feed = ({ navigate }) => {
     return (
       <>
         <Container>
+          <h1 className="d-flex justify-content-center mt-5">acebook.</h1>
           <h2>Posts</h2>
-
           <div>
             <button onClick={logout}>Logout</button>
           </div>
-          <div className="">
-            <CreatePost/>
-          </div>
-          <Row className="justify-content-md-center mt-3">
-            <Col md={8}>
+          <Col md={12}>
+            <CreatePost />
+          </Col>
+          <Row className="justify-content-md-center">
+            <Col md={6}>
               <div id="feed" role="feed">
                 {posts.map((post) => (
                   <Post post={post} key={post._id} />

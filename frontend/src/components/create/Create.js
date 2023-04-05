@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from "react";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
+import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 
 const CreatePost = () => {
   const [message, setMessage] = useState("");
-  const [token, setToken] = useState(window.localStorage.getItem("token"));
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -15,7 +15,7 @@ const CreatePost = () => {
       method: "post",
       headers: {
         "Content-Type": "application/json",
-        Authorization: `Bearer ${token}`
+        Authorization: `Bearer ${window.localStorage.getItem("token")}`
       },
       body: JSON.stringify({ message: message }),
     });
@@ -25,6 +25,8 @@ const CreatePost = () => {
     } else {
       console.log("your post saved to db");
     }
+
+    setMessage("");
   }
 
   const handlePostChange = (event) => {
@@ -34,7 +36,7 @@ const CreatePost = () => {
   return (
     <Form onSubmit={handleSubmit} >
       <Row className="justify-content-md-center">
-        <Col md={8}>
+        <Col md={6}>
           <Form.Group className="mb-3" controlId="exampleForm.ControlTextarea1">
             <Form.Label>Write your post here...</Form.Label>
             <Form.Control
@@ -50,7 +52,7 @@ const CreatePost = () => {
         </Col>
       </Row>
       <Row className="justify-content-md-center">
-        <Col md={8}>
+        <Col md={6}>
           <Button variant="primary" type="submit" id="submit">
             Submit
           </Button>
