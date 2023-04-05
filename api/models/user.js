@@ -6,7 +6,7 @@ const UserSchema = new mongoose.Schema({
   password: { type: String, required: true },
   avatarUrl: { 
     type: String, 
-    default: 'https://localhost:8080/images/defaultAvatar.png',
+    default: './images/defaultAvatar.png',
     required: true 
   }
 });
