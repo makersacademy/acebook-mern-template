@@ -10,7 +10,7 @@ const CreatePostForm = ({ navigate }) => {
 
     if(token) {
       let response = await fetch( '/posts', {
-        method: 'post',
+        method: 'POST',
         headers: {
           'Content-Type': 'application/json',
           'Authorization': `Bearer ${token}`
