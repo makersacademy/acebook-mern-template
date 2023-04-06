@@ -36,7 +36,7 @@ const Feed = ({ navigate }) => {
       <div className="feed-container">
         <h2 className="feed-heading">Posts</h2>
         <div id='feed' role="feed">
-          {posts.map(
+          {posts?.map(
             (post) => ( <Post post={ post } key={ post._id } /> )
           )}
         </div>

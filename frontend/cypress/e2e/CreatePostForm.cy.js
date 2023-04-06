@@ -1,11 +1,5 @@
 describe("Creates a post.", () => {
 
-  Cypress.on('uncaught:exception', (err, runnable) => {
-    // this is used to not fail the test when something
-    // outside of cypress is causing an issue
-    return false
-  })
-
   it("Redirects to '/posts' after creating post.", () => {
     cy.intercept("POST", "/posts", (req) => {
       req.reply((res) => {
