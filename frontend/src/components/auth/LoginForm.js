@@ -17,13 +17,13 @@ const LogInForm = ({ navigate }) => {
     })
 
     if (response.status === 401) {
-      setErrorMessage('Email address is incorrect. Try again!');
+        setErrorMessage('Email address is incorrect. Try again!');
     } else if (response.status === 402) {
         setErrorMessage('Password is incorrect. Try again!');
-      } else {
-      let data = await response.json()
-      window.localStorage.setItem("token", data.token)
-      navigate('/posts');
+    } else {
+        let data = await response.json()
+        window.localStorage.setItem("token", data.token)
+        navigate('/posts');
     }
   }
 
