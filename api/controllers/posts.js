@@ -3,7 +3,9 @@ const TokenGenerator = require("../models/token_generator");
 
 const PostsController = {
   Index: (req, res) => {
-    Post.find(async (err, posts) => {
+    Post.find()
+    .populate("user", "name")
+    .exec(async (err, posts) => {
       if (err) {
         throw err;
       }
@@ -12,7 +14,8 @@ const PostsController = {
     });
   },
   Create: (req, res) => {
-    const post = new Post(req.body);
+    let postContent = { ...req.body, user: req.user_id };
+    const post = new Post(postContent);
     post.save(async (err) => {
       if (err) {
         throw err;
