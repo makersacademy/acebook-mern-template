@@ -6,3 +6,8 @@ h1 {
 form {
   padding-top: 100px;
 }
+
+.profileImage {
+  height: 60px;
+  width: 60px;
+}
