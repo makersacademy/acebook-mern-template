@@ -21,32 +21,38 @@ const Feed = ({ navigate }) => {
         })
     }
   }, [])
-    
 
   const logout = () => {
     window.localStorage.removeItem("token")
     navigate('/login')
   }
-  
-    if(token) {
-      return(
-        <>
-        <div>
-          <h2>Posts</h2>
-            <button onClick={logout}>
-              Logout
-            </button>
-          <div id='feed' role="feed">
-              {posts.map(
-                (post) => ( <Post post={ post } key={ post._id } /> )
-              )}
-          </div>
+
+  const createpost = () => {
+    navigate('/createpost')
+  }
+
+  if(token) {
+    return(
+      <div className="feed-container">
+        <h2 className="feed-heading">Posts</h2>
+        <div id='feed' role="feed">
+          {posts?.map(
+            (post) => ( <Post post={ post } key={ post._id } /> )
+          )}
         </div>
-        </>
-      )
-    } else {
-      navigate('/signin')
-    }
+        <div className="button-container">
+          <button className="logout-button" onClick={logout}>
+            Logout
+          </button>
+          <button className="create-post-button" onClick={createpost}>
+            Create Post
+          </button>
+        </div>
+      </div>
+    )
+  } else {
+    navigate('/signin')
+  }
 }
 
 export default Feed;
