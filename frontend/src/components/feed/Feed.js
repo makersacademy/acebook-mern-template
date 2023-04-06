@@ -44,7 +44,7 @@ const Feed = ({ navigate }) => {
     .then(response => {
       if(response.status === 201) {
         navigate('/posts');
-        window.location.reload();
+        window.location.reload(); // should be changed to be more React'ful
       } else {
         throw new Error('Failed to create post');
       }
