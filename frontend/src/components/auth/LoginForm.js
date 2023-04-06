@@ -16,10 +16,10 @@ const LogInForm = ({ navigate }) => {
     })
 
     if(response.status !== 201) {
-      console.log("yay")
+      console.log("oop")
       navigate('/login')
     } else {
-      console.log("oop")
+      console.log("yay")
       let data = await response.json()
       window.localStorage.setItem("token", data.token)
       navigate('/posts');
@@ -36,11 +36,16 @@ const LogInForm = ({ navigate }) => {
 
 
     return (
-      <form onSubmit={handleSubmit}>
+      <div>
+        <form onSubmit={handleSubmit}>
         <input placeholder='Email' id="email" type='text' value={ email } onChange={handleEmailChange} />
         <input placeholder='Password' id="password" type='password' value={ password } onChange={handlePasswordChange} />
         <input role='submit-button' id='submit' type="submit" value="Submit" />
-      </form>
+        </form>
+        Don't have an account? <a href="/signup">Sign up</a>
+      </div>
+      
+
     );
 }
 
