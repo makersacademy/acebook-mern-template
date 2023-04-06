@@ -30,6 +30,7 @@ const Feed = ({ navigate }) => {
   
     if(token) {
       return(
+        <>
         <div>
           <h2>Posts</h2>
             <button onClick={logout}>
@@ -41,6 +42,7 @@ const Feed = ({ navigate }) => {
               )}
           </div>
         </div>
+        </>
       )
     } else {
       navigate('/signin')
