@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 const LogInForm = ({ navigate }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [errorMessage, setErrorMessage] = useState("");
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -15,14 +16,14 @@ const LogInForm = ({ navigate }) => {
       body: JSON.stringify({ email: email, password: password })
     })
 
-    if(response.status !== 201) {
-      console.log("yay")
-      navigate('/login')
+    if (response.status === 401) {
+        setErrorMessage('Email address is incorrect. Try again!');
+    } else if (response.status === 402) {
+        setErrorMessage('Password is incorrect. Try again!');
     } else {
-      console.log("oop")
-      let data = await response.json()
-      window.localStorage.setItem("token", data.token)
-      navigate('/posts');
+        let data = await response.json()
+        window.localStorage.setItem("token", data.token)
+        navigate('/posts');
     }
   }
 
@@ -36,11 +37,17 @@ const LogInForm = ({ navigate }) => {
 
 
     return (
-      <form onSubmit={handleSubmit}>
+      <div>
+        <form onSubmit={handleSubmit}>
         <input placeholder='Email' id="email" type='text' value={ email } onChange={handleEmailChange} />
         <input placeholder='Password' id="password" type='password' value={ password } onChange={handlePasswordChange} />
-        <input role='submit-button' id='submit' type="submit" value="Submit" />
-      </form>
+        <input id='submit' type="submit" value="Submit" />
+        </form>
+        {errorMessage && <p>{errorMessage}</p>}
+        Don't have an account? <a href="/signup">Sign up</a>
+      </div>
+      
+
     );
 }
 
