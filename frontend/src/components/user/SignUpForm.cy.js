@@ -7,6 +7,7 @@ describe("Signing up", () => {
 
     cy.intercept('POST', '/users', { message: "OK" }).as("signUpRequest")
 
+    cy.get("#name").type("name");
     cy.get("#email").type("someone@example.com");
     cy.get("#password").type("password");
     cy.get("#submit").click();
