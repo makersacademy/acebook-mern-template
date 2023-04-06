@@ -14,7 +14,7 @@ const PostsController = {
     });
   },
   Create: (req, res) => {
-    let postContent = { ...req.body, user: req.user_id };
+    let postContent = { ...req.body, user: req.user_id, likes: req.likes_id };
     const post = new Post(postContent);
     post.save(async (err) => {
       if (err) {
@@ -25,6 +25,16 @@ const PostsController = {
       res.status(201).json({ message: 'OK', token: token });
     });
   },
+  Update: (req, res) => {
+    const postId = req.params.id;
+    Post.findByIdAndUpdate(postId, { $inc: { likes: 1 } }, { new: true }, (err, post) => {
+      if (err) {
+        res.status(500).json({ error: err });
+      } else {
+        res.status(200).json(post);
+      }
+    });
+  }
 };
 
 module.exports = PostsController;
