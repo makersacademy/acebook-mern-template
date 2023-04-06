@@ -3,7 +3,7 @@ import Post from "../post/Post";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
-import CreatePost from "../create/Create";
+import CreatePost from "../create/CreatePost";
 
 const Feed = ({ navigate }) => {
   const [posts, setPosts] = useState([]);
