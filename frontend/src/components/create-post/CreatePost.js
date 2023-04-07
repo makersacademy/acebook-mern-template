@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
-import Container from "react-bootstrap/Container";
+// import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 
@@ -37,7 +37,9 @@ const CreatePost = () => {
     <Form onSubmit={handleSubmit} >
       <Row className="justify-content-md-center">
         <Col md={6}>
-          <Form.Group className="mb-3" controlId="exampleForm.ControlTextarea1">
+          <Form.Group className="mb-3" 
+          // controlId="exampleForm.ControlTextarea1"
+          >
             <Form.Label>Write your post here...</Form.Label>
             <Form.Control
               as="textarea"
