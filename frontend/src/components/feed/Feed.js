@@ -31,8 +31,8 @@ const Feed = ({ navigate }) => {
   }
 
   const new_post = async (event) => {
+    if (!newPost) return
     event.preventDefault();
-
     fetch( '/posts', {
       method: 'post',
       headers: {
