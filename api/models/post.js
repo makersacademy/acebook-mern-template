@@ -1,10 +1,14 @@
 const mongoose = require("mongoose");
+const Users = require("./user");
 
 const PostSchema = new mongoose.Schema({
-  message: { type: String, required: true },
+  message: {
+    type: String,
+    required: true
+  },
   createdBy: { 
-    type: mongoose.Schema.Types.ObjectID,
-    ref: "Users",
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Users',
     immutable: true,
   },
   createdAt: {
