@@ -5,14 +5,14 @@ const { ObjectId } = require("mongodb");
 
 
 const PostsController = {
-  Index: (req, res) => {
+  Index: async (req, res) => {
+    const user = await Users.findById(req.user_id)
     Post.find(async (err, posts) => {
       if (err) { throw err }
 
       const token = await TokenGenerator.jsonwebtoken(req.user_id)
-      res.status(200).json({ posts: posts, token: token });
-    })
-      .sort({ createdAt: -1 });
+      res.status(200).json({ posts: posts, user: user, token: token });
+    }).sort({ createdAt: -1 });
   },
   
   Create: async (req, res) => {
