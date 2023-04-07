@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import Post from '../post/Post'
 
 const Feed = ({ navigate }) => {
+  const [userData, setUserData] = useState({})
   const [posts, setPosts] = useState([]);
   const [token, setToken] = useState(window.localStorage.getItem("token"));
   const [newPost, setNewPost] = useState("")
@@ -19,7 +20,8 @@ const Feed = ({ navigate }) => {
         .then(async data => {
           window.localStorage.setItem("token", data.token)
           setToken(window.localStorage.getItem("token"))
-          setPosts(data.posts);
+          setPosts(data.posts); 
+          setUserData(data.user)
         })
     }
   }, [])
@@ -49,34 +51,33 @@ const Feed = ({ navigate }) => {
         throw new Error('Failed to create post');
       }
     })
-}
+  }
 
   const handleNewPostChange = (event) => {
     setNewPost(event.target.value);
   }
 
-  
-    if(token) {
-      return(
-        <>
-          <h2>Posts</h2>
-            <button onClick={logout}>
-              Logout
-            </button>
-            <form>
-              <input type='text' id='post' value={newPost} onChange={handleNewPostChange}></input>
-              <button onClick={new_post}>Post</button>
-            </form>
-          <div id='feed' role="feed">
-              {posts.map(
-                (post) => ( <Post post={ post } key={ post._id } /> )
-              )}
-          </div>
-        </>
-      )
-    } else {
-      navigate('/signin')
-    }
+  if (token) {
+    return(
+      <>
+        <h2>Posts</h2>
+          <button onClick={logout}>
+            Logout
+        </button>
+          <form>
+            <input type='text' id='post' value={newPost} onChange={handleNewPostChange}></input>
+            <button onClick={new_post}>Post</button>
+          </form>
+        <div id='feed' role="feed">
+            {posts.map(
+              (post) => ( <Post post={ post } key={ post._id } /> )
+            )}
+        </div>
+      </>
+    )
+  } else {
+    navigate('/signin')
+  }
 }
 
 export default Feed;
