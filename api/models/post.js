@@ -1,7 +1,10 @@
 const mongoose = require("mongoose");
 
 const PostSchema = new mongoose.Schema({
-  message: { type: String, required: true },
+  message: {
+    type: String,
+    required: true 
+  },
   createdBy: { 
     type: mongoose.Schema.Types.ObjectID,
     ref: "Users",

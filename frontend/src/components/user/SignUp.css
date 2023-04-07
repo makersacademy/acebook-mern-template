@@ -1,34 +1,8 @@
-html {
-  border: 20px solid black;
-  height: 100%;
-}
+
 
 body {
   padding: 50px;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
-  background-color: #8b9cab;
+  background-color: #9f9f9f;
 }
 
-div {
-  display: flex;
-  flex-direction: column;
-  background-color: black;
-  padding: 20px;
-  width: 400px;
-  color: #ffffff;
-  text-align: center;
-  border: 4px double #cccccc; /* add this line */
-  border-radius: 10px; /* add this line */
-  font-size: 28px; /* add this line */
-  position: absolute;
-  top:50;
-  bottom: 50;
-  left: 0;
-  right: 0;
-  margin: auto;
-}
-
-form {
-  display: flex;
-  flex-direction: column;
-}
