@@ -8,6 +8,8 @@ const SignUpForm = ({ navigate }) => {
   const [errorMessage, setErrorMessage] = useState("");
 
   const handleSubmit = async (event) => {
+    if (!email || !password) return
+    
     event.preventDefault();
 
     fetch( '/users', {
