@@ -69,9 +69,9 @@ const Feed = ({ navigate }) => {
   const handleSubmit = (event) => {
     event.preventDefault();
     const formData = new FormData();
-    formData.append('img',newImg);
+    formData.append('img', newImg);
 
-    axios.post('/posts', formData, {
+    axios.post('/posts/add', formData, {
       headers: {
         'Authorization': `Bearer ${token}`,
         'Content-Type': 'multipart/form-data'

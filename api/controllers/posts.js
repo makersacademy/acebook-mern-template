@@ -1,5 +1,6 @@
 const Post = require("../models/post");
 const Users = require("../models/user");
+const Image = require('../models/image')
 const TokenGenerator = require("../models/token_generator");
 const { ObjectId } = require("mongodb");
 
@@ -27,6 +28,25 @@ const PostsController = {
       res.status(201).json({ message: 'OK', token: token });
     });
   },
+
+  Upload: async (req, res) => {
+    if (!req.file) return
+    const user = await Users.findById(req.user_id)
+    const image = new Image({
+      image: {
+        fileName: req.file.filename,
+        contentType: req.file.mimetype,
+      },
+      ownerId: user
+    });
+  
+    image.save(async (err) => {
+      if (err) { throw err }
+  
+      const token = await TokenGenerator.jsonwebtoken(req.user_id)
+      res.status(201).json({ message: 'OK', token: token });//.send(image);
+    })
+  }
 };
 
 module.exports = PostsController;
