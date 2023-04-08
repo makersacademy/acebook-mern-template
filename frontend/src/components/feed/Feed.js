@@ -22,7 +22,7 @@ const Feed = ({ navigate }) => {
     }
   }, [])
 
-  const handlePostSubmit = async (message) => {
+  const handlePostSubmit = (message) => {
     fetch('/posts', {
       method: 'POST',
       headers: {
@@ -31,9 +31,12 @@ const Feed = ({ navigate }) => {
       },
       body: JSON.stringify({message})
     })
-      await ((response) => response.json())
-      await ((data) => setPosts([...posts, data.message]))
-      await ((error) => console.error(error));
+      .then((response) => response.json())
+      .then((data) => {
+        setPosts([...posts, data.message])
+        window.location.reload();
+      })
+      .catch((error) => console.error(error));
   };
     
 
@@ -51,14 +54,15 @@ const Feed = ({ navigate }) => {
               Logout
             </button>
           <div id='feed' role="feed">
-              {posts.map(
+              {
+              posts.reverse().map(
                 (post) => ( <Post post={post} key={ post._id } /> )
               )}
           </div>
         </>
       )
     } else {
-      navigate('/signin')
+      navigate('/login')
     }
 }
 
