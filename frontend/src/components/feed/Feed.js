@@ -17,7 +17,7 @@ const Feed = ({ navigate }) => {
         .then(async data => {
           window.localStorage.setItem("token", data.token)
           setToken(window.localStorage.getItem("token"))
-          setPosts(data.posts);
+          setPosts(data.posts.reverse());
         })
     }
   }, [])
@@ -55,7 +55,7 @@ const Feed = ({ navigate }) => {
             </button>
           <div id='feed' role="feed">
               {
-              posts.reverse().map(
+              posts.map(
                 (post) => ( <Post post={post} key={ post._id } /> )
               )}
           </div>
