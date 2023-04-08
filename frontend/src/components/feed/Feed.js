@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import Post from '../post/Post'
+import PostForm from '../post/PostForm'
 
 const Feed = ({ navigate }) => {
   const [posts, setPosts] = useState([]);
@@ -20,6 +21,20 @@ const Feed = ({ navigate }) => {
         })
     }
   }, [])
+
+  const handlePostSubmit = (content) => {
+    fetch('/posts', {
+      method: 'POST',
+      headers: {
+        'content-Type': 'application/json',
+        'Authorization': `Bearer ${token}`
+      },
+      body: JSON.stringify({content})
+    })
+      .then((response) => response.json())
+      .then((data) => setPosts([...posts, data]))
+      .catch((error) => console.error(error));
+  };
     
 
   const logout = () => {
@@ -31,6 +46,7 @@ const Feed = ({ navigate }) => {
       return(
         <>
           <h2>Posts</h2>
+          <PostForm onSubmit={handlePostSubmit} />
             <button onClick={logout}>
               Logout
             </button>
