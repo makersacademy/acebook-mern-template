@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from 'react';
-import Post from '../post/Post'
+import Post from '../post/Post';
+import axios from 'axios';
 
 const Feed = ({ navigate }) => {
   const [userData, setUserData] = useState({})
   const [posts, setPosts] = useState([]);
   const [token, setToken] = useState(window.localStorage.getItem("token"));
-  const [newPost, setNewPost] = useState("")
-  const [likes, setLikes] = useState(0) // to be used for count of like
-  const [comments, setComments] = useState(0) // to be used for count of comments
+  const [newPost, setNewPost] = useState("");
+  const [newImg, setNewImg] = useState(null);
 
   useEffect(() => {
     if(token) {
@@ -23,9 +23,11 @@ const Feed = ({ navigate }) => {
           setPosts(data.posts); 
           setUserData(data.user)
         })
+        .catch(error => {
+          console.log(error);
+        });
     }
-  }, [])
-    
+  }, [token])
 
   const logout = () => {
     window.localStorage.removeItem("token")
@@ -51,32 +53,59 @@ const Feed = ({ navigate }) => {
         throw new Error('Failed to create post');
       }
     })
+    .catch(error => {
+      console.log(error);
+    });
   }
 
   const handleNewPostChange = (event) => {
     setNewPost(event.target.value);
   }
 
-  if (token) {
+  const handleImg = (event) => {
+    setNewImg(event.target.files[0]);
+  }
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    const formData = new FormData();
+    formData.append('img',newImg);
+
+    axios.post('/posts', formData, {
+      headers: {
+        'Authorization': `Bearer ${token}`,
+        'Content-Type': 'multipart/form-data'
+      }
+    })
+    .then(res => {
+      console.log(res);
+    })
+    .catch(error => {
+      console.log(error);
+    });
+  }
+
+  if(token) {
     return(
       <>
         <h2>Posts</h2>
-          <button onClick={logout}>
-            Logout
-        </button>
-          <form>
-            <input type='text' id='post' value={newPost} onChange={handleNewPostChange}></input>
-            <button onClick={new_post}>Post</button>
-          </form>
+        <button onClick={logout}>Logout</button>
+        <form>
+          <input type='text' id='post' value={newPost} onChange={handleNewPostChange} />
+          <button onClick={new_post}>Post</button>
+        </form>
+        <form onSubmit={handleSubmit} encType='multipart/form-data'>
+          <input type='file' accept=".png, .jpg, .jpeg" id='img' onChange={handleImg} />
+          <input type='submit' />
+        </form>
         <div id='feed' role="feed">
-            {posts.map(
-              (post) => ( <Post post={ post } key={ post._id } /> )
-            )}
+          {posts.map((post) => (<Post post={ post } key={ post._id } />))}
         </div>
       </>
-    )
+    );
   } else {
-    navigate('/signin')
+    navigate('/signin');
+    return null;
   }
 }
 

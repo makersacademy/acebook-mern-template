@@ -4,7 +4,7 @@ const Users = require("./user");
 const PostSchema = new mongoose.Schema({
   message: {
     type: String,
-    required: true
+    //required: true 
   },
   createdBy: { 
     type: mongoose.Schema.Types.ObjectId,
