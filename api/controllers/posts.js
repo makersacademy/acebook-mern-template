@@ -12,6 +12,7 @@ const PostsController = {
     });
   },
   Create: (req, res) => {
+    console.log(req.body)
     const post = new Post(req.body);
     post.save(async (err) => {
       if (err) {

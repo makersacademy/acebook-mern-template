@@ -22,18 +22,18 @@ const Feed = ({ navigate }) => {
     }
   }, [])
 
-  const handlePostSubmit = (content) => {
+  const handlePostSubmit = async (message) => {
     fetch('/posts', {
       method: 'POST',
       headers: {
         'content-Type': 'application/json',
         'Authorization': `Bearer ${token}`
       },
-      body: JSON.stringify({content})
+      body: JSON.stringify({message})
     })
-      .then((response) => response.json())
-      .then((data) => setPosts([...posts, data]))
-      .catch((error) => console.error(error));
+      await ((response) => response.json())
+      await ((data) => setPosts([...posts, data.message]))
+      await ((error) => console.error(error));
   };
     
 
@@ -52,7 +52,7 @@ const Feed = ({ navigate }) => {
             </button>
           <div id='feed' role="feed">
               {posts.map(
-                (post) => ( <Post post={ post } key={ post._id } /> )
+                (post) => ( <Post post={post} key={ post._id } /> )
               )}
           </div>
         </>

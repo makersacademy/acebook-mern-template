@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 
 const PostForm = ({ onSubmit }) => {
-  const [content ,setContent] = useState("");
+  const [content, setContent] = useState("");
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -13,9 +13,9 @@ const PostForm = ({ onSubmit }) => {
     <form onSubmit={handleSubmit}>
       <textarea 
         value={content}
-        onChange={(e) => setContent(e.target.value)}
+        onChange={(event) => setContent(event.target.value)}
         placeholder="What's your message, Ace?" 
-        rows="3"
+        rows="2"
         required 
       />
         <button type="submit">Post</button>
