@@ -5,13 +5,14 @@
   --navbar-color: #3d3d3d;
   --navbar-color-hover: #504f4f;
 
-  /* --banner-color: #6fb2a4; */
-
   --text-white: #ffffff;
   --text-black: #3d3d3d;
 
   --post-btn-color: #27b99a;
-  --post-btn-color-active: #3edab8;
+  --post-btn-color-hover: #3edab8;
+
+  --upload-photo-color: #2c8ac8;
+  --upload-photo-hover: #3999d9;
 
   --shadow-color: grey;
   --shadow-settings: 2px 2px 5px var(--shadow-color);
@@ -133,12 +134,14 @@ body {
 }
 
 #user-banner-info h2 {
+  color: var(--secondary-color);
   flex-grow: 1;
   font-size: 5rem;
   text-transform: lowercase;
   letter-spacing: .5rem;
 }
 #user-banner-info p {
+  color: var(--secondary-color);
   font-size: 2rem;
   font-weight: 500;
   text-transform: lowercase;
@@ -148,19 +151,14 @@ body {
 /** NEW POST **/
 /**************/
 
-/* #inner-container {
-  margin: auto;
-  width: 90%;
-} */
-
 .new-post-form {
   display: flex;
   flex-direction: row;
   align-items: center;
   justify-content: flex-start ;
+  width: 100%;
   gap: 1rem;
   padding: 2.5rem 3rem;
-  width: 100%;
 }
 
 .new-post-form .text-field {
@@ -175,18 +173,18 @@ body {
 }
 
 .new-post-form .text-field:focus {
-  outline: var(--post-btn-color-active) 3px solid;
-  transition: outline .2s ease-in-out;
+  outline: var(--post-btn-color-hover) 3px solid;
+  transition: outline .1s ease-in-out;
 }
 
 .new-post-form .post-photo-upload {
   flex-grow: 0;
   cursor: pointer;
-  border: none;
-  background-color: #2c8ac8 ;
   width: 7rem;
   height: 5rem;
+  border: none;
   border-radius: 30px;
+  background-color: var(--upload-photo-color);
   transition: all .15s ease-in-out;
 }
 
@@ -195,7 +193,7 @@ body {
 }
 
 .new-post-form .post-photo-upload:hover {
-  background-color: #3999d9;
+  background-color: var(--upload-photo-hover);
   transform: scale(1.1);
 }
 .new-post-form .post-photo-upload:active {
@@ -203,9 +201,10 @@ body {
 }
 
 .new-post-form .post-submit-btn {
-  background-color: var(--post-btn-color);
+  cursor: pointer;
   border: 1px transparent solid;
   border-radius: 30px;
+  background-color: var(--post-btn-color);
 
   color: var(--text-white);
   font-weight: 900;
@@ -213,12 +212,11 @@ body {
 
   width: 15rem;
   height: 5rem;
-  cursor: pointer;
   transition: all .15s ease-in-out;
 }
 
 .new-post-form .post-submit-btn:hover {
-  background-color: var(--post-btn-color-active);
+  background-color: var(--post-btn-color-hover);
   transform: scale(1.1);
   transition: all .15s ease-in-out;
 }

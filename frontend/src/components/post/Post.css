@@ -5,8 +5,6 @@
   --navbar-color: #3d3d3d;
   --navbar-color-hover: #504f4f;
 
-  /* --banner-color: #6fb2a4; */
-
   --text-white: #ffffff;
   --text-black: #3d3d3d;
 
@@ -15,6 +13,8 @@
 
   --shadow-color: grey;
   --shadow-settings: 2px 2px 5px var(--shadow-color);
+
+  --inside-post-separator: 1px solid rgb(205, 205, 205);
 }
 
 * {
@@ -42,6 +42,10 @@ body {
   border-radius: 3px;
 }
 
+/*-----------------*/
+/*   POST HEADER   */
+/*-----------------*/
+
 #post-header {
   display: flex;
   flex-direction: row;
@@ -51,7 +55,6 @@ body {
   padding: 1rem;
 }
 #post-header img {
-  /* height: 7rem; */
   width: 7%;
   border:  .15rem solid #3d3d3d;
   border-radius: 50px;
@@ -68,22 +71,32 @@ body {
 #post-inner-header time {
   font-size: 1.2rem;
 }
+
+/*-----------------------*/
+/*   POST MESSAGE BODY   */
+/*-----------------------*/
+
 .post-message {
   background-color: var(--secondary-color);
   width: 100%;
-  font-size: 1.4rem;
+  font-size: 2.5rem;
   font-weight: 500;
   padding: 1.5rem 1rem ;
-  border-top: 1px solid rgb(205, 205, 205);
-  border-bottom: 1px solid rgb(205, 205, 205);
+  border-top: var(--inside-post-separator);
+  border-bottom: var(--inside-post-separator);
 }
+
+/*-------------------*/
+/*   POST COUNTERS   */
+/*-------------------*/
+
 #post-counters {
   display: flex;
   align-items: center;
   justify-content: space-between;
   font-size: 1.5rem;
   /* padding: 1rem 0; */
-  border-bottom: 1px solid rgb(205, 205, 205);
+  /* border-bottom: var(--inside-post-separator); */
 }
 
 #post-counters button i {
@@ -96,6 +109,7 @@ body {
   border: none;
   padding: 1rem;
 }
+
 .post-counter:hover {
   color: var(--post-btn-color);
   font-size: 1.35rem;
@@ -103,29 +117,33 @@ body {
   border-radius: 5px;
 }
 
+/*------------------*/
+/**  POST BUTTONS  **/
+/*------------------*/
+
 #post-btns {
+  font-size: 1.5rem;
   display: flex;
   align-items: center;
   justify-content: space-evenly;
-  font-size: 1.5rem;
-  gap: .5rem;
   height: 5rem;
+  gap: .5rem;
   padding-top: 1rem;
-  /* border: 1px solid purple ; */
 }
-
 
 #post-btns .post-btn {
   cursor:  pointer;
-  border: none;
-  background: transparent;
   width: 50%;
   height: 100%;
-  /* border: 1px solid purple ; */
+  font-size: 1.9rem;
+  font-weight: 500;
+  border: none;
   border-radius: 5px;
+  background: transparent;
 }
 
 #post-btns .post-btn:hover {
+  color: var(--secondary-color);
   background: #7adac5;
-  transition: background-color .15s ease-in-out;
+  transition: all .15s ease-in-out;
 }
