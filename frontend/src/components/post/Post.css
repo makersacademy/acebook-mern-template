@@ -1,0 +1,119 @@
+:root {
+  --primary-color: #f0f0f0;
+  --secondary-color: #fff;
+
+  --navbar-color: #3d3d3d;
+  --navbar-color-hover: #504f4f;
+
+  /* --banner-color: #6fb2a4; */
+
+  --text-white: #ffffff;
+  --text-black: #3d3d3d;
+
+  --post-btn-color: #27b99a;
+  --post-btn-color-active: #3edab8;
+
+  --shadow-color: grey;
+  --shadow-settings: 2px 2px 5px var(--shadow-color);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Ubuntu', sans-serif;
+}
+
+html {
+  font-size: 62.5%;
+}
+
+body {
+  background-color: var(--primary-color);
+}
+
+#post-container {
+  background-color: var(--secondary-color);
+  /* border: 1px solid black ; */
+  min-height: 10vh;
+  width: 100%;
+  padding: 1rem 2rem;
+  box-shadow: var(--shadow-settings);
+  border-radius: 3px;
+}
+
+#post-header {
+  display: flex;
+  flex-direction: row;
+  align-items:center;
+  justify-content: flex-start;
+  gap: 1rem;
+  padding: 1rem;
+}
+#post-header img {
+  /* height: 7rem; */
+  width: 7%;
+  border:  .15rem solid #3d3d3d;
+  border-radius: 50px;
+}
+
+#post-inner-header {
+  display: flex;
+  flex-direction: column;
+  gap: .3rem;
+}
+#post-inner-header h3 {
+  font-size: 1.5rem;
+}
+#post-inner-header time {
+  font-size: 1.2rem;
+}
+.post-message {
+  background-color: var(--secondary-color);
+  width: 100%;
+  font-size: 1.4rem;
+  font-weight: 500;
+  padding: 1.5rem 1rem ;
+  border-top: 1px solid rgb(205, 205, 205);
+  border-bottom: 1px solid rgb(205, 205, 205);
+}
+#post-counters {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 1.5rem;
+  padding: 1rem 0;
+  border-bottom: 1px solid rgb(205, 205, 205);
+}
+
+#post-counters p i {
+  padding-right: .5rem;
+  color: #e00615;
+}
+
+#post-btns {
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  font-size: 1.5rem;
+  gap: .5rem;
+  height: 5rem;
+  padding-top: 1rem;
+  /* border: 1px solid purple ; */
+}
+
+
+#post-btns .post-btn {
+  cursor:  pointer;
+  border: none;
+  background: transparent;
+  width: 50%;
+  height: 100%;
+  /* border: 1px solid purple ; */
+  border-radius: 5px;
+}
+
+#post-btns .post-btn:hover {
+  background: var(--primary-color);
+  transition: background-color .15s ease-in-out;
+}
