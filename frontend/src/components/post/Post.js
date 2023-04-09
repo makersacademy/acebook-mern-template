@@ -33,8 +33,8 @@ const Post = ({ post }) => {
       <article data-cy="post" className="post-message" key={post._id}>{post.message}</article>
       
       <div id="post-counters">
-        <p className="post-counter"><i class="fa-sharp fa-solid fa-heart fa-lg"></i>13</p> {/* change for ownerData.likes */}
-        <p className="post-counter">0 comments</p> {/* change for ownerData.comments */}
+        <button className="post-counter"><i class="fa-sharp fa-solid fa-heart fa-lg"></i>0 likes</button> {/* change for ownerData.likes */}
+        <button className="post-counter">0 comments</button> {/* change for ownerData.comments */}
       </div>
 
       <div id="post-btns">

@@ -10,7 +10,7 @@
   --text-white: #ffffff;
   --text-black: #3d3d3d;
 
-  --post-btn-color: #27b99a;
+  --post-btn-color: #27b99a; 
   --post-btn-color-active: #3edab8;
 
   --shadow-color: grey;
@@ -82,13 +82,25 @@ body {
   align-items: center;
   justify-content: space-between;
   font-size: 1.5rem;
-  padding: 1rem 0;
+  /* padding: 1rem 0; */
   border-bottom: 1px solid rgb(205, 205, 205);
 }
 
-#post-counters p i {
+#post-counters button i {
   padding-right: .5rem;
   color: #e00615;
+}
+.post-counter {
+  cursor: pointer;
+  background-color: var(--secondary-color);
+  border: none;
+  padding: 1rem;
+}
+.post-counter:hover {
+  color: var(--post-btn-color);
+  font-size: 1.35rem;
+  transition: background-color .15s ease-in-out;
+  border-radius: 5px;
 }
 
 #post-btns {
@@ -114,6 +126,6 @@ body {
 }
 
 #post-btns .post-btn:hover {
-  background: var(--primary-color);
+  background: #7adac5;
   transition: background-color .15s ease-in-out;
 }
