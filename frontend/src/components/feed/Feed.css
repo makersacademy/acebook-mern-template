@@ -1,8 +1,11 @@
 :root {
   --primary-color: #f0f0f0;
+
+  --navbar-color: #3d3d3d;
   --banner-color: #6fb2a4;
 
   --text-white: #ffffff;
+
   --post-btn-color: #27b99a;
   --post-btn-color-active: #3edab8;
 }
@@ -26,12 +29,14 @@ body {
   background-color: var(--text-white);
   margin: auto;
   max-width: 800px;
-  /* border: 1px solid #3d3d3d; */
 }
 
+/************/
+/** NAVBAR **/
+/************/
+
 #navbar {
-  /* border: 5px red solid; */
-  background-color: #3d3d3d;
+  background-color: var(--navbar-color);
   color: var(--text-white);
   display: flex;
   direction: row;
@@ -52,14 +57,13 @@ body {
   align-items: center;
   justify-content: center;
   gap: .1rem;
-  /* border: 2px violet solid; */
   height: 100%;
 }
 
 .navbar-btn {
-  background-color: transparent;
   cursor: pointer;
   color: var(--text-white);
+  background-color: transparent;
   border: none;
   height: 100%;
   width: 7rem;
@@ -78,7 +82,6 @@ body {
   background: url('../../../public/default_banner.jpeg') no-repeat center center/cover ;
   height: 25vh;
   padding: 2rem;
-  /* border: red 5px solid; */
 }
 
 #user-banner-img {
@@ -95,39 +98,36 @@ body {
 #user-banner-img img {
   max-width: 100%;
   max-height: 100%;
-  /* border: purple 4px solid;*/
 }
 
 
 #user-banner-info {
   flex-grow: 1;
-
   display: flex;
   flex-direction: column;
   align-items: flex-start;
   justify-content: center;
-  /* border: purple 4px solid; */
 }
 
 #user-banner-info h2 {
+  flex-grow: 1;
   font-size: 5rem;
   text-transform: lowercase;
   letter-spacing: .5rem;
-  flex-grow: 1;
-  /* border: purple 4px solid; */
 }
 #user-banner-info p {
   font-size: 2rem;
   font-weight: 500;
   text-transform: lowercase;
-  /* border: purple 4px solid; */
 }
+
+/**************/
+/** NEW POST **/
+/**************/
 
 #inner-container {
   margin: auto;
   width: 90%;
-  /* border: #3d3d3d solid 1px; */
-
 }
 
 .new-post-form {
@@ -137,12 +137,11 @@ body {
   justify-content: center;
   gap: 1rem;
   padding: 3rem;
-  /* background-color: red; */
 }
 
 .new-post-form .text-field {
- border: 1px solid transparent;
  background-color: var(--primary-color);
+ border: 1px solid transparent;
  font-size: 2rem;
  border-radius: 30px;
  padding-left: 1.5rem;
@@ -156,15 +155,17 @@ body {
 }
 
 .new-post-form .post-submit-btn {
-  border: 1px transparent solid;
-  cursor: pointer;
-  border-radius: 30px;
   background-color: var(--post-btn-color);
+  border: 1px transparent solid;
+  border-radius: 30px;
+
   color: var(--text-white);
   font-weight: 900;
   font-size: 2rem;
+
   width: 15rem;
   height: 5rem;
+  cursor: pointer;
 }
 
 .new-post-form .post-submit-btn:hover {
@@ -174,8 +175,4 @@ body {
 
 .new-post-form .post-submit-btn:active {
   transform: translateY(0.15rem);
-}
-
-.feed {
-  background-color: blue;
 }
