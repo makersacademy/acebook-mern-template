@@ -15,7 +15,7 @@
   --upload-photo-hover: #3999d9;
 
   --shadow-color: grey;
-  --shadow-settings: 2px 2px 5px var(--shadow-color);
+  --shadow-settings: 2px 2px 3px var(--shadow-color);
 }
 
 * {
