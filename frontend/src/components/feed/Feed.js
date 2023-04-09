@@ -72,17 +72,12 @@ const Feed = ({ navigate }) => {
             </div>
           </nav>
           <div id="user-banner-container">
-
             <div id="user-banner-img">
-
-              <img src='/default_avatar.png'></img>
-
+              <img src={ userData.avatar }></img>
             </div>
             <div id="user-banner-info">
-
               <h2>{ userData.username }</h2>
               <p>{ userData.email }</p>
-              
             </div>
           </div>
 
