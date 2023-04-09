@@ -3,8 +3,8 @@ import React, { useState } from 'react'
 const PostForm = ({ onSubmit }) => {
   const [content, setContent] = useState("");
 
-  const handleSubmit = async (event) => {
-    event.preventDefault();
+  const handleSubmit = (event) => {
+    event.preventDefault(); //prevents submitting empty form
     onSubmit(content);
     setContent('');
   };
@@ -18,7 +18,7 @@ const PostForm = ({ onSubmit }) => {
         rows="2"
         required 
       />
-        <input id='submit' type="submit" value="Submit" />
+        <input id='submit' type="submit" value="Post" />
     </form>
   )
 }
