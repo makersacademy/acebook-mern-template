@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import Post from '../post/Post'
+// import './Feed.css'
+
 
 const Feed = ({ navigate }) => {
   const [userData, setUserData] = useState({})
@@ -60,19 +62,43 @@ const Feed = ({ navigate }) => {
   if (token) {
     return(
       <>
-        <h2>Posts</h2>
-          <button onClick={logout}>
-            Logout
-        </button>
-          <form>
-            <input type='text' id='post' value={newPost} onChange={handleNewPostChange}></input>
-            <button onClick={new_post}>Post</button>
-          </form>
-        <div id='feed' role="feed">
-            {posts.map(
-              (post) => ( <Post post={ post } key={ post._id } /> )
-            )}
-        </div>
+        <div id='main-container' >
+          <nav id="navbar">
+            <h1>ACEBOOK</h1>
+            <div id="navbar-btns">
+              <button className="navbar-btn">My profile</button>
+              <button className="navbar-btn">Photos</button>
+              <button className="navbar-btn" onClick={logout}>Logout</button>
+            </div>
+          </nav>
+          <div id="user-banner-container">
+
+            <div id="user-banner-img">
+
+              <img src='/default_avatar.png'></img>
+
+            </div>
+            <div id="user-banner-info">
+
+              <h2>{ userData.username }</h2>
+              <p>{ userData.email }</p>
+              
+            </div>
+          </div>
+
+          <div id="inner-container">
+            {/* <h2>Posts</h2> */}
+            <form className="new-post-form">
+              <input type='text' id='post' className="text-field" placeholder="What do you have in mind?" value={newPost} onChange={handleNewPostChange}></input>
+              <button className="post-submit-btn" onClick={new_post}>Send</button>
+            </form>
+            <div id='feed' role="feed">
+              {posts.map(
+                (post) => ( <Post post={ post } key={ post._id } /> )
+              )}
+            </div>
+          </div>
+        </div>     
       </>
     )
   } else {
