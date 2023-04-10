@@ -14,7 +14,7 @@
   --upload-photo-color: #2c8ac8;
   --upload-photo-hover: #3999d9;
 
-  --shadow-color: grey;
+  --shadow-color: rgb(190, 190, 190);
   --shadow-settings: 2px 2px 3px var(--shadow-color);
 }
 
@@ -34,7 +34,6 @@ body {
 }
 
 #main-container {
-  /* background-color: var(--text-white); */
   margin: auto;
   max-width: 800px;
 }
@@ -50,9 +49,10 @@ body {
   direction: row;
   align-items: center;
   justify-content: space-between;
-  height: 5rem;
+  height: 7rem;
   width: 100%;
   padding: 0 2rem;
+  margin: auto;
   box-shadow: var(--shadow-settings);
 }
 
@@ -71,16 +71,17 @@ body {
 
 .navbar-btn {
   cursor: pointer;
+  font-size: 1.5rem;
   color: var(--text-white);
   background-color: transparent;
   border: none;
   height: 90%;
-  width: 7rem;
-  border-radius: 50px;
+  width: 8rem;
+  font-weight: 500;
 }
+
 .navbar-btn:hover {
-  color: var(--text-white);
-  background-color: var(--navbar-color-hover);
+  color: var(--post-btn-color-hover);
   transition: background-color .15s ease-in-out;
 }
 
@@ -95,12 +96,13 @@ body {
   justify-content: center;
   background: url('../../../public/default_banner.jpeg') no-repeat center center/cover ;
   box-shadow: var(--shadow-settings);
-  height: 35vh;
+  height: 30vh;
   margin-bottom: 1rem;
   border-radius: 0 0 3px 3px;
 }
 
 #inner-banner-container {
+  flex-grow: 1;
   flex-grow: 1;
   display: flex;
   flex-direction: row;
@@ -119,6 +121,7 @@ body {
   overflow: hidden;
   width: 25%;
   height: 19rem;
+  flex-shrink: 1;
 }
 
 #user-banner-img img {
@@ -146,6 +149,17 @@ body {
   font-weight: 500;
   text-transform: lowercase;
 }
+
+@media(max-height: 850px) {
+  #inner-banner-container {
+    padding: 0 3rem;
+    width: 100%;
+    justify-content: flex-start;
+  }
+  #user-banner-img {
+    height: 10rem;
+    width: 10rem;
+  }}
 
 /**************/
 /** NEW POST **/
