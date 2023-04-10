@@ -13,10 +13,10 @@ const Post = ({ post }) => {
   const date = moment(`${post.createdAt}`).format("MMMM Do YYYY, h:mm:ss a");
   // console.log(date)
   const [comment, setComment] = useState("");
+  
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    console.log(post._id);
     let response = await fetch(`/posts/${post._id}/comments`, {
       method: "post",
       headers: {
@@ -83,7 +83,8 @@ const Post = ({ post }) => {
           {post.comments && post.comments.length > 0 && (
             <span>
               {post.comments.map((comment) => {
-                return <div key={comment._id}>{comment.message}</div>;
+                console.log(comment)
+                return <div key={comment._id}>{comment.user.name} commented : {comment.message}</div>;
               })}
             </span>
           )}
