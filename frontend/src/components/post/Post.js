@@ -30,16 +30,23 @@ const Post = ({ post }) => {
         </div>
       </div>
 
-      <article data-cy="post" className="post-message" key={post._id}>{post.message}</article>
-      
+      <div id='post-content'>
+        <article data-cy="post" className="post-message" key={post._id}>{post.message}</article>
+        <img className="post-picture" src=''></img> 
+      </div>
+
       <div id="post-counters">
-        <button className="post-counter"><i class="fa-sharp fa-solid fa-heart fa-lg"></i>0 likes</button> {/* change for ownerData.likes */}
+        <button className="post-counter"><i className="fa-sharp fa-solid fa-heart fa-lg"></i>0 likes</button> {/* change for ownerData.likes */}
         <button className="post-counter">0 comments</button> {/* change for ownerData.comments */}
       </div>
 
-      <div id="post-btns">
-        <button className="post-btn">Like</button> {/* Implement behaviour */}
-        <button className="post-btn">Comment</button> {/* Implement behaviour */}
+      {/* <div id="post-btns"> */}
+      <div id="comments-container">
+        <div className="invisible"></div>
+        {/*<button className="post-btn">Like</button> {/* Implement behaviour */}
+        {/* <button className="post-btn">Comment</button> Implement behaviour */}
+        <input type='text' id='post' className="comment-field" placeholder="Comment"></input>
+        <button className="comments-submit-btn"><i class="fa-regular fa-envelope fa-2x"></i></button>
       </div>    
       
     </div>

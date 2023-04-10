@@ -118,11 +118,11 @@ body {
   border-radius: 50%;
   overflow: hidden;
   width: 25%;
+  height: 19rem;
 }
 
 #user-banner-img img {
   max-width: 100%;
-  max-height: 100%;
 }
 
 #user-banner-info {
