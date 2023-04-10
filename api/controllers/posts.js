@@ -46,6 +46,15 @@ const PostsController = {
       const token = await TokenGenerator.jsonwebtoken(req.user_id)
       res.status(201).json({ message: 'OK', token: token });//.send(image);
     })
+  },
+
+  GetPostOwnerData: (req, res) => {
+    Users.findById(req.params.ownerId, async (err, data) => {
+      if (err) { throw err }
+
+      const token = await TokenGenerator.jsonwebtoken(req.user_id)
+      res.status(200).json({ownerData: data, token: token });
+    })
   }
 };
 
