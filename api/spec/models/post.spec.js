@@ -37,4 +37,29 @@ describe("Post model", () => {
       });
     });
   });
+
+  // it("shows the user of a post", () => {
+  //   var post = new Post({ comments: [{ message: 'some comment' }] });
+  //   expect(post.comments[0].message).toEqual("some comment");
+  // })
+
+  it("has a comment", () => {
+    var post = new Post({ comments: [{ message: 'some comment' }] });
+    expect(post.comments[0].message).toEqual("some comment");
+  })
+
+  // it("can save a comment", (done) => {
+  //   var post = new Post({ message: "some message" });
+
+  //   post.save((err) => {
+  //     expect(err).toBeNull();
+
+  //     Post.find((err, posts) => {
+  //       expect(err).toBeNull();
+
+  //       expect(posts[0]).toMatchObject({ message: "some message" });
+  //       done();
+  //     });
+  //   });
+  // });
 });

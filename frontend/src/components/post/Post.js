@@ -83,7 +83,7 @@ const Post = ({ post }) => {
           {post.comments && post.comments.length > 0 && (
             <span>
               {post.comments.map((comment) => {
-                return <div>{comment.message}</div>;
+                return <div key={comment._id}>{comment.message}</div>;
               })}
             </span>
           )}
