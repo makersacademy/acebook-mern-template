@@ -21,31 +21,19 @@ const PostsController = {
     const user = await Users.findById(req.user_id)
     post.createdBy = user
 
+    if (req.file) { 
+      post.image = {
+        fileName: req.file.filename,
+        contentType: req.file.mimetype,
+      }
+    }
+
     post.save(async (err) => {
       if (err) { throw err }
 
       const token = await TokenGenerator.jsonwebtoken(req.user_id)
       res.status(201).json({ message: 'OK', token: token });
     });
-  },
-
-  Upload: async (req, res) => {
-    if (!req.file) return
-    const user = await Users.findById(req.user_id)
-    const image = new Image({
-      image: {
-        fileName: req.file.filename,
-        contentType: req.file.mimetype,
-      },
-      ownerId: user
-    });
-  
-    image.save(async (err) => {
-      if (err) { throw err }
-  
-      const token = await TokenGenerator.jsonwebtoken(req.user_id)
-      res.status(201).json({ message: 'OK', token: token });//.send(image);
-    })
   },
 
   GetPostOwnerData: (req, res) => {

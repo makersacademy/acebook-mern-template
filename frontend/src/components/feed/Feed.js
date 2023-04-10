@@ -58,31 +58,37 @@ const Feed = ({ navigate }) => {
     });
   }
 
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    const formData = new FormData();
+    formData.append('img', newImg);
+
+    axios.post('/posts', formData, {
+      headers: {
+        'Authorization': `Bearer ${token}`,
+        'Content-Type': 'multipart/form-data'
+      },
+      body: JSON.stringify({message: newPost})
+    })
+    .then(response => {
+      if(response.status === 201) {
+        navigate('/posts');
+        window.location.reload(); // should be changed to be more React'ful
+      } else {
+        throw new Error('Failed to create post');
+      }
+    })
+    .catch(error => {
+      console.log(error);
+    });
+  }
+
   const handleNewPostChange = (event) => {
     setNewPost(event.target.value);
   }
 
   const handleImg = (event) => {
     setNewImg(event.target.files[0]);
-  }
-
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    const formData = new FormData();
-    formData.append('img', newImg);
-
-    axios.post('/posts/add', formData, {
-      headers: {
-        'Authorization': `Bearer ${token}`,
-        'Content-Type': 'multipart/form-data'
-      }
-    })
-    .then(res => {
-      console.log(res);
-    })
-    .catch(error => {
-      console.log(error);
-    });
   }
 
   if(token) {
