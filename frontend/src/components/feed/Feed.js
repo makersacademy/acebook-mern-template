@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import Post from '../post/Post'
-import PostForm from '../post/PostForm'
+//import PostForm from '../post/PostForm'
 
 const Feed = ({ navigate }) => {
   const [posts, setPosts] = useState([]);
   const [token, setToken] = useState(window.localStorage.getItem("token"));
+  const [message, setMessage] = useState("")
 
   useEffect(() => {
     if(token) {
@@ -26,8 +27,14 @@ const Feed = ({ navigate }) => {
     } 
   }, [])
 
-  //adds a new post when form is submitted
-  const handlePostSubmit = (message) => {
+  const handleMessageChange = (event) => {
+    setMessage(event.target.value);
+  }
+
+  
+  // NEW POST -----------------------------
+  const handlePostSubmit = (event) => {
+    event.preventDefault();
     fetch('/posts', {
       method: 'POST',
       headers: {
@@ -41,36 +48,49 @@ const Feed = ({ navigate }) => {
         
         //sets posts to all posts + the new post 
         setPosts([...posts, data])
+        setMessage('')
         // this refreshes the whole window which is not ideal.
         window.location.reload();
       })
       .catch((error) => console.error(error));
   };
-    
 
+  // LOGOUT --------------------------------
   const logout = () => {
     window.localStorage.removeItem("token")
     navigate('/login')
   }
+
+  // RENDER POSTS ------------------------
+  const renderPosts = () => {
+    return (
+      <div>
+        {
+          posts.map(
+          (post) => ( 
+          <Post post={post} key={ post._id } /> )
+        )}
+      </div>
+    )
+  }
+
+  // RENDER CREATE POST FORM -----------------
+  const renderPostForm = () => {
+    return (
+      <form onSubmit={handlePostSubmit}>
+        <input type="text" name="message" value={message} onChange={handleMessageChange}/>
+        <button type="submit">Post</button>
+      </form>
+    )
+  }
   
     if(token) {
       return(
-        // <PostForm.. gets the new post form and calls handlePostSubmit when submitted
         <>
-          <h2>Posts</h2>
-          <PostForm onSubmit={handlePostSubmit} />
-            <button onClick={logout}>
-              Logout
-            </button>
-          <div id='feed' role="feed">
-              {
-              posts.map(
-                (post) => ( 
-                <Post post={post} key={ post._id } /> 
-                )
-              )}
-          </div>
-
+          <h2>Acebook</h2>
+          <button onClick={logout}>Logout</button>
+          {renderPostForm()}
+          {renderPosts()}
         </>
       )
     } else {
