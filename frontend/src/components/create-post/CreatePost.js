@@ -51,6 +51,10 @@ const CreatePost = () => {
               onChange={handlePostChange}
             />
           </Form.Group>
+          <Form.Group className="mb-3">
+            <Form.Label>Select an image to upload:</Form.Label>
+            <Form.Control type="file"  />
+          </Form.Group>
         </Col>
       </Row>
       <Row className="justify-content-md-center">

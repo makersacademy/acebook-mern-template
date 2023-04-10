@@ -44,16 +44,16 @@ const Post = ({ post }) => {
   return (
     <div>
       <article data-cy="post" key={post._id}>
-        {/* <div> {console.log(post)}</div> */}
+        <div> {console.log(post)}</div>
         <div>
-          {/* <img src={post.user.image} className="profileImage"></img>  */}
+          <img src={post.user.image} className="profileImage"></img> 
           {post.user && post.user.name}
         </div>
         <div>{post.message}</div>
         <div>{date}</div>
         <FontAwesomeIcon icon={faThumbsUp} />
         <Form onSubmit={handleSubmit}>
-          <Row className="justify-content-md-center">
+          <Row className="justify-content-md-right">
             <Col md={6}>
               <Form.Group
                 className="mb-3"
@@ -71,7 +71,7 @@ const Post = ({ post }) => {
               </Form.Group>
             </Col>
           </Row>
-          <Row className="justify-content-md-center">
+          <Row className="justify-content-md-right">
             <Col md={6}>
               <Button variant="primary" type="submit" id="submit">
                 Submit
