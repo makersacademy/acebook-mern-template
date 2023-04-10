@@ -32,6 +32,7 @@ const PostsController = {
   CreateComment: async (req, res) => {
     const postId = req.params.id;
     const comment = { user: req.user_id, message: req.body.message };
+    console.log(comment)
     try {
       const post = await Post.findByIdAndUpdate(
         postId,
@@ -39,7 +40,7 @@ const PostsController = {
         { new: true }
       );
       const token = await TokenGenerator.jsonwebtoken(req.user_id);
-      res.status(200).json({ post, token });
+      res.status(201).json({ post, token });
     } catch (error) {
       res.status(400).json({ error });
     }
