@@ -45,15 +45,20 @@ const Feed = ({ navigate }) => {
     })
       .then((response) => response.json())
       .then((data) => {
-        
         //sets posts to all posts + the new post 
-        setPosts([...posts, data])
-        setMessage('')
+          setPosts([...posts, data])
+          setMessage('')
+
         // this refreshes the whole window which is not ideal.
         window.location.reload();
       })
       .catch((error) => console.error(error));
   };
+
+  // handleLikeButton ??
+    // stringify (likes)
+    //setLikes(post.likes + 1)
+    //reload
 
   // LOGOUT --------------------------------
   const logout = () => {
@@ -68,7 +73,7 @@ const Feed = ({ navigate }) => {
         {
           posts.map(
           (post) => ( 
-          <Post post={post} key={ post._id } /> )
+          <Post post={post} key={ post._id } />)
         )}
       </div>
     )
