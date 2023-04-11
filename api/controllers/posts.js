@@ -24,12 +24,23 @@ const PostsController = {
     });
   },
   Like: async (req, res) => {
-    const post = await Post.findById(req.params.id);
-    post.likes.push(req.user_id);
-    const updatedPost = await post.save();
-    res.json(updatedPost);
-    const token = await TokenGenerator.jsonwebtoken(req.user_id)
-    res.status(201).json({ message: 'OK', token: token });
+    const id = req.params.id
+    const post = await Post.findById(id);
+
+    if(!post) {
+      return res.status(404).send(`No post with ID ${id} found`)
+    }
+    
+    const userId = req.body.userId;
+
+    if (post.likes.includes(userId)) {
+      return res.status(400).send("You have already liked this post");
+    }
+
+    post.likes.push(userId);
+    await post.save();
+
+    res.json(post);
   }
 };
 

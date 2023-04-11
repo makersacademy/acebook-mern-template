@@ -4,7 +4,7 @@ const PostSchema = new mongoose.Schema({
   message: String,
   likes: {
     type: [String], 
-    default: ["jdkfd", "lkjdf"]
+    default: []
   }
 });
 
