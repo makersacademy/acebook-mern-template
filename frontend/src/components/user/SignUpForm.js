@@ -44,7 +44,7 @@ const SignUpForm = ({ navigate }) => {
       <h1 className="d-flex justify-content-center mt-5">acebook.</h1>
       <div className="d-flex justify-content-center sign-up-form">
         <Form onSubmit={handleSubmit} className="">
-          <Form.Group className="mb-3" controlId="formBasicName">
+          <Form.Group className="mb-3" >
             <Form.Label>Full Name</Form.Label>
             <Form.Control
               type="text"
@@ -54,7 +54,7 @@ const SignUpForm = ({ navigate }) => {
               onChange={handleNameChange}
             />
           </Form.Group>
-          <Form.Group className="mb-3" controlId="formBasicEmail">
+          <Form.Group className="mb-3" >
             <Form.Label>Email address</Form.Label>
             <Form.Control
               type="email"
@@ -68,7 +68,7 @@ const SignUpForm = ({ navigate }) => {
             </Form.Text>
           </Form.Group>
 
-          <Form.Group className="mb-3" controlId="formBasicPassword">
+          <Form.Group className="mb-3" >
             <Form.Label>Password</Form.Label>
             <Form.Control
               type="password"
@@ -78,10 +78,10 @@ const SignUpForm = ({ navigate }) => {
               onChange={handlePasswordChange}
             />
           </Form.Group>
-          <Form.Group className="mb-3" controlId="formBasicCheckbox">
+          <Form.Group className="mb-3">
             <Form.Check type="checkbox" label="Check me out" />
           </Form.Group>
-          <Button variant="primary" type="submit" id="submit">
+          <Button variant="primary" type="submit" id="submi">
             Submit
           </Button>
         </Form>

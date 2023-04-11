@@ -9,6 +9,11 @@ h5 {
   font-size: 8;
 }
 
-form {
-  padding-top: 100px;
+article {
+  padding: 40px 0;
+}
+
+.profileImage {
+  height: 60px;
+  width: 60px;
 }
