@@ -50,7 +50,6 @@ const SignUpForm = ({ navigate }) => {
         {errorMessage && <p>{errorMessage}</p>}
         Have an account already? <a href="/login">Log in</a>
       </div>
-      
     );
 }
 

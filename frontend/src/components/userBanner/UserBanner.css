@@ -1,0 +1,88 @@
+#user-banner-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: url('../../../public/default_banner.jpeg') no-repeat center center/cover ;
+  box-shadow: var(--shadow-settings);
+  height: 30vh;
+  margin-bottom: 1rem;
+  border-radius: 0 0 3px 3px;
+}
+
+#inner-banner-container {
+  flex-grow: 1;
+  flex-grow: 1;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: 2rem;
+  padding: 0 2.5rem;
+}
+
+#user-banner-img {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  overflow: hidden;
+  max-width: 20%;
+  flex-shrink: 1;
+}
+
+#user-banner-img img {
+  max-width: 100%;
+}
+
+#user-banner-info {
+  flex-grow: 1;
+  width: 90%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  /* border: red 1px solid; */
+}
+
+#user-banner-info h2 {
+  color: var(--secondary-color);
+  flex-grow: 1;
+  font-size: 5rem;
+  text-transform: lowercase;
+  letter-spacing: .5rem;
+}
+#user-banner-info p {
+  color: var(--secondary-color);
+  font-size: 2rem;
+  font-weight: 500;
+  text-transform: lowercase;
+}
+
+/*-----------------------*/
+/*   RESPONSIVE DESIGN   */
+/*-----------------------*/
+
+@media(max-height: 600px) {
+  #inner-banner-container {
+    padding: 0 3rem;
+    width: 100%;
+  }
+  #user-banner-img {
+    width: 15rem;
+  }
+}
+@media(max-height: 600px) {
+  #user-banner-img {
+    width: 10rem;
+  }
+}
+@media(max-height: 450px) {
+  #inner-banner-container {
+    display: none;
+  }
+  #user-banner-img {
+    width: 10rem;
+  }
+}

@@ -1,6 +1,11 @@
 import React, { useEffect, useState } from 'react';
-import Post from '../post/Post';
+import Post from '../post/Post'
 import axios from 'axios';
+import UserBanner from '../userBanner/UserBanner';
+import Navbar from '../navbar/Navbar';
+import NewPostForm from '../newForm/NewPostForm';
+
+import './Feed.css';
 
 const Feed = ({ navigate }) => {
   const [userData, setUserData] = useState({})
@@ -77,16 +82,23 @@ const Feed = ({ navigate }) => {
   if(token) {
     return(
       <>
-        <h2>Posts</h2>
-        <button onClick={logout}>Logout</button>
-        <form onSubmit={handleSubmit} encType='multipart/form-data'>
+        <Navbar logout={logout} />
+        <div id='main-container' >
+          <div id="user-banner-container">
+            <UserBanner userData={userData} />
+            <NewPostForm newPost={ newPost } handleNewPostChange={handleNewPostChange} new_post={new_post}/>
+          </div>
+          <div id='feed' role="feed">
+            {posts.map(
+              (post) => (<Post post={ post } key={ post._id } /> )
+            )}
+          </div>
+        </div>     
+        {/* <form onSubmit={handleSubmit} encType='multipart/form-data'>
           <input type='text' id='post' value={newPost} onChange={handleNewPostChange} />
           <input type='file' accept=".png, .jpg, .jpeg" id='img' onChange={handleImg} />
           <input type='submit' />
-        </form>
-        <div id='feed' role="feed">
-          {posts.map((post) => (<Post post={ post } key={ post._id } />))}
-        </div>
+        </form> */}
       </>
     );
   } else {
