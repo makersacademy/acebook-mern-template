@@ -10,9 +10,11 @@ describe("Post model", () => {
     });
   });
 
-  it("has a message", () => {
+  it("has a message with a created date", () => {
     var post = new Post({ message: "some message" });
     expect(post.message).toEqual("some message");
+    expect(post.dateCreated).toBeCloseTo(Math.floor(Date.now() / 1000), -2);
+
   });
 
   it("can list all posts", (done) => {
