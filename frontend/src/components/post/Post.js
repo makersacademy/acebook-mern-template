@@ -32,7 +32,7 @@ const Post = ({ post }) => {
       <article data-cy="post" key={post._id}>
         <div>{post.user && post.user.name}</div>
         <div>{post.message}</div>{" "} 
-        <LikeButton likes={post.likes} onClick={handleLikeClick} />
+        <LikeButton likes={likes} onClick={handleLikeClick} />
       </article>
     </div>
   );
