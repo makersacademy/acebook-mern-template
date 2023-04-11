@@ -31,7 +31,7 @@ describe("/users", () => {
         .send({name: "Michael", email: "michael@example.com", password: "1234"})
         await request(app)
         .post("/users")
-        .send({name: "Michael", email: "michael@example.com", password: "1234"})
+        .send({name: "George", email: "george@example.com", password: "1234"})
       let users = await User.find()
       let newUser2 = users[users.length - 1]
       expect(newUser2.id).toEqual(2)
