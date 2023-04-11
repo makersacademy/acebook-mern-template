@@ -4,6 +4,9 @@ import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import CreatePost from "../create/CreatePost";
+import NavBar from "../navigation/Navbar";
+import "bootstrap/dist/css/bootstrap.min.css";
+
 
 const Feed = ({ navigate }) => {
   const [posts, setPosts] = useState([]);
@@ -33,7 +36,11 @@ const Feed = ({ navigate }) => {
   if (token) {
     return (
       <>
+        
         <Container>
+          <div>
+          <NavBar />
+        </div>
           <h1 className="d-flex justify-content-center mt-5">acebook.</h1>
           <h2>Posts</h2>
           <div>

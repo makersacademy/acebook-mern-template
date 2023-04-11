@@ -49,7 +49,7 @@ const LogInForm = ({ navigate }) => {
               <Form.Control
                 type="email"
                 placeholder="Enter email"
-                id="email"
+                // id="email"
                 value={email}
                 onChange={handleEmailChange}
               />
@@ -63,7 +63,7 @@ const LogInForm = ({ navigate }) => {
               <Form.Control
                 type="password"
                 placeholder="Password"
-                id="password"
+                // id="password"
                 value={password}
                 onChange={handlePasswordChange}
               />
