@@ -44,7 +44,7 @@ const LogInForm = ({ navigate }) => {
         <h1 className="d-flex justify-content-center mt-5">acebook.</h1>
         <div className="d-flex justify-content-center">
           <Form onSubmit={handleSubmit} className="">
-            <Form.Group className="mb-3" controlId="formBasicEmail">
+            <Form.Group className="mb-3">
               <Form.Label>Email address</Form.Label>
               <Form.Control
                 type="email"
@@ -58,17 +58,17 @@ const LogInForm = ({ navigate }) => {
               </Form.Text>
             </Form.Group>
 
-            <Form.Group className="mb-3" controlId="formBasicPassword">
+            <Form.Group className="mb-3">
               <Form.Label>Password</Form.Label>
               <Form.Control
                 type="password"
                 placeholder="Password"
-                id="password"
+                // id="password"
                 value={password}
                 onChange={handlePasswordChange}
               />
             </Form.Group>
-            <Form.Group className="mb-3" controlId="formBasicCheckbox">
+            <Form.Group className="mb-3">
               <Form.Check type="checkbox" label="Check me out" />
             </Form.Group>
             <Button variant="primary" type="submit" id="submit">
