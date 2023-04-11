@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import Post from '../post/Post';
 import axios from 'axios';
-console.log
+
 const Feed = ({ navigate }) => {
   const [userData, setUserData] = useState({})
   const [posts, setPosts] = useState([]);
