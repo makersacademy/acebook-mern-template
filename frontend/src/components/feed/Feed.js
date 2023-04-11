@@ -12,9 +12,7 @@ const Feed = ({ navigate }) => {
   useEffect(() => {
     if(token) {
       fetch("/posts", {
-        headers: {
-          'Authorization': `Bearer ${token}`
-        }
+        headers: { 'Authorization': `Bearer ${token}` }
       })
         .then(response => response.json())
         .then(async data => {
@@ -23,9 +21,7 @@ const Feed = ({ navigate }) => {
           setPosts(data.posts); 
           setUserData(data.user)
         })
-        .catch(error => {
-          console.log(error);
-        });
+        .catch(error => console.log(error));
     }
   }, [token])
 
@@ -34,28 +30,40 @@ const Feed = ({ navigate }) => {
     navigate('/login')
   }
 
-  const new_post = async (event) => {
-    if (!newPost) return
+  // ONE METHOD TO SEND THEM ALL XP -
+
+  const handleSubmit = (event) => {
+    if (!newPost && !newImg) return
     event.preventDefault();
-    fetch( '/posts', {
-      method: 'post',
-      headers: {
-        'Content-Type': 'application/json', 
-        'Authorization': `Bearer ${token}`
-      },
-      body: JSON.stringify({message: newPost})
-    })
-    .then(response => {
-      if(response.status === 201) {
-        navigate('/posts');
-        window.location.reload(); // should be changed to be more React'ful
-      } else {
-        throw new Error('Failed to create post');
-      }
-    })
-    .catch(error => {
-      console.log(error);
-    });
+
+    const formData = newFormData();
+    axios.post('/posts', formData, requestHeaders)
+      .then(response => {
+        if (response.status === 201) { reloadFeedPage() }
+        else { throw new Error('Failed to create post'); }
+      })
+      .catch(error => console.log(error));
+  }
+
+  // HELPER METHODS -----------------
+
+  const newFormData = () => {
+    const formData = new FormData();
+    formData.append('post', newPost);
+    formData.append('img', newImg);
+    return formData
+  }
+
+  const requestHeaders ={
+    headers: {
+      'Authorization': `Bearer ${token}`,
+      'Content-Type': 'multipart/form-data'
+    }
+  }
+
+  const reloadFeedPage = () => {
+    navigate('/posts');
+    window.location.reload(); 
   }
 
   const handleNewPostChange = (event) => {
@@ -66,35 +74,13 @@ const Feed = ({ navigate }) => {
     setNewImg(event.target.files[0]);
   }
 
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    const formData = new FormData();
-    formData.append('img', newImg);
-
-    axios.post('/posts/add', formData, {
-      headers: {
-        'Authorization': `Bearer ${token}`,
-        'Content-Type': 'multipart/form-data'
-      }
-    })
-    .then(res => {
-      console.log(res);
-    })
-    .catch(error => {
-      console.log(error);
-    });
-  }
-
   if(token) {
     return(
       <>
         <h2>Posts</h2>
         <button onClick={logout}>Logout</button>
-        <form>
-          <input type='text' id='post' value={newPost} onChange={handleNewPostChange} />
-          <button onClick={new_post}>Post</button>
-        </form>
         <form onSubmit={handleSubmit} encType='multipart/form-data'>
+          <input type='text' id='post' value={newPost} onChange={handleNewPostChange} />
           <input type='file' accept=".png, .jpg, .jpeg" id='img' onChange={handleImg} />
           <input type='submit' />
         </form>

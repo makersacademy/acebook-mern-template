@@ -3,14 +3,10 @@ const Users = require("./user");
 
 const PostSchema = new mongoose.Schema({
   message: { type: String },
-  // image: {
-  //   contentType: String,
-  //   fileName: String,
-  //   uploadDate: {
-  //     type: Date,
-  //     default: () => Date.now()
-  //   }
-  // },
+  image: {
+    contentType: String,
+    fileName: String,
+  },
   createdBy: { 
     type: mongoose.Schema.Types.ObjectId,
     ref: 'Users',

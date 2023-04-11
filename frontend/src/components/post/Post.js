@@ -4,8 +4,6 @@ const Post = ({ post }) => {
   const [token, setToken] = useState(window.localStorage.getItem("token"));
   const [ownerData, setOwnerData] = useState({});
 
-  // get owner info for each post. stored in ownerData
-  // not sure if useEffect is really necessary here
   useEffect(() => {
     if (token) {
       fetch(`/posts/${post.createdBy}`, {
@@ -23,9 +21,16 @@ const Post = ({ post }) => {
     }
   }, [token]);
 
+  const hasImage = 'image' in post // boolean: check if post has an image
+  let imageLocation;
+  if (hasImage) { imageLocation = `/uploads/${post.image.fileName}` }
+
   return (
     <>
-      <article data-cy="post" key={ post._id }>{ post.message }</article>
+      <article data-cy="post" key={post._id}>{post.message}</article>
+      <div>
+        {hasImage ? <img src={imageLocation}></img> : null }
+      </div>
     </>
   )
 }
