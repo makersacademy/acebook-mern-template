@@ -4,7 +4,7 @@ import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import CreatePost from "../create-post/CreatePost";
-import NavBar from "../navigation/Navbar";
+import NavBar from "../navigation/NavBar";
 import "bootstrap/dist/css/bootstrap.min.css";
 
 

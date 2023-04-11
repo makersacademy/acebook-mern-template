@@ -3,6 +3,8 @@ import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import Container from "react-bootstrap/Container";
 import "./LoginForm.css";
+import NavBar from "../navigation/NavBar";
+
 
 const LogInForm = ({ navigate }) => {
   const [email, setEmail] = useState("");
@@ -41,6 +43,9 @@ const LogInForm = ({ navigate }) => {
   return (
     <div>
       <Container>
+         <div>
+          <NavBar />
+        </div>
         <h1 className="d-flex justify-content-center mt-5">acebook.</h1>
         <div className="d-flex justify-content-center">
           <Form onSubmit={handleSubmit} className="">
