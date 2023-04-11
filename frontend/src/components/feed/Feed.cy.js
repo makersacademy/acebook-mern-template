@@ -9,8 +9,8 @@ describe("Feed", () => {
       req.reply({
         statusCode: 200,
         body: { posts: [
-          {_id: 1, message: "Hello, world", dateCreated: 1620000000},
-          {_id: 2, message: "Hello again, world", dateCreated: 1621000000}
+          {_id: 1, message: "Hello, world", dateCreated: "2023-04-10T12:30:00.000Z"},
+          {_id: 2, message: "Hello again, world", dateCreated: "2023-04-11T09:45:00.000Z"}
         ] }
       })
     }).as("getPosts");
@@ -21,11 +21,10 @@ describe("Feed", () => {
       cy.get('[data-cy="post"]')
         .should('have.length', 2)
         .then(($posts) => {
-          const dates = $posts.map((i, el) => Cypress.$(el).find('[data-cy="dateCreated"]').text());
+          const dates = $posts.map((i, el) => Cypress.$(el).find('#date').text());
           const sortedDates = [...dates].sort((a, b) => new Date(b) - new Date(a));
           expect(dates.get()).to.deep.equal(sortedDates);
         });
     });
   });
 });
-
