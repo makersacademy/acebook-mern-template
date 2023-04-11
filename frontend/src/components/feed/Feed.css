@@ -1,52 +1,3 @@
-<<<<<<< HEAD
-.feed-container {
-  max-width: 400px;
-  margin: 0 auto;
-  text-align: center;
-  margin-top: 150px;
-}
-
-.form-container {
-  display: flex;
-  flex-direction: column;
-  width: 400px;
-  margin: 0 auto;
-  margin-top: 50px;
-}
-
-.input-field {
-  margin-bottom: 10px;
-  padding: 10px;
-  border-radius: 5px;
-  border: 1px solid #ccc;
-  font-size: 16px;
-  color: #27296d;
-}
-
-.button-container {
-  margin-top: 20px;
-}
-
-.logout-button {
-  margin-right: 10px;
-  background-color: #d9534f;
-  color: #fff;
-  border: none;
-  padding: 8px 16px;
-  border-radius: 4px;
-  font-size: 16px;
-  cursor: pointer;
-}
-
-.create-post-button {
-  background-color: #5cb85c;
-  color: #fff;
-  border: none;
-  padding: 8px 16px;
-  border-radius: 4px;
-  font-size: 16px;
-  cursor: pointer;
-=======
 h2 {
   color: #263849;
 }
@@ -68,5 +19,4 @@ button {
 button:hover {
   background-color: #90f6d7;
   color: #263849;
->>>>>>> main
 }
