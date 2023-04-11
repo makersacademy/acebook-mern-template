@@ -2,7 +2,6 @@ import React from 'react';
 import './Post.css'
 
 const Post = ({ post }) => {
-  console.log(post)
 
   // implement logic to get post owner data (fetch request, routes and interaction with db)
 
@@ -32,7 +31,7 @@ const Post = ({ post }) => {
 
       <div id='post-content'>
         <article data-cy="post" className="post-message" key={post._id}>{post.message}</article>
-        <img className="post-picture" src=''></img> 
+        <img className="post-picture" src='/pix1.jpeg'></img> 
       </div>
 
       <div id="post-counters">
@@ -46,7 +45,7 @@ const Post = ({ post }) => {
         {/*<button className="post-btn">Like</button> {/* Implement behaviour */}
         {/* <button className="post-btn">Comment</button> Implement behaviour */}
         <input type='text' id='post' className="comment-field" placeholder="Comment"></input>
-        <button className="comments-submit-btn"><i class="fa-regular fa-envelope fa-2x"></i></button>
+        <button className="comments-submit-btn"><i className="fa-regular fa-envelope fa-2x"></i></button>
       </div>    
       
     </div>

@@ -1,32 +1,19 @@
-:root {
-  --inside-post-separator: 1px solid rgb(205, 205, 205);
-
-  --comment-grow-animation: all .4s ease-out; 
-  --comment-shrink-animation: all .7s ease-out; 
-}
-
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  font-family: 'Ubuntu', sans-serif;
-}
-
-html {
-  font-size: 62.5%;
-}
-
-body {
-  background-color: var(--primary-color);
-}
+#feed {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  }
 
 #post-container {
-  background-color: var(--secondary-color);
+  background-color: var(--primary-color);
   min-height: 10vh;
   width: 100%;
   padding: 1rem 2rem;
   box-shadow: var(--shadow-settings);
   border-radius: 3px;
+  margin: auto;
 }
 
 /*-----------------*/
@@ -76,7 +63,7 @@ body {
 }
 
 .post-message {
-  background-color: var(--secondary-color);
+  background-color: var(--primary-color);
   width: 100%;
   font-size: 2rem;
   padding: 1.5rem 1rem;
@@ -96,25 +83,20 @@ body {
   align-items: center;
   justify-content: flex-start;
   padding: .5rem 0;
-  /* border: red solid 1px; */
-  /* border-bottom: var(--inside-post-separator); */
 }
+
 #post-counters button {
   font-size: 2rem;
-  /* border: red solid 1px;*/
 }
 
 #post-counters button .fa-heart {
   padding-right: 1.5rem;
   color: #e00615;
 }
-/* #post-counters button .fa-comment {
-  color: var(--post-btn-color);
-} */
 
 .post-counter {
   cursor: pointer;
-  background-color: var(--secondary-color);
+  background-color: var(--primary-color);
   border: none;
   padding: 1rem;
 }
@@ -129,45 +111,11 @@ body {
   color: var(--post-btn-color);
 }
 
-/*------------------*/
-/**  POST BUTTONS  **/
-/*------------------*/
-
-/* #post-btns {
-  font-size: 1.5rem;
-  display: flex;
-  align-items: center;
-  justify-content: space-evenly;
-  height: 5rem;
-  gap: .5rem;
-  border: red solid 1px;
-} */
-
-/* .post-btn {
-  cursor:  pointer;
-  width: 20%;
-  height: 100%;
-  font-size: 1.9rem;
-  font-weight: 500;
-  border: none;
-  border-radius: 50px;
-  background: transparent;
-  border: red solid 1px;
-} */
-
-/* .post-btn:hover {
-  color: var(--secondary-color);
-  background: #7adac5;
-  transition: all .2s ease-in-out;
-} */
-
-
-/*------------------*/
-/**  COMMENT BUTTONS  **/
-/*------------------*/
+/*---------------------*/
+/*   COMMENT BUTTONS   */
+/*---------------------*/
 
 #comments-container {
-  /* border: red solid 1px; */
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -176,18 +124,17 @@ body {
   height: 5rem;
   margin: 1rem;
 }
+
 .comment-field {
   cursor:  pointer;
   width: 15rem;
   height: 100%;
-  /* font-size: 1.9rem; */
   font-weight: 500;
   border: none;
   border-radius: 30px;
   background: transparent;
   padding-left: 3rem;
   outline: transparent 1px solid;
-  /* color: transparent; */
   transition: var(--comment-shrink-animation);
 }
 
@@ -200,8 +147,6 @@ body {
   color: var(--post-btn-color-hover);
   transition: all .2s ease-in-out;
 }
-
-
 
 .comment-field:focus {
   width: 100%;
@@ -223,7 +168,7 @@ body {
   height: 5rem;
   border: none;
   border-radius: 30px;
-  color: var(--secondary-color);
+  color: var(--primary-color);
   cursor: pointer;
   opacity: 0;
   background-color: var(--upload-photo-color);
@@ -233,6 +178,15 @@ body {
 .comment-field:focus + .comments-submit-btn {
   opacity: 1;
   transition: all .5s ease;
+}
+
+.comment-field:focus + .comments-submit-btn:hover {
+  background-color: var(--upload-photo-hover);
+  transform: scale(1.1);
+  transition: all .15s ease-in-out;
+}
+.comment-field:focus + .comments-submit-btn:active {
+  transform: translateY(1px);
 }
 
 .invisible {

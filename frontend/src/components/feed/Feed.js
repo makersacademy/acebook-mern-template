@@ -1,6 +1,10 @@
 import React, { useEffect, useState } from 'react';
-import Post from '../post/Post'
-import './Feed.css'
+import Post from '../post/Post';
+import UserBanner from '../userBanner/UserBanner';
+import Navbar from '../navbar/Navbar';
+import NewPostForm from '../newForm/NewPostForm';
+
+import './Feed.css';
 
 
 const Feed = ({ navigate }) => {
@@ -62,39 +66,17 @@ const Feed = ({ navigate }) => {
   if (token) {
     return(
       <>
+        <Navbar logout={logout} />
         <div id='main-container' >
-          <nav id="navbar">
-            <h1>ACEBOOK</h1>
-            <div id="navbar-btns">
-              <button className="navbar-btn">My profile</button>
-              <button className="navbar-btn">Photos</button>
-              <button className="navbar-btn" onClick={logout}>Logout</button>
-            </div>
-          </nav>
           <div id="user-banner-container">
-            <div id='inner-banner-container'> 
-              <div id="user-banner-img">
-                <img src={ userData.avatar }></img>
-              </div>
-              <div id="user-banner-info">
-                <h2>{ userData.username }</h2>
-                <p>{ userData.email }</p>
-              </div>
-            </div>
-            <form className="new-post-form">
-              <input type='text' id='post' className="text-field" placeholder="What do you have in mind?" value={newPost} onChange={handleNewPostChange}></input>
-              <button className="post-photo-upload"><i className="fa-regular fa-image fa-2x"></i></button>
-              <button className="post-submit-btn" onClick={new_post}>Send</button>
-            </form>
+            <UserBanner userData={userData} />
+            <NewPostForm newPost={ newPost } handleNewPostChange={handleNewPostChange} new_post={new_post}/>
           </div>
-
-            {/* <h2>Posts</h2> */}
-            
-            <div id='feed' role="feed">
-              {posts.map(
-                (post) => (<Post post={ post } key={ post._id } /> )
-              )}
-            </div>
+          <div id='feed' role="feed">
+            {posts.map(
+              (post) => (<Post post={ post } key={ post._id } /> )
+            )}
+          </div>
         </div>     
       </>
     )
