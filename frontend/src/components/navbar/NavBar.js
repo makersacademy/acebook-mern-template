@@ -1,5 +1,7 @@
-import mainlogo from './main-logo-air.png';
+import mainlogo from '../../main-logo-air.png';
 import { Link } from 'react-router-dom';
+import './NavBar.css';
+import { MemoryRouter } from 'react-router-dom';
 
 
 const NavBar = ({ navigate }) => {
