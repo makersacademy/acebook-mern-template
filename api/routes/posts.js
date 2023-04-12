@@ -8,5 +8,6 @@ const PostsController = require("../controllers/posts");
 router.get("/", PostsController.Index);
 router.post("/", upload.single("image"), PostsController.Create);
 router.post("/:id/comments", PostsController.CreateComment);
+router.patch("/:id", PostsController.Update);
 
 module.exports = router;

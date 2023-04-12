@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import LikeButton from "../likes/LikeButton"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faThumbsUp } from "@fortawesome/free-solid-svg-icons/faThumbsUp";
 import Container from "react-bootstrap/Container";
@@ -41,6 +42,26 @@ const Post = ({ post }) => {
     setComment(event.target.value);
   };
 
+
+  const [likes, setLikes] = useState(post.likes);
+
+  const handleLikeClick = async () => {
+    try {
+      await fetch(`/posts/${post._id}`, {
+        method: "PATCH",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+        body: JSON.stringify({ likes: likes + 1 }),
+      });
+      console.log("Liked post with ID: ", post._id);
+      setLikes(likes + 1);
+    } catch (error) {
+      console.error("Error updating likes:", error);
+    }
+  };
+
   return (
     <div>
       <article data-cy="post" key={post._id}>
@@ -51,7 +72,7 @@ const Post = ({ post }) => {
         </div>
         <div>{post.message}</div>
         <div>{date}</div>
-        <FontAwesomeIcon icon={faThumbsUp} />
+        <LikeButton likes={likes} onClick={handleLikeClick} />
         <Form onSubmit={handleSubmit}>
           <Row className="justify-content-md-right">
             <Col md={6}>
