@@ -3,12 +3,13 @@ import React, { useState } from 'react';
 
 const SignUpForm = ({ navigate }) => {
 
+  const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
 
   const handleSubmit = async (event) => {
-    if (!email || !password) return
+    if (!email || !password || !username) return
     
     event.preventDefault();
 
@@ -17,7 +18,7 @@ const SignUpForm = ({ navigate }) => {
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({ email: email, password: password })
+      body: JSON.stringify({ username: username, email: email, password: password })
     })
       .then(response => {
         if(response.status === 201) {
@@ -31,6 +32,10 @@ const SignUpForm = ({ navigate }) => {
       })
   }
 
+  const handleUsernameChange = (event) => {
+    setUsername(event.target.value)
+  }
+  
   const handleEmailChange = (event) => {
     setEmail(event.target.value)
   }
@@ -43,6 +48,7 @@ const SignUpForm = ({ navigate }) => {
     return (
       <div>
         <form onSubmit={handleSubmit}>
+          <input placeholder="Username" id="username" type="text" value={ username } onChange={handleUsernameChange} />
           <input placeholder="Email" id="email" type='text' value={ email } onChange={handleEmailChange} />
           <input placeholder="Password" id="password" type='password' value={ password } onChange={handlePasswordChange} />
           <input id='submit' type="submit" value="Submit" />
@@ -50,7 +56,6 @@ const SignUpForm = ({ navigate }) => {
         {errorMessage && <p>{errorMessage}</p>}
         Have an account already? <a href="/login">Log in</a>
       </div>
-      
     );
 }
 

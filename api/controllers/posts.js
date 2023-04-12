@@ -1,6 +1,5 @@
 const Post = require("../models/post");
 const Users = require("../models/user");
-const Image = require('../models/image')
 const TokenGenerator = require("../models/token_generator");
 const { ObjectId } = require("mongodb");
 

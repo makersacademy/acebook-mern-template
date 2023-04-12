@@ -1,0 +1,72 @@
+:root {
+  --page-color: #f0f0f0;
+  --primary-color: #fff;
+  --secondary-color: #27b99a;
+  --grey-color: rgb(201, 201, 201);
+
+  --navbar-color: #3d3d3d;
+  --navbar-color-hover: #504f4f;
+
+  --post-btn-color: #27b99a;
+  --post-btn-color-hover: #3edab8;
+
+  --upload-photo-color: #2c8ac8;
+  --upload-photo-hover: #3999d9;
+
+  --text-white: #ffffff;
+  --text-black: #3d3d3d;
+
+  --shadow-color: rgb(148, 148, 148);
+  --shadow-settings: 0px 0px 3px var(--shadow-color);
+
+  --comment-grow-animation: all .4s ease-out; 
+  --comment-shrink-animation: all .7s ease-out; 
+
+  --container-max-width: 900px;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Ubuntu', sans-serif;
+}
+
+html {
+  font-size: 62.5%;
+}
+
+body {
+  background-color: var(--page-color);
+}
+
+#main-container {
+  margin: auto;
+  max-width: var(--container-max-width);
+}
+
+/*-----------------------*/
+/*   RESPONSIVE DESIGN   */
+/*-----------------------*/
+
+@media(max-height: 950px) {
+  #user-banner-container {
+    height: 40vh
+  }
+  }
+@media(max-height: 750px) {
+  #user-banner-container {
+    height: 50vh
+  }
+  }
+@media(max-height: 600px) {
+  #user-banner-container {
+    height: 50vh
+  }
+  }
+@media(max-height: 450px) {
+  #user-banner-container {
+    height: 10rem
+  }
+  }
+
