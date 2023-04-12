@@ -1,0 +1,19 @@
+.post-box {
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  box-shadow: 0 3px 3px rgba(0,0,0,0.05);
+  margin-bottom: 5px;
+  padding: 5px;
+}
+
+#message {
+  font-size: 16px;
+  line-height: 1.5;
+  margin-bottom: 10px;
+}
+
+#date {
+  color: #999;
+  font-size: 10px;
+}
