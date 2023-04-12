@@ -32,8 +32,8 @@ const Feed = ({ navigate }) => {
 
   if (token) {
     return (
-      <>
-        <Container>
+      <div className="container-bg bg-light">
+        <Container className="bg-light">
           <h1 className="d-flex justify-content-center mt-5">acebook.</h1>
           <h2>Posts</h2>
           <div>
@@ -54,7 +54,7 @@ const Feed = ({ navigate }) => {
             </Col>
           </Row>
         </Container>
-      </>
+      </div>
     );
   } else {
     navigate("/signin");
