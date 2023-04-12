@@ -1,6 +1,5 @@
 {
   "dependencies": {
-    "moment": "^2.29.4",
     "@fortawesome/fontawesome-svg-core": "^6.4.0",
     "@fortawesome/free-regular-svg-icons": "^6.4.0",
     "@fortawesome/free-solid-svg-icons": "^6.4.0",
