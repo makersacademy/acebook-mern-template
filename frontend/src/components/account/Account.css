@@ -11,7 +11,7 @@
   border: 1px solid #444;
   border-radius: 4px;
   box-shadow: 5px 5px 10px #0d330e;
-  margin-left: 100px
+  margin-left: 10px
 }
 
 .account-btn:hover {background-color: #e0bc2c}
@@ -43,14 +43,4 @@
   background-color: #000000;
   box-shadow: 0 5px #666;
   transform: translateY(4px);
-}
-
-.parent-container {
-  display: flex;
-  justify-content: center; /* horizontally center align */
-  align-items: center; /* vertically center align */
-}
-
-.btn-container {
-  margin: 0 50px; /* add some space between the buttons */
 }

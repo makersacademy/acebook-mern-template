@@ -39,34 +39,25 @@ const AccountPage = ({ navigate }) => {
     return(
       <>
         <h1>Account Information</h1> <br></br>
-        <div class="info-container">
           <h2>Email</h2>
           {userData.email}
-          <div class="btn-container">
-            <button className="account-btn">Change Email</button>
-          </div>
         
         <br></br>
         <br></br> 
             <h2>Username</h2>
             {userData.username}
 
-          
-          <div class="btn-container">
-            <button className="account-btn">Change Username</button>
-          </div>
 
         <br></br>
         <br></br>
-
-        </div>
-
 
         <div>
-          
+          <button className="account-btn">Change Email</button>
+          <button className="account-btn">Change Username</button>
           <button className="account-btn">Change Password</button>
           <button className="account-btn">Change Avatar</button>
         </div>
+
         <br></br>
         <br></br>
         <br></br>
@@ -74,11 +65,6 @@ const AccountPage = ({ navigate }) => {
         <div>
           <button className="delete-btn" onClick={deleteAccount}>Delete Account</button>
         </div>
-
-
-
-
-
       </>
       
 
