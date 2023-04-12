@@ -8,7 +8,7 @@ describe("Creates a post.", () => {
     }).as("createpost");
     
     cy.visit("/signup");
-    cy.signup("user@email.com", "12345678")
+    cy.signup("user", "user@email.com", "12345678") // THIS NEEDS CHANGING IN MAIN TO CATER FOR ADDITION OF NAME IN SIGN UP
     cy.visit("/login");
     cy.get("#email").type("user@email.com");
     cy.get("#password").type("12345678");
