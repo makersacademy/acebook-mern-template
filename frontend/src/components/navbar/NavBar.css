@@ -1,0 +1,48 @@
+.nav {
+  position: fixed;
+  top: 0;
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #fff;
+  color: #000;
+  max-height: 120px;
+  
+}
+
+.logo-container {
+  width: 120px;
+  height: 120px;
+  padding: 20px;
+}
+
+.logo-container img {
+  position: fixed;
+  top: 0;
+  align-items: flex-start;
+  max-height: 120px;
+  width: auto;
+}
+
+.menu-container ul {
+  list-style: none;
+  display: flex;
+}
+
+.menu-container li {
+  margin-right: 40px;
+}
+
+.menu-container a {
+  text-decoration: none;
+  color: #263849;
+  font-weight: bold;
+  font-family: "Roboto Mono", sans-serif;
+}
+
+.menu-container a:hover {
+  color: #a393eb;
+  text-decoration: underline;
+  text-decoration-color: #a393eb;
+}
