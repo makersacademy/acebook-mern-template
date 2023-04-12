@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import Post from '../post/Post'
 import axios from 'axios';
-import UserBanner from '../userBanner/UserBanner';
-import Navbar from '../navbar/Navbar';
-import NewPostForm from '../newForm/NewPostForm';
+import UserBanner from './userBanner/UserBanner';
+import Navbar from './navbar/Navbar';
+import NewPostForm from './newPostForm/NewPostForm';
+import Footer from './footer/Footer';
+import EmptyPage from './emptyPage/EmptyPage';
 
 import './Feed.css';
 
@@ -86,19 +88,18 @@ const Feed = ({ navigate }) => {
         <div id='main-container' >
           <div id="user-banner-container">
             <UserBanner userData={userData} />
-            <NewPostForm newPost={ newPost } handleNewPostChange={handleNewPostChange} new_post={new_post}/>
+            <NewPostForm newPost={newPost} newImg={newImg} handleImg={handleImg} handleNewPostChange={handleNewPostChange} handleSubmit={handleSubmit}/>
           </div>
           <div id='feed' role="feed">
             {posts.map(
               (post) => (<Post post={ post } key={ post._id } /> )
             )}
           </div>
+          <div>
+            {posts.length === 0 ? <EmptyPage /> : null}
+          </div>
+        <Footer />
         </div>     
-        {/* <form onSubmit={handleSubmit} encType='multipart/form-data'>
-          <input type='text' id='post' value={newPost} onChange={handleNewPostChange} />
-          <input type='file' accept=".png, .jpg, .jpeg" id='img' onChange={handleImg} />
-          <input type='submit' />
-        </form> */}
       </>
     );
   } else {

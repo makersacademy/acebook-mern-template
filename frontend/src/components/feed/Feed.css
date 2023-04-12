@@ -1,6 +1,8 @@
 :root {
   --page-color: #f0f0f0;
   --primary-color: #fff;
+  --secondary-color: #27b99a;
+  --grey-color: rgb(201, 201, 201);
 
   --navbar-color: #3d3d3d;
   --navbar-color-hover: #504f4f;
@@ -16,8 +18,6 @@
 
   --shadow-color: rgb(148, 148, 148);
   --shadow-settings: 0px 0px 3px var(--shadow-color);
-
-  --inside-post-separator: 1px solid rgb(205, 205, 205);
 
   --comment-grow-animation: all .4s ease-out; 
   --comment-shrink-animation: all .7s ease-out; 

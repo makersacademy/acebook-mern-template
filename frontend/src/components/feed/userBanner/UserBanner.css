@@ -3,22 +3,23 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  background: url('../../../public/default_banner.jpeg') no-repeat center center/cover ;
+  background: url('../../../../public/default_banner.jpeg') no-repeat center center/cover ;
   box-shadow: var(--shadow-settings);
   height: 30vh;
+  width: 100%;
   margin-bottom: 1rem;
   border-radius: 0 0 3px 3px;
 }
 
 #inner-banner-container {
   flex-grow: 1;
-  flex-grow: 1;
   display: flex;
   flex-direction: row;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-start;
+  width: 100%;
   gap: 2rem;
-  padding: 0 2.5rem;
+  padding: 0 3rem;
 }
 
 #user-banner-img {
@@ -26,14 +27,18 @@
   flex-direction: row;
   align-items: center;
   justify-content: center;
-  border-radius: 50%;
+  border-radius: 100%;
   overflow: hidden;
-  max-width: 20%;
-  flex-shrink: 1;
+  width: 15rem;
+  height: 15rem;
+  flex-shrink: 0;
+  border: var(--primary-color) 1px solid;
 }
 
 #user-banner-img img {
-  max-width: 100%;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 
 #user-banner-info {
@@ -43,18 +48,17 @@
   flex-direction: column;
   align-items: flex-start;
   justify-content: center;
-  /* border: red 1px solid; */
 }
 
 #user-banner-info h2 {
-  color: var(--secondary-color);
+  color: var(--primary-color);
   flex-grow: 1;
   font-size: 5rem;
   text-transform: lowercase;
   letter-spacing: .5rem;
 }
 #user-banner-info p {
-  color: var(--secondary-color);
+  color: var(--primary-color);
   font-size: 2rem;
   font-weight: 500;
   text-transform: lowercase;
@@ -71,11 +75,13 @@
   }
   #user-banner-img {
     width: 15rem;
+    height: 15rem;
   }
 }
 @media(max-height: 600px) {
   #user-banner-img {
     width: 10rem;
+    height: 10rem;
   }
 }
 @media(max-height: 450px) {
@@ -84,5 +90,38 @@
   }
   #user-banner-img {
     width: 10rem;
+  }
+}
+@media(max-width: 500px) {
+  #user-banner-img {
+    width: 10rem;
+    height: 10rem;
+  }
+  #user-banner-info h2 {
+    font-size: 4rem;
+    letter-spacing: .5rem;
+  }
+}
+@media(max-width: 400px) {
+  #inner-banner-container {
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+  #user-banner-img {
+    width: 10rem;
+    height: 10rem;
+  }
+  #user-banner-info {
+    flex-grow: 1;
+    width: 90%;
+    align-items: center;
+    /* justify-content: center; */
+  }
+  #user-banner-info h2 {
+    font-size: 3rem;
+  }
+  #user-banner-info p {
+    font-size: 1rem;
   }
 }
