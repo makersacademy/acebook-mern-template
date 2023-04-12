@@ -11,6 +11,7 @@ const PostsController = {
       res.status(200).json({ posts: posts, token: token });
     });
   },
+
   Create: (req, res) => {
     console.log(req.body)
     const post = new Post(req.body);
@@ -23,6 +24,7 @@ const PostsController = {
       res.status(201).json({ message: 'OK', token: token });
     });
   },
+
   Like: async (req, res) => {
     const id = req.params.id
     const post = await Post.findById(id);
@@ -38,6 +40,22 @@ const PostsController = {
     // }
 
     post.likes.push(userId);
+    await post.save();
+
+    res.json(post);
+  },
+
+  Comment: async (req, res) => {
+    const id = req.params.id 
+    const post = await Post.findById(id)
+
+    if(!post) {
+      return res.status(404).send(`No post with ID ${id} found`)
+    }
+
+    const userId = req.body.userId;
+
+    post.comments.push(req.body.content);
     await post.save();
 
     res.json(post);
