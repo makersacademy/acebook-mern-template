@@ -17,6 +17,7 @@ describe("/tokens", () => {
     let response = await request(app)
       .post("/tokens")
       .send({ name: "name", email: "test@test.com", password: "12345678", avatarUrl: "https://localhost:8080/images/defaultAvatar.png" })
+      console.log(response.body);
     expect(response.status).toEqual(201)
     expect(response.body.token).not.toEqual(undefined)
     expect(response.body.message).toEqual("OK")
