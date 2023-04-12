@@ -10,7 +10,7 @@ const PostsController = {
       })
       .populate({
         path: "comments.user",
-        select: "name",
+        select: "name image",
       })
       .sort({ createdAt: -1 })
       .exec(async (err, posts) => { 
