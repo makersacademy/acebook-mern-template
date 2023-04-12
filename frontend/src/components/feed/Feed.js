@@ -10,11 +10,6 @@ const Feed = ({ navigate }) => {
   const [token, setToken] = useState(window.localStorage.getItem("token"));
 
   useEffect(() => {
-    const fetchPosts = async () => {
-      const response = await fetch("https://example.com/posts");
-      const data = await response.json();
-      setPosts(data);
-    }
     if (token) {
       fetch("/posts", {
         headers: {
@@ -29,7 +24,7 @@ const Feed = ({ navigate }) => {
           setPosts(data.posts);
         });
     }
-    fetchPosts();
+    
   }, []);
 
   const logout = () => {
@@ -51,7 +46,6 @@ const Feed = ({ navigate }) => {
             <CreatePost />
           </Col>
               
-        return <>
           <Row className="justify-content-md-center">
             <Col md={6}>
              <div id="feed" role="feed">
@@ -67,7 +61,7 @@ const Feed = ({ navigate }) => {
               </div>
             </Col>
           </Row>
-          </>
+       
          </Container>
         </>
      
