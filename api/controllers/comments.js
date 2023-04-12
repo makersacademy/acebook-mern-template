@@ -28,8 +28,10 @@ const CommentsController = {
     });
   },
 
-  GetCommentByPostId: (req, res) => {
-    Comments.findByPostId(req.params.postId, async (err, data) => {
+  GetCommentsByPostId: async (req, res) => {
+    const post = await Post.findById(req.params.postId);
+
+    Comment.find({ postId: post }, async (err, data) => {
       if (err) { throw err }
 
       const token = await TokenGenerator.jsonwebtoken(req.user_id)
