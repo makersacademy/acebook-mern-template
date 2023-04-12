@@ -3,6 +3,11 @@ h1 {
   font-weight: 600px;
 }
 
-form {
-  padding-top: 100px;
+article {
+  padding: 40px 0;
+}
+
+.profileImage {
+  height: 60px;
+  width: 60px;
 }
