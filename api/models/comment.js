@@ -9,10 +9,6 @@ const CommentSchema = new mongoose.Schema({
     immutable: true,
   },
   message: { type: String },
-  image: {
-    contentType: String,
-    fileName: String,
-  },
   createdBy: { 
     type: mongoose.Schema.Types.ObjectId,
     ref: 'Users',
@@ -27,7 +23,6 @@ const CommentSchema = new mongoose.Schema({
     type: Number,
     default: 0,
   },
-
 });
 
 const Comment = mongoose.model("Comment", CommentSchema);
