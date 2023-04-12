@@ -1,5 +1,5 @@
 h1 {
-  font-family: 'Corben', cursive;
+  font-family: "Corben", cursive;
   font-weight: 600px;
 }
 
@@ -7,8 +7,40 @@ article {
   padding: 40px 0;
 }
 
+.postInfo {
+  display: flex;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.postUserInfo {
+  display: flex;
+  flex-direction: column;
+  margin-left: 0.5rem;
+}
+
+.userName {
+  font-weight: 600;
+}
+
+.postTime {
+  color: gray;
+  font-size: 0.8rem;
+}
+
 .profileImage {
   height: 60px;
   width: 60px;
   border-radius: 50%;
+  margin-right: 10px;
+}
+
+.postPhoto {
+  height: 400px;
+  margin: 10px 0;
+}
+
+.likeButton {
+  background-color: aliceblue;
+  border: none;
 }

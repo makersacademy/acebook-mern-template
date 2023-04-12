@@ -4,8 +4,8 @@ import { faThumbsUp } from "@fortawesome/free-solid-svg-icons/faThumbsUp";
 
 const LikeButton = ({ likes, onClick }) => {
   return (
-    <button onClick={onClick}>
-      <FontAwesomeIcon icon={faThumbsUp} /> {likes}
+    <button className="likeButton" onClick={onClick}>
+      Like <FontAwesomeIcon icon={faThumbsUp} /> {likes}
       </button>
       
   );

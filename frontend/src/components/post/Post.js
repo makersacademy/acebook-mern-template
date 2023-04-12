@@ -11,7 +11,8 @@ import moment from "moment";
 // import { useParams } from "react-router-dom";
 
 const Post = ({ post }) => {
-  const date = moment(`${post.createdAt}`).format("MMMM Do YYYY, h:mm:ss a");
+  //const date = moment(`${post.createdAt}`).format("MMMM Do YYYY, h:mm:ss a");
+  const relativeTime = moment(post.createdAt).fromNow();
   // console.log(date)
   const [comment, setComment] = useState("");
 
@@ -63,14 +64,17 @@ const Post = ({ post }) => {
     <article data-cy="post" key={post._id}>
       <div>
         <div> {console.log(post)}</div>
-        <div>
+        <div className="postInfo">
           <img src={post.user.image} className="profileImage"></img>
-          {post.user && post.user.name}
+          <div className="postUserInfo">
+            <span className="userName">{post.user && post.user.name}</span>
+            <span className="postTime">{relativeTime}</span>
+          </div>
         </div>
         <div>{post.message}</div>
         <img src={post.photo} className="postPhoto"></img>
-        <div>{date}</div>
-        <LikeButton likes={likes} onClick={handleLikeClick} />
+
+        <div><LikeButton likes={likes} onClick={handleLikeClick} /></div>
         <Form onSubmit={handleSubmit}>
           <Row className="justify-content-md-right">
             <Col md={6}>
