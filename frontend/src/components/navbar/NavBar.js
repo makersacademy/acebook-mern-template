@@ -10,9 +10,20 @@ const NavBar = ({ navigate }) => {
         <img src={mainlogo}/>
       </div>
       <div data-cy="menu-container" className="menu-container">
+      <ul>
         <li>
-          <Link to="/">Log out</Link> 
+          <Link to="/login">Log out</Link> 
         </li>
+        <li>
+          <Link to="/posts">Feed</Link> 
+        </li>
+        <li>
+          <Link to="/signup">Sign up</Link> 
+        </li>
+        <li>
+          <Link to="/createpost">Create a post</Link> 
+        </li>
+      </ul>
       </div>
     </nav>
   );
