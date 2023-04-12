@@ -50,6 +50,16 @@ const PostsController = {
       res.status(400).json({ error });
     }
   },
+  Update: (req, res) => {
+    const postId = req.params.id;
+    Post.findByIdAndUpdate(postId, { $inc: { likes: 1 } }, { new: true }, (err, post) => {
+      if (err) {
+        res.status(500).json({ error: err });
+      } else {
+        res.status(200).json(post);
+      }
+    });
+  }
 };
 
 module.exports = PostsController;

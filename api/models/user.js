@@ -7,6 +7,8 @@
     image: { type: String, default:'http://cdn.onlinewebfonts.com/svg/img_561543.png' },
   });
 
+  UserSchema.index({ email: 1 }, { unique: true });
+  
   const User = mongoose.model("User", UserSchema);
 
   module.exports = User;
