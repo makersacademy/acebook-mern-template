@@ -7,6 +7,7 @@ import "./LoginForm.css";
 const LogInForm = ({ navigate }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -20,10 +21,21 @@ const LogInForm = ({ navigate }) => {
     });
 
     if (response.status !== 201) {
-      console.log("oop");
-      navigate("/login");
+      let data = await response.json();
+      if (data.error === "Invalid email") {
+        setError("Invalid email");
+        setEmail("");
+        setPassword("");
+      } else if (data.error === "Invalid password") {
+        setError("Invalid password");
+        setEmail("");
+        setPassword("");
+      } else {
+        setError("Invalid email and password: ");
+        setEmail("");
+        setPassword("");
+      }
     } else {
-      console.log("yay");
       let data = await response.json();
       window.localStorage.setItem("token", data.token);
       navigate("/posts");
@@ -68,6 +80,7 @@ const LogInForm = ({ navigate }) => {
                 onChange={handlePasswordChange}
               />
             </Form.Group>
+            {error && <div className="alert alert-danger">{error}<a href="/signup">Please sign up</a></div>}
             <Form.Group className="mb-3">
               <Form.Check type="checkbox" label="Check me out" />
             </Form.Group>
@@ -82,3 +95,4 @@ const LogInForm = ({ navigate }) => {
 };
 
 export default LogInForm;
+
