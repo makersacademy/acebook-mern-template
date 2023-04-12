@@ -40,7 +40,7 @@ const CreatePost = () => {
   }
 
   const handleImageChange = (event) => {
-    setImage(event.target.files[0]);
+    setImage(event.target.files[0]);  
   }
 
   return (
@@ -63,7 +63,7 @@ const CreatePost = () => {
           </Form.Group>
           <Form.Group className="mb-3">
             <Form.Label>Select an image to upload:</Form.Label>
-            <Form.Control type="file" onChange={handleImageChange}  />
+            <Form.Control type="file" accept=".png, .jpg, .jpeg" onChange={handleImageChange} name="image" />
           </Form.Group>
         </Col>
       </Row>

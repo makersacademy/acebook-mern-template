@@ -71,6 +71,7 @@ const Post = ({ post }) => {
           {post.user && post.user.name}
         </div>
         <div>{post.message}</div>
+        <img src={post.photo} className="postPhoto"></img> 
         <div>{date}</div>
         <LikeButton likes={likes} onClick={handleLikeClick} />
         <Form onSubmit={handleSubmit}>
