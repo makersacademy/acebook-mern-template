@@ -4,6 +4,7 @@ import Container from "react-bootstrap/Container";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 
+
 const SignUpForm = ({ navigate }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -12,19 +13,19 @@ const SignUpForm = ({ navigate }) => {
   const handleSubmit = async (event) => {
     event.preventDefault();
 
-    fetch("/users", {
-      method: "post",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ email: email, password: password, name: name }),
-    }).then((response) => {
-      if (response.status === 201) {
-        navigate("/login");
-      } else {
-        navigate("/signup");
-      }
-    });
+      fetch("/users", {
+        method: "post",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ email: email, password: password, name: name }),
+      }).then((response) => {
+        if (response.status === 201) {
+          navigate("/login");
+        } else {
+          navigate("/signup");
+        }
+      });
   };
 
   const handleEmailChange = (event) => {
