@@ -9,6 +9,8 @@ import {
   useNavigate,
   Routes,
   Route,
+  Router,
+  MemoryRouter,
 } from "react-router-dom";
 
 const App = () => {
@@ -22,8 +24,8 @@ const App = () => {
           <Route path='/createpost' element={<CreatePostForm navigate={ useNavigate() }/>}/>
 
         </Routes>
-      </>
+        </>
     );
-}
+};
 
 export default App;
