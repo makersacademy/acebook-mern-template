@@ -1,9 +1,7 @@
 import React, { useState } from "react";
-import Button from "react-bootstrap/Button";
-import Form from "react-bootstrap/Form";
-import Container from "react-bootstrap/Container";
+import { Container, Form, Button } from "react-bootstrap";
 import "./LoginForm.css";
-import NavBar from "../navigation/NavBar";
+// import NavBar from "../navigation/NavBar";
 
 
 const LogInForm = ({ navigate }) => {
@@ -40,12 +38,18 @@ const LogInForm = ({ navigate }) => {
     setPassword(event.target.value);
   };
 
+  const handleSignUp = () => {
+    navigate("/signup");
+  }
+
   return (
     <div>
       <Container>
-         <div>
-          <NavBar />
-        </div>
+        <div className="d-flex justify-content-end mt-3">
+        <Button variant="outline-primary" size = "sm" onClick={handleSignUp}>
+              Create new Account
+            </Button>
+          </div>
         <h1 className="d-flex justify-content-center mt-5">acebook.</h1>
         <div className="d-flex justify-content-center">
           <Form onSubmit={handleSubmit} className="">
@@ -80,7 +84,8 @@ const LogInForm = ({ navigate }) => {
               Submit
             </Button>
           </Form>
-        </div>
+        
+          </div>
       </Container>
     </div>
   );
