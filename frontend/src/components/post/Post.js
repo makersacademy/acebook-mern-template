@@ -63,11 +63,12 @@ const Post = ({ post }) => {
   };
 
   return (
+    <article data-cy="post" key={post._id}>
     <div>
-      <article data-cy="post" key={post._id}>
+      
         <div> {console.log(post)}</div>
         <div>
-          <img src={post.user.image} className="profileImage"></img> 
+         {/* <img src={post.user.image} className="profileImage"></img>  */}
           {post.user && post.user.name}
         </div>
         <div>{post.message}</div>
@@ -101,19 +102,25 @@ const Post = ({ post }) => {
             </Col>
           </Row>
         </Form>
+        
+      </div> 
         <div data-cy="comment" key={post._id}>
           {post.comments && post.comments.length > 0 && (
             <span>
-              {post.comments.map((comment) => {
+             {post.comments.map((comment) => {
                 console.log(comment)
                 return <div key={comment._id}>{comment.user.name} commented : {comment.message}</div>;
               })}
             </span>
           )}
         </div>
-      </article>
-    </div>
-  );
+        
+        
+        
+     
+    </article>
+    ); 
+ 
 };
 
 export default Post;

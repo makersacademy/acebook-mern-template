@@ -5,12 +5,12 @@ import Form from "react-bootstrap/Form";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 
-const CreatePost = () => {
+const CreatePost = (navigate) => {
   const [message, setMessage] = useState("");
   const [image, setImage] = useState(null);
 
   const handleSubmit = async (event) => {
-    event.preventDefault();
+    //event.preventDefault();
 
     const formData = new FormData();
     formData.append("message", message);
@@ -29,6 +29,8 @@ const CreatePost = () => {
       console.log("error saving your post");
     } else {
       console.log("your post saved to db");
+      navigate("/posts");
+
     }
 
     setMessage("");
