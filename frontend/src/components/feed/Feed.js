@@ -16,7 +16,7 @@ const Feed = ({ navigate }) => {
         .then(response => response.json())
         .then(async data => {
           window.localStorage.setItem("token", data.token)
-          setToken(window.localStorage.getItem("token"))
+          setToken(window.localStorage.getItem("token"));
           setPosts(data.posts);
         })
     }
@@ -36,7 +36,7 @@ const Feed = ({ navigate }) => {
       <div className="feed-container">
         <h2 className="feed-heading">Posts</h2>
         <div id='feed' role="feed">
-          {posts?.map(
+          {posts?.sort((a, b) => new Date(b.dateCreated) - new Date(a.dateCreated)).map(
             (post) => ( <Post post={ post } key={ post._id } /> )
           )}
         </div>
