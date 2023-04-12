@@ -67,7 +67,7 @@ const Post = ({ post }) => {
         <div className="postInfo">
           <img src={post.user.image} className="profileImage"></img>
           <div className="postUserInfo">
-            <span className="userName">{post.user && post.user.name}</span>
+            <span className="postUserName">{post.user && post.user.name}</span>
             <span className="postTime">{relativeTime}</span>
           </div>
         </div>
@@ -105,16 +105,20 @@ const Post = ({ post }) => {
       </div>
       <div data-cy="comment" key={post._id}>
         {post.comments && post.comments.length > 0 && (
-          <span>
+          <div className="commentSection">
             {post.comments.map((comment) => {
               console.log(comment);
               return (
-                <div key={comment._id}>
-                  {comment.user.name} commented : {comment.message}
+                <div className="commentInfo" key={comment._id}>
+                  <img src={comment.user.image} className="commentProfileImage"></img>
+                  <div className="commentUserInfo">
+                    <span className="commentUserName">{comment.user.name}</span>
+                    <span className="commentMessage">{comment.message}</span>
+                  </div>
                 </div>
               );
             })}
-          </span>
+          </div>
         )}
       </div>
     </article>

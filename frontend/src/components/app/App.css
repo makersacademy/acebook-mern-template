@@ -19,7 +19,7 @@ article {
   margin-left: 0.5rem;
 }
 
-.userName {
+.postUserName {
   font-weight: 600;
 }
 
@@ -43,4 +43,38 @@ article {
 .likeButton {
   background-color: aliceblue;
   border: none;
+  padding: 10px 0 ;
+}
+
+.likeButton:hover {
+  color: grey;
+
+}
+
+.commentSection {
+  margin: 10px 0;
+}
+
+.commentProfileImage {
+  height: 40px;
+  width: 40px;
+  border-radius: 50%;
+  margin-right: 10px;
+}
+
+.commentInfo {
+  display: flex;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.commentUserInfo {
+  display: flex;
+  flex-direction: column;
+  margin-left: 0.5rem;
+}
+
+.commentUserName {
+  font-weight: 600;
+  font-size: 14px;
 }
