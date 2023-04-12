@@ -11,6 +11,7 @@ const Navbar = ({ logout }) => {
           <div id="navbar-btns">
             <button className="navbar-btn">My profile</button>
             <button className="navbar-btn">Photos</button>
+            <button className="navbar-btn">Account</button>
             <button className="navbar-btn" onClick={logout}>Logout</button>
           </div>
         </nav>
