@@ -9,10 +9,6 @@ const CommentSchema = new mongoose.Schema({
     immutable: true,
   },
   message: { type: String },
-  image: {
-    contentType: String,
-    fileName: String,
-  },
   createdBy: { 
     type: mongoose.Schema.Types.ObjectId,
     ref: 'Users',
