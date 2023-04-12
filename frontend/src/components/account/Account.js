@@ -32,7 +32,17 @@ const AccountPage = ({ navigate }) => {
           {userData.username} 
         </div>
         <div>
-          
+          <button className="account-btn">Change Email</button>
+          <button className="account-btn">Change Username</button>
+          <button className="account-btn">Change Password</button>
+          <button className="account-btn">Change Avatar</button>
+        </div>
+        <br></br>
+        <br></br>
+        <br></br>
+        <br></br>
+        <div>
+          <button className="delete-btn">Delete Account</button>
         </div>
 
 
