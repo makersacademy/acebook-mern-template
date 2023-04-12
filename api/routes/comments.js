@@ -4,7 +4,6 @@ const CommentsController = require("../controllers/comments");
 
 const upload = require('../multerSetup')
 
-router.get("/", CommentsController.Index);
 router.post("/", upload.single('img'), CommentsController.Create)
 router.get("/:postId", CommentsController.GetCommentsByPostId);
 

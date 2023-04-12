@@ -6,16 +6,6 @@ const { ObjectId } = require("mongodb");
 
 const CommentsController = {
   
-  Index: async (req, res) => {
-    const user = await findUser(req.user_id)  // method further down
-
-    Comment.find(async (err, comments) => {
-      if (err) { throw err }
-      const token = await TokenGenerator.jsonwebtoken(req.user_id)
-      res.status(200).json({ comments: comments, posts: posts, user: user, token: token });
-    }).sort({ createdAt: 0 });
-  },
-  
   Create: async (req, res) => {
     const comment = await buildCommentData(req) // method further down
 
@@ -35,7 +25,7 @@ const CommentsController = {
 
       const token = await TokenGenerator.jsonwebtoken(req.user_id)
       res.status(200).json({comments: data, token: token });
-    })
+    }).sort({ createdAt: -1 });
   }
 };
 
