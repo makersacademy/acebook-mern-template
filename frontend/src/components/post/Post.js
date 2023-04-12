@@ -4,6 +4,7 @@ import './Post.css'
 const Post = ({ post }) => {
   const [token, setToken] = useState(window.localStorage.getItem("token"));
   const [ownerData, setOwnerData] = useState({});
+  const [likes, setLikes] = useState(post.likes.length);
 
   useEffect(() => {
     if (token) {
@@ -21,6 +22,32 @@ const Post = ({ post }) => {
         });
     }
   }, [token]);
+
+  const handleLikes = () => {
+    // Step 1
+    fetch(`/posts/${post._id}/likes`, {
+      method: "PUT",
+      headers: { 'Authorization': `Bearer ${token}` }
+    })
+      .then(response => response.json())
+      .then(async data => {
+        // Step 2
+        const updatedLikes = await fetch(`/posts/${post._id}/likes`, {
+          headers: { 'Authorization': `Bearer ${token}` }
+        })
+          .then(response => response.json())
+          .then(data => data.likes)
+          .catch(error => {
+            console.log(error);
+          });
+        // Step 3
+        setLikes(updatedLikes);
+      })
+      .catch(error => {
+        console.log(error);
+      });
+  }
+  
 
   const dateObj = new Date(post.createdAt)
   const options = {
@@ -60,7 +87,10 @@ const Post = ({ post }) => {
       </div>
 
       <div id="post-counters">
-        <button className="post-counter"><i className="fa-sharp fa-solid fa-heart fa-lg"></i>{post.likes} likes</button>
+        <button className="post-counter">
+          <i className="fa-sharp fa-solid fa-heart fa-lg" onClick={handleLikes}></i>
+          {likes} likes
+        </button>
         <button className="post-counter">{post.comments} comments</button>
       </div>
 

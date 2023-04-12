@@ -1,5 +1,6 @@
 const mongoose = require("mongoose");
 const Users = require("./user");
+const { ObjectID } = require("mongodb");
 
 const PostSchema = new mongoose.Schema({
   message: { type: String },
@@ -17,10 +18,15 @@ const PostSchema = new mongoose.Schema({
     immutable: true,
     default: () => Date.now(),
   },
-  likes: {
+  liked: {
     type: Number,
     default: 0,
   },
+  likes: [{
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Users',
+  }],
+
   comments: {
     type: Number,
     default: 0,
