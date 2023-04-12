@@ -22,6 +22,7 @@ const LogInForm = ({ navigate }) => {
 
     if (response.status !== 201) {
       let data = await response.json();
+      console.log(data)
       if (data.error === "Invalid email") {
         setError("Invalid email");
         setEmail("");
@@ -64,6 +65,7 @@ const LogInForm = ({ navigate }) => {
                 id="email"
                 value={email}
                 onChange={handleEmailChange}
+                required
               />
               <Form.Text className="text-muted">
                 We'll never share your email with anyone else.
@@ -78,6 +80,7 @@ const LogInForm = ({ navigate }) => {
                 // id="password"
                 value={password}
                 onChange={handlePasswordChange}
+                required
               />
             </Form.Group>
             {error && <div className="alert alert-danger">{error}<a href="/signup">Please sign up</a></div>}

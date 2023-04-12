@@ -12,8 +12,8 @@ const SessionsController = {
         console.log("auth error: user not found")
         res.status(401).json({ message: "auth error" });
       } else if (user.password !== password) {
-        console.log("auth error: passwords do not match")
-        res.status(401).json({ message: "auth error" });
+        console.log("auth error: invalid password")
+        res.status(401).json({ error: "Invalid password" });
       } else {
         const token = await TokenGenerator.jsonwebtoken(user.id)
         res.status(201).json({ token: token, message: "OK" });
