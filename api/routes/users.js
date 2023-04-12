@@ -5,6 +5,8 @@ const { v4: uuidv4 } = require('uuid')
 const UsersController = require("../controllers/users");
 
 router.post("/", UsersController.Create);
+router.get("/", UsersController.Index);
+router.delete("/", UsersController.Delete);
 
 
 module.exports = router;
