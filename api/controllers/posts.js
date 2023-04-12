@@ -13,7 +13,7 @@ const PostsController = {
         select: "name",
       })
       .sort({ createdAt: -1 })
-      .exec(async (err, posts) => {
+      .exec(async (err, posts) => { 
         if (err) {
           throw err;
         }
@@ -23,9 +23,13 @@ const PostsController = {
   },
   Create: (req, res) => {
     let postContent = { ...req.body, user: req.user_id };
+    if (req.file) {
+      postContent.photo = req.file.path;
+    }
     const post = new Post(postContent);
     post.save(async (err) => {
       if (err) {
+        console.log(err);
         throw err;
       }
 

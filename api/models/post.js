@@ -8,6 +8,10 @@ const PostSchema = new mongoose.Schema(
       ref: "User",
       // required: true,
     },
+    photo: {
+      type: String,
+      default: ""
+    },
     comments: [
       {
         user: {

@@ -34,7 +34,7 @@ const Post = ({ post }) => {
   
     }
 
-    // setMessage("");
+    setComment("");
   };
 
   const handleCommentChange = (event) => {
@@ -79,7 +79,7 @@ const Post = ({ post }) => {
             </Col>
           </Row>
         </Form>
-        <div>
+        <div data-cy="comment" key={post._id}>
           {post.comments && post.comments.length > 0 && (
             <span>
               {post.comments.map((comment) => {

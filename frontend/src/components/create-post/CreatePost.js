@@ -7,17 +7,22 @@ import Col from "react-bootstrap/Col";
 
 const CreatePost = () => {
   const [message, setMessage] = useState("");
+  const [image, setImage] = useState(null);
 
   const handleSubmit = async (event) => {
     event.preventDefault();
 
+    const formData = new FormData();
+    formData.append("message", message);
+    formData.append("image", image);
+
     let response = await fetch("/posts", {
       method: "post",
       headers: {
-        "Content-Type": "application/json",
+        // "Content-Type": "application/json",
         Authorization: `Bearer ${window.localStorage.getItem("token")}`
       },
-      body: JSON.stringify({ message: message }),
+      body: formData,
     });
 
     if (response.status !== 201) {
@@ -27,10 +32,15 @@ const CreatePost = () => {
     }
 
     setMessage("");
+    setImage(null);
   }
 
   const handlePostChange = (event) => {
     setMessage(event.target.value);
+  }
+
+  const handleImageChange = (event) => {
+    setImage(event.target.files[0]);
   }
 
   return (
@@ -53,7 +63,7 @@ const CreatePost = () => {
           </Form.Group>
           <Form.Group className="mb-3">
             <Form.Label>Select an image to upload:</Form.Label>
-            <Form.Control type="file"  />
+            <Form.Control type="file" onChange={handleImageChange}  />
           </Form.Group>
         </Col>
       </Row>
