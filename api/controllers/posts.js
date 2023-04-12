@@ -33,9 +33,9 @@ const PostsController = {
     
     const userId = req.body.userId;
 
-    if (post.likes.includes(userId)) {
-      return res.status(400).send("You have already liked this post");
-    }
+    // if (post.likes.includes(userId)) {
+    //   return res.status(400).send("You have already liked this post");
+    // }
 
     post.likes.push(userId);
     await post.save();

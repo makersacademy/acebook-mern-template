@@ -3,7 +3,7 @@ import React, {useState} from 'react';
 const Post = ({post}) => {
 
   const [likeCount, setLikeCount] = useState(post.likes.length)
-  const [token, setToken] = useState(window.localStorage.getItem("token"));
+  const [token] = useState(window.localStorage.getItem("token"));
 
   const handleLike = async (event) => {
     event.preventDefault();
