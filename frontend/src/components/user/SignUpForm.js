@@ -10,17 +10,24 @@ const SignUpForm = ({ navigate }) => {
   const [password, setPassword] = useState("");
   const [name, setName] = useState("");
   const [error, setError] = useState("");
+  const [image, setImage] = useState(null);
 
   const handleSubmit = async (event) => {
     event.preventDefault();
 
-    fetch("/users", {
+    const formData = new FormData();
+    formData.append("email", email);
+    formData.append("password", password);
+    formData.append("name", name);
+    formData.append("image", image);
+
+    let response = await fetch("/users", {
       method: "post",
       headers: {
-        "Content-Type": "application/json",
+        // "Content-Type": "application/json",
       },
-      body: JSON.stringify({ email: email, password: password, name: name }),
-    }).then((response) => {
+      body: formData,
+    });
 
       if (response.status === 201) {
         navigate("/login");
@@ -32,7 +39,7 @@ const SignUpForm = ({ navigate }) => {
         navigate("/signup");
         
       }
-    });
+   
   };
 
   const handleEmailChange = (event) => {
@@ -45,6 +52,10 @@ const SignUpForm = ({ navigate }) => {
 
   const handleNameChange = (event) => {
     setName(event.target.value);
+  };
+
+  const handleImageChange = (event) => {
+    setImage(event.target.files[0]);  
   };
 
   return (
@@ -85,6 +96,10 @@ const SignUpForm = ({ navigate }) => {
               value={password}
               onChange={handlePasswordChange}
             />
+          </Form.Group>
+          <Form.Group className="mb-3">
+            <Form.Label>Select an image to upload:</Form.Label>
+            <Form.Control type="file" accept=".png, .jpg, .jpeg" onChange={handleImageChange} name="image" />
           </Form.Group>
           {error && <div className="alert alert-danger">{error}<a href="/login">Please login</a> </div>}
           <Form.Group className="mb-3">

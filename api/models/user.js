@@ -4,7 +4,7 @@
     name: { type: String, required: true },
     email: { type: String, required: true, unique: true },
     password: { type: String, required: true },
-    image: { type: String, default:'http://cdn.onlinewebfonts.com/svg/img_561543.png' },
+    image: { type: String, default: "" },
   });
 
   UserSchema.index({ email: 1 }, { unique: true });

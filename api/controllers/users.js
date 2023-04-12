@@ -2,6 +2,9 @@ const User = require("../models/user");
 
 const UsersController = {
   Create: (req, res) => {
+    if (req.file) {
+      req.body.image = req.file.path;
+    }
     const user = new User(req.body);
     user.save((err) => {
       if (err) {
