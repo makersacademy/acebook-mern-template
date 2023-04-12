@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import LikeButton from "../likes/LikeButton"
+import LikeButton from "../likes/LikeButton";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faThumbsUp } from "@fortawesome/free-solid-svg-icons/faThumbsUp";
 import Container from "react-bootstrap/Container";
@@ -14,7 +14,6 @@ const Post = ({ post }) => {
   const date = moment(`${post.createdAt}`).format("MMMM Do YYYY, h:mm:ss a");
   // console.log(date)
   const [comment, setComment] = useState("");
-  
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -26,13 +25,12 @@ const Post = ({ post }) => {
       },
       body: JSON.stringify({ message: comment }),
     });
-    console.log(response)
+    console.log(response);
     if (response.status !== 201) {
       let errorMessage = await response.text();
       console.log(`error saving your comment: ${errorMessage}`);
     } else {
       console.log("your comment saved to db");
-  
     }
 
     setComment("");
@@ -41,7 +39,6 @@ const Post = ({ post }) => {
   const handleCommentChange = (event) => {
     setComment(event.target.value);
   };
-
 
   const [likes, setLikes] = useState(post.likes);
 
@@ -64,15 +61,14 @@ const Post = ({ post }) => {
 
   return (
     <article data-cy="post" key={post._id}>
-    <div>
-      
+      <div>
         <div> {console.log(post)}</div>
         <div>
-         <img src={post.user.image} className="profileImage"></img> 
+          <img src={post.user.image} className="profileImage"></img>
           {post.user && post.user.name}
         </div>
         <div>{post.message}</div>
-        <img src={post.photo} className="postPhoto"></img> 
+        <img src={post.photo} className="postPhoto"></img>
         <div>{date}</div>
         <LikeButton likes={likes} onClick={handleLikeClick} />
         <Form onSubmit={handleSubmit}>
@@ -102,25 +98,23 @@ const Post = ({ post }) => {
             </Col>
           </Row>
         </Form>
-        
-      </div> 
-        <div data-cy="comment" key={post._id}>
-          {post.comments && post.comments.length > 0 && (
-            <span>
-             {post.comments.map((comment) => {
-                console.log(comment)
-                return <div key={comment._id}>{comment.user.name} commented : {comment.message}</div>
-              })}
-            </span>
-          )}
-        </div>
-        
-        
-        
-     
+      </div>
+      <div data-cy="comment" key={post._id}>
+        {post.comments && post.comments.length > 0 && (
+          <span>
+            {post.comments.map((comment) => {
+              console.log(comment);
+              return (
+                <div key={comment._id}>
+                  {comment.user.name} commented : {comment.message}
+                </div>
+              );
+            })}
+          </span>
+        )}
+      </div>
     </article>
-    ); 
- 
+  );
 };
 
 export default Post;

@@ -15,7 +15,6 @@ const Feed = ({ navigate }) => {
         headers: {
           Authorization: `Bearer ${token}`,
         },
-      
       })
         .then((response) => response.json())
         .then(async (data) => {
@@ -24,7 +23,6 @@ const Feed = ({ navigate }) => {
           setPosts(data.posts);
         });
     }
-    
   }, []);
 
   const logout = () => {
@@ -41,33 +39,24 @@ const Feed = ({ navigate }) => {
           <div>
             <button onClick={logout}>Logout</button>
           </div>
-          
+
           <Col md={12}>
             <CreatePost />
           </Col>
-              
+
           <Row className="justify-content-md-center">
             <Col md={6}>
-             <div id="feed" role="feed">
-              
-            
-               { posts.map((post) => {
-                 return (
-                  
-                <Post post={post} key={post._id} />)
-               
-               })};
-               
+              <div id="feed" role="feed">
+                {posts.map((post) => {
+                  return <Post post={post} key={post._id} />;
+                })}
               </div>
             </Col>
           </Row>
-       
-         </Container>
-        </>
-     
-
-  
-  )}else {
+        </Container>
+      </>
+    );
+  } else {
     navigate("/signin");
   }
 };

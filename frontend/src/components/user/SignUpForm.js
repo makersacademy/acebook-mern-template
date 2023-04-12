@@ -29,17 +29,15 @@ const SignUpForm = ({ navigate }) => {
       body: formData,
     });
 
-      if (response.status === 201) {
-        navigate("/login");
-      } else {
-       setError("This email already exists: ")
-        setEmail("");
-        setName("");
-        setPassword("");
-        navigate("/signup");
-        
-      }
-   
+    if (response.status === 201) {
+      navigate("/login");
+    } else {
+      setError("This email already exists: ");
+      setEmail("");
+      setName("");
+      setPassword("");
+      navigate("/signup");
+    }
   };
 
   const handleEmailChange = (event) => {
@@ -55,7 +53,7 @@ const SignUpForm = ({ navigate }) => {
   };
 
   const handleImageChange = (event) => {
-    setImage(event.target.files[0]);  
+    setImage(event.target.files[0]);
   };
 
   return (
@@ -63,7 +61,7 @@ const SignUpForm = ({ navigate }) => {
       <h1 className="d-flex justify-content-center mt-5">acebook.</h1>
       <div className="d-flex justify-content-center sign-up-form">
         <Form onSubmit={handleSubmit} className="">
-          <Form.Group className="mb-3" >
+          <Form.Group className="mb-3">
             <Form.Label>Full Name</Form.Label>
             <Form.Control
               type="text"
@@ -73,7 +71,7 @@ const SignUpForm = ({ navigate }) => {
               onChange={handleNameChange}
             />
           </Form.Group>
-          <Form.Group className="mb-3" >
+          <Form.Group className="mb-3">
             <Form.Label>Email address</Form.Label>
             <Form.Control
               type="email"
@@ -87,7 +85,7 @@ const SignUpForm = ({ navigate }) => {
             </Form.Text>
           </Form.Group>
 
-          <Form.Group className="mb-3" >
+          <Form.Group className="mb-3">
             <Form.Label>Password</Form.Label>
             <Form.Control
               type="password"
@@ -99,9 +97,19 @@ const SignUpForm = ({ navigate }) => {
           </Form.Group>
           <Form.Group className="mb-3">
             <Form.Label>Select an image to upload:</Form.Label>
-            <Form.Control type="file" accept=".png, .jpg, .jpeg" onChange={handleImageChange} name="image" />
+            <Form.Control
+              type="file"
+              accept=".png, .jpg, .jpeg"
+              onChange={handleImageChange}
+              name="image"
+            />
           </Form.Group>
-          {error && <div className="alert alert-danger">{error}<a href="/login">Please login</a> </div>}
+          {error && (
+            <div className="alert alert-danger">
+              {error}
+              <a href="/login">Please login</a>{" "}
+            </div>
+          )}
           <Form.Group className="mb-3">
             <Form.Check type="checkbox" label="Check me out" />
           </Form.Group>

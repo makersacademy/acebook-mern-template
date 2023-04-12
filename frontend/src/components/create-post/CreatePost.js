@@ -20,7 +20,7 @@ const CreatePost = (navigate) => {
       method: "post",
       headers: {
         // "Content-Type": "application/json",
-        Authorization: `Bearer ${window.localStorage.getItem("token")}`
+        Authorization: `Bearer ${window.localStorage.getItem("token")}`,
       },
       body: formData,
     });
@@ -30,27 +30,27 @@ const CreatePost = (navigate) => {
     } else {
       console.log("your post saved to db");
       navigate("/posts");
-
     }
 
     setMessage("");
     setImage(null);
-  }
+  };
 
   const handlePostChange = (event) => {
     setMessage(event.target.value);
-  }
+  };
 
   const handleImageChange = (event) => {
-    setImage(event.target.files[0]);  
-  }
+    setImage(event.target.files[0]);
+  };
 
   return (
-    <Form onSubmit={handleSubmit} >
+    <Form onSubmit={handleSubmit}>
       <Row className="justify-content-md-center">
         <Col md={6}>
-          <Form.Group className="mb-3" 
-          // controlId="exampleForm.ControlTextarea1"
+          <Form.Group
+            className="mb-3"
+            // controlId="exampleForm.ControlTextarea1"
           >
             <Form.Label>Write your post here...</Form.Label>
             <Form.Control
@@ -65,7 +65,12 @@ const CreatePost = (navigate) => {
           </Form.Group>
           <Form.Group className="mb-3">
             <Form.Label>Select an image to upload:</Form.Label>
-            <Form.Control type="file" accept=".png, .jpg, .jpeg" onChange={handleImageChange} name="image" />
+            <Form.Control
+              type="file"
+              accept=".png, .jpg, .jpeg"
+              onChange={handleImageChange}
+              name="image"
+            />
           </Form.Group>
         </Col>
       </Row>
