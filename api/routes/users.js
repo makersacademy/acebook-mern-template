@@ -4,7 +4,9 @@ const multer = require('multer')
 const { v4: uuidv4 } = require('uuid')
 const UsersController = require("../controllers/users");
 
-router.post("/", UsersController.Create);
+const upload = require('../multerSetup')
+
+router.post("/", upload.single('profilePicture'), UsersController.Create);
 
 
 module.exports = router;
