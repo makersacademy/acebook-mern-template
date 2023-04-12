@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import './SignUpForm.css';
+import { Link } from 'react-router-dom';
 
 
 const SignUpForm = ({ navigate }) => {
@@ -22,7 +23,7 @@ const SignUpForm = ({ navigate }) => {
         if(response.status === 201) {
           navigate('/login')
         } else {
-          navigate('/signup')
+          navigate('/')
         }
       })
   }
@@ -41,7 +42,8 @@ const SignUpForm = ({ navigate }) => {
 
 
     return (
-      <div>
+      <>
+      <div id="signup">
         <h1>Sign Up Form</h1>
       <form onSubmit={handleSubmit}>
           <input placeholder="Name" id="name" type='text' value={ name } onChange={handleNameChange} />
@@ -49,7 +51,12 @@ const SignUpForm = ({ navigate }) => {
           <input placeholder="Password" id="password" type='password' value={ password } onChange={handlePasswordChange} />
         <button id='submit' type="submit" value="Submit">Sign Up</button>
       </form>
+      <p>Already have an account?</p>
+      <Link to="/login">Sign in here</Link>
       </div> 
+      <div id="image"> 
+      </div>
+      </>
     );
 }
 

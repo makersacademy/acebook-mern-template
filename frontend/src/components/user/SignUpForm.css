@@ -1,8 +1,9 @@
-div {
+#signup {
   width: 400px;
   margin: 0 auto;
   text-align: center;
   margin-top: 150px;
+  margin-left: 10%;
 }
 
 h1 {
