@@ -10,11 +10,17 @@ const Feed = ({ navigate }) => {
   const [token, setToken] = useState(window.localStorage.getItem("token"));
 
   useEffect(() => {
+    const fetchPosts = async () => {
+      const response = await fetch("https://example.com/posts");
+      const data = await response.json();
+      setPosts(data);
+    }
     if (token) {
       fetch("/posts", {
         headers: {
           Authorization: `Bearer ${token}`,
         },
+      
       })
         .then((response) => response.json())
         .then(async (data) => {
@@ -23,6 +29,7 @@ const Feed = ({ navigate }) => {
           setPosts(data.posts);
         });
     }
+    fetchPosts();
   }, []);
 
   const logout = () => {
@@ -39,22 +46,34 @@ const Feed = ({ navigate }) => {
           <div>
             <button onClick={logout}>Logout</button>
           </div>
+          
           <Col md={12}>
             <CreatePost />
           </Col>
+              
+        return <>
           <Row className="justify-content-md-center">
             <Col md={6}>
-              <div id="feed" role="feed">
-                {posts.map((post) => (
-                  <Post post={post} key={post._id} />
-                ))}
+             <div id="feed" role="feed">
+              
+            
+               { posts.map((post) => {
+                 return (
+                  
+                <Post post={post} key={post._id} />)
+               
+               })};
+               
               </div>
             </Col>
           </Row>
-        </Container>
-      </>
-    );
-  } else {
+          </>
+         </Container>
+        </>
+     
+
+  
+  )}else {
     navigate("/signin");
   }
 };
