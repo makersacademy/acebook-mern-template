@@ -36,9 +36,18 @@ const UsersController = {
             });
           }
         })
-        
       }
     }) 
+  },
+  
+  Delete: (req, res) => {
+    User.deleteOne({_id: req.user_id}, (err, data) => {
+      if (err) {
+        res.status(400).json({message: 'Unable to delete user'})
+      } else {
+        res.status(200).json({message: 'User deleted'});
+      }
+    })
   }
 
   
