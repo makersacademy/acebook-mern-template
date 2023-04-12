@@ -1,0 +1,6 @@
+{
+  "dependencies": {
+    "moment": "^2.29.4",
+    "react-toastify": "^9.1.2"
+  }
+}
