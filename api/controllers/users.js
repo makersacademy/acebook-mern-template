@@ -27,6 +27,9 @@ const UsersController = {
           else {
             req.body.password = hash;
             const user = new User(req.body);
+
+            if (req.file) { user.avatar = `/uploads/${req.file.filename}` }
+            
             user.save((err) => {
             if (err) {
               res.status(400).json({message: 'Bad request'})
