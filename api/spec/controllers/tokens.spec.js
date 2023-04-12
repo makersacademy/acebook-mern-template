@@ -5,7 +5,7 @@ const User = require('../../models/user');
 
 describe("/tokens", () => {
   beforeAll( () => {
-    const user = new User({ name: "name", email: "test@test.com", password: "12345678", avatarUrl: "https://localhost:8080/images/defaultAvatar.png" })
+    const user = new User({ name: "name", email: "test@test.com", password: "12345678", user_id: 1, avatarUrl: "https://localhost:8080/images/defaultAvatar.png" })
     user.save()
   });
 
