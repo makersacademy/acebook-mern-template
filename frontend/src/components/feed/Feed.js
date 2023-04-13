@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import Post from '../post/Post'
 
-
 const Feed = ({ navigate }) => {
   const [posts, setPosts] = useState([]);
   const [token, setToken] = useState(window.localStorage.getItem("token"));
   const [message, setMessage] = useState("")
+  const [author] = useState(window.localStorage.getItem("username"));
 
   useEffect(() => {
     if(token) {
@@ -20,6 +20,7 @@ const Feed = ({ navigate }) => {
         .then(async data => {
           window.localStorage.setItem("token", data.token)
           setToken(window.localStorage.getItem("token"))
+          ///console.log()
 
           //gets all posts and puts them in reverse order
           setPosts(data.posts.reverse());
@@ -41,7 +42,7 @@ const Feed = ({ navigate }) => {
         'content-Type': 'application/json',
         'Authorization': `Bearer ${token}`
       },
-      body: JSON.stringify({message})
+      body: JSON.stringify({message, author})
     })
       .then((response) => response.json())
       .then((data) => {
@@ -50,7 +51,7 @@ const Feed = ({ navigate }) => {
           setMessage('')
 
         // this refreshes the whole window which is not ideal.
-        window.location.reload();
+          window.location.reload();
       })
       .catch((error) => console.error(error));
   };

@@ -1,6 +1,5 @@
 import React, {useState} from 'react';
 
-
 const Post = ({post}) => {
 
   const [likeCount, setLikeCount] = useState(post.likes.length)
@@ -10,7 +9,7 @@ const Post = ({post}) => {
   //access the username property
   //add it to a JSX HTML element in the post return
 
-
+  //add 
 
   // Likes
 
@@ -104,6 +103,7 @@ const Post = ({post}) => {
     <>
     <div>
       <div style={{border: 'solid', width: 300, marginBottom: 10, padding: 5, borderWidth: 1}}> 
+        <article>{post.author}</article>
         <article data-cy="post" key={ post._id }>{ post.message }</article>
         <button onClick={handleLike}>Like</button>
         <div>{likeCount}</div>
