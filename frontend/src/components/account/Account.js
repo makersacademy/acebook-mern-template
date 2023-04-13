@@ -8,9 +8,12 @@ const AccountPage = ({ navigate }) => {
   const userData = state.userData;
   const token = state.token;
 
+  console.log(userData)
+
+
   const deleteAccount = () => {
     if(token) {
-      fetch("/users", {
+      fetch(`/users?id=${userData._id}`, {
         headers: { 'Authorization': `Bearer ${token}` },
         method: "DELETE"
       })
