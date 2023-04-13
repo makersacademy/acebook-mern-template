@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import Post from "../post/Post";
 import CreatePost from "../create-post/CreatePost";
 import "bootstrap/dist/css/bootstrap.min.css";
-import { Navbar, Nav, Row, Container, Col, Card } from "react-bootstrap";
+import { Nav, Row, Container, Col, Card } from "react-bootstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faHouse,
@@ -10,6 +10,7 @@ import {
   faUser,
   faRightFromBracket,
 } from "@fortawesome/free-solid-svg-icons";
+import './Feed.css'
 
 const Feed = ({ navigate }) => {
   const [posts, setPosts] = useState([]);
@@ -50,30 +51,30 @@ const Feed = ({ navigate }) => {
     return (
       <>
         <Container>
-          <Navbar bg="light" variant="light">
-            {/* <div className="d-flex justify-content-between"> */}
-            <Nav>
-              <Navbar.Brand href="#">
+          <nav className="navbar">
+            <div className="nav-container">
+              <div className="nav-logo">
                 <h5>a.</h5>
-              </Navbar.Brand>
+              </div>
+              <div className="nav-elements">
+                <Nav.Link href="/posts">
+                  <FontAwesomeIcon icon={faHouse} size="xl" />
+                </Nav.Link>
 
-              <Nav.Link href="/posts">
-                <FontAwesomeIcon icon={faHouse} size="2xl" />
-              </Nav.Link>
+                <Nav.Link href="/posts">
+                  <FontAwesomeIcon icon={faPlus} size="xl" />
+                </Nav.Link>
 
-              <Nav.Link href="/posts">
-                <FontAwesomeIcon icon={faPlus} size="2xl" />
-              </Nav.Link>
+                <Nav.Link href="#profile">
+                  <FontAwesomeIcon icon={faUser} size="xl" />
+                </Nav.Link>
 
-              <Nav.Link href="#profile">
-                <FontAwesomeIcon icon={faUser} size="2xl" />
-              </Nav.Link>
-
-              <Nav.Link onClick={logout} href="#" className="me-auto">
-                <FontAwesomeIcon icon={faRightFromBracket} size="2xl" />
-              </Nav.Link>
-            </Nav>
-          </Navbar>
+                <Nav.Link onClick={logout} href="#" className="me-auto">
+                  <FontAwesomeIcon icon={faRightFromBracket} size="xl" />
+                </Nav.Link>
+              </div>
+            </div>
+          </nav>
 
           <h1 className="d-flex justify-content-center mt-4 main-title">acebook.</h1>
 

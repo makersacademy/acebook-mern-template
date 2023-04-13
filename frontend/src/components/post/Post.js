@@ -77,12 +77,12 @@ const Post = ({ post, onNewPost }) => {
         </div>
         <div>{post.message}</div>
         <img src={post.photo} className="postPhoto img-fluid"></img>
-<hr/>
+        <hr />
         <div>
           <LikeButton likes={likes} onClick={handleLikeClick} />
         </div>
-        <hr/>
-    </div>
+        <hr />
+      </div>
       <div data-cy="comment" key={post._id}>
         {post.comments && post.comments.length > 0 && (
           <div className="commentSection">
@@ -105,35 +105,31 @@ const Post = ({ post, onNewPost }) => {
         )}
       </div>
       <Form onSubmit={handleSubmit}>
-          <Row className="justify-content-md-right">
-            <Col md={6}>
-              <Form.Group
-                className="mb-3"
-                // controlId="exampleForm.ControlTextarea1"
-              >
-                <Form.Control
-                  as="textarea"
-                  type="text"
-                  // id="message"
-                  value={comment}
-                  rows={1}
-                  placeholder="Write a comment..."
-                  onChange={handleCommentChange}
-                />
-              </Form.Group>
-            </Col>
-          </Row>
-          <Row className="justify-content-md-right">
-            <Col md={6}>
-              <Button variant="primary" type="submit" id="submit">
-                Submit
-              </Button>
-            </Col>
-          </Row>
-        </Form>
-      </div>
+        <Row className="justify-content-md-right">
+          <Col md={6}>
+            <Form.Group className="mb-3">
+              <Form.Control
+                as="textarea"
+                type="text"
+                // id="message"
+                value={comment}
+                rows={1}
+                placeholder="Write a comment..."
+                onChange={handleCommentChange} />
+            </Form.Group>
+          </Col>
+        </Row>
+        <Row className="justify-content-md-right">
+          <Col md={6}>
+            <Button variant="primary" type="submit" id="submit">
+              Submit
+            </Button>
+          </Col>
+        </Row>
+      </Form>
+    {/* </div> */}
       <div data-cy="comment" key={post._id}>
-      {showComments && post.comments && post.comments.length > 0 && (
+        {showComments && post.comments && post.comments.length > 0 && (
           <div className="commentSection">
             {post.comments.map((comment) => {
               console.log(comment);
