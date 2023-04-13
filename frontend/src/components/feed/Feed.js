@@ -9,8 +9,16 @@ const Feed = ({ navigate }) => {
   const [posts, setPosts] = useState([]);
   const [token, setToken] = useState(window.localStorage.getItem("token"));
 
-  const handleNewPost = (newPost) => {
-    setPosts([newPost, ...posts]);
+  const handleNewPost = (newPost, comment) => {
+    if (comment) {
+      setPosts((prevPosts) =>
+        prevPosts.map((post) =>
+          post._id === newPost._id ? newPost : post
+        )
+      );
+    } else {
+      setPosts((prevPosts) => [newPost, ...prevPosts]);
+    }
   };
 
   useEffect(() => {
@@ -58,7 +66,7 @@ const Feed = ({ navigate }) => {
                { posts.map((post) => {
                  return (
                   
-                <Post post={post} key={post._id} />)
+                <Post key={post._id} post={post} onNewPost={handleNewPost} />)
                
                })};
                
