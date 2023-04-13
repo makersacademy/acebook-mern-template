@@ -1,12 +1,16 @@
 import React, { useEffect, useState } from 'react';
 import Post from '../post/Post'
+
 import Mainnav from '../nav/mainNav';
 //import PostForm from '../post/PostForm'
+
 
 const Feed = ({ navigate }) => {
   const [posts, setPosts] = useState([]);
   const [token, setToken] = useState(window.localStorage.getItem("token"));
   const [message, setMessage] = useState("")
+  const [author] = useState(window.localStorage.getItem("username"));
+  const [profilePicture] = useState(window.localStorage.getItem("profilePicture"));
 
   useEffect(() => {
     if(token) {
@@ -21,6 +25,7 @@ const Feed = ({ navigate }) => {
         .then(async data => {
           window.localStorage.setItem("token", data.token)
           setToken(window.localStorage.getItem("token"))
+          ///console.log()
 
           //gets all posts and puts them in reverse order
           setPosts(data.posts.reverse());
@@ -42,7 +47,7 @@ const Feed = ({ navigate }) => {
         'content-Type': 'application/json',
         'Authorization': `Bearer ${token}`
       },
-      body: JSON.stringify({message})
+      body: JSON.stringify({message, author, profilePicture})
     })
       .then((response) => response.json())
       .then((data) => {
@@ -51,7 +56,7 @@ const Feed = ({ navigate }) => {
           setMessage('')
 
         // this refreshes the whole window which is not ideal.
-        window.location.reload();
+          window.location.reload();
       })
       .catch((error) => console.error(error));
   };
@@ -72,10 +77,13 @@ const Feed = ({ navigate }) => {
     return (
       <div>
         {
-          posts.map(
-          (post) => ( 
-          <Post post={post} key={ post._id } />)
-        )}
+          posts.map(                              // the styling of the div below might be better applied inside Feed.css
+          (post) => (                            
+            <div style={{border: 'solid', width: 500, margin: 10, padding: 10}}>
+              <Post post={post} key={ post._id } />
+            </div> 
+          ))
+        }
       </div>
     )
   }
