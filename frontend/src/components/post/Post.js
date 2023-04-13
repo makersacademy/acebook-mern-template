@@ -10,7 +10,7 @@ import Form from "react-bootstrap/Form";
 import moment from "moment";
 // import { useParams } from "react-router-dom";
 
-const Post = ({ post }) => {
+const Post = ({ post, onNewPost }) => {
   const date = moment(`${post.createdAt}`).format("MMMM Do YYYY, h:mm:ss a");
   // console.log(date)
   const [comment, setComment] = useState("");
@@ -32,7 +32,8 @@ const Post = ({ post }) => {
       console.log(`error saving your comment: ${errorMessage}`);
     } else {
       console.log("your comment saved to db");
-  
+      const updatedPost = await response.json();
+      onNewPost(updatedPost.post, true);
     }
 
     // setMessage("");
