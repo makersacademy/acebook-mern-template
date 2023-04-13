@@ -17,7 +17,7 @@ const UsersController = {
   Create: (req, res) => {
     User.findOne({ email: req.body.email }, (err, user) => {
       if (user) {
-        res.status(409).json({message: 'Email already exists'});
+        res.status(409).json({message: 'Email address already exists'});
       } else {
         const saltRounds = 10;
         bcrypt.hash(req.body.password, saltRounds, (err, hash) => {

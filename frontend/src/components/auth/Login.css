@@ -1,0 +1,25 @@
+#login-container {
+  height: 115rem;
+  margin: auto;
+  max-width: var(--container-max-width);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2rem;
+}
+
+#login-form {
+  width: 70%;
+  height: 40rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2rem;
+  border-radius: 5px;
+  padding: 2rem 0;
+  margin: 3rem;
+  background-color: var(--primary-color);
+  box-shadow: var(--shadow-settings);  
+}

@@ -1,34 +1,313 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Ubuntu', sans-serif;
+}
+
 html {
-  border: 20px solid black;
-  height: 100%;
+  font-size: 62.5%;
 }
 
 body {
-  padding: 50px;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
-  background-color: #9f9f9f;
+  background-color: var(--page-color);
 }
 
-div {
+#signup-navbar-container {
+  background-color: var(--navbar-color);
+  box-shadow: var(--shadow-settings);
+  margin-bottom: 1rem;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  box-shadow: var(--shadow-settings);
+}
+
+#signup-navbar {
+  color: var(--text-white);
   display: flex;
-  flex-direction: column;
-  background-color: black;
-  padding: 20px;
-  width: 400px;
-  color: #ffffff;
-  text-align: center;
-  border: 4px double #cccccc; /* add this line */
-  border-radius: 10px; /* add this line */
-  font-size: 28px; /* add this line */
-  position: absolute;
-  top:50;
-  bottom: 50;
-  left: 0;
-  right: 0;
+  direction: row;
+  align-items: center;
+  justify-content: center;
+  max-width: var(--container-max-width);
+  gap: 5rem;
+  height: 7rem;
+  padding: 0 2rem;
   margin: auto;
 }
 
-form {
+#signup-navbar h1 {
+  font-size: 2rem;
+}
+
+#signup-container {
+  height: 120rem;
+  margin: auto;
+  max-width: var(--container-max-width);
   display: flex;
   flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2rem;
+}
+
+#signup-title {
+  font-size: 5rem;
+}
+
+#signup-form {
+  width: 70%;
+  height: 65rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2rem;
+  border-radius: 5px;
+  padding: 2rem 0;
+  margin: 3rem;
+  background-color: var(--primary-color);
+  box-shadow: var(--shadow-settings);  
+}
+
+.form-field {
+  font-size: 1.8rem;
+  width: 75%;
+  height: 5rem;
+  border: none;
+  padding-left: 1.5rem;
+  border-radius: 5px;
+  background-color: var(--page-color);
+ transition: all .1s ease-in-out;
+}
+
+.form-field:focus {
+  outline: var(--post-btn-color-hover) 2px solid;
+  transition: outline .1s ease-in-out;
+}
+
+.form-field:focus::placeholder {
+  color: var(--dark-grey-color);
+  transition: all .1s ease-in-out;
+}
+
+#upload-photo-text {
+  font-size: 1.6rem;
+  margin-top: 2rem;
+}
+
+#signup-profile-pic-upload-container {
+  width: 75%;
+  height: 5.5rem;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+  padding: 0 .5rem;
+  border-radius: 5px;
+  background-color: var(--page-color);
+  gap: 1rem;
+  position: relative;
+  overflow: hidden;
+}
+
+#signup-profile-pic-upload-icon {
+  flex-shrink: 0;
+  flex-grow: 0;
+  position: relative;
+  width: 5rem;
+  height: 5rem;
+  border: none;
+  border-radius: 5px;
+  transition: all .15s ease-in-out;
+}
+
+#profilePicture {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 1;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  cursor: pointer;
+
+}
+
+#signup-profile-pic-upload-container i {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+#signup-profile-pic-upload-icon:hover {
+  transform: scale(1.2);
+}
+
+#signup-profile-pic-upload-icon:active {
+  transform: translateY(.5px);
+}
+
+.signup-photo-filename {
+  font-size: 1.4rem;
+  color: rgb(100, 100, 100);
+
+}
+
+.signup-submit-btn {
+  cursor: pointer;
+  border: 1px transparent solid;
+  border-radius: 50px;
+  background-color: var(--post-btn-color);
+
+  color: var(--text-white);
+  font-weight: 900;
+  font-size: 2rem;
+
+  width: 15rem;
+  height: 5.5rem;
+  transition: all .15s ease-in-out;
+  margin: 3rem 0;
+}
+
+.signup-submit-btn:hover {
+  background-color: var(--post-btn-color-hover);
+  transform: scale(1.1);
+  transition: all .15s ease-in-out;
+}
+
+.signup-submit-btn:active {
+  transform: translateY(1px);
+}
+
+.prompt-login-text {
+  font-size: 1.5rem;
+}
+.prompt-login-link:link,
+.prompt-login-link:visited {
+  color: var(--secondary-color);
+  text-decoration: none;
+  font-size: 1.5rem;
+  font-weight: 500;
+}
+.prompt-login-link:hover {
+  color: var(--post-btn-color-hover);
+  transition: all .15s ease-in-out;
+}
+
+#signup-error-message-container {
+  height: 1rem;
+  margin-bottom: 2rem;
+}
+
+.signup-error-message {
+  color: #ff2a1b;
+  font-size: 1.3rem;
+}
+
+#signup-footer-main-container {
+  background-color: var(--navbar-color);
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  padding: 3rem;
+  border-top: rgb(179, 179, 179) .5px solid;
+}
+
+#signup-footer-inner-container {
+  /* box-shadow: var(--shadow-settings); */
+  background-color: var(--navbar-color);
+  padding: 2rem 0;
+  max-width: var(--container-max-width);
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 20rem;
+  gap: 1rem;
+}
+
+#signup-footer-inner-container p {
+  color: var(--primary-color);
+}
+
+#signup-footer-team-name {
+  font-size: 2rem;
+  font-weight: 900;
+}
+
+#signup-footer-team-members {
+  font-size: 2rem;
+  padding-bottom: 2rem;
+}
+
+#signup-footer-rights {
+  font-size: 1.3rem;
+}
+
+@media(max-height: 1350px) {
+  #signup-footer-main-container {
+    padding: 3rem;
+  }
+  #signup-footer-inner-container {
+    height: 10rem;
+  }
+}
+
+@media(max-height: 1250px) {
+  #signup-container {
+    height: 110rem;
+  }
+  #signup-footer-main-container {
+    padding: 1rem;
+  }
+  #signup-footer-inner-container {
+    height: 10rem;
+  }
+  #signup-footer-team-name {
+    font-size: 1.5rem;
+    font-weight: 900;
+  }
+  
+  #signup-footer-team-members {
+    font-size: 1.5rem;
+    padding-bottom: 2rem;
+  }
+  
+  #signup-footer-rights {
+    font-size: 1rem;
+  }
+}
+
+@media(max-height: 1100px) {
+  #signup-container {
+    height: 105rem;
+  }
+  #signup-footer-main-container {
+    padding: 1rem;
+  }
+  #signup-footer-inner-container {
+    height: 6rem;
+  }
+  #signup-footer-team-name {
+    font-size: 1.5rem;
+    font-weight: 900;
+  }
+  
+  #signup-footer-team-members {
+    font-size: 1.5rem;
+    padding-bottom: 2rem;
+  }
+  
+  #signup-footer-rights {
+    display: none;
+  }
+}
+
+@media(max-width: 650px) {
+  #signup-form {
+    width: 95%;
+  }
 }
