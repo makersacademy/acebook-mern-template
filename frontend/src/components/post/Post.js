@@ -44,6 +44,7 @@ const Post = ({ post }) => {
       body: JSON.stringify({comment: newComment})
     }).then(response => {
       setNewComment("");
+      getComments();
       
     })
     .catch(error => {
@@ -126,7 +127,14 @@ const Post = ({ post }) => {
         <div className="invisible"></div>
         <input type='text' id='post' className="new-comment-field" placeholder="Comment" value={newComment} onChange={handleNewCommentChange} ></input>
         <button className="new-comments-submit-btn" onClick={handleSubmit}><i className="fa-regular fa-envelope fa-2x"></i></button>
-      </div>    
+      </div> 
+
+      <div id="comments-container">
+      {comments.map(
+              (comment) => ( <div key={comment._id}> {comment.message} </div> )
+            )}
+      </div>
+
       
     </div>
   )
