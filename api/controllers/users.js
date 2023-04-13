@@ -14,6 +14,16 @@ const UsersController = {
       }
     });
   },
+
+  Find: (req, res) => {
+    User.findById(req.user_id, (err, user) => {
+      if (err || !user) {
+        res.status(400).json({ message: "Bad request" });
+      } else {
+        res.status(200).json({ user });
+      }
+    });
+  },
 };
 
 module.exports = UsersController;
