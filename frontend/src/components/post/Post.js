@@ -72,7 +72,7 @@ const Post = ({ post }) => {
           </div>
         </div>
         <div>{post.message}</div>
-        <img src={post.photo} className="postPhoto"></img>
+        <img src={post.photo} className="postPhoto img-fluid"></img>
 
         <div><LikeButton likes={likes} onClick={handleLikeClick} /></div>
         <Form onSubmit={handleSubmit}>

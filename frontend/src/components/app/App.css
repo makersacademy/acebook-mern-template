@@ -3,6 +3,10 @@ h1 {
   font-weight: 600px;
 }
 
+.background {
+  background-color: #EFF2F5;
+}
+
 article {
   padding: 40px 0;
 }
@@ -41,14 +45,13 @@ article {
 }
 
 .likeButton {
-  background-color: aliceblue;
+  background-color: #EFF2F5;
   border: none;
   padding: 10px 0 ;
 }
 
 .likeButton:hover {
   color: grey;
-
 }
 
 .commentSection {

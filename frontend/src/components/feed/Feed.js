@@ -32,29 +32,27 @@ const Feed = ({ navigate }) => {
 
   if (token) {
     return (
-      <div className="container-bg bg-light">
-        <Container className="bg-light">
-          <h1 className="d-flex justify-content-center mt-5">acebook.</h1>
-          <h2>Posts</h2>
-          <div>
-            <button onClick={logout}>Logout</button>
-          </div>
+      <Container className="container-bg">
+        <h1 className="d-flex justify-content-center">acebook.</h1>
+        <h2>Posts</h2>
+        <div>
+          <button onClick={logout}>Logout</button>
+        </div>
 
-          <Col md={12}>
-            <CreatePost />
+        <Col md={12}>
+          <CreatePost />
+        </Col>
+
+        <Row className="justify-content-md-center">
+          <Col md={6}>
+            <div id="feed" role="feed">
+              {posts.map((post) => {
+                return <Post post={post} key={post._id} />;
+              })}
+            </div>
           </Col>
-
-          <Row className="justify-content-md-center">
-            <Col md={6}>
-              <div id="feed" role="feed">
-                {posts.map((post) => {
-                  return <Post post={post} key={post._id} />;
-                })}
-              </div>
-            </Col>
-          </Row>
-        </Container>
-      </div>
+        </Row>
+      </Container>
     );
   } else {
     navigate("/signin");
