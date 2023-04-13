@@ -1,7 +1,7 @@
 const Mainnav = () => {
   return (
   <nav className="nav">
-    <a href="/logout" className="ace-book">Acebook</a>
+    <a href="/" className="ace-book">Acebook</a>
     <ul >
       <li >
         <a href='/'>Logout</a>  
