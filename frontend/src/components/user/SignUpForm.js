@@ -42,11 +42,13 @@ const SignUpForm = ({ navigate }) => {
     return (
       <>
       <Navbar/>
+      <h2>Sign Up</h2>
+      <p>Password: 8 characters minimum</p>
       <form onSubmit={handleSubmit}>
           <input placeholder="username" id="username" type="text" value={username} onChange={handleUsernameChange}></input>
-          <input placeholder="Email" id="email" type='text' value={ email } onChange={handleEmailChange} />
-          <input placeholder="Password" id="password" type='password' value={ password } onChange={handlePasswordChange} />
-        <input id='submit' type="submit" value="Submit" />
+          <input placeholder="Email" id="email" type='text' pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" value={ email } onChange={handleEmailChange} />
+          <input placeholder="Password" id="password" type='password' pattern="[a-zA-Z0-9.-_!?]{8,20}" value={ password } onChange={handlePasswordChange} />
+        <input id='submit' type="submit" value="Create account" />
       </form>
       </>
     );

@@ -69,7 +69,7 @@ const Feed = ({ navigate }) => {
   // LOGOUT --------------------------------
   const logout = () => {
     window.localStorage.removeItem("token")
-    navigate('/login')
+    navigate('/')
   }
 
   // RENDER POSTS ------------------------

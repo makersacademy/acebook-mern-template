@@ -41,10 +41,11 @@ const LogInForm = ({ navigate }) => {
     return (
       <>
       <Navbar/>
+      <h2>Log in</h2>
       <form onSubmit={handleSubmit}>
-        <input placeholder='Email' id="email" type='text' value={ email } onChange={handleEmailChange} />
-        <input placeholder='Password' id="password" type='password' value={ password } onChange={handlePasswordChange} />
-        <input role='submit-button' id='submit' type="submit" value="Submit" />
+        <input placeholder='Email' id="email" type='text' pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" value={ email } onChange={handleEmailChange} />
+        <input placeholder='Password' id="password" type='password'  value={ password } onChange={handlePasswordChange} />
+        <input role='submit-button' id='submit' type="submit" value="Log in!" />
       </form>
       </>
     );
