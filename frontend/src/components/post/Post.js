@@ -77,9 +77,8 @@ const Post = ({ post }) => {
       </div>
 
       <div id="post-counters">
-        <button className="post-counter">
-          <i className="fa-sharp fa-solid fa-heart fa-lg" onClick={handleLikes}></i>
-          {likes} likes
+        <button className="post-counter" onClick={handleLikes}>
+          <i className="fa-sharp fa-solid fa-heart fa-lg"></i>{likes} likes
         </button>
         <button className="post-counter">{post.comments} comments</button>
       </div>
