@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import Post from '../post/Post'
+import Mainnav from '../nav/mainNav';
 //import PostForm from '../post/PostForm'
 
 const Feed = ({ navigate }) => {
@@ -92,7 +93,7 @@ const Feed = ({ navigate }) => {
     if(token) {
       return(
         <>
-          <h2>Acebook</h2>
+          <Mainnav/>
           <button onClick={logout}>Logout</button>
           {renderPostForm()}
           {renderPosts()}
