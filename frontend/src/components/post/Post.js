@@ -6,6 +6,12 @@ const Post = ({post}) => {
   const [likeCount, setLikeCount] = useState(post.likes.length)
   const [token] = useState(window.localStorage.getItem("token"));
 
+  //fetch request to get user model data
+  //access the username property
+  //add it to a JSX HTML element in the post return
+
+
+
   // Likes
 
   const handleLike = async (event) => {
