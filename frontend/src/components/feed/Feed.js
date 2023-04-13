@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from "react";
 import Post from "../post/Post";
-import Container from "react-bootstrap/Container";
-import Row from "react-bootstrap/Row";
-import Col from "react-bootstrap/Col";
 import CreatePost from "../create-post/CreatePost";
+import "bootstrap/dist/css/bootstrap.min.css";
+import { Navbar, Nav, Row, Container, Col } from 'react-bootstrap';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faHouse, faPlus, faUser, faRightFromBracket } from '@fortawesome/free-solid-svg-icons';
 
 const Feed = ({ navigate }) => {
   const [posts, setPosts] = useState([]);
@@ -47,12 +48,41 @@ const Feed = ({ navigate }) => {
   if (token) {
     return (
       <>
-        <Container>
+        
+        <Container>         
+          
+        
+          <Navbar bg="light" variant="light">
+        
+            {/* <div className="d-flex justify-content-between"> */}
+              <Nav>
+                <Navbar.Brand href="#">
+                <h5>a.</h5>
+                </Navbar.Brand>
+                
+            
+                <Nav.Link href="/posts">
+              <FontAwesomeIcon icon={faHouse} size="2xl" />
+              </Nav.Link>
+              
+<Nav.Link href="/posts">
+          <FontAwesomeIcon icon={faPlus} size="2xl" />
+                </Nav.Link>
+              
+                 <Nav.Link href="#profile">
+          <FontAwesomeIcon icon={faUser} size="2xl" />
+                </Nav.Link>  
+              
+                <Nav.Link onClick={logout} href="#" className="me-auto">
+          <FontAwesomeIcon icon={faRightFromBracket} size="2xl" />
+                </Nav.Link> 
+              </Nav>
+    </Navbar>
+            
+          
           <h1 className="d-flex justify-content-center mt-5">acebook.</h1>
           <h2>Posts</h2>
-          <div>
-            <button onClick={logout}>Logout</button>
-          </div>
+          
           
           <Col md={12}>
             <CreatePost handleNewPost={handleNewPost} />
@@ -73,14 +103,13 @@ const Feed = ({ navigate }) => {
               </div>
             </Col>
           </Row>
-       
-         </Container>
-        </>
-     
 
-  
-  )}else {
-    navigate("/signin");
+        </Container>
+      </>
+    );
+  } else {
+    navigate("/login");
+
   }
 };
 

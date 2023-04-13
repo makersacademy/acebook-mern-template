@@ -3,6 +3,12 @@ h1 {
   font-weight: 600px;
 }
 
+h5 {
+  font-family: 'Corben', cursive;
+  font-weight: 600px;
+  font-size: 8;
+}
+
 article {
   padding: 40px 0;
 }
@@ -11,3 +17,4 @@ article {
   height: 60px;
   width: 60px;
 }
+
