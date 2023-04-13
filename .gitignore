@@ -65,4 +65,4 @@ cypress/screenshots
 cypress/videos
 
 #image uploads 
-/api/uploads
+# /api/uploads
