@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import Navbar from '../nav/nav';
 
 const SignUpForm = ({ navigate }) => {
 
@@ -40,7 +41,7 @@ const SignUpForm = ({ navigate }) => {
 
     return (
       <>
-      <h1>Acebook</h1>
+      <Navbar/>
       <h2>Sign Up</h2>
       <p>Password: 8 characters minimum</p>
       <form onSubmit={handleSubmit}>

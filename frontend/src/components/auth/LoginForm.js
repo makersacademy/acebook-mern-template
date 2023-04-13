@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import Navbar from '../nav/nav';
 
 const LogInForm = ({ navigate }) => {
   const [email, setEmail] = useState("");
@@ -23,6 +24,7 @@ const LogInForm = ({ navigate }) => {
       let data = await response.json()
       window.localStorage.setItem("token", data.token)
       window.localStorage.setItem("username", data.username)
+      window.localStorage.setItem("profilePicture", data.profilePicture)
       navigate('/posts');
     }
   }
@@ -38,7 +40,7 @@ const LogInForm = ({ navigate }) => {
 
     return (
       <>
-      <h1>Acebook</h1>
+      <Navbar/>
       <h2>Log in</h2>
       <form onSubmit={handleSubmit}>
         <input placeholder='Email' id="email" type='text' pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" value={ email } onChange={handleEmailChange} />

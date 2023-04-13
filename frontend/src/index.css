@@ -1,3 +1,7 @@
+*{
+  box-sizing: border-box;
+}
+
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
@@ -6,6 +10,47 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
+.ace-book {
+  font-size: 2rem;
+}
+
+.nav {
+  background-color: hotpink;
+  color: antiquewhite;
+  display: flex;
+  justify-content: space-between;
+  align-items: stretch;
+  padding:0 2rem;
+  
+}
+
+.nav ul {
+  padding: 0;
+  display: flex;
+  margin: 0;
+  list-style: none;
+  gap: 1rem;
+}
+
+.nav a {
+  color: inherit;
+  text-decoration: none;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  padding: .25rem;
+}
+
+.nav li.active {
+  background-color:rgb(21, 65, 103);
+ 
+}
+
+.nav li:hover {
+  color:rgb(71, 54, 28);
+  
+}
+
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
