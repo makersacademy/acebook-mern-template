@@ -102,7 +102,6 @@ const Feed = ({ navigate }) => {
           <div>
             {posts.length === 0 ? <EmptyPage /> : null}
           </div>
-        <Footer />
         </div>     
       </>
     );
