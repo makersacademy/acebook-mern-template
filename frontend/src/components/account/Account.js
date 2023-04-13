@@ -8,9 +8,6 @@ const AccountPage = ({ navigate }) => {
   const userData = state.userData;
   const token = state.token;
 
-  console.log(userData)
-
-
   const deleteAccount = () => {
     if(token) {
       fetch(`/users?id=${userData._id}`, {
@@ -19,7 +16,6 @@ const AccountPage = ({ navigate }) => {
       })
         .then(response => response.json())
         .then(data => {
-          console.log(data)
           window.localStorage.removeItem("token")
           navigate('/login')
         })
