@@ -9,7 +9,7 @@ const PostSchema = new mongoose.Schema({
     fileName: String,
   },
   createdBy: { 
-    type: mongoose.Schema.Types.ObjectId,
+    type: ObjectID,
     ref: 'Users',
     immutable: true,
   },
@@ -18,12 +18,8 @@ const PostSchema = new mongoose.Schema({
     immutable: true,
     default: () => Date.now(),
   },
-  liked: {
-    type: Number,
-    default: 0,
-  },
   likes: [{
-    type: mongoose.Schema.Types.ObjectId,
+    type: ObjectID,
     ref: 'Users',
   }],
 

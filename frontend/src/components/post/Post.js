@@ -24,31 +24,21 @@ const Post = ({ post }) => {
   }, [token]);
 
   const handleLikes = () => {
-    // Step 1
-    fetch(`/posts/${post._id}/likes`, {
+    console.log('clicked');
+    fetch(`/posts/${post._id}/like`, {
       method: "PUT",
       headers: { 'Authorization': `Bearer ${token}` }
     })
       .then(response => response.json())
       .then(async data => {
-        // Step 2
-        const updatedLikes = await fetch(`/posts/${post._id}/likes`, {
-          headers: { 'Authorization': `Bearer ${token}` }
-        })
-          .then(response => response.json())
-          .then(data => data.likes)
-          .catch(error => {
-            console.log(error);
-          });
-        // Step 3
+        const updatedLikes = data.likes;
         setLikes(updatedLikes);
       })
       .catch(error => {
         console.log(error);
       });
-  }
+  }  
   
-
   const dateObj = new Date(post.createdAt)
   const options = {
     weekday: 'long',
@@ -71,7 +61,7 @@ const Post = ({ post }) => {
 
       <div id="post-header">
         <div id="post-avatar-container">
-          <img className="post-avatar" src={ownerData.avatar}></img>
+          <img className="post-avatar" alt="avatar" src={ownerData.avatar}></img>
         </div>
         <div id="post-inner-header">
           <h3 className="post-owner-username">{ownerData.username}</h3>

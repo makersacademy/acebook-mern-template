@@ -52,7 +52,6 @@ const PostsController = {
 
       const updatedPost = await Post.findById(postID);
       const updatedLikes = updatedPost.likes.length;
-      console.log(updatedPost);
 
       res.status(200).json({ message: "OK", likes: updatedLikes });
     } catch (err) {
