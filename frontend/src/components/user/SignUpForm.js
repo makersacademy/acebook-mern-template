@@ -3,29 +3,38 @@ import "./SignUpForm.css";
 import Container from "react-bootstrap/Container";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
+import "./SignUpForm.css";
 
 
 const SignUpForm = ({ navigate }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [name, setName] = useState("");
+  const [error, setError] = useState("");
 
   const handleSubmit = async (event) => {
     event.preventDefault();
 
-      fetch("/users", {
-        method: "post",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ email: email, password: password, name: name }),
-      }).then((response) => {
-        if (response.status === 201) {
-          navigate("/login");
-        } else {
-          navigate("/signup");
-        }
-      });
+    fetch("/users", {
+      method: "post",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ email: email, password: password, name: name }),
+    }).then((response) => {
+
+      if (response.status === 201) {
+        navigate("/login");
+      } else {
+       setError("This email already exists: ")
+        setEmail("");
+        setName("");
+        setPassword("");
+        navigate("/signup");
+        
+      }
+    });
+
   };
 
   const handleEmailChange = (event) => {
@@ -79,6 +88,7 @@ const SignUpForm = ({ navigate }) => {
               onChange={handlePasswordChange}
             />
           </Form.Group>
+          {error && <div className="alert alert-danger">{error}<a href="/login">Please login</a> </div>}
           <Form.Group className="mb-3">
             <Form.Check type="checkbox" label="Check me out" />
           </Form.Group>
