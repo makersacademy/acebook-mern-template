@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import Post from "../post/Post";
 import CreatePost from "../create-post/CreatePost";
 import "bootstrap/dist/css/bootstrap.min.css";
-import { Navbar, Nav, Row, Container, Col } from "react-bootstrap";
+import { Navbar, Nav, Row, Container, Col, Card } from "react-bootstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faHouse,
@@ -76,10 +76,13 @@ const Feed = ({ navigate }) => {
           </Navbar>
 
           <h1 className="d-flex justify-content-center mt-4 main-title">acebook.</h1>
-         
 
           <Col md={12}>
-            <CreatePost handleNewPost={handleNewPost} />
+            <Container className="py-1">
+            <Card className="px-3 pt-3 shadow-sm p-3 mb-5 bg-white rounded border-0">
+              <CreatePost handleNewPost={handleNewPost} />
+              </Card>
+              </Container>
           </Col>
 
           <Row className="justify-content-md-center">
@@ -87,11 +90,15 @@ const Feed = ({ navigate }) => {
               <div id="feed" role="feed">
                 {posts.map((post) => {
                   return (
+                    <Container className="py-1">
+                      <Card className="shadow-sm px-3 py-2 mb-2 bg-white rounded border-0">
                     <Post
                       key={post._id}
                       post={post}
                       onNewPost={handleNewPost}
-                    />
+                        />
+                      </Card>
+                    </Container>
                   );
                 })}
               </div>
