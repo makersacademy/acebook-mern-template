@@ -6,10 +6,6 @@ const Post = ({ post }) => {
   const [ownerData, setOwnerData] = useState({});
   const [newComment, setNewComment] = useState("");
 
-  const handleNewCommentChange = (event) => {
-    setNewComment(event.target.value);
-  }
-
   useEffect(() => {
     if (token) {
       fetch(`/posts/${post.createdBy}`, {
@@ -27,6 +23,24 @@ const Post = ({ post }) => {
     }
   }, [token]);
 
+  const handleNewCommentChange = (event) => {
+    setNewComment(event.target.value);
+  }
+
+  const handleSubmit = (event) => {
+    if (newComment === "") return
+
+    event.preventDefault();
+
+    fetch ('/comments', {
+      method: 'post',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({message: newComment})
+    }) 
+  }
+
   const dateObj = new Date(post.createdAt)
   const options = {
     weekday: 'long',
@@ -37,10 +51,6 @@ const Post = ({ post }) => {
     minute: '2-digit',
     hour12: false
   };
-
-  const handleSubmit = (event) => {
-    console.log(newComment);
-  }
 
   const humanReadableTime = dateObj.toLocaleString('en-GB', options).replace(/,/g, '');
 
@@ -75,7 +85,7 @@ const Post = ({ post }) => {
 
       <div id="new-comments-container">
         <div className="invisible"></div>
-        <input type='text' id='post' className="new-comment-field" placeholder="Comment" value={newComment} onChange={handleNewCommentChange}></input>
+        <input type='text' id='post' className="new-comment-field" placeholder="Comment" value={newComment} onChange={handleNewCommentChange} ></input>
         <button className="new-comments-submit-btn" onClick={handleSubmit}><i className="fa-regular fa-envelope fa-2x"></i></button>
       </div>    
       
