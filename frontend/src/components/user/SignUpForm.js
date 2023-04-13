@@ -5,7 +5,6 @@ import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import "./SignUpForm.css";
 
-
 const SignUpForm = ({ navigate }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -39,7 +38,6 @@ const SignUpForm = ({ navigate }) => {
       setPassword("");
       navigate("/signup");
     }
-
   };
 
   const handleEmailChange = (event) => {

@@ -54,7 +54,7 @@ const Post = ({ post, onNewPost }) => {
           Authorization: `Bearer ${localStorage.getItem("token")}`,
         },
       });
-  
+
       if (response.ok) {
         const updatedPost = await response.json();
         setLikes(updatedPost.likes);
@@ -66,7 +66,6 @@ const Post = ({ post, onNewPost }) => {
       console.error("Error updating likes:", error);
     }
   };
-  
 
   return (
     <article data-cy="post" key={post._id}>
