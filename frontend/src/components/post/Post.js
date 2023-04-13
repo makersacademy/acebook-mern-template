@@ -38,12 +38,15 @@ const Post = ({ post }) => {
       method: 'post',
       headers: {
         'Content-Type': 'application/json',
+        'Authorization': `Bearer ${token}`
       },
-      body: JSON.stringify({message: newComment})
-    }).then(response => console.log(response))
-      .catch(error => {
-        console.log(error);
-      });
+      body: JSON.stringify({comment: newComment})
+    }).then(response => {
+      setNewComment("");
+    })
+    .catch(error => {
+      console.log(error);
+    });
   }
 
   const handleLikes = () => {
