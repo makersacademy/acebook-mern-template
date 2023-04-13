@@ -4,6 +4,7 @@ import './Post.css'
 const Post = ({ post }) => {
   const [token, setToken] = useState(window.localStorage.getItem("token"));
   const [ownerData, setOwnerData] = useState({});
+  const [newComment, setNewComment] = useState("");
 
   useEffect(() => {
     if (token) {
@@ -32,6 +33,10 @@ const Post = ({ post }) => {
     minute: '2-digit',
     hour12: false
   };
+
+  const handleSubmit = (event) => {
+    console.log(newComment);
+  }
 
   const humanReadableTime = dateObj.toLocaleString('en-GB', options).replace(/,/g, '');
 
@@ -66,8 +71,8 @@ const Post = ({ post }) => {
 
       <div id="new-comments-container">
         <div className="invisible"></div>
-        <input type='text' id='post' className="new-comment-field" placeholder="Comment"></input>
-        <button className="new-comments-submit-btn"><i className="fa-regular fa-envelope fa-2x"></i></button>
+        <input type='text' id='post' className="new-comment-field" placeholder="Comment" value={newComment}></input>
+        <button className="new-comments-submit-btn" onClick={handleSubmit}><i className="fa-regular fa-envelope fa-2x"></i></button>
       </div>    
       
     </div>
