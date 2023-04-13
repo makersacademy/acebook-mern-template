@@ -6,6 +6,10 @@ const Post = ({ post }) => {
   const [ownerData, setOwnerData] = useState({});
   const [newComment, setNewComment] = useState("");
 
+  const handleNewCommentChange = (event) => {
+    setNewComment(event.target.value);
+  }
+
   useEffect(() => {
     if (token) {
       fetch(`/posts/${post.createdBy}`, {
@@ -71,7 +75,7 @@ const Post = ({ post }) => {
 
       <div id="new-comments-container">
         <div className="invisible"></div>
-        <input type='text' id='post' className="new-comment-field" placeholder="Comment" value={newComment}></input>
+        <input type='text' id='post' className="new-comment-field" placeholder="Comment" value={newComment} onChange={handleNewCommentChange}></input>
         <button className="new-comments-submit-btn" onClick={handleSubmit}><i className="fa-regular fa-envelope fa-2x"></i></button>
       </div>    
       
