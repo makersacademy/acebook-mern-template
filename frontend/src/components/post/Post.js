@@ -2,12 +2,6 @@
 import React, { useState } from 'react';
 
 const Post = ({post}) => {
-  return(
-    <article data-cy="post" key={ post._id }>{ post.message }</article>
-    
-import React, {useState} from 'react';
-
-const Post = ({post}) => {
 
   const [likeCount, setLikeCount] = useState(post.likes.length)
   const [token] = useState(window.localStorage.getItem("token"));
