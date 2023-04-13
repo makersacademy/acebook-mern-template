@@ -55,7 +55,7 @@ const Feed = ({ navigate }) => {
       </Container>
     );
   } else {
-    navigate("/signin");
+    navigate("/login");
   }
 };
 
