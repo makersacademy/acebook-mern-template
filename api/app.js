@@ -6,7 +6,6 @@ const JWT = require("jsonwebtoken");
 const cors = require("cors");
 
 const postsRouter = require("./routes/posts");
-const commentsRouter = require("./routes/comments");
 const tokensRouter = require("./routes/tokens");
 const usersRouter = require("./routes/users");
 
@@ -49,7 +48,6 @@ const tokenChecker = (req, res, next) => {
 app.use("/tokens", tokensRouter);
 app.use("/users", usersRouter);
 app.use("/posts", tokenChecker, postsRouter);
-app.use("/comments", tokenChecker, commentsRouter);
 
 
 // catch 404 and forward to error handler

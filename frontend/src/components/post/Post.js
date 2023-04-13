@@ -5,6 +5,7 @@ const Post = ({ post }) => {
   const [token, setToken] = useState(window.localStorage.getItem("token"));
   const [ownerData, setOwnerData] = useState({});
   const [newComment, setNewComment] = useState("");
+  const [likes, setLikes] = useState(post.likes.length);
 
   useEffect(() => {
     if (token) {
@@ -23,6 +24,7 @@ const Post = ({ post }) => {
     }
   }, [token]);
 
+
   const handleNewCommentChange = (event) => {
     setNewComment(event.target.value);
   }
@@ -40,6 +42,22 @@ const Post = ({ post }) => {
       body: JSON.stringify({message: newComment})
     }) 
   }
+
+  const handleLikes = () => {
+    console.log('clicked');
+    fetch(`/posts/${post._id}/like`, {
+      method: "PUT",
+      headers: { 'Authorization': `Bearer ${token}` }
+    })
+      .then(response => response.json())
+      .then(async data => {
+        const updatedLikes = data.likes;
+        setLikes(updatedLikes);
+      })
+      .catch(error => {
+        console.log(error);
+      });
+  }  
 
   const dateObj = new Date(post.createdAt)
   const options = {
@@ -63,7 +81,7 @@ const Post = ({ post }) => {
 
       <div id="post-header">
         <div id="post-avatar-container">
-          <img className="post-avatar" src={ownerData.avatar}></img>
+          <img className="post-avatar" alt="avatar" src={ownerData.avatar}></img>
         </div>
         <div id="post-inner-header">
           <h3 className="post-owner-username">{ownerData.username}</h3>
@@ -79,7 +97,10 @@ const Post = ({ post }) => {
       </div>
 
       <div id="post-counters">
-        <button className="post-counter"><i className="fa-sharp fa-solid fa-heart fa-lg"></i>{post.likes} likes</button>
+        <button className="post-counter">
+          <i className="fa-sharp fa-solid fa-heart fa-lg" onClick={handleLikes}></i>
+          {likes} likes
+        </button>
         <button className="post-counter">{post.comments} comments</button>
       </div>
 
