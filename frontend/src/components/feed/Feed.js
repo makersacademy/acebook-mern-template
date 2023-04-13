@@ -75,8 +75,8 @@ const Feed = ({ navigate }) => {
             </Nav>
           </Navbar>
 
-          <h1 className="d-flex justify-content-center mt-5">acebook.</h1>
-          <h2>Posts</h2>
+          <h1 className="d-flex justify-content-center mt-4 main-title">acebook.</h1>
+         
 
           <Col md={12}>
             <CreatePost handleNewPost={handleNewPost} />
