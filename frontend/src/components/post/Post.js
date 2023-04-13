@@ -1,3 +1,10 @@
+
+import React, { useState } from 'react';
+
+const Post = ({post}) => {
+  return(
+    <article data-cy="post" key={ post._id }>{ post.message }</article>
+    
 import React, {useState} from 'react';
 
 const Post = ({post}) => {

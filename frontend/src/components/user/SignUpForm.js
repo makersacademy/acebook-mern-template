@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import Navbar from '../nav/nav';
 
 const SignUpForm = ({ navigate }) => {
 
@@ -39,12 +40,15 @@ const SignUpForm = ({ navigate }) => {
 
 
     return (
+      <>
+      <Navbar/>
       <form onSubmit={handleSubmit}>
           <input placeholder="username" id="username" type="text" value={username} onChange={handleUsernameChange}></input>
           <input placeholder="Email" id="email" type='text' value={ email } onChange={handleEmailChange} />
           <input placeholder="Password" id="password" type='password' value={ password } onChange={handlePasswordChange} />
         <input id='submit' type="submit" value="Submit" />
       </form>
+      </>
     );
 }
 
