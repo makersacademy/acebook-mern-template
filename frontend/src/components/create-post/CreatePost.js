@@ -5,7 +5,7 @@ import Form from "react-bootstrap/Form";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 
-const CreatePost = (navigate) => {
+const CreatePost = ({ handleNewPost }) => {
   const [message, setMessage] = useState("");
   const [image, setImage] = useState(null);
 
@@ -29,7 +29,8 @@ const CreatePost = (navigate) => {
       console.log("error saving your post");
     } else {
       console.log("your post saved to db");
-      navigate("/posts");
+      const newPost = await response.json();
+      handleNewPost(newPost);
     }
 
     setMessage("");
@@ -43,7 +44,6 @@ const CreatePost = (navigate) => {
   const handleImageChange = (event) => {
     setImage(event.target.files[0]);
   };
-
   return (
     <Form onSubmit={handleSubmit}>
       <Row className="justify-content-md-center">

@@ -54,21 +54,34 @@ const PostsController = {
       res.status(400).json({ error });
     }
   },
-  Update: (req, res) => {
+  Update: async (req, res) => {
     const postId = req.params.id;
-    Post.findByIdAndUpdate(
-      postId,
-      { $inc: { likes: 1 } },
-      { new: true },
-      (err, post) => {
-        if (err) {
-          res.status(500).json({ error: err });
-        } else {
-          res.status(200).json(post);
-        }
+    const userId = req.user_id;
+  
+    try {
+      const post = await Post.findById(postId);
+  
+      if (!post) {
+        return res.status(404).json({ error: 'Post not found' });
       }
-    );
-  },
+  
+      const userIndex = post.likedBy.indexOf(userId);
+  
+      if (userIndex === -1) {
+        post.likes += 1;
+        post.likedBy.push(userId);
+      } else {
+        post.likes -= 1;
+        post.likedBy.splice(userIndex, 1);
+      }
+  
+      await post.save();
+  
+      res.status(200).json(post);
+    } catch (err) {
+      res.status(500).json({ error: err });
+    }
+  }
 };
 
 module.exports = PostsController;
