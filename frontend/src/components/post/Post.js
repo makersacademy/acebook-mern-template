@@ -134,9 +134,14 @@ const Post = ({ post, onNewPost }) => {
           </div>
         )}
       </div>
-      <Button variant="secondary" onClick={() => setShowComments(!showComments)}>
-        {showComments ? "Hide Comments" : "Show Comments" }
+      {post.comments && post.comments.length > 0 && (
+      <Button
+        variant="secondary"
+        onClick={() => setShowComments(!showComments)}
+      >
+        {showComments ? "Hide Comments" : "Show Comments"}
       </Button>
+    )}
     </article>
   );
 };
