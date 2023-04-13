@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import LikeButton from "../likes/LikeButton"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faThumbsUp } from "@fortawesome/free-solid-svg-icons/faThumbsUp";
 import Container from "react-bootstrap/Container";
@@ -41,17 +42,38 @@ const Post = ({ post }) => {
     setComment(event.target.value);
   };
 
+
+  const [likes, setLikes] = useState(post.likes);
+
+  const handleLikeClick = async () => {
+    try {
+      await fetch(`/posts/${post._id}`, {
+        method: "PATCH",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+        body: JSON.stringify({ likes: likes + 1 }),
+      });
+      console.log("Liked post with ID: ", post._id);
+      setLikes(likes + 1);
+    } catch (error) {
+      console.error("Error updating likes:", error);
+    }
+  };
+
   return (
+    <article data-cy="post" key={post._id}>
     <div>
-      <article data-cy="post" key={post._id}>
+      
         <div> {console.log(post)}</div>
         <div>
-          <img src={post.user.image} className="profileImage"></img> 
+         {/* <img src={post.user.image} className="profileImage"></img>  */}
           {post.user && post.user.name}
         </div>
         <div>{post.message}</div>
         <div>{date}</div>
-        <FontAwesomeIcon icon={faThumbsUp} />
+        <LikeButton likes={likes} onClick={handleLikeClick} />
         <Form onSubmit={handleSubmit}>
           <Row className="justify-content-md-right">
             <Col md={6}>
@@ -79,19 +101,25 @@ const Post = ({ post }) => {
             </Col>
           </Row>
         </Form>
+        
+      </div> 
         <div>
           {post.comments && post.comments.length > 0 && (
             <span>
-              {post.comments.map((comment) => {
+             {post.comments.map((comment) => {
                 console.log(comment)
                 return <div key={comment._id}>{comment.user.name} commented : {comment.message}</div>;
               })}
             </span>
           )}
         </div>
-      </article>
-    </div>
-  );
+        
+        
+        
+     
+    </article>
+    ); 
+ 
 };
 
 export default Post;

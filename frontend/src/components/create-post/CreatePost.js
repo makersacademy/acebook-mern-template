@@ -5,11 +5,11 @@ import Form from "react-bootstrap/Form";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 
-const CreatePost = () => {
+const CreatePost = (navigate) => {
   const [message, setMessage] = useState("");
 
   const handleSubmit = async (event) => {
-    event.preventDefault();
+    //event.preventDefault();
 
     let response = await fetch("/posts", {
       method: "post",
@@ -24,6 +24,8 @@ const CreatePost = () => {
       console.log("error saving your post");
     } else {
       console.log("your post saved to db");
+      navigate("/posts");
+
     }
 
     setMessage("");
