@@ -4,6 +4,7 @@ import './Post.css'
 const Post = ({ post }) => {
   const [token, setToken] = useState(window.localStorage.getItem("token"));
   const [ownerData, setOwnerData] = useState({});
+  const [newComment, setNewComment] = useState("");
   const [likes, setLikes] = useState(post.likes.length);
 
   useEffect(() => {
@@ -23,6 +24,31 @@ const Post = ({ post }) => {
     }
   }, [token]);
 
+
+  const handleNewCommentChange = (event) => {
+    setNewComment(event.target.value);
+  }
+
+  const handleSubmit = (event) => {
+    if (newComment === "") return
+
+    event.preventDefault();
+
+    fetch (`/comments/${post._id}`, {
+      method: 'post',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${token}`
+      },
+      body: JSON.stringify({comment: newComment})
+    }).then(response => {
+      setNewComment("");
+    })
+    .catch(error => {
+      console.log(error);
+    });
+  }
+
   const handleLikes = () => {
     console.log('clicked');
     fetch(`/posts/${post._id}/like`, {
@@ -38,7 +64,7 @@ const Post = ({ post }) => {
         console.log(error);
       });
   }  
-  
+
   const dateObj = new Date(post.createdAt)
   const options = {
     weekday: 'long',
@@ -85,8 +111,8 @@ const Post = ({ post }) => {
 
       <div id="new-comments-container">
         <div className="invisible"></div>
-        <input type='text' id='post' className="new-comment-field" placeholder="Comment"></input>
-        <button className="new-comments-submit-btn"><i className="fa-regular fa-envelope fa-2x"></i></button>
+        <input type='text' id='post' className="new-comment-field" placeholder="Comment" value={newComment} onChange={handleNewCommentChange} ></input>
+        <button className="new-comments-submit-btn" onClick={handleSubmit}><i className="fa-regular fa-envelope fa-2x"></i></button>
       </div>    
       
     </div>

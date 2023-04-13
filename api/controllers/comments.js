@@ -46,7 +46,7 @@ const retrieveImgData = (req) => {
 const buildCommentData = async (req) => {
   const comment = new Comment();
   const user = await findUser(req.user_id);
-  const post = await Post.findById(req.body.postId);
+  const post = await Post.findById(req.params.postId);
 
   comment.createdBy = user
   comment.message = req.body.comment
