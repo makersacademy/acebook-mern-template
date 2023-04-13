@@ -34,13 +34,16 @@ const Post = ({ post }) => {
 
     event.preventDefault();
 
-    fetch ('/comments', {
+    fetch (`/comments/${post._id}`, {
       method: 'post',
       headers: {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({message: newComment})
-    }) 
+    }).then(response => console.log(response))
+      .catch(error => {
+        console.log(error);
+      });
   }
 
   const handleLikes = () => {
