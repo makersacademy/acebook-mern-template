@@ -1,7 +1,7 @@
 import React from 'react';
 import './EmptyPage.css'
 
-const EmptyPage = ({ }) => {
+const EmptyPage = () => {
   
   return (
     <>

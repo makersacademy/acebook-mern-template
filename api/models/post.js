@@ -1,5 +1,6 @@
 const mongoose = require("mongoose");
 const Users = require("./user");
+const { ObjectID } = require("mongodb");
 
 const PostSchema = new mongoose.Schema({
   message: { type: String },
@@ -8,7 +9,7 @@ const PostSchema = new mongoose.Schema({
     fileName: String,
   },
   createdBy: { 
-    type: mongoose.Schema.Types.ObjectId,
+    type: ObjectID,
     ref: 'Users',
     immutable: true,
   },
@@ -17,10 +18,11 @@ const PostSchema = new mongoose.Schema({
     immutable: true,
     default: () => Date.now(),
   },
-  likes: {
-    type: Number,
-    default: 0,
-  },
+  likes: [{
+    type: ObjectID,
+    ref: 'Users',
+  }],
+
   comments: {
     type: Number,
     default: 0,
