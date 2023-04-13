@@ -38,7 +38,7 @@ const Feed = ({ navigate }) => {
   }
 
   const account = () => {
-    navigate('/account')
+    navigate('/account', {state: { userData: userData, token: token}})
   }
 
   // ONE METHOD TO SEND THEM ALL XP -

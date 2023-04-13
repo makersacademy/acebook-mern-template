@@ -1,33 +1,21 @@
 import React, {useEffect, useState} from 'react';
+import { useLocation } from 'react-router';
 import './Account.css';
 
 const AccountPage = ({ navigate }) => {
-  const [userData, setUserData] = useState({})
-  const [token, setToken] = useState(window.localStorage.getItem("token"));
-  useEffect(() => {
-    if(token) {
-      fetch("/users", {
-        headers: { 'Authorization': `Bearer ${token}` }
-      })
-        .then(response => response.json())
-        .then(data => {
-          window.localStorage.setItem("token", data.token)
-          setToken(window.localStorage.getItem("token"))
-          setUserData(data.user)
-        })
-        .catch(error => console.log(error));
-    }
-  }, [token])
+  
+  const { state } = useLocation();
+  const userData = state.userData;
+  const token = state.token;
 
   const deleteAccount = () => {
     if(token) {
-      fetch("/users", {
+      fetch(`/users?id=${userData._id}`, {
         headers: { 'Authorization': `Bearer ${token}` },
         method: "DELETE"
       })
         .then(response => response.json())
         .then(data => {
-          console.log(data)
           window.localStorage.removeItem("token")
           navigate('/login')
         })
