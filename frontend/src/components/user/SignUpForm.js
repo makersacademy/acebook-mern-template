@@ -38,6 +38,10 @@ const SignUpForm = ({ navigate }) => {
     setPassword(event.target.value)
   }
 
+  const handleImageUpload = () => {
+    console.log("image uploaded!")
+  }
+
 
     return (
       <>
@@ -48,6 +52,8 @@ const SignUpForm = ({ navigate }) => {
           <input placeholder="username" id="username" type="text" value={username} onChange={handleUsernameChange}></input>
           <input placeholder="Email" id="email" type='text' pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" value={ email } onChange={handleEmailChange} />
           <input placeholder="Password" id="password" type='password' pattern="[a-zA-Z0-9.-_!?]{8,20}" value={ password } onChange={handlePasswordChange} />
+          <div>Upload your profile photo:</div>
+          <input placeholder="image" id="image" type="file" onChange={handlePasswordChange}/>
         <input id='submit' type="submit" value="Create account" />
       </form>
       </>
