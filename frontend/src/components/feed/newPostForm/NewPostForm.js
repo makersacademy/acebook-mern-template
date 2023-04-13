@@ -14,7 +14,7 @@ const NewPostForm = ({newImg, newPost, handleNewPostChange, handleSubmit, handle
             {newImg ? <div id='selected-file-notification'></div> : null }
           </div>
         </div>
-        <input className="post-submit-btn" type="submit"/>
+        <input className="post-submit-btn" type="submit" value="Send"/>
       </form>
     </>
   );

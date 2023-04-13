@@ -154,15 +154,6 @@ body {
   color: rgb(100, 100, 100);
 
 }
-.signup-photo-filename::after {
-  content: "";
-  position: absolute;
-  top: 0;
-  right: 0;
-  height: 100%;
-  width: 20px;
-  color: linear-gradient(to left, rgba(0, 255, 255, 0), white);
-}
 
 .signup-submit-btn {
   cursor: pointer;
@@ -264,6 +255,7 @@ body {
     height: 10rem;
   }
 }
+
 @media(max-height: 1250px) {
   #signup-container {
     height: 110rem;
@@ -288,6 +280,7 @@ body {
     font-size: 1rem;
   }
 }
+
 @media(max-height: 1100px) {
   #signup-container {
     height: 105rem;
@@ -312,6 +305,7 @@ body {
     display: none;
   }
 }
+
 @media(max-width: 650px) {
   #signup-form {
     width: 95%;

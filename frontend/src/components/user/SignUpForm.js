@@ -90,7 +90,7 @@ const SignUpForm = ({ navigate }) => {
             </div>
           </div>
           
-          <input id='submit' className='signup-submit-btn' type="submit" value="Submit" />
+          <input id='submit' className='signup-submit-btn' type="submit" value="Sign up" />
           
         </form>
           <p className='prompt-login-text'>Already have an account? Please <a href="/login" className='prompt-login-link'>login</a></p>
