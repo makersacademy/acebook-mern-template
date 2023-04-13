@@ -10,7 +10,7 @@ import Form from "react-bootstrap/Form";
 import moment from "moment";
 // import { useParams } from "react-router-dom";
 
-const Post = ({ post }) => {
+const Post = ({ post, onNewPost }) => {
   const date = moment(`${post.createdAt}`).format("MMMM Do YYYY, h:mm:ss a");
   // console.log(date)
   const [comment, setComment] = useState("");
@@ -32,7 +32,8 @@ const Post = ({ post }) => {
       console.log(`error saving your comment: ${errorMessage}`);
     } else {
       console.log("your comment saved to db");
-  
+      const updatedPost = await response.json();
+      onNewPost(updatedPost.post, true);
     }
 
     // setMessage("");
@@ -47,20 +48,26 @@ const Post = ({ post }) => {
 
   const handleLikeClick = async () => {
     try {
-      await fetch(`/posts/${post._id}`, {
+      const response = await fetch(`/posts/${post._id}`, {
         method: "PATCH",
         headers: {
           "Content-Type": "application/json",
           Authorization: `Bearer ${localStorage.getItem("token")}`,
         },
-        body: JSON.stringify({ likes: likes + 1 }),
       });
-      console.log("Liked post with ID: ", post._id);
-      setLikes(likes + 1);
+  
+      if (response.ok) {
+        const updatedPost = await response.json();
+        setLikes(updatedPost.likes);
+        console.log("Updated likes for post with ID:", post._id);
+      } else {
+        console.error("Error updating likes:", response.statusText);
+      }
     } catch (error) {
       console.error("Error updating likes:", error);
     }
   };
+  
 
   return (
     <article data-cy="post" key={post._id}>

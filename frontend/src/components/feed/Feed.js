@@ -10,6 +10,18 @@ const Feed = ({ navigate }) => {
   const [posts, setPosts] = useState([]);
   const [token, setToken] = useState(window.localStorage.getItem("token"));
 
+  const handleNewPost = (newPost, comment) => {
+    if (comment) {
+      setPosts((prevPosts) =>
+        prevPosts.map((post) =>
+          post._id === newPost._id ? newPost : post
+        )
+      );
+    } else {
+      setPosts((prevPosts) => [newPost, ...prevPosts]);
+    }
+  };
+
   useEffect(() => {
     if (token) {
       fetch("/posts", {
@@ -73,7 +85,7 @@ const Feed = ({ navigate }) => {
           
           
           <Col md={12}>
-            <CreatePost />
+            <CreatePost handleNewPost={handleNewPost} />
           </Col>
               
           <Row className="justify-content-md-center">
@@ -84,7 +96,7 @@ const Feed = ({ navigate }) => {
                { posts.map((post) => {
                  return (
                   
-                <Post post={post} key={post._id} />)
+                <Post key={post._id} post={post} onNewPost={handleNewPost} />)
                
                })};
                
