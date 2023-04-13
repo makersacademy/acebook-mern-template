@@ -74,7 +74,9 @@ const Post = ({ post }) => {
         <div>{post.message}</div>
         <img src={post.photo} className="postPhoto img-fluid"></img>
 
-        <div><LikeButton likes={likes} onClick={handleLikeClick} /></div>
+        <div>
+          <LikeButton likes={likes} onClick={handleLikeClick} />
+        </div>
         <Form onSubmit={handleSubmit}>
           <Row className="justify-content-md-right">
             <Col md={6}>
@@ -110,7 +112,10 @@ const Post = ({ post }) => {
               console.log(comment);
               return (
                 <div className="commentInfo" key={comment._id}>
-                  <img src={comment.user.image} className="commentProfileImage"></img>
+                  <img
+                    src={comment.user.image}
+                    className="commentProfileImage"
+                  ></img>
                   <div className="commentUserInfo">
                     <span className="commentUserName">{comment.user.name}</span>
                     <span className="commentMessage">{comment.message}</span>

@@ -6,8 +6,7 @@ const LikeButton = ({ likes, onClick }) => {
   return (
     <button className="likeButton" onClick={onClick}>
       Like <FontAwesomeIcon icon={faThumbsUp} /> {likes}
-      </button>
-      
+    </button>
   );
 };
 

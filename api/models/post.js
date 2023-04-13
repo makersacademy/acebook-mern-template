@@ -11,11 +11,11 @@ const PostSchema = new mongoose.Schema(
     },
     photo: {
       type: String,
-      default: ""
+      default: "",
     },
     likes: {
       type: Number,
-      default: 0
+      default: 0,
     },
     comments: [
       {

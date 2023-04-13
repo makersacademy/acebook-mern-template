@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import Container from "react-bootstrap/Container";
-import "./LoginForm.css";
 
 const LogInForm = ({ navigate }) => {
   const [email, setEmail] = useState("");
@@ -22,7 +21,7 @@ const LogInForm = ({ navigate }) => {
 
     if (response.status !== 201) {
       let data = await response.json();
-      console.log(data)
+      console.log(data);
       if (data.error === "Invalid email") {
         setError("Invalid email");
         setEmail("");
@@ -83,7 +82,12 @@ const LogInForm = ({ navigate }) => {
                 required
               />
             </Form.Group>
-            {error && <div className="alert alert-danger">{error}<a href="/signup">Please sign up</a></div>}
+            {error && (
+              <div className="alert alert-danger">
+                {error}
+                <a href="/signup">Please sign up</a>
+              </div>
+            )}
             <Form.Group className="mb-3">
               <Form.Check type="checkbox" label="Check me out" />
             </Form.Group>
@@ -98,4 +102,3 @@ const LogInForm = ({ navigate }) => {
 };
 
 export default LogInForm;
-
