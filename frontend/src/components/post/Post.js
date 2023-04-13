@@ -76,11 +76,34 @@ const Post = ({ post, onNewPost }) => {
         </div>
         <div>{post.message}</div>
         <img src={post.photo} className="postPhoto img-fluid"></img>
-
+<hr/>
         <div>
           <LikeButton likes={likes} onClick={handleLikeClick} />
         </div>
-        <Form onSubmit={handleSubmit}>
+        <hr/>
+    </div>
+      <div data-cy="comment" key={post._id}>
+        {post.comments && post.comments.length > 0 && (
+          <div className="commentSection">
+            {post.comments.map((comment) => {
+              console.log(comment);
+              return (
+                <div className="commentInfo" key={comment._id}>
+                  <img
+                    src={comment.user.image}
+                    className="commentProfileImage">
+                  </img>
+                  <div className="commentUserInfo">
+                    <span className="commentUserName">{comment.user.name}</span>
+                    <span className="commentMessage">{comment.message}</span>
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+        )}
+      </div>
+      <Form onSubmit={handleSubmit}>
           <Row className="justify-content-md-right">
             <Col md={6}>
               <Form.Group
@@ -107,28 +130,6 @@ const Post = ({ post, onNewPost }) => {
             </Col>
           </Row>
         </Form>
-      </div>
-      <div data-cy="comment" key={post._id}>
-        {post.comments && post.comments.length > 0 && (
-          <div className="commentSection">
-            {post.comments.map((comment) => {
-              console.log(comment);
-              return (
-                <div className="commentInfo" key={comment._id}>
-                  <img
-                    src={comment.user.image}
-                    className="commentProfileImage"
-                  ></img>
-                  <div className="commentUserInfo">
-                    <span className="commentUserName">{comment.user.name}</span>
-                    <span className="commentMessage">{comment.message}</span>
-                  </div>
-                </div>
-              );
-            })}
-          </div>
-        )}
-      </div>
     </article>
   );
 };

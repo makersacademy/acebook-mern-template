@@ -7,7 +7,7 @@ import { Button } from "react-bootstrap";
 const LikeButton = ({ likes, onClick }) => {
   return (
 
-    <Button variant="outline-secondary" onClick={onClick}>
+    <Button variant="outline-secondary" onClick={onClick} className="shadow-none">
      <FontAwesomeIcon icon={faThumbsUp} /> Like {likes}
     </Button>
   );
