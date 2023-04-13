@@ -30,5 +30,6 @@ const upload = multer({ storage: storage, fileFilter: imageFilter });
 const UsersController = require("../controllers/users");
 
 router.post("/", upload.single("image"), UsersController.Create);
+router.get("/", UsersController.Find);
 
 module.exports = router;

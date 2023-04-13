@@ -11,6 +11,7 @@ const Post = ({ post, onNewPost }) => {
   const relativeTime = moment(post.createdAt).fromNow();
   // console.log(date)
   const [comment, setComment] = useState("");
+  const [showComments, setShowComments] = useState(false);
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -130,6 +131,36 @@ const Post = ({ post, onNewPost }) => {
             </Col>
           </Row>
         </Form>
+      </div>
+      <div data-cy="comment" key={post._id}>
+      {showComments && post.comments && post.comments.length > 0 && (
+          <div className="commentSection">
+            {post.comments.map((comment) => {
+              console.log(comment);
+              return (
+                <div className="commentInfo" key={comment._id}>
+                  <img
+                    src={comment.user.image}
+                    className="commentProfileImage"
+                  ></img>
+                  <div className="commentUserInfo">
+                    <span className="commentUserName">{comment.user.name}</span>
+                    <span className="commentMessage">{comment.message}</span>
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+        )}
+      </div>
+      {post.comments && post.comments.length > 0 && (
+      <Button
+        variant="secondary"
+        onClick={() => setShowComments(!showComments)}
+      >
+        {showComments ? "Hide Comments" : "Show Comments"}
+      </Button>
+    )}
     </article>
   );
 };
