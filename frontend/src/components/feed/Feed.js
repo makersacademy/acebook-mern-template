@@ -37,6 +37,10 @@ const Feed = ({ navigate }) => {
     navigate('/login')
   }
 
+  const account = () => {
+    navigate('/account')
+  }
+
   // ONE METHOD TO SEND THEM ALL XP -
 
   const handleSubmit = (event) => {
@@ -61,7 +65,7 @@ const Feed = ({ navigate }) => {
     return formData
   }
 
-  const requestHeaders ={
+  const requestHeaders = {
     headers: {
       'Authorization': `Bearer ${token}`,
       'Content-Type': 'multipart/form-data'
@@ -84,7 +88,7 @@ const Feed = ({ navigate }) => {
   if(token) {
     return(
       <>
-        <Navbar logout={logout} />
+        <Navbar logout={logout} account={account} />
         <div id='main-container' >
           <div id="user-banner-container">
             <UserBanner userData={userData} />
@@ -98,7 +102,6 @@ const Feed = ({ navigate }) => {
           <div>
             {posts.length === 0 ? <EmptyPage /> : null}
           </div>
-        <Footer />
         </div>     
       </>
     );

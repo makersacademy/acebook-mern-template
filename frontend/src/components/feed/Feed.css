@@ -3,6 +3,7 @@
   --primary-color: #fff;
   --secondary-color: #27b99a;
   --grey-color: rgb(201, 201, 201);
+  --dark-grey-color: rgb(186, 186, 186);
 
   --navbar-color: #3d3d3d;
   --navbar-color-hover: #504f4f;
@@ -16,7 +17,7 @@
   --text-white: #ffffff;
   --text-black: #3d3d3d;
 
-  --shadow-color: rgb(148, 148, 148);
+  --shadow-color: rgb(186, 185, 185);
   --shadow-settings: 0px 0px 3px var(--shadow-color);
 
   --comment-grow-animation: all .4s ease-out; 
