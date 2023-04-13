@@ -23,6 +23,7 @@ const LogInForm = ({ navigate }) => {
       let data = await response.json()
       window.localStorage.setItem("token", data.token)
       window.localStorage.setItem("username", data.username)
+      window.localStorage.setItem("profilePicture", data.profilePicture)
       navigate('/posts');
     }
   }
