@@ -61,14 +61,13 @@ const Feed = ({ navigate }) => {
               </div>
             </Col>
           </Row>
-       
-         </Container>
-        </>
-     
 
-  
-  )}else {
-    navigate("/signin");
+        </Container>
+      </>
+    );
+  } else {
+    navigate("/login");
+
   }
 };
 
