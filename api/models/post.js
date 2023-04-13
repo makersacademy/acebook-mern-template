@@ -5,6 +5,10 @@ const PostSchema = new mongoose.Schema({
   likes: {
     type: [String], 
     default: []
+  },
+  comments: {
+    type: Array,
+    default: []
   }
 });
 
