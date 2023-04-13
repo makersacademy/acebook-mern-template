@@ -9,6 +9,10 @@ const Feed = ({ navigate }) => {
   const [posts, setPosts] = useState([]);
   const [token, setToken] = useState(window.localStorage.getItem("token"));
 
+  const handleNewPost = (newPost) => {
+    setPosts([newPost, ...posts]);
+  };
+
   useEffect(() => {
     if (token) {
       fetch("/posts", {
@@ -43,7 +47,7 @@ const Feed = ({ navigate }) => {
           </div>
           
           <Col md={12}>
-            <CreatePost />
+            <CreatePost handleNewPost={handleNewPost} />
           </Col>
               
           <Row className="justify-content-md-center">
