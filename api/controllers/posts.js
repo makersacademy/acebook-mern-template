@@ -10,7 +10,7 @@ const PostsController = {
       })
       .populate({
         path: "comments.user",
-        select: "name",
+        select: "name image",
       })
       .sort({ createdAt: -1 })
       .exec(async (err, posts) => {
@@ -23,9 +23,13 @@ const PostsController = {
   },
   Create: (req, res) => {
     let postContent = { ...req.body, user: req.user_id };
+    if (req.file) {
+      postContent.photo = req.file.path;
+    }
     const post = new Post(postContent);
     post.save(async (err) => {
       if (err) {
+        console.log(err);
         throw err;
       }
 
@@ -53,16 +57,16 @@ const PostsController = {
   Update: async (req, res) => {
     const postId = req.params.id;
     const userId = req.user_id;
-  
+
     try {
       const post = await Post.findById(postId);
-  
+
       if (!post) {
-        return res.status(404).json({ error: 'Post not found' });
+        return res.status(404).json({ error: "Post not found" });
       }
-  
+
       const userIndex = post.likedBy.indexOf(userId);
-  
+
       if (userIndex === -1) {
         post.likes += 1;
         post.likedBy.push(userId);
@@ -70,14 +74,14 @@ const PostsController = {
         post.likes -= 1;
         post.likedBy.splice(userIndex, 1);
       }
-  
+
       await post.save();
-  
+
       res.status(200).json(post);
     } catch (err) {
       res.status(500).json({ error: err });
     }
-  }
+  },
 };
 
 module.exports = PostsController;

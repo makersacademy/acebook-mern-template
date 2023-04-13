@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import LikeButton from "../likes/LikeButton"
+import LikeButton from "../likes/LikeButton";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faThumbsUp } from "@fortawesome/free-solid-svg-icons/faThumbsUp";
 import Container from "react-bootstrap/Container";
@@ -11,10 +11,10 @@ import moment from "moment";
 // import { useParams } from "react-router-dom";
 
 const Post = ({ post, onNewPost }) => {
-  const date = moment(`${post.createdAt}`).format("MMMM Do YYYY, h:mm:ss a");
+  //const date = moment(`${post.createdAt}`).format("MMMM Do YYYY, h:mm:ss a");
+  const relativeTime = moment(post.createdAt).fromNow();
   // console.log(date)
   const [comment, setComment] = useState("");
-  
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -26,7 +26,7 @@ const Post = ({ post, onNewPost }) => {
       },
       body: JSON.stringify({ message: comment }),
     });
-    console.log(response)
+    console.log(response);
     if (response.status !== 201) {
       let errorMessage = await response.text();
       console.log(`error saving your comment: ${errorMessage}`);
@@ -36,13 +36,12 @@ const Post = ({ post, onNewPost }) => {
       onNewPost(updatedPost.post, true);
     }
 
-    // setMessage("");
+    setComment("");
   };
 
   const handleCommentChange = (event) => {
     setComment(event.target.value);
   };
-
 
   const [likes, setLikes] = useState(post.likes);
 
@@ -55,7 +54,7 @@ const Post = ({ post, onNewPost }) => {
           Authorization: `Bearer ${localStorage.getItem("token")}`,
         },
       });
-  
+
       if (response.ok) {
         const updatedPost = await response.json();
         setLikes(updatedPost.likes);
@@ -67,20 +66,24 @@ const Post = ({ post, onNewPost }) => {
       console.error("Error updating likes:", error);
     }
   };
-  
 
   return (
     <article data-cy="post" key={post._id}>
-    <div>
-      
+      <div>
         <div> {console.log(post)}</div>
-        <div>
-         {/* <img src={post.user.image} className="profileImage"></img>  */}
-          {post.user && post.user.name}
+        <div className="postInfo">
+          <img src={post.user.image} className="profileImage"></img>
+          <div className="postUserInfo">
+            <span className="postUserName">{post.user && post.user.name}</span>
+            <span className="postTime">{relativeTime}</span>
+          </div>
         </div>
         <div>{post.message}</div>
-        <div>{date}</div>
-        <LikeButton likes={likes} onClick={handleLikeClick} />
+        <img src={post.photo} className="postPhoto img-fluid"></img>
+
+        <div>
+          <LikeButton likes={likes} onClick={handleLikeClick} />
+        </div>
         <Form onSubmit={handleSubmit}>
           <Row className="justify-content-md-right">
             <Col md={6}>
@@ -108,25 +111,30 @@ const Post = ({ post, onNewPost }) => {
             </Col>
           </Row>
         </Form>
-        
-      </div> 
-        <div>
-          {post.comments && post.comments.length > 0 && (
-            <span>
-             {post.comments.map((comment) => {
-                console.log(comment)
-                return <div key={comment._id}>{comment.user.name} commented : {comment.message}</div>;
-              })}
-            </span>
-          )}
-        </div>
-        
-        
-        
-     
+      </div>
+      <div data-cy="comment" key={post._id}>
+        {post.comments && post.comments.length > 0 && (
+          <div className="commentSection">
+            {post.comments.map((comment) => {
+              console.log(comment);
+              return (
+                <div className="commentInfo" key={comment._id}>
+                  <img
+                    src={comment.user.image}
+                    className="commentProfileImage"
+                  ></img>
+                  <div className="commentUserInfo">
+                    <span className="commentUserName">{comment.user.name}</span>
+                    <span className="commentMessage">{comment.message}</span>
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+        )}
+      </div>
     </article>
-    ); 
- 
+  );
 };
 
 export default Post;

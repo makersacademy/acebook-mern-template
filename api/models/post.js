@@ -9,9 +9,13 @@ const PostSchema = new mongoose.Schema(
       ref: "User",
       // required: true,
     },
+    photo: {
+      type: String,
+      default: "",
+    },
     likes: {
       type: Number,
-      default: 0
+      default: 0,
     },
     likedBy: [{
       type: mongoose.Schema.Types.ObjectId,

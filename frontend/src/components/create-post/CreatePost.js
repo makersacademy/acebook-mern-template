@@ -7,17 +7,22 @@ import Col from "react-bootstrap/Col";
 
 const CreatePost = ({ handleNewPost }) => {
   const [message, setMessage] = useState("");
+  const [image, setImage] = useState(null);
 
   const handleSubmit = async (event) => {
     //event.preventDefault();
 
+    const formData = new FormData();
+    formData.append("message", message);
+    formData.append("image", image);
+
     let response = await fetch("/posts", {
       method: "post",
       headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${window.localStorage.getItem("token")}`
+        // "Content-Type": "application/json",
+        Authorization: `Bearer ${window.localStorage.getItem("token")}`,
       },
-      body: JSON.stringify({ message: message }),
+      body: formData,
     });
 
     if (response.status !== 201) {
@@ -29,18 +34,23 @@ const CreatePost = ({ handleNewPost }) => {
     }
 
     setMessage("");
-  }
+    setImage(null);
+  };
 
   const handlePostChange = (event) => {
     setMessage(event.target.value);
-  }
+  };
 
+  const handleImageChange = (event) => {
+    setImage(event.target.files[0]);
+  };
   return (
-    <Form onSubmit={handleSubmit} >
+    <Form onSubmit={handleSubmit}>
       <Row className="justify-content-md-center">
         <Col md={6}>
-          <Form.Group className="mb-3" 
-          // controlId="exampleForm.ControlTextarea1"
+          <Form.Group
+            className="mb-3"
+            // controlId="exampleForm.ControlTextarea1"
           >
             <Form.Label>Write your post here...</Form.Label>
             <Form.Control
@@ -55,7 +65,12 @@ const CreatePost = ({ handleNewPost }) => {
           </Form.Group>
           <Form.Group className="mb-3">
             <Form.Label>Select an image to upload:</Form.Label>
-            <Form.Control type="file"  />
+            <Form.Control
+              type="file"
+              accept=".png, .jpg, .jpeg"
+              onChange={handleImageChange}
+              name="image"
+            />
           </Form.Group>
         </Col>
       </Row>
