@@ -54,7 +54,7 @@ const Feed = ({ navigate }) => {
           <Navbar bg="bg-light" variant="light">
             <Nav>
               <Navbar.Brand href="#">
-                <h5>a.</h5>
+                <h5 className="favicon">a.</h5>
               </Navbar.Brand>
               <Nav.Link href="/posts">
                 <FontAwesomeIcon icon={faHouse} size="xl" />
@@ -75,14 +75,16 @@ const Feed = ({ navigate }) => {
           </Navbar>
 
           <h1 className="d-flex justify-content-center mt-4 main-title">acebook.</h1>
-
-          <Col md={12}>
-            <Container className="py-1">
+          
+          <Row className="justify-content-md-center">
+          <Col md={6}>
+            <div className="writePost">
             <Card className="px-3 pt-3 shadow-sm p-3 mb-5 bg-white rounded border-0">
               <CreatePost handleNewPost={handleNewPost} />
               </Card>
-              </Container>
+              </div> 
           </Col>
+          </Row>
 
           <Row className="justify-content-md-center">
             <Col md={6}>
@@ -90,7 +92,7 @@ const Feed = ({ navigate }) => {
                 {posts.map((post) => {
                   return (
                     <Container className="py-1">
-                      <Card className="shadow-sm px-3 py-2 mb-2 bg-white rounded border-0">
+                      <Card className="shadow-sm px-3 mb-2 bg-white rounded border-0">
                     <Post
                       key={post._id}
                       post={post}

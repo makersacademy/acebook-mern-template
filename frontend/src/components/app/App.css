@@ -1,13 +1,14 @@
 h1 {
   font-family: "Corben", cursive;
-  font-weight: 600px;
-  padding: 50px 0;
+  padding-bottom: 50px;
+}
+
+.favicon {
+  font-size: 26px;
 }
 
 h5 {
   font-family: 'Corben', cursive;
-  font-weight: 600px;
-  font-size: 8;
 }
 
 .background {
@@ -15,7 +16,7 @@ h5 {
 }
 
 article {
-  padding: 40px 0;
+  padding: 20px 0;
 }
 
 .postInfo {
@@ -54,11 +55,24 @@ article {
 .likeButton {
   background-color: #EFF2F5;
   border: none;
-  padding: 10px 0 ;
 }
 
 .likeButton:hover {
   color: grey;
+}
+
+article .commentButton {
+  background-color: white;
+  color: black;
+  border: none;
+  padding: 0;
+  text-decoration: underline;
+}
+
+article .commentButton:hover {
+  background-color: white;
+  color: black;
+  border: none;
 }
 
 .commentSection {
@@ -87,4 +101,34 @@ article {
 .commentUserName {
   font-weight: 600;
   font-size: 14px;
+}
+
+.comment-input-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.comment-input-wrapper > .form-group {
+  flex-grow: 1;
+}
+
+.comment-input-wrapper > .form-group > .comment-input {
+  margin-right: 5px;
+}
+
+.comment-input-wrapper > .submit-button {
+  width: 100px;
+}
+
+.submit-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  padding: 0;
+  background: none;
+  border: none;
+  font-size: 25px;
+  color: grey;
 }

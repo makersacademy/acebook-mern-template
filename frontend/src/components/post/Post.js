@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import LikeButton from "../likes/LikeButton";
-// import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-// import { faThumbsUp } from "@fortawesome/free-solid-svg-icons/faThumbsUp";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faPaperPlane } from '@fortawesome/free-solid-svg-icons';
 import { Container, Row, Col, Button, Form } from "react-bootstrap";
 import moment from "moment";
 // import { useParams } from "react-router-dom";
@@ -54,7 +54,7 @@ const Post = ({ post, onNewPost }) => {
           Authorization: `Bearer ${localStorage.getItem("token")}`,
         },
       });
-  
+
       if (response.ok) {
         const updatedPost = await response.json();
         setLikes(updatedPost.likes);
@@ -85,7 +85,7 @@ const Post = ({ post, onNewPost }) => {
       } else {
         console.error("Error updating likes:", response.statusText);
       }
-      } catch (error) {
+    } catch (error) {
       console.error("Error updating likes:", error);
     }
   };
@@ -102,33 +102,18 @@ const Post = ({ post, onNewPost }) => {
           </div>
         </div>
         <div>{post.message}</div>
-        <img src={post.photo} className="postPhoto img-fluid"></img>
+        {post.photo && (
+          <img src={post.photo} className="postPhoto img-fluid"></img>
+        )}
         <hr />
         <div>
-          <LikeButton likes={likes} onClick={handleLikeClick} isLiked={isLiked} />
+          <LikeButton
+            likes={likes}
+            onClick={handleLikeClick}
+            isLiked={isLiked}
+          />
         </div>
         <hr />
-      </div>
-      <div data-cy="comment" key={post._id}>
-        {post.comments && post.comments.length > 0 && (
-          <div className="commentSection">
-            {post.comments.map((comment) => {
-              console.log(comment);
-              return (
-                <div className="commentInfo" key={comment._id}>
-                  <img
-                    src={comment.user.image}
-                    className="commentProfileImage">
-                  </img>
-                  <div className="commentUserInfo">
-                    <span className="commentUserName">{comment.user.name}</span>
-                    <span className="commentMessage">{comment.message}</span>
-                  </div>
-                </div>
-              );
-            })}
-          </div>
-        )}
       </div>
       <Form onSubmit={handleSubmit}>
         <Row className="justify-content-md-right">
@@ -141,25 +126,28 @@ const Post = ({ post, onNewPost }) => {
                 value={comment}
                 rows={1}
                 placeholder="Write a comment..."
-                onChange={handleCommentChange} />
+                onChange={handleCommentChange}
+              />
             </Form.Group>
           </Col>
         </Row>
         <Row className="justify-content-md-right">
           <Col md={6}>
-            <Button variant="primary" type="submit" id="submit">
-              Submit
-            </Button>
+            <span className="submit-button" onClick={handleSubmit}>
+              <FontAwesomeIcon icon={faPaperPlane} />
+            </span>
           </Col>
         </Row>
       </Form>
-    {/* </div> */}
+      {/* </div> */}
       <div data-cy="comment" key={post._id}>
         {showComments && post.comments && post.comments.length > 0 && (
           <div className="commentSection">
             {post.comments.map((comment) => {
-              console.log(comment);
-              const isCommentLiked = comment.likedBy.some((id) => id.toString() === userId);
+              // console.log(comment);
+              const isCommentLiked = comment.likedBy.some(
+                (id) => id.toString() === userId
+              );
               return (
                 <div className="commentInfo" key={comment._id}>
                   <img
@@ -182,13 +170,14 @@ const Post = ({ post, onNewPost }) => {
         )}
       </div>
       {post.comments && post.comments.length > 0 && (
-      <Button
-        variant="secondary"
-        onClick={() => setShowComments(!showComments)}
-      >
-        {showComments ? "Hide Comments" : "Show Comments"}
-      </Button>
-    )}
+        <button
+          className="commentButton"
+          variant="secondary"
+          onClick={() => setShowComments(!showComments)}
+        >
+          {showComments ? "Hide Comments" : "Show Comments"}
+        </button>
+      )}
     </article>
   );
 };
