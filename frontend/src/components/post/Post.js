@@ -1,12 +1,8 @@
 import React, { useEffect, useState } from "react";
 import LikeButton from "../likes/LikeButton";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faThumbsUp } from "@fortawesome/free-solid-svg-icons/faThumbsUp";
-import Container from "react-bootstrap/Container";
-import Row from "react-bootstrap/Row";
-import Col from "react-bootstrap/Col";
-import Button from "react-bootstrap/Button";
-import Form from "react-bootstrap/Form";
+// import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+// import { faThumbsUp } from "@fortawesome/free-solid-svg-icons/faThumbsUp";
+import { Container, Row, Col, Button, Form } from "react-bootstrap";
 import moment from "moment";
 // import { useParams } from "react-router-dom";
 
@@ -81,40 +77,59 @@ const Post = ({ post, onNewPost }) => {
         </div>
         <div>{post.message}</div>
         <img src={post.photo} className="postPhoto img-fluid"></img>
-
+        <hr />
         <div>
           <LikeButton likes={likes} onClick={handleLikeClick} />
         </div>
-        <Form onSubmit={handleSubmit}>
-          <Row className="justify-content-md-right">
-            <Col md={6}>
-              <Form.Group
-                className="mb-3"
-                // controlId="exampleForm.ControlTextarea1"
-              >
-                <Form.Control
-                  as="textarea"
-                  type="text"
-                  // id="message"
-                  value={comment}
-                  rows={1}
-                  placeholder="Write a comment..."
-                  onChange={handleCommentChange}
-                />
-              </Form.Group>
-            </Col>
-          </Row>
-          <Row className="justify-content-md-right">
-            <Col md={6}>
-              <Button variant="primary" type="submit" id="submit">
-                Submit
-              </Button>
-            </Col>
-          </Row>
-        </Form>
+        <hr />
       </div>
       <div data-cy="comment" key={post._id}>
-      {showComments && post.comments && post.comments.length > 0 && (
+        {post.comments && post.comments.length > 0 && (
+          <div className="commentSection">
+            {post.comments.map((comment) => {
+              console.log(comment);
+              return (
+                <div className="commentInfo" key={comment._id}>
+                  <img
+                    src={comment.user.image}
+                    className="commentProfileImage">
+                  </img>
+                  <div className="commentUserInfo">
+                    <span className="commentUserName">{comment.user.name}</span>
+                    <span className="commentMessage">{comment.message}</span>
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+        )}
+      </div>
+      <Form onSubmit={handleSubmit}>
+        <Row className="justify-content-md-right">
+          <Col md={6}>
+            <Form.Group className="mb-3">
+              <Form.Control
+                as="textarea"
+                type="text"
+                // id="message"
+                value={comment}
+                rows={1}
+                placeholder="Write a comment..."
+                onChange={handleCommentChange} />
+            </Form.Group>
+          </Col>
+        </Row>
+        <Row className="justify-content-md-right">
+          <Col md={6}>
+            <Button variant="primary" type="submit" id="submit">
+              Submit
+            </Button>
+          </Col>
+        </Row>
+      </Form>
+    {/* </div> */}
+      <div data-cy="comment" key={post._id}>
+        {showComments && post.comments && post.comments.length > 0 && (
           <div className="commentSection">
             {post.comments.map((comment) => {
               console.log(comment);
