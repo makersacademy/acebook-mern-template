@@ -1,6 +1,6 @@
 const User = require("../models/user");
-const path = require('path');
-const fs = require('fs')
+
+
 
 const UsersController = {
     Create: async (req, res) => {

@@ -1,6 +1,7 @@
 const Post = require("../models/post");
 const TokenGenerator = require("../models/token_generator");
 
+
 const PostsController = {
   Index: (req, res) => {
     Post.find(async (err, posts) => {

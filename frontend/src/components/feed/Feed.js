@@ -12,6 +12,7 @@ const Feed = ({ navigate }) => {
   const [author] = useState(window.localStorage.getItem("username"));
   const [profilePicture] = useState(window.localStorage.getItem("profilePicture"));
 
+
   useEffect(() => {
     if(token) {
       fetch("/posts", {
@@ -61,10 +62,6 @@ const Feed = ({ navigate }) => {
       .catch((error) => console.error(error));
   };
 
-  // handleLikeButton ??
-    // stringify (likes)
-    //setLikes(post.likes + 1)
-    //reload
 
   // LOGOUT --------------------------------
   const logout = () => {
@@ -88,6 +85,7 @@ const Feed = ({ navigate }) => {
     )
   }
 
+  
   // RENDER CREATE POST FORM -----------------
   const renderPostForm = () => {
     return (

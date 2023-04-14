@@ -67,8 +67,6 @@ const SignUpForm = ({ navigate }) => {
     } catch (error) {
       console.log(error);
     }
-
-
   }
 
   const renderImageUploadForm = () => {

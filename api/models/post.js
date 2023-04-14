@@ -13,6 +13,10 @@ const PostSchema = new mongoose.Schema({
   comments: {
     type: Array,
     default: []
+  },
+  profilePicture: { 
+    type: String, 
+    default: 'default.jpg'
   }
 });
 
