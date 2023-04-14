@@ -51,7 +51,7 @@ const Feed = ({ navigate }) => {
     return (
       <>
         <Container>
-          <Navbar bg="white" variant="light">
+          <Navbar bg="bg-light" variant="light">
             <Nav>
               <Navbar.Brand href="#">
                 <h5>a.</h5>
@@ -74,7 +74,7 @@ const Feed = ({ navigate }) => {
             </Nav>
           </Navbar>
 
-          <h1 className="d-flex justify-content-center mt-4 main-title">acebook.</h1>
+          <hr className="shadow p-3 mb-5 bg-white rounded"/>
 
           <Col md={12}>
             <Container className="py-1">
