@@ -71,7 +71,28 @@ const Post = ({ post, onNewPost }) => {
       console.error("Error updating likes:", error);
     }
   };
-  
+
+  const handleCommentLikeClick = async (commentId) => {
+    try {
+      const response = await fetch(`/posts/${post._id}/comments/${commentId}`, {
+        method: "PATCH",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+      });
+
+      if (response.ok) {
+        const updatedPost = await response.json();
+        onNewPost(updatedPost, true);
+        console.log("Updated likes for comment with ID:", commentId);
+      } else {
+        console.error("Error updating likes:", response.statusText);
+      }
+      } catch (error) {
+      console.error("Error updating likes:", error);
+    }
+  };
 
   return (
     <article data-cy="post" key={post._id}>
@@ -123,6 +144,7 @@ const Post = ({ post, onNewPost }) => {
           <div className="commentSection">
             {post.comments.map((comment) => {
               console.log(comment);
+              const isCommentLiked = comment.likedBy.some((id) => id.toString() === userId);
               return (
                 <div className="commentInfo" key={comment._id}>
                   <img
@@ -132,6 +154,11 @@ const Post = ({ post, onNewPost }) => {
                   <div className="commentUserInfo">
                     <span className="commentUserName">{comment.user.name}</span>
                     <span className="commentMessage">{comment.message}</span>
+                    <LikeButton
+                      likes={comment.likes}
+                      onClick={() => handleCommentLikeClick(comment._id)}
+                      isLiked={isCommentLiked}
+                    />
                   </div>
                 </div>
               );
