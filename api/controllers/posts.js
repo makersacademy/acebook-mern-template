@@ -48,7 +48,13 @@ const PostsController = {
         postId,
         { $push: { comments: comment } },
         { new: true }
-      );
+      ).populate({
+        path: "user",
+        select: "name image",
+      }).populate({
+        path: "comments.user",
+        select: "name image",
+      });
       const token = await TokenGenerator.jsonwebtoken(req.user_id);
       res.status(201).json({ post, token });
     } catch (error) {
