@@ -28,7 +28,7 @@ const LikeButton = ({ likes, onClick, isLiked }) => {
           className={`like-icon ${isLiked ? 'liked' : ''} ${animate ? 'shake' : ''}`}
         />
       )}{" "}
-      <span>{likes}</span>
+      {likes > 0 && <span>{likes}</span>}
     </div>
   );
 };
