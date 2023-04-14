@@ -7,28 +7,21 @@ import { MemoryRouter } from 'react-router-dom';
 const NavBar = ({ navigate }) => {
 
   return (
-    <nav data-cy="nav" className='nav'>
-      <div data-cy="logo-container" className="logo-container">
-        <img src={mainlogo}/>
-      </div>
-      <div data-cy="menu-container" className="menu-container">
-      <ul>
-        <li>
-          <Link to="/login">Log out</Link> 
-        </li>
-        <li>
-          <Link to="/posts">Feed</Link> 
-        </li>
-        <li>
-          <Link to="/signup">Sign up</Link> 
-        </li>
-        <li>
-          <Link to="/createpost">Create a post</Link> 
-        </li>
-      </ul>
-      </div>
-    </nav>
+    <>
+      <nav data-cy="nav" className='nav'>
+        <div data-cy="logo-container" className="logo-container">
+          <Link to="/"><img src={mainlogo}/></Link>
+        </div>
+        <div data-cy="menu-container" className="menu-container">
+          <ul>
+            <li><Link to="/posts">FEED</Link></li>
+            <li><Link to="/login">LOGIN</Link></li>
+            <li><Link to="/signup">SIGN UP</Link></li>
+          </ul>
+        </div>
+      </nav>
+    </>
   );
-};
+}
 
 export default NavBar;

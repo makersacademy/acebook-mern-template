@@ -7,14 +7,15 @@
   align-items: center;
   background-color: #fff;
   color: #263849;
-  max-height: 120px;
+  max-height: 150px;
+  border-bottom: solid 2px #35bcbf;
 }
 
 .logo-container img {
   position: fixed;
   top: 0;
   left: 0;
-  max-height: 120px;
+  max-height: 150px;
   width: auto;
   margin-left: 40px;
 }
@@ -25,7 +26,7 @@
   position: fixed;
   top: 0;
   right: 0;
-  margin-top: 60px;
+  margin-top: 65px;
   margin-right: 40px;
 }
 

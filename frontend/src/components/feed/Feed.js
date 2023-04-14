@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import Post from '../post/Post';
+import NavBar from '../navbar/NavBar';
 import './Feed.css';
+import { useNavigate } from 'react-router';
 
 const Feed = ({ navigate }) => {
   const [posts, setPosts] = useState([]);
@@ -32,8 +34,10 @@ const Feed = ({ navigate }) => {
   }
 
   if(token) {
-    return(
-      <div className="feed-container">
+    return (
+      <>
+      <NavBar navigate={ navigate } />
+        <div className="feed-container">
         <h2 className="feed-heading">Posts</h2>
         <div id='feed' role="feed">
           {posts?.sort((a, b) => new Date(b.dateCreated) - new Date(a.dateCreated)).map(
@@ -49,9 +53,10 @@ const Feed = ({ navigate }) => {
           </button>
         </div>
       </div>
+      </>
     )
   } else {
-    navigate('/signin')
+    navigate('/')
   }
 }
 

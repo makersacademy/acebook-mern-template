@@ -1,4 +1,4 @@
-div {
+.login {
   width: 400px;
   margin: 0 auto;
   text-align: center;
@@ -7,14 +7,18 @@ div {
 
 h1 {
   color: #263849;
+  margin-bottom: 40px;
 }
 
-form {
+.login-form {
   display: flex;
   flex-direction: column;
   width: 400px;
+  height: 400px;
   margin: 0 auto;
   margin-top: 50px;
+  border: solid 1px #35bcbf;
+  padding: 40px;
 }
 
 input {
@@ -41,4 +45,9 @@ button {
 button:hover {
   background-color: #90f6d7;
   color: #263849;
+}
+
+.signup-link {
+  text-decoration: none;
+  color: #35bcbf; 
 }

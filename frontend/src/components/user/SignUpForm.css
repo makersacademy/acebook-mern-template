@@ -2,8 +2,6 @@
   width: 400px;
   margin: 0 auto;
   text-align: center;
-  margin-top: 150px;
-  margin-left: 10%;
 }
 
 h1 {
@@ -15,7 +13,7 @@ form {
   flex-direction: column;
   width: 400px;
   margin: 0 auto;
-  margin-top: 50px;
+  margin-top: 30px;
 }
 
 input {
@@ -42,4 +40,9 @@ button {
 button:hover {
   background-color: #90f6d7;
   color: #263849;
+}
+
+.login-link {
+  text-decoration: none;
+  color: #35bcbf; 
 }

@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import './LoginForm.css';
+import { Link } from 'react-router-dom';
 
 const LogInForm = ({ navigate }) => {
   const [email, setEmail] = useState("");
@@ -37,14 +38,18 @@ const LogInForm = ({ navigate }) => {
 
 
     return (
-      <div>
-        <h1>Sign In Form</h1>
-      <form onSubmit={handleSubmit}>
-        <input placeholder='Email' id="email" type='text' value={ email } onChange={handleEmailChange} />
-        <input placeholder='Password' id="password" type='password' value={ password } onChange={handlePasswordChange} />
-        <button role='submit-button' id='submit' type="submit" value="Submit">Sign In</button>
-      </form>
+      <>
+      <div className="login">
+        <form onSubmit={handleSubmit} className="login-form">
+          <h1>Sign In Form</h1>
+          <input placeholder='Email' id="email" type='text' value={ email } onChange={handleEmailChange} />
+          <input placeholder='Password' id="password" type='password' value={ password } onChange={handlePasswordChange} />
+          <button role='submit-button' id='submit' type="submit" value="Submit">Sign In</button>
+          <p>Do you not have an account with us yet?</p>
+          <p>Sign up <Link to="/signup" className="signup-link">HERE</Link></p>
+        </form>
       </div>
+      </>
     );
 }
 
