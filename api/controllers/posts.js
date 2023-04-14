@@ -85,12 +85,17 @@ const PostsController = {
       await post.save();
   
       await post.populate({ path: "user", select: "name image" }).execPopulate();
+      await post.populate({
+        path: "comments.user",
+        select: "name image",
+      }).execPopulate();
   
       res.status(200).json(post);
     } catch (err) {
       res.status(500).json({ error: err });
     }
-  },  
+  },
+  
   UpdateComment: async (req, res) => {
     const postId = req.params.postId;
     const commentId = req.params.commentId;
