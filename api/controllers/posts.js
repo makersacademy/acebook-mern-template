@@ -91,7 +91,48 @@ const PostsController = {
       res.status(500).json({ error: err });
     }
   },  
+  UpdateComment: async (req, res) => {
+    const postId = req.params.postId;
+    const commentId = req.params.commentId;
+    const userId = req.user_id;
   
+    try {
+      const post = await Post.findById(postId);
+  
+      if (!post) {
+        return res.status(404).json({ error: "Post not found" });
+      }
+  
+      const comment = post.comments.id(commentId);
+  
+      if (!comment) {
+        return res.status(404).json({ error: "Comment not found" });
+      }
+  
+      const userIndex = comment.likedBy.indexOf(userId);
+  
+      if (userIndex === -1) {
+        comment.likes += 1;
+        comment.likedBy.push(userId);
+      } else {
+        comment.likes -= 1;
+        comment.likedBy.splice(userIndex, 1);
+      }
+  
+      await post.save();
+  
+      await post.populate({ path: "user", select: "name image" }).execPopulate();
+      await post.populate({
+        path: "comments.user",
+        select: "name image",
+      }).execPopulate();
+  
+      res.status(200).json(post);
+    } catch (err) {
+      res.status(500).json({ error: err });
+    }
+  },
+   
 };
 
 module.exports = PostsController;
