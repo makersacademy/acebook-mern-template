@@ -61,6 +61,7 @@ const CreatePost = ({ handleNewPost }) => {
               rows={3}
               placeholder="Say what's on your mind today..."
               onChange={handlePostChange}
+              required
             />
           </Form.Group>
           <Form.Group className="mb-3">
@@ -77,7 +78,7 @@ const CreatePost = ({ handleNewPost }) => {
       <Row className="justify-content-md-center">
         <Col md={12}>
           <Button variant="primary" type="submit" id="submit">
-            Submit
+            Post
           </Button>
         </Col>
       </Row>

@@ -106,7 +106,7 @@ const Post = ({ post, onNewPost }) => {
           <img src={post.photo} className="postPhoto img-fluid"></img>
         )}
         <hr />
-        <div>
+        <div className="likes">
           <LikeButton
             likes={likes}
             onClick={handleLikeClick}
@@ -127,11 +127,10 @@ const Post = ({ post, onNewPost }) => {
                 rows={1}
                 placeholder="Write a comment..."
                 onChange={handleCommentChange}
+                required
               />
             </Form.Group>
           </Col>
-        </Row>
-        <Row className="justify-content-md-right">
           <Col md={6}>
             <span className="submit-button" onClick={handleSubmit}>
               <FontAwesomeIcon icon={faPaperPlane} />

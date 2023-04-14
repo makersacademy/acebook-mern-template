@@ -52,13 +52,9 @@ article {
   margin: 10px 0;
 }
 
-.likeButton {
-  background-color: #EFF2F5;
-  border: none;
-}
-
-.likeButton:hover {
-  color: grey;
+.likes .like-button {
+  padding-left: 10px;
+  font-size: 16px;
 }
 
 article .commentButton {
@@ -67,12 +63,14 @@ article .commentButton {
   border: none;
   padding: 0;
   text-decoration: underline;
+  font-size: 14px;
 }
 
 article .commentButton:hover {
   background-color: white;
   color: black;
   border: none;
+  text-decoration: none;
 }
 
 .commentSection {
@@ -103,32 +101,18 @@ article .commentButton:hover {
   font-size: 14px;
 }
 
-.comment-input-wrapper {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
-
-.comment-input-wrapper > .form-group {
-  flex-grow: 1;
-}
-
-.comment-input-wrapper > .form-group > .comment-input {
-  margin-right: 5px;
-}
-
-.comment-input-wrapper > .submit-button {
-  width: 100px;
-}
-
 .submit-button {
   display: inline-flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  padding: 0;
+  padding: 6px 0;
   background: none;
   border: none;
-  font-size: 25px;
+  font-size: 22px;
   color: grey;
+}
+
+.submit-button:hover {
+  color: #085ED6;
 }
