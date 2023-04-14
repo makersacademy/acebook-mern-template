@@ -13,6 +13,9 @@ const Post = ({ post, onNewPost }) => {
   const [comment, setComment] = useState("");
   const [showComments, setShowComments] = useState(false);
 
+  const userId = localStorage.getItem("user_id");
+  const isLiked = post.likedBy.some((id) => id.toString() === userId);
+
   const handleSubmit = async (event) => {
     event.preventDefault();
     let response = await fetch(`/posts/${post._id}/comments`, {
@@ -51,15 +54,38 @@ const Post = ({ post, onNewPost }) => {
           Authorization: `Bearer ${localStorage.getItem("token")}`,
         },
       });
-
+  
       if (response.ok) {
         const updatedPost = await response.json();
         setLikes(updatedPost.likes);
         console.log("Updated likes for post with ID:", post._id);
+        onNewPost(updatedPost, true);
       } else {
         console.error("Error updating likes:", response.statusText);
       }
     } catch (error) {
+      console.error("Error updating likes:", error);
+    }
+  };
+
+  const handleCommentLikeClick = async (commentId) => {
+    try {
+      const response = await fetch(`/posts/${post._id}/comments/${commentId}`, {
+        method: "PATCH",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+      });
+
+      if (response.ok) {
+        const updatedPost = await response.json();
+        onNewPost(updatedPost, true);
+        console.log("Updated likes for comment with ID:", commentId);
+      } else {
+        console.error("Error updating likes:", response.statusText);
+      }
+      } catch (error) {
       console.error("Error updating likes:", error);
     }
   };
@@ -79,7 +105,7 @@ const Post = ({ post, onNewPost }) => {
         <img src={post.photo} className="postPhoto img-fluid"></img>
         <hr />
         <div>
-          <LikeButton likes={likes} onClick={handleLikeClick} />
+          <LikeButton likes={likes} onClick={handleLikeClick} isLiked={isLiked} />
         </div>
         <hr />
       </div>
@@ -133,6 +159,7 @@ const Post = ({ post, onNewPost }) => {
           <div className="commentSection">
             {post.comments.map((comment) => {
               console.log(comment);
+              const isCommentLiked = comment.likedBy.some((id) => id.toString() === userId);
               return (
                 <div className="commentInfo" key={comment._id}>
                   <img
@@ -142,6 +169,11 @@ const Post = ({ post, onNewPost }) => {
                   <div className="commentUserInfo">
                     <span className="commentUserName">{comment.user.name}</span>
                     <span className="commentMessage">{comment.message}</span>
+                    <LikeButton
+                      likes={comment.likes}
+                      onClick={() => handleCommentLikeClick(comment._id)}
+                      isLiked={isCommentLiked}
+                    />
                   </div>
                 </div>
               );
