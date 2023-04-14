@@ -17,6 +17,9 @@ const Post = ({ post, onNewPost }) => {
   const [comment, setComment] = useState("");
   const [showComments, setShowComments] = useState(false);
 
+  const userId = localStorage.getItem("user_id");
+  const isLiked = post.likedBy.some((id) => id.toString() === userId);
+
   const handleSubmit = async (event) => {
     event.preventDefault();
     let response = await fetch(`/posts/${post._id}/comments`, {
@@ -55,11 +58,12 @@ const Post = ({ post, onNewPost }) => {
           Authorization: `Bearer ${localStorage.getItem("token")}`,
         },
       });
-
+  
       if (response.ok) {
         const updatedPost = await response.json();
         setLikes(updatedPost.likes);
         console.log("Updated likes for post with ID:", post._id);
+        onNewPost(updatedPost, true);
       } else {
         console.error("Error updating likes:", response.statusText);
       }
@@ -67,6 +71,7 @@ const Post = ({ post, onNewPost }) => {
       console.error("Error updating likes:", error);
     }
   };
+  
 
   return (
     <article data-cy="post" key={post._id}>
@@ -83,7 +88,7 @@ const Post = ({ post, onNewPost }) => {
         <img src={post.photo} className="postPhoto img-fluid"></img>
 
         <div>
-          <LikeButton likes={likes} onClick={handleLikeClick} />
+          <LikeButton likes={likes} onClick={handleLikeClick} isLiked={isLiked} />
         </div>
         <Form onSubmit={handleSubmit}>
           <Row className="justify-content-md-right">
