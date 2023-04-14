@@ -3,29 +3,16 @@ const path = require('path');
 const fs = require('fs')
 
 const UsersController = {
-  Create: async (req, res) => {
-    const { name, email, password} = req.body;
-    const profilePicture = req.file;
-
-    const user = new User({
-      name,
-      email,
-      password,
-      profilePicture: {
-        data: fs.readFileSync(path.join(__dirname, '../frontend/public', profilePicture.filename)),
-        contentType: profilePicture.mimetype
-      }
-    })
-
-    try {
-      await newUser.save();
-      fs.renameSync(path.join(__dirname, '../public/images/', profilePicture.filename), path.join(__dirname, '../public/images/', newFileName));
-      res.json({ message: 'User created successfully' });
-    } catch (error) {
-      console.error(error);
-      res.status(500).json({ message: 'Server error' });
-    }
-  },
+    Create: async (req, res) => {
+      const user = await new User(req.body);
+      user.save((err) => {
+        if (err) {
+          res.status(400).json({message: 'Bad request'})
+        } else {
+          res.status(201).json({ message: 'OK' });
+        }
+      });
+    },
   UploadImage: (req, res) => {
     const file = req.file;
     if(!file) {
@@ -37,3 +24,4 @@ const UsersController = {
 };
 
 module.exports = UsersController;
+

@@ -7,7 +7,7 @@ const SignUpForm = ({ navigate }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  const [file, setFile] = useState(null); 
+  const [file, setFile] = useState('f6782410420a17e3de48d22412adfd0c.jpg'); 
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -20,7 +20,9 @@ const SignUpForm = ({ navigate }) => {
       body: JSON.stringify({ 
         username: username, 
         email: email, 
-        password: password })
+        password: password,
+        profilePicture: file
+       })
     })
       .then(response => {
         if(response.status === 201) {
@@ -51,6 +53,7 @@ const SignUpForm = ({ navigate }) => {
     event.preventDefault();
     const formData = new FormData();
     formData.append('profilePicture', file)
+    
 
     try {
       const response = await fetch('users/upload-image', {
@@ -58,7 +61,9 @@ const SignUpForm = ({ navigate }) => {
         body: formData
       });
       const data = await response.json();
-      console.log(data);
+      console.log(data.filename + '.jpg');
+      setFile(data.filename)
+
     } catch (error) {
       console.log(error);
     }
