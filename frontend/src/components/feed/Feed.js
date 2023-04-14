@@ -3,6 +3,7 @@ import Post from '../post/Post';
 import NavBar from '../navbar/NavBar';
 import './Feed.css';
 import { useNavigate } from 'react-router';
+import CreatePostForm from '../createpost/CreatePostForm';
 
 const Feed = ({ navigate }) => {
   const [posts, setPosts] = useState([]);
@@ -24,11 +25,6 @@ const Feed = ({ navigate }) => {
     }
   }, [])
 
-  const logout = () => {
-    window.localStorage.removeItem("token")
-    navigate('/login')
-  }
-
   const createpost = () => {
     navigate('/createpost')
   }
@@ -38,19 +34,11 @@ const Feed = ({ navigate }) => {
       <>
       <NavBar navigate={ navigate } />
         <div className="feed-container">
-        <h2 className="feed-heading">Posts</h2>
+        <CreatePostForm navigate={ navigate } />
         <div id='feed' role="feed">
-          {posts?.sort((a, b) => new Date(b.dateCreated) - new Date(a.dateCreated)).map(
-            (post) => ( <Post post={ post } key={ post._id } /> )
-          )}
-        </div>
-        <div className="button-container">
-          <button className="logout-button" onClick={logout}>
-            Logout
-          </button>
-          <button className="create-post-button" onClick={createpost}>
-            Create Post
-          </button>
+        {posts?.filter(post => post.message !== "sadasd")
+                 .sort((a, b) => new Date(b.dateCreated) - new Date(a.dateCreated))
+                 .map(post => <Post post={post} key={post._id} />)}
         </div>
       </div>
       </>

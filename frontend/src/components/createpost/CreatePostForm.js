@@ -35,11 +35,19 @@ const CreatePostForm = ({ navigate }) => {
     setMessage(event.target.value)
   }
 
+  const handleReload = () => {
+    window.location.reload();
+  };
+
   return (
-    <form onSubmit={handleSubmit}>
-      <input placeholder="Message" id="message" type='text' value={ message } onChange={handleMessageChange} />
-      <input id='submit' type="submit" value="Submit" />
-    </form>
+    <>
+      <div className="add-message-form">
+        <form onSubmit={handleSubmit}>
+          <input placeholder="Add post here.." id="message" type='text' value={ message } onChange={handleMessageChange} />
+          <button id='submit' type="submit" value="Submit" onClick={ handleReload }>ADD POST</button>
+        </form>
+      </div>
+    </>
   );
 };
 
