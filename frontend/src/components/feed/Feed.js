@@ -74,7 +74,7 @@ const Feed = ({ navigate }) => {
             </Nav>
           </Navbar>
 
-          <hr className="shadow p-3 mb-5 bg-white rounded"/>
+          <h1 className="d-flex justify-content-center mt-4 main-title">acebook.</h1>
 
           <Col md={12}>
             <Container className="py-1">
