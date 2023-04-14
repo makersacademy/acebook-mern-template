@@ -32,5 +32,7 @@ router.get("/", PostsController.Index);
 router.post("/", upload.single("image"), PostsController.Create);
 router.post("/:id/comments", PostsController.CreateComment);
 router.patch("/:id", PostsController.Update);
+router.patch("/:postId/comments/:commentId", PostsController.UpdateComment);
+
 
 module.exports = router;
