@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import Post from "../post/Post";
 import CreatePost from "../create-post/CreatePost";
 import "bootstrap/dist/css/bootstrap.min.css";
-import { Nav, Row, Container, Col, Card } from "react-bootstrap";
+import { Navbar, Nav, Row, Container, Col, Card } from "react-bootstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faHouse,
@@ -51,30 +51,28 @@ const Feed = ({ navigate }) => {
     return (
       <>
         <Container>
-          <nav className="navbar">
-            <div className="nav-container">
-              <div className="nav-logo">
+          <Navbar bg="white" variant="light">
+            <Nav>
+              <Navbar.Brand href="#">
                 <h5>a.</h5>
-              </div>
-              <div className="nav-elements">
-                <Nav.Link href="/posts">
-                  <FontAwesomeIcon icon={faHouse} size="xl" />
-                </Nav.Link>
+              </Navbar.Brand>
+              <Nav.Link href="/posts">
+                <FontAwesomeIcon icon={faHouse} size="xl" />
+              </Nav.Link>
 
-                <Nav.Link href="/posts">
-                  <FontAwesomeIcon icon={faPlus} size="xl" />
-                </Nav.Link>
+              <Nav.Link href="/posts">
+                <FontAwesomeIcon icon={faPlus} size="xl" />
+              </Nav.Link>
+            
+              <Nav.Link href="#profile">
+                <FontAwesomeIcon icon={faUser} size="xl" />
+              </Nav.Link>
 
-                <Nav.Link href="#profile">
-                  <FontAwesomeIcon icon={faUser} size="xl" />
-                </Nav.Link>
-
-                <Nav.Link onClick={logout} href="#" className="me-auto">
-                  <FontAwesomeIcon icon={faRightFromBracket} size="xl" />
-                </Nav.Link>
-              </div>
-            </div>
-          </nav>
+              <Nav.Link onClick={logout} href="#" className="me-auto">
+                <FontAwesomeIcon icon={faRightFromBracket} size="xl" />
+              </Nav.Link>
+            </Nav>
+          </Navbar>
 
           <h1 className="d-flex justify-content-center mt-4 main-title">acebook.</h1>
 
