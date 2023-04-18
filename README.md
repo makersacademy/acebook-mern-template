@@ -2,6 +2,10 @@
 
 In this project, you are tasked with working on an existing application. A significant part of the challenge will be to familiarise yourself with the codebase you've inherited, as you work to **improve and extend** it.
 
+# Trello
+
+[Trello board](https://trello.com/b/y1VEI2yj/acebook-brachiosauruses)
+
 ## Videos
 
 These videos complement the docs below.
