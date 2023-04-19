@@ -4,14 +4,14 @@ const Post = (props) => {
   const { post, token, setToken } = props;
   const [deletedPost, setDeletedPost] = useState(false);
 
-  const Delete = (token, setToken, post) => {
+  const Delete = () => {
     if (token) {
-      fetch("/posts", {
+      fetch("/posts/", {
         method: "delete",
         headers: {
           Authorization: `Bearer ${token}`,
         },
-        body: {_id: post._id}
+        body: { _id: post._id },
       })
         .then((response) => response.json())
         .then(async (data) => {
@@ -28,7 +28,7 @@ const Post = (props) => {
       return (
         <article data-cy="post" key={post._id}>
           {post.message}
-          <button onClick={Delete(token, setToken)}>Delete</button>
+          <button onClick={Delete}>Delete</button>
         </article>
       );
     else
