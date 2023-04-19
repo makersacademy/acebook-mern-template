@@ -22,8 +22,18 @@ const PostsController = {
       res.status(201).json({ message: 'OK', token: token });
     });
   },
+  Delete: (req, res) => {
+    Post.deleteOne({"_id": req.body.id }, async (err) => {
+        if (err) {
+          throw err;
+        }
+        const token = await TokenGenerator.jsonwebtoken(req.user_id)
+        res.status(201).json({ message: 'OK', token: token });
+    });
 
-  //delete a post - using mongoose method
+    
+      
+  }
 };
 
 module.exports = PostsController;

@@ -4,6 +4,31 @@ import Post from '../post/Post'
 const Feed = ({ navigate }) => {
   const [posts, setPosts] = useState([]);
   const [token, setToken] = useState(window.localStorage.getItem("token"));
+  const [message, setMessage] = useState("")
+
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+
+    fetch( '/posts', {
+      method: 'post',
+      headers: {
+        'Authorization': `Bearer ${token}`,
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({ message: message })
+    })
+      .then(response => {
+        if(response.status === 201) {
+          navigate('/posts')
+        } else {
+          navigate('/posts')
+        }
+      })
+  }
+
+  const handleMessage = (event) => {
+    setMessage(event.target.value)
+  }
 
   //React HOOK - triggers side effect that happens automatically when conditions are met
   useEffect(() => {
@@ -38,14 +63,15 @@ const Feed = ({ navigate }) => {
               Logout
             </button>
             <form onSubmit={handleSubmit}>
-              <label>Add a post here:</label>
-              <input type="text" size="58" id="message" value={ message } onChange={handleMessage}></input>
-              <input type="submit" id="submit" value="submit"></input>
+              <label>Your post: </label>
+              <input type="text" size="50" id="message" value={ message } onChange={handleMessage}></input>
+              <input type="submit" id="submit" value="Submit"></input>
             </form>
           <div id='feed' role="feed">
               {posts.map(
                 (post) => ( <Post post={ post } key={ post._id } /> )
-              )}
+              )
+              }
           </div>
         </>
       )
@@ -53,5 +79,7 @@ const Feed = ({ navigate }) => {
       navigate('/signin')
     }
 }
+
+
 
 export default Feed;
