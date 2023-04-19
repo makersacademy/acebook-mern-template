@@ -3,7 +3,7 @@ const TokenGenerator = require("../models/token_generator");
 
 const PostsController = {
   Index: (req, res) => {
-    Post.find(async (err, posts) => {
+    Post.find(async (err, posts) => {  // .find mongoose method
       if (err) {
         throw err;
       }
@@ -13,7 +13,7 @@ const PostsController = {
   },
   Create: (req, res) => {
     const post = new Post(req.body);
-    post.save(async (err) => {
+    post.save(async (err) => { // .save mongoose method
       if (err) {
         throw err;
       }
@@ -22,6 +22,8 @@ const PostsController = {
       res.status(201).json({ message: 'OK', token: token });
     });
   },
+
+  //delete a post - using mongoose method
 };
 
 module.exports = PostsController;

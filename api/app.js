@@ -10,6 +10,9 @@ const usersRouter = require("./routes/users");
 
 const app = express();
 
+//API: JWT_SECRET=SUPER_SECRET npm run start:test
+//FRONTEND: JWT_SECRET=SUPER_SECRET npm run start
+
 // setup for receiving JSON
 app.use(express.json())
 
@@ -39,7 +42,7 @@ const tokenChecker = (req, res, next) => {
 };
 
 // route setup
-app.use("/posts", tokenChecker, postsRouter);
+app.use("/posts",tokenChecker, postsRouter);
 app.use("/tokens", tokensRouter);
 app.use("/users", usersRouter);
 

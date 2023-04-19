@@ -20,3 +20,6 @@ const App = () => {
 }
 
 export default App;
+
+//API: JWT_SECRET=SUPER_SECRET npm run start:test
+//FRONTEND: JWT_SECRET=SUPER_SECRET npm run start
