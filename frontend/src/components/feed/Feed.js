@@ -4,6 +4,31 @@ import Post from '../post/Post'
 const Feed = ({ navigate }) => {
   const [posts, setPosts] = useState([]);
   const [token, setToken] = useState(window.localStorage.getItem("token"));
+  const [message, setMessage] = useState("")
+
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+
+    fetch( '/posts', {
+      method: 'post',
+      headers: {
+        'Authorization': `Bearer ${token}`,
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({ message: message })
+    })
+      .then(response => {
+        if(response.status === 201) {
+          navigate('/posts')
+        } else {
+          navigate('/posts')
+        }
+      })
+  }
+
+  const handleMessage = (event) => {
+    setMessage(event.target.value)
+  }
 
   useEffect(() => {
     if(token) {
@@ -26,6 +51,7 @@ const Feed = ({ navigate }) => {
     window.localStorage.removeItem("token")
     navigate('/login')
   }
+
   
     if(token) {
       return(
@@ -34,10 +60,16 @@ const Feed = ({ navigate }) => {
             <button onClick={logout}>
               Logout
             </button>
+            <form onSubmit={handleSubmit}>
+              <label>Your post: </label>
+              <input type="text" size="50" id="message" value={ message } onChange={handleMessage}></input>
+              <input type="submit" id="submit" value="Submit"></input>
+            </form>
           <div id='feed' role="feed">
               {posts.map(
                 (post) => ( <Post post={ post } key={ post._id } /> )
-              )}
+              )
+              }
           </div>
         </>
       )
@@ -45,5 +77,7 @@ const Feed = ({ navigate }) => {
       navigate('/signin')
     }
 }
+
+
 
 export default Feed;
