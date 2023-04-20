@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import './LoginForm.css'
 
 const LogInForm = ({ navigate }) => {
   const [email, setEmail] = useState("");
@@ -36,11 +37,23 @@ const LogInForm = ({ navigate }) => {
 
 
     return (
-      <form onSubmit={handleSubmit}>
-        <input placeholder='Email' id="email" type='text' value={ email } onChange={handleEmailChange} />
-        <input placeholder='Password' id="password" type='password' value={ password } onChange={handlePasswordChange} />
-        <input role='submit-button' id='submit' type="submit" value="Submit" />
-      </form>
+      <body>
+      <div id="homePage">
+      <div class="textWrap">
+            <div class="heading">
+              <img src="https://i.imgur.com/kjtUiie.png" class="home-img" alt="Acebook"></img>
+            </div>
+            <p class="catchline">The worst Facebook clone there ever was...</p>
+        </div>
+        <div class="formWrap">
+          <form onSubmit={handleSubmit}>
+            <input placeholder='Email' id="email" class='textEntry' type='text' value={ email } onChange={handleEmailChange} />
+            <input placeholder='Password' id="password" class='textEntry' type='password' value={ password } onChange={handlePasswordChange} />
+            <input id='submit' type="submit" class="loginButton" value="Log In" />
+          </form>
+        </div>
+      </div>
+      </body>
     );
 }
 

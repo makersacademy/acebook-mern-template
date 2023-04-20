@@ -1,4 +1,5 @@
 import React from 'react';
+import './Home.css';
 
 const HomePage = ({navigate}) => {
 
@@ -28,13 +29,24 @@ const HomePage = ({navigate}) => {
         navigate ('/signup')
       }
 
-    return (
-        <form onSubmit={handleSubmit}>
-        <button id="signup" type='text' onClick={signup}>Sign Up</button>
-        <button id="login" type='text' onClick={login}>Log In</button>
-    </form>
+  return (
+    <body>
+      <div id="homePage">
+      <div class="textWrap">
+            <div class="heading">
+              <img src="https://i.imgur.com/kjtUiie.png" class="home-img" alt="Acebook"></img>
+            </div>
+            <p class="catchline">The worst Facebook clone there ever was...</p>
+        </div>
+        <div class="formWrap">
+          <form onSubmit={handleSubmit}>
+            <button id="signup" type='text' class='signupButton' onClick={signup}>Sign Up</button>
+            <button id="login" type='text' class='loginButton' onClick={login}>Log In</button>
+          </form>
+        </div>
+      </div>
+    </body>
   );
 }
-
 
 export default HomePage;
