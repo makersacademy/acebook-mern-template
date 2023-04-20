@@ -43,6 +43,8 @@ const tokenChecker = (req, res, next) => {
 
 // route setup
 app.use("/posts",tokenChecker, postsRouter);
+app.use("/", indexRouter);
+app.use("/posts", tokenChecker, postsRouter);
 app.use("/tokens", tokensRouter);
 app.use("/users", usersRouter);
 
