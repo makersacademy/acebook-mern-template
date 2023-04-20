@@ -34,7 +34,8 @@ const PostsController = {
       
   },
 
-  Update: async (req, res) => {
+    
+Update: async (req, res) => {
     const newMessage = req.body.newMessage
     const id = req.body._id
     console.log(newMessage, id)
@@ -42,14 +43,12 @@ const PostsController = {
       await Post.findById({"_id":req.body._id}, (updatedMessage) => {
         updatedMessage.message = newMessage;
         updatedMessage.save();
-      })
-    }catch(err){
+    })
+  }catch(err){
       console.log(err)
-    }
+  }
     res.status(201).json({ message: 'OK'})
   }
-    
-  
 
 };
 
