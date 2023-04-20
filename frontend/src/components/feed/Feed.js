@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import Post from '../post/Post'
+import LikeButton from '../likeButton/LikeButton';
 
 const Feed = ({ navigate }) => {
   const [posts, setPosts] = useState([]);
   const [token, setToken] = useState(window.localStorage.getItem("token"));
   const [message, setMessage] = useState("")
+  const [likes, setLikes] = useState(0)
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -15,7 +17,7 @@ const Feed = ({ navigate }) => {
         'Authorization': `Bearer ${token}`,
         'Content-Type': 'application/json'
       },
-      body: JSON.stringify({ message: message })
+      body: JSON.stringify({ message: message, likeCount: likes })
     })
       .then(response => {
         if(response.status === 201) {
@@ -31,6 +33,10 @@ const Feed = ({ navigate }) => {
   }
 
   //React HOOK - triggers side effect that happens automatically when conditions are met
+  const handleLikes = (event) => {
+    setLikes(event.target.value)
+  }
+
   useEffect(() => {
     if(token) {
       fetch("/posts", {
@@ -63,13 +69,14 @@ const Feed = ({ navigate }) => {
               Logout
             </button>
             <form onSubmit={handleSubmit}>
-              <label>Your post: </label>
+              <label>Add post: </label>
               <input type="text" size="50" id="message" value={ message } onChange={handleMessage}></input>
+              <input type="hidden" id="likes" value={ likes } onChange={handleLikes}/>
               <input type="submit" id="submit" value="Submit"></input>
             </form>
           <div id='feed' role="feed">
               {posts.map(
-                (post) => ( <Post post={ post } key={ post._id } /> )
+                (post) => ( <Post post={ post } key={ post._id } value={ post.likeCount} /> )
               )
               }
           </div>

@@ -1,5 +1,6 @@
 const Post = require("../models/post");
 const TokenGenerator = require("../models/token_generator");
+// const updatedMessage = require("../../frontend/src/")
 
 const PostsController = {
   Index: (req, res) => {
@@ -31,7 +32,27 @@ const PostsController = {
         res.status(201).json({ message: 'OK', token: token });
     });
       
+  },
+
+  Update: async (req, res) => {
+    const newMessage = req.body.newMessage
+    const id = req.body._id
+    console.log(newMessage, id)
+    try{
+      await Post.findById({"_id":req.body._id}, (updatedMessage) => {
+        updatedMessage.message = newMessage;
+        updatedMessage.save();
+      })
+    }catch(err){
+      console.log(err)
+    }
+    res.status(201).json({ message: 'OK'})
   }
+    
+  
+
 };
 
+
+// {_id: req.body.id}, { $set: {"likeCount": likes}} 
 module.exports = PostsController;
