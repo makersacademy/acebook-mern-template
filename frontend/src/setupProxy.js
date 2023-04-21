@@ -5,7 +5,7 @@ const proxyAPI = {
     : "http://localhost:8080",
   changeOrigin: true,
   pathRewrite: {
-    '/api': '/'
+    '/api/': '/'
   },
 };
 module.exports = function (app) {
