@@ -6,7 +6,7 @@ const Post = (props) => {
 
   const Delete = () => {
     if (token) {
-      fetch("/posts/", {
+      fetch("/api/posts/", {
         method: "delete",
         headers: {
           Authorization: `Bearer ${token}`,

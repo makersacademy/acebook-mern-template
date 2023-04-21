@@ -7,7 +7,7 @@ const Feed = ({ navigate }) => {
 
   useEffect(() => {
     if(token) {
-      fetch("/posts", {
+      fetch("/api/posts", {
         headers: {
           'Authorization': `Bearer ${token}`
         }

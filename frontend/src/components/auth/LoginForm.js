@@ -7,7 +7,7 @@ const LogInForm = ({ navigate }) => {
   const handleSubmit = async (event) => {
     event.preventDefault();
 
-    let response = await fetch( '/tokens', {
+    let response = await fetch( '/api/tokens', {
       method: 'post',
       headers: {
         'Content-Type': 'application/json',
