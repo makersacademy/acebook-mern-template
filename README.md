@@ -2,6 +2,8 @@
 
 In this project, you are tasked with working on an existing application. A significant part of the challenge will be to familiarise yourself with the codebase you've inherited, as you work to **improve and extend** it.
 
+Link to Trello Board - https://trello.com/b/JFnRqonB/acebook-team-earth
+
 ## Videos
 
 These videos complement the docs below.
