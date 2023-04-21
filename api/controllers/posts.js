@@ -61,7 +61,6 @@ const PostsController = {
   })
   }
 
-  
   // Update: (req, res) => {
   //   Post.updateOne(
   //     {_id: req.body.id}, { $set: {"likeCount": likes}} 

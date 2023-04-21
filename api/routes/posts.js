@@ -5,9 +5,9 @@ const PostsController = require("../controllers/posts");
 
 router.get("/", PostsController.Index);
 router.post("/", PostsController.Create);
-router.delete("/", PostsController.Delete);
 router.put("/like", PostsController.LikePost);
 router.put("/unlike", PostsController.UnlikePost);
+//router.delete("/", PostsController.Delete);
 // router.update('/', PostsController.Update);
 
 module.exports = router;
