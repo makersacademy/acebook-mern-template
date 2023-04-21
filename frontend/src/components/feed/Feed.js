@@ -56,11 +56,11 @@ const Feed = ({ navigate }) => {
     if(token) {
       return(
         <>
-          <h2>Posts</h2>
+          <h2 class="postTitle">Posts</h2>
             <button onClick={logout}>
               Logout
             </button>
-            <form onSubmit={handleSubmit}>
+            <form onSubmit={handleSubmit} class="homePage">
               <label>Your post: </label>
               <input type="text" size="50" id="message" value={ message } onChange={handleMessage}></input>
               <input type="submit" id="submit" value="Submit"></input>
