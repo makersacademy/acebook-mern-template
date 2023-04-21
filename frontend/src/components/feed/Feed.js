@@ -74,8 +74,8 @@ const Feed = ({ navigate }) => {
             </form>
           <div id='feed' role="feed">
               {posts.map(
-                (post) => ( <Post post={ post } key={ post._id } value={ post.likeCount} /> )
-              )
+                (post) => ( <Post post={ post } key={ post._id } /> )
+              ).reverse()
               }
           </div>
         </>
