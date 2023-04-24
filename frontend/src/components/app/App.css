@@ -5,13 +5,15 @@
 
 svg {
   position: absolute;
-  top: 50vh;
+  top: 58vh;
   width: 100%;
+  z-index: -1;
 }
 
 .background {
   position: absolute;
   width: 100%;
-  min-height: 50vh;
+  min-height: 58vh;
   background-color: rgba(51, 96, 255, 0.26);
+  z-index: -1;
 }
