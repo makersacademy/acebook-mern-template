@@ -6,27 +6,10 @@ import './Post.css';
 
 const Post = ({post}) => {
   const user_id = window.localStorage.getItem("user_id");
-    useEffect(() => {
-    if(token) {
-      fetch("/posts", {
-        headers: {
-          'Authorization': `Bearer ${token}`
-        }
-      })
-        .then(response => response.json())
-        .then(async data => {
-          window.localStorage.setItem("token", data.token)
-          setToken(window.localStorage.getItem("token"))
-          setPosts(data.posts);
-        })
-    }
-    // eslint-disable-next-line
-  }, [])
   const [token, setToken] = useState(window.localStorage.getItem("token"));
-  // eslint-disable-next-line
   const [posts, setPosts] = useState([]);
 
-  useEffect(() => {
+    useEffect(() => {
     if(token) {
       fetch("/posts", {
         headers: {
@@ -99,7 +82,6 @@ const Post = ({post}) => {
     })
   };
 
-
   const makeComment = (text,postId) => {
     fetch('posts/comment', {
       method: "put",
@@ -118,9 +100,8 @@ const Post = ({post}) => {
       console.log(err)
     })
   }
-// 
-  return(
 
+  return(
     <div id="homePage">
       <div className="flexbox">
         <div className="item">
