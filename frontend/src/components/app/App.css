@@ -1,5 +1,17 @@
 .main {
   width: 100vw;
   height: 100vh;
-  background: linear-gradient(rgba(51, 96, 255, 0.26) 52%, #fff 0%);
+}
+
+svg {
+  position: absolute;
+  top: 50vh;
+  width: 100%;
+}
+
+.background {
+  position: absolute;
+  width: 100%;
+  min-height: 50vh;
+  background-color: rgba(51, 96, 255, 0.26);
 }
