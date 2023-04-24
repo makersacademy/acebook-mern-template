@@ -47,7 +47,6 @@ const Feed = ({ navigate }) => {
       })
   }
 
-
   useEffect(() => {
     if(token) {
       fetch("/posts", {

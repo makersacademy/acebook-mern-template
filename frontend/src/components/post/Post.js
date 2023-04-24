@@ -1,16 +1,8 @@
 import React, {useState, useEffect } from 'react';
 import './Post.css';
-import LikeButton from '../likeButton/LikeButton';
+
 ;
 
-//funstion saving newMessage 
-function updatedMessage(id) {
-  const newMessage = prompt("Enter your NEW message:")
-  console.log(newMessage)
-
-};
-
-module.export = updatedMessage;
 
 const Post = ({post}) => {
   const user_id = window.localStorage.getItem("user_id");
@@ -50,6 +42,30 @@ const Post = ({post}) => {
     }
     // eslint-disable-next-line
   }, [])
+
+  const updatedMessage = async (id) => {
+    
+    const newMessage = prompt("Enter your NEW message:")
+    console.log(user_id)
+    console.log(id)
+    if (user_id === id){
+  
+    await fetch( '/posts/update', {
+          method: "put",
+          headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}`,
+        },
+        body: JSON.stringify({ _id: id, message: newMessage })
+      })
+      .then(response => {
+        response.json()
+        if(response.status === 201) {
+        } 
+      })
+    }
+    else{ console.log("Not your post")}
+  };
 
 
   const likePost = (id) => {

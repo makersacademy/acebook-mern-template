@@ -36,19 +36,18 @@ const PostsController = {
 
   Update: async (req, res) => {
       const newMessage = req.body.message
+      console.log(newMessage)
       const id = req.body._id
-      concole.log(req.body)
-      console.log(newMessage, id)
-      try{
-        await Post.findById({"_id":req.body._id}, (updatedMessage) => {
-          updatedMessage.message = newMessage;
-          updatedMessage.save();
-      })
-    }catch(err){
-        console.log(err)
-    }
-      res.status(201).json({ message: 'OK'})
-  },
+      console.log(req.body)
+      // console.log(newMessage, id)
+      await Post.findOneAndUpdate({_id:req.body._id}, { $set:{ message: newMessage  }}).exec(async (err,result)=> {
+        if (err) {
+          throw err;
+        }
+        const token = await TokenGenerator.jsonwebtoken(req.user_id)
+        res.status(201).json(result);
+    })
+    },
 
   LikePost: (req, res) => {
     Post.findByIdAndUpdate(req.body._id, {
