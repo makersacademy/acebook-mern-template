@@ -10,35 +10,37 @@ const Feed = ({ navigate }) => {
 
   const handleSubmit = async (event) => {
     event.preventDefault()
-    const data = new FormData()   // << learn more about FormData / used to upload data
-    data.append("file", image)
-    data.append("upload_preset", "acebook")
-    data.append("cloud_name", "dhocnl7tm")
-    await fetch("https://api.cloudinary.com/v1_1/dhocnl7tm/image/upload", {
-      method: "post",
-      body: data
-    })
-    .then(res => res.json())
-    .then(data => {
+    if (image === "") {
       fetch( '/posts', {
         method: 'post',
         headers: {
           'Authorization': `Bearer ${token}`,
           'Content-Type': 'application/json'
         },
-        body: JSON.stringify({ message: message, photo: data.url  })
+        body: JSON.stringify({ message: message, photo: "" })
       })
-      console.log(data.url)
-    })      
-      .then(response => {
-        if(response.status === 201) {
-          navigate('/posts')
-        } else {
-          navigate('/posts')
-        }
+    } else {
+      const data = new FormData()   // << learn more about FormData / used to upload data
+      data.append("file", image)
+      data.append("upload_preset", "acebook")
+      data.append("cloud_name", "dhocnl7tm")
+      await fetch("https://api.cloudinary.com/v1_1/dhocnl7tm/image/upload", {
+        method: "post",
+        body: data
       })
-
+      .then(res => res.json())
+      .then(data => {
+        fetch( '/posts', {
+          method: 'post',
+          headers: {
+            'Authorization': `Bearer ${token}`,
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({ message: message, photo: data.url  })
+        })
+      })
   }
+}
 
   useEffect(() => {
     if(token) {
@@ -55,6 +57,7 @@ const Feed = ({ navigate }) => {
           console.log(data.posts)
         })
     }
+    // eslint-disable-next-line
   }, [])
     
   const logout = () => {
