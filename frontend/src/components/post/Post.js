@@ -8,7 +8,7 @@ const Post = ({post}) => {
   const user_id = window.localStorage.getItem("user_id");
   const [token, setToken] = useState(window.localStorage.getItem("token"));
   const [posts, setPosts] = useState([]);
-
+  const [likes, setLikes] = useState(post.likes)
     useEffect(() => {
     if(token) {
       fetch("/posts", {
@@ -120,10 +120,10 @@ const Post = ({post}) => {
             :
             <article><p><img src={post.photo} alt="placeholder" className="postImg"></img></p></article>
             }
-            {post.likes.includes(user_id) ?
-            <p><button className="unlike-button" onClick={() => unLikePost(post._id)}>Unlike | {post.likes.length}</button></p>
+            {likes.includes(user_id) ?
+            <p><button className="unlike-button" onClick={() => unLikePost(post._id)}>Unlike | {likes.length}</button></p>
             :
-            <p><button className="like-button" onClick={() => likePost(post._id)}>Like | {post.likes.length}</button></p>
+            <p><button className="like-button" onClick={() => likePost(post._id)}>Like | {likes.length}</button></p>
             }
             <button onClick={() => {updatedMessage(post._id)}}>Edit Post</button>
             <form onSubmit={(e) => {
