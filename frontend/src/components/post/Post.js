@@ -116,8 +116,7 @@ const Post = ({post}) => {
         ?   
         <p><button className="unlike-button" onClick={() => unLikePost(post._id)}>Unlike | {post.likes.length}</button></p>
         :
-
-         <p><button className="like-button" onClick={() => likePost(post._id)}>Like | {post.likes.length}</button></p>
+        <p><button className="like-button" onClick={() => likePost(post._id)}>Like | {post.likes.length}</button></p>
         }
         <form onSubmit={(e) => {
           e.preventDefault()
@@ -125,13 +124,9 @@ const Post = ({post}) => {
         }}>
           <input type="text" placeholder="Leave a comment..."/>
         </form>
-            <p>Likes: {post.likes.length}</p>
-        </article>
-        <div id="example">    
-      </div>
-
         </div>
       </div>
+    </div>
     </div>
 
     
