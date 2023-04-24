@@ -1,6 +1,9 @@
 import React, {useState, useEffect } from 'react';
 import './Post.css';
 
+;
+
+
 const Post = ({post}) => {
   const user_id = window.localStorage.getItem("user_id");
     useEffect(() => {
@@ -40,6 +43,29 @@ const Post = ({post}) => {
     // eslint-disable-next-line
   }, [])
 
+  const updatedMessage = async (id) => {
+    
+    const newMessage = prompt("Enter your NEW message:")
+    console.log(user_id)
+    console.log(id)
+    if (user_id === id){
+  
+    await fetch( '/posts/update', {
+          method: "put",
+          headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}`,
+        },
+        body: JSON.stringify({ _id: id, message: newMessage })
+      })
+      .then(response => {
+        response.json()
+        if(response.status === 201) {
+        } 
+      })
+    }
+    else{ console.log("Not your post")}
+  };
 
   const likePost = (id) => {
     fetch('posts/like',{
@@ -94,10 +120,12 @@ const Post = ({post}) => {
   }
 // 
   return(
+
     <div id="homePage">
       <div className="flexbox">
         <div className="item">
           <div className='content'>
+
             {post.message === "" ? false
             :
             <article data-cy="post" className="postMsg" key={ post._id }>{ post.message }</article>
@@ -111,6 +139,7 @@ const Post = ({post}) => {
             :
             <p><button className="like-button" onClick={() => likePost(post._id)}>Like | {post.likes.length}</button></p>
             }
+            <button onClick={() => {updatedMessage(post._id)}}>Edit Post</button>
             <form onSubmit={(e) => {
               e.preventDefault()
               makeComment(e.target[0].value, post._id)
@@ -121,7 +150,12 @@ const Post = ({post}) => {
         </div>
       </div>
     </div> 
+
   )
 };
 
 export default Post;
+
+
+
+// 
