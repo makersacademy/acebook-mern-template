@@ -5,7 +5,7 @@ describe("Signing up", () => {
   it("calls the /users endpoint", () => {
     cy.mount(<SignUpForm navigate={navigate}/>)
 
-    cy.intercept('POST', '/users', { message: "OK" }).as("signUpRequest")
+    cy.intercept('POST', '/api/users', { message: "OK" }).as("signUpRequest")
 
     cy.get("#email").type("someone@example.com");
     cy.get("#password").type("password");
