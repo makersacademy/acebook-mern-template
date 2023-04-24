@@ -4,7 +4,7 @@ import styles from "./LandingPage.css";
 
 const LandingPage = ({ navigate }) => {
   return (
-    <section class="landing">
+    <section className="landing">
       <div className="header">ACEBOOK</div>
       <p className="text">
         Miaow then turn around and show you my bum have a lot of grump in

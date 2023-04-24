@@ -9,7 +9,7 @@ const Button = (props) => {
   };
 
   return (
-    <button class="button" onClick={link}>
+    <button className="button" onClick={link}>
       {text}
     </button>
   );
