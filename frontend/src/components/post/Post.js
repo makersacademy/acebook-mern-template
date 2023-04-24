@@ -1,9 +1,13 @@
 import React, {useState, useEffect } from 'react';
 import './Post.css';
 
+;
+
+
 const Post = ({post}) => {
   const user_id = window.localStorage.getItem("user_id");
-  const [likes, setLikes] = useState(post.likes)
+  const [token, setToken] = useState(window.localStorage.getItem("token"));
+  const [posts, setPosts] = useState([]);
 
     useEffect(() => {
     if(token) {
@@ -21,10 +25,30 @@ const Post = ({post}) => {
     }
     // eslint-disable-next-line
   }, [])
-  const [token, setToken] = useState(window.localStorage.getItem("token"));
-  // eslint-disable-next-line
-  const [posts, setPosts] = useState([]);
 
+  const updatedMessage = async (id) => {
+    
+    const newMessage = prompt("Enter your NEW message:")
+    console.log(user_id)
+    console.log(id)
+    if (user_id === id){
+  
+    await fetch( '/posts/update', {
+          method: "put",
+          headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}`,
+        },
+        body: JSON.stringify({ _id: id, message: newMessage })
+      })
+      .then(response => {
+        response.json()
+        if(response.status === 201) {
+        } 
+      })
+    }
+    else{ console.log("Not your post")}
+  };
 
   const likePost = (id) => {
     fetch('posts/like',{
@@ -63,7 +87,6 @@ const Post = ({post}) => {
     })
   };
 
-
   const makeComment = (text,postId) => {
     fetch('posts/comment', {
       method: "put",
@@ -81,49 +104,39 @@ const Post = ({post}) => {
     }).catch(err => {
       console.log(err)
     })
-  };
+  }
 
-  // const commentBox = () => {
-  //   navigate()
-  // }
-// 
+
   return(
-
     <div id="homePage">
       <div className="flexbox">
         <div className="item">
           <div className='content'>
-        {post.message === ""
-        ?
-        false
-        :
-        <article data-cy="post" className="postMsg" key={ post._id }>{ post.message }</article>
-        }       
-        {post.photo === ""
-        ?
-        false
-        :
-        <article><p><img src={post.photo} alt="placeholder" className="postImg"></img></p></article>
-        }
-        
-        {likes.includes(user_id)
-        ?   
-        <p><button className="unlike-button" onClick={() => unLikePost(post._id)}>Unlike | {likes.length}</button></p>
-        :
-        <p><button className="like-button" onClick={() => likePost(post._id)}>Like | {likes.length}</button></p>
-        }
-        <form onSubmit={(e) => {
-          e.preventDefault()
-          makeComment(e.target[0].value, post._id)
-        }}>
-          <input type="text" placeholder="Leave a comment..."/>
-        </form>
+            {post.message === "" ? false
+            :
+            <article data-cy="post" className="postMsg" key={ post._id }>{ post.message }</article>
+            }       
+            {post.photo === "" ? false
+            :
+            <article><p><img src={post.photo} alt="placeholder" className="postImg"></img></p></article>
+            }
+            {post.likes.includes(user_id) ?
+            <p><button className="unlike-button" onClick={() => unLikePost(post._id)}>Unlike | {post.likes.length}</button></p>
+            :
+            <p><button className="like-button" onClick={() => likePost(post._id)}>Like | {post.likes.length}</button></p>
+            }
+            <button onClick={() => {updatedMessage(post._id)}}>Edit Post</button>
+            <form onSubmit={(e) => {
+              e.preventDefault()
+              makeComment(e.target[0].value, post._id)
+            }}>
+              <input type="text" placeholder="Leave a comment..."/>
+            </form>
+          </div>
         </div>
       </div>
-    </div>
-    </div>
+    </div> 
 
-    
   )
 };
 

@@ -19,8 +19,12 @@ const App = () => {
           <Route path='/profile'  element={<Profile navigate={ useNavigate() }/>}/>
           <Route path='/login'  element={<LoginForm  navigate={ useNavigate() }/>}/>
           <Route path='/signup' element={<SignUpForm navigate={ useNavigate() }/>}/>
+          <Route path='/signup' element={<SignUpForm navigate={ useNavigate() }/>}/>
         </Routes>
     );
 }
 
 export default App;
+
+//API: JWT_SECRET=SUPER_SECRET npm run start:test
+//FRONTEND: JWT_SECRET=SUPER_SECRET npm run start
