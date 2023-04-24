@@ -92,21 +92,32 @@ const Post = ({post}) => {
       console.log(err)
     })
   }
-
 // 
   return(
 
-
     <div id="homePage">
-      <div class="postWrap">
-        <div class="textWrap">
-        <article data-cy="post" key={ post._id }>{post.message}
-        <br/>
+      <div className="flexbox">
+        <div className="item">
+          <div className='content'>
+        {post.message === ""
+        ?
+        false
+        :
+        <article data-cy="post" className="postMsg" key={ post._id }>{ post.message }</article>
+        }       
+        {post.photo === ""
+        ?
+        false
+        :
+        <article><p><img src={post.photo} alt="placeholder" className="postImg"></img></p></article>
+        }
+        
         {post.likes.includes(user_id)
         ?   
-        <button class="like-button" onClick={() => unLikePost(post._id)}>Unlike</button>
+        <p><button className="unlike-button" onClick={() => unLikePost(post._id)}>Unlike | {post.likes.length}</button></p>
         :
-        <button class="unlike-button" onClick={() => likePost(post._id)}>Like</button>
+
+         <p><button className="like-button" onClick={() => likePost(post._id)}>Like | {post.likes.length}</button></p>
         }
         <form onSubmit={(e) => {
           e.preventDefault()
@@ -118,6 +129,7 @@ const Post = ({post}) => {
         </article>
         <div id="example">    
       </div>
+
         </div>
       </div>
     </div>

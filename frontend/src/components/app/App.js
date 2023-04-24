@@ -4,6 +4,7 @@ import SignUpForm from '../user/SignUpForm'
 import React, { useState, useEffect, createContext, useReducer, useContext } from 'react';
 import Feed from '../feed/Feed'
 import HomePage from '../home/Home'
+import Profile from '../profile/Profile'
 import {
   useNavigate,
   Routes,
@@ -15,6 +16,7 @@ const App = () => {
         <Routes>
           <Route path='/' element={<HomePage navigate={ useNavigate() }/>}/>
           <Route path='/posts'  element={<Feed navigate={ useNavigate() }/>}/>
+          <Route path='/profile'  element={<Profile navigate={ useNavigate() }/>}/>
           <Route path='/login'  element={<LoginForm  navigate={ useNavigate() }/>}/>
           <Route path='/signup' element={<SignUpForm navigate={ useNavigate() }/>}/>
         </Routes>
