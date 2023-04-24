@@ -71,6 +71,26 @@ const Post = ({post}) => {
     .then(result => {
       console.log(result)
     })
+  };
+
+
+  const makeComment = (text,postId) => {
+    fetch('posts/comment', {
+      method: "put",
+      headers: {
+        "Content-Type":"application/json",
+        "Authorization":`Bearer ${token}`
+      },
+      body:JSON.stringify({
+        _id: postId,
+        text
+      })
+    }).then(res=>res.json())
+    .then(result=>{
+      console.log(result)
+    }).catch(err => {
+      console.log(err)
+    })
   }
 // 
   return(
@@ -96,10 +116,20 @@ const Post = ({post}) => {
         ?   
         <p><button className="unlike-button" onClick={() => unLikePost(post._id)}>Unlike | {post.likes.length}</button></p>
         :
-        <p><button className="like-button" onClick={() => likePost(post._id)}>Like | {post.likes.length}</button></p>
+
+         <p><button className="like-button" onClick={() => likePost(post._id)}>Like | {post.likes.length}</button></p>
         }
-        
-        </div>
+        <form onSubmit={(e) => {
+          e.preventDefault()
+          makeComment(e.target[0].value, post._id)
+        }}>
+          <input type="text" placeholder="Leave a comment..."/>
+        </form>
+            <p>Likes: {post.likes.length}</p>
+        </article>
+        <div id="example">    
+      </div>
+
         </div>
       </div>
     </div>

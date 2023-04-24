@@ -2,6 +2,7 @@ const { ObjectId } = require("mongodb");
 const mongoose = require("mongoose");
 
 const PostSchema = new mongoose.Schema({
+
   message: {
     type: String
   },
@@ -12,7 +13,11 @@ const PostSchema = new mongoose.Schema({
   photo: {
     type: String,
     default: ""
-  }
+  },
+   comments:[{
+    text: String,
+    postedBy: {type:ObjectId, ref:"User"}
+      }]
 });
 
 const Post = mongoose.model("Post", PostSchema);

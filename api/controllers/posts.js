@@ -59,8 +59,26 @@ const PostsController = {
       const token = await TokenGenerator.jsonwebtoken(req.user_id)
       res.status(201).json(result);
   })
-  }
+  },
 
+  CommentPost: (req, res) => {
+      const comment = {
+        text: req.body.text,
+        postedBy: req.user_id
+      }
+    Post.findByIdAndUpdate(req.body._id, {
+      $push:{ comments: comment }
+    },{
+      new:true
+    }).populate("comments.postedBy", "_id")
+    .exec(async (err,result) => {
+      if (err) {
+        throw err;
+      }
+      const token = await TokenGenerator.jsonwebtoken(req.user_id)
+      res.status(201).json(result);
+  })
+  },
   // Update: (req, res) => {
   //   Post.updateOne(
   //     {_id: req.body.id}, { $set: {"likeCount": likes}} 
