@@ -30,22 +30,20 @@ const HomePage = ({navigate}) => {
       }
 
   return (
-    <body>
       <div id="homePage">
-      <div class="textWrap">
-            <div class="heading">
-              <img src="https://i.imgur.com/kjtUiie.png" class="home-img" alt="Acebook"></img>
+      <div className="textWrap">
+            <div className="heading">
+              <img src="https://i.imgur.com/kjtUiie.png" className="home-img" alt="Acebook"></img>
             </div>
-            <p class="catchline">The worst Facebook clone there ever was...</p>
+            <p className="catchline">The worst Facebook clone there ever was...</p>
         </div>
-        <div class="formWrap">
+        <div className="formWrap">
           <form onSubmit={handleSubmit}>
-            <button id="signup" type='text' class='signupButton' onClick={signup}>Sign Up</button>
-            <button id="login" type='text' class='loginButton' onClick={login}>Log In</button>
+            <button id="signup" type='text' className='signupButton' onClick={signup}>Sign Up</button>
+            <button id="login" type='text' className='loginButton' onClick={login}>Log In</button>
           </form>
         </div>
       </div>
-    </body>
   );
 }
 

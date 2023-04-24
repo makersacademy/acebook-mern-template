@@ -1,0 +1,121 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap');
+body {
+    background-color: rgb(239,242,245);
+    font-family: 'Roboto', sans-serif;
+
+}
+
+.like-button {
+    cursor: pointer;
+    background: #3498db;
+    background-image: linear-gradient(to bottom, #3498db, #2980b9);
+    border-radius: 15px;
+    border-width: 1px;
+    font-family: Arial;
+    color: #ffffff;
+    font-size: 12px;
+    padding: 5px 10px 5px 10px;
+    text-decoration: none;
+}
+
+.like-button:hover {
+    cursor: pointer;
+    background: #3cb0fd;
+    background-image: linear-gradient(to bottom, #3cb0fd, #3498db);
+    border-radius: 15px;
+    border-width: 1px;
+    font-family: Arial;
+    color: #ffffff;
+    font-size: 12px;
+    padding: 5px 10px 5px 10px;
+    text-decoration: none;
+}
+
+.unlike-button {
+    cursor: pointer;
+    background: #bf3f47;
+    background-image: linear-gradient(to bottom, #ba4343, #ca3333);
+    border-radius: 15px;    
+    border-width: 1px;
+    font-family: Arial;
+    color: #ffffff;
+    font-size: 12px;
+    padding: 5px 10px 5px 10px;
+    text-decoration: none;
+}
+
+.unlike-button:hover {
+    cursor: pointer;
+    background: #c55f66;
+    background-image: linear-gradient(to bottom, #c45e5e, #ca3a3a);
+    border-radius: 15px;
+    border-width: 1px;
+    font-family: Arial;
+    color: #ffffff;
+    font-size: 12px;
+    padding: 5px 10px 5px 10px;
+    text-decoration: none;
+}
+
+
+
+.postImg {
+    width:100%;
+    max-width:200px;
+    border-radius: 5px;
+    transition:transform 0.25s ease;
+}
+
+.postImg:hover {
+    -webkit-transform:scale(1.75); /* or some other value */
+    transform:scale(1.75);
+}
+
+.flexbox {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+    box-sizing: content-box;
+    margin: -15px 0px;
+}
+
+.item {
+    box-sizing: content-box;
+    width: 100%;
+    padding: -40px 10px;
+}   
+
+.content {
+    width: 675px;
+    color: #242424;
+    background-color: #f7f6f6;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    border-radius: 5px;
+    padding: 5% 2% 5% 2%;
+    font-weight: 600;
+    text-align: center;
+    box-sizing: border-box;
+    height: 100%;
+    padding: 22px;
+
+}
+
+.postMsg {
+    width: 630px;
+    color: #242424;
+    background-color: #fff;
+    box-shadow: 0 2px 3px 0 rgba(0, 0, 0, 0.2), 0 3px 10px 0 rgba(0, 0, 0, 0.19);
+    border-radius: 5px;
+    font-weight: 600;
+    text-align: center;
+    box-sizing: border-box;
+    padding: 25px; 
+}
+
+.homePage {
+    margin-top: 15px;
+}
+
+
+

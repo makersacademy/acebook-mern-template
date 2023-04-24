@@ -34,24 +34,69 @@ const PostsController = {
       
   },
 
-    
-Update: async (req, res) => {
-    const newMessage = req.body.newMessage
-    const id = req.body._id
-    console.log(newMessage, id)
-    try{
-      await Post.findById({"_id":req.body._id}, (updatedMessage) => {
-        updatedMessage.message = newMessage;
-        updatedMessage.save();
-    })
-  }catch(err){
-      console.log(err)
-  }
-    res.status(201).json({ message: 'OK'})
-  }
+  Update: async (req, res) => {
+      const newMessage = req.body.message
+      const id = req.body._id
+      concole.log(req.body)
+      console.log(newMessage, id)
+      try{
+        await Post.findById({"_id":req.body._id}, (updatedMessage) => {
+          updatedMessage.message = newMessage;
+          updatedMessage.save();
+      })
+    }catch(err){
+        console.log(err)
+    }
+      res.status(201).json({ message: 'OK'})
+  },
+
+  LikePost: (req, res) => {
+    Post.findByIdAndUpdate(req.body._id, {
+      $push: { likes: req.user_id }
+    },{
+      new:true
+    }).exec(async (err,result)=> {
+      if (err) {
+        throw err;
+      }
+      const token = await TokenGenerator.jsonwebtoken(req.user_id)
+      res.status(201).json(result);
+  })
+  },
+
+  UnlikePost: (req, res) => {
+    Post.findByIdAndUpdate(req.body._id, {
+      $pull:{ likes: req.user_id }
+    },{
+      new:true
+    }).exec(async (err,result) => {
+      if (err) {
+        throw err;
+      }
+      const token = await TokenGenerator.jsonwebtoken(req.user_id)
+      res.status(201).json(result);
+  })
+  },
+
+  CommentPost: (req, res) => {
+      const comment = {
+        text: req.body.text,
+        postedBy: req.user_id
+      }
+    Post.findByIdAndUpdate(req.body._id, {
+      $push:{ comments: comment }
+    },{
+      new:true
+    }).populate("comments.postedBy", "_id")
+    .exec(async (err,result) => {
+      if (err) {
+        throw err;
+      }
+      const token = await TokenGenerator.jsonwebtoken(req.user_id)
+      res.status(201).json(result);
+  })
+  },
 
 };
 
-
-// {_id: req.body.id}, { $set: {"likeCount": likes}} 
 module.exports = PostsController;
