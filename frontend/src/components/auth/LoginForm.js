@@ -39,23 +39,21 @@ const LogInForm = ({ navigate }) => {
 
 
     return (
-      <body>
       <div id="homePage">
-      <div class="textWrap">
-            <div class="heading">
-              <img src="https://i.imgur.com/kjtUiie.png" class="home-img" alt="Acebook"></img>
+      <div className="textWrap">
+            <div className="heading">
+              <img src="https://i.imgur.com/kjtUiie.png" className="home-img" alt="Acebook"></img>
             </div>
-            <p class="catchline">The worst Facebook clone there ever was...</p>
+            <p className="catchline">The worst Facebook clone there ever was...</p>
         </div>
-        <div class="formWrap">
+        <div className="formWrap">
           <form onSubmit={handleSubmit}>
-            <input placeholder='Email' id="email" class='textEntry' type='text' value={ email } onChange={handleEmailChange} />
-            <input placeholder='Password' id="password" class='textEntry' type='password' value={ password } onChange={handlePasswordChange} />
-            <input id='submit' type="submit" class="loginButton" value="Log In" />
+            <input placeholder='Email' id="email" className='textEntry' type='text' value={ email } onChange={handleEmailChange} />
+            <input placeholder='Password' id="password" className='textEntry' type='password' value={ password } onChange={handlePasswordChange} />
+            <input id='submit' type="submit" className="loginButton" value="Log In" />
           </form>
         </div>
       </div>
-      </body>
     );
 }
 

@@ -1,4 +1,52 @@
-@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap');
-.postTitle {
-    font-family: 'Roboto', sans-serif;
+
+#submit {
+    cursor: pointer;
+    background: #3498db;
+    background-image: linear-gradient(to bottom, #5685ae, #2980b9);
+    border-radius: 8px;
+    border-width: 1px;
+    font-family: Arial;
+    color: #ffffff;
+    font-size: 12px;
+    padding: 5px 10px 5px 10px;
+    text-decoration: none;
 }
+
+#submit:hover {
+    cursor: pointer;
+    background: #41974f;
+    background-image: linear-gradient(to bottom, #5685ae, #6a8f99);
+    border-radius: 8px;
+    font-family: Arial;
+    color: #ffffff;
+    font-size: 12px;
+    padding: 5px 10px 5px 10px;
+    text-decoration: none;
+}
+
+input[type="file"] {
+    display: none;
+}
+
+.custom-file-upload {
+    border: 1px solid #000000;
+    background-color: #5685ae;
+    border-radius: 8px;
+    border-width: 1px;
+    font-size: 12px;
+    padding: 6px 12px;
+    cursor: pointer;
+    color: #fff;
+}
+
+.message
+{
+    height: 100px;
+    width: 375px;
+    font-size: 12pt;
+    resize: none;
+    font-family: Arial;
+}
+
+
+
