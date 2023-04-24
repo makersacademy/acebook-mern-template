@@ -33,7 +33,6 @@ const Feed = ({ navigate }) => {
       .then(response => {
         if(response.status === 201) {
           navigate('/posts')
-          console.log(`URL sent to db: ${url}`)
         } else {
           navigate('/posts')
         }
