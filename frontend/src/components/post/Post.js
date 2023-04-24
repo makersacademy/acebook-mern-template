@@ -3,6 +3,8 @@ import './Post.css';
 
 const Post = ({post}) => {
   const user_id = window.localStorage.getItem("user_id");
+  const [likes, setLikes] = useState(post.likes)
+
     useEffect(() => {
     if(token) {
       fetch("/posts", {
@@ -23,23 +25,6 @@ const Post = ({post}) => {
   // eslint-disable-next-line
   const [posts, setPosts] = useState([]);
 
-  useEffect(() => {
-    if(token) {
-      fetch("/posts", {
-        headers: {
-          'Authorization': `Bearer ${token}`
-        }
-      })
-        .then(response => response.json())
-        .then(async data => {
-          window.localStorage.setItem("token", data.token)
-          setToken(window.localStorage.getItem("token"))
-          setPosts(data.posts);
-        })
-    }
-    // eslint-disable-next-line
-  }, [])
-
 
   const likePost = (id) => {
     fetch('posts/like',{
@@ -54,6 +39,7 @@ const Post = ({post}) => {
     }).then(res => res.json())
     .then(result => {
       console.log(result)
+      setLikes(likes.concat(user_id))
     })
   };
 
@@ -70,6 +56,10 @@ const Post = ({post}) => {
     }).then(res => res.json())
     .then(result => {
       console.log(result)
+      let unLike = likes.slice()
+      unLike.splice((likes.indexOf(user_id)),1 )
+      setLikes(unLike)
+      console.log("this is ", likes)
     })
   };
 
@@ -91,7 +81,11 @@ const Post = ({post}) => {
     }).catch(err => {
       console.log(err)
     })
-  }
+  };
+
+  // const commentBox = () => {
+  //   navigate()
+  // }
 // 
   return(
 
@@ -112,11 +106,11 @@ const Post = ({post}) => {
         <article><p><img src={post.photo} alt="placeholder" className="postImg"></img></p></article>
         }
         
-        {post.likes.includes(user_id)
+        {likes.includes(user_id)
         ?   
-        <p><button className="unlike-button" onClick={() => unLikePost(post._id)}>Unlike | {post.likes.length}</button></p>
+        <p><button className="unlike-button" onClick={() => unLikePost(post._id)}>Unlike | {likes.length}</button></p>
         :
-        <p><button className="like-button" onClick={() => likePost(post._id)}>Like | {post.likes.length}</button></p>
+        <p><button className="like-button" onClick={() => likePost(post._id)}>Like | {likes.length}</button></p>
         }
         <form onSubmit={(e) => {
           e.preventDefault()
