@@ -63,6 +63,7 @@ const Post = ({post}) => {
     }).then(res => res.json())
     .then(result => {
       console.log(result)
+      setLikes(likes.concat(user_id))
     })
   };
 
@@ -79,6 +80,10 @@ const Post = ({post}) => {
     }).then(res => res.json())
     .then(result => {
       console.log(result)
+      let unLike = likes.slice()
+      unLike.splice((likes.indexOf(user_id)),1 )
+      setLikes(unLike)
+      console.log("this is ", likes)
     })
   };
 
@@ -101,12 +106,12 @@ const Post = ({post}) => {
     })
   }
 
+
   return(
     <div id="homePage">
       <div className="flexbox">
         <div className="item">
           <div className='content'>
-
             {post.message === "" ? false
             :
             <article data-cy="post" className="postMsg" key={ post._id }>{ post.message }</article>
