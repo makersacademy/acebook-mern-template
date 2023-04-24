@@ -2,8 +2,6 @@ const { ObjectId } = require("mongodb");
 const mongoose = require("mongoose");
 
 const PostSchema = new mongoose.Schema({
-  // message: String,
-  // likeCount: Number
 
   message: {
     type: String
@@ -16,6 +14,7 @@ const PostSchema = new mongoose.Schema({
     type: String,
     default: ""
   },
+
   comments:[{
     text: String,
     postedBy: {type:ObjectId, ref:"User"}

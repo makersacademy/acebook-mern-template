@@ -67,7 +67,6 @@ const Post = ({post}) => {
     else{ console.log("Not your post")}
   };
 
-
   const likePost = (id) => {
     fetch('posts/like',{
       method:"put",
@@ -126,38 +125,32 @@ const Post = ({post}) => {
       <div className="flexbox">
         <div className="item">
           <div className='content'>
-        {post.message === ""
-        ?
-        false
-        :
-        <article data-cy="post" className="postMsg" key={ post._id }>{ post.message }</article>
-        }       
-        {post.photo === ""
-        ?
-        false
-        :
-        <article><p><img src={post.photo} alt="placeholder" className="postImg"></img></p></article>
-        }
-        
-        {post.likes.includes(user_id)
-        ?   
-        <p><button className="unlike-button" onClick={() => unLikePost(post._id)}>Unlike | {post.likes.length}</button></p>
-        :
-        <p><button className="like-button" onClick={() => likePost(post._id)}>Like | {post.likes.length}</button></p>
-        }
-        <button onClick={() => {updatedMessage(post._id)}}>Edit Post</button>
-        <form onSubmit={(e) => {
-          e.preventDefault()
-          makeComment(e.target[0].value, post._id)
-        }}>
-          <input type="text" placeholder="Leave a comment..."/>
-        </form>
+
+            {post.message === "" ? false
+            :
+            <article data-cy="post" className="postMsg" key={ post._id }>{ post.message }</article>
+            }       
+            {post.photo === "" ? false
+            :
+            <article><p><img src={post.photo} alt="placeholder" className="postImg"></img></p></article>
+            }
+            {post.likes.includes(user_id) ?
+            <p><button className="unlike-button" onClick={() => unLikePost(post._id)}>Unlike | {post.likes.length}</button></p>
+            :
+            <p><button className="like-button" onClick={() => likePost(post._id)}>Like | {post.likes.length}</button></p>
+            }
+            <button onClick={() => {updatedMessage(post._id)}}>Edit Post</button>
+            <form onSubmit={(e) => {
+              e.preventDefault()
+              makeComment(e.target[0].value, post._id)
+            }}>
+              <input type="text" placeholder="Leave a comment..."/>
+            </form>
+          </div>
         </div>
       </div>
-    </div>
-    </div>
+    </div> 
 
-    
   )
 };
 

@@ -11,5 +11,4 @@ router.put("/unlike", PostsController.UnlikePost);
 router.put("/comment", PostsController.CommentPost)
 //router.delete("/", PostsController.Delete);
 
-
 module.exports = router;
