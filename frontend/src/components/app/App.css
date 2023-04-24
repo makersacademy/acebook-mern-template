@@ -1,0 +1,5 @@
+.main {
+  width: 100vw;
+  height: 100vh;
+  background: linear-gradient(rgba(51, 96, 255, 0.26) 52%, #fff 0%);
+}

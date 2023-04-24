@@ -1,14 +1,21 @@
 body {
   margin: 0;
-  font-family: 'Helvetica Neue',
-    sans-serif;
+  padding: 0;
+  border: 0;
+  box-sizing: border-box;
+  font-family: "Helvetica Neue", sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   color: #373737;
-  background-color: #fff;
+  /* background: linear-gradient(rgba(51, 96, 255, 0.26) 52%, #fff 0%); */
 }
 
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
 }
