@@ -15,7 +15,7 @@ const LandingPage = ({ navigate }) => {
           d="M0,96L80,85.3C160,75,320,53,480,64C640,75,800,117,960,117.3C1120,117,1280,75,1360,53.3L1440,32L1440,0L1360,0C1280,0,1120,0,960,0C800,0,640,0,480,0C320,0,160,0,80,0L0,0Z"></path>
       </svg>
       <div className="hero">
-        <div class="header">Acebook</div>
+        <div class="header">ACEBOOK</div>
         <p className="text">
           Miaow then turn around and show you my bum have a lot of grump in
           yourself because you can't forget to be grumpy and not be like king

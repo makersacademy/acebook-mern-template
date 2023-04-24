@@ -41,4 +41,6 @@
 
 .text {
   width: 60%;
+  font-size: 1.25rem;
+  line-height: 1.5rem;
 }
