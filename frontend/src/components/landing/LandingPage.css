@@ -1,7 +1,8 @@
 .landing {
   width: 100vw;
   height: 100vh;
-  background: linear-gradient(rgba(51, 96, 255, 0.26) 51%, #fff 0%);
+  background: linear-gradient(rgba(51, 96, 255, 0.26) 52%, #fff 0%);
+
 }
 
 .box {
@@ -13,7 +14,7 @@
 .svg {
   width: 100%;
   position: relative;
-  top: 51%;
+  top: 52%;
   /* height: 100%; */
 }
 
