@@ -7,6 +7,9 @@ const Feed = ({ navigate }) => {
   const [token, setToken] = useState(window.localStorage.getItem("token"));
   const [message, setMessage] = useState("")
   const [image, setImg] = useState("")
+  const user_id = window.localStorage.getItem("user_id");
+
+  
 
   const handleSubmit = async (event) => {
     event.preventDefault()
@@ -17,7 +20,14 @@ const Feed = ({ navigate }) => {
           'Authorization': `Bearer ${token}`,
           'Content-Type': 'application/json'
         },
-        body: JSON.stringify({ message: message, photo: "" })
+        body: JSON.stringify({ message: message, photo: "", postedBy: user_id})
+      })
+      .then(res => res.json())
+      .then(data => {
+        let postArr = data.post
+        let pushing = posts.concat(postArr)
+        console.log('this is:', postArr)
+        setPosts(pushing)
       })
     } else {
       const data = new FormData()   // << learn more about FormData / used to upload data
@@ -36,7 +46,14 @@ const Feed = ({ navigate }) => {
             'Authorization': `Bearer ${token}`,
             'Content-Type': 'application/json'
           },
-          body: JSON.stringify({ message: message, photo: data.url  })
+          body: JSON.stringify({message: message, photo: data.url, postedBy: user_id })
+        })
+        .then(res => res.json())
+        .then(data => {
+        let postArr = data.post
+        let pushing = posts.concat(postArr)
+        console.log('this is:', postArr)
+        setPosts(pushing)
         })
       })
   }
