@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import Post from '../post/Post'
-import Button from '../button/Button'
+import RouteButton from '../routeButton/RouteButton'
 
 const Feed = ({ navigate }) => {
   const [posts, setPosts] = useState([]);
@@ -32,7 +32,7 @@ const Feed = ({ navigate }) => {
       return(
         <>
           <h2>Hi Jay, What's on your mind?</h2>
-          <Button navigate={navigate} routePath={'/posts/new'} text={'Post Something'}/>
+          <RouteButton navigate={navigate} routePath={'/posts/new'} text={'Post Something'}/>
 
           <div id='feed' role="feed">
               {posts.map(

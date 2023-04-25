@@ -1,4 +1,4 @@
-.button {
+.route-button {
   width: 12rem;
   height: 4rem;
   background: #3360ff;
@@ -11,7 +11,7 @@
   cursor: pointer;
 }
 
-.button:hover {
+.route-button:hover {
   transform: scale(0.96);
   box-shadow: 0px 5px 5px rgba(51, 96, 255, 0.65);
   font-size: 1.95rem;

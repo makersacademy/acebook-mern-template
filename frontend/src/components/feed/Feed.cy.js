@@ -29,7 +29,7 @@ describe("Feed", () => {
   });
   it("should have a clickable 'create post' button", () => {
     cy.mount(<Feed navigate={navigate} />);
-    cy.get(".button")
+    cy.get(".route-button")
       .should("contain.text", "Post Something")
       .should("be.visible")
       .should("be.enabled");

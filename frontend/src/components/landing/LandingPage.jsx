@@ -1,5 +1,5 @@
 import React from "react";
-import Button from "../button/Button";
+import RouteButton from "../routeButton/RouteButton";
 import styles from "./LandingPage.css";
 
 const LandingPage = ({ navigate }) => {
@@ -14,7 +14,7 @@ const LandingPage = ({ navigate }) => {
         with butt lick butt fart rainbows until owner yells pee in litter box
         hiss at cats so no, you can't close the door
       </p>
-      <Button navigate={navigate} routePath={"/signup"} text={"Sign up"} />
+      <RouteButton navigate={navigate} routePath={"/signup"} text={"Sign up"} />
     </section>
   );
 };
