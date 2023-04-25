@@ -22,8 +22,6 @@ a {
 /*
 STYLE ADVICE FOR NEW COMPONENTS
 
---
-
 Dimensions for new full page components - 
 
 width: 100%;
@@ -32,6 +30,17 @@ min-height: 100%
 Leave background as transparent unless otherwise needed.
 
 Flexbox is probably best to center/justify simple pages.
+
+CLASS NAMES
+
+To avoid repeating class names across different components,
+try using the following template:
+
+.[component]-[element]
+
+e.g. landing-text
+
+DEFAULT STYLES
 
 Default black is: #373737
 Default blue is: #3360ff
