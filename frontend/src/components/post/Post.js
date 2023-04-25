@@ -31,7 +31,6 @@ const Post = ({post}) => {
     const newMessage = prompt("Enter your NEW message:")
     console.log(user_id)
     console.log(id)
-    if (user_id === id){
   
     await fetch( '/posts/update', {
           method: "put",
@@ -46,8 +45,7 @@ const Post = ({post}) => {
         if(response.status === 201) {
         } 
       })
-    }
-    else{ console.log("Not your post")}
+
   };
 
   const likePost = (id) => {
@@ -106,6 +104,27 @@ const Post = ({post}) => {
     })
   }
 
+  const deletePost = (id) => {
+    const post_id = id
+    console.log(post_id)
+    fetch('posts/delete', {
+      method: "delete",
+      headers: {
+        "Content-Type":"application/json",
+        "Authorization":`Bearer ${token}`
+      },
+      body:JSON.stringify({
+        _id: post_id
+      })
+    }).then(res=>res.json())
+    .then(result=>{
+      console.log(result)
+    }).catch(err => {
+      console.log(err)
+    })
+
+  };
+
 
   return(
     <div id="homePage">
@@ -125,7 +144,12 @@ const Post = ({post}) => {
             :
             <p><button className="like-button" onClick={() => likePost(post._id)}>Like | {likes.length}</button></p>
             }
+            {post.postedBy.includes(user_id) ?
             <button onClick={() => {updatedMessage(post._id)}}>Edit Post</button>
+            : "" }
+            {post.postedBy.includes(user_id) ?
+            <button onClick={() => {deletePost(post._id)}}>Delete Post</button>
+            : "" }
             <form onSubmit={(e) => {
               e.preventDefault()
               makeComment(e.target[0].value, post._id)

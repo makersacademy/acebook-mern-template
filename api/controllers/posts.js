@@ -14,6 +14,7 @@ const PostsController = {
   },
   Create: (req, res) => {
     const post = new Post(req.body);
+    console.log(req.body)
     post.save(async (err) => { // .save mongoose method
       if (err) {
         throw err;
@@ -23,16 +24,16 @@ const PostsController = {
       res.status(201).json({ message: 'OK', token: token });
     });
   },
-  Delete: (req, res) => {
-    Post.deleteOne({"_id": req.body.id }, async (err) => {
+  Delete: async (req, res) => {
+    console.log(req.body)
+    await Post.deleteOne({_id:req.body._id}).exec(async (err,result)=> {
         if (err) {
           throw err;
         }
         const token = await TokenGenerator.jsonwebtoken(req.user_id)
-        res.status(201).json({ message: 'OK', token: token });
-    });
-      
-  },
+        res.status(201).json(result);
+    })
+    },
 
   Update: async (req, res) => {
       const newMessage = req.body.message
