@@ -13,8 +13,7 @@ const SubmitButton = (props) => {
       className="submit-button"
       onClick={link}
       type="submit"
-      value={text}
-      form={form}></button>
+      form={form}>{text}</button>
   );
 };
 

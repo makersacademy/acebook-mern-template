@@ -8,8 +8,10 @@ describe("Feed", () => {
 
   it("should have a clickable 'add to feed' button", () => {
     cy.mount(<NewPost navigate={navigate} />);
-    cy.get(".submit-button").should("be.visible").should("be.enabled");
-    cy.get(".submit-button").invoke("val").should("eq", "Add to Feed");
+    cy.get(".submit-button")
+      .should("be.visible")
+      .should("be.enabled")
+      .should("contain.text", "Add to Feed");
   });
 
   it("should have a form for submitting written text", () => {
