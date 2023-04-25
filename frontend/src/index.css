@@ -1,13 +1,53 @@
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
+  padding: 0;
+  border: 0;
+  box-sizing: border-box;
+  font-family: "Helvetica Neue", sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  color: #373737;
 }
 
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+/*
+STYLE ADVICE FOR NEW COMPONENTS
+
+Dimensions for new full page components - 
+
+width: 100%;
+min-height: 100%
+
+Leave background as transparent unless otherwise needed.
+
+Flexbox is probably best to center/justify simple pages.
+
+CLASS NAMES
+
+To avoid repeating class names across different components,
+try using the following template:
+
+.[component]-[element]
+
+e.g. landing-text
+
+DEFAULT STYLES
+
+Default black is: #373737
+Default blue is: #3360ff
+Transparent blue opacity is: 26%
+
+Default font is: "Helvetica Neue", sans-serif;
+Titles are: Tahoma, Geneva, Verdana, sans-serif;
+Landing font size is: 1.25rem
+Landing line height is: 1.5rem
+*/
