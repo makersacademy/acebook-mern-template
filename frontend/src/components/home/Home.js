@@ -30,15 +30,15 @@ const HomePage = ({navigate}) => {
       }
 
   return (
-      <div id="homePage">
-      <div className="textWrap">
-            <div className="heading">
+      <div id="home-page">
+      <div className="hp-wrap">
+        </div>
+        <div className="hp-form-div">
+        <div className="heading">
               <img src="https://i.imgur.com/kjtUiie.png" className="home-img" alt="Acebook"></img>
             </div>
-            <p className="catchline">The worst Facebook clone there ever was...</p>
-        </div>
-        <div className="formWrap">
-          <form onSubmit={handleSubmit}>
+            <p className="hp-text">Welcome to the worst FB clone... ever</p>
+          <form onSubmit={handleSubmit} className="hp-form">
             <button id="signup" type='text' className='signupButton' onClick={signup}>Sign Up</button>
             <button id="login" type='text' className='loginButton' onClick={login}>Log In</button>
           </form>

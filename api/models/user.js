@@ -8,21 +8,21 @@ const UserSchema = new mongoose.Schema({
   password: { 
     type: String, 
     required: true 
+  },
+  profilePic: {
+    type: String,
+    default: "https://res.cloudinary.com/dhocnl7tm/image/upload/v1682355179/hugk4xv9xqei28pwy4ay.png"
+  },
+  firstName: {
+    type: String
+  },
+  lastName: {
+    type: String
+  },
+  username: {
+    type: String,
+    default: "Acebook User"
   }
-  // profilePic: {
-  //   type: String,
-  //   default: ""
-  // },
-  // firstName: {
-  //   type: String
-  // },
-  // lastName: {
-  //   type: String
-  // },
-  // username: {
-  //   type: String,
-  //   default: "Acebook User"
-  // }
 });
 
 const User = mongoose.model("User", UserSchema);
