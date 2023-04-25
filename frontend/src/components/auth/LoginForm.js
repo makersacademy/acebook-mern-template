@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import './LoginForm.css'
 
 const LogInForm = ({ navigate }) => {
   const [email, setEmail] = useState("");
@@ -18,10 +19,12 @@ const LogInForm = ({ navigate }) => {
     if(response.status !== 201) {
       console.log("yay")
       navigate('/login')
+
     } else {
       console.log("oop")
       let data = await response.json()
       window.localStorage.setItem("token", data.token)
+      window.localStorage.setItem("user_id", data.user_id)
       navigate('/posts');
     }
   }
@@ -36,11 +39,21 @@ const LogInForm = ({ navigate }) => {
 
 
     return (
-      <form onSubmit={handleSubmit}>
-        <input placeholder='Email' id="email" type='text' value={ email } onChange={handleEmailChange} />
-        <input placeholder='Password' id="password" type='password' value={ password } onChange={handlePasswordChange} />
-        <input role='submit-button' id='submit' type="submit" value="Submit" />
-      </form>
+      <div id="homePage">
+      <div className="textWrap">
+            <div className="heading">
+              <img src="https://i.imgur.com/kjtUiie.png" className="home-img" alt="Acebook"></img>
+            </div>
+            <p className="catchline">The worst Facebook clone there ever was...</p>
+        </div>
+        <div className="formWrap">
+          <form onSubmit={handleSubmit}>
+            <input placeholder='Email' id="email" className='textEntry' type='text' value={ email } onChange={handleEmailChange} />
+            <input placeholder='Password' id="password" className='textEntry' type='password' value={ password } onChange={handlePasswordChange} />
+            <input id='submit' type="submit" className="loginButton" value="Log In" />
+          </form>
+        </div>
+      </div>
     );
 }
 
