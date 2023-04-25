@@ -8,9 +8,7 @@ const Feed = ({ navigate }) => {
   const [message, setMessage] = useState("")
   const [image, setImg] = useState("")
   const user_id = window.localStorage.getItem("user_id");
-  console.log(user_id)
   
-
   const handleSubmit = async (event) => {
     event.preventDefault()
     if (image === "") {
@@ -57,7 +55,6 @@ const Feed = ({ navigate }) => {
           window.localStorage.setItem("token", data.token)
           setToken(window.localStorage.getItem("token"))
           setPosts(data.posts);
-          console.log(data.posts)
         })
     }
     // eslint-disable-next-line

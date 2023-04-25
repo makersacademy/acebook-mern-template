@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import './Profile.css'
+import './Profile.css';
 
 const Profile = ({ navigate }) => {
     const [token, setToken] = useState(window.localStorage.getItem("token"));
