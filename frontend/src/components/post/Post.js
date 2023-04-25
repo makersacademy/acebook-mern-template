@@ -1,16 +1,13 @@
 import React, {useState, useEffect } from 'react';
 import './Post.css';
 
-;
-
-
 const Post = ({post}) => {
   const user_id = window.localStorage.getItem("user_id");
   const [token, setToken] = useState(window.localStorage.getItem("token"));
   const [posts, setPosts] = useState([]);
   const [likes, setLikes] = useState(post.likes)
   
-    useEffect(() => {
+  useEffect(() => {
     if(token) {
       fetch("/posts", {
         headers: {
@@ -28,11 +25,7 @@ const Post = ({post}) => {
   }, [])
 
   const updatedMessage = async (id) => {
-    
     const newMessage = prompt("Enter your NEW message:")
-    console.log(user_id)
-    console.log(id)
-  
     await fetch( '/posts/update', {
           method: "put",
           headers: {
@@ -46,7 +39,6 @@ const Post = ({post}) => {
         if(response.status === 201) {
         } 
       })
-
   };
 
   const likePost = (id) => {
@@ -123,18 +115,15 @@ const Post = ({post}) => {
     }).catch(err => {
       console.log(err)
     })
-
   };
 
-
   return(
-    <div id="homePage">
-      <div className="flexbox">
-        <div className="item">
+    <div id="post-wrap">
+      <div className="post-flex">
           <div className='content'>
             {post.message === "" ? false
             :
-            <article data-cy="post" className="postMsg" key={ post._id }>{ post.message }</article>
+            <article data-cy="post" className="post-text" key={ post._id }>{ post.message }</article>
             }       
             {post.photo === "" ? false
             :
@@ -157,16 +146,10 @@ const Post = ({post}) => {
             }}>
               <input type="text" placeholder="Leave a comment..."/>
             </form>
-          </div>
         </div>
       </div>
     </div> 
-
   )
 };
 
 export default Post;
-
-
-
-// 

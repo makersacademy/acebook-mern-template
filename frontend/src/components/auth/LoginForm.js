@@ -39,17 +39,17 @@ const LogInForm = ({ navigate }) => {
 
 
     return (
-      <div id="homePage">
-      <div className="textWrap">
+      <div id="li-page">
+      <div className="li-wrap">
             <div className="heading">
               <img src="https://i.imgur.com/kjtUiie.png" className="home-img" alt="Acebook"></img>
             </div>
-            <p className="catchline">The worst Facebook clone there ever was...</p>
+            <p className="li-text">Log-in with your email & password!</p>
         </div>
-        <div className="formWrap">
-          <form onSubmit={handleSubmit}>
-            <input placeholder='Email' id="email" className='textEntry' type='text' value={ email } onChange={handleEmailChange} />
-            <input placeholder='Password' id="password" className='textEntry' type='password' value={ password } onChange={handlePasswordChange} />
+        <div className="li-form-div">
+          <form onSubmit={handleSubmit} className="li-form">
+            <input placeholder='Email' id="email" className='email-and-password ' type='text' value={ email } onChange={handleEmailChange} />
+            <input placeholder='Password' id="password" className='email-and-password ' type='password' value={ password } onChange={handlePasswordChange} />
             <input id='submit' type="submit" className="loginButton" value="Log In" />
           </form>
         </div>

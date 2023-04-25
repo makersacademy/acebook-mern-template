@@ -1,18 +1,8 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap');
-body {
-    background-color: rgb(239,242,245);
-    font-family: 'Roboto', sans-serif;
-
-}
-#homePage {
+#li-page {
     display: flex;
     justify-content: center;
     align-items: center;
-    margin-top: 5%;
-}
-.textWrapper {
-    width: 37vw;
-    margin-right: 3%;
     margin-top: 5%;
 }
 .home-img {
@@ -22,7 +12,7 @@ body {
     font-size: 48px;
     max-width: 450px; 
 }
-.catchline {
+.li-text {
     color: rgb(61, 67, 73);
     font-weight: 700px;
     font-size: 24px;
@@ -30,10 +20,11 @@ body {
     padding-right: 20px;
     margin-top: 0px;
 }
-.formWrap {
+.li-form-div {
     width: 300px;
-    height: 130px;
-    margin-top: 5%;
+    height: 300px;
+    margin-top: 0px;
+    text-align: center;
     background-color: #fff;
     padding: 5% 2% 5% 2%;
     border-radius: 5px;
@@ -42,6 +33,9 @@ body {
     justify-content: center;
     align-items: center;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+.li-form {
+    margin: auto;
 }
 .loginButton {
     background-color: rgb(66,183,41); 
@@ -137,7 +131,7 @@ body {
     color: #fff;
     padding: 6px;
 } 
-.textEntry {
+.email-and-password {
     background-color: rgb(208, 208, 208); 
     color: #7a7a7a; 
     font-size: 14px;
@@ -145,10 +139,11 @@ body {
     padding: 8px;
     font-weight: bold;
     margin: 0 auto;
-    margin-top: 1%;
+    margin-top: 2%;
     margin-bottom: 2%;
     border-radius: 3px;
     padding: 6px;
     border: none;
     cursor: text;
+    text-align: center;
 } 

@@ -1,28 +1,17 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap');
-body {
-    background-color: rgb(239,242,245);
-    font-family: 'Roboto', sans-serif;
 
-}
-#homePage {
+#home-page {
     display: flex;
     justify-content: center;
     align-items: center;
     margin-top: 5%;
 }
-.textWrapper {
-    width: 37vw;
-    margin-right: 3%;
-    margin-top: 5%;
-}
 .home-img {
-    position: relative;
-    top: -50%;
-    left: 0%;
     font-size: 48px;
-    max-width: 450px; 
+    max-width: 500px; 
+    text-align: center;
 }
-.catchline {
+.hp-text {
     color: rgb(61, 67, 73);
     font-weight: 700px;
     font-size: 24px;
@@ -30,10 +19,11 @@ body {
     padding-right: 20px;
     margin-top: 0px;
 }
-.formWrap {
-    width: 300px;
-    height: 130px;
-    margin-top: 5%;
+.hp-form-div {
+    width: 600px;
+    height: 400px;
+    margin-top: 0px;
+    text-align: center;
     background-color: #fff;
     padding: 5% 2% 5% 2%;
     border-radius: 5px;
