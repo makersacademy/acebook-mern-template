@@ -18,3 +18,27 @@ a {
   text-decoration: none;
   color: inherit;
 }
+
+/*
+STYLE GUIDE FOR NEW COMPONENTS
+
+--
+
+Dimension for new full page components - 
+
+width: 100%;
+min-height: 100%
+
+Leave background as transparent unless otherwise needed.
+
+Flexbox is probably best to center/justify simple pages.
+
+Default black is: #373737
+Default blue is: #3360ff
+Transparent blue opacity is: 26%
+
+Default font is: "Helvetica Neue", sans-serif;
+Titles are: Tahoma, Geneva, Verdana, sans-serif;
+Landing font size is: 1.25rem
+Landing line height is: 1.5rem
+*/
