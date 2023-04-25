@@ -9,6 +9,7 @@ const Post = ({post}) => {
   const [token, setToken] = useState(window.localStorage.getItem("token"));
   const [posts, setPosts] = useState([]);
   const [likes, setLikes] = useState(post.likes)
+  
     useEffect(() => {
     if(token) {
       fetch("/posts", {

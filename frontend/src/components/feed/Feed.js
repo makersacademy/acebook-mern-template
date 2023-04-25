@@ -8,7 +8,7 @@ const Feed = ({ navigate }) => {
   const [message, setMessage] = useState("")
   const [image, setImg] = useState("")
   const user_id = window.localStorage.getItem("user_id");
-  
+
   const handleSubmit = async (event) => {
     event.preventDefault()
     if (image === "") {
@@ -19,6 +19,13 @@ const Feed = ({ navigate }) => {
           'Content-Type': 'application/json'
         },
         body: JSON.stringify({ message: message, photo: "", postedBy: user_id})
+      })
+      .then(res => res.json())
+      .then(data => {
+        let postArr = data.post
+        let pushing = posts.concat(postArr)
+        console.log('this is:', postArr)
+        setPosts(pushing)
       })
     } else {
       const data = new FormData()   // << learn more about FormData / used to upload data
@@ -38,6 +45,13 @@ const Feed = ({ navigate }) => {
             'Content-Type': 'application/json'
           },
           body: JSON.stringify({message: message, photo: data.url, postedBy: user_id })
+        })
+        .then(res => res.json())
+        .then(data => {
+        let postArr = data.post
+        let pushing = posts.concat(postArr)
+        console.log('this is:', postArr)
+        setPosts(pushing)
         })
       })
   }
