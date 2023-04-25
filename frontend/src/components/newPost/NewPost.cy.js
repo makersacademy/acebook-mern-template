@@ -19,4 +19,16 @@ describe("Feed", () => {
     cy.get(".new-post-form").should("be.visible");
     cy.get('input[placeholder*="Tell people how you\'re feeling..."]');
   });
+
+  it("calls the /users endpoint", () => {
+    cy.mount(<NewPost navigate={navigate} />);
+
+    cy.intercept("POST", "/api/posts", { message: "OK" }).as("newPostRequest");
+
+    cy.get(".new-post-input").type("test message cypress");
+    cy.get(".submit-button").click();
+    cy.wait("@newPostRequest").then((interception) => {
+      expect(interception.response.body.message).to.eq("OK");
+    });
+  });
 });
