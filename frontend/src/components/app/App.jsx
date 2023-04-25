@@ -10,9 +10,7 @@ const App = () => {
   return (
     <section className="main">
       <div className="background"></div>
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        viewBox="0 0 1440 320">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320">
         <path
           fill="#3360FF"
           fill-opacity="0.26"
@@ -21,6 +19,10 @@ const App = () => {
       <Routes>
         <Route path="/" element={<LandingPage navigate={useNavigate()} />} />
         <Route path="/posts" element={<Feed navigate={useNavigate()} />} />
+        <Route
+          path="/posts/new"
+          element={<NewPost navigate={useNavigate()} />}
+        />
         <Route path="/login" element={<LoginForm navigate={useNavigate()} />} />
         <Route
           path="/signup"
