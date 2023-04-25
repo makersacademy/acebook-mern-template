@@ -9,6 +9,6 @@ router.put('/update', PostsController.Update);
 router.put("/like", PostsController.LikePost);
 router.put("/unlike", PostsController.UnlikePost);
 router.put("/comment", PostsController.CommentPost)
-//router.delete("/", PostsController.Delete);
+router.delete("/delete", PostsController.Delete);
 
 module.exports = router;

@@ -6,6 +6,12 @@ const PostSchema = new mongoose.Schema({
   message: {
     type: String
   },
+
+  postedBy: {
+    type:ObjectId
+
+  },
+
   likes: [{
     type: ObjectId, 
     ref: "Users"
