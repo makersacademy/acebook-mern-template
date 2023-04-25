@@ -1,6 +1,5 @@
 .route-button {
-  width: 12rem;
-  height: 4rem;
+  padding: 0.5rem 1rem;
   background: #3360ff;
   box-shadow: 0px 4px 4px rgba(51, 96, 255, 0.65);
   border-radius: 16px;
@@ -12,7 +11,7 @@
 }
 
 .route-button:hover {
-  transform: scale(0.96);
+  background: #3455cd;
+  transform: scale(0.99);
   box-shadow: 0px 5px 5px rgba(51, 96, 255, 0.65);
-  font-size: 1.95rem;
 }

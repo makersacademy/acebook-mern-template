@@ -28,7 +28,7 @@ const NewPost = ({ navigate }) => {
   };
 
   return (
-    <>
+    <section class="new-post">
       <form
         onSubmit={(e) => {
           e.preventDefault();
@@ -46,7 +46,7 @@ const NewPost = ({ navigate }) => {
         />
       </form>
       <SubmitButton text={"Add to Feed"} form={"post"} />
-    </>
+    </section>
   );
 };
 
