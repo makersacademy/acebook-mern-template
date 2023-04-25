@@ -15,10 +15,6 @@ JWT_SECRET=SUPER_SECRET npm run test
 Frontend
 Start the server in test mode (so that it connects to the test DB)
 
-cd api
-JWT_SECRET=SUPER_SECRET npm run start:test
-Then start the front end in a new terminal session
-
 cd frontend
 JWT_SECRET=SUPER_SECRET npm start
 Then run the tests in a new terminal session

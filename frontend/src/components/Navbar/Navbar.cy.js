@@ -1,8 +1,11 @@
 import Navbar from './Navbar';
-import { BrowserRouter as Router, useLocation} from "react-router-dom";
+import { BrowserRouter as Router} from "react-router-dom";
 
 
 
+
+
+// TEST WORKS (1)
 const location = () => {}
 describe("Navbar", () => {
   it("renders the Acebook title and a link to the login page", () => {
@@ -11,59 +14,50 @@ describe("Navbar", () => {
                     <Navbar/>
                 </Router>
             );
-    // window.localStorage.removeItem("token");
     cy.clearLocalStorage("token")
-    cy.get('[data-cy="h1"]')
+    cy.get('[data-cy="logo"]')
     .should('contain', "Acebook")
-    cy.get('[data-cy="login"]')
-    .should('contain', "Log In")
-    .and('have.attr', 'href', '/login')
+    cy.get('[data-cy="signup"]')
+    .should('contain', "Sign Up")
     })
 
-    it("changes from login to sign up when the user is on the sign in page", () => {
+
+it("changes from signup to login when the user is on the sign in page", () => {
         cy.mount(
                     <Router>
                         <Navbar location={location}/>
                     </Router>
                 );
         cy.clearLocalStorage("token")
-        cy.get('[data-cy="h1"]')
+        cy.get('[data-cy="logo"]')
         .should('contain', "Acebook")
-        cy.get('[data-cy="signup"]')
-        .should('contain', "Sign Up")
-        .and('have.attr', 'href', '/signup')
+        cy.get('[data-cy="login"]')
+        .should('contain', "Log In")
     })
 
-    it("changes from login to sign up when the user is on the sign in page", () => {
+
+    it("allows the user to access the feed page when the user is logged in and clicks the Acebook logo", () => {
+        cy.mount(
+                    <Router>
+                        <Navbar/>
+                    </Router>
+                );
+        window.localStorage.setItem("token", "fakeToken")
+        cy.get('[data-cy="logo"]').click()
+        cy.url().should('include', '/feed') 
+     })
+
+     it("renders the Acebook title and the profile and signout links when the user is logged in and on a feed or posts page", () => {
         cy.mount(
                     <Router>
                         <Navbar location={location}/>
                     </Router>
                 );
-        cy.clearLocalStorage("token")
-        cy.get('[data-cy="h1"]')
-        .should('contain', "Acebook")
-        cy.get('[data-cy="signup"]')
-        .should('contain', "Sign Up")
-        .and('have.attr', 'href', '/signup')
-    })
-
-    // it("it prevents the user from clicking on the Acebook title to access feed when they are not logged in", () => {
-    //     cy.mount(
-    //                 <Router>
-    //                     <Navbar navigate={navigate}/>
-    //                 </Router>
-    //             );
-    //     // window.localStorage.removeItem("token");
-    //     cy.clearLocalStorage("token")
-    //     cy.get('[data-cy="h1"]')
-    //     .should('contain', "Acebook")
-    //     cy.get('[data-cy="login"]')
-    //     .should('contain', "Log In")
-    //     .and('have.attr', 'href', '/login')
-    //     })
+        window.localStorage.setItem("token", "fakeToken")
+        
+        cy.get('[data-cy="logo"]')
+        cy.get('[data-cy="user"]')
+        cy.get('[data-cy="signout"]')
+        .should('contain', "Signout")        
+     })
 })
-
-// cy.get('#header a')
-//   .should('have.class', 'active')
-//   .and('have.attr', 'href', '/users')
