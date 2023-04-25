@@ -27,11 +27,11 @@ describe("Feed", () => {
         .and("contain.text", "Hello again, world");
     });
   });
-  it('should have a clickable \'create post\' button', () => {
+  it("should have a clickable 'create post' button", () => {
+    cy.mount(<Feed navigate={navigate} />);
     cy.get(".button")
-      .should("contain.text", "Create Post")
+      .should("contain.text", "Post Something")
       .should("be.visible")
       .should("be.enabled");
-
-  })
+  });
 });

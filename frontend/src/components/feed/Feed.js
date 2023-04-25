@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import Post from '../post/Post'
+import Button from '../button/Button'
 
 const Feed = ({ navigate }) => {
   const [posts, setPosts] = useState([]);
@@ -22,18 +23,17 @@ const Feed = ({ navigate }) => {
   }, [])
     
 
-  const logout = () => {
-    window.localStorage.removeItem("token")
-    navigate('/login')
-  }
+  // const logout = () => {
+  //   window.localStorage.removeItem("token")
+  //   navigate('/login')
+  // }
   
     if(token) {
       return(
         <>
-          <h2>Posts</h2>
-            <button onClick={logout}>
-              Logout
-            </button>
+          <h2>Hi Jay, What's on your mind?</h2>
+          <Button navigate={navigate} routePath={'/posts/new'} text={'Post Something'}/>
+
           <div id='feed' role="feed">
               {posts.map(
                 (post) => ( <Post post={ post } key={ post._id } token={token} setToken={setToken}/> )
