@@ -5,7 +5,11 @@ const NewPost = ({ navigate }) => {
   return (
     <>
       <form action="post" id="post" className="new-post-form">
-        <input>Tell people how you're feeling...</input>
+        <input
+          type="text"
+          class="new-post-input"
+          placeholder="Tell people how you're feeling..."
+        />
       </form>
       <SubmitButton
         navigate={navigate}

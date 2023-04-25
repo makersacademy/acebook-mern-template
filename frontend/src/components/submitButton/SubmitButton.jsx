@@ -1,7 +1,7 @@
 import React from "react";
 import styles from "./SubmitButton.css";
 
-const submitButton = (props) => {
+const SubmitButton = (props) => {
   const { navigate, routePath, text, form } = props;
 
   const link = () => {
@@ -18,4 +18,4 @@ const submitButton = (props) => {
   );
 };
 
-export default submitButton;
+export default SubmitButton;
