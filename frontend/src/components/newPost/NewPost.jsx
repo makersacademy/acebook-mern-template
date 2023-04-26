@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import SubmitButton from "../submitButton/SubmitButton";
+import styles from "./NewPost.css";
 
 const NewPost = ({ navigate }) => {
   const [token, setToken] = useState(window.localStorage.getItem("token"));
@@ -27,15 +28,18 @@ const NewPost = ({ navigate }) => {
   };
 
   return (
-    <section class="new-post">
+    <section className="new-post">
+      <h2 className="new-post-header">Post something</h2>
       <form
+        className="new-post-form"
         onSubmit={(e) => {
           e.preventDefault();
           submitMessage();
         }}
         id="post"
-        className="new-post-form">
+      >
         <input
+        className="new-post-input"
           type="text"
           class="new-post-input"
           placeholder="Tell people how you're feeling..."
