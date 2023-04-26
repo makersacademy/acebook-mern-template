@@ -1,11 +1,17 @@
 import { Link, useNavigate } from "react-router-dom";
 import logo from "../../images/ACEBOOK.png";
-
-// frontend/public/ACEBOOK.png
+import { useEffect } from "react";
 
 const Navbar = ({ location }) => {
   const isLoggedIn = window.localStorage.getItem("token");
+
   const navigate = useNavigate();
+
+  useEffect(() => {
+    if (location === "/" && isLoggedIn) {
+      navigate("/posts");
+    }
+  }, []);
 
   const IsLoggedOut = () => {
     setTimeout(() => {
@@ -14,11 +20,11 @@ const Navbar = ({ location }) => {
     if (isLoggedIn) {
       window.localStorage.removeItem("token");
     }
-    navigate("/login");
+    navigate("/");
   };
 
-  const signup = () => {
-    if (location === "/login") {
+  const Signup = () => {
+    if (location === "/login" && !isLoggedIn) {
       return (
         <Link to="/signup" data-cy="signup">
           Sign Up
@@ -27,8 +33,8 @@ const Navbar = ({ location }) => {
     }
   };
 
-  const login = () => {
-    if (location === "/signup" || location === "/") {
+  const Login = () => {
+    if (location === "/signup" || (location === "/" && !isLoggedIn)) {
       return (
         <Link to="/login" data-cy="login">
           Log In
@@ -37,41 +43,48 @@ const Navbar = ({ location }) => {
     }
   };
 
-  const feedNav = () => {
-    return (
-      <>
-        <Link to="/search-friend" data-cy="search-friend">
-          Search Friend
-        </Link>
-        <Link to="/profile" data-cy="profile">
-          Profile
-        </Link>
-        <Link to="/" data-cy="logout" onClick={IsLoggedOut}>
-          Sign Out
-        </Link>
-      </>
-    );
+  
+
+  const FeedNav = () => {
+    if (isLoggedIn && location === "/posts") {
+      return (
+        <>
+          <Link to="/search-friend" data-cy="search-friend">
+            Search Friend
+          </Link>
+          <Link to="/profile" data-cy="profile">
+            Profile
+          </Link>
+          <Link to="/" data-cy="logout" onClick={IsLoggedOut}>
+            Sign Out
+          </Link>
+        </>
+      );
+    }
   };
 
-  const searchFriendNav = () => {
+  const SearchFriendNav = () => {
+    if (isLoggedIn && location === "/search-friend") {
       return (
         <>
           <Link to="/posts" data-cy="feed">
-          Feed
-        </Link>
-         <Link to="/profile" data-cy="profile">
-          Profile
-        </Link>
-        <Link to="/" data-cy="logout" onClick={IsLoggedOut}>
-          Sign Out
-        </Link>    
+            Feed
+          </Link>
+          <Link to="/profile" data-cy="profile">
+            Profile
+          </Link>
+          <Link to="/" data-cy="logout" onClick={IsLoggedOut}>
+            Sign Out
+          </Link>
         </>
       );
+    }
   };
 
-  const mainNav = () => {
-      return (
-        <>
+  const MainNav = () => {
+    if (isLoggedIn && (location === "/profile" || location === "/friend-list" || location === "/friend" ))
+    return (
+      <>
         <Link to="/search-friend" data-cy="search-friend">
           Search Friend
         </Link>
@@ -85,42 +98,23 @@ const Navbar = ({ location }) => {
           Sign Out
         </Link>
       </>
-      );
+    );
   };
 
   return (
     <header>
-      {isLoggedIn && location === "/posts" &&(
-            <div className="container">
-              <Link to="/posts">
-                <img data-cy="logo" src={logo} />
-              </Link>
-              {feedNav()}
-            </div>
-          )}
-         {isLoggedIn && location === "/search-friend" &&(
-            <div className="container">
-              <Link to="/posts">
-                <img data-cy="logo" src={logo} />
-              </Link>
-              {searchFriendNav()}
-            </div>
-          )}
-           {isLoggedIn && (location === "/profile" || location === "/friend-list" || location === "/friend" ) &&(
-            <div className="container">
-              <Link to="/posts">
-                <img data-cy="logo" src={logo} />
-              </Link>
-              {mainNav()}
-            </div>
-          )}
-      {!isLoggedIn && (
-        <div>
-          <h1 data-cy="logo">Acebook</h1>
-          {signup()}
-          {login()}
-        </div>
-      )}
+      <div data-cy="nav-container">
+        <Link to={isLoggedIn ? "/posts" : "/"}>
+          <img data-cy="logo" src={logo} />
+        </Link>
+        <nav data-cy="nav">
+          {Signup()}
+          {Login()}
+          {FeedNav()}
+          {SearchFriendNav()}
+          {MainNav()}
+        </nav>
+      </div>
     </header>
   );
 };

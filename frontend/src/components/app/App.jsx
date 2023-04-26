@@ -17,7 +17,7 @@ const App = () => {
     const navigate = useNavigate()
   return (
     <>
-    <Navbar location = {location} navigate = {navigate}/>
+    <Navbar location = {location}/>
     <section className="main">
       <div className="background"></div>
       <svg
