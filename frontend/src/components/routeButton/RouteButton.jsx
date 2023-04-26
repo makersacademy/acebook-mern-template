@@ -1,7 +1,7 @@
 import React from "react";
-import styles from "./Button.css";
+import styles from "./RouteButton.css";
 
-const Button = (props) => {
+const RouteButton = (props) => {
   const { navigate, routePath, text } = props;
 
   const link = () => {
@@ -9,10 +9,10 @@ const Button = (props) => {
   };
 
   return (
-    <button className="button" onClick={link}>
+    <button className="route-button" onClick={link}>
       {text}
     </button>
   );
 };
 
-export default Button;
+export default RouteButton;

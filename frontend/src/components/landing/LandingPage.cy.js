@@ -7,7 +7,7 @@ describe("LandingPage", () => {
     cy.get(".landing-text")
       .should("be.visible")
       .should("contain.text", "Miaow then turn around");
-    cy.get(".button")
+    cy.get(".route-button")
       .should("contain.text", "Sign up")
       .should("be.visible")
       .should("be.enabled");

@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+import styles from "./Post.css";
+const moment = require("moment");
 
 const Post = (props) => {
   const { post, token, setToken } = props;
@@ -26,26 +28,29 @@ const Post = (props) => {
   const displayPost = (deletedPost) => {
     if (deletedPost === false)
       return (
-        <article data-cy="post" key={post._id}>
-          {post.message}
-          <button onClick={Delete}>Delete</button>
-        </article>
+        <div className="post-container">
+          <h4 className="post-timestamp">
+            {moment(post.createdAt).calendar()}
+          </h4>
+          <p className="post-message">{post.message}</p>
+          <div className="border-separator"></div>
+          <h4 className="post-delete" onClick={Delete}>
+            Delete
+          </h4>
+        </div>
       );
     else
       return (
-        <div>
+        <div className="post-container">
           <p>This message has been deleted.</p>
         </div>
       );
   };
 
   return (
-    // <article data-cy="post" key={post._id}>
-    //   {post.message}
-    //   <button onClick={Delete(token, setToken)}>Delete</button>
-    // </article>
-
-    displayPost(deletedPost)
+    <article className="post" data-cy="post" key={post._id}>
+      {displayPost(deletedPost)}
+    </article>
   );
 };
 
