@@ -23,7 +23,6 @@ const NewPost = ({ navigate }) => {
           setToken(window.localStorage.getItem("token"));
         });
     }
-    console.log("it works!");
     navigate("/posts");
   };
 
