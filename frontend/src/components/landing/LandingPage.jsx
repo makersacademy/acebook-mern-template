@@ -5,7 +5,7 @@ import styles from "./LandingPage.css";
 const LandingPage = ({ navigate }) => {
   return (
     <section className="landing">
-      <div className="landing-header">ACEBOOK</div>
+      <h1 className="landing-header">ACEBOOK</h1>
       <p className="landing-text">
         Miaow then turn around and show you my bum have a lot of grump in
         yourself because you can't forget to be grumpy and not be like king
