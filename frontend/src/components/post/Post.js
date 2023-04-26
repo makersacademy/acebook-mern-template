@@ -1,7 +1,6 @@
 import React, {useState, useEffect } from 'react';
 import './Post.css';
-
-;
+import Modal from '../comment/Modal';
 
 
 const Post = ({post}) => {
@@ -9,6 +8,8 @@ const Post = ({post}) => {
   const [token, setToken] = useState(window.localStorage.getItem("token"));
   const [posts, setPosts] = useState([]);
   const [likes, setLikes] = useState(post.likes)
+  const [show, setShow] = useState(false);
+  const [comments, setComments] = useState(post.comments)
   
     useEffect(() => {
     if(token) {
@@ -95,15 +96,16 @@ const Post = ({post}) => {
       },
       body:JSON.stringify({
         _id: postId,
-        text
+        text: text
       })
     }).then(res=>res.json())
-    .then(result=>{
-      console.log(result)
-    }).catch(err => {
-      console.log(err)
-    })
+    .then( data => {
+      let updateComments = comments.concat(data)
+      setComments(updateComments)
+
+  })
   }
+
 
   const deletePost = (id) => {
     const post_id = id
@@ -151,12 +153,21 @@ const Post = ({post}) => {
             {post.postedBy.includes(user_id) ?
             <button onClick={() => {deletePost(post._id)}}>Delete Post</button>
             : "" }
-            <form onSubmit={(e) => {
-              e.preventDefault()
+            <form onSubmit={(e) => { e.preventDefault()
               makeComment(e.target[0].value, post._id)
             }}>
-              <input type="text" placeholder="Leave a comment..."/>
+              <input type="text" placeholder="Enter a comment.."/>
             </form>
+              <button onClick={() => setShow(true)}>Show comments</button>
+              <Modal title="Comments Tab" onClose={() => setShow(false)} show={show}>
+              {
+                comments.map(record => {
+                  return (
+                    <h6 key="comms-box"><span key="user-name" style={{fontweight: "500"}}>Username</span> : {record.text}</h6>
+                  )
+                })
+              }
+              </Modal>
           </div>
         </div>
       </div>

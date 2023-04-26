@@ -92,8 +92,9 @@ const PostsController = {
       if (err) {
         throw err;
       }
+      console.log('this is result:', result)
       const token = await TokenGenerator.jsonwebtoken(req.user_id)
-      res.status(201).json(result);
+      res.status(201).json(comment);
   })
   },
 
