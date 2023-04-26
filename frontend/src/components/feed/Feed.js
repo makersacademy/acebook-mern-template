@@ -24,7 +24,7 @@ const Feed = ({ navigate }) => {
       .then(data => {
         let postArr = data.post
         let pushing = posts.concat(postArr)
-        console.log('this is:', postArr)
+        // console.log('this is:', postArr)
         setPosts(pushing)
       })
     } else {

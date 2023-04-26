@@ -1,0 +1,6 @@
+{
+  "dependencies": {
+    "react-dom": "^18.2.0",
+    "react-transition-group": "^4.4.5"
+  }
+}
