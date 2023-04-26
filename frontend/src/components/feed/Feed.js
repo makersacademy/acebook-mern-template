@@ -7,8 +7,8 @@ const Feed = ({ navigate }) => {
   const [token, setToken] = useState(window.localStorage.getItem("token"));
   const [message, setMessage] = useState("")
   const [image, setImg] = useState("")
-  const user_id = window.localStorage.getItem("user_id");
-
+  const user = JSON.parse(window.localStorage.getItem("user"));
+  
   const handleSubmit = async (event) => {
     event.preventDefault()
     if (image === "") {
@@ -18,7 +18,7 @@ const Feed = ({ navigate }) => {
           'Authorization': `Bearer ${token}`,
           'Content-Type': 'application/json'
         },
-        body: JSON.stringify({ message: message, photo: "", postedBy: user_id})
+        body: JSON.stringify({ message: message, photo: "", postedBy: user._id})
       })
       .then(res => res.json())
       .then(data => {
@@ -44,7 +44,7 @@ const Feed = ({ navigate }) => {
             'Authorization': `Bearer ${token}`,
             'Content-Type': 'application/json'
           },
-          body: JSON.stringify({message: message, photo: data.url, postedBy: user_id })
+          body: JSON.stringify({message: message, photo: data.url, postedBy: user._id })
         })
         .then(res => res.json())
         .then(data => {

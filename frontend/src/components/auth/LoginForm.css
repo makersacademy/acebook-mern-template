@@ -1,19 +1,9 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap');
-body {
-    background-color: rgb(239,242,245);
-    font-family: 'Roboto', sans-serif;
-
-}
-#homePage {
+#li-page {
     display: flex;
     justify-content: center;
     align-items: center;
-    margin-top: 5%;
-}
-.textWrapper {
-    width: 37vw;
-    margin-right: 3%;
-    margin-top: 5%;
+    margin-top: 10%;
 }
 .home-img {
     position: relative;
@@ -22,18 +12,26 @@ body {
     font-size: 48px;
     max-width: 450px; 
 }
-.catchline {
+.back-btn {
+    text-align: center !important;
+}
+.back-img {
+    max-width: 36px;
+}
+.li-text {
     color: rgb(61, 67, 73);
     font-weight: 700px;
     font-size: 24px;
     float: left;
     padding-right: 20px;
     margin-top: 0px;
+    padding-left: 35px;
 }
-.formWrap {
+.li-form-div {
     width: 300px;
-    height: 130px;
-    margin-top: 5%;
+    height: 300px;
+    margin-top: 0px;
+    text-align: center;
     background-color: #fff;
     padding: 5% 2% 5% 2%;
     border-radius: 5px;
@@ -43,112 +41,69 @@ body {
     align-items: center;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
-.loginButton {
-    background-color: rgb(66,183,41); 
+.li-form {
+    margin: auto;
+}
+.login-button {
+    background-color: rgb(25,119,242); 
     color: #fff; 
     font-size: 16px;
+    width: 60%;
     padding: 8px;
     font-weight: bold;
     margin: 0 auto;
     margin-top: 3%;
     margin-bottom: 3%;
-    width: 100%;
-    border-radius: 3px;
+    width: 45%;
+    border-radius: 20px;
     color: #fff;
     padding: 6px;
-    transition: 150ms;
+    transition: 500ms;
     border: none;
+    text-align: center;
 } 
-.loginButton:hover {
-    background-color: rgb(66,183,41); 
-    box-shadow: inset 1px 1px 10px #3333334d;        
+.login-button:hover {
+    background-color: rgb(43, 124, 229); 
+    box-shadow: inset 1px 1px 10px #3333339a;   
     color: #fff; 
     font-size: 16px;
+    width: 50%;
     padding: 8px;
     font-weight: bold;
     margin: 0 auto;
     margin-top: 3%;
     margin-bottom: 3%;
-    width: 100%;
-    border-radius: 3px;
     color: #fff;
     padding: 6px;
     cursor: pointer;
 } 
-.loginButton:active {
-    background-color: rgb(66,183,41); 
-    box-shadow: inset 1px 1px 10px #333333c1;  
-    color: #fff; 
-    font-size: 16px;
-    padding: 8px;
-    font-weight: bold;
-    margin: 0 auto;
-    margin-top: 3%;
-    margin-bottom: 3%;
-    width: 100%;
-    border-radius: 3px;
-    color: #fff;
-    padding: 6px;
-} 
-.signupButton {
-    background-color: rgb(25,119,242); 
-    color: #fff; 
-    font-size: 16px;
-    padding: 8px;
-    font-weight: bold;
-    margin: 0 auto;
-    margin-top: 3%;
-    margin-bottom: 3%;
-    width: 100%;
-    border-radius: 3px;
-    color: #fff;
-    padding: 6px;
-    transition: 150ms;
-    border: none;
-} 
-.signupButton:hover {
-    background-color: rgb(25,119,242); 
-    box-shadow: inset 1px 1px 10px #3333334d;   
-    color: #fff; 
-    font-size: 16px;
-    padding: 8px;
-    font-weight: bold;
-    margin: 0 auto;
-    margin-top: 3%;
-    margin-bottom: 3%;
-    width: 100%;
-    border-radius: 3px;
-    color: #fff;
-    padding: 6px;
-    cursor: pointer;
-} 
-.signupButton:active {
+.login-button:active {
     background-color: rgb(25,119,242); 
     box-shadow: inset 1px 1px 10px #333333c1; 
     color: #fff; 
     font-size: 16px;
+    width: 60%;
     padding: 8px;
     font-weight: bold;
     margin: 0 auto;
     margin-top: 3%;
     margin-bottom: 3%;
-    width: 100%;
-    border-radius: 3px;
     color: #fff;
     padding: 6px;
 } 
-.textEntry {
+.email-and-password {
     background-color: rgb(208, 208, 208); 
     color: #7a7a7a; 
-    font-size: 14px;
+    font-size: 16px;
     width: 96%;
     padding: 8px;
     font-weight: bold;
     margin: 0 auto;
-    margin-top: 1%;
-    margin-bottom: 2%;
+    margin-top: 8%;
+    margin-bottom: 3%;
     border-radius: 3px;
     padding: 6px;
     border: none;
     cursor: text;
+    text-align: center;
 } 
