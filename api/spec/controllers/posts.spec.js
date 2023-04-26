@@ -157,4 +157,28 @@ describe("/posts", () => {
       expect(response.body.token).toEqual(undefined);
     })
   })
+  describe("DELETE, when token is present", () => {
+    test("deletes a post", async () => {
+      let post1 = new Post({ message: "howdy!" });
+      let post2 = new Post({ message: "hola!" });
+      await post1.save();
+      await post2.save();
+      const posts = await request(app)
+        .get("/posts")
+        .set("Authorization", `Bearer ${token}`)
+        .send({ token: token });
+      const postIDs = JSON.parse(posts.text).posts.map(
+        (returnedPost) => returnedPost._id
+      );
+      await request(app)
+        .delete("/posts")
+        .set("Authorization", `Bearer ${token}`)
+        .send({ token: token }, { _id: postIDs[0] });
+      const filteredPosts = await request(app)
+        .get("/posts")
+        .set("Authorization", `Bearer ${token}`)
+        .send({ token: token });
+      expect(JSON.parse(filteredPosts.text).posts.length).toEqual(1);
+    });
+  });
 });
