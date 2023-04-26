@@ -19,7 +19,6 @@
   align-items: center;
   justify-content: flex-start;
   gap: 4vh;
-  border: solid 2px green;
 }
 
 .feed-header {
