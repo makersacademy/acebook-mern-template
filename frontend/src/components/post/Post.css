@@ -1,0 +1,34 @@
+.post{
+  background: #F8FBFF;
+  box-shadow: 3px 4px 5px 4px rgba(145, 145, 147, 0.57);
+  border-radius: 16px;
+  padding: 2rem;
+  width: 100%;
+}
+
+.post-container{
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 2vh;
+}
+
+.post-timestamp{
+  color: #919193;
+}
+
+.post-message{
+  text-align: left;
+}
+
+.border-separator{
+  width: 100%;
+  border: solid 1px;
+  border-bottom: #373737;
+}
+
+.post-delete {
+  color: #919193;
+  cursor: pointer;
+  padding: 0.25rem 0.5rem;
+}
