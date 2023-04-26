@@ -162,10 +162,8 @@ const Post = ({post}) => {
               }
               </Modal>
           </div>
-
         </div>
       </div>
-    </div> 
   )
 };
 
