@@ -1,6 +1,7 @@
 import { Link, useNavigate } from "react-router-dom";
 import logo from "../../images/ACEBOOK.png";
 import { useEffect } from "react";
+import styles from "./Navbar.css";
 
 const Navbar = ({ location }) => {
   const isLoggedIn = window.localStorage.getItem("token");
@@ -43,8 +44,6 @@ const Navbar = ({ location }) => {
     }
   };
 
-  
-
   const FeedNav = () => {
     if (isLoggedIn && location === "/posts") {
       return (
@@ -82,32 +81,38 @@ const Navbar = ({ location }) => {
   };
 
   const MainNav = () => {
-    if (isLoggedIn && (location === "/profile" || location === "/friend-list" || location === "/friend" ))
-    return (
-      <>
-        <Link to="/search-friend" data-cy="search-friend">
-          Search Friend
-        </Link>
-        <Link to="/posts" data-cy="feed">
-          Feed
-        </Link>
-        <Link to="/profile" data-cy="profile">
-          Profile
-        </Link>
-        <Link to="/" data-cy="logout" onClick={IsLoggedOut}>
-          Sign Out
-        </Link>
-      </>
-    );
+    if (
+      isLoggedIn &&
+      (location === "/profile" ||
+        location === "/friend-list" ||
+        location === "/friend" ||
+        location === "/posts/new")
+    )
+      return (
+        <>
+          <Link to="/search-friend" data-cy="search-friend">
+            Search Friend
+          </Link>
+          <Link to="/posts" data-cy="feed">
+            Feed
+          </Link>
+          <Link to="/profile" data-cy="profile">
+            Profile
+          </Link>
+          <Link to="/" data-cy="logout" onClick={IsLoggedOut}>
+            Sign Out
+          </Link>
+        </>
+      );
   };
 
   return (
-    <header>
-      <div data-cy="nav-container">
+    <header className="navbar">
+      <div className="navbar-container" data-cy="nav-container">
         <Link to={isLoggedIn ? "/posts" : "/"}>
           <img data-cy="logo" src={logo} />
         </Link>
-        <nav data-cy="nav">
+        <nav className="navbar-links" data-cy="nav">
           {Signup()}
           {Login()}
           {FeedNav()}

@@ -1,0 +1,21 @@
+.navbar-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.navbar-links {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    gap: 6rem;
+    width: 80%;
+    align-items: center;
+    font-size: 1.25rem;
+    font-weight: bold;
+}
+
+a:hover {
+    text-decoration: underline;
+}
