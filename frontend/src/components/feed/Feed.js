@@ -8,11 +8,8 @@ const Feed = ({ navigate }) => {
   const [message, setMessage] = useState("")
   const [image, setImg] = useState("")
   const [search, setSearch] = useState("");
-  const user_id = window.localStorage.getItem("user_id");
-
+  const user = JSON.parse(window.localStorage.getItem("user"));
   
-  
-
   const handleSubmit = async (event) => {
     event.preventDefault()
     if (image === "") {
@@ -22,7 +19,14 @@ const Feed = ({ navigate }) => {
           'Authorization': `Bearer ${token}`,
           'Content-Type': 'application/json'
         },
-        body: JSON.stringify({ message: message, photo: "", postedBy: user_id})
+        body: JSON.stringify({ message: message, photo: "", postedBy: user._id})
+      })
+      .then(res => res.json())
+      .then(data => {
+        let postArr = data.post
+        let pushing = posts.concat(postArr)
+        // console.log('this is:', postArr)
+        setPosts(pushing)
       })
     } else {
       const data = new FormData()   // << learn more about FormData / used to upload data
@@ -41,7 +45,14 @@ const Feed = ({ navigate }) => {
             'Authorization': `Bearer ${token}`,
             'Content-Type': 'application/json'
           },
-          body: JSON.stringify({message: message, photo: data.url, postedBy: user_id })
+          body: JSON.stringify({message: message, photo: data.url, postedBy: user._id })
+        })
+        .then(res => res.json())
+        .then(data => {
+        let postArr = data.post
+        let pushing = posts.concat(postArr)
+        console.log('this is:', postArr)
+        setPosts(pushing)
         })
       })
   }
@@ -60,10 +71,7 @@ const Feed = ({ navigate }) => {
           window.localStorage.setItem("token", data.token)
           setToken(window.localStorage.getItem("token"))
           setPosts(data.posts);
-          console.log(data.posts)
-          console.log(search)
 
-          
         })
     }
     // eslint-disable-next-line

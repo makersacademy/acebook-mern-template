@@ -1,15 +1,18 @@
 import React, {useState, useEffect } from 'react';
 import './Post.css';
-
-;
+import Modal from '../comment/Modal';
 
 
 const Post = ({post}) => {
-  const user_id = window.localStorage.getItem("user_id");
+  const user = JSON.parse(window.localStorage.getItem("user"));
   const [token, setToken] = useState(window.localStorage.getItem("token"));
   const [posts, setPosts] = useState([]);
   const [likes, setLikes] = useState(post.likes)
-    useEffect(() => {
+  const [show, setShow] = useState(false);
+  const [comments, setComments] = useState(post.comments)
+
+  useEffect(() => {
+
     if(token) {
       fetch("/posts", {
         headers: {
@@ -27,11 +30,7 @@ const Post = ({post}) => {
   }, [])
 
   const updatedMessage = async (id) => {
-    
     const newMessage = prompt("Enter your NEW message:")
-    console.log(user_id)
-    console.log(id)
-  
     await fetch( '/posts/update', {
           method: "put",
           headers: {
@@ -45,7 +44,6 @@ const Post = ({post}) => {
         if(response.status === 201) {
         } 
       })
-
   };
 
   const likePost = (id) => {
@@ -61,7 +59,7 @@ const Post = ({post}) => {
     }).then(res => res.json())
     .then(result => {
       console.log(result)
-      setLikes(likes.concat(user_id))
+      setLikes(likes.concat(user._id))
     })
   };
 
@@ -79,7 +77,7 @@ const Post = ({post}) => {
     .then(result => {
       console.log(result)
       let unLike = likes.slice()
-      unLike.splice((likes.indexOf(user_id)),1 )
+      unLike.splice((likes.indexOf(user._id)),1 )
       setLikes(unLike)
       console.log("this is ", likes)
     })
@@ -94,15 +92,16 @@ const Post = ({post}) => {
       },
       body:JSON.stringify({
         _id: postId,
-        text
+        text: text
       })
     }).then(res=>res.json())
-    .then(result=>{
-      console.log(result)
-    }).catch(err => {
-      console.log(err)
-    })
+    .then( data => {
+      let updateComments = comments.concat(data)
+      setComments(updateComments)
+
+  })
   }
+
 
   const deletePost = (id) => {
     const post_id = id
@@ -122,50 +121,52 @@ const Post = ({post}) => {
     }).catch(err => {
       console.log(err)
     })
-
   };
 
-
   return(
-    <div id="homePage">
-      <div className="flexbox">
-        <div className="item">
+    <div id="post-wrap">
+      <div className="post-flex">
           <div className='content'>
             {post.message === "" ? false
             :
-            <article data-cy="post" className="postMsg" key={ post._id }>{ post.message }</article>
+            <article data-cy="post" className="post-text" key={ post._id }>{ post.message }</article>
             }       
             {post.photo === "" ? false
             :
             <article><p><img src={post.photo} alt="placeholder" className="postImg"></img></p></article>
             }
-            {likes.includes(user_id) ?
+            {likes.includes(user._id) ?
             <p><button className="unlike-button" onClick={() => unLikePost(post._id)}>Unlike | {likes.length}</button></p>
             :
             <p><button className="like-button" onClick={() => likePost(post._id)}>Like | {likes.length}</button></p>
             }
-            {post.postedBy.includes(user_id) ?
-            <button className="edit-button"onClick={() => {updatedMessage(post._id)}}>Edit Post</button>
+            {post.postedBy.includes(user._id) ?
+            <button onClick={() => {updatedMessage(post._id)}}>Edit Post</button>
             : "" }
-            {post.postedBy.includes(user_id) ?
-            <button className ="delete-button" onClick={() => {deletePost(post._id)}}>Delete Post</button>
+            {post.postedBy.includes(user._id) ?
+            <button onClick={() => {deletePost(post._id)}}>Delete Post</button>
             : "" }
-            <form onSubmit={(e) => {
-              e.preventDefault()
+            <form onSubmit={(e) => { e.preventDefault()
               makeComment(e.target[0].value, post._id)
             }}>
-              <input type="text" placeholder="Leave a comment..."/>
+              <input type="text" placeholder="Enter a comment.."/>
             </form>
+              <button onClick={() => setShow(true)}>Show comments</button>
+              <Modal title="Comments Tab" onClose={() => setShow(false)} show={show}>
+              {
+                comments.map(record => {
+                  return (
+                    <h6 key="comms-box"><span key="user-name" style={{fontweight: "500"}}>Username</span> : {record.text}</h6>
+                  )
+                })
+              }
+              </Modal>
           </div>
+
         </div>
       </div>
     </div> 
-
   )
 };
 
 export default Post;
-
-
-
-// 

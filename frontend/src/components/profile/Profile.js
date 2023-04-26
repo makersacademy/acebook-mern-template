@@ -1,63 +1,116 @@
 import React, { useEffect, useState } from 'react';
-import './Profile.css'
+import './Profile.css';
 
 const Profile = ({ navigate }) => {
     const [token, setToken] = useState(window.localStorage.getItem("token"));
-    const user_id = window.localStorage.getItem("user_id");
-    const [firstName, setFirst] = useState("");
-    const [lastName, setLast] = useState("");
-    const [username, setUsername] = useState("");
+    const user = JSON.parse(window.localStorage.getItem("user"));
+    const [firstName, setFirst] = useState(user.firstName);
+    const [lastName, setLast] = useState(user.lastName);
+    const [username, setUsername] = useState(user.username);
     const [profilePic, setProfilePic] = useState("");
+    const [rerender, setRerender] = useState(false);
 
     const handleSubmit = async (event) => {
         event.preventDefault()
-        const data = new FormData()   // << learn more about FormData / used to upload data
-        data.append("file", profilePic)
-        data.append("upload_preset", "acebook")
-        data.append("cloud_name", "dhocnl7tm")
-        await fetch("https://api.cloudinary.com/v1_1/dhocnl7tm/image/upload", {
-            method: "post",
-            body: data
-        })
-        .then(res => res.json())
-        .then(data => {
-            fetch( '/users', {
-                method: 'post',
-                headers: {
-                'Authorization': `Bearer ${token}`,
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({ firstName: firstName, lastName: lastName, username: username, profilePic: profilePic  })
-        })
-        console.log(data.url)
-        })      
-        .then(response => {
-            if(response.status === 201) {
-                navigate('/posts')
+        
+        if (!firstName || !lastName || !username) {
+            console.log("enter all fields bla bla bla")
+        } else {
+            if (!profilePic) {
+                let params = { 
+                    _id: user._id, 
+                    email: user.email, 
+                    firstName: firstName, 
+                    lastName: lastName, 
+                    username: username, 
+                    profilePic: user.profilePic 
+                }
+                fetch( '/users', {
+                    method: 'put',
+                    headers: {
+                    'Authorization': `Bearer ${token}`,
+                    'Content-Type': 'application/json'
+                },
+                    body: JSON.stringify(params)
+                })  
+                .then(res => res.json())
+                .then(data => {
+                    window.localStorage.removeItem("user")
+                    const user = {_id: data._id, email: data.email, username: data.username, firstName: data.firstName, lastName: data.lastName, profilePic: data.profilePic}
+                    window.localStorage.setItem("user", JSON.stringify(user))
+                    setRerender(!rerender);
+                })
             } else {
-                navigate('/posts')
+                const data = new FormData()   // << learn more about FormData / used to upload data
+                data.append("file", profilePic)
+                data.append("upload_preset", "acebook")
+                data.append("cloud_name", "dhocnl7tm")
+                fetch("https://api.cloudinary.com/v1_1/dhocnl7tm/image/upload", {
+                    method: "post",
+                    body: data
+                })
+                .then(res => res.json())
+                .then(data => {
+                    let params = { 
+                        _id: user._id, 
+                        email: user.email, 
+                        firstName: firstName, 
+                        lastName: lastName, 
+                        username: username, 
+                        profilePic: data.url
+                    }                    
+                    fetch( '/users', {
+                        method: 'put',
+                        headers: {
+                        'Authorization': `Bearer ${token}`,
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(params)
+                    })
+                    .then(res => res.json())
+                    .then(data => {
+                        window.localStorage.removeItem("user")
+                        const user = {_id: data._id, email: data.email, username: data.username, firstName: data.firstName, lastName: data.lastName, profilePic: data.profilePic}
+                        window.localStorage.setItem("user", JSON.stringify(user))
+                        setRerender(!rerender);
+                    })
+                })  
             }
-        })
+        }
+        
     }
-
     return (
-        <div id="homePage">
-            <div className="textWrap">
-                <div className="heading">
-                    <img src={user_id} className="home-img" alt="Acebook"></img>
+        <div id="pf-page">
+            <div className="pf-card">
+                <div className="pf-card-items">
+                    <b className="pf-username">Username</b>
+                    <div className="pf-name-div"><b className="pf-card-text">{user.username}</b></div>
+                    <br></br>
+                    <img src={user.profilePic} className="profile-pic-icon" alt="Profile"></img>
+                    <br></br>
+                    <br></br>
+                    <b className="pf-your-name">Name:</b>
+                    <div className="pf-name-div"><b className="pf-name">{user.firstName} {user.lastName}</b></div>
                 </div>
-                <p className="catchline">Make your profile yours by adding some details...</p>
             </div>
-            <div className="formWrap">
-                <form onSubmit={handleSubmit}>
-                    <input placeholder="First Name" id="firstName" className='textEntry' type='text' value={ firstName } onChange={(e) => setFirst(e.target.value)} />
-                    <input placeholder="Last Name" id="secondName" className='textEntry' type='text' value={ lastName } onChange={(e) => setLast(e.target.value)} />
-                    <input placeholder="Username" id="username" className='textEntry' type='text' value={ username } onChange={(e) => setUsername(e.target.value)} />
-                    <label className="custom-file-upload">
-                    <input type="file" id="chooseImg" onInput={(e) => setProfilePic(e.target.files[0])}></input>
+            <div className="pf-form-div">
+                <form onSubmit={handleSubmit} className="pf-form">
+                    <p className="pf-text">Edit your profile:</p>
+                    <div className="first-name"><input placeholder="First name" id="firstName" className='firstname-txt' type='text' value={ firstName } onChange={(e) => setFirst(e.target.value)} /></div>
+                    <div className="last-name"><input placeholder="Last name" id="lastName" className='lastname-txt' type='text' value={ lastName } onChange={(e) => setLast(e.target.value)} /></div>
+                    <br></br>
+                    <br></br>
+                    <input placeholder="Username" id="username" className='un-text' type='text' value={ username } onChange={(e) => setUsername(e.target.value)} />
+                    {/* Add password change */}
+                    <br></br>
+                    <br></br>
+                    <label className="upload-button">
+                    <input type="file" accept="image/png, image/jpeg" id="chooseImg" onChange={(e) => setProfilePic(e.target.files[0])}></input>
                         Upload Profile Picture
                     </label>
-                    <input id='submit' type="submit" className="signupButton" value="Updata Profile" />
+                    <br></br>
+                    <br></br>
+                    <button id="submit-btn" type='text' className='update-btn' onClick={handleSubmit}>Submit Changes</button>
                 </form>
             </div>
         </div>
