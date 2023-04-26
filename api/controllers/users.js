@@ -12,19 +12,13 @@ const UsersController = {
     });
   },
   Update: async (req, res) => {
-    await User.findOneAndUpdate({ _id: req.body.id}, { $set:{ firstName: req.body.firstName, lastName: req.body.lastName, username: req.body.username, profilePic: req.body.profilePic  }})
+    await User.findOneAndUpdate({ _id: req.body._id}, { $set:{ firstName: req.body.firstName, lastName: req.body.lastName, username: req.body.username, profilePic: req.body.profilePic  }})
     .exec(async (err, result)=> {
       if (err) {
         throw err;
       }
-      res.status(201).json({ message: 'OK', firstName: req.body.firstName, lastName: req.body.lastName, username: req.body.username, profilePic: req.body.profilePic });
-    })
-  },
-  FetchInfo: (req, res) => {
-    console.log(req.body.id)
-    User.findOne({ _id: req.body.id })
-    .then((response) => {
-      res.status(201).json({ message: 'OK', firstName: req.body.firstName, lastName: req.body.lastName, username: req.body.username, profilePic: req.body.profilePic });
+      
+      res.status(201).json({ message: 'OK', _id: req.body._id, email: req.body.email, firstName: req.body.firstName, lastName: req.body.lastName, username: req.body.username, profilePic: req.body.profilePic });
     })
   }
 }

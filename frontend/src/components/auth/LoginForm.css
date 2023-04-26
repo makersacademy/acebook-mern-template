@@ -3,7 +3,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    margin-top: 5%;
+    margin-top: 10%;
 }
 .home-img {
     position: relative;
@@ -12,6 +12,12 @@
     font-size: 48px;
     max-width: 450px; 
 }
+.back-btn {
+    text-align: center !important;
+}
+.back-img {
+    max-width: 36px;
+}
 .li-text {
     color: rgb(61, 67, 73);
     font-weight: 700px;
@@ -19,6 +25,7 @@
     float: left;
     padding-right: 20px;
     margin-top: 0px;
+    padding-left: 35px;
 }
 .li-form-div {
     width: 300px;
@@ -37,110 +44,63 @@
 .li-form {
     margin: auto;
 }
-.loginButton {
-    background-color: rgb(66,183,41); 
+.login-button {
+    background-color: rgb(25,119,242); 
     color: #fff; 
     font-size: 16px;
+    width: 60%;
     padding: 8px;
     font-weight: bold;
     margin: 0 auto;
     margin-top: 3%;
     margin-bottom: 3%;
-    width: 100%;
-    border-radius: 3px;
+    width: 45%;
+    border-radius: 20px;
     color: #fff;
     padding: 6px;
-    transition: 150ms;
+    transition: 500ms;
     border: none;
+    text-align: center;
 } 
-.loginButton:hover {
-    background-color: rgb(66,183,41); 
-    box-shadow: inset 1px 1px 10px #3333334d;        
+.login-button:hover {
+    background-color: rgb(43, 124, 229); 
+    box-shadow: inset 1px 1px 10px #3333339a;   
     color: #fff; 
     font-size: 16px;
+    width: 50%;
     padding: 8px;
     font-weight: bold;
     margin: 0 auto;
     margin-top: 3%;
     margin-bottom: 3%;
-    width: 100%;
-    border-radius: 3px;
     color: #fff;
     padding: 6px;
     cursor: pointer;
 } 
-.loginButton:active {
-    background-color: rgb(66,183,41); 
-    box-shadow: inset 1px 1px 10px #333333c1;  
-    color: #fff; 
-    font-size: 16px;
-    padding: 8px;
-    font-weight: bold;
-    margin: 0 auto;
-    margin-top: 3%;
-    margin-bottom: 3%;
-    width: 100%;
-    border-radius: 3px;
-    color: #fff;
-    padding: 6px;
-} 
-.signupButton {
-    background-color: rgb(25,119,242); 
-    color: #fff; 
-    font-size: 16px;
-    padding: 8px;
-    font-weight: bold;
-    margin: 0 auto;
-    margin-top: 3%;
-    margin-bottom: 3%;
-    width: 100%;
-    border-radius: 3px;
-    color: #fff;
-    padding: 6px;
-    transition: 150ms;
-    border: none;
-} 
-.signupButton:hover {
-    background-color: rgb(25,119,242); 
-    box-shadow: inset 1px 1px 10px #3333334d;   
-    color: #fff; 
-    font-size: 16px;
-    padding: 8px;
-    font-weight: bold;
-    margin: 0 auto;
-    margin-top: 3%;
-    margin-bottom: 3%;
-    width: 100%;
-    border-radius: 3px;
-    color: #fff;
-    padding: 6px;
-    cursor: pointer;
-} 
-.signupButton:active {
+.login-button:active {
     background-color: rgb(25,119,242); 
     box-shadow: inset 1px 1px 10px #333333c1; 
     color: #fff; 
     font-size: 16px;
+    width: 60%;
     padding: 8px;
     font-weight: bold;
     margin: 0 auto;
     margin-top: 3%;
     margin-bottom: 3%;
-    width: 100%;
-    border-radius: 3px;
     color: #fff;
     padding: 6px;
 } 
 .email-and-password {
     background-color: rgb(208, 208, 208); 
     color: #7a7a7a; 
-    font-size: 14px;
+    font-size: 16px;
     width: 96%;
     padding: 8px;
     font-weight: bold;
     margin: 0 auto;
-    margin-top: 2%;
-    margin-bottom: 2%;
+    margin-top: 8%;
+    margin-bottom: 3%;
     border-radius: 3px;
     padding: 6px;
     border: none;
