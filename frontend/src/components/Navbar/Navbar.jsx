@@ -85,7 +85,8 @@ const Navbar = ({ location }) => {
       isLoggedIn &&
       (location === "/profile" ||
         location === "/friend-list" ||
-        location === "/friend")
+        location === "/friend" ||
+        location === "/posts/new")
     )
       return (
         <>
