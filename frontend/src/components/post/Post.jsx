@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+const moment = require('moment');
+
 
 const Post = (props) => {
   const { post, token, setToken } = props;
@@ -27,7 +29,7 @@ const Post = (props) => {
     if (deletedPost === false)
       return (
         <article data-cy="post" key={post._id}>
-          {post.message}
+            {post.message} {moment(post.createdAt).calendar()}
           <button onClick={Delete}>Delete</button>
         </article>
       );
