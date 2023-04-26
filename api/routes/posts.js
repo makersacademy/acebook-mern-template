@@ -10,5 +10,6 @@ router.put("/like", PostsController.LikePost);
 router.put("/unlike", PostsController.UnlikePost);
 router.put("/comment", PostsController.CommentPost)
 router.delete("/delete", PostsController.Delete);
+router.get("/search", PostsController.FindSearch);
 
 module.exports = router;

@@ -145,10 +145,10 @@ const Post = ({post}) => {
             <p><button className="like-button" onClick={() => likePost(post._id)}>Like | {likes.length}</button></p>
             }
             {post.postedBy.includes(user_id) ?
-            <button onClick={() => {updatedMessage(post._id)}}>Edit Post</button>
+            <button className="edit-button"onClick={() => {updatedMessage(post._id)}}>Edit Post</button>
             : "" }
             {post.postedBy.includes(user_id) ?
-            <button onClick={() => {deletePost(post._id)}}>Delete Post</button>
+            <button className ="delete-button" onClick={() => {deletePost(post._id)}}>Delete Post</button>
             : "" }
             <form onSubmit={(e) => {
               e.preventDefault()

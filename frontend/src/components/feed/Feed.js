@@ -7,8 +7,10 @@ const Feed = ({ navigate }) => {
   const [token, setToken] = useState(window.localStorage.getItem("token"));
   const [message, setMessage] = useState("")
   const [image, setImg] = useState("")
+  const [search, setSearch] = useState("");
   const user_id = window.localStorage.getItem("user_id");
-  console.log(user_id)
+
+  
   
 
   const handleSubmit = async (event) => {
@@ -45,6 +47,7 @@ const Feed = ({ navigate }) => {
   }
 }
 
+
   useEffect(() => {
     if(token) {
       fetch("/posts", {
@@ -58,22 +61,75 @@ const Feed = ({ navigate }) => {
           setToken(window.localStorage.getItem("token"))
           setPosts(data.posts);
           console.log(data.posts)
+          console.log(search)
+
+          
         })
     }
     // eslint-disable-next-line
   }, [])
-    
+  
+  const handleSearchChange = (event) => {
+    setSearch(event.target.value)
+    const search = event.target.value
+    console.log("change handler: ",event.target.value)
+    console.log(search)
+  }
+
+
+  const submitSearchHandler = (event) => {
+    event.preventDefault()
+    console.log("submmit handler: ",event.target.value)
+    fetch(`/posts/search?searchTerm=${event.target.value}`, { 
+      headers: {
+        'Authorization': `Bearer ${token}`,
+        // 'searchItem': event.target.value 
+      }
+    })
+      .then(response => response.json())
+      .then(async data => {
+        window.localStorage.setItem("token", data.token)
+        setToken(window.localStorage.getItem("token"))
+        setPosts(data.posts);
+        console.log(data.posts)
+        // navigate("posts/search")
+        
+      })
+  
+  // eslint-disable-next-line
+}
+
   const logout = () => {
     window.localStorage.removeItem("token")
     navigate('/login')
   }
 
+
   if(token) {
     return(
       <>
-      <button onClick={logout}>
-        Sign Out
-      </button>
+      <header>
+        <div class="container">
+        <img src="https://i.imgur.com/kjtUiie.png" alt="logo" class="logo"></img>
+          <nav>
+            <ul>
+              <li>
+                <div class="search-container">
+                  <form className="SearchBar">
+                    <input type="text" placeholder="Search.." name="search" value={ search } onChange={handleSearchChange}></input>
+                    <button onClick={submitSearchHandler} id='submit' type="submit" className="searchButton" value= { search }>Search</button>
+                  </form>
+                </div>
+              </li>
+              <li><a href="http://localhost:3000">Homepage</a></li>
+              <li><a href="http://localhost:3000/profile">My Profile</a></li>
+              <li><a href="http://localhost:3000/posts">Feed</a></li>
+              <li><a href="http://localhost:3000/login" onClick={logout}>Sign Out</a></li>
+            </ul>
+          </nav>
+        </div>
+      </header>
+      <hr class="solid"></hr>
       <div className="flexbox">
         <div className="item">
           <br></br>

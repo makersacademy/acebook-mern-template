@@ -117,5 +117,56 @@ body {
     margin-top: 15px;
 }
 
+.edit-button {
+    cursor: pointer;
+    background: #3498db;
+    background-image: linear-gradient(to bottom, #3498db, #2980b9);
+    border-radius: 15px;
+    border-width: 1px;
+    font-family: Arial;
+    color: #ffffff;
+    font-size: 12px;
+    padding: 5px 10px 5px 10px;
+    text-decoration: none;
+}
+
+.edit-button:hover {
+    cursor: pointer;
+    background: #3cb0fd;
+    background-image: linear-gradient(to bottom, #3cb0fd, #3498db);
+    border-radius: 15px;
+    border-width: 1px;
+    font-family: Arial;
+    color: #ffffff;
+    font-size: 12px;
+    padding: 5px 10px 5px 10px;
+    text-decoration: none;
+}
+
+.delete-button {
+    cursor: pointer;
+    background: #bf3f47;
+    background-image: linear-gradient(to bottom, #ba4343, #ca3333);
+    border-radius: 15px;    
+    border-width: 1px;
+    font-family: Arial;
+    color: #ffffff;
+    font-size: 12px;
+    padding: 5px 10px 5px 10px;
+    text-decoration: none;
+}
+
+.delete-button:hover {
+    cursor: pointer;
+    background: #c55f66;
+    background-image: linear-gradient(to bottom, #c45e5e, #ca3a3a);
+    border-radius: 15px;
+    border-width: 1px;
+    font-family: Arial;
+    color: #ffffff;
+    font-size: 12px;
+    padding: 5px 10px 5px 10px;
+    text-decoration: none;
+}
 
 

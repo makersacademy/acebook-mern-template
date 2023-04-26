@@ -1,6 +1,6 @@
 const Post = require("../models/post");
 const TokenGenerator = require("../models/token_generator");
-// const updatedMessage = require("../../frontend/src/")
+
 
 const PostsController = {
   Index: (req, res) => {
@@ -95,6 +95,20 @@ const PostsController = {
       const token = await TokenGenerator.jsonwebtoken(req.user_id)
       res.status(201).json(result);
   })
+  },
+
+  FindSearch: (req, res) => {
+    console.log(req.query.searchTerm)
+    Post.find({message: { "$regex": req.query.searchTerm, "$options": "i" } },async (err, posts) => {  // .find mongoose method
+      const searchResults = posts.map( (post) => {if (post.message.includes("good")){
+            console.log("posts: ",post)}})
+
+      if (err) {
+        throw err;
+      }
+      const token = await TokenGenerator.jsonwebtoken(req.user_id)
+      res.status(200).json({ posts: posts, token: token, results: searchResults});
+    });
   },
 
 };
