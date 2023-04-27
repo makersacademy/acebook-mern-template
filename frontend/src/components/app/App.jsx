@@ -6,11 +6,11 @@ import UserProfile from "../userProfile/UserProfile";
 import FriendProfile from "../friendProfile/FriendProfile";
 import FriendList from "../friendList/FriendList";
 import Signout from "../signout/Signout";
-import React, { useState } from "react";
 import Feed from "../feed/Feed";
 import NewPost from "../newPost/NewPost";
-import { useNavigate, Routes, Route, useLocation } from "react-router-dom";
 import Navbar from "../navbar/Navbar";
+import React, { useState } from "react";
+import { useNavigate, Routes, Route, useLocation } from "react-router-dom";
 
 const App = () => {
   const location = useLocation().pathname;
@@ -44,10 +44,7 @@ const App = () => {
             path="/friend-list"
             element={<FriendList navigate={navigate} />}
           />
-          <Route
-            path="/search-friend"
-            element={<FriendList navigate={navigate} />}
-          />
+          <Route path="/connect" element={<FriendList navigate={navigate} />} />
           <Route path="/login" element={<LoginForm navigate={navigate} />} />
           <Route path="/signout" element={<Signout navigate={navigate} />} />
           <Route path="/signup" element={<SignUpForm navigate={navigate} />} />

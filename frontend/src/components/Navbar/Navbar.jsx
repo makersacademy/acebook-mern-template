@@ -48,8 +48,8 @@ const Navbar = ({ location }) => {
     if (isLoggedIn && location === "/posts") {
       return (
         <>
-          <Link to="/search-friend" data-cy="search-friend">
-            Search Friend
+          <Link to="/connect" data-cy="connect">
+            Connect
           </Link>
           <Link to="/profile" data-cy="profile">
             Profile
@@ -62,8 +62,8 @@ const Navbar = ({ location }) => {
     }
   };
 
-  const SearchFriendNav = () => {
-    if (isLoggedIn && location === "/search-friend") {
+  const FriendNav = () => {
+    if (isLoggedIn && location === "/connect") {
       return (
         <>
           <Link to="/posts" data-cy="feed">
@@ -90,8 +90,8 @@ const Navbar = ({ location }) => {
     )
       return (
         <>
-          <Link to="/search-friend" data-cy="search-friend">
-            Search Friend
+          <Link to="/connect" data-cy="connect">
+            Connect
           </Link>
           <Link to="/posts" data-cy="feed">
             Feed
@@ -116,11 +116,12 @@ const Navbar = ({ location }) => {
           {Signup()}
           {Login()}
           {FeedNav()}
-          {SearchFriendNav()}
+          {FriendNav()}
           {MainNav()}
         </nav>
       </div>
     </header>
   );
 };
+
 export default Navbar;
