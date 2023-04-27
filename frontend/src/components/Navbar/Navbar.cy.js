@@ -1,6 +1,5 @@
-import Navbar from './Navbar';
+import Navbar from "../navbar/Navbar";
 import { BrowserRouter as Router} from "react-router-dom";
-
 
 const location = () => {}
 describe("Navbar", () => {
@@ -38,8 +37,8 @@ describe("Navbar", () => {
                 );
         window.localStorage.setItem("token", "fakeToken")
         cy.get('[data-cy="logo"]')
-        cy.get('[data-cy="search-friend"]')
-        .should('contain', "Search Friend")
+        cy.get('[data-cy="connect"]')
+        .should('contain', "Connect")
         cy.get('[data-cy="profile"]')
         .should('contain', "Profile")
         cy.get('[data-cy="logout"]')
@@ -54,8 +53,8 @@ describe("Navbar", () => {
                 );
         window.localStorage.setItem("token", "fakeToken")
         cy.get('[data-cy="logo"]')
-        cy.get('[data-cy="search-friend"]')
-        .should('contain', "Search Friend")
+        cy.get('[data-cy="connect"]')
+        .should('contain', "Connect")
         cy.get('[data-cy="feed"]')
         .should('contain', "Feed")
         cy.get('[data-cy="profile"]')
@@ -64,10 +63,10 @@ describe("Navbar", () => {
         .should('contain', "Sign Out")
     })
 
-    it("renders the Acebook logo and the feed, profile and signout links when the user is logged in and on the search friends page", () => {
+    it("renders the Acebook logo and the feed, profile and signout links when the user is logged in and on the Connects page", () => {
         cy.mount(
                     <Router>
-                        <Navbar location="/search-friend"/>
+                        <Navbar location="/connect"/>
                     </Router>
                 );
         window.localStorage.setItem("token", "fakeToken")
@@ -83,7 +82,7 @@ describe("Navbar", () => {
     it("navigates the user to the feed page when they are logged in and click the Acebook logo", () => {
         cy.mount(
                     <Router>
-                        <Navbar location="/search-friend"/>
+                        <Navbar location="/connect"/>
                     </Router>
                 );
         window.localStorage.setItem("token", "fakeToken")
