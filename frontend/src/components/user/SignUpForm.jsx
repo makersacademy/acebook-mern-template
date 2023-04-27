@@ -3,9 +3,16 @@ import SubmitButton from "../submitButton/SubmitButton";
 import styles from "./SignUpForm.css";
 
 const SignUpForm = ({ navigate }) => {
+  // const [imgURL, setImgURL] = useState("");
+  const [image, setImage] = useState();
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+
+  async function postImage({image}) {
+    const formData = new FormData();
+    formData.append("image", image)
+  ;}
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -15,7 +22,7 @@ const SignUpForm = ({ navigate }) => {
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({ email: email, password: password }),
+      body: JSON.stringify({ name: name, email: email, password: password }),
     }).then((response) => {
       if (response.status === 201) {
         navigate("/login");
@@ -24,6 +31,10 @@ const SignUpForm = ({ navigate }) => {
       }
     });
   };
+
+  // const handleImgURLChange = (event) => {
+  //   setImgURL(event.target.value);
+  // };
 
   const handleNameChange = (event) => {
     setName(event.target.value);
@@ -40,6 +51,13 @@ const SignUpForm = ({ navigate }) => {
   return (
     <section className="signup">
       <form id="signup" onSubmit={handleSubmit}>
+      {/* <input
+          placeholder="img"
+          id="img"
+          type="file"
+          value={imgURL}
+          onChange={handleImgURLChange}
+        /> */}
         <input
           placeholder="Name"
           id="name"
@@ -61,7 +79,6 @@ const SignUpForm = ({ navigate }) => {
           value={password}
           onChange={handlePasswordChange}
           />
-        {/* <input id="submit" type="submit" value="Submit" /> */}
         <SubmitButton form="signup" text="Sign Up" />
       </form>
     </section>
