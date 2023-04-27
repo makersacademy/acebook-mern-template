@@ -2,7 +2,6 @@ import React, {useState, useEffect } from 'react';
 import './Post.css';
 import Modal from '../comment/Modal';
 
-
 const Post = ({post}) => {
   const user = JSON.parse(window.localStorage.getItem("user"));
   const [token, setToken] = useState(window.localStorage.getItem("token"));
@@ -10,6 +9,7 @@ const Post = ({post}) => {
   const [likes, setLikes] = useState(post.likes)
   const [show, setShow] = useState(false);
   const [comments, setComments] = useState(post.comments)
+  const [rerender, setRerender] = useState(false);
 
   useEffect(() => {
 
@@ -28,6 +28,8 @@ const Post = ({post}) => {
     }
     // eslint-disable-next-line
   }, [])
+
+
 
   const updatedMessage = async (id) => {
     const newMessage = prompt("Enter your NEW message:")
@@ -117,7 +119,7 @@ const Post = ({post}) => {
       })
     }).then(res=>res.json())
     .then(result=>{
-      console.log(result)
+      setRerender(!rerender);
     }).catch(err => {
       console.log(err)
     })
@@ -133,34 +135,40 @@ const Post = ({post}) => {
             }       
             {post.photo === "" ? false
             :
-            <article><p><img src={post.photo} alt="placeholder" className="postImg"></img></p></article>
+            <article><p><img src={post.photo} alt="placeholder" className="post-img"></img></p></article>
             }
+            <div className='btns-div'>
             {likes.includes(user._id) ?
-            <p><button className="unlike-button" onClick={() => unLikePost(post._id)}>Unlike | {likes.length}</button></p>
+            <button className="unlike-btn" onClick={() => unLikePost(post._id)}>💔   {likes.length}</button>
             :
-            <p><button className="like-button" onClick={() => likePost(post._id)}>Like | {likes.length}</button></p>
+            <button className="like-btn" onClick={() => likePost(post._id)}>🤍   {likes.length}</button>
             }
-            {post.postedBy.includes(user._id) ?
-            <button onClick={() => {updatedMessage(post._id)}}>Edit Post</button>
-            : "" }
-            {post.postedBy.includes(user._id) ?
-            <button onClick={() => {deletePost(post._id)}}>Delete Post</button>
-            : "" }
             <form onSubmit={(e) => { e.preventDefault()
               makeComment(e.target[0].value, post._id)
             }}>
-              <input type="text" placeholder="Enter a comment.."/>
-            </form>
-              <button onClick={() => setShow(true)}>Show comments</button>
-              <Modal title="Comments Tab" onClose={() => setShow(false)} show={show}>
+            <p></p>
+            <input type="text" className='comment-entry' placeholder="Enter a comment..."/>
+            <p></p>
+            <div className='comments-btn-div'><button onClick={() => setShow(true)}>Comments</button></div>
+            {post.postedBy.includes(user._id) ?
+            <h4 className="edit-text" onClick={() => {updatedMessage(post._id)}}>Edit Post</h4>
+            : "" }
+            {post.postedBy.includes(user._id) ?
+            <h4 className="delete-text" onClick={() => {deletePost(post._id)}}>Delete</h4>
+            : "" }
+              <Modal title="Comments Tab" className="comments-modal" onClose={() => setShow(false)} show={show}>
               {
                 comments.map(record => {
                   return (
-                    <h6 key="comms-box"><span key="user-name" style={{fontweight: "500"}}>Username</span> : {record.text}</h6>
+                    <h4 key="comms-box"><span key="user-name" style={{fontweight: "500"}}>Username</span> : {record.text}</h4>
                   )
                 })
               }
               </Modal>
+            </form>
+            </div>
+            <br></br>
+            <br></br>
           </div>
         </div>
       </div>
