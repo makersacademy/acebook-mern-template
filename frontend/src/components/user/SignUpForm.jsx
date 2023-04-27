@@ -1,7 +1,9 @@
 import React, { useState } from "react";
+import SubmitButton from "../submitButton/SubmitButton";
 import styles from "./SignUpForm.css";
 
 const SignUpForm = ({ navigate }) => {
+  const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
@@ -23,6 +25,10 @@ const SignUpForm = ({ navigate }) => {
     });
   };
 
+  const handleNameChange = (event) => {
+    setName(event.target.value);
+  };
+
   const handleEmailChange = (event) => {
     setEmail(event.target.value);
   };
@@ -33,7 +39,14 @@ const SignUpForm = ({ navigate }) => {
 
   return (
     <section className="signup">
-      <form onSubmit={handleSubmit}>
+      <form id="signup" onSubmit={handleSubmit}>
+        <input
+          placeholder="Name"
+          id="name"
+          type="text"
+          value={name}
+          onChange={handleNameChange}
+        />
         <input
           placeholder="Email"
           id="email"
@@ -48,7 +61,8 @@ const SignUpForm = ({ navigate }) => {
           value={password}
           onChange={handlePasswordChange}
           />
-        <input id="submit" type="submit" value="Submit" />
+        {/* <input id="submit" type="submit" value="Submit" /> */}
+        <SubmitButton form="signup" text="Sign Up" />
       </form>
     </section>
   );
