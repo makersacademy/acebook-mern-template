@@ -112,6 +112,13 @@ const Feed = ({ navigate }) => {
     navigate('/login')
   }
 
+  const feed = () => {
+    navigate('/posts')
+  }
+
+  const profile = () => {
+    navigate('/profile')
+  }
 
   if(token) {
     return(
@@ -129,40 +136,48 @@ const Feed = ({ navigate }) => {
                   </form>
                 </div>
               </li>
-              <li><a href="http://localhost:3000">Homepage</a></li>
-              <li><a href="http://localhost:3000/profile">My Profile</a></li>
-              <li><a href="http://localhost:3000/posts">Feed</a></li>
-              <li><a href="http://localhost:3000/login" onClick={logout}>Sign Out</a></li>
+              <li onClick={feed}>Feed</li>
+              <li onClick={profile}>My Profile</li>
+              <li onClick={logout}>Log Out</li>
             </ul>
           </nav>
         </div>
       </header>
-      <hr class="solid"></hr>
-      <div className="flexbox">
-        <div className="item">
-          <br></br>
-          <br></br>
+
+<div id="feed-wrap">
+      <div className="feed-flex">
+          <div className='feed-content'>
+          <div className='feed-wrap'>
           <form onSubmit={(e) => handleSubmit(e)} className="homePage" id="messageForm">
-            <label>Write your post...</label>
+            <div className='message-div'>
+            <label className='message-label'>What do you want to share, {user.firstName}?</label>
             <br></br>
             <textarea name="message" className="message" form="messageForm" value={ message } onChange={(e) => setMessage(e.target.value)}></textarea>
             <br></br>
             <br></br>
+            <div className='post-btn-div'>
             <label className="custom-file-upload">
             <input type="file" id="chooseImg" onInput={(e) => setImg(e.target.files[0])}></input>
-              Add an image
+            <h4 className='add-img'>Add image</h4>
             </label>
             <br></br>
-            <br></br>
-            <input type="submit" id="submit" value="Submit Post"></input>
+            <label className="custom-file-upload">
+              <input type="submit" id="chooseImg"></input>
+            <h4 className='submit-post-btn'>Post!</h4>
+            </label>
+            </div>
+            </div>
           </form>
-        <div id='feed' role="feed">
+          <div id='feed' role="feed">
             {posts.map(
               (post) => ( <Post post={ post } key={ post._id } /> )
             ).reverse()
             }
+          </div>
+
+          </div>
         </div>
-        </div>
+      </div>
       </div>
       </>
     )

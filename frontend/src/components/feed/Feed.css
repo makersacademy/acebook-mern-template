@@ -1,52 +1,123 @@
 
-#submit {
-    cursor: pointer;
-    background: #3498db;
-    background-image: linear-gradient(to bottom, #5685ae, #2980b9);
-    border-radius: 8px;
-    border-width: 1px;
-    font-family: Arial;
-    color: #ffffff;
-    font-size: 12px;
-    padding: 5px 10px 5px 10px;
-    text-decoration: none;
+#feed-wrap {
+    display: flex;
+    justify-content: center;
+    margin-top: 2.5%;
 }
 
-#submit:hover {
+.feed-flex {
+    display: flex;
+    margin: 100px 0px;
+}
+
+.feed-content {
+    width: 500px;
+    color: #242424;
+    background-color: #f7f6f6;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    border-radius: 5px;
+    font-weight: 600;
+    text-align: center;
+    box-sizing: border-box;
+    height: 230px;
+    padding-top: 10px;
+    margin-bottom: 90px;
+}
+
+.submit-post-btn { 
+    font-family: 'Poppins', sans-serif;
+    font-size: 14px;
+    width: 35px;
     cursor: pointer;
-    background: #41974f;
-    background-image: linear-gradient(to bottom, #5685ae, #6a8f99);
-    border-radius: 8px;
-    font-family: Arial;
-    color: #ffffff;
-    font-size: 12px;
-    padding: 5px 10px 5px 10px;
+    padding: 0px 0px 2px 0px;
+    margin-top: -37px;
+    margin-right: 50px;
+    float: right;
+    color: #1e1e1e;
     text-decoration: none;
+    background:
+    linear-gradient(
+        to right,
+        rgb(26, 32, 209),
+        rgb(6, 97, 255)
+    ),
+    linear-gradient(
+        to right,
+        rgb(4, 167, 40),
+        rgb(87, 231, 140),
+        rgb(24, 167, 76)
+    );
+    background-size: 100% 3px, 0 3px;
+    background-position: 100% 100%, 0 100%;
+    background-repeat: no-repeat;
+    transition: background-size 400ms;
+}
+.submit-post-btn:hover {
+    background-size: 0 3px, 100% 3px;
 }
 
 input[type="file"] {
     display: none;
 }
 
-.custom-file-upload {
-    border: 1px solid #000000;
-    background-color: #5685ae;
-    border-radius: 8px;
-    border-width: 1px;
-    font-size: 12px;
-    padding: 6px 12px;
+input[type="submit"] {
+    display: none;
+}
+
+.add-img { 
+    font-family: 'Poppins', sans-serif;
+    font-size: 13px;
+    width: 68px;
     cursor: pointer;
-    color: #fff;
+    padding: 0px 0px 2px 0px;
+    margin-top: -17px;
+    margin-left: 49px;
+    float: left;
+    color: #242424;
+    text-decoration: none;
+    background:
+    linear-gradient(
+        to right,
+        rgb(220, 220, 220),
+        rgb(215, 215, 215)
+    ),
+    linear-gradient(
+        to right,
+        rgb(4, 167, 40),
+        rgb(87, 231, 140),
+        rgb(24, 167, 76)
+    );
+    background-size: 100% 3px, 0 3px;
+    background-position: 100% 100%, 0 100%;
+    background-repeat: no-repeat;
+    transition: background-size 400ms;
+}
+.add-img:hover {
+    background-size: 0 3px, 100% 3px;
 }
 
 .message
 {
-    height: 100px;
-    width: 375px;
+    margin-top: 5px;
+    height: 150px;
+    width: 400px;
     font-size: 12pt;
     resize: none;
     font-family: Arial;
+    border-color: #00000022;
+    border-radius: 5px;
 }
+
+.message-div
+{
+    margin-bottom: 0px;
+}
+
+.message-label
+{
+    padding-left: 10px;
+}
+
 
 .container {
     width: 95%;
