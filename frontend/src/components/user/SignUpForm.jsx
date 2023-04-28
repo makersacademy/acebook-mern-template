@@ -4,10 +4,12 @@ import styles from "./SignUpForm.css";
 
 const SignUpForm = ({ navigate }) => {
   // const [imgURL, setImgURL] = useState("");
-  const [image, setImage] = useState();
+  const [file, setFile] = useState();
+  const [imgURL, setImgURL] = useState();
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [popout, setPopout] = useState(false);
 
   async function postImage({image}) {
     const formData = new FormData();
@@ -48,16 +50,54 @@ const SignUpForm = ({ navigate }) => {
     setPassword(event.target.value);
   };
 
+  const handleFileChange = (event) => {
+    event.preventDefault();
+    const newFile = event.target.files[0];
+    setFile(newFile);
+  }
+
+  const handleStoreFile = (event) => {
+    event.preventDefault();
+    console.log(file);
+    const formData = new FormData();
+    formData.append("file", file);
+    console.log(formData.getAll("file"));
+    fetch("/api/images", {
+      method: "post",
+      formData,
+    }).then((res) => {console.log(res.status)})
+  };
+
+  const displayPopout = () => {
+    if (popout === true){
+      return (
+        <>
+          <div className="signup-popout">
+            <form id="popout" className="signup-popout-form" onSubmit={handleStoreFile}>
+              <input className="signup-popout-file" type="file" value="" onChange={handleFileChange} accept="image/*" />
+            </form>
+            <SubmitButton form="popout" text="Upload Photo" />
+          </div>
+        </>
+      )
+    } else {
+      return;
+    }
+  }
+
   return (
     <section className="signup">
+      {displayPopout()}
+      <div className="signup-image-container">
+        <img src="" alt="Profile picture goes here."></img>
+        <button className="signup-image-button" onClick={() => {setPopout(true)}}>Update Photo</button>
+      </div>
       <form id="signup" onSubmit={handleSubmit}>
-      {/* <input
-          placeholder="img"
-          id="img"
-          type="file"
+        <input
+          id="img-url"
+          type="hidden"
           value={imgURL}
-          onChange={handleImgURLChange}
-        /> */}
+        />
         <input
           placeholder="Name"
           id="name"

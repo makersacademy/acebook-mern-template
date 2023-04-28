@@ -1,15 +1,7 @@
 const User = require("../models/user");
-const multer = require("multer");
-const upload = multer({ dest: "uploads/" });
-const { uploadFile } = require("../s3");
 
-module.exports.upload=(upload.single('image')), (req, res, next)=>{
-  next();
-};
-
-module.exports.UsersController = {
+const UsersController = {
   Create: (req, res) => {
-    // upload.single('image'); // <=== this is were we stopped !!!
     const user = new User(req.body);
     user.save((err) => {
       if (err) {
@@ -21,6 +13,4 @@ module.exports.UsersController = {
   },
 };
 
-// module.exports = UsersController;
-
-// upload.single("image")
+module.exports = UsersController;
