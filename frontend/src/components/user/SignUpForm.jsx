@@ -3,18 +3,12 @@ import SubmitButton from "../submitButton/SubmitButton";
 import styles from "./SignUpForm.css";
 
 const SignUpForm = ({ navigate }) => {
-  // const [imgURL, setImgURL] = useState("");
   const [file, setFile] = useState();
   const [imgURL, setImgURL] = useState();
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [popout, setPopout] = useState(false);
-
-  async function postImage({image}) {
-    const formData = new FormData();
-    formData.append("image", image)
-  ;}
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -33,10 +27,6 @@ const SignUpForm = ({ navigate }) => {
       }
     });
   };
-
-  // const handleImgURLChange = (event) => {
-  //   setImgURL(event.target.value);
-  // };
 
   const handleNameChange = (event) => {
     setName(event.target.value);
@@ -64,8 +54,8 @@ const SignUpForm = ({ navigate }) => {
     console.log(formData.getAll("file"));
     fetch("/api/images", {
       method: "post",
-      formData,
-    }).then((res) => {console.log(res.status)})
+      body: formData,
+    }).then((res) => {console.log(res.body)})
   };
 
   const displayPopout = () => {

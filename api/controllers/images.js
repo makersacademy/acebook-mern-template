@@ -1,6 +1,10 @@
+const { uploadFile } = require("../s3");
+
 const ImagesController = {
-  Create: (req, res) => {
-    console.log("hello");
+  Create: async (req, res) => {
+    const file = req.file;
+    const result = await uploadFile(file);
+    console.log(result);
   },
 };
 
