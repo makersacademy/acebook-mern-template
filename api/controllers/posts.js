@@ -37,10 +37,6 @@ const PostsController = {
 
   Update: async (req, res) => {
       const newMessage = req.body.message
-      console.log(newMessage)
-      const id = req.body._id
-      console.log(req.body)
-      // console.log(newMessage, id)
       await Post.findOneAndUpdate({_id:req.body._id}, { $set:{ message: newMessage  }}).exec(async (err,result)=> {
         if (err) {
           throw err;
@@ -92,7 +88,6 @@ const PostsController = {
       if (err) {
         throw err;
       }
-      console.log('this is result:', result)
       const token = await TokenGenerator.jsonwebtoken(req.user_id)
       res.status(201).json(comment);
   })
@@ -102,7 +97,7 @@ const PostsController = {
     console.log(req.query.searchTerm)
     Post.find({message: { "$regex": req.query.searchTerm, "$options": "i" } },async (err, posts) => {  // .find mongoose method
       const searchResults = posts.map( (post) => {if (post.message.includes("good")){
-            console.log("posts: ",post)}})
+      }})
 
       if (err) {
         throw err;

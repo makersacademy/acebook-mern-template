@@ -5,6 +5,8 @@
     align-items: center;
     margin-top: 10%;
 }
+
+
 .home-img {
     position: relative;
     top: -50%;
@@ -23,7 +25,7 @@
 }
 .su-form-div {
     width: 300px;
-    height: 300px;
+    height: 350px;
     margin-top: 0px;
     text-align: center;
     background-color: #fff;
@@ -38,6 +40,8 @@
 .su-form {
     margin: auto;
 }
+
+
 .sign-up-button-2 {
     background-color: rgb(25,119,242); 
     color: #fff; 
@@ -45,9 +49,6 @@
     width: 60%;
     padding: 8px;
     font-weight: bold;
-    margin: 0 auto;
-    margin-top: 3%;
-    margin-bottom: 3%;
     width: 45%;
     border-radius: 20px;
     color: #fff;
@@ -64,8 +65,6 @@
     padding: 8px;
     font-weight: bold;
     margin: 0 auto;
-    margin-top: 3%;
-    margin-bottom: 3%;
     color: #fff;
     padding: 6px;
     cursor: pointer;
@@ -79,94 +78,116 @@
     padding: 8px;
     font-weight: bold;
     margin: 0 auto;
-    margin-top: 3%;
-    margin-bottom: 3%;
     color: #fff;
     padding: 6px;
 } 
 .un-text {
-    background-color: rgb(208, 208, 208); 
-    color: #3e3e3e; 
-    font-size: 16px;
-    width: 70%;
-    padding: 8px;
-    font-weight: bold;
-    margin: auto;
-    margin-top: 3%;
-    margin-bottom: 2%;
-    border-radius: 3px;
-    padding: 6px;
+    background-color: transparent;
     border: none;
-    cursor: text;
+    border-bottom: 1px solid #9e9e9e;
+    border-radius: 0;
+    outline: none;
+    height: 3rem;
+    width: 100%;
+    font-size: 16px;
+    margin: 0 0 8px 0;
+    padding: 0;
+    box-shadow: none;
+    box-sizing: content-box;
+    transition: box-shadow .3s, border .3s;
     text-align: center;
 } 
+.un-text:focus {
+    border-bottom: 1px solid #26a69a;
+    box-shadow: 0 1px 0 0 #26a69a;
+}
+.first-name-txt:focus {
+    border-bottom: 1px solid #26a69a;
+    box-shadow: 0 1px 0 0 #26a69a;
+}
 .email-text {
-    background-color: rgb(208, 208, 208); 
-    color: #3e3e3e; 
-    font-size: 16px;
-    width: 70%;
-    padding: 8px;
-    font-weight: bold;
-    margin: auto;
-    margin-top: 2%;
-    margin-bottom: 2%;
-    border-radius: 3px;
-    padding: 6px;
+    background-color: transparent;
     border: none;
-    cursor: text;
+    border-bottom: 1px solid #9e9e9e;
+    border-radius: 0;
+    outline: none;
+    height: 3rem;
+    width: 100%;
+    font-size: 16px;
+    margin: 0 0 8px 0;
+    padding: 0;
+    box-shadow: none;
+    box-sizing: content-box;
+    transition: box-shadow .3s, border .3s;
     text-align: center;
 } 
+.email-text:focus {
+    border-bottom: 1px solid #26a69a;
+    box-shadow: 0 1px 0 0 #26a69a;
+}
 .pw-text {
-    background-color: rgb(208, 208, 208); 
-    color: #3e3e3e; 
-    font-size: 16px;
-    width: 70%;
-    padding: 8px;
-    font-weight: bold;
-    margin: auto;
-    margin-top: 2%;
-    margin-bottom: 2%;
-    border-radius: 3px;
-    padding: 6px;
+    background-color: transparent;
     border: none;
-    cursor: text;
+    border-bottom: 1px solid #9e9e9e;
+    border-radius: 0;
+    outline: none;
+    height: 3rem;
+    width: 100%;
+    font-size: 16px;
+    margin: 0 0 8px 0;
+    padding: 0;
+    box-shadow: none;
+    box-sizing: content-box;
+    transition: box-shadow .3s, border .3s;
     text-align: center;
 } 
+.pw-text:focus {
+    border-bottom: 1px solid #26a69a;
+    box-shadow: 0 1px 0 0 #26a69a;
+}
 .firstname-txt {
-    background-color: rgb(208, 208, 208); 
-    color: #3e3e3e; 
-    font-size: 16px;
-    width: 96%;
-    padding: 8px;
-    font-weight: bold;
-    margin: 0 auto;
-    margin-top: 1%;
-    margin-bottom: 2%;
-    border-radius: 3px;
-    padding: 6px;
+    background-color: transparent;
     border: none;
-    cursor: text;
-    text-align:center
+    border-bottom: 1px solid #9e9e9e;
+    border-radius: 0;
+    outline: none;
+    height: 3rem;
+    width: 100%;
+    font-size: 16px;
+    margin: 0 0 8px 0;
+    padding: 0;
+    box-shadow: none;
+    box-sizing: content-box;
+    transition: box-shadow .3s, border .3s;
+    text-align: center;
 } 
+.firstname-txt:focus {
+    border-bottom: 1px solid #26a69a;
+    box-shadow: 0 1px 0 0 #26a69a;
+}
+.lastname-txt {
+    background-color: transparent;
+    border: none;
+    border-bottom: 1px solid #9e9e9e;
+    border-radius: 0;
+    outline: none;
+    height: 3rem;
+    width: 100%;
+    font-size: 16px;
+    margin: 0 0 8px 0;
+    padding: 0;
+    box-shadow: none;
+    box-sizing: content-box;
+    transition: box-shadow .3s, border .3s;
+    text-align: center;
+} 
+.lastname-txt:focus {
+    border-bottom: 1px solid #26a69a;
+    box-shadow: 0 1px 0 0 #26a69a;
+}
 .first-name {
     float: left;
     width: 47%;
-} 
-.lastname-txt {
-    background-color: rgb(208, 208, 208); 
-    color: #3e3e3e; 
-    font-size: 16px;
-    width: 92%;
-    padding: 8px;
-    font-weight: bold;
-    margin: 0 auto;
-    margin-top: 1%;
-    margin-bottom: 2%;
-    border-radius: 3px;
-    padding: 6px;
-    border: none;
-    cursor: text;
-    text-align:center
 } 
 .last-name {
     float: right;

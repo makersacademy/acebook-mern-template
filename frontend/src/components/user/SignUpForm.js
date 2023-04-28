@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
-import './SignUpForm.css'
+import './SignUpForm.css';
+import M from 'materialize-css'
+import '../../toasts/toast.css'
 
 const SignUpForm = ({ navigate }) => {
   const [username, setUsername] = useState("")
@@ -11,6 +13,7 @@ const SignUpForm = ({ navigate }) => {
   const handleSubmit = async (event) => {
     event.preventDefault();
 
+    let status = null
     fetch( '/users', {
       method: 'post',
       headers: {
@@ -18,11 +21,16 @@ const SignUpForm = ({ navigate }) => {
       },
       body: JSON.stringify({ email: email, password: password, username: username, firstName: firstName, lastName: lastName })
     })
-      .then(response => {
-        if(response.status === 201) {
-          navigate('/login')
+      .then(res => {
+        status = res.status
+        return res.json()
+      })
+      .then(data => {
+        if (status !== 201) {
+          M.toast({html: data.message, classes: "rounded"})
         } else {
-          navigate('/signup')
+          M.toast({html: data.message, classes: "rounded"})
+          navigate('/login')
         }
       })
   }
@@ -43,10 +51,8 @@ const SignUpForm = ({ navigate }) => {
           </div>
             <input placeholder="Username" id="username" className='un-text' type='text' value={ username } onChange={(e) => setUsername(e.target.value)} />
             <br></br>
-            <br></br>
             <div className="first-name"><input placeholder="First Name" id="firstName" className='firstname-txt' type='text' value={ firstName } onChange={(e) => setFirst(e.target.value)} /></div>
             <div className="last-name"><input placeholder="Last Name" id="lastName" className='lastname-txt' type='text' value={ lastName } onChange={(e) => setLast(e.target.value)} /></div>
-            <br></br>
             <br></br>
             <input placeholder="Email" id="email" className='email-text' type='text' value={ email } onChange={(e) => setEmail(e.target.value)} />
             <input placeholder="Password" id="password" className='pw-text' type='password' value={ password } onChange={(e) => setPassword(e.target.value)} />

@@ -124,12 +124,12 @@ const Feed = ({ navigate }) => {
     return(
       <>
       <header>
-        <div class="container">
-        <img src="https://i.imgur.com/kjtUiie.png" alt="logo" class="logo"></img>
+        <div className="container">
+        <img src="https://i.imgur.com/kjtUiie.png" alt="logo" className="logo"></img>
           <nav>
             <ul>
               <li>
-                <div class="search-container">
+                <div className="search-container">
                   <form className="SearchBar">
                     <input type="text" placeholder="Search.." name="search" value={ search } onChange={handleSearchChange}></input>
                     <button onClick={submitSearchHandler} id='submit' type="submit" className="searchButton" value= { search }>Search</button>

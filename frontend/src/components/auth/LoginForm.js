@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import './LoginForm.css'
+import M from 'materialize-css'
 
 const LogInForm = ({navigate}) => {
   const [email, setEmail] = useState("");
@@ -8,26 +9,28 @@ const LogInForm = ({navigate}) => {
   const handleSubmit = async (event) => {
     event.preventDefault();
 
+    let status = null
     let response = await fetch( '/tokens', {
       method: 'post',
       headers: {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({ email: email, password: password })
+    })    
+    .then(res => {
+      status = res.status
+      return res.json()
     })
-
-    if(response.status !== 201) {
-      console.log("yay")
-      navigate('/login')
-
-    } else {
-      console.log("oop")
-      let data = await response.json()
-      console.log(data)
-      window.localStorage.setItem("token", data.token)
-      window.localStorage.setItem("user", JSON.stringify(data.user))
-      navigate('/posts');
-    }
+    .then(data => {
+      if (status !== 201) {
+        M.toast({html: data.message, classes: "rounded"})
+      } else {
+        M.toast({html: data.message, classes: "rounded"})
+        window.localStorage.setItem("token", data.token)
+        window.localStorage.setItem("user", JSON.stringify(data.user))
+        navigate('/posts')
+      }
+    })
   }
 
   const handleEmailChange = (event) => {

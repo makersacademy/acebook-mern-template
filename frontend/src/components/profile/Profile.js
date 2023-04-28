@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import './Profile.css';
+import M from 'materialize-css'
 
 const Profile = ({ navigate }) => {
     const [token, setToken] = useState(window.localStorage.getItem("token"));
@@ -13,6 +14,7 @@ const Profile = ({ navigate }) => {
     const handleSubmit = async (event) => {
         event.preventDefault()
         
+        let status = null
         if (!firstName || !lastName || !username) {
             console.log("enter all fields bla bla bla")
         } else {
@@ -25,7 +27,7 @@ const Profile = ({ navigate }) => {
                     username: username, 
                     profilePic: user.profilePic 
                 }
-                fetch( '/users', {
+                await fetch( '/users', {
                     method: 'put',
                     headers: {
                     'Authorization': `Bearer ${token}`,
@@ -33,19 +35,26 @@ const Profile = ({ navigate }) => {
                 },
                     body: JSON.stringify(params)
                 })  
-                .then(res => res.json())
+                .then(res => {
+                    status = res.status
+                    return res.json()
+                })
                 .then(data => {
-                    window.localStorage.removeItem("user")
-                    const user = {_id: data._id, email: data.email, username: data.username, firstName: data.firstName, lastName: data.lastName, profilePic: data.profilePic}
-                    window.localStorage.setItem("user", JSON.stringify(user))
-                    setRerender(!rerender);
+                    console.log(data.message)
+                    if (status !== 201) {
+                        M.toast({html: data.message, classes: "rounded"})
+                    } else {
+                        const storeUser = {_id: user._id, email: user.email, username: data.username, firstName: data.firstName, lastName: data.lastName, profilePic: data.profilePic}
+                        window.localStorage.setItem("user", JSON.stringify(storeUser))
+                        setRerender(!rerender);
+                    }
                 })
             } else {
                 const data = new FormData()   // << learn more about FormData / used to upload data
                 data.append("file", profilePic)
                 data.append("upload_preset", "acebook")
                 data.append("cloud_name", "dhocnl7tm")
-                fetch("https://api.cloudinary.com/v1_1/dhocnl7tm/image/upload", {
+                await fetch("https://api.cloudinary.com/v1_1/dhocnl7tm/image/upload", {
                     method: "post",
                     body: data
                 })
@@ -67,12 +76,19 @@ const Profile = ({ navigate }) => {
                     },
                     body: JSON.stringify(params)
                     })
-                    .then(res => res.json())
+                    .then(res => {
+                        status = res.status
+                        return res.json()
+                    })
                     .then(data => {
-                        window.localStorage.removeItem("user")
-                        const user = {_id: data._id, email: data.email, username: data.username, firstName: data.firstName, lastName: data.lastName, profilePic: data.profilePic}
-                        window.localStorage.setItem("user", JSON.stringify(user))
-                        setRerender(!rerender);
+                        console.log(data)
+                        if (status !== 201) {
+                            M.toast({html: data.message, classes: "rounded"})
+                        } else {
+                            const storeUser = {_id: user._id, email: user.email, username: data.username, firstName: data.firstName, lastName: data.lastName, profilePic: data.profilePic}
+                            window.localStorage.setItem("user", JSON.stringify(storeUser))
+                            setRerender(!rerender);
+                        }
                     })
                 })  
             }
@@ -81,6 +97,16 @@ const Profile = ({ navigate }) => {
     }
     return (
         <div id="pf-page">
+            <div className="pf-card">
+                <div className="friends-title-div">
+                    <div className='friends-title'>
+                        <p className="pf-text">Your friends</p>
+                    </div>
+                    <div className='search-div'>
+                        <input placeholder="🔍" id="search-friends" className='search-friends' type='text' />
+                    </div>
+                </div>
+            </div>
             <div className="pf-card">
                 <div className="pf-card-items">
                     <b className="pf-username">Username</b>
@@ -93,7 +119,7 @@ const Profile = ({ navigate }) => {
                     <div className="pf-name-div"><b className="pf-name">{user.firstName} {user.lastName}</b></div>
                 </div>
             </div>
-            <div className="pf-form-div">
+            <div className="pf-card">
                 <form onSubmit={handleSubmit} className="pf-form">
                     <p className="pf-text">Edit your profile:</p>
                     <div className="first-name"><input placeholder="First name" id="firstName" className='firstname-txt' type='text' value={ firstName } onChange={(e) => setFirst(e.target.value)} /></div>

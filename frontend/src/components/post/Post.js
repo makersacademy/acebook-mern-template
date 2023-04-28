@@ -100,7 +100,6 @@ const Post = ({post}) => {
     .then( data => {
       let updateComments = comments.concat(data)
       setComments(updateComments)
-
   })
   }
 
@@ -143,12 +142,12 @@ const Post = ({post}) => {
             :
             <button className="like-btn" onClick={() => likePost(post._id)}>🤍   {likes.length}</button>
             }
-            <form onSubmit={(e) => { e.preventDefault()
-              makeComment(e.target[0].value, post._id)
-            }}>
-            <p></p>
-            <input type="text" className='comment-entry' placeholder="Enter a comment..."/>
-            <p></p>
+            <form onSubmit={(e) => { 
+              makeComment(e.target[0].value, post._id) 
+              e.preventDefault()
+              }}>
+              <input type="text" className='comment-entry' placeholder="Enter a comment..."/>
+            </form>
             <div className='comments-btn-div'><button onClick={() => setShow(true)}>Comments</button></div>
             {post.postedBy.includes(user._id) ?
             <h4 className="edit-text" onClick={() => {updatedMessage(post._id)}}>Edit Post</h4>
@@ -165,7 +164,6 @@ const Post = ({post}) => {
                 })
               }
               </Modal>
-            </form>
             </div>
             <br></br>
             <br></br>
