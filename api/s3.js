@@ -1,10 +1,12 @@
 const fs = require('fs');
 const AWS = require('aws-sdk');
+const dotenv = require('dotenv');
+dotenv.config();
 
-const bucketName = process.env.REACT_APP_AWS_BUCKET_NAME;
-const region = process.env.REACT_APP_AWS_BUCKET_REGION;
-const accessKeyId = process.env.REACT_APP_AWS_ACCESS_KEY;
-const secretAccessKey = process.env.REACT_APP_AWS_SECRET_KEY;
+const bucketName = process.env.AWS_BUCKET_NAME;
+const region = process.env.AWS_BUCKET_REGION;
+const accessKeyId = process.env.AWS_ACCESS_KEY;
+const secretAccessKey = process.env.AWS_SECRET_KEY;
 
 const s3Client = new AWS.S3({
   region: region,
