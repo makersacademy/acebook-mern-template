@@ -3,10 +3,10 @@ import SubmitButton from "../submitButton/SubmitButton";
 import styles from "./SignUpForm.css";
 
 const SignUpForm = ({ navigate }) => {
-  const placeholderURL =
-    "https://acebook-brachiosauruses.s3.eu-north-1.amazonaws.com/511c4db929c70c0f507903b7d36ad5ae";
   const [file, setFile] = useState();
-  const [imgURL, setImgURL] = useState(placeholderURL);
+  const [imgURL, setImgURL] = useState(
+    "https://acebook-brachiosauruses.s3.eu-north-1.amazonaws.com/93ff7f683548f25693ac389aefb1f755"
+  );
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -41,20 +41,20 @@ const SignUpForm = ({ navigate }) => {
       body: formData,
     })
       .then((response) => response.json())
-      .then(async (data) => {
+      .then((data) => {
         setImgURL(data.url);
       });
   };
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-
+    
     fetch("/api/users", {
       method: "post",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({ name: name, email: email, password: password }),
+      body: JSON.stringify({ image: imgURL, name: name, email: email, password: password }),
     }).then((response) => {
       if (response.status === 201) {
         navigate("/login");
@@ -104,7 +104,6 @@ const SignUpForm = ({ navigate }) => {
         </button>
       </div>
       <form id="signup" onSubmit={handleSubmit}>
-        <input id="img-url" type="hidden" value={imgURL} />
         <input
           placeholder="Name"
           id="name"

@@ -6,3 +6,8 @@
     align-items: center;
     justify-content: center;
 }
+
+.signup-popout {
+  position: absolute;
+  top: 20vh;
+}

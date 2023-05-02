@@ -5,6 +5,7 @@ const logger = require("morgan");
 const JWT = require("jsonwebtoken");
 const multer = require("multer");
 const upload = multer({ dest: "uploads/" });
+const parser = require("body-parser");
 
 const postsRouter = require("./routes/posts");
 const tokensRouter = require("./routes/tokens");
@@ -14,10 +15,9 @@ const imagesRouter = require("./routes/images");
 const app = express();
 
 // setup for receiving JSON
-// app.use(express.json())
+// app.use(express.json());
 
 app.use(logger("dev"));
-// app.use(express.json());
 app.use(express.static(path.join(__dirname, "public")));
 
 // middleware function to check for valid tokens
@@ -43,7 +43,7 @@ const tokenChecker = (req, res, next) => {
 // route setup
 app.use("/posts", tokenChecker, postsRouter);
 app.use("/tokens", tokensRouter);
-app.use("/users", usersRouter);
+app.use("/users", parser.json(), usersRouter);
 app.use("/images", upload.single("file"), imagesRouter);
 
 // catch 404 and forward to error handler
