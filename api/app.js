@@ -14,9 +14,6 @@ const imagesRouter = require("./routes/images");
 
 const app = express();
 
-// setup for receiving JSON
-// app.use(express.json());
-
 app.use(logger("dev"));
 app.use(express.static(path.join(__dirname, "public")));
 
@@ -41,8 +38,8 @@ const tokenChecker = (req, res, next) => {
 };
 
 // route setup
-app.use("/posts", tokenChecker, postsRouter);
-app.use("/tokens", tokensRouter);
+app.use("/posts", parser.json(), tokenChecker, postsRouter);
+app.use("/tokens", parser.json(), tokensRouter);
 app.use("/users", parser.json(), usersRouter);
 app.use("/images", upload.single("file"), imagesRouter);
 
