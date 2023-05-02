@@ -54,7 +54,7 @@ const SignUpForm = ({ navigate }) => {
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({ image: imgURL, name: name, email: email, password: password }),
+      body: JSON.stringify({ imageURL: imgURL, name: name, email: email, password: password }),
     }).then((response) => {
       if (response.status === 201) {
         navigate("/login");
@@ -81,7 +81,7 @@ const SignUpForm = ({ navigate }) => {
                 accept="image/*"
               />
             </form>
-            <SubmitButton form="popout" text="Upload Photo" />
+            <SubmitButton id="image-submit" form="popout" text="Upload Photo" />
           </div>
         </>
       );
@@ -125,7 +125,7 @@ const SignUpForm = ({ navigate }) => {
           value={password}
           onChange={handlePasswordChange}
         />
-        <SubmitButton form="signup" text="Sign Up" />
+        <SubmitButton id="user-submit" form="signup" text="Sign Up" />
       </form>
     </section>
   );

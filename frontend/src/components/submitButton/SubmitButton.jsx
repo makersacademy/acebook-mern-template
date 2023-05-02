@@ -2,14 +2,12 @@ import React from "react";
 import styles from "./SubmitButton.css";
 
 const SubmitButton = (props) => {
-  const { text, form } = props;
-
+  const { id, text, form } = props;
 
   return (
-    <button
-      className="submit-button"
-      type="submit"
-      form={form}>{text}</button>
+    <button id={id} className="submit-button" type="submit" form={form}>
+      {text}
+    </button>
   );
 };
 
