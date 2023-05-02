@@ -4,6 +4,7 @@ import styles from "./SignUpForm.css";
 
 const SignUpForm = ({ navigate }) => {
   const [file, setFile] = useState();
+  const [fileName, setFileName] = useState("");
   const [imgURL, setImgURL] = useState(
     "https://acebook-brachiosauruses.s3.eu-north-1.amazonaws.com/93ff7f683548f25693ac389aefb1f755"
   );
@@ -28,6 +29,14 @@ const SignUpForm = ({ navigate }) => {
     event.preventDefault();
     const newFile = event.target.files[0];
     setFile(newFile);
+    var reader = new FileReader();
+    var imgtag = document.getElementById("selected-image");
+    imgtag.title = newFile.name;
+    reader.onload = (event) => {
+      imgtag.src = event.target.result;
+    };
+    reader.readAsDataURL(newFile);
+    setFileName(newFile.name);
   };
 
   const handleStoreFile = (event) => {
@@ -44,7 +53,8 @@ const SignUpForm = ({ navigate }) => {
       .then((data) => {
         setImgURL(data.url);
       })
-      .then(setPopout(false));
+      .then(setPopout(false))
+      .then(setFileName(""));
   };
 
   const handleSubmit = async (event) => {
@@ -79,7 +89,16 @@ const SignUpForm = ({ navigate }) => {
               id="popout"
               className="signup-popout-form"
               onSubmit={handleStoreFile}>
+              <div className="upload-img-container">
+                <img
+                  src=""
+                  className="upload-img"
+                  id="selected-image"
+                />
+              </div>
+              <label htmlFor="image-upload">{fileName}</label>
               <input
+                id="image-upload"
                 className="signup-popout-file"
                 type="file"
                 value=""
@@ -87,7 +106,8 @@ const SignUpForm = ({ navigate }) => {
                 accept="image/*"
               />
             </form>
-            <SubmitButton id="image-submit" form="popout" text="Upload Photo" />
+            <SubmitButton id="image-submit" form="popout" text="Select Photo" />
+            <h3 className="signup-cancel-button" onClick={() => {setPopout(false)}}>cancel</h3>
           </div>
         </div>
       );
