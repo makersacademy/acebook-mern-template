@@ -10,8 +10,19 @@ describe("User model", () => {
     });
   });
 
+  it("has an image URL", () => {
+    const user = new User({
+      imageURL: "www.placeholder-img.com",
+      name: "Noelia",
+      email: "someone@example.com",
+      password: "password",
+    });
+    expect(user.imageURL).toEqual("www.placeholder-img.com");
+  })
+
   it("has a username", () => {
     const user = new User({
+      imageURL: "www.placeholder-img.com",
       name: "Noelia",
       email: "someone@example.com",
       password: "password",
@@ -21,6 +32,7 @@ describe("User model", () => {
 
   it("has an email address", () => {
     const user = new User({
+      imageURL: "www.placeholder-img.com",
       name: "Noelia",
       email: "someone@example.com",
       password: "password",
@@ -30,6 +42,7 @@ describe("User model", () => {
 
   it("has a password", () => {
     const user = new User({
+      imageURL: "www.placeholder-img.com",
       name: "Noelia",
       email: "someone@example.com",
       password: "password",
@@ -47,6 +60,7 @@ describe("User model", () => {
 
   it("can save a user", (done) => {
     const user = new User({
+      imageURL: "www.placeholder-img.com",
       name: "Jack",
       email: "someone@example.com",
       password: "password",
@@ -59,6 +73,7 @@ describe("User model", () => {
         expect(err).toBeNull();
 
         expect(users[0]).toMatchObject({
+          imageURL: "www.placeholder-img.com",
           name: "Jack",
           email: "someone@example.com",
           password: "password",

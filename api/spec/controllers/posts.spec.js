@@ -10,7 +10,7 @@ let token;
 
 describe("/posts", () => {
   beforeAll( async () => {
-    const user = new User({name: "Test", email: "test@test.com", password: "12345678"});
+    const user = new User({imageURL: "www.placeholder-image.com", name: "Test", email: "test@test.com", password: "12345678"});
     await user.save();
 
     token = JWT.sign({
