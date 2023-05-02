@@ -43,18 +43,24 @@ const SignUpForm = ({ navigate }) => {
       .then((response) => response.json())
       .then((data) => {
         setImgURL(data.url);
-      });
+      })
+      .then(setPopout(false));
   };
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    
+
     fetch("/api/users", {
       method: "post",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({ imageURL: imgURL, name: name, email: email, password: password }),
+      body: JSON.stringify({
+        imageURL: imgURL,
+        name: name,
+        email: email,
+        password: password,
+      }),
     }).then((response) => {
       if (response.status === 201) {
         navigate("/login");
@@ -67,7 +73,7 @@ const SignUpForm = ({ navigate }) => {
   const displayPopout = () => {
     if (popout === true) {
       return (
-        <>
+        <div className="signup-popout-container">
           <div className="signup-popout">
             <form
               id="popout"
@@ -83,7 +89,7 @@ const SignUpForm = ({ navigate }) => {
             </form>
             <SubmitButton id="image-submit" form="popout" text="Upload Photo" />
           </div>
-        </>
+        </div>
       );
     } else {
       return;
@@ -93,40 +99,47 @@ const SignUpForm = ({ navigate }) => {
   return (
     <section className="signup">
       {displayPopout()}
-      <div className="signup-image-container">
-        <img src={imgURL} alt="Profile picture goes here."></img>
+      <div className="signup-upload-container">
+        <div className="signup-img-container">
+          <img
+            src={imgURL}
+            alt="Profile picture goes here."
+            className="signup-img"></img>
+        </div>
         <button
           className="signup-image-button"
           onClick={() => {
             setPopout(true);
           }}>
-          Update Photo
+          UPDATE PHOTO
         </button>
       </div>
-      <form id="signup" onSubmit={handleSubmit}>
-        <input
-          placeholder="Name"
-          id="name"
-          type="text"
-          value={name}
-          onChange={handleNameChange}
-        />
-        <input
-          placeholder="Email"
-          id="email"
-          type="text"
-          value={email}
-          onChange={handleEmailChange}
-        />
-        <input
-          placeholder="Password"
-          id="password"
-          type="password"
-          value={password}
-          onChange={handlePasswordChange}
-        />
-        <SubmitButton id="user-submit" form="signup" text="Sign Up" />
-      </form>
+      <div className="signup-form-container">
+        <form id="signup" className="signup-form" onSubmit={handleSubmit}>
+          <input
+            placeholder="Name"
+            id="name"
+            type="text"
+            value={name}
+            onChange={handleNameChange}
+          />
+          <input
+            placeholder="Email"
+            id="email"
+            type="text"
+            value={email}
+            onChange={handleEmailChange}
+          />
+          <input
+            placeholder="Password"
+            id="password"
+            type="password"
+            value={password}
+            onChange={handlePasswordChange}
+          />
+          <SubmitButton id="user-submit" form="signup" text="Sign Up" />
+        </form>
+      </div>
     </section>
   );
 };
