@@ -8,5 +8,8 @@
     "moment": "^2.29.4",
     "multer": "^1.4.5-lts.1",
     "react-bootstrap": "^2.7.2"
+  },
+  "devDependencies": {
+    "eslint-plugin-cypress": "^2.13.2"
   }
 }

@@ -58,6 +58,11 @@ const SignUpForm = ({ navigate }) => {
 
   return (
     <Container>
+      <div className="d-flex justify-content-end mt-3">
+          <Button variant="outline-primary" size="sm" href="/login">
+            Already have an account? Sign in now
+          </Button>
+        </div>
       <h1 className="d-flex justify-content-center mt-5">acebook.</h1>
       <div className="d-flex justify-content-center sign-up-form">
         <Form onSubmit={handleSubmit} className="">
