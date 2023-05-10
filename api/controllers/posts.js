@@ -16,13 +16,13 @@ const PostsController = {
   // It creates a post and saves it to the database
   Create: (req, res) => {
     const post = new Post(req.body);
-    post.save(async (err) => {
+    post.save(async (err, post) => {
       if (err) {
         throw err;
       }
 
       const token = await TokenGenerator.jsonwebtoken(req.user_id)
-      res.status(201).json({ message: 'OK', token: token });
+      res.status(201).json({ message: 'OK', token: token, post: post });
     });
   },
 };

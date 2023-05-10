@@ -21,31 +21,34 @@ const Feed = ({ navigate }) => {
         })
     }
   }, [])
-    
 
   const logout = () => {
     window.localStorage.removeItem("token")
     navigate('/login')
   }
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
-    fetch("/posts", {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'Authorization': `Bearer ${token}`
-      },
-      body: JSON.stringify({ message: newPost })
-    })
-      .then(response => response.json())
-      .then(data => {
-        // setPosts([{ ...data.post, _id: data.post.id }, ...posts]);
-        window.location.reload();
-        setNewPost('');
-      })
-    
-  }
+  
+    try {
+      const response = await fetch("/posts", {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}`
+        },
+        body: JSON.stringify({ message: newPost })
+      });
+  
+      const data = await response.json();
+  
+      setPosts([{ ...data.post, _id: data.post._id}, ...posts]);
+      setNewPost('');
+  
+    } catch (error) {
+      console.error(error);
+    }
+  };
   
   if(token) {
     return(
