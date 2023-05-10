@@ -6,7 +6,7 @@ const Feed = ({ navigate }) => {
   const [posts, setPosts] = useState([]);
   const [needsRefresh, setRefresh] = useState(false);
   const [token, setToken] = useState(window.localStorage.getItem("token"));
-  console.log(needsRefresh);
+
   useEffect(() => {
     if(token) {
       fetch("/posts", {
@@ -22,8 +22,9 @@ const Feed = ({ navigate }) => {
           setRefresh(false);
         })
     }
-  }, [needsRefresh])
-    
+  }, [needsRefresh]) //Dependency - when needsRefresh (a boolean)
+    // changes, it call for the useEffect to be rerun - refreshing the posts
+    // pass () => setRefresh(true) to any component that needs to refresh and call it in the component
 
   const logout = () => {
     window.localStorage.removeItem("token")
