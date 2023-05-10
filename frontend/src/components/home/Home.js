@@ -4,7 +4,7 @@ import './Home.css';
 
 const Home = () => {
   return (
-    <div>
+    <div className="navbar">
       <h1>Welcome to Acebook</h1>
       <nav>
         <ul>
