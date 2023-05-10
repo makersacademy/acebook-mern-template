@@ -12,7 +12,7 @@ const LogInForm = ({ navigate }) => {
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({ email: email, password: password })
+      body: JSON.stringify({ email: email, password: password, })
     })
 
     if(response.status !== 201) {
@@ -21,6 +21,7 @@ const LogInForm = ({ navigate }) => {
     } else {
       console.log("oop")
       let data = await response.json()
+      
       window.localStorage.setItem("token", data.token)
       navigate('/posts');
     }
