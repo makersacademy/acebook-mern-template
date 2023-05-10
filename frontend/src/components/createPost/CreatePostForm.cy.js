@@ -3,7 +3,7 @@ const navigate = () => {}
 
 describe("Making a post", () => {
   it("calls the /posts endpoint", () => {
-    cy.mount(<CreatePostForm navigate={navigate}/>)
+    cy.mount(<CreatePostForm onCreated={() => {}}/>)
 
     cy.intercept('POST', '/posts', { token: "fakeToken", message: "OK" }).as("createPostRequest")
 

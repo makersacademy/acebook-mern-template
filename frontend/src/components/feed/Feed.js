@@ -4,8 +4,9 @@ import CreatePostForm from '../createPost/CreatePostForm';
 
 const Feed = ({ navigate }) => {
   const [posts, setPosts] = useState([]);
+  const [needsRefresh, setRefresh] = useState(false);
   const [token, setToken] = useState(window.localStorage.getItem("token"));
-
+  console.log(needsRefresh);
   useEffect(() => {
     if(token) {
       fetch("/posts", {
@@ -17,10 +18,11 @@ const Feed = ({ navigate }) => {
         .then(async data => {
           window.localStorage.setItem("token", data.token)
           setToken(window.localStorage.getItem("token"))
-          setPosts(data.posts);
+          setPosts(data.posts)
+          setRefresh(false);
         })
     }
-  }, [])
+  }, [needsRefresh])
     
 
   const logout = () => {
@@ -35,7 +37,7 @@ const Feed = ({ navigate }) => {
             <button onClick={logout}>
               Logout
             </button>
-            <CreatePostForm/> 
+            <CreatePostForm onCreated={() => setRefresh(true)}/> 
           <div id='feed' role="feed">
               {posts.map(
                 (post) => ( <Post post={ post } key={ post._id } /> )

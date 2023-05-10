@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-const CreatePostForm = ({ navigate }) => {
+const CreatePostForm = ({ onCreated }) => {
   const [message, setMessage] = useState("");
   const [token, setToken] = useState(window.localStorage.getItem("token"));
 
@@ -15,6 +15,8 @@ const CreatePostForm = ({ navigate }) => {
       },
       body: JSON.stringify({ message: message })
     })
+
+    onCreated();
   }
 
   const handleMessageChange = (event) => {
