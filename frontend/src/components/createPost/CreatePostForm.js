@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 
 const CreatePostForm = ({ navigate }) => {
   const [message, setMessage] = useState("");
+  const [token, setToken] = useState(window.localStorage.getItem("token"));
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -10,6 +11,7 @@ const CreatePostForm = ({ navigate }) => {
       method: 'post',
       headers: {
         'Content-Type': 'application/json',
+        'Authorization': `Bearer ${token}`
       },
       body: JSON.stringify({ message: message })
     })

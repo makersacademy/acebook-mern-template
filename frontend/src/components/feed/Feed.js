@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import Post from '../post/Post'
+import CreatePostForm from '../createPost/CreatePostForm';
 
 const Feed = ({ navigate }) => {
   const [posts, setPosts] = useState([]);
@@ -34,6 +35,7 @@ const Feed = ({ navigate }) => {
             <button onClick={logout}>
               Logout
             </button>
+            <CreatePostForm/> 
           <div id='feed' role="feed">
               {posts.map(
                 (post) => ( <Post post={ post } key={ post._id } /> )
