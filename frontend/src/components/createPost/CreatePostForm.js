@@ -15,18 +15,6 @@ const CreatePostForm = ({ navigate }) => {
       },
       body: JSON.stringify({ message: message })
     })
-
-    if(response.status !== 201) {
-      //bad reponse
-      console.log("bad response - != 201")
-      //refresh posts
-      navigate('/posts')
-    } else {
-      //good response
-      console.log("Good response - 201")
-      //refresh posts
-      navigate('/posts');
-    }
   }
 
   const handleMessageChange = (event) => {
