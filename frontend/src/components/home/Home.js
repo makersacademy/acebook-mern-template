@@ -1,13 +1,14 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import SignUpForm from '../user/SignUpForm';
 import './Home.css';
 
 const Home = () => {
   return (
-    <div className="navbar">
-      <h1>Welcome to Acebook</h1>
-      <nav>
-        <ul>
+    <div className="container">
+      <nav className="navbar">
+        <div className="navbar-brand">Welcome To Acebook</div>
+        <ul className="navbar-nav">
           <li>
             <Link to="/signup">Sign Up</Link>
           </li>
@@ -16,6 +17,7 @@ const Home = () => {
           </li>
         </ul>
       </nav>
+      <SignUpForm />
     </div>
   );
 }

@@ -8,7 +8,7 @@ describe('Home', () => {
         <Home />
       </BrowserRouter>
     );
-    cy.contains('Welcome to Acebook');
+    cy.contains(/welcome to acebook/i);
   });
 });
 
