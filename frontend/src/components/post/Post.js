@@ -6,6 +6,4 @@ const Post = ({post}) => {
   )
 }
 
-// {"_id": token, "message": string}
-
 export default Post;

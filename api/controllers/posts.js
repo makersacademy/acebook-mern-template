@@ -10,7 +10,7 @@ const PostsController = {
       }
       // checks if the user is logged in and matches the user_id
       const token = await TokenGenerator.jsonwebtoken(req.user_id)
-      res.status(200).json({ posts: posts, token: token });
+      res.status(200).json({ posts: posts.reverse(), token: token });
     });
   },
   // It creates a post and saves it to the database
