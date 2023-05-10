@@ -59,9 +59,9 @@ const Feed = ({ navigate }) => {
         <form onSubmit={handleSubmit}>
           <label>
             New Post:
-            <input type="text" value={newPost} onChange={(event) => setNewPost(event.target.value)} />
+            <input id="postText" type="text" value={newPost} onChange={(event) => setNewPost(event.target.value)} />
           </label>
-          <button type="submit">Post</button>
+          <button id="post" type="submit">Post</button>
         </form>
         <div id='feed' role="feed">
             {posts.map(

@@ -24,4 +24,27 @@ describe("Feed", () => {
       .and('contain.text', "Hello again, world")
     })
   })
+
+  it("submit a post using the form and display it", () => {
+    window.localStorage.setItem("token", "fakeToken")
+    cy.mount(<Feed navigate={navigate}/>)
+    cy.intercept('POST', '/posts', { message: "OK", token: "blah" }).as("newPost")
+    cy.get("#postText").type("Hello, world")
+    cy.get("#post").click()
+    cy.wait("@newPost").then( interception => {
+      expect(interception.response.body.message).to.eq("OK")
+    })
+    
+    cy.intercept('GET', '/posts', (req) => {
+        req.reply({
+          statusCode: 200,
+          body: { posts: [
+            {_id: 1, message: "Hello, world"}
+          ] }
+        })
+      }
+    ).as("getPosts")
+
+    cy.mount(<Feed navigate={navigate}/>)
+  })
 })
