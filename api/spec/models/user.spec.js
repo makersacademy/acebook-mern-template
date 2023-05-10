@@ -59,7 +59,7 @@ describe("User model", () => {
     });
   });
 
-  it("can make a username ", () => { 
+  it("has a username", () => { 
     const user = new User({ 
       email: "someone@example.com", 
       password: "password", 
