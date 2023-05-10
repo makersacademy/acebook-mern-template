@@ -7,7 +7,6 @@ describe("/tokens", () => {
     beforeAll( async () => {
       const user = new User({email: "test@test.com", password: "12345678", username: "username"});
       await user.save();
-    console.log(user)
   });
 
   afterAll( async () => {
