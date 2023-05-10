@@ -87,17 +87,24 @@ describe("/posts", () => {
   });
 
   describe("GET, when token is present", () => {
-    test("returns every post in the collection", async () => {
-      let post1 = new Post({ message: "howdy!" });
-      let post2 = new Post({ message: "hola!" });
+    test("returns posts in order from newest to oldest", async () => {
+      let post1 = new Post({
+        message: "howdy!",
+        dateCreated: "2023-05-10T20:51:59.427Z",
+      });
+      let post2 = new Post({
+        message: "hola!",
+        dateCreated: "2023-05-10T22:51:59.427Z",
+      });
       await post1.save();
       await post2.save();
       let response = await request(app)
         .get("/posts")
         .set("Authorization", `Bearer ${token}`)
         .send({ token: token });
+      console.log(response.body.posts);
       let messages = response.body.posts.map((post) => post.message);
-      expect(messages).toEqual(["howdy!", "hola!"]);
+      expect(messages).toEqual(["hola!", "howdy!"]);
     });
 
     test("the response code is 200", async () => {
@@ -156,3 +163,13 @@ describe("/posts", () => {
     });
   });
 });
+
+// test "GET, index returns posts in order"
+// test("does not return a new token", async () => {
+//   let post1 = new Post({ message: "howdy!" });
+//   let post2 = new Post({ message: "hola!" });
+//   await post2.save();
+//   await post1.save();
+//   let response = await request(app).get("/posts");
+//   console.log(response.body);
+//   expect(response.body).toEqual(undefined);

@@ -28,17 +28,16 @@ const Feed = ({ navigate }) => {
 
   if (token) {
     return (
-      <>
+      <div>
+        {console.log(posts)}
         <h2>Posts</h2>
         <button onClick={logout}>Logout</button>
         <div id="feed" role="feed">
-          {posts
-            .sort((a, b) => new Date(b.lastUpdated) - new Date(a.lastUpdated))
-            .map((post) => (
-              <Post post={post} key={post._id} />
-            ))}
+          {posts.map((post) => (
+            <Post post={post} key={post._id} />
+          ))}
         </div>
-      </>
+      </div>
     );
   } else {
     navigate("/signin");

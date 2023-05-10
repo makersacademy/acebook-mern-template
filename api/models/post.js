@@ -2,7 +2,7 @@ const mongoose = require("mongoose");
 
 const PostSchema = new mongoose.Schema({
   message: { type: String },
-  lastUpdated: { type: Date, default: Date.now },
+  dateCreated: { type: Date, default: Date.now },
 });
 
 const Post = mongoose.model("Post", PostSchema);
