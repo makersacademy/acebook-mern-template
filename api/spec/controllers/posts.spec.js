@@ -36,7 +36,7 @@ describe("/posts", () => {
       let response = await request(app)
         .post("/posts")
         .set("Authorization", `Bearer ${token}`)
-        .send({ message: "hello world", token: token });
+        .send({ message: "hello world", like: 0, token: token });
       expect(response.status).toEqual(201);
     });
   
@@ -48,6 +48,16 @@ describe("/posts", () => {
       let posts = await Post.find();
       expect(posts.length).toEqual(1);
       expect(posts[0].message).toEqual("hello world");
+    });
+
+    test("creates a new post", async () => {
+      await request(app)
+        .post("/posts")
+        .set("Authorization", `Bearer ${token}`)
+        .send({ message: "hello world", token: token });
+      let posts = await Post.find();
+      expect(posts.length).toEqual(1);
+      expect(posts[0].like).toEqual(0);
     });
   
     test("returns a new token", async () => {
