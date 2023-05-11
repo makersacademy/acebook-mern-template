@@ -23,6 +23,20 @@ const PostsController = {
       res.status(201).json({ message: "OK", token: token });
     });
   },
+  UpdateLikeCount: (req, res) => {
+    const postId = req.params.postId
+    Post.findByIdAndUpdate(
+      postId,
+      { $inc: { likeCount: 1} },
+      { new: true },
+      (err, post) => {
+        if(err) {
+          throw err;
+        }
+        res.status(200).json({ message: "OK", post: post})
+      }
+    )
+  }
 };
 
 module.exports = PostsController;
