@@ -1,5 +1,6 @@
-import React, { useEffect, useState } from "react";
-import Post from "../post/Post";
+import React, { useEffect, useState } from 'react';
+import Post from '../post/Post'
+import CreatePostForm from '../createPost/CreatePostForm';
 
 const Feed = ({ navigate }) => {
   const [posts, setPosts] = useState([]);
@@ -48,24 +49,6 @@ const Feed = ({ navigate }) => {
     } else {
       navigate('/signin')
     }
-}
-
-  if (token) {
-    return (
-      <div>
-        {console.log(posts)}
-        <h2>Posts</h2>
-        <button onClick={logout}>Logout</button>
-        <div id="feed" role="feed">
-          {posts.map((post) => (
-            <Post post={post} key={post._id} />
-          ))}
-        </div>
-      </div>
-    );
-  } else {
-    navigate("/signin");
-  }
 };
 
 export default Feed;
