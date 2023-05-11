@@ -1,0 +1,11 @@
+article {
+    display: flex;
+    flex-direction: column;
+    align-items: right;
+    justify-content: right;
+    border: 1px solid #ccc;
+    padding: 1rem;
+    border-radius: 0.5rem;
+    max-width: 30rem;
+    margin: 1rem auto;
+  }

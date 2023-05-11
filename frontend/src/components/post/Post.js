@@ -1,4 +1,5 @@
 import React from "react";
+import './Post.css'; // import the CSS file
 
 const Post = ({ post }) => {
   return (
