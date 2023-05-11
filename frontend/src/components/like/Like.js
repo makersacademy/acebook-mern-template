@@ -17,22 +17,10 @@ const Like = ( { postId } ) => {
       },
     })
     setLikeCount(likeCount + 1);
+    // const data = await response.json();
+    // setLikeCount(data.likeCount);
   }
 
-  // const handleClick = async (event) => {
-  //   event.preventDefault();
-
-    // let response = await fetch( '/posts', {
-    //   method: 'PUT',
-    //   headers: {
-    //     'Content-Type': 'application/json',
-    //     'Authorization': `Bearer ${token}`
-    //   },
-  //     body: JSON.stringify({ message: message })
-  //   })
-
-  //   setLike();
-  // }
 
   return (
     <button onClick={handleLikeClick}> 
