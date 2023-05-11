@@ -32,13 +32,23 @@ const SignUpForm = ({ navigate }) => {
     setPassword(event.target.value)
   }
 
+  const login = () => {
+    navigate('/login')
+  }
 
-    return (
+
+  return (
+    <>
+      <h2>Sign up</h2>
+      <button onClick={login}>
+              Login 
+      </button>
       <form onSubmit={handleSubmit}>
           <input placeholder="Email" id="email" type='text' value={ email } onChange={handleEmailChange} />
           <input placeholder="Password" id="password" type='password' value={ password } onChange={handlePasswordChange} />
         <input id='submit' type="submit" value="Submit" />
       </form>
+      </>
     );
 }
 
