@@ -10,7 +10,11 @@ let token;
 
 describe("/posts", () => {
   beforeAll(async () => {
-    const user = new User({ email: "test@test.com", password: "12345678" });
+    const user = new User({
+      email: "test@test.com",
+      password: "12345678",
+      username: "username",
+    });
     await user.save();
 
     token = JWT.sign(
@@ -163,13 +167,3 @@ describe("/posts", () => {
     });
   });
 });
-
-// test "GET, index returns posts in order"
-// test("does not return a new token", async () => {
-//   let post1 = new Post({ message: "howdy!" });
-//   let post2 = new Post({ message: "hola!" });
-//   await post2.save();
-//   await post1.save();
-//   let response = await request(app).get("/posts");
-//   console.log(response.body);
-//   expect(response.body).toEqual(undefined);

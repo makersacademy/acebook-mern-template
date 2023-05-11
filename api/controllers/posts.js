@@ -8,10 +8,6 @@ const PostsController = {
         throw err;
       }
       const token = await TokenGenerator.jsonwebtoken(req.user_id);
-
-      // originally in frontend, but I thought frontend should have minimal code and main purpose is for displaying
-      // moved it here as I think this is the backends job?
-      // unless we're gna add more sorting features then can move it back in the frontend?
       posts.sort((a, b) => new Date(b.dateCreated) - new Date(a.dateCreated));
       res.status(200).json({ posts: posts, token: token });
     });
