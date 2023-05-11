@@ -1,6 +1,5 @@
-import React, { useEffect, useState } from 'react';
-import Post from '../post/Post'
-import CreatePostForm from '../createPost/CreatePostForm';
+import React, { useEffect, useState } from "react";
+import Post from "../post/Post";
 
 const Feed = ({ navigate }) => {
   const [posts, setPosts] = useState([]);
@@ -8,11 +7,11 @@ const Feed = ({ navigate }) => {
   const [token, setToken] = useState(window.localStorage.getItem("token"));
 
   useEffect(() => {
-    if(token) {
+    if (token) {
       fetch("/posts", {
         headers: {
-          'Authorization': `Bearer ${token}`
-        }
+          Authorization: `Bearer ${token}`,
+        },
       })
         .then(response => response.json())
         .then(async data => {
@@ -50,5 +49,23 @@ const Feed = ({ navigate }) => {
       navigate('/signin')
     }
 }
+
+  if (token) {
+    return (
+      <div>
+        {console.log(posts)}
+        <h2>Posts</h2>
+        <button onClick={logout}>Logout</button>
+        <div id="feed" role="feed">
+          {posts.map((post) => (
+            <Post post={post} key={post._id} />
+          ))}
+        </div>
+      </div>
+    );
+  } else {
+    navigate("/signin");
+  }
+};
 
 export default Feed;
