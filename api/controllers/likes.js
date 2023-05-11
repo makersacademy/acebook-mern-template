@@ -1,9 +1,9 @@
-const Likes = require("../models/post");
+const Post = require("../models/post");
 const TokenGenerator = require("../models/token_generator");
 
-const PostsController = {
-  // Retrieves a list of all posts
-  Index: (req, res) => {
+const LikesController = {
+  // increase the count of likes
+  IncreaseLikes: (req, res) => {
     Post.find(async (err, posts) => {
       if (err) {
         throw err;
