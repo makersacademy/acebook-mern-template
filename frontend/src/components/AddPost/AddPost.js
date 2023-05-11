@@ -32,9 +32,6 @@ const AddPost = () => { // was passing in navigate but that is not passed into t
       }
   }
   
-
-
-
     const handleMessageChange = (event) => {
       setMessage(event.target.value)
     }
@@ -50,5 +47,8 @@ const AddPost = () => { // was passing in navigate but that is not passed into t
     )
   }
 
-
 export default AddPost;
+
+
+
+
