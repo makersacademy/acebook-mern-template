@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-const AddPost = () => { // was passinf in navigate but that is not passed into this component in Feed
+const AddPost = () => { // was passing in navigate but that is not passed into this component in Feed
   const [message, setMessage] = useState('');
   const [token, setToken] = useState(window.localStorage.getItem("token"));
 
@@ -29,23 +29,7 @@ const AddPost = () => { // was passinf in navigate but that is not passed into t
           setToken(window.localStorage.getItem("token"));
           // navigate('/posts'); // navigate is not present in this component
         }
-          
-          
-          
-          
-          
-          
-          // .then(response => response.json())
-          // .then(async data => {
-          //   window.localStorage.setItem("token", data.token);
-          //   setToken(window.localStorage.getItem("token"));
-            // console.log(data) // VISIBILITY
-            // navigate('./login')
-            // Should trigger a reload of all posts
-          // })
-          
       }
-      
   }
   
 
