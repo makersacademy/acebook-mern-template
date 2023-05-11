@@ -16,6 +16,7 @@ const CreatePostForm = ({ onCreated }) => {
       body: JSON.stringify({ message: message })
     })
 
+    setMessage("")
     onCreated();
   }
 
