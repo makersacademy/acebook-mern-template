@@ -7,21 +7,9 @@ const AddPost = ({ navigate }) => {
   const handleSubmit = (event) => {
     event.preventDefault();
 
-    // useEffect(() => {
       if (token) {
-        
-        // fetch("/posts", {
-        //   headers: {
-        //     'Authorization': `Bearer ${token}`
-        //   }
-        // })
-        //   .then(response => response.json())
-        //   .then(async data => {
-        //     window.localStorage.setItem("token", data.token)
-        //     setToken(window.localStorage.getItem("token"))
-        //     setPosts(data.posts);
-        //   })
 
+        console.log(`{message}`) // VISIBILITY
         fetch('/posts', {
           method: 'POST',
           headers: {
@@ -34,64 +22,23 @@ const AddPost = ({ navigate }) => {
           .then(async data => {
             window.localStorage.setItem("token", data.token);
             setToken(window.localStorage.getItem("token"));
-            console.log(data)
-            // setPosts(data.posts);
+            console.log(data) // VISIBILITY
+            // navigate('./login')
+            // Should trigger a reload of all posts
           })
-    
-        // if (response.status !== 201) {
-        //   console.log(response)
-        //   navigate('/posts')
-        // } else {
-        //   console.log("Yay!")
-        //   let data = response.json()
-        //   window.localStorage.setItem("token", data.token)
-        //   navigate('/posts');
-        // }
-
+          
       }
-    // }, [])
+      
   }
+  // let response = await fetch('/tokens', {
+  //   method: 'post',
+  //   headers: {
+  //     'Content-Type': 'application/json',
+  //   },
+  //   body: JSON.stringify({ email: email, password: password })
+  // })
 
-  // const handleSubmit = async (event) => {
-  //   event.preventDefault();
 
-  //   useEffect(() => {
-  //     if (token) {
-        
-  //       // fetch("/posts", {
-  //       //   headers: {
-  //       //     'Authorization': `Bearer ${token}`
-  //       //   }
-  //       // })
-  //       //   .then(response => response.json())
-  //       //   .then(async data => {
-  //       //     window.localStorage.setItem("token", data.token)
-  //       //     setToken(window.localStorage.getItem("token"))
-  //       //     setPosts(data.posts);
-  //       //   })
-
-  //       let response = await fetch('/posts', {
-  //         method: 'POST',
-  //         headers: {
-  //           'Authorization': `Bearer ${token}`,
-  //           'Content-Type': 'application/json',
-  //         },
-  //         body: JSON.stringify({ message: message })
-  //       })
-    
-  //       if (response.status !== 201) {
-  //         console.log(response)
-  //         navigate('/posts')
-  //       } else {
-  //         console.log("Yay!")
-  //         let data = await response.json()
-  //         window.localStorage.setItem("token", data.token)
-  //         navigate('/posts');
-  //       }
-
-  //     }
-  //   }, [])
-  // }
 
     const handleMessageChange = (event) => {
       setMessage(event.target.value)
