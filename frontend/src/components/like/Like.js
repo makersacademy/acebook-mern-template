@@ -6,19 +6,28 @@ const Like = ( { postId } ) => {
   const [likeCount, setLikeCount] = useState(0);
   const [token, setToken] = useState(window.localStorage.getItem("token"));
 
-  const handleLikeClick = () => {
+  const handleLikeClick = async (event) => {
+    event.preventDefault();
+
+    let response = await fetch('/posts', {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${token}`
+      },
+    })
     setLikeCount(likeCount + 1);
   }
 
   // const handleClick = async (event) => {
   //   event.preventDefault();
 
-  //   let response = await fetch( '/posts', {
-  //     method: 'PUT',
-  //     headers: {
-  //       'Content-Type': 'application/json',
-  //       'Authorization': `Bearer ${token}`
-  //     },
+    // let response = await fetch( '/posts', {
+    //   method: 'PUT',
+    //   headers: {
+    //     'Content-Type': 'application/json',
+    //     'Authorization': `Bearer ${token}`
+    //   },
   //     body: JSON.stringify({ message: message })
   //   })
 
