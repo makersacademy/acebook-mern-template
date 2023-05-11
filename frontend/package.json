@@ -17,8 +17,8 @@
     "start": "react-scripts --openssl-legacy-provider start",
     "build": "react-scripts build",
     "test": "npm run test:unit && npm run test:feature",
-    "test:unit": "cypress run --component",
-    "test:feature": "cypress run",
+    "test:unit": "cypress open --component",
+    "test:feature": "cypress open",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {
