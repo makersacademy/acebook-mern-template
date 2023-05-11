@@ -1,5 +1,5 @@
 import React from "react";
-import { useState} from "react";
+import { useState } from "react";
 
 const Like = ( { postId } ) => {
   let like = 0;
