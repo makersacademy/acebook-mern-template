@@ -1,19 +1,12 @@
 import React from "react";
 import { useState } from "react";
-import PropTypes from 'prop-types';
 
 const Like = ( { postId, likesCount, liked } ) => {
-
-  Like.propTypes = {
-    postId: PropTypes.string.isRequired,
-    likesCount: PropTypes.number.isRequired,
-  };
 
   const [likeCount, setLikeCount] = useState(likesCount); // declare likeCount before initializing it
   const [token, setToken] = useState(window.localStorage.getItem("token"));
 
-  const handleLikeClick = async (event) => {
-    event.preventDefault();
+  const handleLikeClick = async () => {
 
     let response = await fetch(`/posts/${postId}`, {
       method: 'PATCH',
@@ -23,9 +16,10 @@ const Like = ( { postId, likesCount, liked } ) => {
       },
     })
     const data = await response.json();
+    console.log(data)
     setLikeCount(data.likeCount);
     setToken(window.localStorage.getItem("token")); // Update token
-    liked();
+    // liked();
   }
 
   return (
