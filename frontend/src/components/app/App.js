@@ -13,7 +13,7 @@ import {
 import {AuthenticationContext} from '../authenticationProvider/AuthenticationProvider';
 
 const App = () => {
-  const {isLoggedIn, setIsLoggedIn} = useContext(AuthenticationContext)
+  const {isLoggedIn, setIsLoggedIn, username, setUsername} = useContext(AuthenticationContext)
   return (
     <div>    
       <div className="container">
@@ -22,8 +22,8 @@ const App = () => {
           <ul className="navbar-nav">
             {isLoggedIn ? 
               <>
-                <li>Hello User</li>
-                <li><Link to="/login" onClick={() => {setIsLoggedIn(false)}}>logout</Link> </li>
+                <li>Hello {username}</li>
+                <li><Link to="/login" onClick={() => {setIsLoggedIn(false); setUsername("")}}>logout</Link> </li>
               </> : 
               <>
                 <li><Link to="/signup">Sign Up</Link></li>
@@ -34,7 +34,6 @@ const App = () => {
         </nav>
       </div>
       <Routes>
-        {/* <Route path='/posts'  element={<Feed navigate={ useNavigate() }/>}/> */}
         <Route path='/posts'  element={
           <ProtectedRoute>
             <Feed navigate={ useNavigate() }/>

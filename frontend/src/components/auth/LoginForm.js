@@ -4,7 +4,7 @@ import {AuthenticationContext} from '../authenticationProvider/AuthenticationPro
 const LogInForm = ({ navigate }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const {isLoggedIn, setIsLoggedIn} = useContext(AuthenticationContext)
+  const {isLoggedIn, setIsLoggedIn, username, setUsername} = useContext(AuthenticationContext)
 
 
   const handleSubmit = async (event) => {
@@ -25,6 +25,10 @@ const LogInForm = ({ navigate }) => {
       console.log("oop")
       let data = await response.json()
       setIsLoggedIn(true)
+
+      const localUsername = await getUsername(email)
+      setUsername(localUsername)
+
       window.localStorage.setItem("token", data.token)
       navigate('/posts');
     }
@@ -38,6 +42,13 @@ const LogInForm = ({ navigate }) => {
     setPassword(event.target.value)
   }
 
+  const getUsername = async (email) => {
+    let response = await fetch( "/users/" + email, {
+      method: 'get'
+    }).then( (response) => response.json())
+
+    return response.username;
+  }
 
     return (
       <form onSubmit={handleSubmit}>
