@@ -2,13 +2,14 @@ import React from "react";
 import { useState } from "react";
 import PropTypes from 'prop-types';
 
-const Like = ( { postId } ) => {
+const Like = ( { postId, likesCount } ) => {
 
   Like.propTypes = {
     postId: PropTypes.string.isRequired,
+    likesCount: PropTypes.number.isRequired,
   };
 
-  const [likeCount, setLikeCount] = useState(0);
+  const [likeCount, setLikeCount] = useState(likesCount); // declare likeCount before initializing it
   const [token, setToken] = useState(window.localStorage.getItem("token"));
 
   const handleLikeClick = async (event) => {
@@ -31,7 +32,7 @@ const Like = ( { postId } ) => {
     <button onClick={handleLikeClick}> 
       LIKE
     </button>
-    <p>{likeCount} likes</p>
+    <p>{likeCount} likes</p> {/* use the likeCount state variable */}
   </div>
   )
 }
