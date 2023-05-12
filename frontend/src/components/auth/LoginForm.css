@@ -1,0 +1,13 @@
+.centered-box {
+    border: 1px solid black;
+    background-color: rgb(224, 254, 255);
+    width: 400px;
+    margin: 0 auto;
+    text-align: center;
+    padding: 20px;
+    margin-top: 50px;
+}
+
+.input-field {
+    margin-bottom: 20px;
+}
