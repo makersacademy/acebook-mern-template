@@ -32,7 +32,7 @@ const PostsController = {
 
     // checking if the ID is a valid Mongoose type
     if (!mongoose.Types.ObjectId.isValid(id)) {
-      return res.status(404).json({error: 'post does not exist'})
+      return res.status(404).json({error: "not valid ID"})
     }
 
     const post = await Post.findOneAndUpdate({_id: id},
@@ -45,7 +45,7 @@ const PostsController = {
     })
     const token = await TokenGenerator.jsonwebtoken(req.user_id);
     // 201 for sending data
-    res.status(201).json({ message: "OK", post: post, token: token})
+    res.status(201).json({ message: "OK", post: post})
   }
 }
 
