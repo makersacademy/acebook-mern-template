@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import Post from '../post/Post'
+import Post from '../post/Post';
+import PropTypes from 'prop-types';
 import CreatePostForm from '../createPost/CreatePostForm';
 
 const Feed = ({ navigate }) => {
@@ -41,7 +42,7 @@ const Feed = ({ navigate }) => {
             <CreatePostForm onCreated={() => setRefresh(true)}/> 
           <div id='feed' role="feed">
               {posts.map(
-                (post) => ( <Post post={ post } key={ post._id } /> )
+                (post) => ( <Post post={ post } key={ post._id } liked={() => setRefresh(true)} /> )
               )}
           </div>
         </>

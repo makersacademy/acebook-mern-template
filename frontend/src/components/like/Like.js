@@ -2,7 +2,7 @@ import React from "react";
 import { useState } from "react";
 import PropTypes from 'prop-types';
 
-const Like = ( { postId, likesCount } ) => {
+const Like = ( { postId, likesCount, liked } ) => {
 
   Like.propTypes = {
     postId: PropTypes.string.isRequired,
@@ -25,6 +25,7 @@ const Like = ( { postId, likesCount } ) => {
     const data = await response.json();
     setLikeCount(data.likeCount);
     setToken(window.localStorage.getItem("token")); // Update token
+    liked();
   }
 
   return (

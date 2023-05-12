@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import Like from '../like/Like';
 import './Post.css'; // import the CSS file
 
-const Post = ({ post }) => {
+const Post = ({ post, liked }) => {
   Post.propTypes = {
     post: PropTypes.shape({
       _id: PropTypes.string.isRequired,
@@ -16,7 +16,7 @@ const Post = ({ post }) => {
     <article data-cy="post" key={post._id}>
       {post.message}
 
-      <Like postId={post._id} likesCount={post.likeCount}/>
+      <Like postId={post._id} likesCount={post.likeCount} liked={liked}/>
     </article>
   );
 };
