@@ -25,6 +25,27 @@ const PostsController = {
       res.status(201).json({ message: 'OK', token: token, post: post });
     });
   },
-};
+
+  AddLikes: (req, res) => {
+    const postId = req.params.id;
+    Post.findById(postId, (err, post) => {
+      if (err) {
+        throw err;
+      }
+    
+      const updatedPost = post;
+      updatedPost.like += 1;
+
+      updatedPost.save(async (err, updatedPost) => {
+        if (err) {
+          throw err;
+        }
+
+        const token = await TokenGenerator.jsonwebtoken(req.user_id);
+        res.status(201).json({ message: 'OK', token: token, post: updatedPost });
+      });
+  });
+},
+}
 
 module.exports = PostsController;

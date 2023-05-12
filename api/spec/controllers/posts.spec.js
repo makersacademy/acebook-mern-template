@@ -167,4 +167,22 @@ describe("/posts", () => {
       expect(response.body.token).toEqual(undefined);
     })
   })
+
+  describe("PUT /posts/:id/likes", () => {
+    test("increases the number of likes for a post by 1", async () => {
+        let post1 = new Post({message: "howdy!"});
+        await post1.save();
+
+        let response = await request(app)
+            .post(`/posts/${post1._id}/likes`)
+            .set("Authorization", `Bearer ${token}`)
+            .send({ token: token });
+
+        expect(response.status).toEqual(201);
+        expect(response.body.post.like).toEqual(1);
+
+        let updatedPost = await Post.findById(post1._id);
+        expect(updatedPost.like).toEqual(1);
+    });
+  });
 });
