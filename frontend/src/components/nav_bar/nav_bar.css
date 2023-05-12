@@ -1,38 +1,122 @@
-.dropdown-button{
+
+
+
+.navbar-container {
   display: flex;
-  justify-content: flex-end;
-  color: crimson;
- 
+  justify-content: space-between;
+  align-items: center;
+  background-color: teal;
+  color: white;
+  padding: 10px;
 }
 
-.signUpNav{
-  display: flex;
-  justify-content: flex-end;
-  color: blue;
- 
+.navbar-container img {
+  width: 200px;
 }
 
-.loginNav{
+.logo-container {
+  display: absolute;
+  justify-content: center; /* Align logo to center */
+  align-items: center;
+  height: 100%; /* Set height to 100% */
+  flex: 1; /* Add flex to take up remaining space */
+  margin-left: 600px;
+}
+
+.logo img {
+  width: 200px;
+}
+
+.dropdown-button {
   display: flex;
   justify-content: flex-end;
-  color: blueviolet;
- 
+  color: white;
+  background-color: teal;
+  border: none;
+  font-size: 16px;
+  cursor: pointer;
+  padding: 10px;
+  transition: background-color 0.2s ease;
+}
+
+.dropdown-button:hover {
+  background-color: #008080;
+}
+
+.signUpNav {
+  display: flex;
+  justify-content: flex-end;
+  color: white;
+  background-color: teal;
+  border: none;
+  cursor: pointer;
+  padding: 10px;
+  margin-right: 10px;
+  transition: background-color 0.2s ease;
+  font-size: medium;
+}
+
+.signUpNav:hover {
+  background-color: #008080;
+}
+
+.loginNav {
+  display: flex;
+  justify-content: flex-end;
+  color: white;
+  background-color: teal;
+  border: none;
+  cursor: pointer;
+  padding: 10px;
+  margin-right: 10px;
+  transition: background-color 0.2s ease;
+  font-size: medium;
+}
+
+
+.loginNav:hover {
+  background-color: #008080;
 }
 
 .dropdown-container {
   display: flex;
   justify-content: flex-end;
-  color: crimson;
 }
 
 .login-signup {
   display: flex;
   justify-content: flex-end;
-  color: crimson;
 }
 
 .dropdown-content {
   display: flex;
-  justify-content: flex-end;
-  color: crimson;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-end;
+  color: teal;
+  background-color: teal;
+  min-width: 160px;
+  z-index: 1;
+}
+
+.dropdown-logout {
+  color: teal;
+  padding: 10px;
+  cursor: pointer;
+  justify-content: center;
+  align-items: center;
+  transition: background-color 0.2s ease;
+
+  
+}
+
+.dropdown-item {
+  color: teal;
+  padding: 10px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.dropdown-item:hover {
+  background-color: #eee;
 }
