@@ -1,8 +1,11 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
+import {AuthenticationContext} from '../authenticationProvider/AuthenticationProvider';
 
 const LogInForm = ({ navigate }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const {isLoggedIn, setIsLoggedIn} = useContext(AuthenticationContext)
+
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -21,7 +24,7 @@ const LogInForm = ({ navigate }) => {
     } else {
       console.log("oop")
       let data = await response.json()
-      
+      setIsLoggedIn(true)
       window.localStorage.setItem("token", data.token)
       navigate('/posts');
     }
