@@ -1,3 +1,9 @@
+#root{
+  max-width: 840px;
+  /*page centralized*/
+  margin: 0 auto;
+}
+
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',

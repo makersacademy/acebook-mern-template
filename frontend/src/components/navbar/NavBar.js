@@ -1,18 +1,16 @@
-import React from 'react'
-// import { PrimaryNav, MenuLink, Menu, style} from ‘./NavbarElements’
-const Navbar = () => {
+    import React from 'react'
+    // import { PrimaryNav, MenuLink, Menu, style} from ‘./NavbarElements’
+    import './NavBar.css';
 
-  return (
-    <>
-     <h2>Farcebook</h2>
-    <nav>
-   
-   <ul>
-    <li className='nav-item' ><a href='/login'>Login</a></li>
-    <li className='nav-item'><a href='/signup'>Sign up</a></li>
-    </ul>
-    </nav>
-    </>
-  )
-}
-export default Navbar
+    const Navbar = () => {
+
+      return (
+          <>
+            <nav className='nav-bar'>
+              <div className='nav-item' ><a href='/login'>Login</a></div>
+              <div className='nav-item'><a href='/signup'>Sign up</a></div>
+            </nav>
+          </>
+      )
+    }
+    export default Navbar

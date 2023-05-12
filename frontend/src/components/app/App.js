@@ -12,6 +12,7 @@ import Navbar from '../navbar/NavBar';
 const App = () => {
     return (
       <>
+        <h2>Farcebook</h2>
         <Navbar />
         <Routes>
           <Route path='/posts'  element={<Feed navigate={ useNavigate() }/>}/>
