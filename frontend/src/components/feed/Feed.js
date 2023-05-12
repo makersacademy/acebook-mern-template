@@ -49,6 +49,28 @@ const Feed = ({ navigate }) => {
       console.error(error);
     }
   };
+
+  const handleLike = async (postId) => {
+    try {
+      const response = await fetch(`/posts/${postId}/likes`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}`
+        },
+      });
+  
+      const data = await response.json();
+  
+      // update posts state to reflect the new likes count
+      setPosts(posts.map(post => 
+        post._id === postId ? { ...post, like: data.post.like } : post
+      ));
+  
+    } catch (error) {
+      console.error(error);
+    }
+  };
   
   if(token) {
     return(
@@ -65,7 +87,7 @@ const Feed = ({ navigate }) => {
         </form>
         <div id='feed' role="feed">
             {posts.map(
-              (post) => ( <Post post={ post } key={ post._id } /> )
+              (post) => ( <Post post={ post } key={ post._id } onLike={handleLike} /> )
             )}
         </div>
       </>
