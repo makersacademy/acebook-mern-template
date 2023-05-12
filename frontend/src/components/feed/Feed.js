@@ -1,12 +1,12 @@
 import React, { useEffect, useState, useContext } from 'react';
 import Post from '../post/Post'
 import CreatePostForm from '../createPost/CreatePostForm';
-
+import {AuthenticationContext} from '../authenticationProvider/AuthenticationProvider';
 
 const Feed = ({ navigate }) => {
+  const {isLoggedIn, setIsLoggedIn, username, setUsername, token, setToken} = useContext(AuthenticationContext)
   const [posts, setPosts] = useState([]);
   const [needsRefresh, setRefresh] = useState(false);
-  const [token, setToken] = useState(window.localStorage.getItem("token"));
 
 
   useEffect(() => {
@@ -18,8 +18,7 @@ const Feed = ({ navigate }) => {
       })
         .then(response => response.json())
         .then(async data => {
-          window.localStorage.setItem("token", data.token)
-          setToken(window.localStorage.getItem("token"))
+          setToken(data.token)
           setPosts(data.posts)
           setRefresh(false);
         })

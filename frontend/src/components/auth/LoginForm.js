@@ -4,7 +4,7 @@ import {AuthenticationContext} from '../authenticationProvider/AuthenticationPro
 const LogInForm = ({ navigate }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const {isLoggedIn, setIsLoggedIn, username, setUsername} = useContext(AuthenticationContext)
+  const {isLoggedIn, setIsLoggedIn, username, setUsername, token, setToken} = useContext(AuthenticationContext)
 
 
   const handleSubmit = async (event) => {
@@ -29,7 +29,7 @@ const LogInForm = ({ navigate }) => {
       const localUsername = await getUsername(email)
       setUsername(localUsername)
 
-      window.localStorage.setItem("token", data.token)
+      setToken(data.token)
       navigate('/posts');
     }
   }

@@ -13,7 +13,7 @@ import {
 import {AuthenticationContext} from '../authenticationProvider/AuthenticationProvider';
 
 const App = () => {
-  const {isLoggedIn, setIsLoggedIn, username, setUsername} = useContext(AuthenticationContext)
+  const {isLoggedIn, setIsLoggedIn, username, setUsername, token, setToken} = useContext(AuthenticationContext)
   return (
     <div>    
       <div className="container">
@@ -23,7 +23,7 @@ const App = () => {
             {isLoggedIn ? 
               <>
                 <li>Hello {username}</li>
-                <li><Link to="/login" onClick={() => {setIsLoggedIn(false); setUsername("")}}>logout</Link> </li>
+                <li><Link to="/login" onClick={() => {setIsLoggedIn(false); setUsername(""); setToken("")}}>logout</Link> </li>
               </> : 
               <>
                 <li><Link to="/signup">Sign Up</Link></li>
