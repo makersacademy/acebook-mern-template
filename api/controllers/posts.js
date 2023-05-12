@@ -7,7 +7,9 @@ const PostsController = {
       if (err) {
         throw err;
       }
-      const token = await TokenGenerator.jsonwebtoken(req.user_id)
+      const token = await TokenGenerator.jsonwebtoken(req.user_id);
+      posts.forEach(post => {
+        if (post.likedBy.includes(req.user_id)) {post._doc.didUserLikeThis = true;}})
       res.status(200).json({ posts: posts, token: token });
     });
   },
@@ -17,7 +19,6 @@ const PostsController = {
       if (err) {
         throw err;
       }
-
       const token = await TokenGenerator.jsonwebtoken(req.user_id)
       res.status(201).json({ message: 'OK', token: token });
     });
@@ -37,7 +38,7 @@ const PostsController = {
   },
   Unlike: (req, res) => {
 
-  }
+  },
 };
 
 module.exports = PostsController;
