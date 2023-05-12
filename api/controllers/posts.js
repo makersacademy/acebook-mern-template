@@ -34,6 +34,9 @@ const PostsController = {
         res.status(200).json({ likes: (post.likes), token: token });
       }
     })
+  },
+  Unlike: (req, res) => {
+
   }
 };
 
