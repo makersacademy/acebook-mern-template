@@ -8,7 +8,7 @@ describe("TokenGenerator", () => {
       const token = TokenGenerator.jsonwebtoken(user_id);
       const payload = JWT.decode(token, process.env.JWT_SECRET);
       expect(payload.user_id).toEqual(user_id);
-      expect(payload.exp - payload.iat).toEqual(600);
+      expect(payload.exp - payload.iat).toEqual(3600);
     })
   })
 })

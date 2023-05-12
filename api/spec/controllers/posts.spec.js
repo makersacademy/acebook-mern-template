@@ -10,7 +10,8 @@ let token;
 
 describe("/posts", () => {
   beforeAll( async () => {
-    const user = new User({email: "test@test.com", password: "12345678"});
+    const user = new User({email: "test@test.com", password: "12345678",  firstName: "Betty",
+    lastName: "Rubble" });
     await user.save();
 
     token = JWT.sign({
@@ -96,7 +97,7 @@ describe("/posts", () => {
         .set("Authorization", `Bearer ${token}`)
         .send({token: token});
       let messages = response.body.posts.map((post) => ( post.message ));
-      expect(messages).toEqual(["howdy!", "hola!"]);
+      expect(messages).toEqual(["hola!", "howdy!"]);
     })
 
     test("the response code is 200", async () => {
