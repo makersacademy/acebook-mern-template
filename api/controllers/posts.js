@@ -37,12 +37,7 @@ const PostsController = {
 
     const post = await Post.findOneAndUpdate({_id: id},
       { $inc: { likeCount: 1} },
-      { new: true },
-      (err, post) => {
-        if(err) {
-          throw err;
-        }
-    })
+      { new: true }).exec()
     const token = await TokenGenerator.jsonwebtoken(req.user_id);
     // 201 for sending data
     res.status(201).json({ message: "OK", post: post})
