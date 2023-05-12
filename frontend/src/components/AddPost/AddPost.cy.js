@@ -2,8 +2,8 @@ import AddPost from './AddPost';
 const navigate = () => {};
 
 describe('AddPost', () => {
-  it('returns a ', () => {
-    cy.mount(<AddPost navigate={navigate} />);
+  it('creates a new post', () => {
+    cy.mount(<AddPost />);
 
     cy.intercept('POST', '/posts', {
       statusCode: 201,
