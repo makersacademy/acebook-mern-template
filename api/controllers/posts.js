@@ -1,5 +1,6 @@
 const Post = require("../models/post");
 const TokenGenerator = require("../models/token_generator");
+const mongoose = require("mongoose");
 
 const PostsController = {
   Index: (req, res) => {
@@ -23,20 +24,29 @@ const PostsController = {
       res.status(201).json({ message: "OK", token: token });
     });
   },
-  UpdateLikeCount: (req, res) => {
-    const postId = req.params.postId
-    Post.findByIdAndUpdate(
-      postId,
+  UpdateLikeCount: async (req, res) => {
+    console.log(req);
+    const { id } = req.params
+    console.log(id)
+    console.log(req.params)
+
+    // checking if the ID is a valid Mongoose type
+    if (!mongoose.Types.ObjectId.isValid(id)) {
+      return res.status(404).json({error: 'post does not exist'})
+    }
+
+    const post = await Post.findOneAndUpdate({_id: id},
       { $inc: { likeCount: 1} },
       { new: true },
       (err, post) => {
         if(err) {
           throw err;
         }
-        res.status(200).json({ message: "OK", post: post})
-      }
-    )
+    })
+    const token = await TokenGenerator.jsonwebtoken(req.user_id);
+    // 201 for sending data
+    res.status(201).json({ message: "OK", post: post, token: token})
   }
-};
+}
 
 module.exports = PostsController;
