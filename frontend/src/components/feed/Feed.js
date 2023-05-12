@@ -21,8 +21,7 @@ const Feed = ({ navigate }) => {
           setPosts(data.posts);
         })
     }
-  }, []) // don't retrigger on every re-render - just when submit button is clicked?
-
+  }, [])
 
   const logout = () => {
     window.localStorage.removeItem("token")
