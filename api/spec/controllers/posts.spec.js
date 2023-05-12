@@ -168,7 +168,7 @@ describe("/posts", () => {
     })
   })
 
-  describe("PUT /posts/:id/likes", () => {
+  describe("POST /posts/:id/likes", () => {
     test("increases the number of likes for a post by 1", async () => {
         let post1 = new Post({message: "howdy!"});
         await post1.save();
