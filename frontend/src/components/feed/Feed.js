@@ -22,10 +22,10 @@ const Feed = ({ navigate }) => {
     }
   }, [])
 
-  const logout = () => {
-    window.localStorage.removeItem("token")
-    navigate('/login')
-  }
+  // const logout = () => {
+  //   window.localStorage.removeItem("token")
+  //   navigate('/login')
+  // }
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -54,8 +54,6 @@ const Feed = ({ navigate }) => {
     return(
       <>
         <h2>Posts</h2>
-        <button onClick={logout}>Logout</button>
-
         <form onSubmit={handleSubmit}>
           <label>
             New Post:
@@ -75,5 +73,6 @@ const Feed = ({ navigate }) => {
     navigate('/signin')
   }
 }
+
 
 export default Feed;

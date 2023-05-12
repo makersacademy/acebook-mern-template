@@ -11,3 +11,46 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+.nav-container {
+  background: #fff;
+  padding: 18px;
+  display: flex;
+  width:100%;
+}
+
+/* this style centers the image within the anchor */
+.nav-container > a {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.nav-container .logo {
+  width: 180px;
+}
+
+/* default style for mobile width */
+.nav-container ul {
+  display: flex;
+  flex-direction: column;
+  list-style: none;
+}
+
+/* style for larger widths */
+@media screen and (min-width:600px) {
+  .nav-container ul {
+    flex-direction:row;
+    width:100%;
+    justify-content:space-around;
+  }
+}
+
+.nav-container li {
+  font-weight: bold;
+  
+}
+  
+.nav-container a:hover {
+   color: var(--primary-color);
+}
