@@ -4,7 +4,7 @@ import CreatePostForm from '../createPost/CreatePostForm';
 import {AuthenticationContext} from '../authenticationProvider/AuthenticationProvider';
 
 const Feed = ({ navigate }) => {
-  const {isLoggedIn, setIsLoggedIn, username, setUsername, token, setToken} = useContext(AuthenticationContext)
+  const {token, setToken} = useContext(AuthenticationContext)
   const [posts, setPosts] = useState([]);
   const [needsRefresh, setRefresh] = useState(false);
 
