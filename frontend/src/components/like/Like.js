@@ -1,7 +1,7 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useState } from "react";
 
-const Like = ( { postId, likesCount, liked } ) => {
+const Like = ( { postId, likesCount } ) => {
 
   const [likeCount, setLikeCount] = useState(likesCount); // declare likeCount before initializing it
   const [token, setToken] = useState(window.localStorage.getItem("token"));
@@ -18,8 +18,9 @@ const Like = ( { postId, likesCount, liked } ) => {
     const data = await response.json();
     console.log(data)
     setLikeCount(data.likeCount);
-    setToken(window.localStorage.getItem("token")); // Update token
-    // liked();
+    setLikeCount(data.post.likeCount);
+    setToken(window.localStorage.getItem("token")); // Update tokendfdf
+
   }
 
   return (
