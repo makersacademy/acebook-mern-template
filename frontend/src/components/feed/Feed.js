@@ -1,11 +1,13 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import Post from '../post/Post'
 import CreatePostForm from '../createPost/CreatePostForm';
+
 
 const Feed = ({ navigate }) => {
   const [posts, setPosts] = useState([]);
   const [needsRefresh, setRefresh] = useState(false);
   const [token, setToken] = useState(window.localStorage.getItem("token"));
+
 
   useEffect(() => {
     if (token) {

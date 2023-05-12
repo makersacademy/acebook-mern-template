@@ -1,6 +1,7 @@
 import './App.css';
 import LoginForm from '../auth/LoginForm'
 import SignUpForm from '../user/SignUpForm'
+import ProtectedRoute from '../protectedRoute/ProtectedRoute'
 import React, { useState, useContext } from 'react';
 import { Link, Navigate } from 'react-router-dom';
 import Feed from '../feed/Feed'
@@ -34,7 +35,11 @@ const App = () => {
       </div>
       <Routes>
         {/* <Route path='/posts'  element={<Feed navigate={ useNavigate() }/>}/> */}
-        <Route path='/posts'  element={isLoggedIn ? <Feed navigate={ useNavigate() }/> : <Navigate to='/login' />}/>
+        <Route path='/posts'  element={
+          <ProtectedRoute>
+            <Feed navigate={ useNavigate() }/>
+          </ProtectedRoute>
+        }/>
         <Route path='/login'  element={<LoginForm  navigate={ useNavigate() }/>}/>
         <Route path='/signup' element={<SignUpForm navigate={ useNavigate() }/>}/>
         <Route path='*' element={<Navigate to='/login' />} />
