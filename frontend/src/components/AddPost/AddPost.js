@@ -25,6 +25,7 @@ const AddPost = () => { // was passing in navigate but that is not passed into t
           console.log("yay!")
           let data = await response.json()
           console.log(data) // VISIBILITY
+          window.location.reload()
           window.localStorage.setItem("token", data.token)
           setToken(window.localStorage.getItem("token"));
           // navigate('/posts'); // navigate is not present in this component
@@ -40,8 +41,9 @@ const AddPost = () => { // was passing in navigate but that is not passed into t
       <>
         <form onSubmit={handleSubmit}>
           <input placeholder='Message' id="message" type='text' value={message} onChange={handleMessageChange} />
-          <input role='submit-button' id='submit' type="submit" value="Submit" />
-        </form>
+          <input role='submit-button' id='submit' type="submit" value="Post" />
+        </form>  
+
     
       </>
     )
