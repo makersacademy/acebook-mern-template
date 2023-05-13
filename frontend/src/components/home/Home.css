@@ -6,9 +6,15 @@ body {
   text-align: center;
 }
 
-div {
+.container {
+  border: 15px solid rgb(71, 112, 78);
   width: 300px;
-  border: 15px solid green;
   padding: 50px;
-  margin: 20px;
+  margin: 20px auto;
+  text-align: center;
+}
+
+h1 {
+  margin-bottom: 25px;
+  font-size: 40px ;
 }
