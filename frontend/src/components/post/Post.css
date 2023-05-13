@@ -1,11 +1,37 @@
 article {
-    display: flex;
-    flex-direction: column;
-    align-items: right;
-    justify-content: right;
-    border: 1px solid #ccc;
-    padding: 1rem;
-    border-radius: 0.5rem;
-    max-width: 30rem;
-    margin: 1rem auto;
-  }
+  display: flex;
+  flex-direction: column;
+  border: px solid #ccc;
+  padding: 1rem;
+  border-radius: 0.5rem;
+  max-width: 30rem;
+  margin: 1rem auto;
+}
+
+article.post {
+
+  border: 1px solid #ccc;
+  padding: 1rem;
+  border-radius: 0.5rem;
+  
+}
+
+.comments-container {
+  display: flex;
+  margin: 1px auto;
+  flex-direction: column;
+  gap: 5px; /* change the gap value as needed */
+  /* ... existing rules */
+}
+
+.comments-container > * {
+  margin: 1; /* reset margin for immediate child elements */
+}
+
+p {
+  margin-top: 1px;
+  margin-bottom: 1px;
+  font-family: Helvetica, sans-serif;
+  line-height: 1.2;
+  padding: 10px;
+}

@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import './CommentForm.css';
 
 const CreateCommentForm = ({ onCreated, postId }) => {
   const [comment, setComment] = useState("");
@@ -25,12 +26,10 @@ const CreateCommentForm = ({ onCreated, postId }) => {
   }
 
     return (
-      <>
-      <form onSubmit={handleSubmit} id="commentForm">
-        <textarea rows="1" cols="50" placeholder='...' id="comment" value={ comment } onChange={handleCommentChange} form="commentForm"/>
-        <input role='submit-button' id='submit' type="submit" value="Submit" />
+      <form onSubmit={handleSubmit} id="commentForm" className="comment-form">
+        <textarea rows="2" cols="50" placeholder='Add a comment...' id="comment" value={ comment } onChange={handleCommentChange} form="commentForm"/>
+        <input role='submit-button' id='submit' type="submit" value="Comment" />
       </form>
-      </>
     );
 }
 

@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import Post from '../post/Post'
 import CreatePostForm from '../createPost/CreatePostForm';
+import './Feed.css'
 
 const Feed = ({ navigate }) => {
   const [posts, setPosts] = useState([]);
@@ -38,6 +39,7 @@ const Feed = ({ navigate }) => {
     if(token) {
       return(
         <>
+        <div class="feed-container">
           <h2>Posts</h2>
             <button onClick={logout}>
               Logout
@@ -48,6 +50,7 @@ const Feed = ({ navigate }) => {
                 (post) => ( <Post post={ post } key={ post._id } onCreated={handlePostCreated}/> )
               )}
           </div>
+         </div>
         </>
       )
     } else {
