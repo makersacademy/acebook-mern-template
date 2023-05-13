@@ -13,8 +13,8 @@ const SignUpForm = ({ navigate }) => {
   const handleSubmit = async (event) => {
     event.preventDefault();
 
-    if (email) {
-      alert(`Thank you, ${email}, for signing up!`);
+    if (userName) {
+      alert(`Thank you, ${userName}, for signing up!`);
     }
 
     fetch( '/users', {
