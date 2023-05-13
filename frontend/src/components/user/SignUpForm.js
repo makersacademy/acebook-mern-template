@@ -6,6 +6,8 @@ const SignUpForm = ({ navigate }) => {
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [userName, setUserName] = useState("");
+  const [userPhoto, setUserPhoto] = useState(null);
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -13,7 +15,7 @@ const SignUpForm = ({ navigate }) => {
     if (email) {
       alert(`Thank you, ${email}, for signing up!`);
     }
-    
+
     fetch( '/users', {
       method: 'post',
       headers: {
@@ -38,6 +40,13 @@ const SignUpForm = ({ navigate }) => {
     setPassword(event.target.value)
   }
 
+  const handleNameChange = (event) => {
+    setUserName(event.target.value)
+  }
+
+  const handleUserPhotoChange = (event) => {
+    setUserPhoto(event.target.files[0])
+  }
 
     return (
       <>
@@ -46,8 +55,10 @@ const SignUpForm = ({ navigate }) => {
         <h1>Sign up</h1><br></br>
         <p>Please enter a valid email and password to sign up.</p><br></br>
           <form onSubmit={handleSubmit}>
-            <input placeholder='Email' id="email" type='text' value={email} onChange={event => setEmail(event.target.value)} /><br></br>
-            <input className="input-field" placeholder='Password' id="password" type='password' value={password} onChange={event => setPassword(event.target.value)} /><br></br>
+            <input placeholder='Name' id="user-name" type='text' value={userName} onChange={handleNameChange} /><br></br>
+            <input placeholder="Profile picture" id="profile-picture" type ="file" value={userPhoto} onChange={handleUserPhotoChange} /><br></br>
+            <input placeholder='Email' id="email" type='text' value={email} onChange={handleEmailChange} /><br></br>
+            <input className="input-field" placeholder='Password' id="password" type='password' value={password} onChange={handlePasswordChange} /><br></br>
             <input role='submit-button' id='submit' type="submit" value="Sign-up" />
           </form>
         </div>
