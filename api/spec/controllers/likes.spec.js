@@ -93,21 +93,28 @@ describe("/posts", () => {
 
   describe("GET POSTS to determine which ones user already liked or not", () => {
     test("returns didUserLikeThis: true if user liked the post", async () => {
-      const user = (await User.find())[0]
       let post1 = new Post({message: "howdy!"});
-      // We assume user liked post 2
-      let post2 = new Post({message: "hola!", likedBy: [user.id]});
+      let post2 = new Post({message: "hola!"});
       await post1.save();
       await post2.save();
+      let post_id = (await Post.find())[0].id;
+      // We like the first post using the post_id from line above
+      await request(app)
+        .post("/posts/like")
+        .set("Authorization", `Bearer ${token}`)
+        .send({ post_id: post_id, token: token });
+
+      // A get request to receive all posts
       let response = await request(app)
         .get("/posts")
         .set("Authorization", `Bearer ${token}`)
         .send({token: token});
       let messages = response.body.posts
-      // didUserLikeThis only gets generated if user likes a post
-      expect(messages[0].didUserLikeThis).toEqual(undefined)
-      // returns true for the post user liked
-      expect(messages[1].didUserLikeThis).toEqual(true)
+      // didUserLikeThis only gets generated if user likes a post and returns true
+      // for post the user liked
+      expect(messages[0].didUserLikeThis).toEqual(true)
+      // user did not like this, so it returns undefined
+      expect(messages[1].didUserLikeThis).toEqual(undefined)
     });
   });
 });
