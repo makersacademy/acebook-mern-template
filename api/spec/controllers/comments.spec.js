@@ -2,6 +2,7 @@ const app = require("../../app");
 const request = require("supertest");
 require("../mongodb_helper");
 
+const Post = require("../../models/post")
 const Comment = require("../../models/comment");
 const User = require("../../models/user");
 
@@ -43,11 +44,24 @@ describe("/comments", () => {
     test("responds with a 201", async () => {
       const mongoose = require('mongoose');
       const postId = mongoose.Types.ObjectId();
+
+      const post = {
+        _id: postId,
+        comments: [],
+        save: jest.fn(),
+      }
+
+      jest.spyOn(Post, 'findById').mockResolvedValue(post);
+
       let response = await request(app)
         .post("/comments")
         .send({ comment: "hello world", postId: postId });
+
+      expect(post.comments).toContain("hello world");
+      expect(post.save).toHaveBeenCalled();
       expect(response.status).toEqual(201);
     });
+
 
     test("creates a new comment", async () => {
       await request(app)
