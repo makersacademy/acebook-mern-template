@@ -6,6 +6,7 @@
 
       return (
           <>
+           <h2>Farcebook</h2>
             <nav className='nav-bar'>
               <div className='nav-item' ><a href='/login'>Login</a></div>
               <div className='nav-item'><a href='/signup'>Sign up</a></div>

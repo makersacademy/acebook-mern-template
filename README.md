@@ -225,7 +225,7 @@ After logging in, you won't see much but you can create posts using PostMan and 
 
   ```
   ; cd frontend
-  ; JWT_SECRET=SUPER_SECRET npm run test
+  ; JWT_SECRET=SUPER_SECRET npm start
   ```
 
   Then run the tests in a new terminal session
