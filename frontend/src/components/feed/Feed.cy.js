@@ -3,7 +3,7 @@ const navigate = () => {}
 
 describe("Feed", () => {
   it("Calls the /posts endpoint and lists all the posts", () => {
-    window.localStorage.setItem("token", "fakeToken")
+    window.localStorage.setItem("token", "fakeToken") // setItem takes a key name and value to add it to localStorage
 
     cy.intercept('GET', '/posts', (req) => {
         req.reply({
