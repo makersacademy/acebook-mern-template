@@ -1,11 +1,17 @@
+// Imports necessary dependencies from React and a Post component.
 import React, { useEffect, useState } from 'react';
 import Post from '../post/Post'
 
+// Define a Feed component which receives a navigate prop to handle navigation.
 const Feed = ({ navigate }) => {
+  // Initialize states with useState for posts, token and newPost.
   const [posts, setPosts] = useState([]);
   const [token, setToken] = useState(window.localStorage.getItem("token"));
   const [newPost, setNewPost] = useState('');
 
+  // useEffect hook is used for handling side effects.
+  // It fetches posts from the "/posts" endpoint and updates the posts state.
+  // The token is included in the header for authorization.
   useEffect(() => {
     if(token) {
       fetch("/posts", {
@@ -22,11 +28,14 @@ const Feed = ({ navigate }) => {
     }
   }, [])
 
+  // logout function removes the token from localStorage and navigates to login page.
   const logout = () => {
     window.localStorage.removeItem("token")
     navigate('/login')
   }
 
+  // handleSubmit function handles post submission.
+  // It sends a POST request to "/posts" endpoint with the new post data.
   const handleSubmit = async (event) => {
     event.preventDefault();
   
@@ -50,6 +59,8 @@ const Feed = ({ navigate }) => {
     }
   };
 
+  // handleLike function sends a POST request to "/posts/{postId}/likes" endpoint to like a post.
+  // It also updates the post's like count in the local state.
   const handleLike = async (postId) => {
     try {
       const response = await fetch(`/posts/${postId}/likes`, {
@@ -62,7 +73,6 @@ const Feed = ({ navigate }) => {
   
       const data = await response.json();
   
-      // update posts state to reflect the new likes count
       setPosts(posts.map(post => 
         post._id === postId ? { ...post, like: data.post.like } : post
       ));
@@ -72,6 +82,8 @@ const Feed = ({ navigate }) => {
     }
   };
   
+  // If token is present, render the posts feed with the ability to add a new post and logout.
+  // If not, navigate to the signin page.
   if(token) {
     return(
       <>
