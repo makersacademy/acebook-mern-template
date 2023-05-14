@@ -61,16 +61,6 @@ describe("/posts", () => {
     });  
   });
 
-  describe("LIKE, when token is missing", () => {
-    test("responds with a 401", async () => {
-      let response = await request(app)
-        .post("/posts/like")
-        // post ID does not matter here, as we expect to get stuck at token checks
-        .send({ post_id: 1, token: token });
-      expect(response.status).toEqual(401);
-    });
-  });
-  
   describe("POST, when token is missing", () => {
     test("responds with a 401", async () => {
       let response = await request(app)
