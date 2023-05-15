@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import './AddPost.css';
 
 const AddPost = () => { // was passing in navigate but that is not passed into this component in Feed
   const [message, setMessage] = useState('');
@@ -43,8 +44,8 @@ const AddPost = () => { // was passing in navigate but that is not passed into t
     return (
       <>
         <form onSubmit={handleSubmit}>
-          <input placeholder='Message' id="message" type='text' value={message} onChange={handleMessageChange} />
-          <input role='submit-button' id='submit' type="submit" value="Post" />
+          <input className="input-field" placeholder='Message' id="message" type='text' value={message} onChange={handleMessageChange} />
+          <input className="input-button" role='submit-button' id='submit' type="submit" value="Add New Post" />
         </form>  
 
     

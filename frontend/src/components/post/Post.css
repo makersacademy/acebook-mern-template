@@ -1,0 +1,17 @@
+.postbox {
+  font-family: 'Raleway';
+  border: 1px solid #bbb;
+  padding: 8px;
+  margin: 8px 0;
+  border-radius: 10px;
+  box-shadow: 1px 2px 3px rgba(0,0,0,0.4);
+}
+
+.postflex {
+  display: flex;
+  justify-content: space-between;
+}
+
+.postbox article {
+  margin-bottom: 0;
+}

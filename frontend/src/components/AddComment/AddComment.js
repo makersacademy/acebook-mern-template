@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import './AddComment.css';
 
 // const Post = require('../../models/post');
 
@@ -49,9 +50,9 @@ const AddComment = ({ post }) => {
   return (
     <>
       <form onSubmit={handleSubmit}>
-        <label htmlFor="comment">Add a comment</label>
-        <input placeholder='Comment' id="comment" type='text' value={comment} onChange={handleCommentChange} />
-        <input role='submit-button' id='submit' type="submit" value="Submit" />
+        {/* <label htmlFor="comment">Add a comment</label> */}
+        <input className="input-field" placeholder='Comment' id="comment" type='text' value={comment} onChange={handleCommentChange} />
+        <input className="input-button" role='submit-button' id='submit-comment' type="submit" value="Add comment" />
       </form>
     </>
   )
