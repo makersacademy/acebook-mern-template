@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import {AuthenticationContext} from '../authenticationProvider/AuthenticationProvider';
 
 const CreatePostForm = ({ onCreated }) => {
   const [message, setMessage] = useState("");

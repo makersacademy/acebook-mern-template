@@ -1,8 +1,11 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
+import {AuthenticationContext} from '../authenticationProvider/AuthenticationProvider';
 
 const LogInForm = ({ navigate }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const {isLoggedIn, setIsLoggedIn, username, setUsername, token, setToken} = useContext(AuthenticationContext)
+
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -21,8 +24,12 @@ const LogInForm = ({ navigate }) => {
     } else {
       console.log("oop")
       let data = await response.json()
-      
-      window.localStorage.setItem("token", data.token)
+      setIsLoggedIn(true)
+
+      const localUsername = await getUsername(email)
+      setUsername(localUsername)
+
+      setToken(data.token)
       navigate('/posts');
     }
   }
@@ -35,6 +42,13 @@ const LogInForm = ({ navigate }) => {
     setPassword(event.target.value)
   }
 
+  const getUsername = async (email) => {
+    let response = await fetch( "/users/" + email, {
+      method: 'get'
+    }).then( (response) => response.json())
+
+    return response.username;
+  }
 
     return (
       <form onSubmit={handleSubmit}>
