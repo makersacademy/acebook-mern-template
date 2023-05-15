@@ -73,7 +73,7 @@ const Feed = ({ navigate }) => {
       const data = await response.json();
   
       if (response.status === 400) {
-        alert(data.message);    
+        // alert(data.message);    
       } else {
         setPosts(posts.map(post => 
           post._id === postId ? { ...post, like: data.post.like } : post
