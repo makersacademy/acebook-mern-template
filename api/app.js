@@ -1,5 +1,6 @@
 const createError = require("http-errors");
 const express = require("express");
+// const bodyParser = require('body-parser'); // added to stop '413 payload too large' error
 const path = require("path");
 const logger = require("morgan");
 const JWT = require("jsonwebtoken");
@@ -14,7 +15,10 @@ const app = express();
 app.use(express.json())
 
 app.use(logger("dev"));
-app.use(express.json());
+// app.use(express.json());
+app.use(express.json({limit: '50mb'}));
+// app.use(bodyParser.json({ limit: '10mb' })); // added to stop payload too large error
+// app.use(bodyParser.urlencoded({ extended: true, limit: '10mb' }));
 app.use(express.static(path.join(__dirname, "public")));
 
 // middleware function to check for valid tokens

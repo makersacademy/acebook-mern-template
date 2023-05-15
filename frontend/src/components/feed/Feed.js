@@ -38,7 +38,7 @@ const Feed = ({ navigate }) => {
           </button>
 
         <div className="new-post-form">
-          < NewPostForm/>
+          < NewPostForm />
         </div>
 
 
