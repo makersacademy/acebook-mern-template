@@ -1,0 +1,20 @@
+.nav-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #F0F2F5;
+  padding: 10px;
+}
+
+/* Style for the navigation items */
+.nav-item {
+  margin-right: 10px;
+}
+
+/* Style for the navigation links */
+.nav-item a {
+  text-decoration: none;
+  color: #1a1a1a;
+  font-size: 18px;
+  font-weight: bold;
+}
