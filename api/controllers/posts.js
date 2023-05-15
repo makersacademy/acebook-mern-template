@@ -36,7 +36,7 @@ const PostsController = {
   
       // Check if the user has already liked the post
       if (post.likedBy.includes(userId)) {
-        return res.status(400).json({ message: 'User has already liked this post.' });
+        return res.status(400).json({ message: "You've already liked this post." });
       }
   
       const updatedPost = post;
