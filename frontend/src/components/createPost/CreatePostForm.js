@@ -4,7 +4,6 @@ import {AuthenticationContext} from '../authenticationProvider/AuthenticationPro
 const CreatePostForm = ({ onCreated }) => {
   const {token, username} = useContext(AuthenticationContext)
   const [message, setMessage] = useState("");
-  const {token, setToken} = useContext(AuthenticationContext)
 
   const handleSubmit = async (event) => {
     event.preventDefault();
