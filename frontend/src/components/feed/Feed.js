@@ -12,8 +12,8 @@ const Feed = ({ navigate }) => {
       getPosts();
     }
   }, [])
-  
-  const getPosts = () => {
+
+  const getPosts = () => { // abstracted out the get request that was in useEffect, so it can be passed down to NewPostForm as a prop
     fetch("/posts", {
       headers: {
         'Authorization': `Bearer ${token}`
@@ -24,6 +24,7 @@ const Feed = ({ navigate }) => {
       window.localStorage.setItem("token", data.token)
       setToken(window.localStorage.getItem("token"))
       setPosts(data.posts);
+      console.log(posts);
     })
   }
 
@@ -53,7 +54,7 @@ const Feed = ({ navigate }) => {
           </button>
 
         <div className="new-post-form">
-          < NewPostForm getPosts={ getPosts }/>
+          < NewPostForm getPosts={ getPosts } posts={ posts } setPosts={ setPosts }/> 
         </div>
 
 
