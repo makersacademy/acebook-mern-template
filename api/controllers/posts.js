@@ -4,14 +4,16 @@ const TokenGenerator = require("../models/token_generator");
 
 const PostsController = {
   Index: (req, res) => {
-    Post.find().populate({path: "authorUserId", select: "username"})
-    .exec(async (err, posts) => {
-      if (err) {
-        throw err;
-      }
-      const token = await TokenGenerator.jsonwebtoken(req.user_id)
-      res.status(200).json({ posts: posts, token: token });
-    });
+    // Post.find().populate({path: "authorUserID", select: "username"})
+    Post.find().populate("authorUserID")
+      .exec(async (err, posts) => {
+        if (err) {
+          throw err;
+        }
+
+        const token = await TokenGenerator.jsonwebtoken(req.user_id)
+        res.status(200).json({ posts: posts, token: token });
+      });
   },
   Create: (req, res) => {
     const post = new Post(req.body);

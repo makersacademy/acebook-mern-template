@@ -21,7 +21,11 @@ const Feed = ({ navigate }) => {
         .then(async data => {
           window.localStorage.setItem("token", data.token)
           setToken(window.localStorage.getItem("token"))
-          console.log(data.posts[0])
+          data.posts.forEach((post) => {
+            post.author = post.authorUserID.username
+            delete post.authorUserID
+          })
+          console.log(`1st post's author set to: ${data.posts[0].author}`)
           setPosts(orderByDate(data.posts));
         })
     }
