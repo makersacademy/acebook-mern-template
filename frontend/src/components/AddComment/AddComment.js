@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
+import React, { useState } from 'react'
 
-const AddPost = () => { // was passing in navigate but that is not passed into this component in Feed
-  const [message, setMessage] = useState('');
+const AddComment = () => {
+  const [comment, setComment] = useState('');
   const [token, setToken] = useState(window.localStorage.getItem("token"));
 
   const handleSubmit = async (event) => {
@@ -9,7 +9,7 @@ const AddPost = () => { // was passing in navigate but that is not passed into t
 
       if (token) {
 
-        console.log(`${message}`) // VISIBILITY
+        console.log(`${comment}`) // VISIBILITY
         const response = await fetch('/posts', {
           method: 'POST',
           headers: {
@@ -17,8 +17,7 @@ const AddPost = () => { // was passing in navigate but that is not passed into t
             'Content-Type': 'application/json',
           },
           body: JSON.stringify({
-            message: message,
-            comments: []
+            comment: comment
           })
         })
         if (response.status !== 201) {
@@ -34,23 +33,24 @@ const AddPost = () => { // was passing in navigate but that is not passed into t
         }
       }
   }
-  
-    const handleMessageChange = (event) => {
-      setMessage(event.target.value)
-    }
 
-    return (
-      <>
-        <form onSubmit={handleSubmit}>
-          <input placeholder='Message' id="message" type='text' value={message} onChange={handleMessageChange} />
-          <input role='submit-button' id='submit' type="submit" value="Submit" />
-        </form>
-      </>
-    )
+
+
+
+
+  const handleCommentChange = (event) => {
+    setComment(event.target.value)
   }
 
-export default AddPost;
+  return (
+    <>
+      <form onSubmit={handleSubmit}>
+        <label htmlFor="comment">Add a comment</label>
+        <input placeholder='Comment' id="comment" type='text' value={comment} onChange={handleCommentChange} />
+        <input role='submit-button' id='submit' type="submit" value="Submit" />
+      </form>
+    </>
+  )
+}
 
-
-
-
+export default AddComment
