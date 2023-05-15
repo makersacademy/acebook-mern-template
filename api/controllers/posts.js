@@ -1,9 +1,11 @@
 const Post = require("../models/post");
 const TokenGenerator = require("../models/token_generator");
+// const User = require ("../models/user");
 
 const PostsController = {
   Index: (req, res) => {
-    Post.find(async (err, posts) => {
+    Post.find().populate({path: "authorUserId", select: "username"})
+    .exec(async (err, posts) => {
       if (err) {
         throw err;
       }

@@ -21,6 +21,7 @@ const Feed = ({ navigate }) => {
         .then(async data => {
           window.localStorage.setItem("token", data.token)
           setToken(window.localStorage.getItem("token"))
+          console.log(data.posts[0])
           setPosts(orderByDate(data.posts));
         })
     }
