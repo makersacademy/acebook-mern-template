@@ -53,6 +53,27 @@ const PostsController = {
       });
     });
   },
+
+  CreateComment: (req, res) => {
+    const { postId, text } = req.body;
+    const userId = req.user_id;
+    
+    Post.findById(postId, async (err, post) => {
+      if (err) {
+        throw err;
+      }
+    
+      post.comments.push({ text: text, author: userId });
+      post.save(async (err, updatedPost) => {
+        if (err) {
+          throw err;
+        }
+    
+        const token = await TokenGenerator.jsonwebtoken(userId);
+        res.status(201).json({ message: 'OK', token: token, post: updatedPost });
+      });
+    });
+  },  
 }  
 
 module.exports = PostsController;
