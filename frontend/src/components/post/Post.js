@@ -11,8 +11,10 @@ const Post = ({ post, onCreated }) => {
 
   if (post.message !== "") { // Quickfix to remove empty submits
     return (
+
       <article data-cy="post" className="post" key={post._id}>
         <p className="message">{post.message}</p>
+        <p class="show_author">Posted by: {post.author}</p>
         <Like postId={post._id} likesCount={post.likeCount}/>
         <div className="comments-container">
             <CreateCommentForm postId={post._id} onCreated={handleCommentCreated} />

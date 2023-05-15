@@ -34,4 +34,23 @@ p {
   font-family: Helvetica, sans-serif;
   line-height: 1.2;
   padding: 10px;
+  
+  position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: right;
+    justify-content: right;
+    border: 1px solid #ccc;
+    padding: 1rem;
+    border-radius: 0.5rem;
+    max-width: 30rem;
+    margin: 1rem auto;
+  }
+
+.show_author {
+  font-size: small;
+  color: gray;
+  position: absolute;
+  right: 1vh;
+  bottom: 0;
 }
