@@ -43,5 +43,14 @@ describe("Post model", () => {
     expect(post.like).toEqual(0);
     expect(post.likedBy).toEqual(expect.arrayContaining([]));
   });
+
+  it("has a like field with 5 likes", () => {
+    var post = new Post({ message: "some message", like: 5 });
+    expect(post.like).toEqual(5);
+  });
   
+  it("has a likedBy field with two users", () => {
+    var post = new Post({ message: "some message", likedBy: ["user1", "user2"] });
+    expect(post.likedBy).toEqual(expect.arrayContaining(["user1", "user2"]));
+  });  
 });
