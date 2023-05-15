@@ -6,6 +6,10 @@ const Feed = ({ navigate }) => {
   const [posts, setPosts] = useState([]);
   const [token, setToken] = useState(window.localStorage.getItem("token"));
 
+  function orderByDate (posts) {
+    return posts.sort((a,b) => new Date(a.createdAt) - new Date(b.createdAt)).reverse()
+  }
+
   useEffect(() => {
     if(token) {
       fetch("/posts", {
@@ -17,7 +21,7 @@ const Feed = ({ navigate }) => {
         .then(async data => {
           window.localStorage.setItem("token", data.token)
           setToken(window.localStorage.getItem("token"))
-          setPosts(data.posts);
+          setPosts(orderByDate(data.posts));
         })
     }
   }, [])
@@ -27,6 +31,7 @@ const Feed = ({ navigate }) => {
     window.localStorage.removeItem("token")
     navigate('/login')
   }
+
   
     if(token) {
       return(
