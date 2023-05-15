@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 
-const NewPostForm = ({onSubmit}) => {
+const NewPostForm = ({toggleRefresh}) => {
   const [newPost, setNewPost] = useState("");
   const [token, setToken] = useState(window.localStorage.getItem("token"));
 
@@ -24,7 +24,7 @@ const NewPostForm = ({onSubmit}) => {
         setNewPost(""); // clear the input field - set as empty string so type doesn't change
       })
       // executes the callback function whenever form is submitted
-      onSubmit()
+      toggleRefresh()
     }
   }
 

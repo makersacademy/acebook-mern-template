@@ -47,7 +47,7 @@ const Feed = ({ navigate }) => {
           </button>
 
         <div className="new-post-form">
-          < NewPostForm onSubmit={toggleRefresh}/>
+          < NewPostForm toggleRefresh={toggleRefresh}/>
         </div>
 
         <div id='feed' role="feed">
