@@ -9,20 +9,23 @@ const Feed = ({ navigate }) => {
 
   useEffect(() => {
     if(token) {
-      fetch("/posts", {
-        headers: {
-          'Authorization': `Bearer ${token}`
-        }
-      })
-        .then(response => response.json())
-        .then(async data => { // try to remove async and see if it works
-          window.localStorage.setItem("token", data.token)
-          setToken(window.localStorage.getItem("token"))
-          setPosts(data.posts);
-        })
+      getPosts();
     }
   }, [])
-
+  
+  const getPosts = () => {
+    fetch("/posts", {
+      headers: {
+        'Authorization': `Bearer ${token}`
+      }
+    })
+    .then(response => response.json())
+    .then(async data => { // try to remove async and see if it works
+      window.localStorage.setItem("token", data.token)
+      setToken(window.localStorage.getItem("token"))
+      setPosts(data.posts);
+    })
+  }
 
   const logout = () => {
     window.localStorage.removeItem("token")
@@ -38,7 +41,7 @@ const Feed = ({ navigate }) => {
           </button>
 
         <div className="new-post-form">
-          < NewPostForm/>
+          < NewPostForm getPosts={ getPosts }/>
         </div>
 
 
