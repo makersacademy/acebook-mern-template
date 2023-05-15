@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import Post from '../post/Post'
+import Post from '../post/Post';
 import CreatePostForm from '../createPost/CreatePostForm';
 
 const Feed = ({ navigate }) => {
