@@ -1,9 +1,9 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import {AuthenticationContext} from '../authenticationProvider/AuthenticationProvider';
 
 const CreatePostForm = ({ onCreated }) => {
   const [message, setMessage] = useState("");
-  const [token, setToken] = useState(window.localStorage.getItem("token"));
+  const {token} = useContext(AuthenticationContext)
 
   const handleSubmit = async (event) => {
     event.preventDefault();
