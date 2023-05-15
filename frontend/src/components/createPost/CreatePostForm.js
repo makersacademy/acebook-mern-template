@@ -1,9 +1,9 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import {AuthenticationContext} from '../authenticationProvider/AuthenticationProvider';
 
 const CreatePostForm = ({ onCreated }) => {
+  const {token, username} = useContext(AuthenticationContext)
   const [message, setMessage] = useState("");
-  const [token, setToken] = useState(window.localStorage.getItem("token"));
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -14,7 +14,7 @@ const CreatePostForm = ({ onCreated }) => {
         'Content-Type': 'application/json',
         'Authorization': `Bearer ${token}`
       },
-      body: JSON.stringify({ message: message })
+      body: JSON.stringify({ message: message, author: username })
     })
 
     setMessage("")
