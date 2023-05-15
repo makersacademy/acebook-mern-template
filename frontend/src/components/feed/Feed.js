@@ -28,11 +28,6 @@ const Feed = ({ navigate }) => {
     }
   }, [])
 
-  // const logout = () => {
-  //   window.localStorage.removeItem("token")
-  //   navigate('/login')
-  // }
-
   // handleSubmit function handles post submission.
   // It sends a POST request to "/posts" endpoint with the new post data.
   const handleSubmit = async (event) => {
