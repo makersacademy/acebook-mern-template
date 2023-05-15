@@ -1,11 +1,11 @@
 import React, {useState} from 'react';
 
-const NewPostForm = ({getPosts}) => {
+const NewPostForm = ({getPosts, posts, setPosts}) => { // posts and setPosts seem to need to be passed down for getPosts to work on line 26
   const [newPost, setNewPost] = useState("");
   const [token, setToken] = useState(window.localStorage.getItem("token"));
 
   const submitPost = (event) => {
-    // When you use event.preventDefault(), it needs to be at the very top of the function, otherwise it doesn't prevent the page from reloading. So the page was 
+    // When you use event.preventDefault(), it needs to be at the very top of the function, otherwise it doesn't prevent the page from reloading. So the page was
     // forever reloading and then running the tests again and again.
     event.preventDefault()
     if(token) {
@@ -23,7 +23,7 @@ const NewPostForm = ({getPosts}) => {
         setToken(window.localStorage.getItem("token"))
         setNewPost(""); // clear the input field - set as empty string so type doesn't change
       })
-      getPosts();
+      getPosts(); // this means every time the submit button is clicked, it will send a new GET request to reload the posts in Feed
     }
   }
 
