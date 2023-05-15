@@ -37,4 +37,11 @@ describe("Post model", () => {
       });
     });
   });
+
+  it("sets default values for like and likedBy", () => {
+    var post = new Post({ message: "some message" });
+    expect(post.like).toEqual(0);
+    expect(post.likedBy).toEqual(expect.arrayContaining([]));
+  });
+  
 });
