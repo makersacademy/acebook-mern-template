@@ -5,6 +5,6 @@ const PostsController = require("../controllers/posts");
 
 router.get("/", PostsController.Index);
 router.post("/", PostsController.Create);
-router.patch("/", PostsController.Update);
+router.patch("/", PostsController.Update);    //AddComment: update post with new comment
 
 module.exports = router;
