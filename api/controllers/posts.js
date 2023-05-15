@@ -17,7 +17,10 @@ const PostsController = {
     });
   },
   Create: (req, res) => {
-    const post = new Post(req.body);
+    const post = new Post();
+    post.message = req.body.message
+    // add the user ID of the author who wrote the post
+    post.author = req.user_id
     post.save(async (err) => {
       if (err) {
         throw err;

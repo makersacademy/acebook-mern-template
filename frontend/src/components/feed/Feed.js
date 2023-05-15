@@ -5,28 +5,33 @@ import NewPostForm from '../new-post/NewPostForm'
 const Feed = ({ navigate }) => {
   const [posts, setPosts] = useState([]);
   const [token, setToken] = useState(window.localStorage.getItem("token"));
-
+  // We have a new constant called refresh, starts by false as default
+  const [refresh, setRefresh] = useState(false);
 
   useEffect(() => {
     if(token) {
-      getPosts();
+      fetch("/posts", {
+        headers: {
+          'Authorization': `Bearer ${token}`
+        }
+      })
+        .then(response => response.json())
+        .then(async data => {
+          window.localStorage.setItem("token", data.token)
+          setToken(window.localStorage.getItem("token"))
+          setPosts(data.posts);
+        })
     }
-  }, [])
+    // use effect watches over the refresh constant and executes the function 
+    // within each time refresh changes
+  }, [refresh])
 
-  const getPosts = () => { // abstracted out the GET request that was in useEffect, so it can be passed down to NewPostForm as a prop
-    fetch("/posts", {
-      headers: {
-        'Authorization': `Bearer ${token}`
-      }
-    })
-    .then(response => response.json())
-    .then(async data => { // try to remove async and see if it works
-      window.localStorage.setItem("token", data.token)
-      setToken(window.localStorage.getItem("token"))
-      setPosts(data.posts);
-      console.log(posts);
-    })
-  }
+  const toggleRefresh = () => {
+    // sets whatever is inside refresh to the opposite, triggering a refresh
+    // through useeffect. this is activated whenever the newpostform is
+    // submitted
+    setRefresh(prevRefresh => !prevRefresh);
+  };
 
   function comparebyDate( a, b ) {
     if ( a.createdDateTime < b.createdDateTime ){
@@ -54,9 +59,8 @@ const Feed = ({ navigate }) => {
           </button>
 
         <div className="new-post-form">
-          < NewPostForm getPosts={ getPosts } posts={ posts } setPosts={ setPosts }/>
+          < NewPostForm onSubmit={toggleRefresh}/>
         </div>
-
 
         <div id='feed' role="feed">
             {sortedData.map(
