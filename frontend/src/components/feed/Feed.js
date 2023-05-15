@@ -83,6 +83,27 @@ const Feed = ({ navigate }) => {
       console.error(error);
     }
   };  
+
+  const handleComment = async (postId, comment) => {
+    try {
+      const response = await fetch(`/posts/${postId}/comments`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}`
+        },
+        body: JSON.stringify({ comment })
+      });
+  
+      const data = await response.json();
+  
+      setPosts(posts.map(post => 
+        post._id === postId ? { ...post, comments: [...post.comments, { comment, author: 'You', date: new Date(), _id: new Date().getTime() }] } : post
+      ));
+    } catch (error) {
+      console.error(error);
+    }
+  };
   
   // If token is present, render the posts feed with the ability to add a new post and logout.
   // If not, navigate to the signin page.
@@ -99,12 +120,11 @@ const Feed = ({ navigate }) => {
         </form>
         <div id='feed' role="feed">
             {posts.map(
-              (post) => ( <Post post={ post } key={ post._id } onLike={handleLike} /> )
+              (post) => ( <Post post={ post } key={ post._id } onLike={handleLike} onComment={handleComment} /> )
             )}
         </div>
       </>
     )
-    
   } else {
     navigate('/signin')
   }
