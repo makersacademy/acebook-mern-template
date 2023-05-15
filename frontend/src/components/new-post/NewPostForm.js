@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 
-const NewPostForm = ({getPosts, posts, setPosts}) => { // posts and setPosts seem to need to be passed down for getPosts to work on line 26
+const NewPostForm = ({toggleRefresh}) => {
   const [newPost, setNewPost] = useState("");
   const [token, setToken] = useState(window.localStorage.getItem("token"));
 
@@ -23,7 +23,8 @@ const NewPostForm = ({getPosts, posts, setPosts}) => { // posts and setPosts see
         setToken(window.localStorage.getItem("token"))
         setNewPost(""); // clear the input field - set as empty string so type doesn't change
       })
-      getPosts(); // this means every time the submit button is clicked, it will send a new GET request to reload the posts in Feed
+      // executes the callback function whenever form is submitted
+      toggleRefresh()
     }
   }
 
