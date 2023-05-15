@@ -24,6 +24,13 @@ Cypress.Commands.add('login', (email, password) => {
   cy.get("#password").type(password);
   cy.get("#submit").click();
 })
+
+// this command can be used to make new posts
+Cypress.Commands.add('make_a_post', (post_content) => {
+  cy.visit("/posts");
+  cy.get('#new-post-field').type(post_content);
+  cy.get('#new-post-button').click();
+})
 //
 //
 // -- This is a child command --
