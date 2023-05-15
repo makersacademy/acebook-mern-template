@@ -1,4 +1,6 @@
 const Post = require("../models/post");
+const User = require("../models/user");
+
 const TokenGenerator = require("../models/token_generator");
 
 const PostsController = {
@@ -12,12 +14,17 @@ const PostsController = {
       // which returns true if the user's id is already in the likedBy array.
       // likedBy array is the list of users who already liked the post
       posts.forEach(post => {
-        if (post.likedBy.includes(req.user_id)) {post._doc.didUserLikeThis = true;}})
+        if (post.likedBy.includes(req.user_id)) {post._doc.didUserLikeThis = true;}
+        post.author = author
+      });
       res.status(200).json({ posts: posts, token: token });
     });
   },
   Create: (req, res) => {
-    const post = new Post(req.body);
+    const post = new Post();
+    post.message = req.body.message
+    // add the user ID of the author who wrote the post
+    post.author = req.user_id
     post.save(async (err) => {
       if (err) {
         throw err;
