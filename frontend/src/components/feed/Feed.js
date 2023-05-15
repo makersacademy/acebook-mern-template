@@ -90,7 +90,7 @@ const Feed = ({ navigate }) => {
         body: JSON.stringify({ comment })
       });
   
-      const data = await response.json();
+      // const data = await response.json();
   
       setPosts(posts.map(post => 
         post._id === postId ? { ...post, comments: [...post.comments, { comment, author: 'You', date: new Date(), _id: new Date().getTime() }] } : post

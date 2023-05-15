@@ -1,0 +1,15 @@
+/* Post.css */
+
+.post-message {
+  margin-bottom: 20px;
+}
+
+.button-container {
+  display: flex;
+  justify-content: flex-start;  /* aligns buttons to the left */
+  margin-bottom: 10px;
+}
+
+.button-container button {
+  margin-right: 10px;  /* adds some space between the buttons */
+}
