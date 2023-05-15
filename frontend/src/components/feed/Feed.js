@@ -1,11 +1,7 @@
 import React, { useEffect, useState, useContext } from 'react';
 import Post from '../post/Post';
 import CreatePostForm from '../createPost/CreatePostForm';
-<<<<<<< HEAD
-import './Feed.css'
-=======
 import {AuthenticationContext} from '../authenticationProvider/AuthenticationProvider';
->>>>>>> main
 
 const Feed = ({ navigate }) => {
   const {token, setToken} = useContext(AuthenticationContext)
@@ -30,6 +26,10 @@ const Feed = ({ navigate }) => {
   }, [needsRefresh]) //Dependency - when needsRefresh (a boolean)
     // changes, it call for the useEffect to be rerun - refreshing the posts
     // pass () => setRefresh(true) to any component that needs to refresh and call it in the component
+  
+  const handlePostCreated = () => {
+    setRefresh(true);
+  }
   
     if(token) {
       return(
