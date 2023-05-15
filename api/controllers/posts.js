@@ -55,7 +55,9 @@ const PostsController = {
   },
 
   CreateComment: (req, res) => {
-    const { postId, comment } = req.body;
+    const postId = req.params.id;
+    const { comment } = req.body;
+
     const userId = req.user_id;
     
     Post.findById(postId, async (err, post) => {

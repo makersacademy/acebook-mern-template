@@ -206,4 +206,21 @@ describe("/posts", () => {
         expect(response.body.message).toEqual("You've already liked this post.");
     });
   });
+
+  describe("POST /posts/:id/comments", () => {
+    test("adds a comment to a post", async () => {
+      let post1 = new Post({message: "howdy!"});
+      await post1.save();
+
+      let res = await request(app)
+        .post(`/posts/${post1._id}/comments`)
+        .set("Authorization", `Bearer ${token}`)
+        .send({ comment: "This is a test comment" })
+        .expect(201);
+
+      let updatedPost = await Post.findById(post1._id);
+      expect(updatedPost.comments.length).toEqual(1);
+      expect(updatedPost.comments[0]).toMatchObject({ comment: "This is a test comment" });
+    });
+  });
 });
