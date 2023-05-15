@@ -4,6 +4,7 @@ const mongoose = require("mongoose");
 const PostSchema = new mongoose.Schema({
   message: { type: String, required: true },
   like: { type: Number, default: 0 },
+  likedBy: { type: [String], default: [] },
 });
 
 const Post = mongoose.model("Post", PostSchema);
