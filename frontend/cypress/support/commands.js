@@ -16,6 +16,14 @@ Cypress.Commands.add('signup', (email, password) => {
   cy.get("#password").type(password);
   cy.get("#submit").click();
 })
+
+// this command can now be used to shortcut the login process in end to end testing
+Cypress.Commands.add('login', (email, password) => {
+  cy.visit("/login");
+  cy.get("#email").type(email);
+  cy.get("#password").type(password);
+  cy.get("#submit").click();
+})
 //
 //
 // -- This is a child command --
