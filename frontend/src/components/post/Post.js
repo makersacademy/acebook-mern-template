@@ -3,13 +3,16 @@ import Like from '../like/Like';
 import './Post.css'; // import the CSS file
 
 const Post = ({ post }) => {
-  return (
-    <article data-cy="post" key={post._id}>
-      {post.message}
+  if (post.message !== "") { // Quickfix to remove empty submits
+    return (
+      <article data-cy="post" key={post._id}>
+        {post.message}
 
       <Like postId={post._id} likesCount={post.likeCount}/>
-    </article>
-  );
+      </article>
+    );
+  }
+  return null;
 };
 
 export default Post;
