@@ -32,4 +32,5 @@ describe("/tokens", () => {
     expect(response.body.token).toEqual(undefined)
     expect(response.body.message).toEqual("auth error")
   })
+
 })
