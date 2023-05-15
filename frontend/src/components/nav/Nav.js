@@ -1,29 +1,39 @@
-import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import React, { useEffect, useState } from 'react';
+import { BrowserRouter, Link, NavLink } from 'react-router-dom';
 import './nav.css'
+import NavButton from '../navbutton/NavButton';
 
 const NavBar = ({ navigate }) => {
-//   const [email, setEmail] = useState("");
-//   const [password, setPassword] = useState("");
+const [email, setEmail] = useState("");
+const [password, setPassword] = useState("");
+const [authed, setAuthed] = useState(false);
+const [token, setToken] = useState(window.localStorage.getItem("token"));
 
-    const sendUserTo = () => {
-      
-    }
  
+  useEffect(() => {
+    
+  }, [token])
+
     return (
+      <>
       <div className="nav-container">
-        <div className="nav-box">
-            <div>
-                <Link to="/signup">Sign-up</Link>
-            </div>
-            <div>
-                <Link to="/login">Login</Link>
-            </div>
-            <div>
-                <Link to="/posts">Posts</Link>
-            </div>
-        </div>
+          {token ? (
+          <div className="nav-box">
+            <h1>Waffle</h1>
+            <NavButton to="/posts" value="Posts"/>
+
+            <NavButton to="/logout" value="Logout"/>
+          </div>
+          ):(
+          <div className="nav-box">
+            <h1>Waffle</h1>
+            <NavButton to="/signup" value="Sign-up"/>
+
+            <NavButton to="/login" value="Login"/>
+          </div>
+          )}
       </div>
+      </>
     );
 }
 

@@ -41,7 +41,6 @@ const SignUpForm = ({ navigate }) => {
 
     return (
       <>
-        <NavBar />
         <div className="centered-box">
         <h1>Sign up</h1><br></br>
         <p>Please enter a valid email and password to sign up.</p><br></br>

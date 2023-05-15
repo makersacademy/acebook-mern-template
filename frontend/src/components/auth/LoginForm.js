@@ -43,16 +43,15 @@ const LogInForm = ({ navigate }) => {
 
   return (
     <>
-    <NavBar />
-    <div className="centered-box">
-      <h1>Login</h1><br></br> 
-      <p>Please enter your login details.</p><br></br>
-      <form onSubmit={handleSubmit}>
-        <input placeholder='Email' id="email" type='text' value={ email } onChange={handleEmailChange} /><br></br>
-        <input className="input-field" placeholder='Password' id="password" type='password' value={ password } onChange={handlePasswordChange} /><br></br>
-        <input role='submit-button' id='submit' type="submit" value="Login" />
-      </form>
-    </div>
+      <div className="centered-box">
+        <h1>Login</h1><br></br> 
+        <p>Please enter your login details.</p><br></br>
+        <form onSubmit={handleSubmit}>
+          <input placeholder='Email' id="email" type='text' value={ email } onChange={handleEmailChange} /><br></br>
+          <input className="input-field" placeholder='Password' id="password" type='password' value={ password } onChange={handlePasswordChange} /><br></br>
+          <input role='submit-button' id='submit' type="submit" value="Login" />
+        </form>
+      </div>
     </>
   );
 }

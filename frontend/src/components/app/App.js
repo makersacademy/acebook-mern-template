@@ -7,6 +7,8 @@ import {
   useNavigate,
   Routes,
   Route,
+  Link,
+  NavLink
 } from "react-router-dom";
 
 const App = () => {
@@ -15,6 +17,7 @@ const App = () => {
           <Route path='/posts'  element={<Feed navigate={ useNavigate() }/>}/>
           <Route path='/login'  element={<LoginForm  navigate={ useNavigate() }/>}/>
           <Route path='/signup' element={<SignUpForm navigate={ useNavigate() }/>}/>
+          {/* <Route path='/account' element={<Account navigate={ useNavigate() }/>}/> */}
         </Routes>
     );
 }
