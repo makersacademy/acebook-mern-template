@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 
-const AddComment = () => {
+const AddComment = ({ post }) => {
   const [comment, setComment] = useState('');
   const [token, setToken] = useState(window.localStorage.getItem("token"));
 
@@ -10,7 +10,7 @@ const AddComment = () => {
       if (token) {
 
         console.log(`${comment}`) // VISIBILITY
-        const response = await fetch('/posts', {
+        const response = await fetch(`/posts/${post._id}`, { // This fetch is not complete!!!
           method: 'POST',
           headers: {
             'Authorization': `Bearer ${token}`,
@@ -33,10 +33,6 @@ const AddComment = () => {
         }
       }
   }
-
-
-
-
 
   const handleCommentChange = (event) => {
     setComment(event.target.value)

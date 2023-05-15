@@ -2,7 +2,7 @@ const mongoose = require("mongoose");
 
 const PostSchema = new mongoose.Schema({
   message: String,
-  comments: []
+  comments: []   // AddComments: Added comments (empty array) to schema 
 },
   {
   timestamps: true
