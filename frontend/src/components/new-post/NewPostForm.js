@@ -1,10 +1,13 @@
 import React, {useState} from 'react';
 
-const NewPostForm = ({}) => {
+const NewPostForm = ({getPosts}) => {
   const [newPost, setNewPost] = useState("");
   const [token, setToken] = useState(window.localStorage.getItem("token"));
 
   const submitPost = (event) => {
+    // When you use event.preventDefault(), it needs to be at the very top of the function, otherwise it doesn't prevent the page from reloading. So the page was 
+    // forever reloading and then running the tests again and again.
+    event.preventDefault()
     if(token) {
       fetch('/posts', {
         method: "POST",
@@ -18,11 +21,9 @@ const NewPostForm = ({}) => {
       .then(async data => {
         window.localStorage.setItem("token", data.token)
         setToken(window.localStorage.getItem("token"))
-        // console.log(data.message)
-        event.preventDefault() // don't do the default functionality of the form - which would submit and reload the page
-        // console.log(newPost) // connect to database, update data
         setNewPost(""); // clear the input field - set as empty string so type doesn't change
       })
+      getPosts();
     }
   }
 
