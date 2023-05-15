@@ -52,5 +52,29 @@ describe("Post model", () => {
   it("has a likedBy field with two users", () => {
     var post = new Post({ message: "some message", likedBy: ["user1", "user2"] });
     expect(post.likedBy).toEqual(expect.arrayContaining(["user1", "user2"]));
+  });
+  
+  it("can save a comment to a post", (done) => {
+    var post = new Post({ message: "some message" });
+  
+    post.save((err) => {
+      expect(err).toBeNull();
+  
+      Post.findById(post._id, (err, foundPost) => {
+        expect(err).toBeNull();
+  
+        foundPost.comments.push({ comment: "some comment", author: "user1" });
+        foundPost.save((err) => {
+          expect(err).toBeNull();
+  
+          Post.findById(post._id, (err, updatedPost) => {
+            expect(err).toBeNull();
+  
+            expect(updatedPost.comments[0]).toMatchObject({ comment: "some comment", author: "user1" });
+            done();
+          });
+        });
+      });
+    });
   });  
 });
