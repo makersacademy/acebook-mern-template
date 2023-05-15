@@ -9,6 +9,7 @@ const Post = ({ post }) => {
         {post.message}
 
       <Like postId={post._id} likesCount={post.likeCount}/>
+      <p class="show_author">Posted by: {post.author}</p>
       </article>
     );
   }

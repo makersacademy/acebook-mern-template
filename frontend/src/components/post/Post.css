@@ -1,4 +1,5 @@
 article {
+  position: relative;
     display: flex;
     flex-direction: column;
     align-items: right;
@@ -9,3 +10,11 @@ article {
     max-width: 30rem;
     margin: 1rem auto;
   }
+
+.show_author {
+  font-size: small;
+  color: gray;
+  position: absolute;
+  right: 1vh;
+  bottom: 0;
+}
