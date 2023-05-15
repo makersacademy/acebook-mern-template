@@ -2,7 +2,8 @@ const mongoose = require("mongoose");
 
 // this defines the structure of the post in the database
 const PostSchema = new mongoose.Schema({
-  message: String
+  message: { type: String, required: true },
+  like: { type: Number, default: 0 },
 });
 
 const Post = mongoose.model("Post", PostSchema);
