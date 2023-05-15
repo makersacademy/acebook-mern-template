@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useContext } from 'react';
-import Post from '../post/Post'
+import Post from '../post/Post';
 import CreatePostForm from '../createPost/CreatePostForm';
 import {AuthenticationContext} from '../authenticationProvider/AuthenticationProvider';
 

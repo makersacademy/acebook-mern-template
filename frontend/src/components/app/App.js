@@ -2,7 +2,7 @@ import './App.css';
 import LoginForm from '../auth/LoginForm'
 import SignUpForm from '../user/SignUpForm'
 import ProtectedRoute from '../protectedRoute/ProtectedRoute'
-import React, { useState, useContext } from 'react';
+import React, { useContext } from 'react';
 import { Link, Navigate } from 'react-router-dom';
 import Feed from '../feed/Feed'
 import {
