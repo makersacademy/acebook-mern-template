@@ -1,4 +1,5 @@
 import React from "react";
+import Like from '../like/Like';
 import './Post.css'; // import the CSS file
 import CreateCommentForm from "../commentForm/CommentForm";
 
@@ -12,6 +13,7 @@ const Post = ({ post, onCreated }) => {
     return (
       <article data-cy="post" className="post" key={post._id}>
         <p className="message">{post.message}</p>
+        <Like postId={post._id} likesCount={post.likeCount}/>
         <div className="comments-container">
             <CreateCommentForm postId={post._id} onCreated={handleCommentCreated} />
           <div className="comments">
