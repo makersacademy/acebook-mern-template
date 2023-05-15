@@ -22,7 +22,7 @@ const SignUpForm = ({ navigate }) => {
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({ email: email, password: password, photo: userPhoto })
+      body: JSON.stringify({ email: email, password: password, userName: userName, photo: userPhoto })
     })
       .then(response => {
         if(response.status === 201) {
@@ -49,7 +49,7 @@ const SignUpForm = ({ navigate }) => {
     let reader = new FileReader();
     reader.readAsDataURL(file);
     reader.onload = () => {
-      setUserPhoto(reader.result)
+      setUserPhoto(reader.result);
     }
   }
 
@@ -61,7 +61,7 @@ const SignUpForm = ({ navigate }) => {
         <p>Please enter a valid email and password to sign up.</p><br></br>
           <form onSubmit={handleSubmit}>
             <input placeholder='Name' id="user-name" type='text' value={userName} onChange={handleNameChange} /><br></br>
-            < FileUploader onFileSelectSuccess={(file) => {handlePhotoChange(file)}} onFileSelectError={({error}) => alert(error)}/><br></br>
+            < FileUploader onFileSelectSuccess={(file) => {handlePhotoChange(file)}} onFileSelectError={({error}) => alert(error)} userPhoto={ userPhoto } setUserPhoto={ setUserPhoto }/><br></br>
             <input placeholder='Email' id="email" type='text' value={email} onChange={handleEmailChange} /><br></br>
             <input className="input-field" placeholder='Password' id="password" type='password' value={password} onChange={handlePasswordChange} /><br></br>
             <input role='submit-button' id='submit' type="submit" value="Sign-up" />
