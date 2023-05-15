@@ -4,7 +4,6 @@ const JWT = require("jsonwebtoken");
 
 const PostsController = {
   Index: (req, res) => {
-    // Post.find().populate({path: "authorUserID", select: "username"})
     Post.find().populate("authorUserID")
       .exec(async (err, posts) => {
         if (err) {
