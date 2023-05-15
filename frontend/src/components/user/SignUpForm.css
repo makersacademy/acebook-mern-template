@@ -1,0 +1,35 @@
+.form-header {
+    margin-bottom: 20px;
+    text-align: center;
+  }
+  
+  .aligned-credentials {
+    display: flex;
+    justify-content: center;
+  }
+  
+  .email-box-space {
+    margin-right: 10px;
+  }
+  
+  .password-box-space {
+    margin-left: 10px;
+  }
+  
+  .aligned-names {
+    display: flex;
+    justify-content: center;
+  }
+  
+  .first-name-box-space {
+    margin-right: 10px;
+  }
+  
+  .last-name-box-space {
+    margin-left: 10px;
+  }
+  
+  .form-group {
+    margin-bottom: 10px;
+    text-align: center;
+  }
