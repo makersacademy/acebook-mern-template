@@ -1,7 +1,11 @@
 const mongoose = require("mongoose");
 
 const PostSchema = new mongoose.Schema({
-  message: String}, { timestamps: true
+  message: String,
+  comments: []
+},
+  {
+  timestamps: true
 });
 
 const Post = mongoose.model("Post", PostSchema);
