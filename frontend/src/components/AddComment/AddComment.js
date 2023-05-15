@@ -1,5 +1,7 @@
 import React, { useState } from 'react'
 
+// const Post = require('../../models/post');
+
 const AddComment = ({ post }) => {
   const [comment, setComment] = useState('');
   const [token, setToken] = useState(window.localStorage.getItem("token"));
@@ -9,25 +11,29 @@ const AddComment = ({ post }) => {
 
       if (token) {
 
-        console.log(`${comment}`) // VISIBILITY
-        const response = await fetch(`/posts/${post._id}`, { // This fetch is not complete!!!
-          method: 'POST',
+        console.log(`${post._id}`) // VISIBILITY
+        const response = await fetch(`/posts/${post._id}`, {
+          method: 'PATCH',
           headers: {
             'Authorization': `Bearer ${token}`,
             'Content-Type': 'application/json',
           },
           body: JSON.stringify({
-            comment: comment
+            // Post, { $push: { comments: comment } },
+            message: comment,
           })
         })
-        if (response.status !== 201) {
+        if (response.status !== 204) {
           console.log("oops")
           // navigate('/login')
         } else {
           console.log("yay!")
-          let data = await response.json()
+          console.log(`res = ${response}`)
+          console.log(response)
+          let data = await response//.json()
           console.log(data) // VISIBILITY
-          window.localStorage.setItem("token", data.token)
+          window.localStorage.setItem("token", response.token)
+          
           setToken(window.localStorage.getItem("token"));
           // navigate('/posts'); // navigate is not present in this component
         }

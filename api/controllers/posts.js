@@ -1,5 +1,5 @@
-const Post = require("../models/post");
-const TokenGenerator = require("../models/token_generator");
+const Post = require('../models/post');
+const TokenGenerator = require('../models/token_generator');
 
 const PostsController = {
   Index: (req, res) => {
@@ -7,7 +7,7 @@ const PostsController = {
       if (err) {
         throw err;
       }
-      const token = await TokenGenerator.jsonwebtoken(req.user_id)
+      const token = await TokenGenerator.jsonwebtoken(req.user_id);
       res.status(200).json({ posts: posts, token: token });
     });
   },
@@ -18,25 +18,47 @@ const PostsController = {
         throw err;
       }
 
-      const token = await TokenGenerator.jsonwebtoken(req.user_id)
+      const token = await TokenGenerator.jsonwebtoken(req.user_id);
       res.status(201).json({ message: 'OK', token: token });
     });
   },
-  Update: (req, res) => {
-    if (ObjectId.isValid(req.params.id)) { // only checks if id is valid, not if it exists
-      const updates = req.body;
-    updates.save(async (err) => {
-      if (err) {
-        throw err;
-      }
+  // Update: (req, res) => {
+  //   const post_id = req.params.id;
+  //   const update = req.body;
+  //   Post.findOneAndUpdate({ _id: post_id }, update, { new: true },
+  //     (async (updatedDoc) => {
+  //       if (!updatedDoc) {
+  //         res.status(400);
+  //       }
+        
+  //       // res.status(204).json({ message: 'OK' });
+  //     }))
+  //     const token = await TokenGenerator.jsonwebtoken(req.user_id);
+  //       console.log(token)
+  //       console.log("HELLLO")
+  //       res.status(204).json({ message: 'OK', token: token });
+  //   ;  
+  // },
 
-      const token = await TokenGenerator.jsonwebtoken(req.user_id)
-      res.status(201).json({ message: 'OK', token: token });
-    });
-    } else { // if not 24 hex chars
-      res.status(500).json({error: 'Not a valid document ID'}) // error where invalid ID string is given
-    } 
-  }
+  Update: async (req, res) => {
+    console.log("Hello")
+    const post_id = req.params.id;
+    const update = req.body;
+    console.log(req.user_id)
+    try {
+      const updatedDoc = await Post.findOneAndUpdate({ _id: post_id }, update, {
+        new: true,
+      });
+      const token = await TokenGenerator.jsonwebtoken(req.user_id);
+      console.log(req.user_id)
+      console.log(token)
+      res.status(204).json({ message: 'OK', token: token });
+
+    } catch (err) {
+      res.status(500); //server error
+      console.log(err);
+    }
+  },
 };
 
 module.exports = PostsController;
