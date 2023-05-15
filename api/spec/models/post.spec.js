@@ -54,27 +54,17 @@ describe("Post model", () => {
     expect(post.likedBy).toEqual(expect.arrayContaining(["user1", "user2"]));
   });
   
-  it("can save a comment to a post", (done) => {
-    var post = new Post({ message: "some message" });
+  it("can save a comment to a post", async () => {
+    const post = new Post({ message: "some message" });
   
-    post.save((err) => {
-      expect(err).toBeNull();
+    await post.save();
   
-      Post.findById(post._id, (err, foundPost) => {
-        expect(err).toBeNull();
+    const foundPost = await Post.findById(post._id);
+    foundPost.comments.push({ comment: "some comment", author: "user1" });
+    await foundPost.save();
   
-        foundPost.comments.push({ comment: "some comment", author: "user1" });
-        foundPost.save((err) => {
-          expect(err).toBeNull();
+    const updatedPost = await Post.findById(post._id);
   
-          Post.findById(post._id, (err, updatedPost) => {
-            expect(err).toBeNull();
-  
-            expect(updatedPost.comments[0]).toMatchObject({ comment: "some comment", author: "user1" });
-            done();
-          });
-        });
-      });
-    });
-  });  
+    expect(updatedPost.comments[0]).toMatchObject({ comment: "some comment", author: "user1" });
+  });
 });
