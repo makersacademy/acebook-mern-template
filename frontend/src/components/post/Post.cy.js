@@ -7,7 +7,7 @@ describe("Post", () => {
   })
 
   it('renders a post with a created datetime', () => {
-    const currentDateTime = new Date().toISOString()
+    const currentDateTime = new Date().toUTCString()
     cy.mount(<Post post={{_id: 1, message: "Hello, world", createdDateTime: currentDateTime}} />);
     cy.get('[data-cy="post"]').should('contain.text', currentDateTime)
   })
