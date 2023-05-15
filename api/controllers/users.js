@@ -2,7 +2,7 @@ const User = require("../models/user");
 
 const UsersController = {
   Create: async (req, res) => {  //defines a method called "Create" that is an asynchronous function and takes two parameters: "req" and "res", which represent the request and response objects.
-    const { email } = req.body; // extracts the email property from the request body
+    const {email} = req.body; // extracts the email property from the request body
     const existingUser = await User.findOne({ email }); //queries the database to see if a user with the provided email already exists.
                                                         // It uses the User model to find a document in the database that matches the provided email.
     
@@ -21,4 +21,21 @@ const UsersController = {
   },
 };
 
+
+
 module.exports = UsersController;
+
+
+//findOne() and save() methods used in the code are asynchronous operations that involve interacting with a database, which may take some time to complete. 
+//findOne() and save() are both asynchronous operations that return Promises in Mongoose. 
+// When using asynchronous operations, it's best to use async/await or .then() to handle the Promises and ensure that the code executes in the correct order and ensures the application remains responsive and performs efficiently.
+// on its own the save() method takes a callback function that will be executed once the operation is completed.  
+
+
+
+
+// const { email } = req.body; is using object destructuring to extract the email property from the req.body object. 
+//This means that it's equivalent to writing const email = req.body.email;, but in a shorter and more concise way.
+
+//On the other hand, const user = new User(req.body); is creating a new instance of the User model and passing the entire req.body object as an argument
+
