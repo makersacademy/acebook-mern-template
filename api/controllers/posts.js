@@ -55,7 +55,7 @@ const PostsController = {
   },
 
   CreateComment: (req, res) => {
-    const { postId, text } = req.body;
+    const { postId, comment } = req.body;
     const userId = req.user_id;
     
     Post.findById(postId, async (err, post) => {
@@ -63,7 +63,7 @@ const PostsController = {
         throw err;
       }
     
-      post.comments.push({ text: text, author: userId });
+      post.comments.push({ comment: comment, author: userId });
       post.save(async (err, updatedPost) => {
         if (err) {
           throw err;

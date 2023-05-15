@@ -3,7 +3,7 @@ const mongoose = require("mongoose");
 // this defines the structure of the post in the database
 
 const CommentSchema = new mongoose.Schema({
-  text: { type: String, required: true },
+  comment: { type: String, required: true },
   author: { type: String, required: true },
   date: { type: Date, default: Date.now },
 });
