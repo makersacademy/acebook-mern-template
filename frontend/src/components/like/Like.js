@@ -1,10 +1,11 @@
 import React, { useEffect } from "react";
-import { useState } from "react";
+import { useState, useContext } from "react";
+import {AuthenticationContext} from '../authenticationProvider/AuthenticationProvider';
 
 const Like = ( { postId, likesCount } ) => {
 
   const [likeCount, setLikeCount] = useState(likesCount); // declare likeCount before initializing it
-  const [token, setToken] = useState(window.localStorage.getItem("token"));
+  const {token, setToken} = useContext(AuthenticationContext)
 
   const handleLikeClick = async () => {
 
@@ -17,10 +18,7 @@ const Like = ( { postId, likesCount } ) => {
     })
     const data = await response.json();
     console.log(data)
-    setLikeCount(data.likeCount);
     setLikeCount(data.post.likeCount);
-    setToken(window.localStorage.getItem("token")); // Update tokendfdf
-
   }
 
   return (
