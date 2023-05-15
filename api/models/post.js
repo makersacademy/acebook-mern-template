@@ -1,7 +1,9 @@
 const mongoose = require("mongoose");
+const CommentSchema = require("./comment")
 
 const PostSchema = new mongoose.Schema({
-  message: String
+  message: String,
+  comments: [CommentSchema]
 });
 
 const Post = mongoose.model("Post", PostSchema);
