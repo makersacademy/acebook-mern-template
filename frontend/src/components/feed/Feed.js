@@ -73,7 +73,7 @@ const Feed = ({ navigate }) => {
       const data = await response.json();
   
       if (response.status === 400) {
-        // alert(data.message);    <----- Uncomment if you want the user to see a message when they try to like a post they already liked
+        alert(data.message);    
       } else {
         setPosts(posts.map(post => 
           post._id === postId ? { ...post, like: data.post.like } : post
