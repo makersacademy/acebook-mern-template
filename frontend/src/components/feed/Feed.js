@@ -28,11 +28,10 @@ const Feed = ({ navigate }) => {
     }
   }, [])
 
-  // logout function removes the token from localStorage and navigates to login page.
-  const logout = () => {
-    window.localStorage.removeItem("token")
-    navigate('/login')
-  }
+  // const logout = () => {
+  //   window.localStorage.removeItem("token")
+  //   navigate('/login')
+  // }
 
   // handleSubmit function handles post submission.
   // It sends a POST request to "/posts" endpoint with the new post data.
@@ -88,8 +87,6 @@ const Feed = ({ navigate }) => {
     return(
       <>
         <h2>Posts</h2>
-        <button onClick={logout}>Logout</button>
-
         <form onSubmit={handleSubmit}>
           <label>
             New Post:
@@ -109,5 +106,6 @@ const Feed = ({ navigate }) => {
     navigate('/signin')
   }
 }
+
 
 export default Feed;
