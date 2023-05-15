@@ -31,9 +31,10 @@ const AddComment = ({ post }) => {
           console.log("yay!")
           console.log(`res = ${response}`)
           console.log(response)
-          let data = response.json()
+          let data = await response.json()
+          console.log(`token = ${data.token}`)
           console.log(data) // VISIBILITY
-          window.localStorage.setItem("token", response.token)
+          window.localStorage.setItem("token", data.token)
           
           setToken(window.localStorage.getItem("token"));
           // navigate('/posts'); // navigate is not present in this component

@@ -13,6 +13,7 @@ const PostsController = {
   },
   Create: (req, res) => {
     const post = new Post(req.body);
+    console.log(`req.body = ${req.body}`)
     post.save(async (err) => {
       if (err) {
         throw err;
@@ -30,7 +31,8 @@ const PostsController = {
       const update = req.body;
       const updatedPost = await Post.findOneAndUpdate({ _id: post_id }, update, { new: true });
       const token = await TokenGenerator.jsonwebtoken(req.user_id);
-      res.json({mssg: "You have updated this post!", token: token, updatedPost: updatedPost})
+      res.json({token})
+      // res.json({mssg: "You have updated this post!", token: token, updatedPost: updatedPost})
     } catch (err) {
       res.status(500).json({error: "messed up again!"})
     }
