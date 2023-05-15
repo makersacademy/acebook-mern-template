@@ -23,14 +23,15 @@ const AddComment = ({ post }) => {
             message: comment,
           })
         })
-        if (response.status !== 204) {
+        console.log(response)
+        if (response.status !== 200) {
           console.log("oops")
           // navigate('/login')
         } else {
           console.log("yay!")
           console.log(`res = ${response}`)
           console.log(response)
-          let data = await response//.json()
+          let data = response.json()
           console.log(data) // VISIBILITY
           window.localStorage.setItem("token", response.token)
           
