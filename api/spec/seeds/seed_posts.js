@@ -36,3 +36,5 @@ db.once('open', function() {
     mongoose.connection.close
      
 });
+
+// node api/spec/seeds/seed_posts.js 

@@ -16,9 +16,9 @@ describe("Post model", () => {
   });
 
   it("has a timestamp", () => {
-    const current_time = new Date().toISOString()
+    const current_time = new Date()
     var post = new Post({ message: "some message", createdDateTime: current_time });
-    expect(post.createdDateTime.toISOString()).toEqual(current_time)
+    expect(post.createdDateTime).toEqual(current_time)
   });
 
   it("can list all posts", (done) => {
