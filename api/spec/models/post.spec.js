@@ -54,17 +54,17 @@ describe("Post model", () => {
     expect(post.likedBy).toEqual(expect.arrayContaining(["user1", "user2"]));
   });
   
-  it("can save a comment to a post", async () => {
+  it("can save a comment to a post with user id and name", async () => {
     const post = new Post({ message: "some message" });
   
     await post.save();
   
     const foundPost = await Post.findById(post._id);
-    foundPost.comments.push({ comment: "some comment", author: "user1" });
+    foundPost.comments.push({ comment: "some comment", author: { id: "user1", name: "John Doe" } });
     await foundPost.save();
   
     const updatedPost = await Post.findById(post._id);
   
-    expect(updatedPost.comments[0]).toMatchObject({ comment: "some comment", author: "user1" });
-  });
+    expect(updatedPost.comments[0]).toMatchObject({ comment: "some comment", author: { id: "user1", name: "John Doe" } });
+  });  
 });

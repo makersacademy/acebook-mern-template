@@ -212,21 +212,23 @@ describe("/posts", () => {
       let post1 = new Post({message: "howdy!"});
       await post1.save();
   
+      const user = await User.findOne({email: "test@test.com"});
+  
       await request(app)
         .post(`/posts/${post1._id}/comments`)
         .set("Authorization", `Bearer ${token}`)
-        .send({ comment: "This is a test comment" })
+        .send({ 
+          comment: "This is a test comment", 
+          author: { id: user._id.toString(), name: `${user.firstName} ${user.lastName}` } 
+        })
         .expect(201);
   
       let updatedPost = await Post.findById(post1._id);
       expect(updatedPost.comments.length).toEqual(1);
-      expect(updatedPost.comments[0]).toMatchObject({ comment: "This is a test comment" });
-  
-      // Get the user
-      const user = await User.findById(updatedPost.comments[0].author);
-      
-      // Check if the user's id matches the author's id
-      expect(String(user._id)).toEqual(updatedPost.comments[0].author);
+      expect(updatedPost.comments[0]).toMatchObject({ 
+        comment: "This is a test comment", 
+        author: { id: user._id.toString(), name: `${user.firstName} ${user.lastName}` } 
+      });
     });
   });
-});
+});  
