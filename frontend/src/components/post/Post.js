@@ -23,7 +23,7 @@ const Post = ({post, onLike, onComment}) => {
     <article data-cy="post" key={ post._id }>
       <p className="post-message">{ post.message }</p> 
       <div className="button-container">
-        <button onClick={handleLike} style={{ backgroundColor: post.like > 0 ? 'teal' : 'grey' }}>👍 | { post.like }</button>
+        <button onClick={handleLike} style={{ backgroundColor: post.like > 0 ? 'teal' : 'grey' }}>👍 {post.like > 0 ? ` | ${post.like}` : ''}</button>
         <button onClick={toggleComments}>
           { showComments ? 'Hide Comments' : `💬 (${post.comments.length})` }
         </button>
