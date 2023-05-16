@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 
 const SignUpForm = ({ navigate }) => {
-
+ 
   const [email, setEmail] = useState("");
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
@@ -45,9 +45,9 @@ const SignUpForm = ({ navigate }) => {
   return (
     <>
       <h2>Sign up</h2>
-      <button onClick={login}>
+      {/* <button onClick={login}>
               Login 
-      </button>
+      </button> */}
       <form onSubmit={handleSubmit}>
           <input placeholder="Email" id="email" type='text' value={ email } onChange={handleEmailChange} />
           <input placeholder="Username" id="username" type='text' value={ username } onChange={handleUsernameChange} />
