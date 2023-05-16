@@ -5,7 +5,7 @@ describe("Logging in", () => {
   it("calls the /tokens endpoint", () => {
     cy.mount(<LoginForm navigate={navigate}/>)
 
-    cy.intercept('POST', '/tokens', { token: "fakeToken" }).as("loginRequest")
+    cy.intercept('POST', '/tokens', { token: "fakeToken" }).as("loginRequest") // mocking the post request, the return value is @loginRequest
 
     cy.get("#email").type("someone@example.com");
     cy.get("#password").type("password");

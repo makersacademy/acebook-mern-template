@@ -16,6 +16,21 @@ Cypress.Commands.add('signup', (email, password) => {
   cy.get("#password").type(password);
   cy.get("#submit").click();
 })
+
+// this command can now be used to shortcut the login process in end to end testing
+Cypress.Commands.add('login', (email, password) => {
+  cy.visit("/login");
+  cy.get("#email").type(email);
+  cy.get("#password").type(password);
+  cy.get("#submit").click();
+})
+
+// this command can be used to make new posts
+Cypress.Commands.add('make_a_post', (post_content) => {
+  cy.visit("/posts");
+  cy.get('#new-post-field').type(post_content);
+  cy.get('#new-post-button').click();
+})
 //
 //
 // -- This is a child command --
