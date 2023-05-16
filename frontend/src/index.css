@@ -23,12 +23,16 @@ code {
 .input-field {
   font-family: 'Raleway';
   font-size: 0.8rem;
-  color: #888;
+  color: #000;
   margin: 0 8px 0 0;
   padding: 4px 8px;
   border: 1px solid #888;
   border-radius: 5px;
   box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+}
+
+.input-field::placeholder {
+  color: #a4a4a4;
 }
 
 .input-button {
@@ -40,4 +44,11 @@ code {
   border: 1px solid #777;
   border-radius: 4px;
   color: #777;
+}
+
+.input-button:hover {
+  background-color: #b1b1b1;
+  /* border: 1px solid #777;
+  border-radius: 4px; */
+  color: #fff;
 }
