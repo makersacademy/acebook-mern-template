@@ -1,15 +1,23 @@
-import { useEffect, useContext } from "react";
+import { useContext } from "react";
 import './nav.css'
 import NavButton from '../navbutton/NavButton';
+
+// import logged in context as defined in App.js
 import {loggedInContext} from '../app/App';
+import { useNavigate } from "react-router";
 
 const NavBar = () => {
 
+// set consts for loggedIn and setLoggedIn (funct) to be accessed within the component
 const [loggedIn, setLoggedIn] = useContext(loggedInContext)
- 
-useEffect(() => {
-  console.log(loggedIn)
-}, [loggedIn])
+
+const navigate = useNavigate()
+
+const logout = () => {
+  window.localStorage.removeItem("token")
+  setLoggedIn(false)
+  navigate('/login')
+}
 
     return (
       <>
@@ -19,7 +27,7 @@ useEffect(() => {
             <h1>Title</h1>
             <NavButton to="/posts" value="Posts"/>
 
-            <NavButton to="/logout" value="Logout"/>
+            <button className="logout-button" onClick={logout}>Logout</button>
           </div>
           :
           <div className="nav-box">
