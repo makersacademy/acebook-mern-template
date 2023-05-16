@@ -61,5 +61,6 @@ typings/
 .next
 
 # cypress.io
-cypress/screenshots
-cypress/videos
+frontend/cypress/screenshots/
+frontend/cypress/screenshots/
+

@@ -179,7 +179,7 @@ REPLACE THIS TEXT WITH A LINK TO YOUR CARD WALL
   In a new terminal session...
 
   ```
-  ; cd frontend
+  ;cd frontend 
   ; npm start
   ```
 
