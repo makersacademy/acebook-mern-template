@@ -92,8 +92,8 @@ const Feed = ({ navigate }) => {
       // const data = await response.json();
   
       setPosts(posts.map(post => 
-        post._id === postId ? { ...post, comments: [...post.comments, { comment, author: 'You', date: new Date(), _id: new Date().getTime() }] } : post
-      ));
+        post._id === postId ? { ...post, comments: [...post.comments, { comment, author: { name: 'You' }, date: new Date(), _id: new Date().getTime() }] } : post
+      ));      
     } catch (error) {
       console.error(error);
     }
