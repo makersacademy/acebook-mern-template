@@ -1,12 +1,12 @@
-body {
+.home-page {
   background-color: #ef666f;
   color: white;
-  padding: 40px;
+  padding: 80px;
   font-family: Arial;
   text-align: center;
 }
 
-.container {
+.home-page .container {
   border: 15px solid rgb(71, 112, 78);
   width: 300px;
   padding: 50px;
@@ -14,7 +14,7 @@ body {
   text-align: center;
 }
 
-h1 {
+.home-page h1 {
   margin-bottom: 25px;
   font-size: 40px ;
 }
