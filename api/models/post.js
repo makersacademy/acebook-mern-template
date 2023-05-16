@@ -9,10 +9,10 @@ const PostSchema = new mongoose.Schema({
     required: true,
     ref: "User"
   },
-  ,
+  
 },
   {
- 
+
     timestamps: true
   }
 );

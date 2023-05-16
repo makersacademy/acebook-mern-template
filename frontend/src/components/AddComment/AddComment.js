@@ -13,6 +13,7 @@ const AddComment = ({ post }) => {
       if (token) {
 
         console.log(`${post._id}`) // VISIBILITY
+        console.log((`user = ${window.localStorage.getItem('username')}`))
         const response = await fetch(`/posts/${post._id}`, {
           method: 'PATCH',
           headers: {
@@ -20,8 +21,12 @@ const AddComment = ({ post }) => {
             'Content-Type': 'application/json',
           },
           body: JSON.stringify({
-            // Post, { $push: { comments: comment } },
-            message: comment,
+            $push: {
+              comments: {
+                comment: comment,
+                author: window.localStorage.getItem('username'),
+              }
+            },
           })
         })
         console.log(response)

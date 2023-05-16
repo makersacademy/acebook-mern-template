@@ -31,6 +31,7 @@ const PostsController = {
   Update: async (req, res) => {
     try {
       const post_id = req.params.id;
+      console.log(post_id)
       const update = req.body;
       const updatedPost = await Post.findOneAndUpdate({ _id: post_id }, update, { new: true });
       const token = await TokenGenerator.jsonwebtoken(req.user_id);
