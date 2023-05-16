@@ -25,7 +25,7 @@ const Feed = ({ navigate }) => {
           setPosts(data.posts);
         })
     }
-    // use effect watches over the refresh constant and executes the function 
+    // use effect watches over the refresh constant and executes the function
     // within each time refresh changes
   }, [refresh])
 
