@@ -38,14 +38,14 @@ const Post = ({post, onLike, onComment}) => {
           <div className="button-container">
             <button className='like-button' onClick={handleLike}>👍 | { post.like }</button>
               <button onClick={toggleComments}>
-                { showComments ? 'Hide Comments' : `💬 (${post.comments.length})` }
+                { showComments ? 'Hide Comments' : `💬 | ${post.comments.length}` }
               </button>
           </div>
         {showComments && (
         <>
         <div className='comment-container'>
             {post.comments.map(comment => 
-              <p className='comments' key={comment._id}>
+              <div className='comments' key={comment._id}>
                 <div className='comment-name'>
                 <strong>{comment.author.name}:</strong>
                 <div className='comment-comment'>
@@ -56,11 +56,11 @@ const Post = ({post, onLike, onComment}) => {
                 <div className='comment-time'>
                 <small>{new Date(comment.date).toLocaleString()}</small>
                 </div>
-              </p>
+              </div>
             )}
           <form onSubmit={handleComment}>
             <label>
-              New Comment:
+              {'New Comment: '}
               <input type="text" value={newComment} onChange={(event) => setNewComment(event.target.value)} />
             </label>
             <button type="submit">Comment</button>
