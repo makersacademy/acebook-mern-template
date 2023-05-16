@@ -10,9 +10,21 @@ describe("Post model", () => {
     });
   });
 
-  it("has a message", () => {
-    var post = new Post({ message: "some message" });
+  it("has a message, a number of likes, author ID and an array of ID's who liked the post", () => {
+    const author_id = new mongoose.Types.ObjectId()
+    const likedBy_id = [new mongoose.Types.ObjectId(),new mongoose.Types.ObjectId()]
+    const post_data = { 
+      message: "some message",
+      likes: 3,
+      author: author_id,
+      likedBy: likedBy_id
+    }
+    var post = new Post(post_data);
+    expect(post.likes).toEqual(3)
     expect(post.message).toEqual("some message");
+    expect(post.author).toEqual(author_id);
+    expect(post.likedBy[0]).toEqual(likedBy_id[0]);
+    expect(post.likedBy[1]).toEqual(likedBy_id[1]);
   });
 
   it("has a timestamp", () => {
