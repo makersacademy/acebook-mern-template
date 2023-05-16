@@ -8,7 +8,7 @@ const secret = process.env.JWT_SECRET;
 
 let token;
 
-describe("/posts", () => {
+describe("/posts", () => {  
   beforeAll( async () => {
     const user = new User({email: "test@test.com", password: "12345678"});
     await user.save();
@@ -60,7 +60,7 @@ describe("/posts", () => {
       expect(newPayload.iat > originalPayload.iat).toEqual(true);
     });  
   });
-  
+
   describe("POST, when token is missing", () => {
     test("responds with a 401", async () => {
       let response = await request(app)
