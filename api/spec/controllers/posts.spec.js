@@ -52,6 +52,27 @@ describe("/posts", () => {
       expect(posts.length).toEqual(1);
       expect(posts[0].message).toEqual("hello world");
     });
+
+    test("add one like in an existing post", async () => {
+      await request(app)
+        .post("/posts")
+        .set("Authorization", `Bearer ${token}`)
+        .send({ message: "hello world", token: token });
+      let posts = await Post.find();
+
+      await request(app)
+        .patch("/posts/likes")
+        .set("Authorization", `Bearer ${token}`)
+        .send({post_id: posts[0]._id, user_id: mockUserID});
+
+      let updatedPosts = await Post.find();
+      //testing if the likes array has one element
+      expect(updatedPosts[0].likes.length).toEqual(1);
+      //testing if the user id is added to the likes array
+      expect(updatedPosts[0].likes[0]).toEqual(mockUserID);
+
+     
+    });
   
     test("returns a new token", async () => {
       let response = await request(app)
