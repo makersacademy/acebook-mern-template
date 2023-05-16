@@ -61,6 +61,7 @@ const PostsController = {
   
     const userId = req.user_id;
     
+    // A better way would have been to update the token generator but that may break other functions + tests
     User.findById(userId, async (err, user) => {
       if (err) {
         throw err;
