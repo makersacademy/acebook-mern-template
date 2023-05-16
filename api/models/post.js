@@ -2,7 +2,6 @@ const mongoose = require("mongoose");
 
 const PostSchema = new mongoose.Schema({
   message: String,
-  createdDateTime: Date,
   likes: {
     type: Number,
     default: 0
@@ -14,7 +13,8 @@ const PostSchema = new mongoose.Schema({
   author: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'User'
-  }
+  },
+  createdDateTime: Date
 });
 
 const Post = mongoose.model("Post", PostSchema);
