@@ -52,13 +52,6 @@ const Feed = ({ navigate }) => {
         </div>
 
         <div id='feed' role="feed">
-            {/* {posts.map(
-              (post) => { // object destructuring and spreading so that the author object keys become keys of the post
-                const { author, ...outerObj } = post;
-                const spreadPost = { ...outerObj, ...author };
-                return spreadPost;
-              }
-            )} */}
             {posts.map(
               (post) => ( <Post post={ post } key={ post._id } /> )
             )}
