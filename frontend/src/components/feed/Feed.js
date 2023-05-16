@@ -92,6 +92,13 @@ const Feed = ({ navigate }) => {
       const data = await response.json();
       setPosts(posts.map(post => 
         post._id === postId ? { ...post, like: data.post.like } : post));
+      
+      if (response.ok) {
+        console.log('Like removed successfully');
+      } else {
+        //
+      }
+
     } catch (error) {
       console.error(error);
     }
