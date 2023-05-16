@@ -5,4 +5,6 @@ const CommentSchema = new mongoose.Schema({
   createdDateTime: Date
 })
 
+const Comment = mongoose.model("Comment", CommentSchema);
+
 module.exports = CommentSchema;

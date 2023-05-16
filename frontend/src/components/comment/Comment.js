@@ -1,10 +1,15 @@
-import React from 'react';
+import React, {useState} from 'react';
 
-class Comment extends Component {
-constructor() {
- super();
- this.state = {
-  commentValue: "",
-  commentLine: [{ commentId:"", text: "", }],
+
+const CommentBox = () => {
+  const[commentValue, setCommentValue] = useState("");
+  
+  const handleCommentValue = (e) => {
+    setCommentValue(e.target.value);
   };
+
+  return 
+
+
+
 }
