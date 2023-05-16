@@ -1,8 +1,11 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import Post from '../post/Post'
+import {loggedInContext} from '../app/App'
+
 import NewPostForm from '../new-post/NewPostForm'
 
 const Feed = ({ navigate }) => {
+  const [loggedIn, setLoggedIn] = useContext(loggedInContext)
   const [posts, setPosts] = useState([]);
   const [token, setToken] = useState(window.localStorage.getItem("token"));
   // We have a new constant called refresh, starts by false as default
@@ -34,8 +37,19 @@ const Feed = ({ navigate }) => {
     setRefresh(prevRefresh => !prevRefresh);
   };
 
+  const comparebyDate = ( a, b ) => {
+    if ( a.createdDateTime < b.createdDateTime ){
+      return -1;
+    }
+    if ( a.createdDateTime > b.createdDateTime ){
+      return 1;
+    }
+    return 0;
+  }
+
   const logout = () => {
     window.localStorage.removeItem("token")
+    setLoggedIn(false)
     navigate('/login')
   }
 
@@ -52,8 +66,8 @@ const Feed = ({ navigate }) => {
         </div>
 
         <div id='feed' role="feed">
-            {posts.map(
-              (post) => ( <Post post={ post } key={ post._id } /> )
+            {posts.sort(comparebyDate).map(
+              (post) => ( <Post post={ post } key={ post._id }/> )
             )}
         </div>
       </>

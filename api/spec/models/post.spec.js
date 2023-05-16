@@ -27,6 +27,12 @@ describe("Post model", () => {
     expect(post.likedBy[1]).toEqual(likedBy_id[1]);
   });
 
+  it("has a timestamp", () => {
+    const current_time = new Date()
+    var post = new Post({ message: "some message", createdDateTime: current_time });
+    expect(post.createdDateTime).toEqual(current_time)
+  });
+
   it("can list all posts", (done) => {
     Post.find((err, posts) => {
       expect(err).toBeNull();

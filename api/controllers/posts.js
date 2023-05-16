@@ -25,6 +25,7 @@ const PostsController = {
     post.message = req.body.message
     // add the user ID of the author who wrote the post
     post.author = req.user_id
+    post.createdDateTime = new Date()
     post.save(async (err) => {
       if (err) {
         throw err;
