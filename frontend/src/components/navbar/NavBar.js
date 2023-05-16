@@ -17,10 +17,6 @@
         setUsername(window.localStorage.getItem("username"))
       }, [window.localStorage.getItem("token")])
 
-      
-      
-      
-
       const logout = () => {
         window.localStorage.removeItem("token")
         // navigate('/login')
@@ -29,10 +25,10 @@
       if(token) {
         return (
           <>
-           <h2>Farcebook</h2>
            <nav className='nav-bar'>
-             <div className='nav-item' onClick={logout}><a href='/logout'>Logout</a></div>
+           <h2>Farcebook</h2>
              <div className="username-format">{username}</div>
+             <div className='nav-item' onClick={logout}><a href='/logout'>Logout</a></div>
            </nav>
           </>
         )
