@@ -8,7 +8,8 @@ const Feed = ({ navigate }) => {
   const [loggedIn, setLoggedIn] = useContext(loggedInContext)
   const [posts, setPosts] = useState([]);
   const [token, setToken] = useState(window.localStorage.getItem("token"));
-
+  // We have a new constant called refresh, starts by false as default
+  const [refresh, setRefresh] = useState(false);
 
   useEffect(() => {
     if(token) {
@@ -18,13 +19,22 @@ const Feed = ({ navigate }) => {
         }
       })
         .then(response => response.json())
-        .then(async data => { // try to remove async and see if it works
+        .then(async data => {
           window.localStorage.setItem("token", data.token)
           setToken(window.localStorage.getItem("token"))
           setPosts(data.posts);
         })
     }
-  }, [])
+    // use effect watches over the refresh constant and executes the function 
+    // within each time refresh changes
+  }, [refresh])
+
+  const toggleRefresh = () => {
+    // sets whatever is inside refresh to the opposite, triggering a refresh
+    // through useeffect. this is activated whenever the newpostform is
+    // submitted
+    setRefresh(prevRefresh => !prevRefresh);
+  };
 
   const logout = () => {
     window.localStorage.removeItem("token")
@@ -41,9 +51,8 @@ const Feed = ({ navigate }) => {
           </button>
 
         <div className="new-post-form">
-          < NewPostForm/>
+          < NewPostForm toggleRefresh={toggleRefresh}/>
         </div>
-
 
         <div id='feed' role="feed">
             {posts.map(
