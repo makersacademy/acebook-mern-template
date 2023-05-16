@@ -13,6 +13,8 @@ const PostsController = {
       // This is mapping an additional field called didUserLikeThis inside posts
       // which returns true if the user's id is already in the likedBy array.
       // likedBy array is the list of users who already liked the post
+      // posts.author.userName = userName;
+      // posts.author.photo = photo;
       posts.forEach(post => {
         if (post.likedBy.includes(req.user_id)) {post._doc.didUserLikeThis = true;}})
       res.status(200).json({ posts: posts, token: token });

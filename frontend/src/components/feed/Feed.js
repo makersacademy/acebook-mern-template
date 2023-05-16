@@ -21,6 +21,7 @@ const Feed = ({ navigate }) => {
           setToken(window.localStorage.getItem("token"))
           setPosts(data.posts);
         })
+        .then(() => console.log(posts))
     }
     // use effect watches over the refresh constant and executes the function
     // within each time refresh changes
@@ -51,8 +52,15 @@ const Feed = ({ navigate }) => {
         </div>
 
         <div id='feed' role="feed">
+            {/* {posts.map(
+              (post) => { // object destructuring and spreading so that the author object keys become keys of the post
+                const { author, ...outerObj } = post;
+                const spreadPost = { ...outerObj, ...author };
+                return spreadPost;
+              }
+            )} */}
             {posts.map(
-              (post) => ( <Post post={ post } key={ post._id }/> )
+              (post) => ( <Post post={ post } key={ post._id } /> )
             )}
         </div>
       </>
@@ -63,3 +71,5 @@ const Feed = ({ navigate }) => {
 }
 
 export default Feed;
+
+// userName={ post.author.userName } photo={ post.author.photo }
