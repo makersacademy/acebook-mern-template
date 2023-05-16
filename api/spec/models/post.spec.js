@@ -60,11 +60,11 @@ describe("Post model", () => {
     await post.save();
   
     const foundPost = await Post.findById(post._id);
-    foundPost.comments.push({ comment: "some comment", author: { id: "user1", name: "John Doe" } });
+    foundPost.comments.push({ comment: "some comment", author: { id: "user1", name: "Donald Chump" } });
     await foundPost.save();
   
     const updatedPost = await Post.findById(post._id);
   
-    expect(updatedPost.comments[0]).toMatchObject({ comment: "some comment", author: { id: "user1", name: "John Doe" } });
+    expect(updatedPost.comments[0]).toMatchObject({ comment: "some comment", author: { id: "user1", name: "Donald Chump" } });
   });  
 });
