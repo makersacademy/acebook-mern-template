@@ -54,7 +54,3 @@ const AddPost = () => { // was passing in navigate but that is not passed into t
   }
 
 export default AddPost;
-
-
-
-

@@ -21,36 +21,31 @@ const Feed = ({ navigate }) => {
         .then(async data => {
           window.localStorage.setItem("token", data.token)
           setToken(window.localStorage.getItem("token"))
+          data.posts.forEach((post) => {
+            post.author = post.authorUserID.username
+            delete post.authorUserID
+          })
+          console.log(`1st post's author set to: ${data.posts[0].author}`)
           setPosts(orderByDate(data.posts));
         })
     }
   }, [])
-    
-
-  const logout = () => {
-    window.localStorage.removeItem("token")
-    navigate('/login')
-  }
-
   
-    if(token) {
-      return(
-        <>
-          <h2>Posts</h2>
-          <button onClick={logout}>
-            Logout
-          </button>
-          <AddPost />
-          <div id='feed' role="feed">
-            {posts.map(
-              (post) => ( <Post post={ post } key={ post._id } /> )
-            )}
-          </div>
-        </>
-      )
-    } else {
-      navigate('/signin')
-    }
+  if(token) {
+    return(
+      <>
+        <h2>Posts</h2>
+        <AddPost />
+        <div id='feed' role="feed">
+          {posts.map(
+            (post) => ( <Post post={ post } key={ post._id } /> )
+          )}
+        </div>
+      </>
+    )
+  } else {
+    navigate('/signin')
+  }
 }
 
 export default Feed;
