@@ -4,7 +4,10 @@ const mongoose = require("mongoose");
 
 const CommentSchema = new mongoose.Schema({
   comment: { type: String, required: true },
-  author: { type: String, required: true },
+  author: {
+    id: { type: String, required: true },
+    name: { type: String, required: true },
+  },
   date: { type: Date, default: Date.now },
 });
 

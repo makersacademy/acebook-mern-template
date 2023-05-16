@@ -32,7 +32,7 @@ const Post = ({post, onLike, onComment}) => {
         <>
           <h3>Comments</h3>
           {post.comments.map(comment => 
-            <p key={comment._id}><strong>{comment.author}:</strong> {comment.comment}</p>
+            <p key={comment._id}><strong>{comment.author.name}:</strong> {comment.comment}</p>
           )}
           <form onSubmit={handleComment}>
             <label>
