@@ -10,7 +10,11 @@ const Post = ({post}) => {
     <>
     <div className="user-info">
       <div className="user-profile-picture" >
-        <img src={post.author.photo} alt="user-profile"/>
+        {post.author.photo ? (
+          <img src={post.author.photo} alt="user-profile"/>
+        ) : (
+          <img src="/happy-fox.jpeg" alt="default-profile" />
+        )}
       </div>
       <h3>{ post.author.userName }</h3>
     </div>
