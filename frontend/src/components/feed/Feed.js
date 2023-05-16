@@ -1,7 +1,10 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import Post from '../post/Post'
+import {loggedInContext} from '../app/App'
+
 
 const Feed = ({ navigate }) => {
+  const [loggedIn, setLoggedIn] = useContext(loggedInContext)
   const [posts, setPosts] = useState([]);
   const [token, setToken] = useState(window.localStorage.getItem("token"));
 
@@ -23,6 +26,7 @@ const Feed = ({ navigate }) => {
 
   const logout = () => {
     window.localStorage.removeItem("token")
+    setLoggedIn(false)
     navigate('/login')
   }
   

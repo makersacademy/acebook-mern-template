@@ -1,8 +1,10 @@
-import React, { useState } from 'react';
-import NavBar from '../nav/Nav.js';
+import React, { useState, useContext } from 'react';
 import './LoginForm.css';
+import {loggedInContext} from '../app/App'
+
 
 const LogInForm = ({ navigate }) => {
+  const [loggedIn, setLoggedIn] = useContext(loggedInContext)
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
@@ -30,6 +32,7 @@ const LogInForm = ({ navigate }) => {
       let data = await response.json()
       console.log(data)
       window.localStorage.setItem("token", data.token)
+      setLoggedIn(true)
       navigate('/posts');
     }
   }

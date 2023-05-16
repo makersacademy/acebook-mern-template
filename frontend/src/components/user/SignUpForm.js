@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import NavBar from '../nav/Nav.js';
 import './SignUpForm.css';
 
 const SignUpForm = ({ navigate }) => {

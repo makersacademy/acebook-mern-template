@@ -1,32 +1,29 @@
-import React, { useEffect, useState } from 'react';
-import { BrowserRouter, Link, NavLink } from 'react-router-dom';
+import { useEffect, useContext } from "react";
 import './nav.css'
 import NavButton from '../navbutton/NavButton';
+import {loggedInContext} from '../app/App';
 
-const NavBar = ({ navigate }) => {
-const [email, setEmail] = useState("");
-const [password, setPassword] = useState("");
-const [authed, setAuthed] = useState(false);
-const [token, setToken] = useState(window.localStorage.getItem("token"));
+const NavBar = () => {
 
+const [loggedIn, setLoggedIn] = useContext(loggedInContext)
  
-  useEffect(() => {
-    
-  }, [token])
+useEffect(() => {
+  console.log(loggedIn)
+}, [loggedIn])
 
     return (
       <>
       <div className="nav-container">
-          {token ? (
+          {(loggedIn ?
           <div className="nav-box">
-            <h1>Waffle</h1>
+            <h1>Title</h1>
             <NavButton to="/posts" value="Posts"/>
 
             <NavButton to="/logout" value="Logout"/>
           </div>
-          ):(
+          :
           <div className="nav-box">
-            <h1>Waffle</h1>
+            <h1>Title</h1>
             <NavButton to="/signup" value="Sign-up"/>
 
             <NavButton to="/login" value="Login"/>
