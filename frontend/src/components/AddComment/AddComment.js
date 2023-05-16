@@ -56,8 +56,14 @@ const AddComment = ({ post }) => {
     <>
       <form onSubmit={handleSubmit}>
         {/* <label htmlFor="comment">Add a comment</label> */}
-        <input className="input-field" placeholder='Comment' id="comment" type='text' value={comment} onChange={handleCommentChange} />
-        <input className="input-button" role='submit-button' id='submit-comment' type="submit" value="Add comment" />
+        <input data-cy="comment" className="input-field" 
+          placeholder='Comment' id="comment" type='text' 
+          value={comment} onChange={handleCommentChange}
+        />
+        <input data-cy="submit" className="input-button" 
+          role='submit-button' id='submit-comment' 
+          type="submit" value="Add comment"
+        />
       </form>
     </>
   )
