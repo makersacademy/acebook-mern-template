@@ -25,7 +25,7 @@ const Post = ({post, onLike, onComment}) => {
       <div className="button-container">
         <button onClick={handleLike} style={{ backgroundColor: post.like > 0 ? 'teal' : 'grey' }}>👍 {post.like > 0 ? ` | ${post.like}` : ''}</button>
         <button onClick={toggleComments}>
-          { showComments ? 'Hide Comments' : `💬 (${post.comments.length})` }
+          {post.comments.length === 0 ? '💬' : (showComments ? 'Hide Comments' : `💬 | ${post.comments.length}`)}
         </button>
       </div>
       {showComments && (
