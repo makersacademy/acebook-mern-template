@@ -28,7 +28,7 @@
            <nav className='nav-bar'>
            <h2>Farcebook</h2>
              <div className="username-format">{username}</div>
-             <div className='nav-item' onClick={logout}><a href='/logout'>Logout</a></div>
+             <div className='nav-item' onClick={logout}><a href='/login'>Logout</a></div>
            </nav>
           </>
         )
