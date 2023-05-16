@@ -7,6 +7,7 @@ const JWT = require("jsonwebtoken");
 const postsRouter = require("./routes/posts");
 const tokensRouter = require("./routes/tokens");
 const usersRouter = require("./routes/users");
+const usersUpdatesRouter = require("./routes/userUpdateRoute")
 
 const app = express();
 
@@ -42,6 +43,8 @@ const tokenChecker = (req, res, next) => {
 app.use("/posts", tokenChecker, postsRouter);
 app.use("/tokens", tokensRouter);
 app.use("/users", usersRouter);
+app.use("/usersUpdate", usersUpdatesRouter);
+
 
 // catch 404 and forward to error handler
 app.use((req, res, next) => {
@@ -57,5 +60,22 @@ app.use((err, req, res) => {
   // respond with details of the error
   res.status(err.status || 500).json({message: 'server error'})
 });
+
+app.put('/usersUpdate/:id', async (req, res) => {
+  try {
+    const { firstName } = req.body;
+    const user = await User.findById(req.params.id);
+    if (!user) {
+      return res.status(404).json({ message: 'User not found' });
+    }
+    user.firstName = firstName;
+    await user.save();
+    res.json({ message: 'User updated successfully', user });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ message: 'Server error' });
+  }
+});
+
 
 module.exports = app;

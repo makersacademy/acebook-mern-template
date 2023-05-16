@@ -12,18 +12,18 @@
 .name {
   text-align: left;
   margin-right: 10px;
-  font-size: larger;
+  font-size: small;
 
 }
 
 .message {
   margin-top: 40px;
   margin-bottom: 40px;
+  font-size: x-large;
 }
 
 .like-button {
-  margin-bottom: 10px;
-  max-width: 60px;
+  margin-right: 10px;
 }
 
 .time {
@@ -38,3 +38,22 @@ article {
  
 }
 
+.button-container {
+  border-top: solid;
+  border-bottom: solid;
+  border-style: ridge;
+  border-left: none;
+  border-right: none;
+  padding: 5px;
+  margin-bottom: 10px;
+}
+
+.comment-container {
+  border-bottom: solid;
+  border-style: ridge;
+  border-top: none;
+  border-left: none;
+  border-right: none;
+  padding-bottom: 10px;
+  margin-bottom: 10px;
+}

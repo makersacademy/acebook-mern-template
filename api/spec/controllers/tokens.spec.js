@@ -3,7 +3,7 @@ const request = require("supertest");
 require("../mongodb_helper");
 const User = require('../../models/user');
 
-describe("/tokens", () => {
+describe.only("/tokens", () => {
   beforeAll( () => {
     const user = new User({ email: "test@test.com", password: "12345678",  firstName: "Betty",
     lastName: "Rubble" })
@@ -32,4 +32,5 @@ describe("/tokens", () => {
     expect(response.body.token).toEqual(undefined)
     expect(response.body.message).toEqual("auth error")
   })
+
 })

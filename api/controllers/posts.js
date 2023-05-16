@@ -47,24 +47,63 @@ const PostsController = {
 
   AddLikes: (req, res) => {
     const postId = req.params.id;
+    const userId = req.user_id;
     Post.findById(postId, (err, post) => {
       if (err) {
         throw err;
       }
-    
+  
+      // Check if the user has already liked the post
+      if (post.likedBy.includes(userId)) {
+        return res.status(400).json({ message: "You've already liked this post." });
+      }
+  
       const updatedPost = post;
       updatedPost.like += 1;
-
+      updatedPost.likedBy.push(userId);
+  
       updatedPost.save(async (err, updatedPost) => {
         if (err) {
           throw err;
         }
-
-        const token = await TokenGenerator.jsonwebtoken(req.user_id);
+  
+        const token = await TokenGenerator.jsonwebtoken(userId);
         res.status(201).json({ message: 'OK', token: token, post: updatedPost });
       });
-  });
-},
+    });
+  },
+
+  CreateComment: (req, res) => {
+    const postId = req.params.id;
+    const { comment } = req.body;
+  
+    const userId = req.user_id;
+    
+    // A better way would have been to update the token generator but that may break other functions + tests
+    User.findById(userId, async (err, user) => {
+      if (err) {
+        throw err;
+      }
+  
+      const userName = `${user.firstName} ${user.lastName}`;
+  
+      Post.findById(postId, async (err, post) => {
+        if (err) {
+          throw err;
+        }
+    
+        post.comments.push({ comment: comment, author: { id: userId, name: userName } });
+        post.save(async (err, updatedPost) => {
+          if (err) {
+            throw err;
+          }
+      
+          const token = await TokenGenerator.jsonwebtoken(userId);
+          res.status(201).json({ message: 'OK', token: token, post: updatedPost });
+        });
+      });
+    });
+  },  
 }
 
 module.exports = PostsController;

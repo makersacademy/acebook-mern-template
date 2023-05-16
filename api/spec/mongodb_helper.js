@@ -18,3 +18,6 @@ afterAll(function (done) {
     done();
   });
 });
+
+mongoose.set('useFindAndModify', false);
+
