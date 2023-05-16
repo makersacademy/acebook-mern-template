@@ -25,6 +25,18 @@ const PostsController = {
       const token = await TokenGenerator.jsonwebtoken(req.user_id)
       res.status(201).json({ message: 'OK', token: token });
     });
+  },
+  AddLikes: async(req, res) => {
+    const post = await Post.findById(req.body.post_id, (err, post) => {
+      if (err) { 
+        throw err }
+      post.likes.concat(req.body.user_id)
+      post.save(async (err) => {
+        if (err) { throw err }
+        const token = await TokenGenerator.jsonwebtoken(req.user_id)
+        res.status(201).json({ message: 'OK', token: token });
+      });
+    })  
   }
 };
 
