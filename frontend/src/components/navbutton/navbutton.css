@@ -1,0 +1,23 @@
+.navbutton {
+  background-color: white;
+  padding: 22px;
+  padding-top: 15px;
+  padding-bottom: 15px;
+  border: solid rgb(202, 202, 202) 1px;
+  margin: 6px;
+}
+
+
+.nav-box h1 {
+  margin-right: auto;
+  border-bottom: 2px solid black;
+}
+
+.nav-box a {
+  text-decoration: none;
+  border-radius: 6px;
+}
+
+.nav-box a.active {
+  background-color: var(--primary);
+}

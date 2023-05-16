@@ -1,3 +1,20 @@
+.logout-button {
+    background-color: white;
+    padding: 22px;
+    padding-top: 15px;
+    padding-bottom: 15px;
+    border: solid rgb(202, 202, 202) 1px;
+    margin: 6px;
+    text-decoration: none;
+    border-radius: 8px;
+    cursor:pointer;
+}
+
+:root {
+  --primary: green;
+  --secondary: blue;
+}
+
 .nav-container {
     border: 1px solid #ccc;
     padding: 10px;
@@ -7,12 +24,13 @@
 
 .nav-box {
     display: flex;
-    justify-content: space-between;
+    justify-content: flex-end;
     align-items: center;
     padding:10px;
-    max-width: 400px;
+    max-width: 1200px;
     margin: 0 auto;
 }
+
 
 /* .nav-bar button {
     background-color: transparent;
