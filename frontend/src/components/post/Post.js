@@ -31,9 +31,13 @@ const Post = ({post, onLike, onComment}) => {
       {showComments && (
         <>
           <h3>Comments</h3>
-          {post.comments.map(comment => 
-            <p key={comment._id}><strong>{comment.author.name}:</strong> {comment.comment}</p>
-          )}
+            {post.comments.map(comment => 
+              <p key={comment._id}>
+                <strong>{comment.author.name}:</strong> {comment.comment} 
+                <br />
+                <small>{new Date(comment.date).toLocaleString()}</small>
+              </p>
+            )}
           <form onSubmit={handleComment}>
             <label>
               New Comment:
