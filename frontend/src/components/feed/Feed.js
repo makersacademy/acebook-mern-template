@@ -36,6 +36,16 @@ const Feed = ({ navigate }) => {
     setRefresh(prevRefresh => !prevRefresh);
   };
 
+  const comparebyDate = ( a, b ) => {
+    if ( a.createdDateTime < b.createdDateTime ){
+      return -1;
+    }
+    if ( a.createdDateTime > b.createdDateTime ){
+      return 1;
+    }
+    return 0;
+  }
+
   const logout = () => {
     window.localStorage.removeItem("token")
     setLoggedIn(false)
@@ -55,7 +65,7 @@ const Feed = ({ navigate }) => {
         </div>
 
         <div id='feed' role="feed">
-            {posts.map(
+            {posts.sort(comparebyDate).map(
               (post) => ( <Post post={ post } key={ post._id }/> )
             )}
         </div>
