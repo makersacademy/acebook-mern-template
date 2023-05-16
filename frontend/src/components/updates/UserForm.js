@@ -6,6 +6,7 @@ const UserForm = ({ navigate }) => {
 //   const [password, setPassword] = useState("");
 //   const [firstName, setfirstName] = useState("");
 //   const [lastName, setlastName] = useState("");
+const [successMessage, setSuccessMessage] = useState("");
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -26,8 +27,10 @@ const UserForm = ({ navigate }) => {
     }).then((response) => {
         console.log(response.status);
       if (response.status === 200) {
-        navigate("/posts");
+        setSuccessMessage("Email updated successfully.");
+        navigate("/profile/");
       } else {
+        setSuccessMessage("Email did not update, please try again.");
         navigate("/signup");
       }
     });
@@ -104,6 +107,9 @@ const UserForm = ({ navigate }) => {
     <div class="form-group">
       <input id="submit" type="submit" value="Submit" />
     </div>
+    {successMessage && (
+        <div className="success-message">{successMessage}</div>
+      )}
   </form>
   );
 };
