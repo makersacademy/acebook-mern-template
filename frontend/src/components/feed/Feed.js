@@ -1,4 +1,3 @@
-// Imports necessary dependencies from React and a Post component.
 import React, { useEffect, useState } from 'react';
 import Post from '../post/Post'
 
@@ -121,7 +120,7 @@ const Feed = ({ navigate }) => {
       </>
     )
   } else {
-    navigate('/signin')
+    navigate('/login')
   }
 }
 
