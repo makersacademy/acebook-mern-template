@@ -1,0 +1,9 @@
+.like-button {
+  display: inline-block;
+}
+
+.like-amount {
+  display: inline-block;
+  color: blue;
+  margin-left: 5px
+}
