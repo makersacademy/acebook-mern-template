@@ -9,7 +9,6 @@ const Post = ({post}) => {
       <article data-cy="post" key={post._id}>
       <p className="post-text">{post.message}</p>
         <p className="time-text">Posted at {post.createdAt.slice(11, 16)} on {post.createdAt.slice(0, 10)} by {post.author}</p>
-        {/* <>{post.comments.forEach((comment) => <p>{comment.comment}</p> ) }</> */}
         <div className="break-line"></div>
         {post.comments.map(
           (comment, index) => ( <Comment comment={comment} key={index} />)

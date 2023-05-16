@@ -43,7 +43,7 @@ const AddComment = ({ post }) => {
           window.localStorage.setItem("token", data.token)
           
           setToken(window.localStorage.getItem("token"));
-          // navigate('/posts'); // navigate is not present in this component
+          setComment("")
         }
       }
   }

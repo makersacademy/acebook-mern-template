@@ -8,7 +8,6 @@ const Comment = ({comment, index}) => {
         <p className="comment-text">{comment.comment}</p>
         {/* <p>Posted at {post.createdAt.slice(11, 16)} on {post.createdAt.slice(0, 10)} by {post.author}</p> */}
         <p className="comment-time-text"> by {comment.author}</p>
-        {/* <>{post.comments.forEach((comment) => <p>{comment.comment}</p> ) }</> */}
       </article>
     </div>
     
