@@ -1,19 +1,48 @@
-import React from 'react';
+import React, { useState } from 'react';
+import './Post.css';
 
-// Define a Post component which receives a post object and an onLike function as props.
-const Post = ({post, onLike}) => {
-  // Define a handleLike function that calls the onLike function prop with the ID of the post.
+const Post = ({post, onLike, onComment}) => {
+  const [newComment, setNewComment] = useState('');
+  const [showComments, setShowComments] = useState(false);
+
   const handleLike = () => {
     onLike(post._id);
   };
 
+  const handleComment = (event) => {
+    event.preventDefault();
+    onComment(post._id, newComment);
+    setNewComment('');
+  };
+
+  const toggleComments = () => {
+    setShowComments(!showComments);
+  }
+
   return (
-    // Render an article HTML element for each post.
-    // Render a button that, when clicked, calls the handleLike function.
-    // The button also displays the count of likes the post has received.
     <article data-cy="post" key={ post._id }>
-      { post.message }  
-      <button onClick={handleLike}>👍 | { post.like }</button>
+      <p className="post-message">{ post.message }</p> 
+      <div className="button-container">
+        <button onClick={handleLike}>👍 | { post.like }</button>
+        <button onClick={toggleComments}>
+          { showComments ? 'Hide Comments' : `💬 (${post.comments.length})` }
+        </button>
+      </div>
+      {showComments && (
+        <>
+          <h3>Comments</h3>
+          {post.comments.map(comment => 
+            <p key={comment._id}><strong>{comment.author.name}:</strong> {comment.comment}</p>
+          )}
+          <form onSubmit={handleComment}>
+            <label>
+              New Comment:
+              <input type="text" value={newComment} onChange={(event) => setNewComment(event.target.value)} />
+            </label>
+            <button type="submit">Comment</button>
+          </form>
+        </>
+      )}
     </article>
   )
 }

@@ -1,5 +1,6 @@
 const Post = require("../models/post");
 const TokenGenerator = require("../models/token_generator");
+const User = require("../models/user");
 
 const PostsController = {
   // Retrieves a list of all posts
@@ -53,6 +54,38 @@ const PostsController = {
       });
     });
   },
-}  
+
+  CreateComment: (req, res) => {
+    const postId = req.params.id;
+    const { comment } = req.body;
+  
+    const userId = req.user_id;
+    
+    // A better way would have been to update the token generator but that may break other functions + tests
+    User.findById(userId, async (err, user) => {
+      if (err) {
+        throw err;
+      }
+  
+      const userName = `${user.firstName} ${user.lastName}`;
+  
+      Post.findById(postId, async (err, post) => {
+        if (err) {
+          throw err;
+        }
+    
+        post.comments.push({ comment: comment, author: { id: userId, name: userName } });
+        post.save(async (err, updatedPost) => {
+          if (err) {
+            throw err;
+          }
+      
+          const token = await TokenGenerator.jsonwebtoken(userId);
+          res.status(201).json({ message: 'OK', token: token, post: updatedPost });
+        });
+      });
+    });
+  },  
+}
 
 module.exports = PostsController;
