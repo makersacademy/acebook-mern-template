@@ -1,0 +1,36 @@
+.postbox {
+  font-family: 'Raleway';
+  border: 1px solid #bbb;
+  padding: 15px;
+  margin: 12px 0;
+  border-radius: 10px;
+  box-shadow: 1px 2px 3px rgba(0,0,0,0.4);
+  width: 100%;
+}
+
+.postflex {
+  display: flex;
+  justify-content: space-between;
+}
+
+.postbox article {
+  margin-bottom: 0;
+  width: 100%;
+}
+
+.post-text {
+  font-size: 1.2rem;
+  margin-bottom: 10px;
+}
+
+.time-text {
+  font-size: 0.9rem;
+  color: #888;
+}
+
+.break-line {
+  background-color: #dcdcdc;
+  min-height: 1px;
+  width: 100%;
+  margin: 10px auto;
+}

@@ -5,6 +5,7 @@ const SignUpForm = ({ navigate }) => {
   const [email, setEmail] = useState("");
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const [errors, setErrors] = useState([]); //  'Invalid email address!'
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -20,6 +21,12 @@ const SignUpForm = ({ navigate }) => {
         if(response.status === 201) {
           navigate('/login')
         } else {
+          if(response.status === 400) {
+            response.json().then(data => {
+              setErrors(data.message) //message comes from backend
+            })
+          }
+
           navigate('/signup')
         }
       })
@@ -54,6 +61,9 @@ const SignUpForm = ({ navigate }) => {
           <input placeholder="Password" id="password" type='password' value={ password } onChange={handlePasswordChange} />
         <input id='submit' type="submit" value="Submit" />
       </form>
+      <div>
+        {errors}
+      </div>
       </>
     );
 }

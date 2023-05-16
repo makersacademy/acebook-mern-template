@@ -3,6 +3,7 @@ const mongoose = require("mongoose");
 
 const PostSchema = new mongoose.Schema({
   message: String, 
+  comments: [],   // AddComments: Added comments (empty array) to schema 
   authorUserID: {
     type: mongoose.Schema.Types.ObjectId,
     required: true,
