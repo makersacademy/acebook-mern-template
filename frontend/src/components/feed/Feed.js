@@ -38,10 +38,10 @@ const Feed = ({ navigate }) => {
 
   const comparebyDate = ( a, b ) => {
     if ( a.createdDateTime < b.createdDateTime ){
-      return -1;
+      return 1;
     }
     if ( a.createdDateTime > b.createdDateTime ){
-      return 1;
+      return -1;
     }
     return 0;
   }
