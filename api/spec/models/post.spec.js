@@ -14,6 +14,32 @@ describe("Post model", () => {
     expect(post.message).toEqual("some message");
   });
 
+  it("finding a comment in a existing post", (done) => {
+    var post = new Post({ message: "some message", authorUserID: "645fd378ceaefce663b8b497", comments: ["some comment"] });
+    post.save((err) => {
+      expect(err).toBeNull();
+      Post.find( (err, posts) => {
+        expect(err).toBeNull();
+        expect(posts[0].comments.length).toEqual(1)
+        expect(posts[0].comments[0]).toEqual('some comment')
+        done()
+      });
+    });
+  });
+
+  it("finding a comment in a existing post", (done) => {
+    var post = new Post({ message: "some message", authorUserID: "645fd378ceaefce663b8b497", comments: ["some comment"] });
+    post.save((err) => {
+      expect(err).toBeNull();
+      Post.find( (err, posts) => {
+        expect(err).toBeNull();
+        expect(posts[0].comments.length).toEqual(1)
+        expect(posts[0].comments[0]).toEqual('some comment')
+        done()
+      });
+    });
+  });
+
   it("finding a like in a existing post", async() => {
     //to be able to test an object id, we need to create one, that's why we are using mongoose
     var id = mongoose.Types.ObjectId();
