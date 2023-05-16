@@ -45,10 +45,17 @@ const Post = ({post, onLike, onComment}) => {
         <>
         <div className='comment-container'>
             {post.comments.map(comment => 
-              <p key={comment._id}>
-                <strong>{comment.author.name}:</strong> {comment.comment} 
+              <p className='comments' key={comment._id}>
+                <div className='comment-name'>
+                <strong>{comment.author.name}:</strong>
+                <div className='comment-comment'>
+                {comment.comment} 
+                </div>
+                </div>
                 <br />
+                <div className='comment-time'>
                 <small>{new Date(comment.date).toLocaleString()}</small>
+                </div>
               </p>
             )}
           <form onSubmit={handleComment}>

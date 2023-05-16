@@ -5,6 +5,7 @@
   margin-bottom: 40px;
   text-align: center;
   min-width: 500px;
+  max-width: 500px;
   display: flex;
   flex-direction: column;
 }
@@ -56,4 +57,24 @@ article {
   border-right: none;
   padding-bottom: 10px;
   margin-bottom: 10px;
+  max-width: 500px;
+}
+
+.comments {
+  background-color: rgba(128, 128, 128, 0.103);
+  padding: 8px;
+}
+
+.comment-name {
+  text-align: left;
+}
+
+.comment-comment {
+ margin-left: 10px;
+ margin-top: 10px;
+}
+
+.comment-time {
+  text-align: right;
+  font-size: small;
 }
