@@ -37,7 +37,7 @@ describe("/posts", () => {
       let response = await request(app)
         .post("/posts")
         .set("Authorization", `Bearer ${token}`)
-        .send({ message: "hello world", token: token });
+        .send({ message: "hello world", like: 0, token: token });
       expect(response.status).toEqual(201);
     });
   
@@ -49,6 +49,16 @@ describe("/posts", () => {
       let posts = await Post.find();
       expect(posts.length).toEqual(1);
       expect(posts[0].message).toEqual("hello world");
+    });
+
+    test("creates a new post", async () => {
+      await request(app)
+        .post("/posts")
+        .set("Authorization", `Bearer ${token}`)
+        .send({ message: "hello world", token: token });
+      let posts = await Post.find();
+      expect(posts.length).toEqual(1);
+      expect(posts[0].like).toEqual(0);
     });
   
     test("returns a new token", async () => {
@@ -158,4 +168,42 @@ describe("/posts", () => {
       expect(response.body.token).toEqual(undefined);
     })
   })
+
+  describe("POST /posts/:id/likes", () => {
+    test("increases the number of likes for a post by 1", async () => {
+        let post1 = new Post({message: "howdy!"});
+        await post1.save();
+
+        let response = await request(app)
+            .post(`/posts/${post1._id}/likes`)
+            .set("Authorization", `Bearer ${token}`)
+            .send({ token: token });
+
+        expect(response.status).toEqual(201);
+        expect(response.body.post.like).toEqual(1);
+
+        let updatedPost = await Post.findById(post1._id);
+        expect(updatedPost.like).toEqual(1);
+    });
+
+    test("returns error message when user has already liked the post", async () => {
+        let post1 = new Post({message: "howdy!"});
+        await post1.save();
+
+        // User likes the post for the first time
+        await request(app)
+            .post(`/posts/${post1._id}/likes`)
+            .set("Authorization", `Bearer ${token}`)
+            .send({ token: token });
+
+        // User tries to like the post a second time
+        let response = await request(app)
+            .post(`/posts/${post1._id}/likes`)
+            .set("Authorization", `Bearer ${token}`)
+            .send({ token: token });
+
+        expect(response.status).toEqual(400);
+        expect(response.body.message).toEqual("You've already liked this post.");
+    });
+  });
 });

@@ -25,6 +25,34 @@ const PostsController = {
       res.status(201).json({ message: 'OK', token: token, post: post });
     });
   },
-};
+
+  AddLikes: (req, res) => {
+    const postId = req.params.id;
+    const userId = req.user_id;
+    Post.findById(postId, (err, post) => {
+      if (err) {
+        throw err;
+      }
+  
+      // Check if the user has already liked the post
+      if (post.likedBy.includes(userId)) {
+        return res.status(400).json({ message: "You've already liked this post." });
+      }
+  
+      const updatedPost = post;
+      updatedPost.like += 1;
+      updatedPost.likedBy.push(userId);
+  
+      updatedPost.save(async (err, updatedPost) => {
+        if (err) {
+          throw err;
+        }
+  
+        const token = await TokenGenerator.jsonwebtoken(userId);
+        res.status(201).json({ message: 'OK', token: token, post: updatedPost });
+      });
+    });
+  },
+}  
 
 module.exports = PostsController;
