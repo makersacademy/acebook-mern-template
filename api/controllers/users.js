@@ -1,5 +1,7 @@
 const User = require("../models/user");
 
+const TokenGenerator = require("../models/token_generator");
+
 const UsersController = {
   Create: (req, res) => {
     const user = new User(req.body);
@@ -13,13 +15,14 @@ const UsersController = {
   },
 
   Index: (req, res) => {
-    User.findOne(req.query.userId).then(async (err, user) => {
-      if (err) {
-        throw err;
+    User.findOne({ _id: req.user_id }).then(async (user) => {
+      if (!user) {
+        res.status(404).json({ message: "no such user exists in db" });
+      } else {
+        const token = await TokenGenerator.jsonwebtoken(user.id)
+        res.status(200).json({ token: token, user: user });
       }
-      const token = await TokenGenerator.jsonwebtoken(req.user_id)
-      res.status(200).json({ user: user, token: token });
-    })
+    });
   }
 };
 
