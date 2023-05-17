@@ -11,6 +11,16 @@ const UsersController = {
       }
     });
   },
+
+  Index: (req, res) => {
+    User.findOne(req.query.userId).then(async (err, user) => {
+      if (err) {
+        throw err;
+      }
+      const token = await TokenGenerator.jsonwebtoken(req.user_id)
+      res.status(200).json({ user: user, token: token });
+    })
+  }
 };
 
 module.exports = UsersController;
