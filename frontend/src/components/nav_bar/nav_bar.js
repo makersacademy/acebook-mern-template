@@ -9,6 +9,7 @@ const Navigation = () => {
 
   const logout = () => {
     window.localStorage.removeItem("token");
+    
     navigate('/login');
   };
   
@@ -24,6 +25,10 @@ const Navigation = () => {
       navigate('/posts')
     }
   }
+
+  const handleProfileClick = () => {
+    navigate('/profile/');
+  };
 
   const [isOpen, setIsOpen] = useState(false);
   const handleDropdownClick = () => setIsOpen(!isOpen);

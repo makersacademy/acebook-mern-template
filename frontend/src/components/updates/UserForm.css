@@ -1,0 +1,75 @@
+.form-header {
+    /* Styles for the form header */
+    font-size: 20px;
+    font-weight: bold;
+    text-align: center;
+
+  }
+  
+  .aligned-credentials {
+    /* Styles for the aligned credentials */
+    display: flex;
+ 
+  }
+  
+  .email-box-space {
+    /* Styles for the email input box */
+    margin-right: 10px;
+   
+  }
+  
+  .password-box-space {
+    /* Styles for the password input box */
+    margin-left: 10px;
+  }
+  
+  .aligned-names {
+    /* Styles for the aligned names */
+    display: flex;
+   
+  }
+  
+  .first-name-box-space {
+    /* Styles for the first name input box */
+    margin-right: 10px;
+    /* Add other styles as needed */
+  }
+  
+  .last-name-box-space {
+    /* Styles for the last name input box */
+    margin-left: 10px;
+  }
+  
+  .form-group {
+    /* Styles for the form group */
+    margin-bottom: 10px;
+    text-align: center;
+  }
+  
+  .success-message {
+    /* Styles for the success message */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: green;
+    font-weight: bold;
+    padding: 10px;
+    border-radius: 5px;
+    margin-top: 10px;
+    background-color: white;
+  }
+  
+  .error-message {
+    /* Styles for the error message */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: red;
+    font-weight: bold;
+    padding: 10px;
+    border-radius: 5px;
+    margin-top: 10px;
+    background-color: white;
+  }
+  
+  
