@@ -30,6 +30,12 @@ const UserForm = ({ navigate }) => {
       if (response.status === 200) {
         setSuccessMessage("Your changes have been updated successfully.");
         navigate("/profile/");
+
+        // Clear the input fields
+      setEmail("");
+      setPassword("");
+      setFirstName("");
+      setLastName("");
       } else {
         setSuccessMessage("Changes failed, please try again.");
         navigate("/signup");
