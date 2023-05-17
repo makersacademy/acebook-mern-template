@@ -19,6 +19,7 @@
     "test": "npm run test:unit && npm run test:feature",
     "test:unit": "cypress open --component",
     "test:feature": "cypress open",
+    "test:single": "cypress run --component --spec",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {
