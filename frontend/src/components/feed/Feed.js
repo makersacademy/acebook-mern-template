@@ -67,7 +67,8 @@ const Feed = ({ navigate }) => {
       const data = await response.json();
   
       if (response.status === 400) {
-        // alert(data.message);    
+        removeLike(postId);
+
       } else {
         setPosts(posts.map(post => 
           post._id === postId ? { ...post, like: data.post.like } : post
@@ -76,7 +77,32 @@ const Feed = ({ navigate }) => {
     } catch (error) {
       console.error(error);
     }
-  };  
+  }; 
+  
+  const removeLike = async (postId) => {
+    try {
+      const response = await fetch(`/posts/${postId}/likes`, {
+        method: 'DELETE',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}`
+        },
+      });
+
+      const data = await response.json();
+      setPosts(posts.map(post => 
+        post._id === postId ? { ...post, like: data.post.like } : post));
+      
+      if (response.ok) {
+        console.log('Like removed successfully');
+      } else {
+        //
+      }
+
+    } catch (error) {
+      console.error(error);
+    }
+  }
 
   const handleComment = async (postId, comment) => {
     try {

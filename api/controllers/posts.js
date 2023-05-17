@@ -55,6 +55,29 @@ const PostsController = {
     });
   },
 
+  RemoveLikes: (req, res) => {
+      const postId = req.params.id;
+      const userId = req.user_id;
+
+      Post.findById(postId, (err, post) => {
+        if (err) {
+          throw err;
+        }
+
+      const updatedPost = post;
+      updatedPost.like -= 1;
+      updatedPost.likedBy = updatedPost.likedBy.filter((id) => id !== userId);
+    
+      updatedPost.save(async (err, updatedPost) => {
+        if (err) {
+          throw err;
+        }
+      const token = await TokenGenerator.jsonwebtoken(userId);
+      res.status(201).json({ message: 'OK', token: token, post: updatedPost });
+      });
+    });
+  },
+
   CreateComment: (req, res) => {
     const postId = req.params.id;
     const { comment } = req.body;

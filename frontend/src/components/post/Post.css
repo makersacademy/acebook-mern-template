@@ -13,3 +13,12 @@
 .button-container button {
   margin-right: 10px;  /* adds some space between the buttons */
 }
+
+.like-button {
+  background-color: rgb(0, 128, 128); /* Sets button colour */
+}
+
+.no-like-button {
+  background-color: grey; /* Sets button colour */
+
+}
