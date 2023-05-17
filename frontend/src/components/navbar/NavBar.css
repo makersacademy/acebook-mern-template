@@ -2,7 +2,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background-color: #F0F2F5;
+  background-color: #27559c;
   padding: 10px;
 }
 
@@ -14,11 +14,11 @@
 /* Style for the navigation links */
 .nav-item a {
   text-decoration: none;
-  color: #1a1a1a;
+  color: #fdfeff;
   font-size: 18px;
   font-weight: bold;
 }
 
 .username-format {
-  font-size: 1rem; font-weight: 300; color: darkblue
+  font-size: 1rem; font-weight: 300; color: rgb(234, 234, 241)
 }
