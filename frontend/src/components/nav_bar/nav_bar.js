@@ -14,7 +14,7 @@ const Navigation = () => {
   };
   
   const handleLoginClick = () => {
-   navigate('login')
+   navigate('/login')
   }
   const handleSignupClick = () => {
    navigate('/signup')
@@ -37,42 +37,41 @@ const Navigation = () => {
   const isSignupPage = location.pathname === '/signup';
 
   return ( 
-  <>
-  <div className='navbar-container'>
-    <div className='logo-container'>
-      <div className="logo" onClick={handleLogoClick}>
-        <img src={logo} alt="logo"></img>
+    <div className='navbar-container'>
+      <div className='nav-section'>
+        {/* this is needed to centre the logo. */}
+      </div>
+      <div className='nav-section logo-container'>
+        <div className="logo" onClick={handleLogoClick}>
+          <img src={logo} alt="logo"></img>
+        </div>
+      </div>
+      <div className='nav-section'>
+        { token ? (
+          <div className="dropdown">
+            <div className='dropdown-container'>
+              <button className="dropdown-button" onClick={handleDropdownClick}>
+              Dropdown
+              </button>
+            </div>
+            {isOpen && (
+            <div className="dropdown-content">
+              <button className="dropdown-item" onClick={handleProfileClick}>Profile Settings</button>
+              <div>
+                <button className='dropdown-logout' onClick={logout}>Logout</button>
+              </div>
+            </div>
+            )}
+          </div>
+        ) : (
+          <div className='login-signup'>
+            {isLoginPage && <button className='signUpNav' onClick={handleSignupClick}>Sign up page</button>}
+            {isSignupPage && <button className='loginNav' onClick={handleLoginClick}>Login page</button>}
+          </div>
+        )}
       </div>
     </div>
-  { token ? (
-    <div className="dropdown">
-      <div className='dropdown-container'>
-        <button className="dropdown-button" onClick={handleDropdownClick}>
-        Dropdown
-        </button>
-      </div>
-    {isOpen && (
-     <div className="dropdown-content">
-     <button className="dropdown-item" onClick={handleProfileClick}>
-       Profile Settings
-     </button>
-     <div>
-        <button className='dropdown-logout' onClick={logout}>Logout</button>
-      </div>
-    </div>
-    )}
-  </div>
-  ) : (
-  <>
-    <div className='login-signup'>
-      {isLoginPage && <button className='signUpNav' onClick={handleSignupClick}>Sign up page</button>}
-      {isSignupPage && <button className='loginNav' onClick={handleLoginClick}>Login page</button>}
-    </div>
-  </>
   )
-   }
-  </div>
-  </>
-  )
-  };
-  export default Navigation;
+};
+
+export default Navigation;
