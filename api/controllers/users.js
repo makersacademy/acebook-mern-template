@@ -18,6 +18,25 @@ const UsersController = {
     });
   }   
   },
+
+  //Maybe could be used tp upload the image instead of sending url
+  // UploadProfilePicture: async (req, res) => {
+  //   try {
+  //     if (!req.file) {
+  //       throw new Error("No file uploaded");
+  //     }
+  
+  //     const result = await cloudinary.uploader.upload(req.file.path);
+  //     res.json({message : "Image uploaded successfully", url: result.secure_url })
+  //     return result.secure_url
+  
+  //   } catch (error) {
+  //     console.error(error);
+  //     res.status(500).json({ error: error.message });
+  //   }
+  // }
 };
+
+
 
 module.exports = UsersController;

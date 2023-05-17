@@ -10,7 +10,7 @@ const Post = ({ post }) => {
     <div className="postbox postflex">
       <Avatar
         alt="Remy Sharp"
-        src="https://res.cloudinary.com/dmkipvd8d/image/upload/v1684273799/_124800859_gettyimages-817514614_dfpybm.jpg"
+        src={ post.avatar }
         sx={{ width: 56, height: 56 }}
       />
       <article data-cy="post" key={post._id}>
