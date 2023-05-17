@@ -16,7 +16,7 @@ const Post = ({post}) => {
           <img src="/happy-fox.jpeg" alt="default-profile" />
         )}
       </div>
-      <h3>{ post.author.userName }</h3>
+      <h3 className="user-name">{ post.author.userName }</h3>
     </div>
     <article data-cy="post" key={ post._id }>{ post.message } { formattedDate } </article>
     <Like likes={post.likes} post_id={ post._id } didUserLikeThis={post.didUserLikeThis}/>
