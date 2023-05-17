@@ -1,5 +1,6 @@
 const Post = require("../models/post");
 const TokenGenerator = require("../models/token_generator");
+const Comment = require("../models/comment");
 
 const PostsController = {
   Index: (req, res) => {
