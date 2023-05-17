@@ -68,7 +68,7 @@ const Navbar = ({ navigate }) => {
         <div className="nav-left">
         <Avatar
           alt="Remy Sharp"
-          src="https://res.cloudinary.com/dmkipvd8d/image/upload/w_1000,c_fill,ar_1:1,g_auto,r_max,bo_5px_solid_red,b_rgb:262c35/v1684179149/800px-Facebook_logo__28square_29_dgjsjn.png"
+          src="https://res.cloudinary.com/dmkipvd8d/image/upload/w_1000,c_fill,ar_1:1,g_auto,r_max,bo_30px_solid_white,b_rgb:262c35/v1684179149/800px-Facebook_logo__28square_29_dgjsjn.png"
           sx={{ width: 56, height: 56 }}
         />
         

@@ -8,6 +8,7 @@ nav {
   justify-content: space-between;
   max-width: 840px;
   margin: 0 auto;
+  height: 100%;
 }
 
 .nav-left {
@@ -19,9 +20,9 @@ nav {
 
 nav h1 {
   color: #fdfeff;
-  font-size: 3rem;
+  font-size: 3.5rem;
   font-weight: bold;
-  margin: 10px 0 10px 20px;  
+  margin: 10px 0 10px 40px;  
 }
 
 .nav-bar {
@@ -41,8 +42,12 @@ nav h1 {
 .nav-item a {
   text-decoration: none;
   color: #fdfeff;
-  font-size: 18px;
+  font-size: 2.2rem;
   font-weight: bold;
+}
+
+.nav-item a:hover {
+  color: #97ffff;
 }
 
 .username-format {
