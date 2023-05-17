@@ -8,6 +8,10 @@ describe("/users 1", () => {
     await User.deleteMany({});
   });
 
+  afterAll( async () => {
+    await User.deleteMany({});
+  })
+
   describe("POST, when email, password, first name and last name are provided", () => {
     test("the response code is 201", async () => {
       let response = await request(app)
