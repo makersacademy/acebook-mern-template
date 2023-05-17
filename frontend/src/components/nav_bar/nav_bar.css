@@ -31,18 +31,6 @@
 
 }
 
-.dropdown-button {
-  display: flex;
-  justify-content: flex-end;
-  color: white;
-  background-color: teal;
-  border: none;
-  font-size: 16px;
-  cursor: pointer;
-  padding: 10px;
-  transition: background-color 0.2s ease;
-}
-
 .dropdown-button:hover {
   background-color: #008080;
 }
@@ -91,24 +79,42 @@
   justify-content: flex-end;
 }
 
+.dropdown-button {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center; /* Center items vertically */
+  color: white;
+  background-color: teal;
+  border: none;
+  font-size: 16px;
+  cursor: pointer;
+  padding: 10px;
+  transition: background-color 0.2s ease;
+}
+
 .dropdown-content {
   display: flex;
   flex-direction: column;
-  justify-content: flex-start;
-  align-items: flex-end;
+  justify-content: flex-end;
+  align-items: flex-end; /* Align items to the right */
   color: teal;
   background-color: teal;
   min-width: 160px;
   z-index: 1;
+  cursor: pointer;
+  border: solid;
 }
 
 .dropdown-logout {
+  margin-top: 10px;
   color: teal;
   padding: 10px;
   cursor: pointer;
   justify-content: center;
-  align-items: center;
+  align-items: flex-end; /* Align to the right */
   transition: background-color 0.2s ease;
+  border-radius: 10px;
+  min-width: 114px;
 }
 
 .dropdown-item {
@@ -116,6 +122,8 @@
   padding: 10px;
   cursor: pointer;
   transition: background-color 0.2s ease;
+  border-radius: 10px;
+  max-width: 120px;
 }
 
 .dropdown-item:hover {
