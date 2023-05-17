@@ -10,7 +10,7 @@ const goodbyeMessages = [
     image: eye_roll,
   },
   {
-    message: "Owh, good...",
+    message: "Let's be honest...",
     image: brand,
   },
   {
