@@ -1,17 +1,21 @@
 import React, { useState } from "react";
-import './SignUpForm.css';
+import './UserForm.css';
 
-const SignUpForm = ({ navigate }) => {
+const UserForm = ({ navigate }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [firstName, setfirstName] = useState("");
-  const [lastName, setlastName] = useState("");
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
+  const [successMessage, setSuccessMessage] = useState("");
+  const [responseStatus, setResponseStatus] = useState(null); 
 
   const handleSubmit = async (event) => {
     event.preventDefault();
 
-    fetch("/users", {
-      method: "post",
+  console.log(window.localStorage.getItem("token"));
+
+    fetch("/userUpdatesRoute", {
+      method: "put",
       headers: {
         "Content-Type": "application/json",
       },
@@ -22,34 +26,43 @@ const SignUpForm = ({ navigate }) => {
         lastName: lastName,
       }),
     }).then((response) => {
-      if (response.status === 201) {
-        navigate("/login");
+        console.log(response.status);
+      if (response.status === 200) {
+        setSuccessMessage("Your changes have been updated successfully.");
+        navigate("/profile/");
+
+        // Clear the input fields
+      setEmail("");
+      setPassword("");
+      setFirstName("");
+      setLastName("");
       } else {
+        setSuccessMessage("Changes failed, please try again.");
         navigate("/signup");
       }
     });
   };
 
-  const handleEmailChange = (event) => {
+  const handleEmailUpdate = (event) => {
     setEmail(event.target.value);
   };
 
-  const handlePasswordChange = (event) => {
+  const handlePasswordUpdate = (event) => {
     setPassword(event.target.value);
   };
 
-  const handlefirstNameChange = (event) => {
-    setfirstName(event.target.value);
+  const handleFirstNameUpdate = (event) => {
+    setFirstName(event.target.value);
   };
 
-  const handlelastNameChange = (event) => {
-    setlastName(event.target.value);
+  const handleLastNameUpdate = (event) => {
+    setLastName(event.target.value);
   };
 
   return (
     <form onSubmit={handleSubmit}>
     <div class="form-header">
-      <p>Please complete the details below to create your account:</p>
+      <p>Update your details here:</p>
     </div>
 
     <div class="form-group">
@@ -60,18 +73,18 @@ const SignUpForm = ({ navigate }) => {
             id="email"
             type="text"
             value={email}
-            onChange={handleEmailChange}
+            onChange={handleEmailUpdate}
           />
         </div>
-        <div class="password-box-space">
+         <div class="password-box-space">
           <input
             placeholder="Password"
             id="password"
             type="password"
             value={password}
-            onChange={handlePasswordChange}
-          />
-        </div>
+            onChange={handlePasswordUpdate}
+          /> 
+        </div> 
       </div>
     </div>
 
@@ -83,7 +96,7 @@ const SignUpForm = ({ navigate }) => {
             id="firstName"
             type="text"
             value={firstName}
-            onChange={handlefirstNameChange}
+            onChange={handleFirstNameUpdate}
           />
         </div>
         <div class="last-name-box-space">
@@ -92,7 +105,7 @@ const SignUpForm = ({ navigate }) => {
             id="lastName"
             type="text"
             value={lastName}
-            onChange={handlelastNameChange}
+            onChange={handleLastNameUpdate}
           />
         </div>
       </div>
@@ -101,8 +114,17 @@ const SignUpForm = ({ navigate }) => {
     <div class="form-group">
       <input id="submit" type="submit" value="Submit" />
     </div>
+    {successMessage && (
+        <div
+          className={`success-message ${responseStatus === 200 ? 'ok' : 'error'}`}
+        >
+          {successMessage}
+        </div>
+)}
+
   </form>
   );
 };
 
-export default SignUpForm;
+export default UserForm;
+

@@ -2,17 +2,19 @@ const createError = require("http-errors");
 const express = require("express");
 const path = require("path");
 const logger = require("morgan");
+const cookieParser = require("cookie-parser")
 const JWT = require("jsonwebtoken");
 
 const postsRouter = require("./routes/posts");
 const tokensRouter = require("./routes/tokens");
 const usersRouter = require("./routes/users");
-const usersUpdatesRouter = require("./routes/userUpdateRoute")
+const userUpdatesRouter = require("./routes/userUpdatesRoute")
 
 const app = express();
 
 // setup for receiving JSON
 app.use(express.json())
+app.use(cookieParser());
 
 app.use(logger("dev"));
 app.use(express.json());
@@ -43,7 +45,7 @@ const tokenChecker = (req, res, next) => {
 app.use("/posts", tokenChecker, postsRouter);
 app.use("/tokens", tokensRouter);
 app.use("/users", usersRouter);
-app.use("/usersUpdate", usersUpdatesRouter);
+app.use("/userUpdatesRoute", userUpdatesRouter);
 
 
 // catch 404 and forward to error handler
@@ -61,7 +63,7 @@ app.use((err, req, res) => {
   res.status(err.status || 500).json({message: 'server error'})
 });
 
-app.put('/usersUpdate/:id', async (req, res) => {
+app.put('/userUpdatesRoute/:id', async (req, res) => {
   try {
     const { firstName } = req.body;
     const user = await User.findById(req.params.id);

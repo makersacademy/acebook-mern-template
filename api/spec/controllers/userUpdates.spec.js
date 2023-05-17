@@ -2,20 +2,26 @@ const app = require("../../app");
 const request = require("supertest");
 require("../mongodb_helper");
 const User = require("../../models/user");
+const TokenGenerator = require("../../models/token_generator");
 
 describe("User Updates", () => {
-  let user; // user variable declared at top level so anything below it can use it via the below hook 
+  let user; // user variable declared at top level so anything below it can use it via the below hook
+  let token;
 
-  beforeEach(async () => {      //runs literally before each 'it' test
-    await User.deleteMany({});  // deletes everything before each test run
+  beforeEach(async () => {
+    //runs literally before each 'it' test
+    await User.deleteMany({}); // deletes everything before each test run
 
-    user = new User({           //creates a new user that will be used in every single test, as declared by let user;
+    user = new User({
+      //creates a new user that will be used in every single test, as declared by let user;
       email: "daved@test.com",
       password: "5678",
       firstName: "Dave",
       lastName: "David",
     });
-    await user.save();        //saves newly created user
+    await user.save(); //saves newly created user
+
+    new_token = TokenGenerator.jsonwebtoken(user._id)
   });
 
   describe("when updating only the first name", () => {
@@ -26,7 +32,8 @@ describe("User Updates", () => {
 
     beforeEach(async () => {
       response = await request(app)
-        .put(`/usersUpdate/${user._id}`)
+        .put(`/userUpdatesRoute`)
+        .set('Cookie', [`token=${new_token}`])
         .send(updatedFields);
     });
 
@@ -40,17 +47,17 @@ describe("User Updates", () => {
     });
   });
 
-
   describe("when updating first and last name", () => {
     const updatedFields = {
       firstName: "John",
-      lastName: "Perry"
+      lastName: "Perry",
     };
     let response;
 
     beforeEach(async () => {
       response = await request(app)
-        .put(`/usersUpdate/${user._id}`)
+        .put(`/userUpdatesRoute`)
+        .set('Cookie', [`token=${new_token}`])
         .send(updatedFields);
     });
 
@@ -67,13 +74,14 @@ describe("User Updates", () => {
 
   describe("when updating email only", () => {
     const updatedFields = {
-      email: "newJohn@email.com"
+      email: "newJohn@email.com",
     };
     let response;
 
     beforeEach(async () => {
       response = await request(app)
-        .put(`/usersUpdate/${user._id}`)
+      .put(`/userUpdatesRoute`)
+      .set('Cookie', [`token=${new_token}`])
         .send(updatedFields);
     });
 
@@ -89,13 +97,14 @@ describe("User Updates", () => {
 
   describe("when updating password only", () => {
     const updatedFields = {
-      password: "one2three"
+      password: "one2three",
     };
     let response;
 
     beforeEach(async () => {
       response = await request(app)
-        .put(`/usersUpdate/${user._id}`)
+      .put(`/userUpdatesRoute`)
+      .set('Cookie', [`token=${new_token}`])
         .send(updatedFields);
     });
 
@@ -109,5 +118,22 @@ describe("User Updates", () => {
     });
   });
 
+  describe("when deleting a user", () => {
+    let response;
 
+    beforeEach(async () => {
+      response = await request(app).delete(`/userUpdatesRoute`)
+      .set('Cookie', [`token=${new_token}`]);
+    });
+
+    it("should return status 200", async () => {
+      expect(response.statusCode).toEqual(200);
+    });
+
+    it("not be able to find the deleted user in database", async () => {
+      const deletedUser = await User.findById(user._id);
+      expect(deletedUser).toBeNull();
+    });
+  });
 });
+

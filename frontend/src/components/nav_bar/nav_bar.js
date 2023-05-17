@@ -3,15 +3,13 @@ import React, { useState } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import logo from './logo.png'
 
-
-
-
 const Navigation = () => {
   const navigate = useNavigate();
   const location = useLocation();
 
   const logout = () => {
     window.localStorage.removeItem("token");
+    
     navigate('/login');
   };
   
@@ -27,6 +25,10 @@ const Navigation = () => {
       navigate('/posts')
     }
   }
+
+  const handleProfileClick = () => {
+    navigate('/profile/');
+  };
 
   const [isOpen, setIsOpen] = useState(false);
   const handleDropdownClick = () => setIsOpen(!isOpen);
@@ -50,9 +52,11 @@ const Navigation = () => {
         </button>
       </div>
     {isOpen && (
-      <div className="dropdown-content">
-        <button className="dropdown-item">Profile Settings</button>
-      <div>
+     <div className="dropdown-content">
+     <button className="dropdown-item" onClick={handleProfileClick}>
+       Profile Settings
+     </button>
+     <div>
         <button className='dropdown-logout' onClick={logout}>Logout</button>
       </div>
     </div>
@@ -72,5 +76,3 @@ const Navigation = () => {
   )
   };
   export default Navigation;
-
- 
