@@ -11,9 +11,6 @@ const AddComment = ({ post }) => {
     event.preventDefault();
 
       if (token) {
-
-        console.log(`${post._id}`) // VISIBILITY
-        console.log((`user = ${window.localStorage.getItem('username')}`))
         const response = await fetch(`/posts/${post._id}`, {
           method: 'PATCH',
           headers: {
