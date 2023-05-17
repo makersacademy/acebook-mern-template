@@ -63,24 +63,29 @@ const Navbar = ({ navigate }) => {
     );
   } else {
     return (
-      <>
-  
+      <nav>
+        <div className="navbar">
+        <div className="nav-left">
         <Avatar
           alt="Remy Sharp"
           src="https://res.cloudinary.com/dmkipvd8d/image/upload/w_1000,c_fill,ar_1:1,g_auto,r_max,bo_5px_solid_red,b_rgb:262c35/v1684179149/800px-Facebook_logo__28square_29_dgjsjn.png"
           sx={{ width: 56, height: 56 }}
         />
         
-        <h2 className="title">Farcebook</h2>
-        <nav className="nav-bar">
+        <h1 className="title">Farcebook</h1>
+        </div>
+        
+        <div className="nav-bar">
           <div className="nav-item">
             <a href="/login">Login</a>
           </div>
           <div className="nav-item">
             <a href="/signup">Sign up</a>
           </div>
-        </nav>
-      </>
+        </div>
+        </div>
+        
+      </nav>
     );
   }
 };

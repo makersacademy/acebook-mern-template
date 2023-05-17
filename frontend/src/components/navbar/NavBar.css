@@ -1,3 +1,29 @@
+nav {
+  background-color: #27559c;
+  height: 80px;
+}
+
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  max-width: 840px;
+  margin: 0 auto;
+}
+
+.nav-left {
+  display: flex;
+  height: 100%;
+  align-items: center;
+
+}
+
+nav h1 {
+  color: #fdfeff;
+  font-size: 3rem;
+  font-weight: bold;
+  margin: 10px 0 10px 20px;  
+}
+
 .nav-bar {
   display: flex;
   justify-content: space-between;
