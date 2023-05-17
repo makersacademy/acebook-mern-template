@@ -50,9 +50,6 @@ const Feed = ({ navigate }) => {
     return(
       <>
         <h2>Posts</h2>
-          <button onClick={logout}>
-            Logout
-          </button>
 
         <div className="new-post-form">
           < NewPostForm toggleRefresh={toggleRefresh}/>
