@@ -45,26 +45,26 @@ const Navbar = ({ navigate }) => {
     // }
   } else {
     contextButton = <div className="nav-item">
-                       <a href="/login">Login</a>
-                       <a href="/signup">Sign up</a>
+                      <a href="/login">Login</a>
+                      <a href="/signup">Sign up</a>
                     </div>
   }
   
     return (
       <nav>
-        <div className="nav-bar">
-        <div className="nav-left">
-        <Avatar
-          alt="Remy Sharp"
-          src="https://res.cloudinary.com/dmkipvd8d/image/upload/w_1000,c_fill,ar_1:1,g_auto,r_max,bo_30px_solid_white,b_rgb:262c35/v1684179149/800px-Facebook_logo__28square_29_dgjsjn.png"
-          sx={{ width: 56, height: 56 }}
-        />
+        <div className="navbar">
+          <div className="nav-left">
+            <Avatar
+              alt="Remy Sharp"
+              src="https://res.cloudinary.com/dmkipvd8d/image/upload/w_1000,c_fill,ar_1:1,g_auto,r_max,bo_30px_solid_white,b_rgb:262c35/v1684179149/800px-Facebook_logo__28square_29_dgjsjn.png"
+              sx={{ width: 56, height: 56 }}
+            />
         
-        <h1 className="title">Farcebook</h1>
-        </div>
-          <>
-           { contextButton }
-          </>
+            <h1 h1 className="title">Farcebook</h1>
+          </div>
+          <div className="nav-right">
+            { contextButton }
+          </div>
         </div>
       </nav>
     );

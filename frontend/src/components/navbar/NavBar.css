@@ -1,11 +1,15 @@
 nav {
   background-color: #27559c;
   height: 80px;
+  position: sticky;
+  top: 0;
+  z-index: 100;
 }
 
 .navbar {
   display: flex;
   justify-content: space-between;
+  align-items: center;
   max-width: 840px;
   margin: 0 auto;
   height: 100%;
@@ -15,7 +19,6 @@ nav {
   display: flex;
   height: 100%;
   align-items: center;
-
 }
 
 nav h1 {
@@ -35,7 +38,7 @@ nav h1 {
 
 /* Style for the navigation items */
 .nav-item {
-  margin-right: 10px;
+  margin-left: 10px;
 }
 
 /* Style for the navigation links */

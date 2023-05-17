@@ -50,11 +50,7 @@ const SignUpForm = ({ navigate }) => {
 
 
   return (
-    <>
-      <h2>Sign up</h2>
-      {/* <button onClick={login}>
-              Login 
-      </button> */}
+    <div className='login-form'>
       <form onSubmit={handleSubmit}>
           <label for="email">Email: </label>
           <input placeholder="Email" id="email" type='text' value={ email } onChange={handleEmailChange} /> <br />
@@ -67,7 +63,7 @@ const SignUpForm = ({ navigate }) => {
       <div>
         {errors}
       </div>
-      </>
+      </div>
     );
 }
 
