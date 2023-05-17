@@ -2,13 +2,16 @@ import AddPost from './AddPost';
 // const navigate = () => {};
 
 describe('AddPost', () => {
-  xit('creates a new post', () => {
+  it('creates a new post', () => {
+    window.localStorage.setItem("token", "fakeToken")
+    
     cy.mount(<AddPost />);
 
     cy.intercept('POST', '/posts', {
       statusCode: 201,
       body: {
         message: 'Hello FarceBook',
+        comments: []
       },
     }).as('newPostRequest');
 

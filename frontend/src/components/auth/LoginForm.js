@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import SignUpForm from '../user/SignUpForm'
 
 const LogInForm = ({ navigate }) => {
-  const [email, setEmail] = useState("");
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
 
@@ -14,7 +13,7 @@ const LogInForm = ({ navigate }) => {
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({ email: email, username: username, password: password })
+      body: JSON.stringify({ username: username, password: password })
     })
 
     if (response.status !== 201) {
@@ -27,10 +26,6 @@ const LogInForm = ({ navigate }) => {
       window.localStorage.setItem("username", username)
       navigate('/posts');
     }
-  }
-
-  const handleEmailChange = (event) => {
-    setEmail(event.target.value)
   }
 
   const handleUsernameChange = (event) => {
@@ -46,7 +41,6 @@ const LogInForm = ({ navigate }) => {
     <>
       <h2>Login</h2>
       <form onSubmit={handleSubmit}>
-        <input placeholder='Email' id="email" type='text' value={email} onChange={handleEmailChange} />
         <input placeholder="Username" id="username" type='text' value={ username } onChange={handleUsernameChange} />
         <input placeholder='Password' id="password" type='password' value={password} onChange={handlePasswordChange} />
         <input role='submit-button' id='submit' type="submit" value="Submit" />

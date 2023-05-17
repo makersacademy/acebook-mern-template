@@ -13,6 +13,33 @@ const Navbar = ({ navigate }) => {
   useEffect(() => {
     if (token !== window.localStorage.getItem("token")) {
       setToken(window.localStorage.getItem("token"));
+
+      const logout = () => {
+        window.localStorage.removeItem("token")
+        // navigate('/login')
+      }
+
+      if(token) {
+        return (
+          <>
+          <nav className='nav-bar'>
+          <h2>Farcebook</h2>
+            <div className="username-format">{username}</div>
+            <div className='nav-item' onClick={logout}><a href='/login'>Logout</a></div>
+          </nav>
+          </>
+        )
+      } else {
+        return (
+          <>
+          <h2>Farcebook</h2>
+          <nav className='nav-bar'>
+            <div className='nav-item' ><a href='/login'>Login</a></div>
+            <div className='nav-item'><a href='/signup'>Sign up</a></div>
+          </nav>
+          </>
+        )
+      }
     }
     setUsername(window.localStorage.getItem("username"));
   }, [window.localStorage.getItem("token")]);
