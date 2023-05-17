@@ -14,7 +14,7 @@ const goodbyeMessages = [
     image: brand,
   },
   {
-    message: "WHat a surprise...not!",
+    message: "What a surprise...not!",
     image: quitter,
   },
   // Add more goodbye messages and corresponding images as needed
