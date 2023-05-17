@@ -1,17 +1,18 @@
 import React, { useState } from "react";
-// import './SignUpForm.css';
+import './UserForm.css';
 
 const UserForm = ({ navigate }) => {
   const [email, setEmail] = useState("");
-//   const [password, setPassword] = useState("");
-//   const [firstName, setfirstName] = useState("");
-//   const [lastName, setlastName] = useState("");
-const [successMessage, setSuccessMessage] = useState("");
+  const [password, setPassword] = useState("");
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
+  const [successMessage, setSuccessMessage] = useState("");
+  const [responseStatus, setResponseStatus] = useState(null); 
 
   const handleSubmit = async (event) => {
     event.preventDefault();
 
-   console.log(window.localStorage.getItem("token"));
+  console.log(window.localStorage.getItem("token"));
 
     fetch("/userUpdatesRoute", {
       method: "put",
@@ -20,17 +21,17 @@ const [successMessage, setSuccessMessage] = useState("");
       },
       body: JSON.stringify({
         email: email,
-        // password: password,
-        // firstName: firstName,
-        // lastName: lastName,
+        password: password,
+        firstName: firstName,
+        lastName: lastName,
       }),
     }).then((response) => {
         console.log(response.status);
       if (response.status === 200) {
-        setSuccessMessage("Email updated successfully.");
+        setSuccessMessage("Your changes have been updated successfully.");
         navigate("/profile/");
       } else {
-        setSuccessMessage("Email did not update, please try again.");
+        setSuccessMessage("Changes failed, please try again.");
         navigate("/signup");
       }
     });
@@ -40,17 +41,17 @@ const [successMessage, setSuccessMessage] = useState("");
     setEmail(event.target.value);
   };
 
-//   const handlePasswordUpdate = (event) => {
-//     setPassword(event.target.value);
-//   };
+  const handlePasswordUpdate = (event) => {
+    setPassword(event.target.value);
+  };
 
-//   const handlefirstNameUpdate = (event) => {
-//     setfirstName(event.target.value);
-//   };
+  const handleFirstNameUpdate = (event) => {
+    setFirstName(event.target.value);
+  };
 
-//   const handlelastNameUpdate = (event) => {
-//     setlastName(event.target.value);
-//   };
+  const handleLastNameUpdate = (event) => {
+    setLastName(event.target.value);
+  };
 
   return (
     <form onSubmit={handleSubmit}>
@@ -69,19 +70,19 @@ const [successMessage, setSuccessMessage] = useState("");
             onChange={handleEmailUpdate}
           />
         </div>
-        {/* <div class="password-box-space">
+         <div class="password-box-space">
           <input
             placeholder="Password"
             id="password"
             type="password"
             value={password}
             onChange={handlePasswordUpdate}
-          /> */}
-        {/* </div> */}
+          /> 
+        </div> 
       </div>
     </div>
 
-    {/* <div class="form-group">
+    <div class="form-group">
       <div class="aligned-names">
         <div class="first-name-box-space">
           <input
@@ -89,7 +90,7 @@ const [successMessage, setSuccessMessage] = useState("");
             id="firstName"
             type="text"
             value={firstName}
-            onChange={handlefirstNameUpdate}
+            onChange={handleFirstNameUpdate}
           />
         </div>
         <div class="last-name-box-space">
@@ -98,18 +99,23 @@ const [successMessage, setSuccessMessage] = useState("");
             id="lastName"
             type="text"
             value={lastName}
-            onChange={handlelastNameUpdate}
+            onChange={handleLastNameUpdate}
           />
         </div>
       </div>
-    </div> */}
+    </div>
 
     <div class="form-group">
       <input id="submit" type="submit" value="Submit" />
     </div>
     {successMessage && (
-        <div className="success-message">{successMessage}</div>
-      )}
+        <div
+          className={`success-message ${responseStatus === 200 ? 'ok' : 'error'}`}
+        >
+          {successMessage}
+        </div>
+)}
+
   </form>
   );
 };

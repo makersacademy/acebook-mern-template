@@ -8,9 +8,9 @@ describe("update user details", () => {
     cy.intercept('PUT', '/userUpdatesRoute', { message: "OK" }).as("userUpdate")
 
     cy.get("#email").type("someone@example.com");
-    // cy.get("#password").type("password");
-    // cy.get("#firstName").type("firstName");
-    // cy.get("#lastName").type("lastName");
+    cy.get("#password").type("password");
+    cy.get("#firstName").type("firstName");
+    cy.get("#lastName").type("lastName");
     cy.get("#submit").click();
     cy.wait('@userUpdate').then( interception => {
       expect(interception.response.body.message).to.eq("OK")
