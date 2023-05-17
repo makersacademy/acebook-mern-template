@@ -6,6 +6,7 @@ import "./Feed.css";
 const Feed = ({ navigate }) => {
   const [posts, setPosts] = useState([]);
   const [token, setToken] = useState(window.localStorage.getItem("token"));
+  window.localStorage.setItem("app-route", "feed")
 
   function orderByDate (posts) {
     return posts.sort((a,b) => new Date(a.createdAt) - new Date(b.createdAt)).reverse()

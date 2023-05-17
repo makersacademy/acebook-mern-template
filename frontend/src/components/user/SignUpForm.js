@@ -6,6 +6,7 @@ const SignUpForm = ({ navigate }) => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [errors, setErrors] = useState([]); //  'Invalid email address!'
+  window.localStorage.setItem("app-route", "signup")
 
   const handleSubmit = async (event) => {
     event.preventDefault();

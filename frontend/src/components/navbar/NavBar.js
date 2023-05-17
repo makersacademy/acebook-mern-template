@@ -34,21 +34,15 @@ const Navbar = ({ navigate }) => {
     contextButton = <div className="nav-item" onClick={logout}>
       <a href="/login">Logout</a>
     </div>
-    // } else if (in login page) {
-    //   contextButton = <div className="nav-item">
-    //                     <a href="/signup">Sign up</a>
-    //                   </div>
-    // } else if (in signup page) {
-    //   contextButton = <div className="nav-item">
-    //                     <a href="/login">Login</a>
-    //                   </div>
-    // }
-  } else {
-    contextButton = <div className="nav-item">
-                      <a href="/login">Login</a>
-                      <a href="/signup">Sign up</a>
-                    </div>
-  }
+    } else if (window.localStorage.getItem("app-route") === "login") {
+      contextButton = <div className="nav-item">
+                        <a href="/signup">Sign up</a>
+                      </div>
+    } else if (window.localStorage.getItem("app-route") === "signup") {
+      contextButton = <div className="nav-item">
+                        <a href="/login">Login</a>
+                      </div>
+    }
   
     return (
       <nav>

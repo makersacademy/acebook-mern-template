@@ -5,6 +5,7 @@ import "./LoginForm.css";
 const LogInForm = ({ navigate }) => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  window.localStorage.setItem("app-route", "login")
 
   const handleSubmit = async (event) => {
     event.preventDefault();
