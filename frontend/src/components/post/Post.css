@@ -1,0 +1,18 @@
+.user-profile-picture {
+  width: 50px; /* Adjust the size as needed */
+  height: 50px;
+  border-radius: 50%;
+  overflow: hidden;
+  margin-right: 10px;
+}
+
+.user-profile-picture img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* Adjust the object-fit property as needed */
+}
+
+.user-info {
+  display: flex;
+  align-items: center;
+}

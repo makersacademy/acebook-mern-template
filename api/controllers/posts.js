@@ -1,4 +1,5 @@
 const Post = require("../models/post");
+
 const TokenGenerator = require("../models/token_generator");
 
 const PostsController = {
@@ -13,7 +14,7 @@ const PostsController = {
       // likedBy array is the list of users who already liked the post
       posts.forEach(post => {
         if (post.likedBy.includes(req.user_id)) {post._doc.didUserLikeThis = true;}})
-      res.status(200).json({ posts: posts, token: token });    
+      res.status(200).json({ posts: posts, token: token });
     }));
   },
   Create: (req, res) => {
