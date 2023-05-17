@@ -20,6 +20,8 @@
     "test:unit": "cypress run --component",
     "test:feature": "cypress run",
     "test:single": "cypress run --component --spec",
+    "test:e2esingle": "cypress run --spec",
+
     "eject": "react-scripts eject"
   },
   "eslintConfig": {
