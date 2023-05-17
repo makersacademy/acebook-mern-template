@@ -1,26 +1,34 @@
-import React from 'react';
-import AddComment from '../AddComment/AddComment';
-import Comment from '../comment/Comment';
-import './Post.css';
+import React from "react";
+import AddComment from "../AddComment/AddComment";
+import Comment from "../comment/Comment";
+import "./Post.css";
+import Avatar from "@mui/material/Avatar";
 
-const Post = ({post}) => {
+const Post = ({ post }) => {
   return (
-    <div className='postbox postflex'>
+ 
+    <div className="postbox postflex">
+      <Avatar
+        alt="Remy Sharp"
+        src="https://res.cloudinary.com/dmkipvd8d/image/upload/v1684273799/_124800859_gettyimages-817514614_dfpybm.jpg"
+        sx={{ width: 56, height: 56 }}
+      />
       <article data-cy="post" key={post._id}>
-      <p className="post-text">{post.message}</p>
-        <p className="time-text">Posted at {post.createdAt.slice(11, 16)} on {post.createdAt.slice(0, 10)} by {post.author}</p>
+        <p className="post-text">{post.message}</p>
+        { <p className="time-text">
+          Posted at {post.createdAt.slice(11, 16)} on{" "}
+          {post.createdAt.slice(0, 10)} by {post.author}
+        </p> }
         <div className="break-line"></div>
-        {post.comments.map(
-          (comment, index) => ( <Comment comment={comment} key={index} />)
-        )}
+        {post.comments.map((comment, index) => (
+          <Comment comment={comment} key={index} />
+        ))}
         <div className="add-comment">
-          <AddComment post={ post } />
+          <AddComment post={post} />
         </div>
-      
-    </article>
+      </article>
     </div>
-    
-  )
-}
+  );
+};
 
 export default Post;
