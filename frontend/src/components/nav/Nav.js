@@ -26,6 +26,7 @@ const logout = () => {
           <div className="nav-box">
             <h1>Title</h1>
             <NavButton to="/posts" value="Posts"/>
+            <NavButton to="/account" value="Your Account"/>
 
             <button className="logout-button" onClick={logout}>Logout</button>
           </div>

@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import EditAccountButton from '../edit-account/EditAccountButton';
 
 const Account = () => {
   const [user, setUser] = useState({});
@@ -6,9 +7,7 @@ const Account = () => {
 
   useEffect(() => {
     if(token) {
-      const userId = user._id;
-      console.log(userId)
-      fetch(`/users?userId=${userId}`, {
+      fetch("/accounts", {
         headers: {
           'Authorization': `Bearer ${token}`
         }
@@ -22,10 +21,6 @@ const Account = () => {
     }
   }, [])
 
-  // get request to get the user's info
-
-  // display user info below
-
   // one edit button takes you to an edit account component
 
   return(
@@ -37,6 +32,7 @@ const Account = () => {
       )}
 
       <h3 className="user-name">{ user.userName }</h3>
+      <EditAccountButton />
       <h3 className="user-email">{ user.email }</h3>
       <h3 className="user-password">{ user.password }</h3>
       <button id="edit-account-button">Edit account</button>
