@@ -3,6 +3,7 @@ const express = require("express");
 const path = require("path");
 const logger = require("morgan");
 const JWT = require("jsonwebtoken");
+const Comment = require("./models/comment");
 
 const postsRouter = require("./routes/posts");
 const tokensRouter = require("./routes/tokens");

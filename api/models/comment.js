@@ -6,5 +6,6 @@ const CommentSchema = new mongoose.Schema({
 })
 
 const Comment = mongoose.model("Comment", CommentSchema);
+// const comment = new Comment({message:'First Comment'}).save() test for commenting
 
-module.exports = CommentSchema;
+module.exports = {Comment:Comment, CommentSchema:CommentSchema};
