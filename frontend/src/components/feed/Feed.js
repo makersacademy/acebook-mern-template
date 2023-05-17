@@ -46,19 +46,10 @@ const Feed = ({ navigate }) => {
     return 0;
   }
 
-  const logout = () => {
-    window.localStorage.removeItem("token")
-    setLoggedIn(false)
-    navigate('/login')
-  }
-
   if(token) {
     return(
       <>
         <h2>Posts</h2>
-          <button onClick={logout}>
-            Logout
-          </button>
 
         <div className="new-post-form">
           < NewPostForm toggleRefresh={toggleRefresh}/>
