@@ -63,6 +63,7 @@ article {
 .comments {
   background-color: rgba(128, 128, 128, 0.103);
   padding: 8px;
+  margin-bottom: 10px;
 }
 
 .comment-name {
