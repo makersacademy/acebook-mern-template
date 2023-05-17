@@ -3,6 +3,7 @@ const request = require("supertest");
 require("../mongodb_helper");
 const User = require("../../models/user");
 const TokenGenerator = require("../../models/token_generator");
+const Post = require("../../models/post");
 
 describe("User Updates", () => {
   let user; // user variable declared at top level so anything below it can use it via the below hook
@@ -11,6 +12,7 @@ describe("User Updates", () => {
   beforeEach(async () => {
     //runs literally before each 'it' test
     await User.deleteMany({}); // deletes everything before each test run
+    await Post.deleteMany({});
 
     user = new User({
       //creates a new user that will be used in every single test, as declared by let user;
@@ -23,6 +25,12 @@ describe("User Updates", () => {
 
     new_token = TokenGenerator.jsonwebtoken(user._id)
   });
+
+  beforeEach(async () => {   // creates a post with a comment by the pre-defined user
+post = new Post ({
+
+})
+  })
 
   describe("when updating only the first name", () => {
     const updatedFields = {
