@@ -1,31 +1,16 @@
 import AddComment from "./AddComment";
-
-const mockPost =
-  {
-    _id: 1, 
-    message: "Hello, world",
-    authorUserID: {
-                    username: "Cypress",
-                    _id: "mockHexUserObjectID",
-                    email: "cypress@hill.com",
-                  },
-    createdAt: "2023-05-11T14:09:31.064+00:00",
-    comments: [{comment: "fee", author: "fi"}, {comment: "fo", author: "fum"} ]
-  }
-
 describe("AddComment", () => {
   it("creates a new comment within a post", () => {
+    // simulate user being logged in
     window.localStorage.setItem("token", "fakeToken")
     
-    // cy.mount(<AddComment post={ {_id: "mockHexPostID" }} />);
-    cy.mount(<AddComment post = { _id: "mockHexPostID" } />);
+    cy.mount(<AddComment post={ {_id: "mockHexPostID" }} />);
 
-    cy.intercept('PATCH', '/posts/1', {
+    cy.intercept('PATCH', '/posts/mockHexPostID', {
       statusCode: 200,
       body: {
         comment: 'The comment under Hello FarceBook',
         author: 'testuser',
-        token: "fakeReturnedToken" // do we need to simulate the JSON response with a token?
       },
     }).as('newCommentRequest'); 
 
