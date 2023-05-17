@@ -8,6 +8,7 @@
   max-width: 500px;
   display: flex;
   flex-direction: column;
+  border-radius: 20px;
 }
 
 .name {
@@ -23,9 +24,7 @@
   font-size: x-large;
 }
 
-.like-button {
-  margin-right: 10px;
-}
+
 
 .time {
   text-align: right;
@@ -58,12 +57,14 @@ article {
   padding-bottom: 10px;
   margin-bottom: 10px;
   max-width: 500px;
+  
 }
 
 .comments {
   background-color: rgba(128, 128, 128, 0.103);
   padding: 8px;
   margin-bottom: 10px;
+  border-radius: 10px;
 }
 
 .comment-name {
@@ -78,4 +79,17 @@ article {
 .comment-time {
   text-align: right;
   font-size: small;
+}
+  .like-button {
+  background-color: rgb(0, 128, 128); /* Sets button colour */
+  margin-right: 10px;
+}
+
+.no-like-button {
+  background-color: grey; /* Sets button colour */
+}
+
+.button-container button {
+  margin: 0 5px; /* This adds 5px margin to the left and right of each button */
+  border-radius: 100px; /* This makes the buttons rounded. Change the value to increase or decrease the roundness */
 }

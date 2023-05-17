@@ -36,10 +36,13 @@ const Post = ({post, onLike, onComment}) => {
         <div className='message'> { post.message } </div>
         </div>
           <div className="button-container">
-            <button className='like-button' onClick={handleLike}>👍 | { post.like }</button>
+          <button className='like-button' onClick={handleLike} style={{ backgroundColor: post.like > 0 ? 'teal' : 'rgba(128, 128, 128, 0.103)' }}>👍 {post.like > 0 ? ` | ${post.like}` : ''}</button>
+           
+            
               <button onClick={toggleComments}>
-                { showComments ? 'Hide Comments' : `💬 | ${post.comments.length}` }
+              {post.comments.length === 0 ? '💬' : (showComments ? 'Hide Comments' : `💬 | ${post.comments.length}`)}
               </button>
+            
           </div>
         {showComments && (
         <>
