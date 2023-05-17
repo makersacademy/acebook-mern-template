@@ -5,12 +5,29 @@
   padding-bottom: 15px;
   border: solid rgb(202, 202, 202) 1px;
   margin: 6px;
+  text-decoration: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s, color 0.3s;
 }
 
+.navbutton:hover {
+  background-color: var(--primary);
+  color: white;
+}
+
+:root {
+  --primary: #3b5998;
+  --secondary: white;
+}
+
+.navbutton.clicked {
+  color: white; 
+}
 
 .nav-box h1 {
   margin-right: auto;
-  border-bottom: 2px solid black;
+  border-bottom: 1.5px solid black;
 }
 
 .nav-box a {

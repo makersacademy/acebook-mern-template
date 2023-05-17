@@ -1,35 +1,45 @@
+.post-button,
 .logout-button {
-    background-color: white;
-    padding: 22px;
-    padding-top: 15px;
-    padding-bottom: 15px;
-    border: solid rgb(202, 202, 202) 1px;
-    margin: 6px;
-    text-decoration: none;
-    border-radius: 8px;
-    cursor:pointer;
+  font-size: 15px;
+  background-color: white;
+  padding: 22px;
+  padding-top: 15px;
+  padding-bottom: 15px;
+  border: solid rgb(202, 202, 202) 1px;
+  margin: 6px;
+  text-decoration: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+.post-button,
+.logout-button:hover {
+  background-color: var(--primary);
+  color: rgb(255, 255, 255);
 }
 
 :root {
-  --primary: green;
-  --secondary: blue;
+  --primary: #3b5998;
+  --secondary: white;
 }
 
 .nav-container {
-    border: 1px solid #ccc;
-    padding: 10px;
-    background-color: #fff;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  border: 1px solid #ccc;
+  padding: 10px;
+  background-color: #fff;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .nav-box {
-    display: flex;
-    justify-content: flex-end;
-    align-items: center;
-    padding:10px;
-    max-width: 1200px;
-    margin: 0 auto;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  padding: 10px;
+  max-width: 1200px;
+  margin: 0 auto;
 }
+  
 
 
 /* .nav-bar button {
