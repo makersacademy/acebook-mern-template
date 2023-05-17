@@ -33,38 +33,29 @@ const UserUpdates = {
 
   Delete: async (req, res) => {
     const UserId = TokenDecoder.decode(req.cookies.token).user_id;
-  
+
     try {
       const deletedUser = await User.findByIdAndDelete(UserId);
-  
+
       if (!deletedUser) {
         res.status(404).json({ message: "User not found" });
         return;
       }
-  
-      await Post.updateMany(
-        { "comment.author.id": UserId },
-        {
-          $set: {
-            "comment.$[elem].author.firstName": "Unknown",
-            "comment.$[elem].author.lastName": "User",
-            "comment.$[elem].author.name": "Unknown User", 
-          },
-        },
-        { arrayFilters: [{ "elem.author.id": UserId }] }
-      );
-  
-      const updatedPost = await Post.findOne({ "comments.author.id": UserId });
-  
-      res.status(200).json({ message: "OK", user: deletedUser, post: updatedPost });
+
+      await Post.deleteMany({ $or: [
+        { firstName: deletedUser.firstName, lastName: deletedUser.lastName },
+        { "comments.author.id": UserId }
+      ]});
+
+      res.status(200).json({ message: "OK", user: deletedUser });
     } catch (err) {
       console.log("UserUpdates error", err);
       res.status(400).json({ message: "Bad request" });
     }
   },
-  };
-  
-  module.exports = UserUpdates;
+};
+
+module.exports = UserUpdates;
 
 
 //findByIdAndUpdate() is a standard mongoose function

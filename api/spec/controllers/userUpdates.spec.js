@@ -6,43 +6,40 @@ const TokenGenerator = require("../../models/token_generator");
 const Post = require("../../models/post");
 
 describe("User Updates", () => {
-  let user; // user variable declared at top level so anything below it can use it via the below hook
+  let user;
   let new_token;
   let post;
 
   beforeEach(async () => {
-    //runs literally before each 'it' test
-    await User.deleteMany({}); // deletes everything before each test run
+    await User.deleteMany({});
     await Post.deleteMany({});
 
     user = new User({
-      //creates a new user that will be used in every single test, as declared by let user;
       email: "daved@test.com",
       password: "5678",
       firstName: "Dave",
       lastName: "David",
     });
-    await user.save(); //saves newly created user
+    await user.save();
 
-    new_token = TokenGenerator.jsonwebtoken(user._id)
+    new_token = TokenGenerator.jsonwebtoken(user._id);
 
-    post = new Post ({
+    post = new Post({
       message: 'Test post',
       comments: [
         {
           comment: "Test comment for deleted user",
-          author : {
+          author: {
             id: user._id,
             name: `${user.firstName} ${user.lastName}`,
-            firstName: user.firstName, 
+            firstName: user.firstName,
             lastName: user.lastName,
           }
         }
       ]
-      })
-      await post.save();
+    });
+    await post.save();
   });
-
 
   describe("when updating only the first name", () => {
     const updatedFields = {
@@ -100,8 +97,8 @@ describe("User Updates", () => {
 
     beforeEach(async () => {
       response = await request(app)
-      .put(`/userUpdatesRoute`)
-      .set('Cookie', [`token=${new_token}`])
+        .put(`/userUpdatesRoute`)
+        .set('Cookie', [`token=${new_token}`])
         .send(updatedFields);
     });
 
@@ -123,8 +120,8 @@ describe("User Updates", () => {
 
     beforeEach(async () => {
       response = await request(app)
-      .put(`/userUpdatesRoute`)
-      .set('Cookie', [`token=${new_token}`])
+        .put(`/userUpdatesRoute`)
+        .set('Cookie', [`token=${new_token}`])
         .send(updatedFields);
     });
 
@@ -142,26 +139,19 @@ describe("User Updates", () => {
     let response;
 
     beforeEach(async () => {
-      response = await request(app).delete(`/userUpdatesRoute`)
-      .set('Cookie', [`token=${new_token}`]);
+      response = await request(app).delete(`/userUpdatesRoute`).set('Cookie', [`token=${new_token}`]);
     });
 
     it("should return status 200", async () => {
       expect(response.statusCode).toEqual(200);
     });
 
-    it("not be able to find the deleted user in database", async () => {
-      const updatedPost = await Post.findOne(post._id);
+    it("should delete the user and associated posts", async () => {
       const deletedUser = await User.findById(user._id);
-      expect(deletedUser).toBeNull();
-      expect(updatedPost.comments[0].author.name).toEqual('Unknown User');
-    });
+      const updatedPost = await Post.findOne(post._id);
 
-    // it("should still keep the post available", async () => {
-    //   const posts = await Post.find();
-    //   expect(posts.length).toEqual(1);
-    //   expect(posts[0].message).toEqual("Test post");
-    // });
+      expect(deletedUser).toBeNull();
+      expect(updatedPost).toBeNull();
+    });
   });
 });
-

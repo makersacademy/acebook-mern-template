@@ -69,9 +69,9 @@ const UserForm = ({ navigate }) => {
           setSuccessMessage("Your account has been deleted successfully.");
           setFirstName("Unknown");
           setLastName("User");
-          navigate("/posts");
+          navigate("/goodbye");
         } else {
-          setSuccessMessage("Account deletion failed, please try again.");
+          setSuccessMessage("Account deletion failed, please contact our amazing team for support!");
         }
       })
       .catch((error) => {

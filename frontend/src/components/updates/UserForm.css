@@ -59,7 +59,7 @@
     background-color: white;
   }
   
-  .error-message {
+  .success-message.error {
     /* Styles for the error message */
     display: flex;
     justify-content: center;
