@@ -60,6 +60,23 @@ const UserForm = ({ navigate }) => {
     setLastName(event.target.value);
   };
 
+  const handleDelete = () => {
+    fetch("/userUpdatesRoute", {
+      method: "delete",
+    })
+      .then((response) => {
+        if (response.status === 200) {
+          setSuccessMessage("Your account has been deleted successfully.");
+          navigate("/posts");
+        } else {
+          setSuccessMessage("Account deletion failed, please try again.");
+        }
+      })
+      .catch((error) => {
+        setSuccessMessage("Account deletion failed, please try again.");
+      });
+  };
+
   return (
     <form onSubmit={handleSubmit}>
     <div class="form-header">
@@ -122,6 +139,12 @@ const UserForm = ({ navigate }) => {
           {successMessage}
         </div>
 )}
+
+<div class="form-group">
+      <button type="button" onClick={handleDelete}>
+        Delete Account
+      </button>
+    </div>
 
   </form>
   );
