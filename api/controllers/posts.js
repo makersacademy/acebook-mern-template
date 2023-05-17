@@ -34,13 +34,15 @@ const PostsController = {
       if (err) {
         throw err;
       }
-      post.likes.push(req.body.user_id);
+      console.log(req.user_id);
+      post.likes.push(req.user_id);
 
       post.save(async (err, post) => {
         if (err) {
           throw err;
         }
-        res.status(201).json({ message: "OK", post: post });
+        const token = await TokenGenerator.jsonwebtoken(req.user_id);
+        res.status(201).json({ message: "OK", post: post, token: token });
       });
     });
   },
