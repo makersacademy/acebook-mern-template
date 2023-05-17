@@ -36,6 +36,7 @@ const UserForm = ({ navigate }) => {
       setPassword("");
       setFirstName("");
       setLastName("");
+      
       } else {
         setSuccessMessage("Changes failed, please try again.");
         navigate("/signup");
