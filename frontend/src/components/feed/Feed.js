@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import Post from '../post/Post'
+import './Feed.css';
 
 // Define a Feed component which receives a navigate prop to handle navigation.
 const Feed = ({ navigate }) => {
@@ -127,28 +128,27 @@ const Feed = ({ navigate }) => {
   
   // If token is present, render the posts feed with the ability to add a new post and logout.
   // If not, navigate to the signin page.
-  if(token) {
-    return(
-      <>
-        <h2>Posts</h2>
-        <form onSubmit={handleSubmit}>
-          <label>
-            New Post:
-            <input id="postText" type="text" value={newPost} onChange={(event) => setNewPost(event.target.value)} />
-          </label>
-          <button id="post" type="submit">Post</button>
+  if (token) {
+    return (
+      <div className="feed-container">
+        <form className="form-container" onSubmit={handleSubmit}>
+          <label htmlFor="postText">Moan here:</label>
+          <input className='input' id="postText" type="text" value={newPost} onChange={(event) => setNewPost(event.target.value)} />
+          <button className='moan-button' id="post" type="submit">Submit Moan</button>
         </form>
         <div id='feed' role="feed">
-            {posts.map(
-              (post) => ( <Post post={ post } key={ post._id } onLike={handleLike} onComment={handleComment} /> )
-            )}
+          {posts.map(
+            (post) => (<Post post={post} key={post._id} onLike={handleLike} onComment={handleComment} />)
+          )}
         </div>
-      </>
-    )
+      </div>
+    );
   } else {
-    navigate('/login')
+    navigate('/login');
+    return null;
   }
 }
 
-
 export default Feed;
+
+
