@@ -1,24 +1,95 @@
-/* Post.css */
+.post-container {
 
-.post-message {
-  margin-bottom: 20px;
+  border: 1px solid teal;
+  padding: 20px;
+  margin-bottom: 40px;
+  text-align: center;
+  min-width: 500px;
+  max-width: 500px;
+  display: flex;
+  flex-direction: column;
+  border-radius: 20px;
+}
+
+.name {
+  text-align: left;
+  margin-right: 10px;
+  font-size: small;
+
+}
+
+.message {
+  margin-top: 40px;
+  margin-bottom: 40px;
+  font-size: x-large;
+}
+
+
+
+.time {
+  text-align: right;
+}
+
+/* Center the posts on the page */
+article {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+ 
 }
 
 .button-container {
-  display: flex;
-  justify-content: flex-start;  /* aligns buttons to the left */
+  border-top: solid;
+  border-bottom: solid;
+  border-style: ridge;
+  border-left: none;
+  border-right: none;
+  padding: 5px;
   margin-bottom: 10px;
 }
 
-.button-container button {
-  margin-right: 10px;  /* adds some space between the buttons */
+.comment-container {
+  border-bottom: solid;
+  border-style: ridge;
+  border-top: none;
+  border-left: none;
+  border-right: none;
+  padding-bottom: 10px;
+  margin-bottom: 10px;
+  max-width: 500px;
+  
 }
 
-.like-button {
+.comments {
+  background-color: rgba(128, 128, 128, 0.103);
+  padding: 8px;
+  margin-bottom: 10px;
+  border-radius: 10px;
+}
+
+.comment-name {
+  text-align: left;
+}
+
+.comment-comment {
+ margin-left: 10px;
+ margin-top: 10px;
+}
+
+.comment-time {
+  text-align: right;
+  font-size: small;
+}
+  .like-button {
   background-color: rgb(0, 128, 128); /* Sets button colour */
+  margin-right: 10px;
 }
 
 .no-like-button {
   background-color: grey; /* Sets button colour */
+}
 
+.button-container button {
+  margin: 0 5px; /* This adds 5px margin to the left and right of each button */
+  border-radius: 100px; /* This makes the buttons rounded. Change the value to increase or decrease the roundness */
 }
