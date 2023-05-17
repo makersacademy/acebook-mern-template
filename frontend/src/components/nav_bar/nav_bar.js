@@ -56,7 +56,7 @@ const Navigation = () => {
             </div>
             {isOpen && (
             <div className="dropdown-content">
-              <button className="dropdown-item">Profile Settings</button>
+              <button className="dropdown-item" onClick={handleProfileClick}>Profile Settings</button>
               <div>
                 <button className='dropdown-logout' onClick={logout}>Logout</button>
               </div>
