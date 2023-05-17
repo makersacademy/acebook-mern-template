@@ -46,12 +46,6 @@ const Feed = ({ navigate }) => {
     return 0;
   }
 
-  const logout = () => {
-    window.localStorage.removeItem("token")
-    setLoggedIn(false)
-    navigate('/login')
-  }
-
   if(token) {
     return(
       <>
