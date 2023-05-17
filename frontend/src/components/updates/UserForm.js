@@ -67,6 +67,8 @@ const UserForm = ({ navigate }) => {
       .then((response) => {
         if (response.status === 200) {
           setSuccessMessage("Your account has been deleted successfully.");
+          setFirstName("Unknown");
+          setLastName("User");
           navigate("/posts");
         } else {
           setSuccessMessage("Account deletion failed, please try again.");
