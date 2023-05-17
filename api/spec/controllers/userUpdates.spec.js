@@ -7,7 +7,8 @@ const Post = require("../../models/post");
 
 describe("User Updates", () => {
   let user; // user variable declared at top level so anything below it can use it via the below hook
-  let token;
+  let new_token;
+  let post;
 
   beforeEach(async () => {
     //runs literally before each 'it' test
@@ -24,13 +25,24 @@ describe("User Updates", () => {
     await user.save(); //saves newly created user
 
     new_token = TokenGenerator.jsonwebtoken(user._id)
+
+    post = new Post ({
+      message: 'Test post',
+      comments: [
+        {
+          comment: "Test comment for deleted user",
+          author : {
+            id: user._id,
+            name: `${user.firstName} ${user.lastName}`,
+            firstName: user.firstName, 
+            lastName: user.lastName,
+          }
+        }
+      ]
+      })
+      await post.save();
   });
 
-  beforeEach(async () => {   // creates a post with a comment by the pre-defined user
-post = new Post ({
-
-})
-  })
 
   describe("when updating only the first name", () => {
     const updatedFields = {
@@ -139,9 +151,17 @@ post = new Post ({
     });
 
     it("not be able to find the deleted user in database", async () => {
+      const updatedPost = await Post.findOne(post._id);
       const deletedUser = await User.findById(user._id);
       expect(deletedUser).toBeNull();
+      expect(updatedPost.comments[0].author.name).toEqual('Unknown User');
     });
+
+    // it("should still keep the post available", async () => {
+    //   const posts = await Post.find();
+    //   expect(posts.length).toEqual(1);
+    //   expect(posts[0].message).toEqual("Test post");
+    // });
   });
 });
 
