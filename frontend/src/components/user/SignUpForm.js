@@ -56,9 +56,12 @@ const SignUpForm = ({ navigate }) => {
               Login 
       </button> */}
       <form onSubmit={handleSubmit}>
-          <input placeholder="Email" id="email" type='text' value={ email } onChange={handleEmailChange} />
-          <input placeholder="Username" id="username" type='text' value={ username } onChange={handleUsernameChange} />
-          <input placeholder="Password" id="password" type='password' value={ password } onChange={handlePasswordChange} />
+          <label for="email">Email: </label>
+          <input placeholder="Email" id="email" type='text' value={ email } onChange={handleEmailChange} /> <br />
+          <label for="username">Username: </label>
+          <input placeholder="Username" id="username" type='text' value={ username } onChange={handleUsernameChange} /> <br />
+          <label for="password">Password: </label>
+          <input placeholder="Password" id="password" type='password' value={ password } onChange={handlePasswordChange} /> <br />
         <input id='submit' type="submit" value="Submit" />
       </form>
       <div>
