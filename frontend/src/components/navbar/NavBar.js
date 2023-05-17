@@ -18,53 +18,41 @@ const Navbar = ({ navigate }) => {
         window.localStorage.removeItem("token")
         // navigate('/login')
       }
-
-      if(token) {
-        return (
-          <>
-          <nav className='nav-bar'>
-          <h2>Farcebook</h2>
-            <div className="username-format">{username}</div>
-            <div className='nav-item' onClick={logout}><a href='/login'>Logout</a></div>
-          </nav>
-          </>
-        )
-      } else {
-        return (
-          <>
-          <h2>Farcebook</h2>
-          <nav className='nav-bar'>
-            <div className='nav-item' ><a href='/login'>Login</a></div>
-            <div className='nav-item'><a href='/signup'>Sign up</a></div>
-          </nav>
-          </>
-        )
-      }
     }
     setUsername(window.localStorage.getItem("username"));
   }, [window.localStorage.getItem("token")]);
 
+  
   const logout = () => {
-    window.localStorage.removeItem("token");
-    // navigate('/login')
-  };
-
+      window.localStorage.removeItem("token");
+      //navigate('/login')
+    };
+    
+  let contextButton;
+  
   if (token) {
-    return (
-      <>
-        <nav className="nav-bar">
-          <h2>Farcebook</h2>
-          <div className="username-format">{username}</div>
-          <div className="nav-item" onClick={logout}>
-            <a href="/logout">Logout</a>
-          </div>
-        </nav>
-      </>
-    );
+    contextButton = <div className="nav-item" onClick={logout}>
+      <a href="/login">Logout</a>
+    </div>
+    // } else if (in login page) {
+    //   contextButton = <div className="nav-item">
+    //                     <a href="/signup">Sign up</a>
+    //                   </div>
+    // } else if (in signup page) {
+    //   contextButton = <div className="nav-item">
+    //                     <a href="/login">Login</a>
+    //                   </div>
+    // }
   } else {
+    contextButton = <div className="nav-item">
+                       <a href="/login">Login</a>
+                       <a href="/signup">Sign up</a>
+                    </div>
+  }
+  
     return (
       <nav>
-        <div className="navbar">
+        <div className="nav-bar">
         <div className="nav-left">
         <Avatar
           alt="Remy Sharp"
@@ -74,19 +62,12 @@ const Navbar = ({ navigate }) => {
         
         <h1 className="title">Farcebook</h1>
         </div>
-        
-        <div className="nav-bar">
-          <div className="nav-item">
-            <a href="/login">Login</a>
-          </div>
-          <div className="nav-item">
-            <a href="/signup">Sign up</a>
-          </div>
+          <>
+           { contextButton }
+          </>
         </div>
-        </div>
-        
       </nav>
     );
   }
-};
+// };
 export default Navbar;
