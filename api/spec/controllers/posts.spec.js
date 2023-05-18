@@ -5,12 +5,15 @@ const Post = require('../../models/post');
 const User = require('../../models/user');
 const JWT = require("jsonwebtoken");
 const secret = process.env.JWT_SECRET;
+var mongoose = require("mongoose");
 
 let token;
 
+const mockUserID = new mongoose.Types.ObjectId();
+
 describe("/posts", () => {
   beforeAll( async () => {
-    const user = new User({email: "test@test.com", password: "12345678"});
+    const user = new User({email: "test@test.com", password: "12345678", username: "test_username", _id: mockUserID });
     await user.save();
 
     token = JWT.sign({
@@ -48,6 +51,28 @@ describe("/posts", () => {
       let posts = await Post.find();
       expect(posts.length).toEqual(1);
       expect(posts[0].message).toEqual("hello world");
+    });
+
+    test("add one like in an existing post", async () => {
+      // test setup: create a post
+      await request(app)
+        .post("/posts")
+        .set("Authorization", `Bearer ${token}`)
+        .send({ message: "hello world", token: token });
+      let posts = await Post.find();
+
+      await request(app)
+        .patch("/posts/likes")
+        .set("Authorization", `Bearer ${token}`)
+        .send({article_id: posts[0]._id, username: "test_username"});
+
+      let updatedPosts = await Post.find();
+      //testing if the likes array has one element
+      expect(updatedPosts[0].likes.length).toEqual(1);
+      //testing if the user id is added to the likes array
+      expect(updatedPosts[0].likes[0]).toEqual("test_username");
+
+     
     });
   
     test("returns a new token", async () => {
@@ -87,8 +112,8 @@ describe("/posts", () => {
 
   describe("GET, when token is present", () => {
     test("returns every post in the collection", async () => {
-      let post1 = new Post({message: "howdy!"});
-      let post2 = new Post({message: "hola!"});
+      let post1 = new Post({message: "howdy!", authorUserID: mockUserID });
+      let post2 = new Post({message: "hola!", authorUserID: mockUserID });
       await post1.save();
       await post2.save();
       let response = await request(app)
@@ -100,8 +125,9 @@ describe("/posts", () => {
     })
 
     test("the response code is 200", async () => {
-      let post1 = new Post({message: "howdy!"});
-      let post2 = new Post({message: "hola!"});
+      // let post1 = new Post({message: "howdy!", authorUserID: "64621248d00f803f8987d21b"});
+      let post1 = new Post({message: "howdy!", authorUserID: mockUserID});
+      let post2 = new Post({message: "hola!", authorUserID: mockUserID});
       await post1.save();
       await post2.save();
       let response = await request(app)
@@ -112,8 +138,8 @@ describe("/posts", () => {
     })
 
     test("returns a new token", async () => {
-      let post1 = new Post({message: "howdy!"});
-      let post2 = new Post({message: "hola!"});
+      let post1 = new Post({message: "howdy!", authorUserID: mockUserID});
+      let post2 = new Post({message: "hola!", authorUserID: mockUserID});
       await post1.save();
       await post2.save();
       let response = await request(app)
@@ -128,8 +154,8 @@ describe("/posts", () => {
 
   describe("GET, when token is missing", () => {
     test("returns no posts", async () => {
-      let post1 = new Post({message: "howdy!"});
-      let post2 = new Post({message: "hola!"});
+      let post1 = new Post({message: "howdy!", authorUserID: mockUserID});
+      let post2 = new Post({message: "hola!", authorUserID: mockUserID});
       await post1.save();
       await post2.save();
       let response = await request(app)
@@ -138,8 +164,8 @@ describe("/posts", () => {
     })
 
     test("the response code is 401", async () => {
-      let post1 = new Post({message: "howdy!"});
-      let post2 = new Post({message: "hola!"});
+      let post1 = new Post({message: "howdy!", authorUserID: mockUserID});
+      let post2 = new Post({message: "hola!", authorUserID: mockUserID});
       await post1.save();
       await post2.save();
       let response = await request(app)
@@ -148,8 +174,8 @@ describe("/posts", () => {
     })
 
     test("does not return a new token", async () => {
-      let post1 = new Post({message: "howdy!"});
-      let post2 = new Post({message: "hola!"});
+      let post1 = new Post({message: "howdy!", authorUserID: mockUserID});
+      let post2 = new Post({message: "hola!", authorUserID: mockUserID});
       await post1.save();
       await post2.save();
       let response = await request(app)

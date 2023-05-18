@@ -1,13 +1,13 @@
 describe("Signing in", () => {
 
   before(() => {
-    cy.signup("user@email.com", "12345678")
+    cy.signup("someone@example.com", "testuser", "Password1234")
   })
 
   it("with valid credentials, redirects to '/posts'", () => {
     cy.visit("/login");
-    cy.get("#email").type("someone@example.com");
-    cy.get("#password").type("password");
+    cy.get("#username").type("testuser");
+    cy.get("#password").type("Password1234");
     cy.get("#submit").click();
 
     cy.url().should("include", "/posts");
@@ -15,7 +15,7 @@ describe("Signing in", () => {
 
   it("with missing password, redirects to '/login'", () => {
     cy.visit("/login");
-    cy.get("#email").type("someone@example.com");
+    cy.get("#username").type("testuser");
     cy.get("#submit").click();
 
     cy.url().should("include", "/login");

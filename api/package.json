@@ -7,7 +7,7 @@
   "scripts": {
     "start": "nodemon ./bin/www",
     "start:test": "MONGODB_URL='mongodb://0.0.0.0/acebook_test' npm start",
-    "test": "jest"
+    "test": "jest --runInBand"
   },
   "engines": {
     "node": ">=18.1.0"
@@ -25,6 +25,7 @@
     "mongoose": "^5.8.11",
     "morgan": "~1.9.1",
     "nodemon": "^2.0.15",
+    "styled-components": "^5.3.10",
     "superagent": "^8.0.0",
     "supertest": "^6.2.4"
   },

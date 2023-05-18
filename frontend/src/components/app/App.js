@@ -8,15 +8,21 @@ import {
   Routes,
   Route,
 } from "react-router-dom";
-
+import Navbar from '../navbar/NavBar';
 const App = () => {
     return (
-        <Routes>
-          <Route path='/posts'  element={<Feed navigate={ useNavigate() }/>}/>
-          <Route path='/login'  element={<LoginForm  navigate={ useNavigate() }/>}/>
-          <Route path='/signup' element={<SignUpForm navigate={ useNavigate() }/>}/>
-        </Routes>
+      <>
+        <Navbar />
+        <div className="app-body">
+          <Routes>
+            <Route path='/posts'  element={<Feed navigate={ useNavigate() }/>}/>
+            <Route path='/login'  element={<LoginForm  navigate={ useNavigate() }/>}/>
+            <Route path='/signup' element={<SignUpForm navigate={ useNavigate() }/>}/>
+          </Routes>
+        </div>
+      </>
     );
 }
 
 export default App;
+
