@@ -3,7 +3,7 @@ import './AddComment.css';
 
 // const Post = require('../../models/post');
 
-const AddComment = ({ post }) => {
+const AddComment = ({ post, onPostAdded }) => {
   const [comment, setComment] = useState('');
   const [token, setToken] = useState(window.localStorage.getItem("token"));
 
@@ -40,7 +40,8 @@ const AddComment = ({ post }) => {
           window.localStorage.setItem("token", data.token)
           
           setToken(window.localStorage.getItem("token"));
-          setComment("")
+          setComment("");
+          onPostAdded();
         }
       }
   }
