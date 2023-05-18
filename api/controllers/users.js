@@ -1,5 +1,6 @@
 const User = require("../models/user");
 const { validateEmail } = require("../helpers/validation");
+const { validatePassword } = require("../helpers/validation");
 
 const UsersController = {
   Create: (req, res) => { 
