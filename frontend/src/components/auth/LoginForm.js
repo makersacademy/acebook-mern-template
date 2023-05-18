@@ -42,9 +42,9 @@ const LogInForm = ({ navigate }) => {
   return (
     <div className='login-form'>
       <form onSubmit={handleSubmit}>
-      <label for="username">Username: </label>
+      <label htmlFor="username">Username: </label>
         <input placeholder="Username" id="username" type='text' value={ username } onChange={handleUsernameChange} /> <br />
-        <label for="password">Password: </label>
+        <label htmlFor="password">Password: </label>
         <input placeholder='Password' id="password" type='password' value={password} onChange={handlePasswordChange} /> <br />
         <input role='submit-button' id='submit' type="submit" value="Submit" />
       </form>
