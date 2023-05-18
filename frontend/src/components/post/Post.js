@@ -1,5 +1,7 @@
 import React from 'react';
 import Like from '../like/Like';
+import Delete from '../delete/Delete';
+
 import './Post.css';
 
 const Post = ({post}) => {
@@ -20,6 +22,7 @@ const Post = ({post}) => {
     </div>
     <article data-cy="post" key={ post._id }>{ post.message } { formattedDate } </article>
     <Like likes={post.likes} post_id={ post._id } didUserLikeThis={post.didUserLikeThis}/>
+    <Delete />
     </>
   )
 }
