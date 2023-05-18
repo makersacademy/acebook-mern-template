@@ -12,8 +12,6 @@ const Likes = ({ likes, parent }) => {
   const handleButtonClick = async (event) => {
     event.preventDefault();
     // todo: update this to `/posts/like_${parent.type}`
-    // useEffect(() => {
-
       const response = await fetch('/posts/likes', {
         method: 'PATCH',
         headers: {
@@ -32,7 +30,6 @@ const Likes = ({ likes, parent }) => {
         setLikers(data.post.likes)
         // setToken(window.localStorage.getItem("token"))
       }
-    // })
   }
 
   const userHasLiked = (likers) => {
