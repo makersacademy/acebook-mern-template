@@ -48,13 +48,13 @@ const SignUpForm = ({ navigate }) => {
 
   return (
     <form onSubmit={handleSubmit}>
-    <div class="form-header">
+    <div className="form-header">
       <p>Please complete the details below to create your account:</p>
     </div>
 
-    <div class="form-group">
-      <div class="aligned-credentials">
-        <div class="email-box-space">
+    <div className="form-group">
+      <div className="aligned-credentials">
+        <div className="email-box-space">
           <input
             placeholder="Email"
             id="email"
@@ -63,7 +63,7 @@ const SignUpForm = ({ navigate }) => {
             onChange={handleEmailChange}
           />
         </div>
-        <div class="password-box-space">
+        <div className="password-box-space">
           <input
             placeholder="Password"
             id="password"
@@ -75,9 +75,9 @@ const SignUpForm = ({ navigate }) => {
       </div>
     </div>
 
-    <div class="form-group">
-      <div class="aligned-names">
-        <div class="first-name-box-space">
+    <div className="form-group">
+      <div className="aligned-names">
+        <div className="first-name-box-space">
           <input
             placeholder="First Name"
             id="firstName"
@@ -86,7 +86,7 @@ const SignUpForm = ({ navigate }) => {
             onChange={handlefirstNameChange}
           />
         </div>
-        <div class="last-name-box-space">
+        <div className="last-name-box-space">
           <input
             placeholder="Last Name"
             id="lastName"
@@ -98,7 +98,7 @@ const SignUpForm = ({ navigate }) => {
       </div>
     </div>
 
-    <div class="form-group">
+    <div className="form-group">
       <input id="submit" type="submit" value="Submit" />
     </div>
   </form>
