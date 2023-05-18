@@ -5,7 +5,6 @@ import NavButton from '../navbutton/NavButton';
 // import logged in context as defined in App.js
 import {loggedInContext} from '../app/App';
 import { useNavigate } from "react-router";
-import Feed from "../feed/Feed";
 
 const NavBar = () => {
 
@@ -25,9 +24,9 @@ const logout = () => {
       <div className="nav-container">
           {(loggedIn ?
           <div className="nav-box">
-            <h1><i>AceBook</i></h1>
-
-            <button className="post-button" onClick={Feed}>Posts</button>
+            <h1><i>Acebook</i></h1>
+            <NavButton to="/posts" value="Posts"/>
+            <NavButton to="/account" value="Your Account"/>
             <button className="logout-button" onClick={logout}>Logout</button>
           </div>
           :
