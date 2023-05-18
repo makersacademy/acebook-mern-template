@@ -22,7 +22,7 @@ const Post = ({post, onLike, onComment}) => {
     setShowComments(!showComments);
   }
   // const imagePath = 'frontend/public/default-user-t.png';
-  const image = <img src="../../default-user-t.png" alt="Image" width="75" height="75" />;
+  const image = <img src="../../mongoose-user.png" alt="Image" width="75" height="75" />;
 
 
   return (
