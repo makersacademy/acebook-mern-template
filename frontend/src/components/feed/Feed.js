@@ -8,6 +8,8 @@ const Feed = ({ navigate }) => {
   const [token, setToken] = useState(window.localStorage.getItem("token"));
   window.localStorage.setItem("app-route", "feed")
 
+  const [showComments, setShowComments] = useState(false);  
+
   function orderByDate (posts) {
     return posts.sort((a,b) => new Date(a.createdAt) - new Date(b.createdAt)).reverse()
   }
@@ -43,7 +45,7 @@ const Feed = ({ navigate }) => {
         
         <div id='feed' role="feed">
           {posts.map(
-            (post) => ( <Post post={ post } key={ post._id } /> )
+            (post) => ( <Post post={ post } key={ post._id } showComments={showComments} setShowComments={setShowComments}/> )
           )}
         </div>
       </>

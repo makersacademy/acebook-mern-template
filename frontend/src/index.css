@@ -36,6 +36,7 @@ p {
 .input-field {
   font-family: 'Raleway';
   font-size: 1.1rem;
+  background-color: #f6f8ff;
   color: #000;
   margin: 0 8px 0 0;
   padding: 4px 8px;
@@ -55,15 +56,15 @@ p {
   font-size: 1.1rem;
   font-weight: bold;
   padding: 4px 10px;
-  background-color: #eee;
+  background-color: #1e5cbf;
   border: 1px solid #777;
   border-radius: 4px;
-  color: #777;
+  color: #fff;
 }
 
 .input-button:hover {
-  background-color: #1e5cbf;
-  color: #fff;
+  background-color: #fdd45a;
+  color: #444;
 }
 
 .add-comment {

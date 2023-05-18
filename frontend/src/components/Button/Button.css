@@ -1,0 +1,14 @@
+.btn {
+  font-family: 'Raleway';
+  font-size: 1.1rem;
+  font-weight: bold;
+  padding: 4px 10px;
+  border: 1px solid #777;
+  border-radius: 4px;
+  color: #666;
+}
+
+.btn:hover {
+  color: #000;
+}
+
