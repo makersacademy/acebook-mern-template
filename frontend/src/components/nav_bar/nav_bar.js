@@ -1,7 +1,7 @@
 import './nav_bar.css'
 import React, { useState } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
-import logo from './logo.png'
+import logo1 from './logo.png'
 
 const Navigation = () => {
   const navigate = useNavigate();
@@ -42,8 +42,8 @@ const Navigation = () => {
         {/* this is needed to centre the logo. */}
       </div>
       <div className='nav-section logo-container'>
-        <div className="logo" onClick={handleLogoClick}>
-          <img src={logo} alt="logo"></img>
+        <div className="logo1" onClick={handleLogoClick}>
+          <img src={logo1} alt="logo"></img>
         </div>
       </div>
       <div className='nav-section'>

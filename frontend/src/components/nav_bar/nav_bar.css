@@ -15,20 +15,20 @@
 }
 
 .logo-container {
-  flex: 9;  /* Increase the flex value to push right section further to the right */
+  flex: 9  /* Increase the flex value to push right section further to the right */
 }
 
-.logo img {
+.logo1 img {
   width: 200px;
+  max-width: 100%;
+  max-height: 100%;
 }
 
-.logo {
+.logo1 {
   display: flex;
   justify-content: center; /* Align logo to center */
   align-items: center;
   height: 100%; /* Set height to 100% */
-  flex: 1; /* Add flex to take up remaining space */
-
 }
 
 .dropdown-button:hover {
