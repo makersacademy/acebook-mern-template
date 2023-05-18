@@ -47,6 +47,7 @@ const SignUpForm = ({ navigate }) => {
   };
 
   return (
+    <div className="form">
     <form onSubmit={handleSubmit}>
     <div className="form-header">
       <p>Please complete the details below to create your account:</p>
@@ -102,6 +103,7 @@ const SignUpForm = ({ navigate }) => {
       <input id="submit" type="submit" value="Submit" />
     </div>
   </form>
+  </div>
   );
 };
 
