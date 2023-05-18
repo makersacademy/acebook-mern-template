@@ -8,25 +8,32 @@ const UsersController = {
        res.status(400).json({
         message: 'Invalid email address!'
       })
-    } 
-    User.findOne({ email: user.email })
-    .then((check) => {
-      if(check) {
-        res.status(400).json({
-          message: 'This Email is already in use!'
+
+      // if password is ok
+    } else if (!validatePassword(user.password)) {
+      res.status(400).json({
+        message: 'Invalid password!'
+      })
+    } else {
+        User.findOne({ email: user.email })
+        .then((check) => {
+            if (check) {
+                res.status(400).json({
+                  message: 'This Email is already in use!'
+                })
+            } else {
+              user.save((err) => {
+                if (err) {
+                  res.status(400).json({message: 'Bad request'})
+                } else {
+                  res.status(201).json({ message: 'OK' });
+                }
+              });
+          }
         })
-      } else {
-        user.save((err) => {
-        if (err) {
-          res.status(400).json({message: 'Bad request'})    
-        } else {
-          res.status(201).json({ message: 'OK' });
-        }
-      });
     }
-    })
-  
-  },
+  }
 };
+
 
 module.exports = UsersController;
