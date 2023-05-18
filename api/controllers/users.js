@@ -16,7 +16,7 @@ const UsersController = {
         res.status(201).json({ message: 'OK' });
       }
     });
-  }   
+  }
   },
 };
 
