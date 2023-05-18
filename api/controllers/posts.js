@@ -30,12 +30,11 @@ const PostsController = {
     });
   },
   AddLikes: (req, res) => {
-    Post.findById(req.body.post_id, (err, post) => {
+    Post.findById(req.body.id, (err, post) => {
       if (err) {
         throw err;
       }
-      console.log(req.user_id);
-      post.likes.push(req.user_id);
+      post.likes.push(req.body.username);
 
       post.save(async (err, post) => {
         if (err) {
