@@ -12,10 +12,14 @@ import {
 } from "react-router-dom";
 import Navigation from '../nav_bar/nav_bar';
 
+import logo from './mongoosebackground.png'
+
 
 const App = () => {
     return (
       <>
+      <div className='background'>
+      <div className='logo' />
       <Navigation />
         <Routes>
           <Route path='/posts'  element={<Feed navigate={ useNavigate() }/>}/>
@@ -25,6 +29,7 @@ const App = () => {
           <Route path='/goodbye' element={<GoodbyeForm navigate={useNavigate()} />} />
 
         </Routes>
+      </div>
       </>
     );
 }
