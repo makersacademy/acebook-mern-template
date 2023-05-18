@@ -130,7 +130,7 @@ const SignUpForm = ({ navigate }) => {
       </div>
 
       <div className="form-group">
-        <input id="submit" type="submit" value="Submit" />
+        <input id="submit" type="submit" value="Become a Moangoose" />
       </div>
 
       {showConfirmation && (

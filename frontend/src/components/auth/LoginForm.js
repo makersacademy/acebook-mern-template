@@ -56,7 +56,7 @@ const LogInForm = ({ navigate }) => {
           <input placeholder='Password' id="password" type='password' value={ password } onChange={handlePasswordChange} />
         </div>
         <div className='login-button-container'>
-          <input className='login-button' role='submit-button' id='submit' type="submit" value="Submit" />
+          <input className='login-button' role='submit-button' id='submit' type="submit" value="Login" />
         </div>
       </form>
     </div>

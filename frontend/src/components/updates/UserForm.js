@@ -151,7 +151,7 @@ const UserForm = ({ navigate }) => {
       </div>
 
       <div className="form-group">
-        <input id="submit" type="submit" value="Submit" />
+        <input id="submit" type="submit" value="Submit changes" />
       </div>
 
       <div className="form-group">
