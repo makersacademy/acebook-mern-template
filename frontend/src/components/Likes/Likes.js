@@ -12,24 +12,27 @@ const Likes = ({ likes, parent }) => {
   const handleButtonClick = async (event) => {
     event.preventDefault();
     // todo: update this to `/posts/like_${parent.type}`
-    const response = await fetch('/posts/likes', {
-      method: 'PATCH',
-      headers: {
-        'Authorization': `Bearer ${token}`,
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        'article_id': parent._id,
-        'username': username
+    // useEffect(() => {
+
+      const response = await fetch('/posts/likes', {
+        method: 'PATCH',
+        headers: {
+          'Authorization': `Bearer ${token}`,
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          'article_id': parent._id,
+          'username': username
+        })
       })
-    })
-    if (response.status !== 201) { console.log("could not add like") }
-    else {
-      let data = await response.json()
-      window.localStorage.setItem("token", data.token)
-      setLikers(data.likes)
-      // setToken(window.localStorage.getItem("token"))
-    }
+      if (response.status !== 201) { console.log("could not add like") }
+      else {
+        let data = await response.json()
+        window.localStorage.setItem("token", data.token)
+        setLikers(data.post.likes)
+        // setToken(window.localStorage.getItem("token"))
+      }
+    // })
   }
 
   const userHasLiked = (likers) => {
