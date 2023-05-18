@@ -16,11 +16,12 @@ const Likes = ({ likers, parent }) => {
         'Authorization': `Bearer ${token}`,
         'Content-Type': 'application/json',
       },
-      body: {
+      body: JSON.stringify({
         'article_id': parent._id,
-      }
+        'username': username
+      })
     })
-    if (response.status !== 200) { console.log("could not add like") }
+    if (response.status !== 201) { console.log("could not add like") }
     else {
       let data = await response.json()
       window.localStorage.setItem("token", data.token)

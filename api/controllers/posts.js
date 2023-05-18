@@ -32,12 +32,14 @@ const PostsController = {
   AddLikes: (req, res) => {
     Post.findById(req.body.article_id, (err, post) => {
       if (err) {
+        console.log('could not find post')
         throw err;
       }
       post.likes.push(req.body.username);
 
       post.save(async (err, post) => {
         if (err) {
+          console.log('could not save the updated post with a new like')
           throw err;
         }
         const token = await TokenGenerator.jsonwebtoken(req.user_id);
