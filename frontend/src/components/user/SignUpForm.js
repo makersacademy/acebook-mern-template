@@ -47,9 +47,10 @@ const SignUpForm = ({ navigate }) => {
   };
 
   return (
+    <div className="form">
     <form onSubmit={handleSubmit}>
     <div className="form-header">
-      <p>Please complete the details below to create your account:</p>
+      <p>Sign up to Moangoose:</p>
     </div>
 
     <div className="form-group">
@@ -102,6 +103,7 @@ const SignUpForm = ({ navigate }) => {
       <input id="submit" type="submit" value="Submit" />
     </div>
   </form>
+  </div>
   );
 };
 

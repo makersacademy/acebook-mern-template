@@ -27,7 +27,6 @@ const App = () => {
           <Route path='/signup' element={<SignUpForm navigate={ useNavigate() }/>}/>
           <Route path='/profile' element={<UserForm navigate={useNavigate()} />} />
           <Route path='/goodbye' element={<GoodbyeForm navigate={useNavigate()} />} />
-
         </Routes>
       </div>
       </>
