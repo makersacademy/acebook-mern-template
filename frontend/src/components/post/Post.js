@@ -7,7 +7,7 @@ import Avatar from "@mui/material/Avatar";
 import Likes from '../Likes/Likes';
 import { createGlobalStyle } from "styled-components";
 
-const Post = ({ post }) => {
+const Post = ({ post, onPostAdded }) => {
   
   const postPropsForLike = { _id: post._id, type: "post"}
 
@@ -51,13 +51,13 @@ const Post = ({ post }) => {
           
         )}  
         <div className="add-comment">
-            <AddComment post={post} />
-          </div>
+          <AddComment post={post} onPostAdded={onPostAdded}/>
+        </div>
         <div className="likes">
           <Likes likes={ post.likes } parent={postPropsForLike} />
         </div>
 
-    </article>
+    </article> 
     </div>
   );
 };

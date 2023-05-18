@@ -6,7 +6,13 @@ import "./Feed.css";
 const Feed = ({ navigate }) => {
   const [posts, setPosts] = useState([]);
   const [token, setToken] = useState(window.localStorage.getItem("token"));
+  const [postCount, setPostCount] = useState(0);
   window.localStorage.setItem("app-route", "feed")
+  const handlePostAdded = () => {
+    setPostCount(prevCount => prevCount + 1); 
+  };
+
+  const [showComments, setShowComments] = useState(false);    
 
   const [showComments, setShowComments] = useState(false);  
 
@@ -15,7 +21,7 @@ const Feed = ({ navigate }) => {
   }
 
   useEffect(() => {
-    if(token) {
+    if (token) {
       fetch("/posts", {
         headers: {
           'Authorization': `Bearer ${token}`
@@ -30,22 +36,22 @@ const Feed = ({ navigate }) => {
             post.avatar = post.authorUserID.avatar
             delete post.authorUserID
           })
-          console.log(`1st post's author set to: ${data.posts[0].author}`)
+          // console.log(`1st post's author set to: ${data.posts[0].author}`) // VISIBILITY 
           setPosts(orderByDate(data.posts));
         })
     }
-  }, [])
+  }, [postCount]);
   
   if(token) {
     return(
       <>
         <div className="add-posts">
-          <AddPost />
+          <AddPost onPostAdded={handlePostAdded}/>
         </div>
         
         <div id='feed' role="feed">
           {posts.map(
-            (post) => ( <Post post={ post } key={ post._id } showComments={showComments} setShowComments={setShowComments}/> )
+            (post) => ( <Post post={ post } key={ post._id } onPostAdded={handlePostAdded} showComments={showComments} setShowComments={setShowComments}/> )
           )}
         </div>
       </>
