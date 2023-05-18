@@ -21,18 +21,23 @@ const Post = ({post, onLike, onComment}) => {
   const toggleComments = () => {
     setShowComments(!showComments);
   }
+  // const imagePath = 'frontend/public/default-user-t.png';
+  const image = <img src="../../default-user-t.png" alt="Image" width="75" height="75" />;
+
 
   return (
     <article data-cy="post" key={ post._id }>
       <div className='post-container'>
         <div className='name-container'>
           <div className='name'> 
+          <div className='post-image'> { image }</div>
             { post.firstName + " "} 
             { post.lastName} 
             
           </div>
         </div>
         <div className='message-container'>
+        {/* <div className='post-image'> { image }</div> */}
         <div className='message'> { post.message } </div>
         </div>
           <div className="button-container">
