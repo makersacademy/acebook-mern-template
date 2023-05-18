@@ -1,7 +1,8 @@
 import './nav_bar.css';
 import React, { useState } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
-import logo1 from './logo.png';
+import logo1 from './moan-name.png'
+import logo2 from './moan-mongoose.png'
 
 const Navigation = () => {
   const navigate = useNavigate();
@@ -42,8 +43,9 @@ const Navigation = () => {
     <div className='navbar-container'>
       <div className='nav-section'></div>
       <div className='nav-section logo-container'>
-        <div className={`logo1 ${token ? 'logo-spin' : ''}`} onClick={handleLogoClick}>
-          <img src={logo1} alt="logo" />
+        <div id="container" className="logo-container" onClick={handleLogoClick}>
+          <img src={logo1} alt="logo1" className="logo1"></img>
+          <img src={logo2} alt="logo2" className="logo2"></img>
         </div>
       </div>
       <div className='nav-section'>
