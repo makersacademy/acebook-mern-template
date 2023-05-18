@@ -6,6 +6,7 @@ const SignUpForm = ({ navigate }) => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [errors, setErrors] = useState([]); //  'Invalid email address!'
+  window.localStorage.setItem("app-route", "signup")
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -50,11 +51,7 @@ const SignUpForm = ({ navigate }) => {
 
 
   return (
-    <>
-      <h2>Sign up</h2>
-      {/* <button onClick={login}>
-              Login 
-      </button> */}
+    <div className='login-form'>
       <form onSubmit={handleSubmit}>
           <label for="email">Email: </label>
           <input placeholder="Email" id="email" type='text' value={ email } onChange={handleEmailChange} /> <br />
@@ -67,7 +64,7 @@ const SignUpForm = ({ navigate }) => {
       <div>
         {errors}
       </div>
-      </>
+      </div>
     );
 }
 

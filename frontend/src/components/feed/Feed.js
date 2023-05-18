@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import Post from '../post/Post';
 import AddPost from '../AddPost/AddPost';
+import "./Feed.css";
 
 const Feed = ({ navigate }) => {
   const [posts, setPosts] = useState([]);
   const [token, setToken] = useState(window.localStorage.getItem("token"));
+  window.localStorage.setItem("app-route", "feed")
 
   function orderByDate (posts) {
     return posts.sort((a,b) => new Date(a.createdAt) - new Date(b.createdAt)).reverse()
@@ -34,8 +36,10 @@ const Feed = ({ navigate }) => {
   if(token) {
     return(
       <>
-        <h2>Posts</h2>
-        <AddPost />
+        <div className="add-posts">
+          <AddPost />
+        </div>
+        
         <div id='feed' role="feed">
           {posts.map(
             (post) => ( <Post post={ post } key={ post._id } /> )

@@ -1,4 +1,5 @@
 .postbox {
+  background-color: #fff;
   font-family: 'Raleway';
   border: 1px solid #bbb;
   padding: 15px;
@@ -33,4 +34,10 @@
   min-height: 1px;
   width: 100%;
   margin: 10px auto;
+}
+
+.post-avatar {
+  border-radius: 50%;
+  margin-right: 10px;
+  border: 1px solid #777;
 }
