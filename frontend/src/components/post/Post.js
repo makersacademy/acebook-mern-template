@@ -8,6 +8,10 @@ const Post = ({post}) => {
   var date = new Date(post.createdDateTime);
   var formattedDate = date.toUTCString()
 
+  const toggleRefresh = () => {
+    console.log('clicked!')
+  }
+
   return(
     <>
     <div className="user-info">
@@ -22,7 +26,7 @@ const Post = ({post}) => {
     </div>
     <article data-cy="post" key={ post._id }>{ post.message } { formattedDate } </article>
     <Like likes={post.likes} post_id={ post._id } didUserLikeThis={post.didUserLikeThis}/>
-    <Delete />
+    <Delete post_id={ post._id} toggleRefresh={toggleRefresh}/>
     </>
   )
 }
