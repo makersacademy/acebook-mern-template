@@ -4,17 +4,25 @@ import "./UserForm.css";
 const UserForm = ({ navigate }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [successMessage, setSuccessMessage] = useState("");
-  const [responseStatus, setResponseStatus] = useState(null);
+  const [passwordsMatchError, setPasswordsMatchError] = useState(false);
   const [showPopup, setShowPopup] = useState(false);
+  const [showConfirmation, setShowConfirmation] = useState(false);
 
-  const handleSubmit = async (event) => {
+  const handleSubmit = (event) => {
     event.preventDefault();
 
-    console.log(window.localStorage.getItem("token"));
+    if (password !== "") {
+        setShowConfirmation(true);
+    } else {
+      submitForm();
+    }
+  };
 
+  const submitForm = () => {
     fetch("/userUpdatesRoute", {
       method: "put",
       headers: {
@@ -26,20 +34,24 @@ const UserForm = ({ navigate }) => {
         firstName: firstName,
         lastName: lastName,
       }),
-    }).then((response) => {
-      console.log(response.status);
-      if (response.status === 200) {
-        setSuccessMessage("Your changes have been updated successfully.");
+    })
+      .then((response) => {
+        console.log(response.status);
+        if (response.status === 200) {
+          setSuccessMessage("Your changes have been updated successfully.");
 
-        // Clear the input fields
-        setEmail("");
-        setPassword("");
-        setFirstName("");
-        setLastName("");
-      } else {
+          // Clear the input fields
+          setEmail("");
+          setPassword("");
+          setFirstName("");
+          setLastName("");
+        } else {
+          setSuccessMessage("Changes failed, please try again.");
+        }
+      })
+      .catch((error) => {
         setSuccessMessage("Changes failed, please try again.");
-      }
-    });
+      });
   };
 
   const handleEmailUpdate = (event) => {
@@ -58,12 +70,25 @@ const UserForm = ({ navigate }) => {
     setLastName(event.target.value);
   };
 
+  const handleConfirm = () => {
+    if (confirmPassword === password) {
+        setShowConfirmation(false);
+      setPasswordsMatchError(false); // Reset error state when passwords match
+      submitForm();
+    } else {
+      setPasswordsMatchError(true);
+    }
+  };
+
+  const handleCancel = () => {
+    setShowConfirmation(false);
+  };
+
   const handleDelete = () => {
     setShowPopup(true);
   };
 
   const handlePopupOK = () => {
-    // Handle OK button click
     window.localStorage.removeItem("token");
 
     fetch("/userUpdatesRoute", {
@@ -75,7 +100,7 @@ const UserForm = ({ navigate }) => {
           navigate("/goodbye");
         } else {
           setSuccessMessage(
-            "Account deletion failed, please contact our amazing team for support!"
+            "Account deletion failed, please contact our support team!"
           );
         }
       })
@@ -87,7 +112,6 @@ const UserForm = ({ navigate }) => {
   };
 
   const handlePopupCancel = () => {
-    // Handle Cancel button click
     setShowPopup(false);
   };
 
@@ -185,6 +209,31 @@ const UserForm = ({ navigate }) => {
             </div>
           </div>
         </div>
+      )}
+
+{showConfirmation && (
+      <div className="confirmation-popup">
+        <input
+          placeholder="Confirm Password"
+          id="confirmPassword"
+          type="password"
+          value={confirmPassword}
+          onChange={(e) => setConfirmPassword(e.target.value)}
+          required
+          className={passwordsMatchError ? "error" : ""}
+        />
+        {passwordsMatchError && (
+          <p className="error-message">Passwords don't match</p>
+        )}
+        <div className="confirmation-buttons">
+          <button type="button" onClick={handleConfirm}>
+            Confirm
+          </button>
+          <button type="button" onClick={handleCancel}>
+            Cancel
+          </button>
+        </div>
+      </div>
       )}
     </form>
   );
