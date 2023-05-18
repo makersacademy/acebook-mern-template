@@ -1,6 +1,7 @@
 import React, { useEffect, useState, useContext, createContext} from 'react';
 import Post from '../post/Post'
 import {loggedInContext} from '../app/App'
+import './Feed.css';
 
 import NewPostForm from '../new-post/NewPostForm'
 
@@ -57,7 +58,7 @@ const Feed = ({ navigate }) => {
         <h2>Posts</h2>
 
         <div className="new-post-form">
-          < NewPostForm toggleRefresh={toggleRefresh}/>
+          < NewPostForm toggleRefresh={toggleRefresh}/><br></br>
         </div>
 
         <div id='feed' role="feed">

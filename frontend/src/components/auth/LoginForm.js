@@ -47,7 +47,7 @@ const LogInForm = ({ navigate }) => {
 
   return (
     <>
-      <div className="centered-box">
+      <div className="login-form">
         <h1>Login</h1><br></br> 
         <p>Please enter your login details.</p><br></br>
         <form onSubmit={handleSubmit}>
