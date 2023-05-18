@@ -65,6 +65,7 @@ article {
   padding: 8px;
   margin-bottom: 10px;
   border-radius: 10px;
+  border-width: 1px;
 }
 
 .comment-name {
@@ -74,6 +75,7 @@ article {
 .comment-comment {
  margin-left: 10px;
  margin-top: 10px;
+ border-width: 1px;
 }
 
 .comment-time {
@@ -83,13 +85,38 @@ article {
   .like-button {
   background-color: rgb(0, 128, 128); /* Sets button colour */
   margin-right: 10px;
+  border-width: 1px;
 }
 
 .no-like-button {
   background-color: grey; /* Sets button colour */
+  border-width: 1px;
 }
 
 .button-container button {
   margin: 0 5px; /* This adds 5px margin to the left and right of each button */
   border-radius: 100px; /* This makes the buttons rounded. Change the value to increase or decrease the roundness */
+}
+
+.comment-button {
+  border-width: 1px;
+  border-radius: 100px
+}
+
+.comment-form button {
+  border-width: 1px;
+  border-radius: 100px
+}
+
+.comment-form {
+  background-color: rgba(0, 128, 128, 0.096);
+  padding: 10px;
+  border-radius: 10px;
+}
+
+.comment-form input {
+  border-radius: 10px;
+  margin-right: 10px;
+  min-width: 300px;
+  min-height: 30px;
 }

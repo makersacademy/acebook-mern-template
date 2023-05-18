@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React, { useState } from 'react';
+import './LoginForm.css';
 
 const LogInForm = ({ navigate }) => {
   const [email, setEmail] = useState("");
@@ -44,25 +45,22 @@ const LogInForm = ({ navigate }) => {
     setPassword(event.target.value);
   };
 
+
   return (
-    <form onSubmit={handleSubmit}>
-      <input
-        placeholder="Email"
-        id="email"
-        type="text"
-        value={email}
-        onChange={handleEmailChange}
-      />
-      <input
-        placeholder="Password"
-        id="password"
-        type="password"
-        value={password}
-        onChange={handlePasswordChange}
-      />
-      <input role="submit-button" id="submit" type="submit" value="Submit" />
-    </form>
-  );
-};
+    <div className='login-container'>
+      <form className='login-form' onSubmit={handleSubmit}>
+        <div className='form-input'>
+          <input placeholder='Email' id="email" type='text' value={ email } onChange={handleEmailChange} />
+        </div>
+        <div className='form-input'>
+          <input placeholder='Password' id="password" type='password' value={ password } onChange={handlePasswordChange} />
+        </div>
+        <div className='login-button-container'>
+          <input className='login-button' role='submit-button' id='submit' type="submit" value="Submit" />
+        </div>
+      </form>
+    </div>
+  );  
+}
 
 export default LogInForm;

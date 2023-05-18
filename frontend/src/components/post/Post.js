@@ -39,7 +39,7 @@ const Post = ({post, onLike, onComment}) => {
           <button className='like-button' onClick={handleLike} style={{ backgroundColor: post.like > 0 ? 'teal' : 'rgba(128, 128, 128, 0.103)' }}>👍 {post.like > 0 ? ` | ${post.like}` : ''}</button>
            
             
-              <button onClick={toggleComments}>
+              <button className='comment-button' onClick={toggleComments}>
               {post.comments.length === 0 ? '💬' : (showComments ? 'Hide Comments' : `💬 | ${post.comments.length}`)}
               </button>
             
@@ -61,9 +61,8 @@ const Post = ({post, onLike, onComment}) => {
                 </div>
               </div>
             )}
-          <form onSubmit={handleComment}>
+          <form className='comment-form' onSubmit={handleComment}>
             <label>
-              {'New Comment: '}
               <input type="text" value={newComment} onChange={(event) => setNewComment(event.target.value)} />
             </label>
             <button type="submit">Comment</button>
