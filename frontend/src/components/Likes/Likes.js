@@ -28,7 +28,6 @@ const Likes = ({ likes, parent }) => {
         let data = await response.json()
         window.localStorage.setItem("token", data.token)
         setLikers(data.post.likes)
-        // setToken(window.localStorage.getItem("token"))
       }
   }
 
@@ -36,9 +35,7 @@ const Likes = ({ likes, parent }) => {
     if (!likers) { return false } // error handling for empty likes array
     let result = false
     likers.forEach((liker) => {
-      if (liker === username) { 
-        result = true 
-      }
+      if (liker === username) {result = true}
     })
     return result
   }
@@ -48,7 +45,8 @@ const Likes = ({ likes, parent }) => {
   if(userHasLiked(likers)){
     likeEmoji = <img src={likedThumbsUp} alt="thumbs up liked emoji" />
   } else {
-    likeEmoji = <img src={unLikedThumbsUp} alt="thumbs up unliked emoji" onClick={handleButtonClick}/>
+    // data-cy set here since this element responds to .click() in cypress
+    likeEmoji = <img src={unLikedThumbsUp} data-cy="like-button" alt="thumbs up unliked emoji" onClick={handleButtonClick}/>
   }
 
   let likesLabel // singular or plural...
@@ -61,7 +59,7 @@ const Likes = ({ likes, parent }) => {
 
   return(
     <div className="likes">
-      <div id="like-count"> {likers && likers.length} {likesLabel} </div>
+      <div id="like-count" data-cy="like-count"> {likers && likers.length} {likesLabel} </div>
       <div id="like-button" >{ likeEmoji }</div> 
     </div>
   )
