@@ -14,8 +14,6 @@ const Feed = ({ navigate }) => {
 
   const [showComments, setShowComments] = useState(false);    
 
-  const [showComments, setShowComments] = useState(false);  
-
   function orderByDate (posts) {
     return posts.sort((a,b) => new Date(a.createdAt) - new Date(b.createdAt)).reverse()
   }
