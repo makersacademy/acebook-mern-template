@@ -1,6 +1,6 @@
 import AddComment from "./AddComment";
 describe("AddComment", () => {
-  xit("creates a new comment within a post", () => {
+  it("creates a new comment within a post", () => {
     // simulate user being logged in
     window.localStorage.setItem("token", "fakeToken")
     
