@@ -28,7 +28,7 @@ const Account = () => {
     // sets whatever is inside refresh to the opposite, triggering a refresh
     // through useeffect. this is activated whenever the newpostform is
     // submitted
-    setRefresh(prevRefresh => prevRefresh + 1);
+    setRefresh(prevRefresh => !prevRefresh);
   };
 
 

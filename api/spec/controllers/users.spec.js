@@ -59,10 +59,4 @@ describe("/users", () => {
       expect(users.length).toEqual(0)
     });
   })
-
-  // describe("GET, when logged in", () => {
-  //   test("response code is 200", async () => {
-
-  //   })
-  // })
 })

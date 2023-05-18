@@ -55,11 +55,9 @@ const EditAccountButton = ({toggleRefresh, valueToChange}) => {
           />
           <button className="edit-button" type="submit">Submit</button>
         </form>
-        {/* <button onClick={toggleButton}>Edit</button> */}
       </>
     ) : (
       <>
-        {/* <button className="edit-button" type="submit">Submit</button> */}
         <button onClick={toggleButton}>Edit</button>
       </>
     )
