@@ -23,7 +23,10 @@ const Feed = ({ navigate }) => {
         .then(async data => {
           window.localStorage.setItem("token", data.token)
           setToken(window.localStorage.getItem("token"))
-          setPosts(data.posts);
+          if (data.posts) {
+            setPosts(data.posts);
+          }
+        
         })
     }
     // use effect watches over the refresh constant and executes the function
