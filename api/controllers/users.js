@@ -23,6 +23,21 @@ const UsersController = {
         res.status(200).json({ token: token, user: user });
       }
     });
+  },
+
+  Edit: (req, res) => {
+    User.findOne({ _id: req.user_id }).then(async (user) => {
+      if (!user) {
+        res.status(404).json({ message: "no such user exists in db" });
+      } else {
+        const token = await TokenGenerator.jsonwebtoken(user.id)
+        const fieldToEdit = req.body.fieldToEdit
+        const newValue = req.body.newValue
+        user.set(fieldToEdit, newValue)
+        await user.save()
+        res.status(200).json({ token: token, message: user});
+      }
+    })
   }
 };
 
