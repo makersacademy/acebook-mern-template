@@ -59,6 +59,21 @@ const PostsController = {
       }
     })
   },
+  CreateComment: async (req, res) => {
+    console.log("here")
+    const comment = new Comment(req.body);
+    comment.author = req.params.userId;
+    comment.message = req.body.value;
+    const postId = req.params.postId;
+    console.log(postId)
+    const post = await Post.findById(postId);
+
+    post.comments.push(comment);
+    await post.save();
+
+    const token = await TokenGenerator.jsonwebtoken(req.user_id);
+    res.status(201).json({ message: 'Comment Added', token: token });
+  },
 };
 
 module.exports = PostsController;

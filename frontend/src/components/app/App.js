@@ -28,7 +28,6 @@ const App = () => {
 
     // changes the localStorage value of loggedIn when loggedIn context changes
     useEffect(() => {
-      console.log(loggedIn);
       window.localStorage.setItem("loggedIn", JSON.stringify(loggedIn));
     }, [loggedIn]);
 

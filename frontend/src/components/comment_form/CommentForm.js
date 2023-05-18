@@ -9,8 +9,9 @@ const NewCommentForm = () => {
   };
 
   const submitComment = (event) => {
+    event.preventDefault()
     if(token) {
-      fetch('/comments', {
+      fetch('/posts/comments/', {
         method: "POST",
         headers: {
           'Content-Type': 'application/json',
@@ -22,8 +23,8 @@ const NewCommentForm = () => {
       .then(async data => {
         window.localStorage.setItem("token", data.token)
         setToken(window.localStorage.getItem("token"))
-        // console.log(data.message)
-        event.preventDefault() // don't do the default functionality of the form - which would submit and reload the page
+        console.log(data.message)
+         // don't do the default functionality of the form - which would submit and reload the page
         // console.log(newPost) // connect to database, update data
         setNewComment(""); // clear the input field - set as empty string so type doesn't change
       })

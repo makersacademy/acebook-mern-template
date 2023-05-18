@@ -3,4 +3,7 @@ const router = express.Router();
 
 const CommentsController = require("../controllers/comments");
 
-router.get("/", CommentsController.Create)
+
+// router.post("/", CommentsController.Create)
+
+module.exports = router;

@@ -3,11 +3,11 @@ const express = require("express");
 const path = require("path");
 const logger = require("morgan");
 const JWT = require("jsonwebtoken");
-const Comment = require("./models/comment");
 
 const postsRouter = require("./routes/posts");
 const tokensRouter = require("./routes/tokens");
 const usersRouter = require("./routes/users");
+const commentsRouter = require("./routes/comments");
 
 const app = express();
 
@@ -39,8 +39,10 @@ const tokenChecker = (req, res, next) => {
 
 // route setup
 app.use("/posts", tokenChecker, postsRouter);
+app.use("/comments", commentsRouter);
 app.use("/tokens", tokensRouter);
 app.use("/users", usersRouter);
+
 
 // catch 404 and forward to error handler
 app.use((req, res, next) => {

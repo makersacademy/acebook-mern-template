@@ -3,10 +3,11 @@ const Post = require("../models/post");
 const TokenGenerator = require("../models/token_generator");
 
 const CommentsController = {
-  _CreateComment: async (req, res) => {
-    const comment = new Comment(req.body);
+  Create: async (req, res) => {
+    console.log("here")
+    const comment = new Comment();
     comment.author = req.params.userId;
-    comment.message = req.body.value;
+    comment.message = req.body.message;
     const postId = req.params.postId;
     console.log(postId)
     const post = await Post.findById(postId);
@@ -17,12 +18,16 @@ const CommentsController = {
     const token = await TokenGenerator.jsonwebtoken(req.user_id);
     res.status(201).json({ message: 'Comment Added', token: token });
   },
+
+  /*
   get CreateComment() {
-    return this._CreateComment;
+    return this.Create;
   },
+
   set CreateComment(value) {
-    this._CreateComment = value;
+    this.Create = value;
   },
+  */
 }
 
-module.exports = CommentsController
+module.exports = CommentsController;
