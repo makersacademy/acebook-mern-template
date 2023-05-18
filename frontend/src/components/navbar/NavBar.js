@@ -1,23 +1,24 @@
 import React, { useEffect, useState } from "react";
 import "./NavBar.css";
 import Avatar from "@mui/material/Avatar";
+import Post from "../post/Post";
 
-const Navbar = ({ navigate }) => {
+const Navbar = ({ navigate}) => {
   const [token, setToken] = useState(window.localStorage.getItem("token"));
   const [username, setUsername] = useState("");
+  const [avatar, setAvatar] = useState(null);
 
   useEffect(() => {
     if (token !== window.localStorage.getItem("token")) {
       setToken(window.localStorage.getItem("token"));
 
       const logout = () => {
-        window.localStorage.removeItem("token")
+        window.localStorage.removeItem("token");
         // navigate('/login')
       }
     }
     setUsername(window.localStorage.getItem("username"));
   }, [window.localStorage.getItem("token")]);
-
   
   const logout = () => {
       window.localStorage.removeItem("token");
@@ -29,6 +30,8 @@ const Navbar = ({ navigate }) => {
   if (token) {
     contextButton = <div className="nav-item" onClick={logout}>
       <a href="/login">Logout</a>
+        {/*/<Avatar alt="Remy Sharp" src= "" sx={{ width: 56, height: 56 }} />*/}
+
     </div>
     } else if (window.localStorage.getItem("app-route") === "login") {
       contextButton = <div className="nav-item">
