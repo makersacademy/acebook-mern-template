@@ -24,7 +24,6 @@ const Feed = ({ navigate }) => {
           window.localStorage.setItem("token", data.token)
           setToken(window.localStorage.getItem("token"))
           data.posts.forEach((post) => {
-            console.log(post)
             post.author = post.authorUserID.username
             post.avatar = post.authorUserID.avatar
             delete post.authorUserID

@@ -4,7 +4,6 @@ import unLikedThumbsUp from '../../images/unlikedThumbsUp.png';
 
 const Likes = ({ likes, parent }) => {
 
-  // const [alreadyLiked, setAlreadyLiked] = useState(false)
   const [likers, setLikers] = useState(likes)
   const [username, setUsername] = useState(window.localStorage.getItem('username'));
   const [token, setToken] = useState(window.localStorage.getItem("token"));
