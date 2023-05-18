@@ -1,9 +1,11 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import './Delete.css';
 
-const Delete = ({toggleRefresh, post_id}) => {
-  
+import { refreshContext } from '../feed/Feed';
+
+const Delete = ({post_id}) => {
   const [token, setToken] = useState(window.localStorage.getItem("token"));
+  const [refresh, setRefresh] = useContext(refreshContext)
 
   const handleDelete = async () => {
     if(token) {
@@ -21,7 +23,7 @@ const Delete = ({toggleRefresh, post_id}) => {
         setToken(window.localStorage.getItem("token"))
       })
       // executes the callback function whenever form is submitted
-      toggleRefresh()
+      setRefresh(!refresh)
     }
   }
 
