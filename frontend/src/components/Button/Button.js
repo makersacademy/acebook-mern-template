@@ -12,6 +12,4 @@ const Button = ({ margin, color, text, onClick }) => {
   )
 }
 
-
-
 export default Button;
