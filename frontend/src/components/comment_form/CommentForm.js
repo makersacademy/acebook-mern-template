@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 
-const NewCommentForm = () => {
+const NewCommentForm = ({post_id}) => {
   const[newComment, setNewComment] = useState("");
   const [token, setToken] = useState(window.localStorage.getItem("token"));
 
@@ -17,7 +17,7 @@ const NewCommentForm = () => {
           'Content-Type': 'application/json',
           "Authorization": `Bearer ${token}`
         },
-        body: JSON.stringify({"message": newComment})
+        body: JSON.stringify({post_id: post_id, "message": newComment})
       })
       .then(response => response.json())
       .then(async data => {

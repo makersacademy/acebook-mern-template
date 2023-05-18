@@ -21,7 +21,7 @@ const Post = ({post}) => {
     </div>
     <article data-cy="post" key={ post._id }>{ post.message } { formattedDate } </article>
     <Like likes={post.likes} post_id={ post._id } didUserLikeThis={post.didUserLikeThis}/>
-    <NewCommentForm />
+    <NewCommentForm post_id= { post._id }/>
     </>
   )
 }
