@@ -78,7 +78,7 @@
       left: 50%;
       transform: translate(-50%, -50%);
       background-color: rgba(170, 216, 216, 0.847);
-      border-radius: 22px;
+      border-radius: 20px;
       padding: 10px;
       min-width: 500px;
   }
