@@ -3,8 +3,11 @@ import AddComment from "../AddComment/AddComment";
 import Comment from "../comment/Comment";
 import "./Post.css";
 import Avatar from "@mui/material/Avatar";
+import Likes from '../Likes/Likes';
 
 const Post = ({ post }) => {
+  
+  const postPropsForLike = { _id: post._id, type: "post"}
   return (
  
     <div className="postbox postflex">
@@ -27,7 +30,10 @@ const Post = ({ post }) => {
         <div className="add-comment">
           <AddComment post={post} />
         </div>
-      </article>
+        <div className="likes">
+          <Likes likes={ post.likes } parent={postPropsForLike} />
+        </div>
+    </article>
     </div>
   );
 };
