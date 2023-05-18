@@ -2,7 +2,6 @@ import React from "react";
 import "./GoodbyeForm.css";
 import eye_roll from "./eye_roll.gif";
 import brand from "./brand.gif";
-import quitter from "./quitter.jpeg";
 
 const goodbyeMessages = [
   {
@@ -12,10 +11,6 @@ const goodbyeMessages = [
   {
     message: "Let's be honest...",
     image: brand,
-  },
-  {
-    message: "What a surprise...not!",
-    image: quitter,
   },
   // Add more goodbye messages and corresponding images as needed
 ];

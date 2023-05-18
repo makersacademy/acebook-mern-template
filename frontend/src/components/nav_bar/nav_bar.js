@@ -34,7 +34,8 @@ const Navigation = () => {
   const handleDropdownClick = () => setIsOpen(!isOpen);
   const token = window.localStorage.getItem('token');
   const isLoginPage = location.pathname === '/login';
-  const isSignupPage = location.pathname === '/signup';
+  const isSignupPage = location.pathname === '/signup'; 
+  const isGoodbyePage = location.pathname === '/goodbye';
 
   return ( 
     <div className='navbar-container'>
@@ -67,6 +68,7 @@ const Navigation = () => {
           <div className='login-signup'>
             {isLoginPage && <button className='signUpNav' onClick={handleSignupClick}>Sign up page</button>}
             {isSignupPage && <button className='loginNav' onClick={handleLoginClick}>Login page</button>}
+            {isGoodbyePage && <button className='signUpNav' onClick={handleLoginClick}>Sign up page</button>}
           </div>
         )}
       </div>
