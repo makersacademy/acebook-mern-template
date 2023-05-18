@@ -2,6 +2,8 @@ import React from 'react';
 import AddComment from '../AddComment/AddComment';
 import Comment from '../comment/Comment';
 import './Post.css';
+import Likes from '../Likes/Likes';
+
 
 const Post = ({post}) => {
   return (
@@ -15,6 +17,9 @@ const Post = ({post}) => {
         )}
         <div className="add-comment">
           <AddComment post={ post } />
+        </div>
+        <div className="likes">
+          <Likes parent={ post } />
         </div>
       
     </article>

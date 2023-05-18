@@ -47,8 +47,6 @@ const AddPost = () => { // was passing in navigate but that is not passed into t
           <input className="input-field" placeholder='Message' id="message" type='text' value={message} onChange={handleMessageChange} />
           <input className="input-button" role='submit-button' id='submit' type="submit" value="Add New Post" />
         </form>  
-
-    
       </>
     )
   }

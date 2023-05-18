@@ -1,6 +1,8 @@
-import React { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
+// import likedThumbsUp from './images/thumbsUpLikedEmoji.png';
+// import unLikedThumbsUp from './images/thumbsUpUnLikedEmoji.png';
 
-const Likes = ({ likers, parent }) => {
+const Likes = ({ parent }) => {
 
   const [username, setUsername] = useState(window.localStorage.getItem('username'));
   const [token, setToken] = useState(window.localStorage.getItem("token"));
@@ -15,7 +17,7 @@ const Likes = ({ likers, parent }) => {
         'Content-Type': 'application/json',
       },
       body: {
-        `${parent.type}_id`: parent._id,
+        'id': parent._id,
       }
     })
     if (response.status !== 200) { console.log("could not add like") }
@@ -28,22 +30,27 @@ const Likes = ({ likers, parent }) => {
 
   const userHasLiked = (likers) => {
     likers.forEach((liker) => {
+      console.log(liker)
       if (liker.username === username) { return true }
     })
   }
 
   let likeEmoji 
 
-  if(userHasLiked(likers)){
-    likeEmoji = <img src="public/thumbsUpLikedEmoji.png" alt="thumbs up liked emoji" />
+  if(userHasLiked(parent.likes)){
+    // likeEmoji = <img src={likedThumbsUp} alt="thumbs up liked emoji" />
+    likeEmoji = <img src={"../images/thumbsUpLikedEmoji.png"} alt="thumbs up liked emoji" />
   } else {
-    likeEmoji = <img src="public/thumbsUpUnLikedEmoji.png" alt="thumbs up unliked emoji" onClick={handleButtonClick}/>
+    // likeEmoji = <img src={unLikedThumbsUp} alt="thumbs up unliked emoji" onClick={handleButtonClick}/>
+    likeEmoji = <img src={"../images/thumbsUpUnLikedEmoji.png"} alt="thumbs up unliked emoji" onClick={handleButtonClick}/>
   }
 
   return(
     <div className="likes">
-      <div id="like-count"> {likers.length} likes </div>
+      <div id="like-count"> {parent.likes.length} likes </div>
       <button id="like-button" >{ likeEmoji }</button> 
     </div>
   )
 }
+
+export default Likes;
