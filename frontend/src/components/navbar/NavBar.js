@@ -1,9 +1,5 @@
 import React, { useEffect, useState } from "react";
-// import { PrimaryNav, MenuLink, Menu, style} from ‘./NavbarElements’
 import "./NavBar.css";
-import Feed from "../feed/Feed";
-import LogInForm from "../auth/LoginForm";
-import SignUpForm from "../user/SignUpForm";
 import Avatar from "@mui/material/Avatar";
 
 const Navbar = ({ navigate }) => {
@@ -54,7 +50,7 @@ const Navbar = ({ navigate }) => {
               sx={{ width: 56, height: 56 }}
             />
         
-            <h1 h1 className="title">Farcebook</h1>
+            <h1 className="title">Farcebook</h1>
           </div>
           <div className="nav-right">
             { contextButton }
