@@ -19,5 +19,6 @@ const PostSchema = new mongoose.Schema({
   comments: [CommentSchema]
 });
 
+const Post = mongoose.model("Post", PostSchema);
 
 module.exports = Post;
