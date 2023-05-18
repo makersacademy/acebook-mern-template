@@ -24,7 +24,7 @@ const NewPostForm = ({toggleRefresh}) => {
         setNewPost(""); // clear the input field - set as empty string so type doesn't change
       })
       // executes the callback function whenever form is submitted
-      toggleRefresh()
+      .then(() => toggleRefresh())
     }
   }
 
