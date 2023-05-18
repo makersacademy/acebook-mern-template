@@ -5,7 +5,7 @@ import "./Post.css";
 import Avatar from "@mui/material/Avatar";
 import Likes from '../Likes/Likes';
 
-const Post = ({ post }) => {
+const Post = ({ post, onPostAdded }) => {
   
   const postPropsForLike = { _id: post._id, type: "post"}
   return (
@@ -31,9 +31,9 @@ const Post = ({ post }) => {
           <Comment comment={comment} key={index} />
         ))}
         <div className="add-comment">
-          <AddComment post={post} />
+          <AddComment post={post} onPostAdded={onPostAdded}/>
         </div>
-    </article>
+      </article> 
     </div>
   );
 };

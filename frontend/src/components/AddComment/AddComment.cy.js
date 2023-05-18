@@ -4,7 +4,7 @@ describe("AddComment", () => {
     // simulate user being logged in
     window.localStorage.setItem("token", "fakeToken")
     
-    cy.mount(<AddComment post={ {_id: "mockHexPostID" }} />);
+    cy.mount(<AddComment post={ {_id: "mockHexPostID" }} onPostAdded={() => {}} />);
 
     cy.intercept('PATCH', '/posts/mockHexPostID', {
       statusCode: 200,
