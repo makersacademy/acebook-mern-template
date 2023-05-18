@@ -1,6 +1,7 @@
 import './App.css';
 import LoginForm from '../auth/LoginForm'
 import SignUpForm from '../user/SignUpForm'
+import Account from '../account/Account'
 import React from "react";
 import Feed from '../feed/Feed'
 import {
@@ -28,7 +29,6 @@ const App = () => {
 
     // changes the localStorage value of loggedIn when loggedIn context changes
     useEffect(() => {
-      console.log(loggedIn);
       window.localStorage.setItem("loggedIn", JSON.stringify(loggedIn));
     }, [loggedIn]);
 
@@ -41,7 +41,7 @@ const App = () => {
           <Route path='/posts'  element={<Feed navigate={ useNavigate() }/>}/>
           <Route path='/login'  element={<LoginForm  navigate={ useNavigate() }/>}/>
           <Route path='/signup' element={<SignUpForm navigate={ useNavigate() }/>}/>
-          {/* <Route path='/account' element={<Account navigate={ useNavigate() }/>}/> */}
+          <Route path='/account' element={<Account navigate={ useNavigate() }/>}/>
         </Routes>
     </loggedInContext.Provider>
     );
