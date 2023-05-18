@@ -15,7 +15,7 @@
   .email-box-space {
     /* Styles for the email input box */
     margin-right: 10px;
-   
+    
   }
   
   .password-box-space {
@@ -70,6 +70,17 @@
     border-radius: 5px;
     margin-top: 10px;
     background-color: white;
+  }
+
+  .form-container {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: rgba(170, 216, 216, 0.847);
+    border-radius: 20px;
+    padding: 10px;
+    min-width: 500px;
   }
   
   

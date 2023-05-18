@@ -7,9 +7,9 @@
 }
 
 .login-form {
-  background-color: rgba(0, 128, 128, 0.096);
+  background-color: rgba(170, 216, 216, 0.847);
   padding: 20px;
-  min-width: 200px;
+  min-width: 500px;
   display: flex;
   flex-direction: column;
   align-items: center;

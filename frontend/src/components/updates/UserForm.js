@@ -82,6 +82,7 @@ const UserForm = ({ navigate }) => {
   };
 
   return (
+    <div className='form-container'>
     <form onSubmit={handleSubmit}>
     <div class="form-header">
       <p>Update your details here:</p>
@@ -132,6 +133,7 @@ const UserForm = ({ navigate }) => {
         </div>
       </div>
     </div>
+    
 
     <div class="form-group">
       <input id="submit" type="submit" value="Submit" />
@@ -152,6 +154,7 @@ const UserForm = ({ navigate }) => {
         </div>
 )}
   </form>
+  </div>
   );
 };
 

@@ -43,5 +43,6 @@
     background-color: rgba(170, 216, 216, 0.847);
     border-radius: 20px;
     padding: 10px;
+    min-width: 500px;
   }
   
