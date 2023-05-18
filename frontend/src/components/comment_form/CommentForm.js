@@ -1,14 +1,11 @@
 import React, {useState} from 'react';
-import Comment from '../'
-
-
 
 const NewCommentForm = () => {
-  const[comment, setComment] = useState("");
+  const[newComment, setNewComment] = useState("");
   const [token, setToken] = useState(window.localStorage.getItem("token"));
 
   const handleComment = (e) => {
-    setComment(e.target.value);
+    setNewComment(e.target.value);
   };
 
   const submitComment = (event) => {
@@ -28,7 +25,7 @@ const NewCommentForm = () => {
         // console.log(data.message)
         event.preventDefault() // don't do the default functionality of the form - which would submit and reload the page
         // console.log(newPost) // connect to database, update data
-        setComment(""); // clear the input field - set as empty string so type doesn't change
+        setNewComment(""); // clear the input field - set as empty string so type doesn't change
       })
     }
   }
