@@ -6,6 +6,7 @@ import Avatar from "@mui/material/Avatar";
 import Likes from '../Likes/Likes';
 
 const Post = ({ post }) => {
+  
   const postPropsForLike = { _id: post._id, type: "post"}
   return (
  
@@ -30,7 +31,7 @@ const Post = ({ post }) => {
           <AddComment post={post} />
         </div>
         <div className="likes">
-          <Likes likers={ post.likes } parent={postPropsForLike} />
+          <Likes likes={ post.likes } parent={postPropsForLike} />
         </div>
     </article>
     </div>

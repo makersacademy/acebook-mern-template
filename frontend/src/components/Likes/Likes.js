@@ -2,8 +2,10 @@ import React, { useEffect, useState } from 'react';
 import likedThumbsUp from '../../images/likedThumbsUp.png';
 import unLikedThumbsUp from '../../images/unlikedThumbsUp.png';
 
-const Likes = ({ likers, parent }) => {
+const Likes = ({ likes, parent }) => {
 
+  // const [alreadyLiked, setAlreadyLiked] = useState(false)
+  const [likers, setLikers] = useState(likes)
   const [username, setUsername] = useState(window.localStorage.getItem('username'));
   const [token, setToken] = useState(window.localStorage.getItem("token"));
 
@@ -25,32 +27,34 @@ const Likes = ({ likers, parent }) => {
     else {
       let data = await response.json()
       window.localStorage.setItem("token", data.token)
+      setLikers(data.likes)
       // setToken(window.localStorage.getItem("token"))
     }
   }
 
   const userHasLiked = (likers) => {
-    if (!likers) { return false }
+    if (!likers) { return false } // error handling for empty likes array
+    let result = false
     likers.forEach((liker) => {
-      console.log(liker)
-      if (liker.username === username) { return true }
+      if (liker === username) { 
+        result = true 
+      }
     })
+    return result
   }
 
-  let likeEmoji 
-
+  let likeEmoji
+  
   if(userHasLiked(likers)){
     likeEmoji = <img src={likedThumbsUp} alt="thumbs up liked emoji" />
-    // likeEmoji = <img src={"./images/thumbsUpLikedEmoji.png"} alt="thumbs up liked emoji" />
   } else {
     likeEmoji = <img src={unLikedThumbsUp} alt="thumbs up unliked emoji" onClick={handleButtonClick}/>
-    // likeEmoji = <img src={"./images/thumbsUpUnLikedEmoji.png"} alt="thumbs up unliked emoji" onClick={handleButtonClick}/>
   }
 
   return(
     <div className="likes">
       <div id="like-count"> {likers && likers.length} likes </div>
-      <button id="like-button" >{ likeEmoji }</button> 
+      <div id="like-button" >{ likeEmoji }</div> 
     </div>
   )
 }
