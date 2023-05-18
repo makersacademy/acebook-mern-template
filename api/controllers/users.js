@@ -8,15 +8,24 @@ const UsersController = {
        res.status(400).json({
         message: 'Invalid email address!'
       })
-    } else {
-      user.save((err) => {
-      if (err) {
-        res.status(400).json({message: 'Bad request'})    
+    } 
+    User.findOne({ email: user.email })
+    .then((check) => {
+      if(check) {
+        res.status(400).json({
+          message: 'This Email is already in use!'
+        })
       } else {
-        res.status(201).json({ message: 'OK' });
-      }
-    });
-  }
+        user.save((err) => {
+        if (err) {
+          res.status(400).json({message: 'Bad request'})    
+        } else {
+          res.status(201).json({ message: 'OK' });
+        }
+      });
+    }
+    })
+  
   },
 };
 
