@@ -22,7 +22,7 @@ const Delete = ({post_id}) => {
         window.localStorage.setItem("token", data.token)
         setToken(window.localStorage.getItem("token"))
       })
-      // executes the callback function whenever form is submitted
+      // changes context in feed to trigger reload
       setRefresh(!refresh)
     }
   }
