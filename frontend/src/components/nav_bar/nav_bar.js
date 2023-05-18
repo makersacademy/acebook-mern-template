@@ -1,7 +1,7 @@
-import './nav_bar.css'
+import './nav_bar.css';
 import React, { useState } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
-import logo from './logo.png'
+import logo from './logo.png';
 
 const Navigation = () => {
   const navigate = useNavigate();
@@ -9,22 +9,23 @@ const Navigation = () => {
 
   const logout = () => {
     window.localStorage.removeItem("token");
-    
     navigate('/login');
   };
-  
+
   const handleLoginClick = () => {
-   navigate('/login')
-  }
+    navigate('/login');
+  };
+
   const handleSignupClick = () => {
-   navigate('/signup')
-  }
+    navigate('/signup');
+  };
 
   const handleLogoClick = () => {
+    const token = window.localStorage.getItem('token');
     if (token) {
-      navigate('/posts')
+      navigate('/posts');
     }
-  }
+  };
 
   const handleProfileClick = () => {
     navigate('/profile/');
@@ -36,42 +37,54 @@ const Navigation = () => {
   const isLoginPage = location.pathname === '/login';
   const isSignupPage = location.pathname === '/signup';
 
-  return ( 
-    <div className='navbar-container'>
-      <div className='nav-section'>
-        {/* this is needed to centre the logo. */}
-      </div>
-      <div className='nav-section logo-container'>
-        <div className="logo" onClick={handleLogoClick}>
-          <img src={logo} alt="logo"></img>
+  return (
+    <>
+      <div className="navbar-container">
+        <div className="logo-container">
+          <div className="logo" onClick={handleLogoClick}>
+            <img src={logo} alt="logo" className="spinning-logo" />
+          </div>
         </div>
-      </div>
-      <div className='nav-section'>
-        { token ? (
+        {token ? (
           <div className="dropdown">
-            <div className='dropdown-container'>
+            <div className="dropdown-container">
               <button className="dropdown-button" onClick={handleDropdownClick}>
-              Dropdown
+                Dropdown
               </button>
             </div>
             {isOpen && (
-            <div className="dropdown-content">
-              <button className="dropdown-item" onClick={handleProfileClick}>Profile Settings</button>
-              <div>
-                <button className='dropdown-logout' onClick={logout}>Logout</button>
+              <div className="dropdown-content">
+                <button className="dropdown-item" onClick={handleProfileClick}>
+                  Profile Settings
+                </button>
+                <div>
+                  <button className="dropdown-logout" onClick={logout}>
+                    Logout
+                  </button>
+                </div>
               </div>
-            </div>
             )}
           </div>
         ) : (
-          <div className='login-signup'>
-            {isLoginPage && <button className='signUpNav' onClick={handleSignupClick}>Sign up page</button>}
-            {isSignupPage && <button className='loginNav' onClick={handleLoginClick}>Login page</button>}
-          </div>
+          <>
+            <div className="login-signup">
+              {isLoginPage && (
+                <button className="signUpNav" onClick={handleSignupClick}>
+                  Sign up page
+                </button>
+              )}
+              {isSignupPage && (
+                <button className="loginNav" onClick={handleLoginClick}>
+                  Login page
+                </button>
+              )}
+            </div>
+          </>
         )}
       </div>
-    </div>
-  )
+    </>
+  );
 };
 
 export default Navigation;
+
