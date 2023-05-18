@@ -8,6 +8,7 @@ const CommentsController = {
     comment.author = req.params.userId;
     comment.message = req.body.value;
     const postId = req.params.postId;
+    console.log(postId)
     const post = await Post.findById(postId);
 
     post.comments.push(comment);
