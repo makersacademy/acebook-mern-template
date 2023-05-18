@@ -41,16 +41,15 @@ describe("Post model", () => {
   });
 
   it("finding a like in a existing post", async() => {
-    //to be able to test an object id, we need to create one, that's why we are using mongoose
-    var id = mongoose.Types.ObjectId();
-    var post = new Post({ message: "some message", authorUserID: "645fd378ceaefce663b8b497", likes: [id] });
+    var username = "babbage123";
+    var post = new Post({ message: "some message", authorUserID: "645fd378ceaefce663b8b497", likes: [username] });
 
     post.save((err) => {
       expect(err).toBeNull();
        Post.find( (err, posts) => {
         expect(err).toBeNull();
         expect(posts[0].likes.length).toEqual(1)
-        expect(posts[0].likes[0]).toEqual(id)
+        expect(posts[0].likes[0]).toEqual(username)
       });
     });
   });

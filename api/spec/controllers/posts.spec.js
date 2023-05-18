@@ -54,6 +54,7 @@ describe("/posts", () => {
     });
 
     test("add one like in an existing post", async () => {
+      // test setup: create a post
       await request(app)
         .post("/posts")
         .set("Authorization", `Bearer ${token}`)
@@ -63,13 +64,13 @@ describe("/posts", () => {
       await request(app)
         .patch("/posts/likes")
         .set("Authorization", `Bearer ${token}`)
-        .send({post_id: posts[0]._id, user_id: mockUserID});
+        .send({article_id: posts[0]._id, username: "test_username"});
 
       let updatedPosts = await Post.find();
       //testing if the likes array has one element
       expect(updatedPosts[0].likes.length).toEqual(1);
       //testing if the user id is added to the likes array
-      expect(updatedPosts[0].likes[0]).toEqual(mockUserID);
+      expect(updatedPosts[0].likes[0]).toEqual("test_username");
 
      
     });

@@ -16,6 +16,7 @@ describe('AddPost', () => {
     }).as('newPostRequest');
 
     cy.get('#message').type('text');
+    cy.get('#message').should('have.value', 'text');
     cy.get('#submit').click();
 
     cy.wait('@newPostRequest').then((interception) => {
