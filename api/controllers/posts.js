@@ -17,6 +17,9 @@ const PostsController = {
       res.status(200).json({ posts: posts, token: token });
     }));
   },
+  Delete: (req, res) => {
+    Post.deleteOne()
+  },
   Create: (req, res) => {
     const post = new Post();
     post.message = req.body.message
