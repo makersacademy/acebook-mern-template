@@ -4,9 +4,12 @@ import Comment from "../comment/Comment";
 import Button from "../Button/Button";
 import "./Post.css";
 import Avatar from "@mui/material/Avatar";
+import Likes from '../Likes/Likes';
 import { createGlobalStyle } from "styled-components";
 
 const Post = ({ post }) => {
+  
+  const postPropsForLike = { _id: post._id, type: "post"}
 
   const [showComments, setShowComments] = useState(false);  
 
@@ -50,8 +53,11 @@ const Post = ({ post }) => {
         <div className="add-comment">
             <AddComment post={post} />
           </div>
+        <div className="likes">
+          <Likes likes={ post.likes } parent={postPropsForLike} />
+        </div>
 
-      </article>
+    </article>
     </div>
   );
 };
