@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import FileUploader from '../file-uploader/FileUploader.js';
 
 const EditAccountButton = ({toggleRefresh, valueToChange}) => {
   const [isPressed, setIsPressed] = useState(false)
@@ -34,16 +35,46 @@ const EditAccountButton = ({toggleRefresh, valueToChange}) => {
       .then(() => toggleButton())
   }}
 
+  const handlePhotoChange = (file) => {
+    let reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onload = () => {
+      setValue(reader.result);
+    }
+  }
+
   return (
     <>
-    {(isPressed ?
-    <form onSubmit={submitChange}>
-      <input className="edit-form" onChange={onChangeValueInput} type="text" value={value} />
-      <button className="edit-button" type="submit">Submit</button>
-    </form> :
-    <button onClick={toggleButton}>Edit</button>
-    )}
-    </>
+  {valueToChange === "photo" ? (
+    isPressed ? (
+      <>
+        <form onSubmit={submitChange}>
+          <FileUploader
+            onFileSelectSuccess={(file) => {handlePhotoChange(file)}}
+            onFileSelectError={({error}) => alert(error)}
+          />
+          <button className="edit-button" type="submit">Submit</button>
+        </form>
+        {/* <button onClick={toggleButton}>Edit</button> */}
+      </>
+    ) : (
+      <>
+        {/* <button className="edit-button" type="submit">Submit</button> */}
+        <button onClick={toggleButton}>Edit</button>
+      </>
+    )
+  ) : (
+    isPressed ? (
+      <form onSubmit={submitChange}>
+        <input className="edit-form" onChange={onChangeValueInput} type="text" value={value} />
+        <button className="edit-button" type="submit">Submit</button>
+      </form>
+    ) : (
+      <button onClick={toggleButton}>Edit</button>
+    )
+  )}
+</>
+
   )
 }
 

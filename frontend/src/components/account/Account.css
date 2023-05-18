@@ -19,21 +19,33 @@
   border-radius: 50%;
   object-fit: cover;
   object-position: center;
-  margin-left: 25%;
   margin-bottom: 10px;
 }
 
 .flex-container {
   display: flex;
-  align-items: center; /* Center items horizontally */
   justify-content: space-between;
   margin-top: 10px;
+  margin-bottom: 10px;
   width: 100%;
 }
 
-h3 {
+.flex-container-photo {
+  display: flex;
+  flex-direction: column;
+  align-items: center; 
+  justify-content: center;
+  margin-top: 20px;
+  margin-bottom: 10px;
+}
+
+p {
   margin: 0;
   text-align: left;
+}
+
+button {
+  margin-left: 10px;
 }
 
 button {
