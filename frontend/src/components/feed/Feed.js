@@ -1,8 +1,10 @@
-import React, { useEffect, useState, useContext } from 'react';
+import React, { useEffect, useState, useContext, createContext} from 'react';
 import Post from '../post/Post'
 import {loggedInContext} from '../app/App'
 
 import NewPostForm from '../new-post/NewPostForm'
+
+export const refreshContext = createContext();
 
 const Feed = ({ navigate }) => {
   const [loggedIn, setLoggedIn] = useContext(loggedInContext)
@@ -59,9 +61,11 @@ const Feed = ({ navigate }) => {
         </div>
 
         <div id='feed' role="feed">
+          <refreshContext.Provider value={[refresh, setRefresh]}>
             {posts.sort(comparebyDate).map(
               (post) => ( <Post post={ post } key={ post._id }/> )
             )}
+          </refreshContext.Provider>
         </div>
       </>
     )
