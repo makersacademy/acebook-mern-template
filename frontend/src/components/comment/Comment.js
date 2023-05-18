@@ -1,12 +1,12 @@
-import React, {useState} from 'react';
+import React from 'react';
+import Post from '../post/Post';
 
+const Comment = (comment) => {
+  return (
+    <div>
+    <h3>{comment.comment}</h3>
+  </div>
+  )
+};
 
-const CommentBox = () => {
-  const[commentValue, setCommentValue] = useState("");
-  
-  const handleCommentValue = (e) => {
-    setCommentValue(e.target.value);
-  };
-
-  return
-}
+export default Comment;
