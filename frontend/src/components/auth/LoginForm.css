@@ -1,0 +1,38 @@
+.login-form {
+    /* width: 100%; */
+    max-width: 500px;
+    margin: 50px auto 0;
+    padding: 40px;
+    border: 1px solid #aaa;
+    border-radius: 15px;
+    background: #fff;
+    box-shadow: 3 4 10px rgba(0,0,0,0.6);   
+}
+
+.login-form label {
+  font-family: 'Raleway';
+    font-size: 1.2rem;
+}
+
+.login-form input {
+  font-family: 'Raleway';
+  width: 100%;
+  font-size: 1.1rem;
+  margin: 10px 0 20px;
+  padding: 5px 10px;
+  border: 1px solid #aaa;
+  border-radius: 5px; 
+  font-size: 1.2rem;
+}
+
+.login-form #submit {
+  margin: 15px 0 10px; 
+  font-weight: bold;
+  color: #444;
+  background-color: #fdd45a;
+}
+
+.login-form #submit:hover {
+  background-color: #1e5cbf;
+  color: #fff;
+}

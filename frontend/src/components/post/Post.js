@@ -9,6 +9,7 @@ const Post = ({ post }) => {
  
     <div className="postbox postflex">
       <Avatar
+        className="post-avatar"
         alt="Remy Sharp"
         src={ post.avatar }
         sx={{ width: 56, height: 56 }}

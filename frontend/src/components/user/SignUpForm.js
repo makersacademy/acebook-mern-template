@@ -7,6 +7,7 @@ const SignUpForm = ({ navigate }) => {
   const [password, setPassword] = useState("");
   const[avatar, setAvatar] = useState(""); // [null, function
   const [errors, setErrors] = useState([]); //  'Invalid email address!'
+  window.localStorage.setItem("app-route", "signup")
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -55,22 +56,21 @@ const SignUpForm = ({ navigate }) => {
 
 
   return (
-    <>
-      <h2>Sign up</h2>
-      {/* <button onClick={login}>
-              Login 
-      </button> */}
+    <div className='login-form'>
       <form onSubmit={handleSubmit}>
-          <input placeholder="Email" id="email" type='text' value={ email } onChange={handleEmailChange} />
-          <input placeholder="Username" id="username" type='text' value={ username } onChange={handleUsernameChange} />
-          <input placeholder="Password" id="password" type='password' value={ password } onChange={handlePasswordChange} />
+          <label for="email">Email: </label>
+          <input placeholder="Email" id="email" type='text' value={ email } onChange={handleEmailChange} /> <br />
+          <label for="username">Username: </label>
+          <input placeholder="Username" id="username" type='text' value={ username } onChange={handleUsernameChange} /> <br />
+          <label for="password">Password: </label>
+          <input placeholder="Password" id="password" type='password' value={ password } onChange={handlePasswordChange} /> <br />
           <input placeholder="Avatar" id="avatar" type='avatar' value={ avatar } onChange={handleAvatarChange} />
         <input id='submit' type="submit" value="Submit" />
       </form>
       <div>
         {errors}
       </div>
-      </>
+      </div>
     );
 }
 
