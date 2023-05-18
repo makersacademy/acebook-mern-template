@@ -18,13 +18,14 @@ const PostsController = {
     }));
   },
   Delete: (req, res) => {
-    Post.findOneAndDelete({ _id: req.body.post_id }, (err, deletedPost) => {
+    Post.findOneAndDelete({ _id: req.body.post_id }, async (err, deletedPost) => {
+      const token = await TokenGenerator.jsonwebtoken(req.user_id);
       if (err) {
-        res.status(400).json({message: "Unable to delete post"})
+        res.status(400).json({message: "Unable to delete post", token: token})
       } else if (deletedPost) {
-        res.status(200).json({message: "Document deleted successfully."})
+        res.status(200).json({message: "Document deleted successfully.", token: token})
       } else {
-        res.status(404).json({message: "Document not found."})
+        res.status(404).json({message: "Document not found.", token: token})
       }
     })
   },
