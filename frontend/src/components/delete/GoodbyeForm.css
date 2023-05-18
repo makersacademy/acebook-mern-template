@@ -1,0 +1,35 @@
+/* GoodbyeForm.css */
+
+.goodbye-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    background-color: #eeddd5;
+  }
+  
+  .goodbye-message {
+    font-size: 24px;
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 40px;
+  }
+
+  .funny-quote {
+    font-size: 15px;
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  
+  .goodbye-image {
+    width: 500px;
+    height: 400px;
+    margin-bottom: 20px;
+  }
+  
+  .quote-sentence {
+    margin-top: 10px; 
+  }
+  

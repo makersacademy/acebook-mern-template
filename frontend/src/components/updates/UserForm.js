@@ -29,19 +29,19 @@ const UserForm = ({ navigate }) => {
         console.log(response.status);
       if (response.status === 200) {
         setSuccessMessage("Your changes have been updated successfully.");
-        navigate("/profile/");
 
         // Clear the input fields
       setEmail("");
       setPassword("");
       setFirstName("");
       setLastName("");
+      
       } else {
         setSuccessMessage("Changes failed, please try again.");
-        navigate("/signup");
       }
     });
   };
+   
 
   const handleEmailUpdate = (event) => {
     setEmail(event.target.value);
@@ -57,6 +57,28 @@ const UserForm = ({ navigate }) => {
 
   const handleLastNameUpdate = (event) => {
     setLastName(event.target.value);
+  };
+
+  const handleDelete = () => {
+
+    window.localStorage.removeItem("token");
+
+    fetch("/userUpdatesRoute", {
+      method: "delete",
+    })
+      .then((response) => {
+        if (response.status === 200) {
+          setSuccessMessage("Your account has been deleted successfully.");
+        //  setFirstName("Unknown");
+       //  setLastName("User");
+          navigate("/goodbye");
+        } else {
+          setSuccessMessage("Account deletion failed, please contact our amazing team for support!");
+        }
+      })
+      .catch((error) => {
+        setSuccessMessage("Account deletion failed, please try again.");
+      });
   };
 
   return (
@@ -114,14 +136,21 @@ const UserForm = ({ navigate }) => {
     <div class="form-group">
       <input id="submit" type="submit" value="Submit" />
     </div>
+    
+
+<div class="form-group">
+      <button type="button" onClick={handleDelete}>
+        Delete Account
+      </button>
+    </div>
+
     {successMessage && (
         <div
-          className={`success-message ${responseStatus === 200 ? 'ok' : 'error'}`}
+        className={`success-message ${successMessage.includes('failed') ? 'error' : 'ok'}`}
         >
           {successMessage}
         </div>
 )}
-
   </form>
   );
 };

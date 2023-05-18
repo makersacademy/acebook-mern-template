@@ -81,5 +81,31 @@ describe("/users 1", () => {
       expect(response.body).toEqual({ message: "Email address already in use" });
     });
     
+    it("can save a user", (done) => {
+      const user = new User({
+        email: "someone@example.com",
+        password: "password",
+        firstName: "Betty",
+        lastName: "Rubble",
+      });
+  
+      user.save((err) => {
+        expect(err).toBeNull();
+  
+        User.find((err, users) => {
+          expect(err).toBeNull();
+  
+          expect(users[0]).toMatchObject({
+            email: "someone@example.com",
+            password: "password",
+            firstName: "Betty",
+            lastName: "Rubble",
+          });
+          done();
+        });
+      });
+    });
+  
+
   });
   })

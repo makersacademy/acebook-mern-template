@@ -167,6 +167,18 @@ REPLACE THIS TEXT WITH A LINK TO YOUR CARD WALL
    brew services start mongodb-community@5.0
    ```
 
+8. Further install requirements: 
+
+-> for use of cookies attached to the client request object: 
+```
+npm install cookie-parser
+```
+
+-> for parsing, validating, manipulating and disaying dates in JS:
+```
+npm install moment --save
+```
+
 ### Start
 
 1. Start the server
