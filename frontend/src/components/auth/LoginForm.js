@@ -4,6 +4,7 @@ import './LoginForm.css';
 const LogInForm = ({ navigate }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [errorMessage, setErrorMessage] = useState("");
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -18,6 +19,7 @@ const LogInForm = ({ navigate }) => {
 
     if (response.status !== 201) {
       console.log("yay");
+      setErrorMessage("Email or password is incorrect, please try again."); 
       navigate("/login");
     } else {
       console.log("oop");
@@ -50,17 +52,18 @@ const LogInForm = ({ navigate }) => {
     <div className='login-container'>
       <form className='login-form' onSubmit={handleSubmit}>
         <div className='form-input'>
-          <input placeholder='Email' id="email" type='text' value={ email } onChange={handleEmailChange} />
+          <input placeholder='Email' id="email" type='text' value={email} onChange={handleEmailChange} />
         </div>
         <div className='form-input'>
-          <input placeholder='Password' id="password" type='password' value={ password } onChange={handlePasswordChange} />
+          <input placeholder='Password' id="password" type='password' value={password} onChange={handlePasswordChange} />
         </div>
+        {errorMessage && <div className="error-message">{errorMessage}</div>} 
         <div className='login-button-container'>
           <input className='login-button' role='submit-button' id='submit' type="submit" value="Login" />
         </div>
       </form>
     </div>
-  );  
+  );
 }
 
 export default LogInForm;
