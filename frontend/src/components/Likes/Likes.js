@@ -54,9 +54,17 @@ const Likes = ({ likes, parent }) => {
     likeEmoji = <img src={unLikedThumbsUp} alt="thumbs up unliked emoji" onClick={handleButtonClick}/>
   }
 
+  let likesLabel // singular or plural...
+
+  if (likers && (likers.length === 1)) {
+    likesLabel = "like"
+  } else {
+    likesLabel = "likes"
+  }
+
   return(
     <div className="likes">
-      <div id="like-count"> {likers && likers.length} likes </div>
+      <div id="like-count"> {likers && likers.length} {likesLabel} </div>
       <div id="like-button" >{ likeEmoji }</div> 
     </div>
   )
