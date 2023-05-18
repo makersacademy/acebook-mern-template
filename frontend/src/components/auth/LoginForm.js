@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
 import SignUpForm from '../user/SignUpForm'
+import "./LoginForm.css";
 
 const LogInForm = ({ navigate }) => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  window.localStorage.setItem("app-route", "login")
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -38,15 +40,16 @@ const LogInForm = ({ navigate }) => {
 
 
   return (
-    <>
-      <h2>Login</h2>
+    <div className='login-form'>
       <form onSubmit={handleSubmit}>
-        <input placeholder="Username" id="username" type='text' value={ username } onChange={handleUsernameChange} />
-        <input placeholder='Password' id="password" type='password' value={password} onChange={handlePasswordChange} />
+      <label htmlFor="username">Username: </label>
+        <input placeholder="Username" id="username" type='text' value={ username } onChange={handleUsernameChange} /> <br />
+        <label htmlFor="password">Password: </label>
+        <input placeholder='Password' id="password" type='password' value={password} onChange={handlePasswordChange} /> <br />
         <input role='submit-button' id='submit' type="submit" value="Submit" />
       </form>
     
-    </>
+    </div>
   )
 }
 

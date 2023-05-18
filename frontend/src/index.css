@@ -1,12 +1,21 @@
 @import url('https://fonts.googleapis.com/css2?family=Raleway:wght@400;700&display=swap');
 
+* {
+  box-sizing: border-box;
+}
+
 #root{
-  max-width: 840px;
+  /* max-width: 840px; */
   /*page centralized*/
   margin: 0 auto;
 }
 
+h2{
+  color:#fdfeff
+}
+
 body {
+  background-color: #f0f6ff;
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
@@ -26,7 +35,7 @@ p {
 
 .input-field {
   font-family: 'Raleway';
-  font-size: 0.8rem;
+  font-size: 1.1rem;
   color: #000;
   margin: 0 8px 0 0;
   padding: 4px 8px;
@@ -43,7 +52,7 @@ p {
 
 .input-button {
   font-family: 'Raleway';
-  font-size: 0.8rem;
+  font-size: 1.1rem;
   font-weight: bold;
   padding: 4px 10px;
   background-color: #eee;
@@ -53,9 +62,7 @@ p {
 }
 
 .input-button:hover {
-  background-color: #b1b1b1;
-  /* border: 1px solid #777;
-  border-radius: 4px; */
+  background-color: #1e5cbf;
   color: #fff;
 }
 

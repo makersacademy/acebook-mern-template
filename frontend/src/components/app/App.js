@@ -13,13 +13,14 @@ const App = () => {
     return (
       <>
         <Navbar />
-        <Routes>
-          <Route path='/posts'  element={<Feed navigate={ useNavigate() }/>}/>
-          <Route path='/login'  element={<LoginForm  navigate={ useNavigate() }/>}/>
-          <Route path='/signup' element={<SignUpForm navigate={ useNavigate() }/>}/>
-        </Routes>
-
-        </>
+        <div className="app-body">
+          <Routes>
+            <Route path='/posts'  element={<Feed navigate={ useNavigate() }/>}/>
+            <Route path='/login'  element={<LoginForm  navigate={ useNavigate() }/>}/>
+            <Route path='/signup' element={<SignUpForm navigate={ useNavigate() }/>}/>
+          </Routes>
+        </div>
+      </>
     );
 }
 
