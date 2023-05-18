@@ -28,7 +28,6 @@ const logout = () => {
             <h1><i>AceBook</i></h1>
 
             <button className="post-button" onClick={Feed}>Posts</button>
-
             <button className="logout-button" onClick={logout}>Logout</button>
           </div>
           :
