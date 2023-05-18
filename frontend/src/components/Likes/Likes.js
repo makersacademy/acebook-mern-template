@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
-// import likedThumbsUp from './images/thumbsUpLikedEmoji.png';
-// import unLikedThumbsUp from './images/thumbsUpUnLikedEmoji.png';
+import likedThumbsUp from '../../images/likedThumbsUp.png';
+import unLikedThumbsUp from '../../images/unlikedThumbsUp.png';
 
 const Likes = ({ parent }) => {
 
@@ -38,11 +38,11 @@ const Likes = ({ parent }) => {
   let likeEmoji 
 
   if(userHasLiked(parent.likes)){
-    // likeEmoji = <img src={likedThumbsUp} alt="thumbs up liked emoji" />
-    likeEmoji = <img src={"../images/thumbsUpLikedEmoji.png"} alt="thumbs up liked emoji" />
+    likeEmoji = <img src={likedThumbsUp} alt="thumbs up liked emoji" />
+    // likeEmoji = <img src={"./images/thumbsUpLikedEmoji.png"} alt="thumbs up liked emoji" />
   } else {
-    // likeEmoji = <img src={unLikedThumbsUp} alt="thumbs up unliked emoji" onClick={handleButtonClick}/>
-    likeEmoji = <img src={"../images/thumbsUpUnLikedEmoji.png"} alt="thumbs up unliked emoji" onClick={handleButtonClick}/>
+    likeEmoji = <img src={unLikedThumbsUp} alt="thumbs up unliked emoji" onClick={handleButtonClick}/>
+    // likeEmoji = <img src={"./images/thumbsUpUnLikedEmoji.png"} alt="thumbs up unliked emoji" onClick={handleButtonClick}/>
   }
 
   return(
