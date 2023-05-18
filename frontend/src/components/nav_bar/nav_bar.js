@@ -51,7 +51,7 @@ const Navigation = () => {
           <div className="dropdown">
             <div className='dropdown-container'>
               <button className="dropdown-button" onClick={handleDropdownClick}>
-              Dropdown
+              ⚪ ⚪ ⚪
               </button>
             </div>
             {isOpen && (
