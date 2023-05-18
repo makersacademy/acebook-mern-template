@@ -82,7 +82,7 @@ const UserForm = ({ navigate }) => {
   };
 
   return (
-    <div className='form-container'>
+    <div className='update-form'>
     <form onSubmit={handleSubmit}>
     <div class="form-header">
       <p>Update your details here:</p>
