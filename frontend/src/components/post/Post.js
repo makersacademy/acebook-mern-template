@@ -24,14 +24,14 @@ const Post = ({ post }) => {
           {post.createdAt.slice(0, 10)} by {post.author}
         </p> }
         <div className="break-line"></div>
+        <div className="likes">
+          <Likes likes={ post.likes } parent={postPropsForLike} />
+        </div>
         {post.comments.map((comment, index) => (
           <Comment comment={comment} key={index} />
         ))}
         <div className="add-comment">
           <AddComment post={post} />
-        </div>
-        <div className="likes">
-          <Likes likes={ post.likes } parent={postPropsForLike} />
         </div>
     </article>
     </div>
