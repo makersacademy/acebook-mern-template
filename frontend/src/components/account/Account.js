@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import EditAccountButton from '../edit-account/EditAccountButton';
+import './Account.css';
 
 const Account = () => {
   const [user, setUser] = useState({});
@@ -29,23 +30,34 @@ const Account = () => {
     setRefresh(prevRefresh => prevRefresh + 1);
   };
 
-  // one edit button takes you to an edit account component
-
   return(
     <div>
-      {user.photo ? (
-        <img src={ user.photo } alt="user-profile" />
-      ) : (
-        <img src="/happy-fox.jpeg" alt="default-profile" />
-      )}
-      <h1>{refresh}</h1>
-      <h3 className="user-name">Your current username: { user.userName }</h3>
-      <EditAccountButton toggleRefresh={toggleRefresh} valueToChange={"userName"}/>
-      <button onClick={toggleRefresh}>toggle me crazy</button>
-      <h3 className="user-email">Your current email: { user.email }</h3>
-      <EditAccountButton toggleRefresh={toggleRefresh} valueToChange={"email"}/>
-      <h3 className="user-password">Your current password: { user.password }</h3>
-      <EditAccountButton toggleRefresh={toggleRefresh} valueToChange={"password"}/>
+      <div className="container">
+
+      <div className="flex-container">
+        {user.photo ? (
+          <img src={ user.photo } alt="user-profile" />
+        ) : (
+          <img src="/happy-fox.jpeg" alt="default-profile" />
+        )}
+      </div>
+
+      <div className="flex-container">
+        <h3 className="user-name">Your current username: { user.userName }</h3>
+        <EditAccountButton toggleRefresh={toggleRefresh} valueToChange={"userName"}/>
+      </div>
+
+      <div className="flex-container">
+        <h3 className="user-email">Your current email: { user.email }</h3>
+        <EditAccountButton toggleRefresh={toggleRefresh} valueToChange={"email"}/>
+      </div>
+
+      <div className="flex-container">
+        <h3 className="user-password">Your current password: { user.password }</h3>
+        <EditAccountButton toggleRefresh={toggleRefresh} valueToChange={"password"}/>
+      </div>
+
+      </div>
     </div>
   )
 }

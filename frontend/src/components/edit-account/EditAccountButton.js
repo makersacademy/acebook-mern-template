@@ -30,13 +30,13 @@ const EditAccountButton = ({toggleRefresh, valueToChange}) => {
         setToken(window.localStorage.getItem("token"))
         setValue("")
       })
-      .then(toggleRefresh())
-      .then(toggleButton())
+      .then(() => toggleRefresh())
+      .then(() => toggleButton())
   }}
 
   return (
     <>
-    {(isPressed ? 
+    {(isPressed ?
     <form onSubmit={submitChange}>
       <input className="edit-form" onChange={onChangeValueInput} type="text" value={value} />
       <button className="edit-button" type="submit">Submit</button>
