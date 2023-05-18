@@ -18,7 +18,15 @@ const PostsController = {
     }));
   },
   Delete: (req, res) => {
-    Post.deleteOne()
+    Post.findOneAndDelete({ _id: req.body.post_id }, (err, deletedPost) => {
+      if (err) {
+        res.status(400).json({message: "Unable to delete post"})
+      } else if (deletedPost) {
+        res.status(200).json({message: "Document deleted successfully."})
+      } else {
+        res.status(404).json({message: "Document not found."})
+      }
+    })
   },
   Create: (req, res) => {
     const post = new Post();
