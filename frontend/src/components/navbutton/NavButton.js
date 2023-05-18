@@ -1,10 +1,13 @@
+import { Link, NavLink } from "react-router-dom"
 import "./navbutton.css"
 
-function NavButton(prop) {
-  const handleClickButton = () => {
-    prop.sendTo({address})
-  }
+function NavButton(props) {
+  const to = props.to;
+  const value = props.value;
+
   return (
-    <button className="navbutton" onClick={handleClickButton}>{prop.linkLabel}</button>
+    <NavLink to={to} className="navbutton">{value}</NavLink>
   )
 }
+
+export default NavButton;
