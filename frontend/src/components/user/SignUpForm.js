@@ -74,6 +74,7 @@ const SignUpForm = ({ navigate }) => {
   };
 
   return (
+    <div className="form">
     <form onSubmit={handleSubmit}>
       <div className="form-header">
         <p>Please complete the details below to create your account:</p>
@@ -157,6 +158,7 @@ const SignUpForm = ({ navigate }) => {
         </div>
       )}
     </form>
+    </div>
   );
 };
 

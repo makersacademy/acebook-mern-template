@@ -13,7 +13,7 @@
   align-items: center;
   margin-bottom: 20px;
   padding: 20px;
-  background-color: rgba(0, 128, 128, 0.096);
+  background-color: rgba(170, 216, 216, 0.847);
   border-radius: 20px;
   min-width: 500px;
   max-width: 500px;
@@ -37,6 +37,5 @@
   margin-right: 10px;
   border-width: 1px;
 }
-
 
 

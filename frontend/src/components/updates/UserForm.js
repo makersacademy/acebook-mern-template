@@ -123,6 +123,7 @@ const UserForm = ({ navigate }) => {
   }, [showPopup]);
 
   return (
+    <div className='update-form'>
     <form onSubmit={handleSubmit}>
       <div className="form-header">
         <p>Update your details here:</p>
@@ -236,6 +237,7 @@ const UserForm = ({ navigate }) => {
       </div>
       )}
     </form>
+    </div>
   );
 };
 

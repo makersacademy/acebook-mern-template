@@ -15,20 +15,51 @@
 }
 
 .logo-container {
-  flex: 9;  /* Increase the flex value to push right section further to the right */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 20%;
 }
 
-.logo img {
+.logo-container #container {
+  position: relative;
+}
+
+.logo-container .logo1,
+.logo-container .logo2 {
   width: 200px;
+  max-width: 100%;
+  max-height: 100%;
 }
 
-.logo {
+.logo-container .logo1 {
+  animation: spin 10s linear infinite;
+}
+
+.logo-container .logo2 {
+  margin-left: -200px; /* Adjust the value to position the second logo on top */
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.logoAll img {
+  width: 200px;
+  max-width: 100%;
+  max-height: 100%;
+}
+
+.logoAll {
   display: flex;
   justify-content: center; /* Align logo to center */
   align-items: center;
   height: 100%; /* Set height to 100% */
-  flex: 1; /* Add flex to take up remaining space */
-
 }
 
 .dropdown-button:hover {
@@ -128,4 +159,17 @@
 
 .dropdown-item:hover {
   background-color: #eee;
+}
+
+.logo-spin {
+  animation: spin 2s linear infinite;
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
 }

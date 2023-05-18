@@ -51,6 +51,9 @@ const LogInForm = ({ navigate }) => {
   return (
     <div className='login-container'>
       <form className='login-form' onSubmit={handleSubmit}>
+      <div className="form-header">
+      <p>Welcome to Moangoose, please login:</p>
+      </div>
         <div className='form-input'>
           <input placeholder='Email' id="email" type='text' value={email} onChange={handleEmailChange} />
         </div>
