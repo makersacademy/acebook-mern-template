@@ -30,7 +30,7 @@ const PostsController = {
     });
   },
   AddLikes: (req, res) => {
-    Post.findById(req.body.id, (err, post) => {
+    Post.findById(req.body.article_id, (err, post) => {
       if (err) {
         throw err;
       }

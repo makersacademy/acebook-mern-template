@@ -64,7 +64,7 @@ describe("/posts", () => {
       await request(app)
         .patch("/posts/likes")
         .set("Authorization", `Bearer ${token}`)
-        .send({id: posts[0]._id, username: "test_username"});
+        .send({article_id: posts[0]._id, username: "test_username"});
 
       let updatedPosts = await Post.find();
       //testing if the likes array has one element
