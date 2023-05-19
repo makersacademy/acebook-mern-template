@@ -9,8 +9,10 @@ const Feed = ({ navigate }) => {
   const [postCount, setPostCount] = useState(0);
   window.localStorage.setItem("app-route", "feed")
   const handlePostAdded = () => {
-    setPostCount(prevCount => prevCount + 1);
+    setPostCount(prevCount => prevCount + 1); 
   };
+
+  const [showComments, setShowComments] = useState(false);    
 
   function orderByDate (posts) {
     return posts.sort((a,b) => new Date(a.createdAt) - new Date(b.createdAt)).reverse()
@@ -47,7 +49,7 @@ const Feed = ({ navigate }) => {
         
         <div id='feed' role="feed">
           {posts.map(
-            (post) => ( <Post post={ post } key={ post._id } onPostAdded={handlePostAdded} /> )
+            (post) => ( <Post post={ post } key={ post._id } onPostAdded={handlePostAdded} showComments={showComments} setShowComments={setShowComments}/> )
           )}
         </div>
       </>

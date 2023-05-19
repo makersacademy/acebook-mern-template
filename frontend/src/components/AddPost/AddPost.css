@@ -1,18 +1,20 @@
 #message {
-  width: 400px;
+  width: 600px;
   font-size: 1.2rem;
   margin: 35px 15px 25px 0;
   padding: 5px 12px;
+  background-color: #fff;
 }
 
 #submit {
   font-size: 1.2rem;
   padding: 5px 12px;
-  background-color: #bed3fa;
-  color: #444;
+  background-color: #2a68cc;
+  color: #fff;
 }
 
 #submit:hover {
   background-color: #fdd45a;
   color: #444;
 }
+
