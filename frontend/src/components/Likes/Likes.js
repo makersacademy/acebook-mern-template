@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import likedThumbsUp from '../../images/likedThumbsUp.png';
 import unLikedThumbsUp from '../../images/unlikedThumbsUp.png';
+import "./Likes.css";
 
 const Likes = ({ likes, parent }) => {
 
@@ -42,10 +43,10 @@ const Likes = ({ likes, parent }) => {
   let likeEmoji
   
   if(userHasLiked(likers)){
-    likeEmoji = <img src={likedThumbsUp} alt="thumbs up liked emoji" />
+    likeEmoji = <img src={likedThumbsUp} alt="thumbs up liked emoji" className="thumb"/>
   } else {
     // data-cy set here since this element responds to .click() in cypress
-    likeEmoji = <img src={unLikedThumbsUp} data-cy="like-button" alt="thumbs up unliked emoji" onClick={handleButtonClick}/>
+    likeEmoji = <img src={unLikedThumbsUp} data-cy="like-button" alt="thumbs up unliked emoji" onClick={handleButtonClick} className="thumb"/>
   }
 
   let likesLabel // singular or plural...
@@ -58,8 +59,8 @@ const Likes = ({ likes, parent }) => {
 
   return(
     <div className="likes">
-      <div id="like-count" data-cy="like-count"> {likers && likers.length} {likesLabel} </div>
       <div id="like-button" >{ likeEmoji }</div> 
+      <div id="like-count" data-cy="like-count"> {likers && likers.length} {likesLabel} </div>
     </div>
   )
 }

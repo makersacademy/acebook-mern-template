@@ -27,6 +27,7 @@
 .time-text {
   font-size: 0.9rem;
   color: #888;
+  margin: 10px 25px 0 0;
 }
 
 .break-line {
@@ -41,3 +42,9 @@
   margin-right: 10px;
   border: 1px solid #777;
 }
+
+.author-and-likes {
+  display: flex;
+  justify-content: space-between;
+}
+

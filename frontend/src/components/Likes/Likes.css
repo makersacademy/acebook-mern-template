@@ -1,0 +1,18 @@
+.thumb {
+  max-width: 35px;
+  max-height: 35px;
+}
+
+.likes {
+  display: flex;
+  align-items: flex-start;
+}
+
+#like-count {
+  margin: 10px 10px 0 0;
+  font-size: 1.2rem;
+}
+
+#like-button {
+  margin: 0 15px 0 10px;
+}

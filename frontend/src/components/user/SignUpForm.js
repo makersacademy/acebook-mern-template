@@ -57,12 +57,15 @@ const SignUpForm = ({ navigate }) => {
 
   return (
     <div className='login-form'>
+      <div className='title-container'>
+        <h1 className='login-title'>Farcebook Sign Up</h1>
+      </div>
       <form onSubmit={handleSubmit}>
-          <label for="email">Email: </label>
+          <label htmlFor="email">Email: </label>
           <input placeholder="Email" id="email" type='text' value={ email } onChange={handleEmailChange} /> <br />
-          <label for="username">Username: </label>
+          <label htmlFor="username">Username: </label>
           <input placeholder="Username" id="username" type='text' value={ username } onChange={handleUsernameChange} /> <br />
-          <label for="password">Password: </label>
+          <label htmlFor="password">Password: </label>
           <input placeholder="Password" id="password" type='password' value={ password } onChange={handlePasswordChange} /> <br />
           <input placeholder="Avatar" id="avatar" type='avatar' value={ avatar } onChange={handleAvatarChange} />
         <input id='submit' type="submit" value="Submit" />
