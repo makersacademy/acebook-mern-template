@@ -54,7 +54,8 @@ const Navbar = ({ navigate}) => {
               sx={{ width: 56, height: 56 }}
             />
         
-            <h1 className="title">Farcebook</h1>
+            <h1 className="farce">Farce</h1>
+            <h1 className="book">book</h1>
           </div>
           <div className="nav-right">
             { contextButton }

@@ -6,6 +6,7 @@ const SignUpForm = ({ navigate }) => {
   const [password, setPassword] = useState('');
   const [avatar, setAvatar] = useState(null);
   const [errors, setErrors] = useState([]);
+  window.localStorage.setItem("app-route", "signup")
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -65,6 +66,9 @@ const SignUpForm = ({ navigate }) => {
 
   return (
     <div className='login-form'>
+      <div className='title-container'>
+        <h1 className='login-title'>Farcebook Sign Up</h1>
+      </div>
       <form onSubmit={handleSubmit}>
         <label htmlFor='email'>Email:</label>
         <input placeholder='Email' id='email' type='text' value={email} onChange={handleEmailChange} /> <br />
@@ -74,7 +78,6 @@ const SignUpForm = ({ navigate }) => {
         <input placeholder='Password' id='password' type='password' value={password} onChange={handlePasswordChange} /> <br />
         <label htmlFor='avatar'>Avatar:</label>
         <input id='avatar' type='file' onChange={handleAvatarChange} /> <br />
-     
 
         <input id='submit' type='submit' value='Submit' />
       </form>

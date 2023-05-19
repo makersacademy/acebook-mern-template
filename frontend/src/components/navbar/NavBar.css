@@ -21,11 +21,25 @@ nav {
   align-items: center;
 }
 
+.farce {
+  display: inline;
+  margin-left: 40px;
+}
+
+.book {
+  opacity: 1;
+  transition: opacity 1.5s;
+}
+
+nav:hover .book{
+  opacity: 0;
+}
+
 nav h1 {
   color: #fdfeff;
   font-size: 3.5rem;
   font-weight: bold;
-  margin: 10px 0 10px 40px;  
+  margin: 10px 0 10px 0;  
 }
 
 .nav-bar {
@@ -39,7 +53,7 @@ nav h1 {
 .nav-right {
   display: flex;
   background-color: #27559c;
-  height: 80%;
+  height: 60%;
   padding: 0 15px 5px;
   border-radius: 15px;
   align-items: center;
@@ -54,14 +68,33 @@ nav h1 {
   color: #27559c;
 }
 
+nav:hover #logo {
+  animation: rotate 0.3s infinite linear;
+}
+
 /* Style for the navigation links */
 .nav-item a {
   text-decoration: none;
   color: #fdfeff;
-  font-size: 2.2rem;
+  font-size: 1.8rem;
   font-weight: bold;
 }
 
 .username-format {
   font-size: 1rem; font-weight: 300; color: rgb(234, 234, 241)
 }
+
+/* 
+#logo:hover {
+  animation: rotate 0.3s infinite linear;
+} */
+
+@keyframes rotate {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
