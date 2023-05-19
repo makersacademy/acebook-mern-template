@@ -36,9 +36,22 @@ nav h1 {
   padding: 10px;
 }
 
-/* Style for the navigation items */
-.nav-item {
-  margin-left: 10px;
+.nav-right {
+  display: flex;
+  background-color: #27559c;
+  height: 80%;
+  padding: 0 15px 5px;
+  border-radius: 15px;
+  align-items: center;
+}
+
+.nav-right:hover {
+  background-color: #fff;
+  cursor: pointer;
+}
+
+.nav-right:hover .nav-item a {
+  color: #27559c;
 }
 
 /* Style for the navigation links */
@@ -47,10 +60,6 @@ nav h1 {
   color: #fdfeff;
   font-size: 2.2rem;
   font-weight: bold;
-}
-
-.nav-item a:hover {
-  color: #97ffff;
 }
 
 .username-format {

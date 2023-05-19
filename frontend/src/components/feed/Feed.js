@@ -33,7 +33,6 @@ const Feed = ({ navigate }) => {
             post.avatar = post.authorUserID.avatar
             delete post.authorUserID
           })
-          // console.log(`1st post's author set to: ${data.posts[0].author}`) // VISIBILITY 
           setPosts(orderByDate(data.posts));
         })
     }
