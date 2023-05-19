@@ -12,7 +12,7 @@ import {
 } from "react-router-dom";
 import Navigation from '../nav_bar/nav_bar';
 
-import logo from './mongoosebackground.png'
+import logo from './smbg.png'
 
 
 const App = () => {
