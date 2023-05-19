@@ -65,17 +65,18 @@ const SignUpForm = ({ navigate }) => {
 
   return (
     <div className='login-form'>
+      <div className='title-container'>
+        <h1 className='login-title'>Farcebook Sign Up</h1>
+      </div>
       <form onSubmit={handleSubmit}>
-        <label htmlFor='email'>Email:</label>
-        <input placeholder='Email' id='email' type='text' value={email} onChange={handleEmailChange} /> <br />
-        <label htmlFor='username'>Username:</label>
-        <input placeholder='Username' id='username' type='text' value={username} onChange={handleUsernameChange} /> <br />
-        <label htmlFor='password'>Password:</label>
-        <input placeholder='Password' id='password' type='password' value={password} onChange={handlePasswordChange} /> <br />
-        <label htmlFor='avatar'>Avatar:</label>
-        <input id='avatar' type='file' onChange={handleAvatarChange} /> <br />
-
-        <input id='submit' type='submit' value='Submit' />
+          <label htmlFor="email">Email: </label>
+          <input placeholder="Email" id="email" type='text' value={ email } onChange={handleEmailChange} /> <br />
+          <label htmlFor="username">Username: </label>
+          <input placeholder="Username" id="username" type='text' value={ username } onChange={handleUsernameChange} /> <br />
+          <label htmlFor="password">Password: </label>
+          <input placeholder="Password" id="password" type='password' value={ password } onChange={handlePasswordChange} /> <br />
+          <input placeholder="Avatar" id="avatar" type='avatar' value={ avatar } onChange={handleAvatarChange} />
+        <input id='submit' type="submit" value="Submit" />
       </form>
 
       <div>{errors}</div>

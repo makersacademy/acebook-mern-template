@@ -5,7 +5,7 @@ import Button from "../Button/Button";
 import "./Post.css";
 import Avatar from "@mui/material/Avatar";
 import Likes from '../Likes/Likes';
-import { createGlobalStyle } from "styled-components";
+// import { createGlobalStyle } from "styled-components";
 
 const Post = ({ post, onPostAdded }) => {
   
@@ -25,17 +25,20 @@ const Post = ({ post, onPostAdded }) => {
       />
 
       <article data-cy="post" key={post._id}>
+          <p className="post-text">{post.message}</p>
+        <div className="author-and-likes">
+          <div className="likes">
+            <Likes likes={ post.likes } parent={postPropsForLike} />
+          </div>
+          { <p className="time-text">
+            Posted at {post.createdAt.slice(11, 16)} on{" "}
+            {post.createdAt.slice(0, 10)} by {post.author}
+          </p>}
+          
+        </div>
         
-        <p className="post-text">{post.message}</p>
-        { <p className="time-text">
-          Posted at {post.createdAt.slice(11, 16)} on{" "}
-          {post.createdAt.slice(0, 10)} by {post.author}
-        </p>}
         
         <div className="break-line"></div>
-        <div className="likes">
-          <Likes likes={ post.likes } parent={postPropsForLike} />
-        </div>
         
         <Button
           margin={showComments ? "15px" : "0"}

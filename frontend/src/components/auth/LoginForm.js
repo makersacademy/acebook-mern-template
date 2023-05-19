@@ -41,6 +41,9 @@ const LogInForm = ({ navigate }) => {
 
   return (
     <div className='login-form'>
+      <div className='title-container'>
+        <h1 className='login-title'>Log in to Farcebook</h1>
+      </div>
       <form onSubmit={handleSubmit}>
       <label htmlFor="username">Username: </label>
         <input placeholder="Username" id="username" type='text' value={ username } onChange={handleUsernameChange} /> <br />
