@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import './LoginForm.css';
+import successAudio from './audiofile.m4a';
 
 const LogInForm = ({ navigate }) => {
   const [email, setEmail] = useState("");
@@ -33,6 +34,10 @@ const LogInForm = ({ navigate }) => {
 
       document.cookie = cookieValue;
 
+      // Play audio on successful login
+      const audio = new Audio(successAudio);
+      audio.play();
+
       navigate("/posts");
     }
   };
@@ -49,9 +54,9 @@ const LogInForm = ({ navigate }) => {
   return (
     <div className='login-container'>
       <form className='login-form' onSubmit={handleSubmit}>
-      <div className="form-header">
-      <p>Welcome to Moangoose, please login:</p>
-      </div>
+        <div className="form-header">
+          <p>Welcome to Moangoose, please login:</p>
+        </div>
         <div className='form-input'>
           <input placeholder='Email' id="email" type='text' value={ email } onChange={handleEmailChange} />
         </div>
