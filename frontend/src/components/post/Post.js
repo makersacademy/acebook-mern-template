@@ -33,7 +33,9 @@ const Post = ({ post, onPostAdded }) => {
         </p>}
         
         <div className="break-line"></div>
-
+        <div className="likes">
+          <Likes likes={ post.likes } parent={postPropsForLike} />
+        </div>
         
         <Button
           className={showComments ? "show" : "hide"}
@@ -44,20 +46,15 @@ const Post = ({ post, onPostAdded }) => {
         />
         {showComments && (
           <>
-          {post.comments.map((comment, index) => (
-          <Comment comment={comment} key={index} />
-          ))}
-        </>
-          
+            {post.comments.map((comment, index) => (
+            <Comment comment={comment} key={index} />
+            ))}
+          </>
         )}  
         <div className="add-comment">
           <AddComment post={post} onPostAdded={onPostAdded}/>
-        </div>
-        <div className="likes">
-          <Likes likes={ post.likes } parent={postPropsForLike} />
-        </div>
-
-    </article> 
+        </div>  
+      </article> 
     </div>
   );
 };
