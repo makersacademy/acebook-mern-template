@@ -3,7 +3,7 @@ import EditAccountButton from '../edit-account/EditAccountButton';
 import './Account.css';
 
 
-const Account = () => {
+const Account = ({ navigate }) => {
   const [user, setUser] = useState({});
   const [token, setToken] = useState(window.localStorage.getItem("token"));
   const [refresh, setRefresh] = useState(false);
@@ -21,6 +21,8 @@ const Account = () => {
         setToken(window.localStorage.getItem("token"))
         setUser(data.user)
       })
+    } else {
+      navigate('/login')
     }
   }, [refresh])
 

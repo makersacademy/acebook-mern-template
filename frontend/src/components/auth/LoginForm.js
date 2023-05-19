@@ -8,6 +8,8 @@ const LogInForm = ({ navigate }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
+  if(loggedIn) {navigate('/posts')}
+
   const handleSubmit = async (event) => {
     event.preventDefault();
 

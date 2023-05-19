@@ -28,8 +28,9 @@ const Feed = ({ navigate }) => {
           if (data.posts) {
             setPosts(data.posts);
           }
-        
         })
+    } else {
+      navigate('/login')
     }
     // use effect watches over the refresh constant and executes the function
     // within each time refresh changes
