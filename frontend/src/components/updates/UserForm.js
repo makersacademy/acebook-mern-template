@@ -123,8 +123,8 @@ const UserForm = ({ navigate }) => {
   }, [showPopup]);
 
   return (
-    <div className='update-form'>
-    <form onSubmit={handleSubmit}>
+    <div className='update-container'>
+    <form className="update-form" onSubmit={handleSubmit}>
       <div className="form-header">
         <p>Update your details here:</p>
       </div>
@@ -176,11 +176,11 @@ const UserForm = ({ navigate }) => {
       </div>
 
       <div className="form-group">
-        <input id="submit" type="submit" value="Submit changes" />
+        <input className="submit-button" id="submit" type="submit" value="Submit changes" />
       </div>
 
       <div className="form-group">
-        <button type="button" onClick={handleDelete}>
+        <button className="delete-button" type="button" onClick={handleDelete}>
           Delete Account
         </button>
       </div>
