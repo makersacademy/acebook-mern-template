@@ -4,7 +4,6 @@ import Like from '../like/Like';
 import Delete from '../delete/Delete';
 
 import './Post.css';
-import Comment from '../comment/Comment';
 import CommentFeed from '../comment_feed/CommentFeed';
 
 const Post = ({post}) => {
