@@ -5,6 +5,7 @@ import Account from '../account/Account'
 import React from "react";
 import Feed from '../feed/Feed'
 import Home from '../home/Home'
+import NotFound from '../not-found/NotFound'
 import {
   useNavigate,
   Routes,
@@ -44,6 +45,7 @@ const App = () => {
           <Route path='/login'  element={<LoginForm  navigate={ useNavigate() }/>}/>
           <Route path='/signup' element={<SignUpForm navigate={ useNavigate() }/>}/>
           <Route path='/account' element={<Account navigate={ useNavigate() }/>}/>
+          <Route path='*' element={<NotFound/>}/>
         </Routes>
     </loggedInContext.Provider>
     );

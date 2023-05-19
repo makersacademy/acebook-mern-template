@@ -1,13 +1,17 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import './SignUpForm.css';
 import FileUploader from '../file-uploader/FileUploader.js';
+import {loggedInContext} from '../app/App'
 
 const SignUpForm = ({ navigate }) => {
 
+  const [loggedIn, setLoggedIn] = useContext(loggedInContext)
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [userName, setUserName] = useState("");
   const [userPhoto, setUserPhoto] = useState(null);
+
+  if(loggedIn) {navigate('/posts')}
 
   const handleSubmit = async (event) => {
     event.preventDefault();
