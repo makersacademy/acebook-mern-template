@@ -9,8 +9,9 @@ const Feed = ({ navigate }) => {
   const [postCount, setPostCount] = useState(0);
   window.localStorage.setItem("app-route", "feed")
   const handlePostAdded = () => {
-    setPostCount(prevCount => prevCount + 1);
+    setPostCount(prevCount => prevCount + 1); 
   };
+
 
   function orderByDate (posts) {
     return posts.sort((a,b) => new Date(a.createdAt) - new Date(b.createdAt)).reverse()
@@ -32,7 +33,6 @@ const Feed = ({ navigate }) => {
             post.avatar = post.authorUserID.avatar
             delete post.authorUserID
           })
-          // console.log(`1st post's author set to: ${data.posts[0].author}`) // VISIBILITY 
           setPosts(orderByDate(data.posts));
         })
     }
