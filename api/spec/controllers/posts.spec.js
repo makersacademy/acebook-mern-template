@@ -9,10 +9,12 @@ const secret = process.env.JWT_SECRET;
 let token;
 
 describe("/posts", () => {  
-  beforeAll( async () => {
-    const user = new User({email: "test@test.com", password: "12345678"});
-    await user.save();
+  let registeredUser;
 
+  beforeAll( async () => {
+    const user = new User({email: "test@test.com", password: "12345678", userName: "testuser"});
+    await user.save();
+    registeredUser = await User.findOne()
     token = JWT.sign({
       user_id: user.id,
       // Backdate this token of 5 minutes
@@ -87,8 +89,8 @@ describe("/posts", () => {
 
   describe("GET, when token is present", () => {
     test("returns every post in the collection", async () => {
-      let post1 = new Post({message: "howdy!"});
-      let post2 = new Post({message: "hola!"});
+      let post1 = new Post({message: "howdy!", author: registeredUser.id});
+      let post2 = new Post({message: "hola!", author: registeredUser.id});
       await post1.save();
       await post2.save();
       let response = await request(app)
@@ -100,8 +102,8 @@ describe("/posts", () => {
     })
 
     test("the response code is 200", async () => {
-      let post1 = new Post({message: "howdy!"});
-      let post2 = new Post({message: "hola!"});
+      let post1 = new Post({message: "howdy!", author: registeredUser.id});
+      let post2 = new Post({message: "hola!", author: registeredUser.id});
       await post1.save();
       await post2.save();
       let response = await request(app)
@@ -112,8 +114,8 @@ describe("/posts", () => {
     })
 
     test("returns a new token", async () => {
-      let post1 = new Post({message: "howdy!"});
-      let post2 = new Post({message: "hola!"});
+      let post1 = new Post({message: "howdy!", author: registeredUser.id});
+      let post2 = new Post({message: "hola!", author: registeredUser.id});
       await post1.save();
       await post2.save();
       let response = await request(app)
@@ -128,8 +130,8 @@ describe("/posts", () => {
 
   describe("GET, when token is missing", () => {
     test("returns no posts", async () => {
-      let post1 = new Post({message: "howdy!"});
-      let post2 = new Post({message: "hola!"});
+      let post1 = new Post({message: "howdy!", author: registeredUser.id});
+      let post2 = new Post({message: "hola!", author: registeredUser.id});
       await post1.save();
       await post2.save();
       let response = await request(app)
@@ -138,8 +140,8 @@ describe("/posts", () => {
     })
 
     test("the response code is 401", async () => {
-      let post1 = new Post({message: "howdy!"});
-      let post2 = new Post({message: "hola!"});
+      let post1 = new Post({message: "howdy!", author: registeredUser.id});
+      let post2 = new Post({message: "hola!", author: registeredUser.id});
       await post1.save();
       await post2.save();
       let response = await request(app)
@@ -148,8 +150,8 @@ describe("/posts", () => {
     })
 
     test("does not return a new token", async () => {
-      let post1 = new Post({message: "howdy!"});
-      let post2 = new Post({message: "hola!"});
+      let post1 = new Post({message: "howdy!", author: registeredUser.id});
+      let post2 = new Post({message: "hola!", author: registeredUser.id});
       await post1.save();
       await post2.save();
       let response = await request(app)

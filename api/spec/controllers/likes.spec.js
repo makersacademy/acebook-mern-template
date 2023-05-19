@@ -9,10 +9,12 @@ const secret = process.env.JWT_SECRET;
 let token;
 
 describe("/posts", () => {  
-  beforeAll( async () => {
-    const user = new User({email: "test@test.com", password: "12345678"});
-    await user.save();
 
+  let registeredUser;
+  beforeAll( async () => {
+    const user = new User({email: "test@test.com", password: "12345678", userName: "testuser"});
+    await user.save();
+    registeredUser = User.findOne()
     token = JWT.sign({
       user_id: user.id,
       // Backdate this token of 5 minutes
@@ -93,8 +95,9 @@ describe("/posts", () => {
 
   describe("GET POSTS to determine which ones user already liked or not", () => {
     test("returns didUserLikeThis: true if user liked the post", async () => {
-      let post1 = new Post({message: "howdy!"});
-      let post2 = new Post({message: "hola!"});
+      const user = await User.findOne()
+      let post1 = new Post({message: "howdy!", author: user.id});
+      let post2 = new Post({message: "hola!", author: user.id});
       await post1.save();
       await post2.save();
       let post_id = (await Post.find())[0].id;
