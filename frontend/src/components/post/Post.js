@@ -38,7 +38,6 @@ const Post = ({ post, onPostAdded }) => {
         </div>
         
         <Button
-          className={showComments ? "show" : "hide"}
           margin={showComments ? "15px" : "0"}
           color={showComments ? "#f99e92" : "#a8eb71"}
           text={showComments ? "Hide Comments" : "Show Comments"}

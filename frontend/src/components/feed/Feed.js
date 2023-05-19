@@ -12,7 +12,6 @@ const Feed = ({ navigate }) => {
     setPostCount(prevCount => prevCount + 1); 
   };
 
-  const [showComments, setShowComments] = useState(false);    
 
   function orderByDate (posts) {
     return posts.sort((a,b) => new Date(a.createdAt) - new Date(b.createdAt)).reverse()
@@ -34,7 +33,6 @@ const Feed = ({ navigate }) => {
             post.avatar = post.authorUserID.avatar
             delete post.authorUserID
           })
-          // console.log(`1st post's author set to: ${data.posts[0].author}`) // VISIBILITY 
           setPosts(orderByDate(data.posts));
         })
     }
@@ -49,7 +47,7 @@ const Feed = ({ navigate }) => {
         
         <div id='feed' role="feed">
           {posts.map(
-            (post) => ( <Post post={ post } key={ post._id } onPostAdded={handlePostAdded} showComments={showComments} setShowComments={setShowComments}/> )
+            (post) => ( <Post post={ post } key={ post._id } onPostAdded={handlePostAdded} /> )
           )}
         </div>
       </>

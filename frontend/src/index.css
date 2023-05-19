@@ -5,8 +5,6 @@
 }
 
 #root{
-  /* max-width: 840px; */
-  /*page centralized*/
   margin: 0 auto;
 }
 
@@ -69,4 +67,17 @@ p {
 
 .add-comment {
   float: right;
+}
+
+#logo:hover {
+  animation: rotate 0.3s infinite linear;
+}
+
+@keyframes rotate {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
 }

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import './AddPost.css';
 
-const AddPost = ({ onPostAdded }) => { // was passing in navigate but that is not passed into this component in Feed
+const AddPost = ({ onPostAdded }) => { 
   console.log("component rendered")
   const [message, setMessage] = useState('');
   const [token, setToken] = useState(window.localStorage.getItem("token"));
@@ -28,7 +28,6 @@ const AddPost = ({ onPostAdded }) => { // was passing in navigate but that is no
           console.log("Whoop! whoop!")
           let data = await response.json()
           setMessage('')
-          // // window.location.reload() // OLD way of reloading page
           window.localStorage.setItem("token", data.token)
           setToken(window.localStorage.getItem("token"));
           onPostAdded();
