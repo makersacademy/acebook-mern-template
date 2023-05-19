@@ -1,59 +1,66 @@
 import React, { useState } from 'react';
 
 const SignUpForm = ({ navigate }) => {
- 
-  const [email, setEmail] = useState("");
-  const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
-  const[avatar, setAvatar] = useState(""); // [null, function
-  const [errors, setErrors] = useState([]); //  'Invalid email address!'
-  window.localStorage.setItem("app-route", "signup")
+  const [email, setEmail] = useState('');
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
+  const [avatar, setAvatar] = useState(null);
+  const [errors, setErrors] = useState([]);
 
   const handleSubmit = async (event) => {
     event.preventDefault();
 
-    fetch( '/users', {
-      method: 'post',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({ email: email, username: username, password: password, avatar: avatar})
-    })
-      .then(response => {
-        if(response.status === 201) {
-          navigate('/login')
-        } else {
-          if(response.status === 400) {
-            response.json().then(data => {
-              setErrors(data.message) //message comes from backend
-            })
-          }
+    //need to change this to use fetch with the avatar
+    //image do not uppload with JSon. 
+    const formData = new FormData();
+    formData.append('email', email);
+    formData.append('username', username);
+    formData.append('password', password);
+    if (avatar) {
+      formData.append('avatar', avatar);
+    }
 
-          navigate('/signup')
+    fetch('/users', {
+      method: 'POST',
+      body: formData,
+    })
+      .then((response) => {
+        if (response.status === 201) {
+          navigate('/login');
+        } else {
+          if (response.status === 400) {
+            response.json().then((data) => {
+              setErrors(data.message);
+            });
+          }
+          navigate('/signup');
         }
       })
-  }
+      .catch((error) => {
+        console.log(error);
+      });
+  };
 
   const handleEmailChange = (event) => {
-    setEmail(event.target.value)
-  }
+    setEmail(event.target.value);
+  };
 
   const handleUsernameChange = (event) => {
-    setUsername(event.target.value)
-  }
+    setUsername(event.target.value);
+  };
 
   const handlePasswordChange = (event) => {
-    setPassword(event.target.value)
-  }
+    setPassword(event.target.value);
+  };
 
   const handleAvatarChange = (event) => {
-    setAvatar(event.target.value)
-  }
+    //before was a string, now is a fileq
+    setAvatar(event.target.files[0]);
+  };
 
   const login = () => {
-    navigate('/login')
-  }
-
+    navigate('/login');
+  };
 
   return (
     <div className='login-form'>
@@ -70,11 +77,10 @@ const SignUpForm = ({ navigate }) => {
           <input placeholder="Avatar" id="avatar" type='avatar' value={ avatar } onChange={handleAvatarChange} />
         <input id='submit' type="submit" value="Submit" />
       </form>
-      <div>
-        {errors}
-      </div>
-      </div>
-    );
-}
+
+      <div>{errors}</div>
+    </div>
+  );
+};
 
 export default SignUpForm;
