@@ -14,9 +14,23 @@ const PostsController = {
       // which returns true if the user's id is already in the likedBy array.
       // likedBy array is the list of users who already liked the post
       posts.forEach(post => {
-        if (post.likedBy.includes(req.user_id)) {post._doc.didUserLikeThis = true;}})
+        if (post.likedBy.includes(req.user_id)) {post._doc.didUserLikeThis = true;}
+        if (post.author._id.toString() === req.user_id) {post._doc.didUserPostThis = true;}
+      })
       res.status(200).json({ posts: posts, token: token });
     }));
+  },
+  Delete: (req, res) => {
+    Post.findOneAndDelete({ _id: req.body.post_id }, async (err, deletedPost) => {
+      const token = await TokenGenerator.jsonwebtoken(req.user_id);
+      if (err) {
+        res.status(400).json({message: "Unable to delete post", token: token})
+      } else if (deletedPost) {
+        res.status(200).json({message: "Document deleted successfully.", token: token})
+      } else {
+        res.status(404).json({message: "Document not found.", token: token})
+      }
+    })
   },
   Create: (req, res) => {
     const post = new Post();

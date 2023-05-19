@@ -1,8 +1,10 @@
 import './App.css';
 import LoginForm from '../auth/LoginForm'
 import SignUpForm from '../user/SignUpForm'
+import Account from '../account/Account'
 import React from "react";
 import Feed from '../feed/Feed'
+import Home from '../home/Home'
 import {
   useNavigate,
   Routes,
@@ -37,10 +39,11 @@ const App = () => {
     <loggedInContext.Provider value={[loggedIn, setLoggedIn]}>
       <NavBar />
         <Routes>
+          <Route path='/' element={<Home navigate={ useNavigate() } />} />
           <Route path='/posts'  element={<Feed navigate={ useNavigate() }/>}/>
           <Route path='/login'  element={<LoginForm  navigate={ useNavigate() }/>}/>
           <Route path='/signup' element={<SignUpForm navigate={ useNavigate() }/>}/>
-          {/* <Route path='/account' element={<Account navigate={ useNavigate() }/>}/> */}
+          <Route path='/account' element={<Account navigate={ useNavigate() }/>}/>
         </Routes>
     </loggedInContext.Provider>
     );

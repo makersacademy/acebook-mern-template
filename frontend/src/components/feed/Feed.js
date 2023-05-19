@@ -1,8 +1,11 @@
-import React, { useEffect, useState, useContext } from 'react';
+import React, { useEffect, useState, useContext, createContext} from 'react';
 import Post from '../post/Post'
 import {loggedInContext} from '../app/App'
+import './Feed.css';
 
 import NewPostForm from '../new-post/NewPostForm'
+
+export const refreshContext = createContext();
 
 const Feed = ({ navigate }) => {
   const [loggedIn, setLoggedIn] = useContext(loggedInContext)
@@ -22,7 +25,10 @@ const Feed = ({ navigate }) => {
         .then(async data => {
           window.localStorage.setItem("token", data.token)
           setToken(window.localStorage.getItem("token"))
-          setPosts(data.posts);
+          if (data.posts) {
+            setPosts(data.posts);
+          }
+        
         })
     }
     // use effect watches over the refresh constant and executes the function
@@ -52,13 +58,15 @@ const Feed = ({ navigate }) => {
         <h2>Posts</h2>
 
         <div className="new-post-form">
-          < NewPostForm toggleRefresh={toggleRefresh}/>
+          < NewPostForm toggleRefresh={toggleRefresh}/><br></br>
         </div>
 
         <div id='feed' role="feed">
+          <refreshContext.Provider value={[refresh, setRefresh]}>
             {posts.sort(comparebyDate).map(
               (post) => ( <Post post={ post } key={ post._id }/> )
             )}
+          </refreshContext.Provider>
         </div>
       </>
     )

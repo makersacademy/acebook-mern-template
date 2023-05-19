@@ -42,7 +42,7 @@ describe("/users", () => {
         expect(users.length).toEqual(0)
     });
   })
-  
+
   describe("POST, when email is missing", () => {
     test("response code is 400", async () => {
       let response = await request(app)

@@ -9,5 +9,6 @@ router.post("/", PostsController.Create);
 router.post("/like", PostsController.AddLike);
 router.post("/unlike", PostsController.Unlike);
 router.post("/comments", CommentsController.Create);
+router.delete("/delete", PostsController.Delete);
 
 module.exports = router;

@@ -54,14 +54,15 @@ const SignUpForm = ({ navigate }) => {
 
     return (
       <>
-        <div className="centered-box">
+        <div className="signup-form">
         <h1>Sign up</h1><br></br>
         <p>Please enter a valid email and password to sign up.</p><br></br>
           <form onSubmit={handleSubmit}>
             <input placeholder='Name' id="user-name" type='text' value={userName} onChange={handleNameChange} /><br></br>
-            < FileUploader onFileSelectSuccess={(file) => {handlePhotoChange(file)}} onFileSelectError={({error}) => alert(error)} userPhoto={ userPhoto } setUserPhoto={ setUserPhoto }/><br></br>
             <input placeholder='Email' id="email" type='text' value={email} onChange={handleEmailChange} /><br></br>
             <input className="input-field" placeholder='Password' id="password" type='password' value={password} onChange={handlePasswordChange} /><br></br>
+            <p>Please upload a profile picture</p>
+            < FileUploader onFileSelectSuccess={(file) => {handlePhotoChange(file)}} onFileSelectError={({error}) => alert(error)} userPhoto={ userPhoto } setUserPhoto={ setUserPhoto }/><br></br><br></br>
             <input role='submit-button' id='submit' type="submit" value="Sign-up" />
           </form>
         </div>
