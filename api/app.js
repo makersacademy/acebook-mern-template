@@ -17,6 +17,11 @@ app.use(logger("dev"));
 app.use(express.json());
 app.use(express.static(path.join(__dirname, "public")));
 
+// avatars is the URL path to access the avatars folder
+//display the images in the avatars folder
+app.use('/avatars', express.static(path.join(__dirname, 'avatars')));
+
+
 // middleware function to check for valid tokens
 const tokenChecker = (req, res, next) => {
 
@@ -42,6 +47,7 @@ const tokenChecker = (req, res, next) => {
 app.use("/posts", tokenChecker, postsRouter);
 app.use("/tokens", tokensRouter);
 app.use("/users", usersRouter);
+
 
 // catch 404 and forward to error handler
 app.use((req, res, next) => {

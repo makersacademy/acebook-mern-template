@@ -1,0 +1,67 @@
+nav {
+  background-color: #27559c;
+  height: 80px;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 840px;
+  margin: 0 auto;
+  height: 100%;
+}
+
+.nav-left {
+  display: flex;
+  height: 100%;
+  align-items: center;
+}
+
+nav h1 {
+  color: #fdfeff;
+  font-size: 3.5rem;
+  font-weight: bold;
+  margin: 10px 0 10px 40px;  
+}
+
+.nav-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #27559c;
+  padding: 10px;
+}
+
+.nav-right {
+  display: flex;
+  background-color: #27559c;
+  height: 80%;
+  padding: 0 15px 5px;
+  border-radius: 15px;
+  align-items: center;
+}
+
+.nav-right:hover {
+  background-color: #fff;
+  cursor: pointer;
+}
+
+.nav-right:hover .nav-item a {
+  color: #27559c;
+}
+
+/* Style for the navigation links */
+.nav-item a {
+  text-decoration: none;
+  color: #fdfeff;
+  font-size: 2.2rem;
+  font-weight: bold;
+}
+
+.username-format {
+  font-size: 1rem; font-weight: 300; color: rgb(234, 234, 241)
+}

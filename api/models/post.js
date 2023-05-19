@@ -1,8 +1,22 @@
 const mongoose = require("mongoose");
+//const { ObjectId } = require ("mongoose")
 
 const PostSchema = new mongoose.Schema({
-  message: String
-});
+  message: String, 
+  comments: [],   // AddComments: Added comments (empty array) to schema 
+  authorUserID: {
+    type: mongoose.Schema.Types.ObjectId,
+    required: true,
+    ref: "User"
+  },
+  likes: [{
+    type: String,
+    default: []
+  }],
+  }, {
+    timestamps: true
+  }
+);
 
 const Post = mongoose.model("Post", PostSchema);
 
