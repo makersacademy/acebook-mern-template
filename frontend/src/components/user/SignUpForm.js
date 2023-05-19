@@ -56,6 +56,7 @@ const SignUpForm = ({ navigate }) => {
   const handleAvatarChange = (event) => {
     //before was a string, now is a fileq
     setAvatar(event.target.files[0]);
+    console.log(event.target.files[0]);
   };
 
   const login = () => {
@@ -73,6 +74,7 @@ const SignUpForm = ({ navigate }) => {
         <input placeholder='Password' id='password' type='password' value={password} onChange={handlePasswordChange} /> <br />
         <label htmlFor='avatar'>Avatar:</label>
         <input id='avatar' type='file' onChange={handleAvatarChange} /> <br />
+     
 
         <input id='submit' type='submit' value='Submit' />
       </form>
