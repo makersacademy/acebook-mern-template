@@ -8,14 +8,16 @@
 .background::before {
   content: "";
   position: fixed;
-  top: 0;
+  top: 225px;
   left: 0;
   width: 100%;
   height: 100%;
-  background-image: url("mongoosebackground.png");
-  background-repeat: repeat-y;
-  background-size: 100%;
+  background-image: url("smbg.png");
+  background-repeat: repeat;
+  background-size: 20%;
   z-index: -1;
+  opacity: 0.1;
+  background-blend-mode: multiply;
 }
 
 .logo {
