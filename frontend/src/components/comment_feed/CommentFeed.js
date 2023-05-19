@@ -3,12 +3,6 @@ import Comment from '../comment/Comment';
 import './CommentFeed.css'
 
 const CommentFeed = ({comments}) => {
-  const [commentList, setCommentList] = useState(comments);
-
-  useEffect(() => {
-    console.log("Here we are")
-  }
-  , [commentList]);
 
   return (
     <div className='comments-feed'>

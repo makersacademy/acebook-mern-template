@@ -64,7 +64,7 @@ const Feed = ({ navigate }) => {
         <div id='feed' role="feed">
           <refreshContext.Provider value={[refresh, setRefresh]}>
             {posts.sort(comparebyDate).map(
-              (post) => ( <Post post={ post } key={ post._id }/> )
+              (post) => ( <Post post={ post } key={ post._id } toggleRefresh={toggleRefresh}/> )
             )}
           </refreshContext.Provider>
         </div>

@@ -6,7 +6,7 @@ import Delete from '../delete/Delete';
 import './Post.css';
 import CommentFeed from '../comment_feed/CommentFeed';
 
-const Post = ({post}) => {
+const Post = ({post, toggleRefresh}) => {
   var date = new Date(post.createdDateTime);
   var formattedDate = date.toUTCString()
 
@@ -32,7 +32,7 @@ const Post = ({post}) => {
           </div>
         </div>
       </div>
-    <NewCommentForm post_id= { post._id }/>
+    <NewCommentForm post_id={ post._id } toggleRefresh={toggleRefresh}/>
     <CommentFeed comments={post.comments}/>
     </>
   )

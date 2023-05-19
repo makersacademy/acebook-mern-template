@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import './CommentForm.css'
 
-const NewCommentForm = ({post_id}) => {
+const NewCommentForm = ({post_id, toggleRefresh}) => {
   const[newComment, setNewComment] = useState("");
   const [token, setToken] = useState(window.localStorage.getItem("token"));
 
@@ -29,6 +29,7 @@ const NewCommentForm = ({post_id}) => {
         // console.log(newPost) // connect to database, update data
         setNewComment(""); // clear the input field - set as empty string so type doesn't change
       })
+      .then(() => toggleRefresh())
     }
   }
   
