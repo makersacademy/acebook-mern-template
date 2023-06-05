@@ -29,6 +29,9 @@
     "supertest": "^6.2.4"
   },
   "devDependencies": {
+    "eslint": "^8.42.0",
+    "eslint-plugin-react": "^7.32.2",
+    "fetch-mock": "^9.11.0",
     "jest": "^27.5.1"
   },
   "nodemonConfig": {
