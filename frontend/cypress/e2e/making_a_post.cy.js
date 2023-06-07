@@ -6,9 +6,20 @@ describe('Making a post', () => {
 
   it('should make a post when user is logged in', () => {
     cy.visit('/create-post');
-    cy.get('#message').type('quack quack quack');
+    cy.get('#message').type('ducklings');
     cy.get('#submit').click();
-    cy.contains('quack quack quack');
+    cy.contains('ducklings');
     cy.url().should("include", "/posts");
+  })
+
+  it('should post two posts and they should both be in the feed', () => {
+    cy.visit('/create-post');
+    cy.get('#message').type('duck');
+    cy.get('#submit').click();
+    cy.visit('/create-post');
+    cy.get('#message').type('goose');
+    cy.get('#submit').click();
+    cy.contains('duck');
+    cy.contains('goose');
   })
 });
