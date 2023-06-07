@@ -32,6 +32,7 @@ describe("User model", () => {
     });
     expect(user.password).toEqual("password");
   });
+
   it("has a name", () => {
     const user = new User({
       email: "someone@example.com",
@@ -43,6 +44,7 @@ describe("User model", () => {
     expect(user.firstName).toEqual("John");
     expect(user.lastName).toEqual("Smith");
   });
+  
   it("has a username", () => {
     const user = new User({
       email: "someone@example.com",
