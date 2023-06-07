@@ -8,6 +8,7 @@ import {
   Routes,
   Route,
 } from "react-router-dom";
+import CreatePostForm from '../create-post/CreatePostForm';
 
 const App = () => {
     return (
@@ -15,6 +16,7 @@ const App = () => {
           <Route path='/posts'  element={<Feed navigate={ useNavigate() }/>}/>
           <Route path='/login'  element={<LoginForm  navigate={ useNavigate() }/>}/>
           <Route path='/signup' element={<SignUpForm navigate={ useNavigate() }/>}/>
+          <Route path='/create-post' element={<CreatePostForm navigate={ useNavigate() }/>}/>
         </Routes>
     );
 }
