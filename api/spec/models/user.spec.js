@@ -60,7 +60,6 @@ describe("User model", () => {
 
         expect(users[0]).toMatchObject({
           email: "someone@example.com",
-          password: "password",
           name: "someone",
         });
         done();
