@@ -26,7 +26,7 @@ describe("/users", () => {
       await request(app)
         .post("/users")
         .send({
-          email: "scarlett@email.com",
+          email: "scarlett1@email.com",
           password: "1234",
           firstName: "Scarlett",
           lastName: "Scarlettson",
@@ -34,7 +34,7 @@ describe("/users", () => {
         })
       let users = await User.find()
       let newUser = users[users.length - 1]
-      expect(newUser.email).toEqual("scarlett@email.com")
+      expect(newUser.email).toEqual("scarlett1@email.com")
     })
   })
 
@@ -43,7 +43,7 @@ describe("/users", () => {
       let response = await request(app)
         .post("/users")
         .send({
-          email: "scarlett@email.com",
+          email: "scarlett2@email.com",
           firstName: "Scarlett",
           lastName: "Scarlettson",
           userName: "scat",
@@ -55,7 +55,7 @@ describe("/users", () => {
       await request(app)
         .post("/users")
         .send({
-          email: "scarlett@email.com",
+          email: "scarlett3@email.com",
           firstName: "Scarlett",
           lastName: "Scarlettson",
           userName: "scat",
@@ -97,7 +97,7 @@ describe("/users", () => {
       let response = await request(app)
         .post("/users")
         .send({
-          email: "scarlett@email.com",
+          email: "scarlett4@email.com",
           password: "1234",
           lastName: "Scarlettson",
           userName: "scat",
@@ -109,7 +109,7 @@ describe("/users", () => {
       await request(app)
         .post("/users")
         .send({
-          email: "scarlett@email.com",
+          email: "scarlett5@email.com",
           password: "1234",
           lastName: "Scarlettson",
           userName: "scat",
@@ -124,7 +124,7 @@ describe("/users", () => {
       let response = await request(app)
         .post("/users")
         .send({
-          email: "scarlett@email.com",
+          email: "scarlett6@email.com",
           password: "1234",
           firstName: "Scarlett",
           userName: "scat",
@@ -151,7 +151,7 @@ describe("/users", () => {
       let response = await request(app)
         .post("/users")
         .send({
-          email: "scarlett@email.com",
+          email: "scarlett6@email.com",
           password: "1234",
           firstName: "Scarlett",
           lastName: "Scarlettson",
@@ -170,6 +170,32 @@ describe("/users", () => {
         })
         let users = await User.find()
       expect(users.length).toEqual(0)
+    });
+  })
+  describe("POST, when we already have the same email in the database", () => {
+
+    test("only creates 1", async () => {
+      await request(app)
+        .post("/users")
+        .send({
+          email: "scarlett@email.com",
+          password: "1234",
+          firstName: "Scarlett",
+          lastName: "Scarlettson",
+          userName: "scat",
+        });
+      await request(app)
+        .post("/users")
+        .send({
+          email: "scarlett@email.com",
+          password: "1234",
+          firstName: "Scarlett",
+          lastName: "Scarlettson",
+          userName: "scat",
+        });
+
+        let users = await User.find()
+      expect(users.length).toEqual(1)
     });
   })
 })
