@@ -1,7 +1,7 @@
-var mongoose = require("mongoose");
+const mongoose = require("mongoose");
 
 require("../mongodb_helper");
-var Post = require("../../models/post");
+const Post = require("../../models/post");
 
 describe("Post model", () => {
   beforeEach((done) => {
@@ -11,8 +11,18 @@ describe("Post model", () => {
   });
 
   it("has a message", () => {
-    var post = new Post({ message: "some message" });
+    const post = new Post({ message: "some message" });
     expect(post.message).toEqual("some message");
+  });
+
+  it("has an empty array for comments", () => {
+    const post = new Post(
+      { 
+      message: "some message", 
+    }
+    );
+
+    expect(post.comments).toBeTruthy();
   });
 
   it("can list all posts", (done) => {
@@ -24,7 +34,7 @@ describe("Post model", () => {
   });
 
   it("can save a post", (done) => {
-    var post = new Post({ message: "some message" });
+    const post = new Post({ message: "some message" });
 
     post.save((err) => {
       expect(err).toBeNull();
@@ -36,5 +46,12 @@ describe("Post model", () => {
         done();
       });
     });
+  });
+
+  it("has a post with a comment", () => {
+    const post = new Post({ message: "some message" });
+    const comment = { message: "This is a comment." };
+    post.comments.push(comment);
+    expect(post.comments[0].message).toEqual("This is a comment.")
   });
 });
