@@ -157,4 +157,28 @@ describe("/posts", () => {
       expect(response.body.token).toEqual(undefined);
     })
   })
+
+  describe("POST /addComment, when token is present", () => {
+    // test("responds with a 201", async () => {
+    //   let response = await request(app)
+    //     .post("/posts/add-comment")
+    //     .set("Authorization", `Bearer ${token}`)
+    //     .send({ message: "hello world", token: token });
+    //   expect(response.status).toEqual(201);
+    // });
+  
+    test("adds a comment to an existing post", () => {
+      // place holder
+    });
+  });
+
+  describe("POST /addComment, when token is missing", () => {
+    test("responds with a 400", async () => {
+      // placeholder
+    });
+  
+    test("doesn't add a comment to an existing post", () => {
+      // place holder, not sure if we need these 0nes
+    });
+  });
 });
