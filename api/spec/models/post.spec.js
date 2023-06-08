@@ -61,4 +61,16 @@ describe("Post model", () => {
     let post = await Post.findById(post1._id);
     expect(post).toMatchObject({ message: "this is a post" });
   })
+
+  it("can update a post based on post object id", async () => {
+    var post = new Post({ message: "This text will change" });
+
+    await post.save();
+
+    const newMessage = "This is the new text";
+
+    await Post.findByIdAndUpdate(post._id, { message: newMessage });
+    let result = await Post.findById(post._id);
+    expect(result).toMatchObject({ message: "This is the new text" });
+  })
 });
