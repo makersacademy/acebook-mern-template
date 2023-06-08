@@ -20,7 +20,9 @@ const SignUpForm = ({ navigate }) => {
         if (response.status === 201) {
           navigate("/login");
         } else {
-          setValidationError({ password: response.message });
+          response.json().then(data => {
+            setValidationError({ password: data.message });
+          });
         }
       });
     }
