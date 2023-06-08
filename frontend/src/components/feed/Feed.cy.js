@@ -26,14 +26,15 @@ describe("Feed", () => {
   })
 
   it("Should post a new post and display on the page", () => {
+    window.localStorage.setItem("token", "fakeToken")
     cy.mount(<Feed navigate={navigate}/>)
 
-    cy.intercept('POST', '/posts', { newPost: "my new post", token: "fakeToken" }).as("post")
+    cy.intercept('POST', '/posts', { message: "OK" }).as("postRequest")
 
-    cy.get("#post").type("my new post");
+    cy.get("#post").type("newPost");
     cy.get("#submit").click();
-    cy.wait('@post').then( interception => {
-      expect(interception.response.body.token).to.eq("fakeToken")
+    cy.wait('@postRequest').then( interception => {
+      expect(interception.response.body.message).to.eq("OK")
     })
   })
 })
