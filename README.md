@@ -217,8 +217,8 @@ After logging in, you won't see much but you can create posts using PostMan and 
   Start the server in test mode (so that it connects to the test DB)
 
   ```
-  ; cd api
-  ; JWT_SECRET=SUPER_SECRET npm run start:test
+  ; cd apiJWT_SECRET=SUPER_SECRET npm run start:test
+  ; 
   ```
 
   Then start the front end in a new terminal session

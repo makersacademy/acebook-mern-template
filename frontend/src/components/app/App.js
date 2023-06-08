@@ -10,6 +10,7 @@ import {
 } from "react-router-dom";
 
 const App = () => {
+  // want to have the token state in App 
     return (
         <Routes>
           <Route path='/posts'  element={<Feed navigate={ useNavigate() }/>}/>

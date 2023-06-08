@@ -1,44 +1,55 @@
 import React, { useEffect, useState } from 'react';
-import Post from '../post/Post'
+import Post from '../post/Post';
+import { fetchPosts, handleSendingNewPost } from '../../fetchers';
 
 const Feed = ({ navigate }) => {
+  const [message, setMessage] = useState('');
   const [posts, setPosts] = useState([]);
   const [token, setToken] = useState(window.localStorage.getItem("token"));
 
   useEffect(() => {
-    if(token) {
-      fetch("/posts", {
-        headers: {
-          'Authorization': `Bearer ${token}`
-        }
-      })
-        .then(response => response.json())
-        .then(async data => {
-          window.localStorage.setItem("token", data.token)
-          setToken(window.localStorage.getItem("token"))
-          setPosts(data.posts);
-        })
-    }
+    fetchPosts(token, setToken, setPosts);
   }, [])
     
-
   const logout = () => {
     window.localStorage.removeItem("token")
     navigate('/login')
   }
-  
+
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    handleSendingNewPost(token, message, "/posts");
+    fetchPosts(token, setToken, setPosts);
+    setMessage('');
+  }
+
     if(token) {
       return(
         <>
-          <h2>Posts</h2>
+            <h1>Posts</h1>
+            <h2>What's up?</h2>
+            <form onSubmit={handleSubmit}>
+              <textarea 
+                id='message'
+                value={message}
+                onChange={(event) => setMessage(event.target.value)} 
+                type='text' 
+                placeholder='Your feelings matter.' 
+                required>
+              </textarea>
+              <button>Post</button>
+            </form>
+
+            <div id='feed' role="feed">
+              {posts.map(
+                // index is counting the times i map
+                (post, index) => ( <Post post={ post } key={ post._id + index } /> )
+              )}
+            </div>
+            
             <button onClick={logout}>
               Logout
             </button>
-          <div id='feed' role="feed">
-              {posts.map(
-                (post) => ( <Post post={ post } key={ post._id } /> )
-              )}
-          </div>
         </>
       )
     } else {
