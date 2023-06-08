@@ -107,7 +107,6 @@ describe("/user", () => {
           expect(response.body.token).toEqual(undefined);
         })
 
-
       })
 
 
