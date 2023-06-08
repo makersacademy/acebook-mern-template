@@ -7,11 +7,13 @@ import {
   useNavigate,
   Routes,
   Route,
+  Navigate
 } from "react-router-dom";
 
 const App = () => {
     return (
         <Routes>
+          <Route path='/'  element={ <Navigate to="/posts"/> }/>
           <Route path='/posts'  element={<Feed navigate={ useNavigate() }/>}/>
           <Route path='/login'  element={<LoginForm  navigate={ useNavigate() }/>}/>
           <Route path='/signup' element={<SignUpForm navigate={ useNavigate() }/>}/>

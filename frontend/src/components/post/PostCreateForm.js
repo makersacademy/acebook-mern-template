@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
+import { Navigate } from "react-router-dom";
 
-const PostCreateForm = () => {
+const PostCreateForm = ({navigate}) => {
   const [post, setPost] = useState("");
   const [token, setToken] = useState(window.localStorage.getItem("token"));
 
@@ -21,6 +22,7 @@ const PostCreateForm = () => {
     if(response.status === 201) {
       // TODO: Will need to renavigate back to /posts upon 201 status
       console.log('Successfully submitted');
+      return <Navigate to='/posts'/>;
     } else {
       console.log('Failed to submit');
     }

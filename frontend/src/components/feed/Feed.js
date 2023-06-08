@@ -21,6 +21,8 @@ const Feed = ({ navigate }) => {
           setToken(window.localStorage.getItem("token"))
           setPosts(data.posts);
         })
+    } else {
+      navigate('/login')
     }
   }, [])
     
@@ -30,25 +32,20 @@ const Feed = ({ navigate }) => {
     navigate('/login')
   }
   
-    if(token) {
-      return(
-        <>
-          <h2>Posts</h2>
-          <button onClick={logout}>
-            Logout
-          </button>
-          <PostCreateForm />
-          <div id='feed' role="feed">
-            {posts.map(
-              (post) => ( <Post post={ post } key={ post._id } /> )
-            )}
-          </div>
-        </>
-      )
-    } else {
-      // TODO: Possibly an error in route. (Might change to /signup?)
-      navigate('/signin')
-    }
+  return(
+    <>
+      <h2>Posts</h2>
+      <button onClick={logout}>
+        Logout
+      </button>
+      <PostCreateForm navigate={ navigate }/>
+      <div id='feed' role="feed">
+        {posts.map(
+          (post) => ( <Post post={ post } key={ post._id } /> )
+        )}
+      </div>
+    </>
+  )
 }
 
 export default Feed;
