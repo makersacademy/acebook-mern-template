@@ -8,7 +8,7 @@ const PostsController = {
         throw err;
       }
       const token = await TokenGenerator.jsonwebtoken(req.user_id)
-      res.status(200).json({ posts: posts, token: token });
+      res.status(200).json({ posts: posts, token: token });//posts are contained here with the token
     });
   },
   Create: (req, res) => {
