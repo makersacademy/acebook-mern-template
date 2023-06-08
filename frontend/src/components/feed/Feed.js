@@ -23,33 +23,37 @@ const Feed = ({ navigate }) => {
   }, [])
     
   const handleSubmitPost = async (event) => {
-    event.preventDefault();
-
-    fetch( '/posts', {
-      method: 'post',
-      headers: {
-        'Authorization': `Bearer ${token}`,
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({ 
-        newPost: newPost
+    // event.preventDefault();
+    if(token) {
+      let response = await fetch( '/posts', {
+        method: 'post',
+        headers: {
+          'Authorization': `Bearer ${token}`,
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ 
+          newPost: newPost
+        })
       })
-    })
-      .then(response => {
- 
-        if(response.status !== 201) {
-          console.log("oop")
-          navigate('/login')
-        } else {
-          console.log("yay")
-          let data = response.json()
-          window.localStorage.setItem("token", data.token)
-          setToken(window.localStorage.getItem("token"))
-          setPosts(data.posts);
-          navigate(useEffect());
+       
+    console.log(response)
+    if(response.status !== 201) {
+      console.log("oop")
+      navigate('/login')
+    } else {
+      console.log("yay")
+      await response.json()
+      // window.localStorage.setItem("token", data.token)
+      window.localStorage.getItem("token")
+      // setPosts(data.posts)
+      navigate('/posts');
+    }
+          
         }
-      })
-  }
+          // .then(navigate(useEffect()));
+      
+    }
+  
 
   const handlePostChange = (event) => {
     setNewPost(event.target.value)
