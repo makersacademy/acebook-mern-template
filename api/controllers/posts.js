@@ -22,6 +22,9 @@ const PostsController = {
       res.status(201).json({ message: 'OK', token: token });
     });
   },
+  addCommentToPost: (req, res) => {
+    // placeholder
+  },
 };
 
 module.exports = PostsController;

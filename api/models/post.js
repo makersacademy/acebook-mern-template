@@ -4,7 +4,6 @@ const CommentsSchema = new mongoose.Schema({
   message: String,
 });
 
-
 const PostSchema = new mongoose.Schema({
   message: String,
   comments: [CommentsSchema],
