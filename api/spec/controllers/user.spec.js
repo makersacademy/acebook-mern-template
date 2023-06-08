@@ -31,8 +31,8 @@ describe("/user", () => {
         await User.deleteMany({});
       })
 
-      describe("GET, when token is present", () => {
-        test("returns user first name, last name and username for a given user password", async () => {
+      describe("GET with email when token is present", () => {
+        test("returns user first name, last name and username for a given email", async () => {
             const email = "test@test.com";
             let response = await request(app)
                 .get("/user")
@@ -72,7 +72,7 @@ describe("/user", () => {
         })
       })
 
-      describe("GET, when token is missing", () => {
+      describe("GET with email when token is missing", () => {
         test("returns an error", async () =>{
           const email = "test@test.com";
           let response = await request(app)
@@ -109,5 +109,102 @@ describe("/user", () => {
 
       })
 
+      describe("GET, when email given doesn't exist", () => {
+        test("returns an error", async () =>{
+          const email = "wrongemail@test.com";
+          let response = await request(app)
+              .get("/user")
+              .set("Authorization", `Bearer ${token}`)
+              .send({
+                  email: email,
+                  token: token});
+          let errMessage = response.body.message;
+          expect(errMessage).toEqual("auth error");
+        })
 
+        test("the response code is 401", async () =>{
+          const email = "wrongemail@test.com";
+          let response = await request(app)
+              .get("/user")
+              .set("Authorization", `Bearer ${token}`)
+              .send({
+                  email: email,
+                  token: token});
+          expect(response.status).toEqual(401);
+        })
+
+        test("does not return a new token", async () =>{
+          const email = "wrongemail@test.com";
+          let response = await request(app)
+              .get("/user")
+              .set("Authorization", `Bearer ${token}`)
+              .send({
+                  email: email,
+                  token: token});
+          expect(response.body.token).toEqual(undefined);
+        })
+
+      })
+      
+
+      describe("GET with userName when token is present", () => {
+        test("returns user first name and last name for a given userName", async () => {
+            const userName = "testy";
+            let response = await request(app)
+                .get("/user")
+                .set("Authorization", `Bearer ${token}`)
+                .send({
+                    userName: userName,
+                    token: token});
+            let userDetails = response.body.user;
+            expect(userDetails.firstName).toEqual("Test");
+            expect(userDetails.lastName).toEqual("Testson");
+        })
+    
+        test("the response code is 200", async () => {
+          const userName = "testy";
+          let response = await request(app)
+              .get("/user")
+              .set("Authorization", `Bearer ${token}`)
+              .send({
+                  userName: userName,
+                  token: token});
+          let userDetails = response.body.user;
+          expect(response.status).toEqual(200);
+        })
+    
+        test("returns a new token", async () => {
+          const userName = "testy";
+          let response = await request(app)
+              .get("/user")
+              .set("Authorization", `Bearer ${token}`)
+              .send({
+                  userName: userName,
+                  token: token});
+        let newPayload = JWT.decode(response.body.token, process.env.JWT_SECRET);
+        let originalPayload = JWT.decode(token, process.env.JWT_SECRET);
+        expect(newPayload.iat > originalPayload.iat).toBeTruthy();
+        })
+      })
+
+
+      describe("GET with userName and email when token is present", () => {
+        test("returns user first name and last name for a given userName", async () => {
+            const userName = "testy";
+            const email = "test@test.com";
+            let response = await request(app)
+                .get("/user")
+                .set("Authorization", `Bearer ${token}`)
+                .send({
+                    userName: userName,
+                    email: email,
+                    token: token});
+            let userDetails = response.body.user;
+            expect(userDetails.firstName).toEqual("Test");
+            expect(userDetails.lastName).toEqual("Testson");
+        })
+    
+      })
+
+  
 });
