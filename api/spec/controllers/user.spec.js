@@ -34,7 +34,6 @@ describe("/user", () => {
       describe("GET, when token is present", () => {
         test("returns user first name, last name and username for a given user password", async () => {
             const email = "test@test.com";
-            User.findOne({ email: email }).then(async (user) => {
             let response = await request(app)
                 .get("/user")
                 .set("Authorization", `Bearer ${token}`)
@@ -45,22 +44,31 @@ describe("/user", () => {
             expect(userDetails.firstName).toEqual("Test");
             expect(userDetails.lastName).toEqual("Testson");
             expect(userDetails.userName).toEqual("testy");
-
-          });
         })
     
-        xtest("the response code is 200", async () => {
-          
+        test("the response code is 200", async () => {
+          const email = "test@test.com";
+            let response = await request(app)
+                .get("/user")
+                .set("Authorization", `Bearer ${token}`)
+                .send({
+                    email: email,
+                    token: token});
+            let userDetails = response.body.user;
+            expect(response.status).toEqual(200);
         })
     
-        xtest("returns a new token", async () => {
-          
+        test("returns a new token", async () => {
+          const email = "test@test.com";
+            let response = await request(app)
+                .get("/user")
+                .set("Authorization", `Bearer ${token}`)
+                .send({
+                    email: email,
+                    token: token});
+          let newPayload = JWT.decode(response.body.token, process.env.JWT_SECRET);
+          let originalPayload = JWT.decode(token, process.env.JWT_SECRET);
+          expect(newPayload.iat > originalPayload.iat).toBeTruthy();
         })
       })
-
-
-
-
-
-
 });

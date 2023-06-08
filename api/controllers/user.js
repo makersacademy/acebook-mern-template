@@ -11,8 +11,16 @@ const UserController = {
               res.status(401).json({ message: "auth error" });
             } else {
               const token = await TokenGenerator.jsonwebtoken(user.id)
-              res.status(200).json({ user: user, token: token});
+              const foundUser = {
+                userId: user._id,
+                firstName: user.firstName,
+                lastName: user.lastName,
+                userName: user.userName
+              }
+              res.status(200).json({ user: foundUser, token: token});
             }
           });
     }
 };
+
+module.exports = UserController;
