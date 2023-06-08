@@ -1,7 +1,8 @@
 describe('Making a post', () => {
   
   beforeEach(() => {
-    cy.login("user@email.com", "12345678")
+    cy.signup("duck@pond.com", "Il0veBread")
+    cy.login("duck@pond.com", "Il0veBread")
   });
 
   it('should make a post when user is logged in', () => {
