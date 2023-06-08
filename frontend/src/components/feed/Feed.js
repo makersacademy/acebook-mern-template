@@ -43,9 +43,6 @@ const Feed = ({ navigate }) => {
     } else {
       console.log("yay")
       await response.json()
-      // window.localStorage.setItem("token", data.token)
-      window.localStorage.getItem("token")
-      // setPosts(data.posts)
       navigate('/posts');
     }
           
