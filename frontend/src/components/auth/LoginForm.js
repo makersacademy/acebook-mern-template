@@ -16,10 +16,10 @@ const LogInForm = ({ navigate }) => {
     })
 
     if(response.status !== 201) {
-      console.log("yay")
+      console.log("unsuccessful login")
       navigate('/login')
     } else {
-      console.log("oop")
+      console.log("successful login")
       let data = await response.json()
       window.localStorage.setItem("token", data.token)
       navigate('/posts');
