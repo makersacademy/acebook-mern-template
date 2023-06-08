@@ -66,10 +66,10 @@ const SignUpForm = ({ navigate }) => {
   return (
     <>
       <h1>Sign Up</h1>
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit} noValidate>
         <div>
           <label htmlFor="email">Email: </label>
-          <input placeholder="Email" id="email" type="text" value={email} onChange={handleEmailChange} />
+          <input placeholder="Email" id="email" type="email" value={email} onChange={handleEmailChange} />
           <p className="validation-error">{validationError?.email}</p>
         </div>
         <div>
