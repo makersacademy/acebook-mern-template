@@ -3,32 +3,37 @@ import React, { useState } from "react";
 const SignUpForm = ({ navigate }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [validationError, setValidationError] = useState({ email: "", password: "" });
+  const [name, setName] = useState("");
+  const [validationError, setValidationError] = useState({ name: "", email: "", password: "" });
 
   const handleSubmit = async event => {
     event.preventDefault();
 
-    if (!validateEmail() || !validatePassword()) {
-      setEmail("");
-      setPassword("");
-      return;
+    if (validateName() && validateEmail() && validatePassword()) {
+      fetch("/users", {
+        method: "post",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ name: name, email: email, password: password }),
+      }).then(response => {
+        if (response.status === 201) {
+          navigate("/login");
+        } else {
+          setValidationError({ password: response.message });
+        }
+      });
     }
+  };
 
-    fetch("/users", {
-      method: "post",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ email: email, password: password }),
-    }).then(response => {
-      if (response.status === 201) {
-        navigate("/login");
-      } else if (response.status === 400) {
-        setValidationError({ password: "Bad request" });
-      } else {
-        navigate("/signup");
-      }
-    });
+  const validateName = () => {
+    if (name.length > 0) {
+      setValidationError(prevState => ({ ...prevState, name: "" }));
+      return true;
+    } else {
+      setValidationError(prevState => ({ ...prevState, name: "Name must be at least one character long" }));
+      return false;
+    }
   };
 
   const validateEmail = () => {
@@ -37,22 +42,26 @@ const SignUpForm = ({ navigate }) => {
     const validEmail = re.test(email);
 
     if (validEmail) {
-      setValidationError({ email: "", password: "" });
+      setValidationError(prevState => ({ ...prevState, email: "" }));
       return true;
     } else {
-      setValidationError({ email: "Email address is not valid" });
+      setValidationError(prevState => ({ ...prevState, email: "Email address is not valid" }));
       return false;
     }
   };
 
   const validatePassword = () => {
     if (password.length > 0) {
-      setValidationError({ email: "", password: "" });
+      setValidationError(prevState => ({ ...prevState, password: "" }));
       return true;
     } else {
-      setValidationError({ password: "Invalid password" });
+      setValidationError(prevState => ({ ...prevState, password: "Invalid password" }));
       return false;
     }
+  };
+
+  const handleNameChange = event => {
+    setName(event.target.value);
   };
 
   const handleEmailChange = event => {
@@ -66,7 +75,13 @@ const SignUpForm = ({ navigate }) => {
   return (
     <>
       <h1>Sign Up</h1>
+
       <form onSubmit={handleSubmit} noValidate>
+        <div>
+          <label htmlFor="name">Name:</label>
+          <input placeholder="Name" id="name" type="text" value={name} onChange={handleNameChange} />
+          <p className="validation-error">{validationError?.name}</p>
+        </div>
         <div>
           <label htmlFor="email">Email: </label>
           <input placeholder="Email" id="email" type="email" value={email} onChange={handleEmailChange} />
