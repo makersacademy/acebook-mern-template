@@ -44,7 +44,9 @@ const Feed = ({ navigate }) => {
           console.log("yay")
           let data = response.json()
           window.localStorage.setItem("token", data.token)
-          navigate('/posts');
+          setToken(window.localStorage.getItem("token"))
+          setPosts(data.posts);
+          navigate(useEffect());
         }
       })
   }
@@ -70,8 +72,8 @@ const Feed = ({ navigate }) => {
              <input id='submit' type="submit" value="Submit" />
              </form>
           <div id='feed' role="feed">
-              {posts.map(
-                (post) => ( <Post post={ post } key={ post._id } /> )
+              {console.log(posts)}
+              {posts.map((post) => (<Post post={ post} key={ post._id } /> )
               )}
           </div>
         </>
