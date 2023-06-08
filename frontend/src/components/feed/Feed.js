@@ -44,12 +44,8 @@ const Feed = ({ navigate }) => {
       console.log("yay")
       await response.json()
       navigate('/posts');
-    }
-          
-        }
-          // .then(navigate(useEffect()));
-      
-    }
+    }}
+  }
   
 
   const handlePostChange = (event) => {
