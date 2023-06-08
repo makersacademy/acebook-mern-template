@@ -1,5 +1,6 @@
 const Post = require("../models/post");
 const TokenGenerator = require("../models/token_generator");
+const tokenDecoder = require("../models/token_decode");
 
 const PostsController = {
   Index: (req, res) => {
@@ -12,7 +13,8 @@ const PostsController = {
     });
   },
   Create: (req, res) => {
-    const post = new Post(req.body);
+    const post = new Post({message: req.body.message, author: req.tokenDecoder(headers['Authorization'].split(' ')[1]).user_id});
+    console.log(req.headers['Authorization'])
     post.save(async (err) => {
       if (err) {
         throw err;

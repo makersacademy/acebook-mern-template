@@ -13,7 +13,7 @@ const CreatePostForm = ({ navigate }) => {
         'Authorization': 'Bearer ' + localStorage.getItem('token')
       },
       body: JSON.stringify({
-        message: message
+        message: message,
       })
     })
     navigate('/posts')
