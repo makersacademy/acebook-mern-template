@@ -47,7 +47,7 @@ describe("Post model", () => {
     await post2.save();
 
     let posts = await Post.find();
-    console.log(posts);
+    // console.log(posts);
     expect(posts.length).toBe(2);
   })
 

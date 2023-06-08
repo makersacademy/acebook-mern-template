@@ -2,7 +2,7 @@ const Post = require("../models/post");
 const TokenGenerator = require("../models/token_generator");
 
 const PostsController = {
-  Index: (req, res) => {
+  Index: (req, res) => {   
     Post.find(async (err, posts) => {
       if (err) {
         throw err;
@@ -22,6 +22,11 @@ const PostsController = {
       res.status(201).json({ message: 'OK', token: token });
     });
   },
+  ShowPost: async (req, res) => {
+    let post_id = '6481ea7ed1f3219e82fddca6'
+    let post = await Post.findById(post_id);
+    console.log(post);
+  }
 };
 
 module.exports = PostsController;

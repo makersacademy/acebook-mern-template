@@ -111,6 +111,17 @@ describe("/posts", () => {
       expect(response.status).toEqual(200);
     })
 
+    test("returns a single post", async () => {
+      let post = new Post({message: "log this bitch"});
+      await post.save();
+      let response = await request(app)
+        .get("/posts/id")
+        .set("Authorization", `Bearer ${token}`)
+        .send({token: token});
+      let messages = response.body.posts.map((post) => ( post.message ));
+      expect(messages).toEqual(["log this bitch"]);
+    })
+
     test("returns a new token", async () => {
       let post1 = new Post({message: "howdy!"});
       let post2 = new Post({message: "hola!"});
