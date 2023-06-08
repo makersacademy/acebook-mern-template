@@ -1,10 +1,12 @@
 import React, { useState } from 'react';
+import './SignUpForm.css';
 
 const SignUpForm = ({ navigate }) => {
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-
+  const [username, setUsername] = useState("");
+ 
   const handleSubmit = async (event) => {
     event.preventDefault();
 
@@ -32,13 +34,21 @@ const SignUpForm = ({ navigate }) => {
     setPassword(event.target.value)
   }
 
+  const handleUsernameChange = (event) => {
+    setUsername(event.target.value)
+  }
+
 
     return (
-      <form onSubmit={handleSubmit}>
-          <input placeholder="Email" id="email" type='text' value={ email } onChange={handleEmailChange} />
-          <input placeholder="Password" id="password" type='password' value={ password } onChange={handlePasswordChange} />
-        <input id='submit' type="submit" value="Submit" />
-      </form>
+      <div className="signUpContainer">
+        <h1 className="signUpHeading"> Start your journey to Mordor.... </h1>
+        <form className="signUpForm" onSubmit={handleSubmit}>
+            <input className= "formInput" placeholder="Email" id="email" type='text' value={ email } onChange={handleEmailChange} />
+            <input className= "formInput" placeholder="Username" id="username" type="text" value={ username } onChange={ handleUsernameChange } />
+            <input className= "formInput" placeholder="Password" id="password" type='password' value={ password } onChange={handlePasswordChange} />
+          <input  className= "inputButton" id='submit' type="submit" value="Submit" />
+        </form>
+      </div>
     );
 }
 
