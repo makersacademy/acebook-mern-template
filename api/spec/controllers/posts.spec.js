@@ -158,26 +158,67 @@ describe("/posts", () => {
     })
   })
 
-  describe("POST /addComment, when token is present", () => {
-    // test("responds with a 201", async () => {
-    //   let response = await request(app)
-    //     .post("/posts/add-comment")
-    //     .set("Authorization", `Bearer ${token}`)
-    //     .send({ message: "hello world", token: token });
-    //   expect(response.status).toEqual(201);
-    // });
+  describe("POST /addCommentToPost, when token is present", () => {
+    test("responds with a 202", async () => {
+      // sends imitation HTTP request
+      let response = await request(app)
+        .post('/posts/add-comment')
+        .set("Authorization", `Bearer ${token}`)
+        .send(
+          { 
+            post_id: 'fake post id',
+            comment: {
+              message: 'a comment',
+            },
+            token: token,
+          }
+        );
+      // checks response status
+      expect(response.status).toEqual(202);
+    });
   
-    test("adds a comment to an existing post", () => {
+    test("adds a comment to an existing post", async () => {
+      // creates a new post
+      const post = new Post({message: 'my first post'});
+      // saves to DB
+      await post.save();
+      // sends imitation HTTP request with post_id inserted into body 
+      let response = await request(app)
+        .post("/posts/add-comment")
+        .set("Authorization", `Bearer ${token}`)
+        .send(
+          { 
+            post_id: post._id,
+            comment: {
+              message: 'a comment',
+            },
+            token: token,
+          }
+        );
+      // checks if post has been updated (need to see if this works)
+      expect(post.comments.length).toEqual(1);
+      expect(post.comments[0].message).toEqual('a comment')
+      // // possible alternative
+      // let updatedPost = await Post.findById(post._id)
+      // expect(updatedPost.comments.length).toEqual(1);
+      // expect(updatedPost.comments[0].message).toEqual('a comment')
+    });
+
+    test("returns a new token", () => {
       // place holder
     });
   });
 
   describe("POST /addComment, when token is missing", () => {
-    test("responds with a 400", async () => {
+    test("responds with a 401", async () => {
       // placeholder
     });
   
     test("doesn't add a comment to an existing post", () => {
+      // place holder, not sure if we need these 0nes
+    });
+
+    test("doesn't return  a new token", () => {
       // place holder, not sure if we need these 0nes
     });
   });
