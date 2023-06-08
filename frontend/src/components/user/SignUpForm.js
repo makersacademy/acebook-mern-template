@@ -23,6 +23,8 @@ const SignUpForm = ({ navigate }) => {
     }).then(response => {
       if (response.status === 201) {
         navigate("/login");
+      } else if (response.status === 400) {
+        setValidationError({ password: "Bad request" });
       } else {
         navigate("/signup");
       }
@@ -66,14 +68,14 @@ const SignUpForm = ({ navigate }) => {
       <h1>Sign Up</h1>
       <form onSubmit={handleSubmit}>
         <div>
-          <label htmlFor="email">Email:</label>
+          <label htmlFor="email">Email: </label>
           <input placeholder="Email" id="email" type="text" value={email} onChange={handleEmailChange} />
-          <p>{validationError?.email}</p>
+          <p className="validation-error">{validationError?.email}</p>
         </div>
         <div>
-          <label htmlFor="password">Password:</label>
+          <label htmlFor="password">Password: </label>
           <input placeholder="Password" id="password" type="password" value={password} onChange={handlePasswordChange} />
-          <p>{validationError?.password}</p>
+          <p className="validation-error">{validationError?.password}</p>
         </div>
 
         <input id="submit" type="submit" value="Submit" />
