@@ -36,5 +36,18 @@ describe("Post model", () => {
         done();
       });
     });
+
   });
+
+  it("can save multiple posts", async () => {
+    var post1 = new Post({ message: "this is a post" });
+    var post2 = new Post({ message: "this is another post" });
+
+    await post1.save();
+    await post2.save();
+
+    let posts = await Post.find();
+    console.log(posts);
+    expect(posts.length).toBe(2);
+  })
 });
