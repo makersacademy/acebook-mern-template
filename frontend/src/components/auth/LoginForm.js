@@ -8,27 +8,23 @@ const LogInForm = ({ navigate }) => {
   const handleSubmit = async event => {
     event.preventDefault();
 
-    if (!validateEmail() || !validatePassword()) {
-      setEmail("");
-      setPassword("");
-      return;
-    }
+    if (validateEmail() && validatePassword()) {
+      let response = await fetch("/tokens", {
+        method: "post",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ email: email, password: password }),
+      });
 
-    let response = await fetch("/tokens", {
-      method: "post",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ email: email, password: password }),
-    });
-
-    if (response.status !== 201) {
-      setValidationError({ password: "Username and password do not match" });
-      navigate("/login");
-    } else {
-      let data = await response.json();
-      window.localStorage.setItem("token", data.token);
-      navigate("/posts");
+      if (response.status !== 201) {
+        setValidationError({ password: "Username and password do not match" });
+        // navigate("/login");
+      } else {
+        let data = await response.json();
+        window.localStorage.setItem("token", data.token);
+        navigate("/posts");
+      }
     }
   };
 
@@ -41,7 +37,7 @@ const LogInForm = ({ navigate }) => {
       setValidationError({ email: "", password: "" });
       return true;
     } else {
-      setValidationError({ email: "Email address is not valid" });
+      setValidationError(prevState => ({ ...prevState, email: "Email address is not valid" }));
       return false;
     }
   };
@@ -51,7 +47,7 @@ const LogInForm = ({ navigate }) => {
       setValidationError({ email: "", password: "" });
       return true;
     } else {
-      setValidationError({ password: "Invalid password" });
+      setValidationError(prevState => ({ ...prevState, password: "Invalid password" }));
       return false;
     }
   };
