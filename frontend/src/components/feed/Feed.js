@@ -28,6 +28,7 @@ const Feed = ({ navigate }) => {
     fetch( '/posts', {
       method: 'post',
       headers: {
+        'Authorization': `Bearer ${token}`,
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({ 
@@ -35,10 +36,15 @@ const Feed = ({ navigate }) => {
       })
     })
       .then(response => {
-        if(response.status === 201) {
-          navigate('/post')
-        } else {
+ 
+        if(response.status !== 201) {
+          console.log("oop")
           navigate('/login')
+        } else {
+          console.log("yay")
+          let data = response.json()
+          window.localStorage.setItem("token", data.token)
+          navigate('/posts');
         }
       })
   }
