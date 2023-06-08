@@ -47,11 +47,32 @@ describe("Post model", () => {
       });
     });
   });
-
+  
   it("has a post with a comment", () => {
     const post = new Post({ message: "some message" });
     const comment = { message: "This is a comment." };
     post.comments.push(comment);
     expect(post.comments[0].message).toEqual("This is a comment.")
   });
+
+  it("can save a post with a comment", (done) => {
+    const post = new Post({ message: "some message" });
+    const comment = { message: "This is a comment." };
+    post.comments.push(comment);
+
+    post.save((err) => {
+      expect(err).toBeNull();
+
+      Post.find((err, posts) => {
+        expect(err).toBeNull();
+        const firstPost = posts[0]
+        const firstComment = firstPost.comments[0]
+
+        expect(firstPost.message).toBe('some message')
+        expect(firstComment.message).toBe('This is a comment.')
+        done();
+      });
+    });
+  });
+
 });
