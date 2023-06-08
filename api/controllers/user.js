@@ -6,18 +6,10 @@ const UserController = {
         const userName = req.body.userName;
         const email = req.body.email;
 
-        let searchValue = "";
-        let searchKey = "";
         let userDetails = {};
 
-        if (userName) {
-          searchKey = 'userName';
-          searchValue = userName;
-        }
-        else {
-          searchKey = 'email';
-          searchValue = email;
-        };
+        const searchKey = userName ? 'userName' : 'email';
+        const searchValue = userName || email;
         
         userDetails[searchKey] = searchValue;
 
