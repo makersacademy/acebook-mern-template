@@ -4,7 +4,7 @@ require("../mongodb_helper");
 const User = require('../../models/user');
 
 describe("/tokens", () => {
-  beforeAll( () => {
+  beforeAll( async () => {
     const user = new User({
       email: "test@test.com",
       password: "12345678",
@@ -12,7 +12,7 @@ describe("/tokens", () => {
       lastName: "Testson",
       userName: "testy"
     })
-    user.save()
+    await user.save()
   });
 
   afterAll( async () => {
