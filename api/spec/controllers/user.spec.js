@@ -48,27 +48,67 @@ describe("/user", () => {
     
         test("the response code is 200", async () => {
           const email = "test@test.com";
-            let response = await request(app)
-                .get("/user")
-                .set("Authorization", `Bearer ${token}`)
-                .send({
-                    email: email,
-                    token: token});
-            let userDetails = response.body.user;
-            expect(response.status).toEqual(200);
+          let response = await request(app)
+              .get("/user")
+              .set("Authorization", `Bearer ${token}`)
+              .send({
+                  email: email,
+                  token: token});
+          let userDetails = response.body.user;
+          expect(response.status).toEqual(200);
         })
     
         test("returns a new token", async () => {
           const email = "test@test.com";
-            let response = await request(app)
-                .get("/user")
-                .set("Authorization", `Bearer ${token}`)
-                .send({
-                    email: email,
-                    token: token});
-          let newPayload = JWT.decode(response.body.token, process.env.JWT_SECRET);
-          let originalPayload = JWT.decode(token, process.env.JWT_SECRET);
-          expect(newPayload.iat > originalPayload.iat).toBeTruthy();
+          let response = await request(app)
+              .get("/user")
+              .set("Authorization", `Bearer ${token}`)
+              .send({
+                  email: email,
+                  token: token});
+        let newPayload = JWT.decode(response.body.token, process.env.JWT_SECRET);
+        let originalPayload = JWT.decode(token, process.env.JWT_SECRET);
+        expect(newPayload.iat > originalPayload.iat).toBeTruthy();
         })
       })
+
+      describe("GET, when token is missing", () => {
+        test("returns an error", async () =>{
+          const email = "test@test.com";
+          let response = await request(app)
+              .get("/user")
+              .set("Authorization", `Bearer `)
+              .send({
+                  email: email,
+                  token: token});
+          let errMessage = response.body.message;
+          expect(errMessage).toEqual("auth error");
+        })
+
+        test("the response code is 401", async () =>{
+          const email = "test@test.com";
+          let response = await request(app)
+              .get("/user")
+              .set("Authorization", `Bearer `)
+              .send({
+                  email: email,
+                  token: token});
+          expect(response.status).toEqual(401);
+        })
+
+        test("does not return a new token", async () =>{
+          const email = "test@test.com";
+          let response = await request(app)
+              .get("/user")
+              .set("Authorization", `Bearer `)
+              .send({
+                  email: email,
+                  token: token});
+          expect(response.body.token).toEqual(undefined);
+        })
+
+
+      })
+
+
 });
