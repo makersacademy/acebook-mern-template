@@ -160,13 +160,17 @@ describe("/posts", () => {
 
   describe("POST /addCommentToPost, when token is present", () => {
     test("responds with a 202", async () => {
+      // creates a new post
+      const post = new Post({message: 'my first post'});
+      // saves to DB
+      await post.save();
       // sends imitation HTTP request
       let response = await request(app)
         .post('/posts/add-comment')
         .set("Authorization", `Bearer ${token}`)
         .send(
           { 
-            post_id: 'fake post id',
+            postId: post._id,
             comment: {
               message: 'a comment',
             },
@@ -188,20 +192,17 @@ describe("/posts", () => {
         .set("Authorization", `Bearer ${token}`)
         .send(
           { 
-            post_id: post._id,
+            postId: post._id,
             comment: {
               message: 'a comment',
             },
             token: token,
           }
         );
-      // checks if post has been updated (need to see if this works)
-      expect(post.comments.length).toEqual(1);
-      expect(post.comments[0].message).toEqual('a comment')
-      // // possible alternative
-      // let updatedPost = await Post.findById(post._id)
-      // expect(updatedPost.comments.length).toEqual(1);
-      // expect(updatedPost.comments[0].message).toEqual('a comment')
+      // checks if post has been updated properly by loading it from the database
+      let updatedPost = await Post.findById(post._id)
+      expect(updatedPost.comments.length).toEqual(1);
+      expect(updatedPost.comments[0].message).toEqual('a comment')
     });
 
     test("returns a new token", () => {
