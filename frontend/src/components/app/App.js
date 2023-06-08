@@ -17,7 +17,7 @@ const App = () => {
           <Route path='/posts'  element={<Feed navigate={ useNavigate() }/>}/>
           <Route path='/login'  element={<LoginForm  navigate={ useNavigate() }/>}/>
           <Route path='/signup' element={<SignUpForm navigate={ useNavigate() }/>}/>
-          <Route path='/user/:username' element={<Profile navigate={ useNavigate() } params={ useParams() }/>}/>
+          <Route path='/user/:username' element={<Profile navigate={ useNavigate() } params={ useParams }/>}/>
         </Routes>
     );
 }

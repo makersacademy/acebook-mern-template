@@ -1,51 +1,50 @@
 import React, { useEffect, useState } from 'react';
 
-const Profile = (props) => {
-  const [token, setToken] = useState(window.localStorage.getItem("token"));
+const Profile = ({ navigate, params }) => {
+  const { username }  = params()
+
+  const [userName, setUserName] = useState("")
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
-  const [userName, setUserName] = useState("");
-
+  const [token, setToken] = useState(window.localStorage.getItem("token"));
+  
   useEffect(() => {
     if(token) {
-      const { username } = props.useParams()
-
-      fetch("/user", {
+      fetch(`/user?username=${username}`, {
         headers: {
-          'Authorization': `Bearer ${token}`
-        },
-        body: JSON.stringify({ username: username })
+          'Authorization': `Bearer ${token}`,
+        }
       })
-        .then(response => response.json())
-        .then(async data => {
-          window.localStorage.setItem("token", data.token)
-          setToken(window.localStorage.getItem("token"))
-          setFirstName(data.firstName)
-          setLastName(data.lastName)
-          setUserName(data.userName)
+      .then(response => response.json())
+      .then( data => {
+        window.localStorage.setItem("token", data.token)
+        setToken(window.localStorage.getItem("token"))
+        
+        setFirstName(data.user.firstName)
+        setLastName(data.user.lastName)
+        setUserName(data.user.userName)
         })
     }
   }, [])
 
   const logout = () => {
     window.localStorage.removeItem("token")
-    props.navigate('/login')
+    navigate('/login')
   }
   
   if(token) {
     return (
       <div data-cy="profile">
-        <h2>Posts</h2>
         <button onClick={logout}>
           Logout
         </button>
-        <h3>{firstName}</h3>
-        <h3>{lastName}</h3>
-        <h3>{userName}</h3>
+        <h2>Profile Page</h2>
+        <h3>Name: {`${firstName} ${lastName}`}</h3>
+        <h3>username: {userName}</h3>
       </div>
     )
   } else {
-    props.navigate('/signin')
+    navigate('/login')
   }
 }
 
