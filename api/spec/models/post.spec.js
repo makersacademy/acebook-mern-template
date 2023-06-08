@@ -50,4 +50,15 @@ describe("Post model", () => {
     console.log(posts);
     expect(posts.length).toBe(2);
   })
+
+  it("can find a single post once multiple posts are added", async () => {
+    var post1 = new Post({ message: "this is a post" });
+    var post2 = new Post({ message: "this is another post" });
+
+    await post1.save();
+    await post2.save();
+
+    let post = await Post.findById(post1._id);
+    expect(post).toMatchObject({ message: "this is a post" });
+  })
 });
