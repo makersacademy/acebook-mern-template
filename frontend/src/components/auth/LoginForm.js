@@ -40,7 +40,7 @@ const LogInForm = ({ navigate }) => {
         <h1> Log in </h1>
         <input placeholder='Email' id="email" type='email' value={ email } onChange={handleEmailChange} />
         <input placeholder='Password' id="password" type='password' value={ password } onChange={handlePasswordChange} />
-        <input role='submit-button' id='submit' type="submit" value="Submit" />
+        <input id='submit' type="submit" value="Submit" />
       </form>
     );
 }
