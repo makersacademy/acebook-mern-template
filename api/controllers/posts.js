@@ -4,7 +4,7 @@ const TokenGenerator = require("../models/token_generator");
 const PostsController = {
   Index: (req, res) => {
     // .find is a mongoose method allowing us to get data out of the DB
-    Post.find((err, posts) => {
+    Post.find().populate({ path: 'user', select: 'name' }).exec((err, posts) => {
       if (err) {
         throw err;
       }
