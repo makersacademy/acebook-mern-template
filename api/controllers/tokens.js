@@ -9,7 +9,7 @@ const SessionsController = {
     const email = req.body.email;
     const password = req.body.password;
 
-    User.findOne({ email: email }).then((user) => {
+    User.findOne({ email: email }).then(async (user) => {
       if (!user) {
         res.status(401).json({ message: "auth error" });
       } else if (await bcrypt.compare(password, user.password) === false) {
