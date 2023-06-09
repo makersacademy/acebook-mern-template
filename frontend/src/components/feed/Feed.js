@@ -44,7 +44,7 @@ const Feed = ({ navigate }) => {
               {posts.map(
                 // index is counting the times i map
                 (post, index) => ( <Post post={ post } key={ post._id + index } /> )
-              )}
+              ).reverse()}
             </div>
             
             <button onClick={logout}>
