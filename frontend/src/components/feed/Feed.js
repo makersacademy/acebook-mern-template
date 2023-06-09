@@ -23,7 +23,7 @@ const Feed = ({ navigate }) => {
   }, [])
     
   const handleSubmitPost = async (event) => {
-    // event.preventDefault();
+    event.preventDefault();
     if(token) {
       let response = await fetch( '/posts', {
         method: 'post',
@@ -43,7 +43,17 @@ const Feed = ({ navigate }) => {
     } else {
       console.log("yay")
       await response.json()
-      navigate('/posts');
+      fetch("/posts", {
+        headers: {
+          'Authorization': `Bearer ${token}`
+        }
+      })
+        .then(response => response.json())
+        .then(async data => {
+          window.localStorage.setItem("token", data.token)
+          setToken(window.localStorage.getItem("token"))
+          setPosts(data.posts);
+        });
     }}
   }
   

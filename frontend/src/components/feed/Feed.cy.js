@@ -30,8 +30,10 @@ describe("Feed", () => {
     cy.mount(<Feed navigate={navigate}/>)
 
     cy.intercept('POST', '/posts', (req => {
-      req.reply(
-      { message: "OK" })
+      req.reply( {
+        
+      }
+      )
       }).as("postRequest")
     )
     cy.get("#post").type("newPost");
