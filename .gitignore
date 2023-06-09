@@ -73,3 +73,4 @@ cypress/screenshots
 cypress/videos
 #cypress e2e test videos
 /frontend/cypress/videos
+/frontend/cypress/screenshots
