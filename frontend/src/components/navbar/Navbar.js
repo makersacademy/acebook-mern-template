@@ -6,11 +6,9 @@ const Navbar = () => {
         <header className="navbar">
         <h1>Acebook</h1>
         <div className="navbar-list">
-            <ul>
-                <li><a>My Page</a></li>
-                <li><a>Posts</a></li>
-                <li><a>Logout</a></li>
-            </ul>
+            <a>My Page</a>
+            <a>Posts</a>
+            <a>Logout</a>
         </div>
     </header>
     )
