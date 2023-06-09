@@ -3,8 +3,8 @@ const TokenGenerator = require("../models/token_generator");
 
 const UserController = {
     Index: (req, res) => {
-        const userName = req.body.userName;
-        const email = req.body.email;
+        const userName = req.query.username;
+        const email = req.query.email;
 
         let userDetails = {};
 
