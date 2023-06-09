@@ -37,7 +37,7 @@ const Feed = ({ navigate }) => {
                 placeholder='Your feelings matter.' 
                 required>
               </textarea>
-              <button>Post</button>
+              <button id='submit'>Post</button>
             </form>
 
             <div id='feed' role="feed">
