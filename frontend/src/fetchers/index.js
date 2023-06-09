@@ -18,6 +18,37 @@ export const handleSendingNewPost = async (token, message, url) => {
     }
 }
 
+export const handleSendingNewComment = async (token, post, comment, url) => {
+    // try catch are essential for async fucntions for cathing errors
+    try {
+      const response = await fetch(`${url}`, {
+        method: 'post',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}`
+        },
+        body: JSON.stringify({
+            postId: post._id,
+            comment: comment,
+            token: token, 
+          }
+        )
+      });
+      const data = await response.json();
+      console.log(data)
+    } catch(e) {
+      console.log(e)
+    }
+}
+
+// { 
+//   postId: post._id,
+//   comment: {
+//     message: 'a comment',
+//   },
+//   token: token,
+// }
+
 export const fetchPosts = (token, setToken, setPosts) => {
     if(token) {
       fetch("/posts", {
@@ -33,3 +64,4 @@ export const fetchPosts = (token, setToken, setPosts) => {
         })
     }
 }
+
