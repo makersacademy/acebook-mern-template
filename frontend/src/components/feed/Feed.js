@@ -23,10 +23,9 @@ const Feed = ({ navigate }) => {
           setToken(window.localStorage.getItem("token"))
           setPosts(data.posts);
         })
-    }
-  }, [])
+      }
+    }, [])
     
-  
     if(token) {
       return(
         <>
