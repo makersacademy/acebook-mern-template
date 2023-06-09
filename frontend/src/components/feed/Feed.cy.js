@@ -24,4 +24,17 @@ describe("Feed", () => {
       .and('contain.text', "Hello again, world")
     })
   })
+
+  it("Calls post /posts endpoint when submitting the new post form", () => {
+    window.localStorage.setItem("token", "fakeToken")
+    cy.mount(<Feed navigate={navigate}/>)
+
+    cy.intercept('POST', 'posts', {message: "OK"}).as("postPosts")
+
+    cy.get("#message").type("Making a post");
+    cy.get("#submit").click();
+    cy.wait('@postPosts').then( interception => {
+      expect(interception.response.body.message).to.eq("OK")
+    })
+  })
 })

@@ -8,3 +8,5 @@ router.post("/", PostsController.Create);
 router.post("/add-comment", PostsController.addCommentToPost);
 
 module.exports = router;
+
+// addComment controller invoked in here

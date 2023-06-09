@@ -7,3 +7,14 @@ const Post = ({post}) => {
 }
 
 export default Post;
+
+// post.comment. i need an area for someone to make a comment
+// this is also where we can add our likes
+
+// add text area
+// add submit button
+// setup handleSubmit
+
+// make a like component 
+
+// research making a folder called fetchers
