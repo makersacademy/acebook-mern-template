@@ -12,7 +12,7 @@ const Navbar = ({ navigate }) => {
     return(
       <>
         <div className="topnav">
-          <button onClick={logout}>
+          <button className = "logout" onClick={logout}>
             Logout
           </button>
         </div>
