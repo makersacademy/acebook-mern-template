@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import './SignUpForm.css';
 
 const SignUpForm = ({ navigate }) => {
   const [email, setEmail] = useState("");
@@ -9,34 +10,31 @@ const SignUpForm = ({ navigate }) => {
   const handleSubmit = async event => {
     event.preventDefault();
 
-    if (!validateName() || !validateEmail() || !validatePassword()) {
-      setName("");
-      setEmail("");
-      setPassword("");
-      return;
+    if (validateName() && validateEmail() && validatePassword()) {
+      fetch("/users", {
+        method: "post",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ name: name, email: email, password: password }),
+      }).then(response => {
+        if (response.status === 201) {
+          navigate("/login");
+        } else {
+          response.json().then(data => {
+            setValidationError({ password: data.message });
+          });
+        }
+      });
     }
-
-    fetch("/users", {
-      method: "post",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ name: name, email: email, password: password }),
-    }).then(response => {
-      if (response.status === 201) {
-        navigate("/login");
-      } else {
-        navigate("/signup");
-      }
-    });
   };
 
   const validateName = () => {
     if (name.length > 0) {
-      setValidationError({ name: "", email: "", password: "" });
+      setValidationError(prevState => ({ ...prevState, name: "" }));
       return true;
     } else {
-      setValidationError({ name: "Name must be at least one character long" });
+      setValidationError(prevState => ({ ...prevState, name: "Name must be at least one character long" }));
       return false;
     }
   };
@@ -47,20 +45,20 @@ const SignUpForm = ({ navigate }) => {
     const validEmail = re.test(email);
 
     if (validEmail) {
-      setValidationError({ name: "", email: "", password: "" });
+      setValidationError(prevState => ({ ...prevState, email: "" }));
       return true;
     } else {
-      setValidationError({ email: "Email address is not valid" });
+      setValidationError(prevState => ({ ...prevState, email: "Email address is not valid" }));
       return false;
     }
   };
 
   const validatePassword = () => {
     if (password.length > 0) {
-      setValidationError({ name: "", email: "", password: "" });
+      setValidationError(prevState => ({ ...prevState, password: "" }));
       return true;
     } else {
-      setValidationError({ password: "Invalid password" });
+      setValidationError(prevState => ({ ...prevState, password: "Invalid password" }));
       return false;
     }
   };
@@ -77,29 +75,31 @@ const SignUpForm = ({ navigate }) => {
     setPassword(event.target.value);
   };
 
-
   return (
     <>
+    <div className="signup" >
       <h1>Sign Up</h1>
-      <form onSubmit={handleSubmit}>
-        <div> 
+
+      <form onSubmit={handleSubmit} noValidate>
+        <div>
           <label htmlFor="name">Name:</label>
           <input placeholder="Name" id="name" type="text" value={name} onChange={handleNameChange} />
-          <p>{validationError?.name}</p>
+          <p className="validation-error">{validationError?.name}</p>
         </div>
         <div>
-          <label htmlFor="email">Email:</label>
-          <input placeholder="Email" id="email" type="text" value={email} onChange={handleEmailChange} />
-          <p>{validationError?.email}</p>
+          <label htmlFor="email">Email: </label>
+          <input placeholder="Email" id="email" type="email" value={email} onChange={handleEmailChange} />
+          <p className="validation-error">{validationError?.email}</p>
         </div>
         <div>
-          <label htmlFor="password">Password:</label>
+          <label htmlFor="password">Password: </label>
           <input placeholder="Password" id="password" type="password" value={password} onChange={handlePasswordChange} />
-          <p>{validationError?.password}</p>
-        </div>      
+          <p className="validation-error">{validationError?.password}</p>
+        </div>
 
         <input id="submit" type="submit" value="Submit" />
       </form>
+    </div>
     </>
   );
 };

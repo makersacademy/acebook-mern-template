@@ -35,13 +35,26 @@ const Post = ({post, userId}) => {
     }
   }
 
+const Post = ({post}) => {
+
+  console.log(post);
+
+  const formattedDate = new Date(post.time).toLocaleString('en-GB', {
+    day: 'numeric',
+    month: 'long',
+    hour: 'numeric',
+    minute: 'numeric',
+  });
+  
   return(
-    <article data-cy="post" key={ post._id }>
+    <article data-cy="post" key={ post._id }> 
+      <p>{ post.user.name }</p>
+      <p>{ formattedDate } </p>
       <p>{ post.message }</p>
-      <div><span>Likes: { numberOfLikes } </span>
-      <button onClick={postLiked}>Like</button></div>
+      <p>Likes: { numberOfLikes } </p>
+      <button onClick={postLiked}>Like</button>
     </article>
   )
-}
+};
 
 export default Post;

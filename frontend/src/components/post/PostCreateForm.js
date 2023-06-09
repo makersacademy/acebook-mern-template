@@ -1,43 +1,57 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState } from "react";
 
 const PostCreateForm = () => {
   const [post, setPost] = useState("");
   const [token, setToken] = useState(window.localStorage.getItem("token"));
+  const [validationError, setValidationError] = useState("");
 
-  const submitPost = async (event) => {
+  const submitPost = async event => {
     // Sends a fetch request to router
     event.preventDefault();
-    let time = new Date();
 
-    let response = await fetch('/posts', {
-      method: 'post',
-      headers: {
-        'Content-Type': 'application/json',
-        'Authorization': `Bearer ${token}`
-      },
-      body: JSON.stringify({ message: post, time: time })
-    })
+    if (validateInput()) {
+      let time = new Date();
 
-    if(response.status === 201) {
-      // TODO: Will need to renavigate back to /posts upon 201 status
-      console.log('Successfully submitted');
-    } else {
-      console.log('Failed to submit');
+      let response = await fetch("/posts", {
+        method: "post",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify({ message: post, time: time }),
+      });
+
+      if (response.status === 201) {
+        // TODO: Will need to renavigate back to /posts upon 201 status
+        console.log("Successfully submitted");
+      } else {
+        console.log("Failed to submit");
+        setValidationError("Server error");
+      }
     }
-  }
+  };
 
-  const handlePostChange = (event) => {
+  const validateInput = () => {
+    if (post.length > 0) {
+      setValidationError("");
+      return true;
+    } else {
+      setValidationError("Please enter a post");
+      return false;
+    }
+  };
+
+  const handlePostChange = event => {
     setPost(event.target.value);
-  }
+  };
 
-  return(
-      // TODO: Input validation for newPost field to be expanded on
-      <form onSubmit={submitPost}>
-        <input placeholder="What's on your mind?" id="newPost" type='text' value={ post } onChange={handlePostChange} required/>
-        <input id="submit" type="submit" value="Post" />
-      </form>
-  )
-
-}
+  return (
+    <form onSubmit={submitPost} noValidate>
+      <input placeholder="What's on your mind?" id="newPost" type="text" value={post} onChange={handlePostChange} required />
+      <input id="submit" type="submit" value="Post" />
+      <p className="validation-error">{validationError}</p>
+    </form>
+  );
+};
 
 export default PostCreateForm;
