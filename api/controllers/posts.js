@@ -30,9 +30,16 @@ const PostsController = {
       // adds comment to the post
       post.comments.push(comment);
       // updates the post in the DB
-      post.save();
-      // returns 202 OK
-      res.status(202).json({ message: 'OK'});
+      post.save(async (err) => {
+        if(err) {
+          throw err;
+        }
+
+        // generates a new tokem
+        const token = await TokenGenerator.jsonwebtoken(req.user_id)
+        // returns 202 OK with new token attached
+        res.status(202).json({ message: 'OK', token: token });
+      });
     });
 
   },
