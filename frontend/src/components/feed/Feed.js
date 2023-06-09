@@ -21,7 +21,8 @@ const Feed = ({ navigate }) => {
         })
     }
   }, [])
-    
+  
+  //posting a new post
   const handleSubmitPost = async (event) => {
     event.preventDefault();
     if(token) {
