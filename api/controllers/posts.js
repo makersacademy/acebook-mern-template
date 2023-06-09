@@ -13,12 +13,9 @@ const PostsController = {
     });
   },
   Create: async (req, res) => {
-    const post = new Post({message: req.body.message});
+    const post = new Post({message: req.body.message, author: tokenDecoder(req.headers['authorization'].split(' ')[1]).user_id});
 
-    const author = await tokenDecoder(req.headers['authorization'].split(' ')[1]).user_id
     try {
-      await post.save();
-      post.author = author;
       await post.save();
 
       await post.populate('author').execPopulate();
