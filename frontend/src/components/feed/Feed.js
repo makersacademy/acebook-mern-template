@@ -29,7 +29,7 @@ const Feed = ({ navigate }) => {
     if(token) {
       return(
         <>
-          <Navbar />
+          <Navbar navigate={navigate}/>
           <h2>Posts</h2>
           <PostCreateForm />
           <div id='feed' role="feed">

@@ -3,8 +3,8 @@ import React from 'react';
 const Navbar = ({ navigate }) => {
 
   const logout = () => {
-    // window.localStorage.removeItem("token")
-    // navigate('/login')
+    window.localStorage.removeItem("token")
+    navigate('/login')
   }
 
 
