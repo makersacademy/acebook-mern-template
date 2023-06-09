@@ -12,6 +12,11 @@
     color: white;
 }
 
+.navbar a:hover {
+    color: rgb(247, 125, 125);
+    cursor: pointer;
+}
+
 .navbar a+a {
     margin-left: 1rem;
   }

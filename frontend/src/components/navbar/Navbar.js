@@ -3,7 +3,7 @@ import React from "react";
 
 const Navbar = () => {
     return(
-        <header className="navbar">
+        <header data-cy="navbar" className="navbar">
         <h1>Acebook</h1>
         <div className="navbar-list">
             <a>My Page</a>
