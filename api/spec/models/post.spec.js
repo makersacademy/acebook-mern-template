@@ -1,7 +1,7 @@
-var mongoose = require("mongoose");
+const mongoose = require("mongoose");
 
 require("../mongodb_helper");
-var Post = require("../../models/post");
+const Post = require("../../models/post");
 
 describe("Post model", () => {
   beforeEach((done) => {
@@ -11,8 +11,18 @@ describe("Post model", () => {
   });
 
   it("has a message", () => {
-    var post = new Post({ message: "some message" });
+    const post = new Post({ message: "some message" });
     expect(post.message).toEqual("some message");
+  });
+
+  it("has an empty array for comments", () => {
+    const post = new Post(
+      { 
+      message: "some message", 
+    }
+    );
+
+    expect(post.comments).toBeTruthy();
   });
 
   it("can list all posts", (done) => {
@@ -24,7 +34,7 @@ describe("Post model", () => {
   });
 
   it("can save a post", (done) => {
-    var post = new Post({ message: "some message" });
+    const post = new Post({ message: "some message" });
 
     post.save((err) => {
       expect(err).toBeNull();
@@ -37,4 +47,32 @@ describe("Post model", () => {
       });
     });
   });
+  
+  it("has a post with a comment", () => {
+    const post = new Post({ message: "some message" });
+    const comment = { message: "This is a comment." };
+    post.comments.push(comment);
+    expect(post.comments[0].message).toEqual("This is a comment.")
+  });
+
+  it("can save a post with a comment", (done) => {
+    const post = new Post({ message: "some message" });
+    const comment = { message: "This is a comment." };
+    post.comments.push(comment);
+
+    post.save((err) => {
+      expect(err).toBeNull();
+
+      Post.find((err, posts) => {
+        expect(err).toBeNull();
+        const firstPost = posts[0]
+        const firstComment = firstPost.comments[0]
+
+        expect(firstPost.message).toBe('some message')
+        expect(firstComment.message).toBe('This is a comment.')
+        done();
+      });
+    });
+  });
+
 });

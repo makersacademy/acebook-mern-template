@@ -157,4 +157,136 @@ describe("/posts", () => {
       expect(response.body.token).toEqual(undefined);
     })
   })
+
+  describe("POST /addCommentToPost, when token is present", () => {
+    test("responds with a 202", async () => {
+      // creates a new post
+      const post = new Post({message: 'my first post'});
+      // saves to DB
+      await post.save();
+      // sends imitation HTTP request with post_id inserted into body 
+      let response = await request(app)
+        .post('/posts/add-comment')
+        .set("Authorization", `Bearer ${token}`)
+        .send(
+          { 
+            postId: post._id,
+            comment: {
+              message: 'a comment',
+            },
+            token: token,
+          }
+        );
+      // checks response status
+      expect(response.status).toEqual(202);
+    });
+  
+    test("adds a comment to an existing post", async () => {
+      // creates a new post
+      const post = new Post({message: 'my first post'});
+      // saves to DB
+      await post.save();
+      // sends imitation HTTP request with post_id inserted into body 
+      let response = await request(app)
+        .post("/posts/add-comment")
+        .set("Authorization", `Bearer ${token}`)
+        .send(
+          { 
+            postId: post._id,
+            comment: {
+              message: 'a comment',
+            },
+            token: token,
+          }
+        );
+      // checks if post has been updated properly by loading it from the database
+      let updatedPost = await Post.findById(post._id)
+      expect(updatedPost.comments.length).toEqual(1);
+      expect(updatedPost.comments[0].message).toEqual('a comment')
+      // checks comment has been assigned a uniqe ID by mongoose
+      expect(updatedPost.comments[0]._id).toBeTruthy();
+    });
+
+    test("returns a new token", async () => {
+      // creates a new post
+      const post = new Post({message: 'my first post'});
+      // saves to DB
+      await post.save();
+      // sends imitation HTTP request with post_id inserted into body 
+      let response = await request(app)
+        .post("/posts/add-comment")
+        .set("Authorization", `Bearer ${token}`)
+        .send(
+          { 
+            postId: post._id,
+            comment: {
+              message: 'a comment',
+            },
+            token: token,
+          }
+        );
+      // finds for the tokens (somehow)
+      let newPayload = JWT.decode(response.body.token, process.env.JWT_SECRET);
+      let originalPayload = JWT.decode(token, process.env.JWT_SECRET);
+      // iat = issued at, this is checking that new payload was issued more recently then the original and thus is newer
+      expect(newPayload.iat > originalPayload.iat).toEqual(true);
+    });
+  });
+
+  describe("POST /addComment, when token is missing", () => {
+    test("responds with a 401", async () => {
+      const post = new Post({message: 'my first post'});
+      await post.save();
+      // no token attached this time
+      let response = await request(app)
+        .post("/posts/add-comment")
+        .send(
+          { 
+            postId: post._id,
+            comment: {
+              message: 'a comment',
+            },
+          }
+        );
+      // checks for 401
+      expect(response.status).toEqual(401)
+    });
+  
+    test("doesn't add a comment to an existing post", async () => {
+      const post = new Post({message: 'my first post'});
+      await post.save();
+      // no token attached this time
+      let response = await request(app)
+        .post("/posts/add-comment")
+        .send(
+          { 
+            postId: post._id,
+            comment: {
+              message: 'a comment',
+            },
+          }
+        );
+      // checks that the Post does not have a comment added
+      let postFromDatabase = await Post.findById(post._id)
+      expect(postFromDatabase.comments.length).toEqual(0);
+    });
+
+    test("doesn't return  a new token", async () => {
+      const post = new Post({message: 'my first post'});
+      await post.save();
+      // no token attached this time
+      let response = await request(app)
+        .post("/posts/add-comment")
+        .send(
+          { 
+            postId: post._id,
+            comment: {
+              message: 'a comment',
+            },
+          }
+        );
+      // checks that the response doesn't have a token attached
+      expect(response.body.token).toEqual(undefined);
+    });
+  });
 });
