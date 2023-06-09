@@ -8,6 +8,7 @@ const PostsController = {
       if (err) {
         throw err;
       }
+      // chain populate in order to access post.user.name on frontend
       const token = TokenGenerator.jsonwebtoken(req.user_id)
       // .json() on the backend sends an http response containing a json.
       res.status(200).json({ posts: posts, token: token });
@@ -20,7 +21,7 @@ const PostsController = {
 
     console.log(post);
 
-    post.save((err) => {
+    post.save((err, post) => {
       if (err) {
         throw err;
       }

@@ -1,6 +1,9 @@
 import React from 'react';
 
 const Post = ({post}) => {
+
+  console.log(post);
+
   const formattedDate = new Date(post.time).toLocaleString('en-GB', {
     day: 'numeric',
     month: 'long',
@@ -10,6 +13,8 @@ const Post = ({post}) => {
   
   return(
     <article data-cy="post" key={ post._id }> 
+    {/* this will work once backend Index population is implemented */}
+      <p>{ post.user.name }</p>
       <p>{ formattedDate } </p>
       <p>{ post.message }</p>
     </article>
