@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Post from "../post/Post";
 import PostCreateForm from "../post/PostCreateForm";
+import BarLoader from 'react-spinners/BarLoader';
 
 const Feed = ({ navigate }) => {
   const [posts, setPosts] = useState([]);
@@ -39,6 +40,7 @@ const Feed = ({ navigate }) => {
 
   return (
     <>
+    {posts.length > 0 ? (<>
       <h2>Posts</h2>
       <button onClick={logout}>Logout</button>
       <PostCreateForm />
@@ -47,6 +49,9 @@ const Feed = ({ navigate }) => {
           <Post post={post} key={post._id} />
         ))}
       </div>
+       </>) : (<BarLoader color='#1877f2'/>)}
+      
+      
     </>
   );
 };
