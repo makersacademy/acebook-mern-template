@@ -1,5 +1,4 @@
-import React, { useEffect, useState } from 'react';
-import { Navigate } from "react-router-dom";
+import React, { useState } from 'react';
 
 const PostCreateForm = ({navigate}) => {
   const [post, setPost] = useState("");
@@ -22,10 +21,14 @@ const PostCreateForm = ({navigate}) => {
     if(response.status === 201) {
       // TODO: Will need to renavigate back to /posts upon 201 status
       console.log('Successfully submitted');
-      return <Navigate to='/posts'/>;
+      return refreshPage();
     } else {
       console.log('Failed to submit');
     }
+  }
+  
+  const refreshPage = () => {
+    window.location.reload(false);
   }
 
   const handlePostChange = (event) => {
@@ -33,10 +36,9 @@ const PostCreateForm = ({navigate}) => {
   }
 
   return(
-      // TODO: Input validation for newPost field to be expanded on
       <form onSubmit={submitPost}>
         <input placeholder="What's on your mind?" id="newPost" type='text' value={ post } onChange={handlePostChange} required/>
-        <input id="submit" type="submit" value="Post" />
+        <input id="submit" type="submit" value="Post" onClick={ refreshPage }/>
       </form>
   )
 
