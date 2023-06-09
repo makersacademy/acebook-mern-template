@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import Post from '../post/Post'
+import Navbar from '../navbar/Navbar';
 
 const Feed = ({ navigate }) => {
   const [posts, setPosts] = useState([]);
@@ -30,6 +31,7 @@ const Feed = ({ navigate }) => {
     if(token) {
       return(
         <>
+          <Navbar />
           <h2>Posts</h2>
             <button onClick={logout}>
               Logout

@@ -1,0 +1,16 @@
+.navbar {
+    background-color: rgb(251, 76, 76);
+    margin: auto -16px;
+    padding: 16px 32px;
+    box-shadow: 0 0 10px 0 rgba(0,0,0,0.3);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+.navbar h1 {
+    color: white;
+}
+.navbar-list {
+    display: inline;
+  }
