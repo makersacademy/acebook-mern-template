@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import "./LoginForm.css";
 
 const LogInForm = ({ navigate }) => {
   const [email, setEmail] = useState("");
@@ -62,6 +63,7 @@ const LogInForm = ({ navigate }) => {
 
   return (
     <>
+      <div className="login" >
       <h1>Log in</h1>
       <form onSubmit={handleSubmit} noValidate>
         <div>
@@ -77,6 +79,7 @@ const LogInForm = ({ navigate }) => {
 
         <input id="submit" type="submit" value="Submit" />
       </form>
+      </div>
     </>
   );
 };
