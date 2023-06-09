@@ -4,8 +4,7 @@ import './LoginForm.css';
 const LogInForm = ({ navigate }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [username, setUsername] = useState("");
-  const [name, setName] = useState("");
+
 
 
   const handleSubmit = async (event) => {
@@ -38,20 +37,10 @@ const LogInForm = ({ navigate }) => {
     setPassword(event.target.value)
   }
 
-  const handleUsernameChange = (event) => {
-    setUsername(event.target.value)
-  }
-
-  const handleNameChange = (event) => {
-    setName(event.target.value)
-  }
-
     return (
       <div className="loginContainer">
         <h1 className="loginHeading">Return to Rivendell...</h1>
-        <form className="loginForm" onSubmit={handleSubmit}>
-          <input className="loginInput" placeholder='Name' id="name" type='text' value={ name } onChange={handleNameChange} />
-          <input className="loginInput" placeholder='Username' id="username" type='text' value={ username } onChange={handleUsernameChange} />
+        <form className="loginForm" onSubmit={handleSubmit}> 
           <input className="loginInput" placeholder='Email' id="email" type='text' value={ email } onChange={handleEmailChange} />
           <input className="loginInput" placeholder='Password' id="password" type='password' value={ password } onChange={handlePasswordChange} />
           <input className="loginButton" role='submit-button' id='submit' type="submit" value="Submit" />

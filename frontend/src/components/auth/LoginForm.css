@@ -7,7 +7,7 @@
 }
 
 .loginContainer{
-  background: linear-gradient( rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5) ), url("../../../public/login-rivendale.jpeg");
+  background: linear-gradient( rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5) ), url("../../../public/login-rivendell.jpeg");
   background-position: center; 
   background-repeat: no-repeat; 
   background-size: cover; 
@@ -36,7 +36,7 @@
   width: 250px;
   border: 2px solid whitesmoke;
   border-radius: 10px;
-  color: whitesmoke;
+  color: black;
 }
 
 .loginButton {
