@@ -12,18 +12,25 @@ const PostsController = {
       res.status(200).json({ posts: posts, token: token });
     });
   },
-  Create: (req, res) => {
-    const post = new Post({message: req.body.message, author: req.tokenDecoder(headers['Authorization'].split(' ')[1]).user_id});
-    console.log(req.headers['Authorization'])
-    post.save(async (err) => {
-      if (err) {
-        throw err;
-      }
+  Create: async (req, res) => {
+    const post = new Post({message: req.body.message});
+
+    const author = await tokenDecoder(req.headers['authorization'].split(' ')[1]).user_id
+    try {
+      await post.save();
+      post.author = author;
+      await post.save();
+
+      await post.populate('author').execPopulate();
 
       const token = await TokenGenerator.jsonwebtoken(req.user_id)
-      res.status(201).json({ message: 'OK', token: token });
-    });
-  },
+      return res.status(201).json({ message: 'OK', token: token });
+    } catch (error) {
+      return res.status(500).json({ error: 'An error occurred while saving the post' });
+    }
+  }
 };
 
+
+// , author: tokenDecoder(req.token).user_id
 module.exports = PostsController;
