@@ -21,6 +21,8 @@ const Feed = ({ navigate }) => {
         .then(async data => {
           window.localStorage.setItem("token", data.token)
           setToken(window.localStorage.getItem("token"))
+          // jwt_decode decodes the data without accessing the secret key, therefore there are no security issues currently present
+          // This line is equivalent to putting the token into jwt.io debugger
           setUserId(jwt_decode(token).user_id)
           setPosts(data.posts);
         })

@@ -2,7 +2,8 @@ const mongoose = require("mongoose");
 
 const PostSchema = new mongoose.Schema({
   message: String,
-  time: Date
+  time: Date,
+  likes: { type: [String], default: [] } 
 });
 
 const Post = mongoose.model("Post", PostSchema);

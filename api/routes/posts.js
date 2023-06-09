@@ -6,5 +6,6 @@ const PostsController = require("../controllers/posts");
 // .Index and .Create are keys to methods defined in the PostController object
 router.get("/", PostsController.Index);
 router.post("/", PostsController.Create);
+router.patch("/", PostsController.Update);
 
 module.exports = router;
