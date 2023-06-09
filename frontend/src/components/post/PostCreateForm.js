@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 
 const PostCreateForm = () => {
-  const [post, setPost] = useState("");
+  const [message, setPost] = useState("");
   const [token, setToken] = useState(window.localStorage.getItem("token"));
 
   const submitPost = async (event) => {
@@ -15,7 +15,7 @@ const PostCreateForm = () => {
         'Content-Type': 'application/json',
         'Authorization': `Bearer ${token}`
       },
-      body: JSON.stringify({ message: post, time: time })
+      body: JSON.stringify({ message: message, time: time })
     })
 
     if(response.status === 201) {
@@ -33,7 +33,7 @@ const PostCreateForm = () => {
   return(
       // TODO: Input validation for newPost field to be expanded on
       <form onSubmit={submitPost}>
-        <input placeholder="What's on your mind?" id="newPost" type='text' value={ post } onChange={handlePostChange} required/>
+        <input placeholder="What's on your mind?" id="newPost" type='text' value={ message } onChange={handlePostChange} required/>
         <input id="submit" type="submit" value="Post" />
       </form>
   )
