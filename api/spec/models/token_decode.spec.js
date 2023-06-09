@@ -7,6 +7,7 @@ describe("tokenDecoder", () => {
       const token = JWT.sign({ id: 1 }, "secret")
       console. log(token)
       const decoded = tokenDecoder(token)
+      console.log(decoded)
       expect(decoded.id).toBe(1)
     })
 
