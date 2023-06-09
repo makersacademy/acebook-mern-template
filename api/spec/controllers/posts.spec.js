@@ -111,15 +111,17 @@ describe("/posts", () => {
       expect(response.status).toEqual(200);
     })
 
+    // Trying to write a test for returning a single post, can't get it to work though
     test("returns a single post", async () => {
-      let post = new Post({message: "log this bitch"});
+      let post = new Post({message: "this should be returned"});
+      let post_id = post._id;
       await post.save();
       let response = await request(app)
-        .get("/posts/id")
+        .get("/posts/" + post_id)
         .set("Authorization", `Bearer ${token}`)
         .send({token: token});
-      let messages = response.body.posts.map((post) => ( post.message ));
-      expect(messages).toEqual(["log this bitch"]);
+      let messages = response.body
+      expect(messages.post.message).toEqual("this should be returned");
     })
 
     test("returns a new token", async () => {

@@ -8,6 +8,7 @@ const PostsController = {
         throw err;
       }
       const token = await TokenGenerator.jsonwebtoken(req.user_id)
+      console.log(posts);
       res.status(200).json({ posts: posts, token: token });
     });
   },
@@ -23,9 +24,11 @@ const PostsController = {
     });
   },
   ShowPost: async (req, res) => {
-    let post_id = '6481ea7ed1f3219e82fddca6'
+    let post_id = req.params.id;
+    console.log(post_id);
     let post = await Post.findById(post_id);
-    console.log(post);
+    const token = await TokenGenerator.jsonwebtoken(req.user_id);
+    res.status(200).json({post, token: token});
   }
 };
 
