@@ -29,6 +29,13 @@ const PostsController = {
     let post = await Post.findById(post_id);
     const token = await TokenGenerator.jsonwebtoken(req.user_id);
     res.status(200).json({post, token: token});
+  },
+  UpdatePost: async (req, res) => {
+    let post_id = req.params.id;
+    await Post.findByIdAndUpdate(post_id, { message: req.body.message });
+    
+    const token = await TokenGenerator.jsonwebtoken(req.user_id)
+    res.status(201).json({ message: 'OK', token: token });
   }
 };
 

@@ -85,6 +85,27 @@ describe("/posts", () => {
     });
   })
 
+  describe("PATCH, when token is present", () => {
+    test("it updates a post", async() => {
+      let post = new Post({message: "this text will change"});
+      await post.save();
+      
+      let response = await request(app)
+      .patch("/posts/" + post._id + "/update")
+      .set("Authorization", `Bearer ${token}`)
+      .send({message: "this is a new message", token: token});
+      expect(response.status).toEqual(201);
+      
+      response = await request(app)
+        .get("/posts/" + post._id)
+        .set("Authorization", `Bearer ${token}`)
+        .send({token: token});
+
+      let result = response.body;
+      expect(result.post.message).toEqual("this is a new message");
+    })
+  })
+
   describe("GET, when token is present", () => {
     test("returns every post in the collection", async () => {
       let post1 = new Post({message: "howdy!"});
@@ -120,8 +141,8 @@ describe("/posts", () => {
         .get("/posts/" + post_id)
         .set("Authorization", `Bearer ${token}`)
         .send({token: token});
-      let messages = response.body;
-      expect(messages.post.message).toEqual("this should be returned");
+      let result = response.body;
+      expect(result.post.message).toEqual("this should be returned");
     })
 
     test("returns a new token", async () => {
