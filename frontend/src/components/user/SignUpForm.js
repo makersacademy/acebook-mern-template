@@ -6,6 +6,8 @@ const SignUpForm = ({ navigate }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [username, setUsername] = useState("");
+  const [name, setName] = useState("");
+
  
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -38,13 +40,18 @@ const SignUpForm = ({ navigate }) => {
     setUsername(event.target.value)
   }
 
+  const handleNameChange = (event) => {
+    setName(event.target.value)
+  }
+
 
     return (
       <div className="signUpContainer">
         <h1 className="signUpHeading"> Start your journey to Mordor.... </h1>
         <form className="signUpForm" onSubmit={handleSubmit}>
-            <input className= "formInput" placeholder="Email" id="email" type='text' value={ email } onChange={handleEmailChange} />
+            <input className="formInput" placeholder='Name' id="name" type='text' value={ name } onChange={handleNameChange} />
             <input className= "formInput" placeholder="Username" id="username" type="text" value={ username } onChange={ handleUsernameChange } />
+            <input className= "formInput" placeholder="Email" id="email" type='text' value={ email } onChange={handleEmailChange} />
             <input className= "formInput" placeholder="Password" id="password" type='password' value={ password } onChange={handlePasswordChange} />
           <input  className= "inputButton" id='submit' type="submit" value="Submit" />
         </form>
