@@ -1,0 +1,19 @@
+.feedContainer{
+  background: linear-gradient( rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5) ), url("../../../public/TOTS_Feed_Page.jpg");
+  background-position: center; 
+  background-repeat: no-repeat; 
+  background-size: cover; 
+  height: 100vh;
+  padding-left: 50px;
+  padding-top: 50px;
+}
+
+h1 {
+  color: white;
+  text-align: center;
+  padding-bottom: 5px;
+}
+
+/* .postForm {
+  padding-left: 10px;
+} */
