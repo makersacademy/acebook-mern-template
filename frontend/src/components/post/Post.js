@@ -13,7 +13,6 @@ const Post = ({post}) => {
   
   return(
     <article data-cy="post" key={ post._id }> 
-    {/* this will work once backend Index population is implemented */}
       <p>{ post.user.name }</p>
       <p>{ formattedDate } </p>
       <p>{ post.message }</p>
