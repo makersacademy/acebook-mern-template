@@ -9,8 +9,8 @@ describe("Feed", () => {
         req.reply({
           statusCode: 200,
           body: { posts: [
-            {_id: 1, message: "Hello, world"},
-            {_id: 2, message: "Hello again, world"}
+            {_id: 1, newPost: "Hello, world"},
+            {_id: 2, newPost: "Hello again, world"}
           ] }
         })
       }
@@ -22,6 +22,26 @@ describe("Feed", () => {
       cy.get('[data-cy="post"]')
       .should('contain.text', "Hello, world")
       .and('contain.text', "Hello again, world")
+    })
+  })
+
+  it("Should post a new post and display on the page", () => {
+    window.localStorage.setItem("token", "fakeToken")
+    cy.mount(<Feed navigate={navigate}/>)
+
+    cy.intercept('POST', '/posts', {
+      statusCode: 201,
+      body: {
+        newPost: 'my new post',
+      },
+    }).as('postRequest')
+
+    cy.get("#post").type("my new post");
+    cy.get("#submit").click()
+
+    cy.wait('@postRequest').then((interception) => {
+      expect(interception.response.statusCode).to.eq(201)
+      expect(interception.response.body.newPost).to.eq('my new post')
     })
   })
 })
