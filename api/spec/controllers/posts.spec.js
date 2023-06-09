@@ -120,7 +120,7 @@ describe("/posts", () => {
         .get("/posts/" + post_id)
         .set("Authorization", `Bearer ${token}`)
         .send({token: token});
-      let messages = response.body
+      let messages = response.body;
       expect(messages.post.message).toEqual("this should be returned");
     })
 

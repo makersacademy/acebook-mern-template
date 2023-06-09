@@ -61,7 +61,7 @@ describe("Post model", () => {
     expect(post).toMatchObject({ message: "this is a post" });
   })
 
-  xit("can update a post based on post object id", async () => {
+  it("can update a post based on post object id", async () => {
     var post = new Post({ message: "This text will change" });
     const newMessage = "This is the new text";
 
