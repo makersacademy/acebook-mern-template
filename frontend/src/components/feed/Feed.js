@@ -1,51 +1,52 @@
-import React, { useEffect, useState } from 'react';
-import Post from '../post/Post';
-import PostCreateForm from '../post/PostCreateForm';
+import React, { useEffect, useState } from "react";
+import Post from "../post/Post";
+import PostCreateForm from "../post/PostCreateForm";
 
 const Feed = ({ navigate }) => {
   const [posts, setPosts] = useState([]);
   const [token, setToken] = useState(window.localStorage.getItem("token")); // Retrieves a token from the browser storage
-
+  // console.log(`Token: ${token}`);
   useEffect(() => {
     // Will send a fetch request if a valid token is found
-    if(token) {
+    if (token) {
       fetch("/posts", {
         headers: {
-          'Authorization': `Bearer ${token}`
-        }
+          Authorization: `Bearer ${token}`,
+        },
       })
-      // This .json() turns a json response into a JS object
+        // This .json() turns a json response into a JS object
         .then(response => response.json())
-        .then(async data => {
-          window.localStorage.setItem("token", data.token)
-          setToken(window.localStorage.getItem("token"))
-          setPosts(data.posts);
-        })
+        .then(data => {
+          if (data.posts) {
+            window.localStorage.setItem("token", data.token);
+            setToken(window.localStorage.getItem("token"));
+            setPosts(data.posts);
+          } else {
+            navigate("/login");
+          }
+        });
     } else {
-      navigate('/login')
+      navigate("/login");
     }
-  }, [])
-    
+  }, []);
 
   const logout = () => {
-    window.localStorage.removeItem("token")
-    navigate('/login')
-  }
-  
-  return(
+    window.localStorage.removeItem("token");
+    navigate("/login");
+  };
+
+  return (
     <>
       <h2>Posts</h2>
-      <button onClick={logout}>
-        Logout
-      </button>
-      <PostCreateForm navigate={ navigate }/>
-      <div id='feed' role="feed">
-        {posts.map(
-          (post) => ( <Post post={ post } key={ post._id } /> )
-        )}
+      <button onClick={logout}>Logout</button>
+      <PostCreateForm navigate={navigate} />
+      <div id="feed" role="feed">
+        {posts.map(post => (
+          <Post post={post} key={post._id} />
+        ))}
       </div>
     </>
-  )
-}
+  );
+};
 
 export default Feed;
