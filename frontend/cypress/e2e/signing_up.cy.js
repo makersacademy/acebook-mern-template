@@ -1,4 +1,7 @@
 describe("Signing up", () => {
+  before(()=> {
+    cy.clearDatabase()
+  })
   it("with valid credentials, redirects to '/login'", () => {
     cy.visit("/signup");
     cy.get("#email").type("someone1@example.com");
