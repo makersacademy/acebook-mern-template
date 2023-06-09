@@ -29,8 +29,11 @@ describe("Feed", () => {
     window.localStorage.setItem("token", "fakeToken")
     cy.mount(<Feed navigate={navigate}/>)
 
-    cy.intercept('POST', '/posts', { message: "OK" }).as("postRequest")
-
+    cy.intercept('POST', '/posts', (req => {
+      req.reply(
+      { message: "OK" })
+      }).as("postRequest")
+    )
     cy.get("#post").type("newPost");
     cy.get("#submit").click();
     cy.wait('@postRequest').then( interception => {
