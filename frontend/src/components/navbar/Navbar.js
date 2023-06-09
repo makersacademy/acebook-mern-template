@@ -1,4 +1,5 @@
 import React from 'react';
+import './Navbar.css';
 
 const Navbar = ({ navigate }) => {
 
@@ -10,10 +11,12 @@ const Navbar = ({ navigate }) => {
 
     return(
       <>
-        <button onClick={logout}>
-          Logout
-        </button>
-        </>
+        <div className="topnav">
+          <button onClick={logout}>
+            Logout
+          </button>
+        </div>
+      </>
       )
 
 }

@@ -41,7 +41,7 @@ const Feed = ({ navigate }) => {
       )
     } else {
       // TODO: Possibly an error in route. (Might change to /signup?)
-      navigate('/signin')
+      navigate('/login')
     }
 }
 
