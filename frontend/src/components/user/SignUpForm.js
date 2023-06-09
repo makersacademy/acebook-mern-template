@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import './SignUpForm.css';
 
 const SignUpForm = ({ navigate }) => {
   const [email, setEmail] = useState("");
@@ -76,6 +77,7 @@ const SignUpForm = ({ navigate }) => {
 
   return (
     <>
+    <div className="signup" >
       <h1>Sign Up</h1>
 
       <form onSubmit={handleSubmit} noValidate>
@@ -97,6 +99,7 @@ const SignUpForm = ({ navigate }) => {
 
         <input id="submit" type="submit" value="Submit" />
       </form>
+    </div>
     </>
   );
 };

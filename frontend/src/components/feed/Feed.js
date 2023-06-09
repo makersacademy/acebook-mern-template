@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import Post from '../post/Post';
 import PostCreateForm from '../post/PostCreateForm';
+import Navbar from '../navbar/Navbar';
+import './Feed.css';
 
 const Feed = ({ navigate }) => {
   const [posts, setPosts] = useState([]);
@@ -21,36 +23,28 @@ const Feed = ({ navigate }) => {
           setToken(window.localStorage.getItem("token"))
           setPosts(data.posts);
         })
-    }
-  }, [])
+      }
+    }, [])
     
-
-  const logout = () => {
-    window.localStorage.removeItem("token")
-    navigate('/login')
-  }
-  
-  console.log(posts);
-
-  if(token) {
-    return(
-      <>
-        <h2>Posts</h2>
-        <button onClick={logout}>
-          Logout
-        </button>
-        <PostCreateForm />
-        <div id='feed' role="feed">
-          {posts.map(
-            (post) => ( <Post post={ post } key={ post._id } /> )
-          )}
-        </div>
-      </>
-    )
-  } else {
-    // TODO: Possibly an error in route. (Might change to /signup?)
-    navigate('/signin')
-  }
+    if(token) {
+      return(
+        <>
+          <Navbar navigate={navigate}/>
+          <div className='posts'>
+            <h2>Posts</h2>
+            <PostCreateForm />
+            <div id='feed' role="feed">
+              {posts.map(
+                (post) => ( <Post post={ post } key={ post._id } /> )
+              )}
+            </div>
+          </div>
+        </>
+      )
+    } else {
+      // TODO: Possibly an error in route. (Might change to /signup?)
+      navigate('/login')
+    }
 }
 
 export default Feed;
