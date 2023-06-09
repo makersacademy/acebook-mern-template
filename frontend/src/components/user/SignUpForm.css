@@ -5,7 +5,6 @@
   padding: 0;
   box-sizing: border-box;
   font-family: 'Poppins', sans-serif;
-  
 }
 
 .signUpForm {
@@ -17,7 +16,10 @@
 }
 
 .signUpContainer {
-  background-color: #161a18;
+  background: linear-gradient( rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5) ), url("../../../public/signup-mordor.jpeg");
+  background-position: center; 
+  background-repeat: no-repeat; 
+  background-size: cover; 
   height: 100vh;
   padding-top: 150px;
 }
@@ -38,16 +40,19 @@
   border: 2px solid white;
   border-radius: 100px;
   padding: 20px;
-  cursor: pointer;
+  cursor: url(../../../public/sword-cursor.png), auto;
   font-size: 20px;
   color: whitesmoke;
   transition: 0.5s ease-in-out;
+  background: rgba(0, 0, 0, 0.2);
+  backdrop-filter: blur(10px);
 }
 
 .inputButton:hover {
   color: red;
   border: 2px solid red;
-  transform: scale(1.1); 
+  transform: scale(1.1);  
+  
 }
 
 .signUpHeading {
@@ -60,4 +65,6 @@
   margin-right: 400px;
   padding: 20px;
   border-radius: 10px;
+  background: rgba(0, 0, 0, 0.2);
+  backdrop-filter: blur(5px);
 } 
