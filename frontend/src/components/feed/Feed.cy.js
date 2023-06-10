@@ -25,6 +25,30 @@ describe("Feed", () => {
     })
   })
 
+  it("lists all the posts in reverse chronological order", () => {
+    window.localStorage.setItem("token", "fakeToken")
+    
+    cy.intercept('GET', '/posts', (req) => {
+        req.reply({
+          statusCode: 200,
+          body: { posts: [
+            {_id: 1, newPost: "Hello, world"},
+            {_id: 2, newPost: "Hello again, world"}
+          ] }
+        })
+      }
+    ).as("getPosts")
+
+    cy.mount(<Feed navigate={navigate}/>)
+    
+    cy.wait("@getPosts").then(() =>{
+      cy.get('[data-cy="post"]').then( posts => {
+        expect(posts[0]).to.contain.text("Hello again, world")
+        expect(posts[1]).to.contain.text("Hello, world")
+      })
+    })
+  })
+
   it("Should post a new post and display on the page", () => {
     window.localStorage.setItem("token", "fakeToken")
     cy.mount(<Feed navigate={navigate}/>)

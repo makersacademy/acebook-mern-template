@@ -25,6 +25,7 @@ const Feed = ({ navigate }) => {
   //posting a new post
   const handleSubmitPost = async (event) => {
     event.preventDefault();
+    
     if(token) {
       let response = await fetch( '/posts', {
         method: 'post',
@@ -44,6 +45,7 @@ const Feed = ({ navigate }) => {
     } else {
       console.log("yay")
       await response.json()
+
       fetch("/posts", {
         headers: {
           'Authorization': `Bearer ${token}`
@@ -58,7 +60,6 @@ const Feed = ({ navigate }) => {
     }}
   }
   
-
   const handlePostChange = (event) => {
     setNewPost(event.target.value)
   }
@@ -68,27 +69,30 @@ const Feed = ({ navigate }) => {
     navigate('/login')
   }
   
-    if(token) {
-      return(
-        <>
-          <h2>Posts</h2>
-            <button onClick={logout}>
-              Logout
-            </button>
-            <form onSubmit={handleSubmitPost}>
-             <input placeholder="post" id="post" type='text' value={ newPost } onChange={handlePostChange} />
-             <input id='submit' type="submit" value="Submit" />
-             </form>
-          <div id='feed' role="feed">
-              {console.log(posts)}
-              {posts.map((post) => (<Post post={ post} key={ post._id } /> )
-              )}
-          </div>
-        </>
-      )
-    } else {
-      navigate('/signin')
-    }
+  if(token) {
+    return(
+      <>
+        <h2>Posts</h2>
+        
+        <button onClick={ logout }>Logout</button>
+
+        <form onSubmit={handleSubmitPost}>
+          <input placeholder="post" id="post" type='text' value={ newPost } onChange={handlePostChange} />
+          <input id='submit' type="submit" value="Submit" />
+        </form>
+
+        <div id='feed' role="feed">
+          {
+            posts.slice().reverse().map((post) => {
+              return <Post post={ post }/>
+            })
+          }
+        </div>
+      </>
+    )
+  } else {
+    navigate('/signin')
+  }
 }
 
 export default Feed;
