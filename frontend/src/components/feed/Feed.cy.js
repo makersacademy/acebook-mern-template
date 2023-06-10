@@ -52,20 +52,38 @@ describe("Feed", () => {
   it("Should post a new post and display on the page", () => {
     window.localStorage.setItem("token", "fakeToken")
     cy.mount(<Feed navigate={navigate}/>)
-
+    
     cy.intercept('POST', '/posts', {
       statusCode: 201,
       body: {
         newPost: 'my new post',
       },
     }).as('postRequest')
-
+    
     cy.get("#post").type("my new post");
     cy.get("#submit").click()
-
+    
     cy.wait('@postRequest').then((interception) => {
       expect(interception.response.statusCode).to.eq(201)
       expect(interception.response.body.newPost).to.eq('my new post')
     })
+  })
+  
+  it("empties the content of the new post input box when submitted", () => {
+    window.localStorage.setItem("token", "fakeToken")
+    cy.mount(<Feed navigate={navigate}/>)
+    
+    cy.intercept('POST', '/posts', {
+      statusCode: 201,
+      body: {
+        newPost: 'my new post',
+      },
+    }).as('postRequest')
+    
+    cy.get("#post").type("my new post");
+    cy.get("#post").should("have.value", "my new post");
+
+    cy.get("#submit").click();
+    cy.get("#post").should("have.value", "");
   })
 })

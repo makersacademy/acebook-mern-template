@@ -8,56 +8,50 @@ const Feed = ({ navigate }) => {
 
   useEffect(() => {
     if(token) {
-      fetch("/posts", {
+      fetchPosts();
+    } else {
+      navigate('/login')
+    }
+  }, [])
+  
+  const fetchPosts = async () => {
+      const response = await fetch("/posts", {
         headers: {
           'Authorization': `Bearer ${token}`
         }
       })
-        .then(response => response.json())
-        .then(async data => {
-          window.localStorage.setItem("token", data.token)
-          setToken(window.localStorage.getItem("token"))
-          setPosts(data.posts);
-        })
-    }
-  }, [])
+      const data = await response.json();
+      window.localStorage.setItem("token", data.token);
+      setToken(window.localStorage.getItem("token"));
+      setPosts(data.posts);
+  }
+
+  const saveNewPost = async () => {
+    return await fetch( '/posts', {
+      method: 'post',
+      headers: {
+        'Authorization': `Bearer ${token}`,
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ 
+        newPost: newPost
+      })
+    })
+  }
   
   //posting a new post
   const handleSubmitPost = async (event) => {
     event.preventDefault();
     
     if(token) {
-      let response = await fetch( '/posts', {
-        method: 'post',
-        headers: {
-          'Authorization': `Bearer ${token}`,
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ 
-          newPost: newPost
-        })
-      })
-       
-    console.log(response)
-    if(response.status !== 201) {
-      console.log("oop")
-      navigate('/login')
+      const response = await saveNewPost();
+      if(response.status === 201) {
+        setNewPost("")
+        fetchPosts();
+      }
     } else {
-      console.log("yay")
-      await response.json()
-
-      fetch("/posts", {
-        headers: {
-          'Authorization': `Bearer ${token}`
-        }
-      })
-        .then(response => response.json())
-        .then(async data => {
-          window.localStorage.setItem("token", data.token)
-          setToken(window.localStorage.getItem("token"))
-          setPosts(data.posts);
-        });
-    }}
+      navigate('./login')
+    }
   }
   
   const handlePostChange = (event) => {
@@ -90,8 +84,6 @@ const Feed = ({ navigate }) => {
         </div>
       </>
     )
-  } else {
-    navigate('/signin')
   }
 }
 
