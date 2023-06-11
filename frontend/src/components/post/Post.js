@@ -35,10 +35,6 @@ const Post = ({post, userId}) => {
     }
   }
 
-const Post = ({post}) => {
-
-  console.log(post);
-
   const formattedDate = new Date(post.time).toLocaleString('en-GB', {
     day: 'numeric',
     month: 'long',

@@ -4,7 +4,7 @@ const { Schema } = mongoose;
 const PostSchema = new Schema({
   message: String,
   time: Date,
-  likes: { type: [String], default: [] }
+  likes: { type: [String], default: [] },
   user: { type: Schema.Types.ObjectId, ref: 'User' }
 });
 

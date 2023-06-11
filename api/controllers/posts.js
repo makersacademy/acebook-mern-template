@@ -4,7 +4,14 @@ const TokenGenerator = require("../models/token_generator");
 const PostsController = {
   Index: (req, res) => {
     // .find gets data out, .populate adds the referenced user fields
-    Post.find().populate({ path: 'user', select: 'name' }).exec((err, posts) => {
+    // .sort will take an object with a format of {property: sort, property: sort}
+    // sort = -1 is descending, sort = 1 is ascending order
+    // in the current format, if time is exactly the same it will sort alphabetically by message
+    // note: (this is purely for the proof of concept, sounds silly to take into account);
+    Post.find()
+    .populate({ path: 'user', select: 'name' })
+    .sort({time: -1, message: 1})
+    .exec((err, posts) => {
       if (err) {
         throw err;
       }
@@ -12,11 +19,6 @@ const PostsController = {
       // .json() on the backend sends an http response containing a json.
       res.status(200).json({ posts: posts, token: token });
     })
-    // sort will take an object with a format of {property: sort, property: sort}
-    // sort = -1 is descending, sort = 1 is ascending order
-    // in the current format, if time is exactly the same it will sort alphabetically by message
-    // note: (this is purely for the proof of concept, sounds silly to take into account)
-    .sort({time: -1, message: 1});
   },
 
   Create: (req, res) => {
