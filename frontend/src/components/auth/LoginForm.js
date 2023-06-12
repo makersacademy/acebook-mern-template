@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import Navbar from '../navbar/Navbar';
 
 const LogInForm = ({ navigate }) => {
   const [email, setEmail] = useState("");
@@ -36,11 +37,14 @@ const LogInForm = ({ navigate }) => {
 
 
     return (
+      <>
+      <Navbar />
       <form onSubmit={handleSubmit}>
         <input placeholder='Email' id="email" type='text' value={ email } onChange={handleEmailChange} />
         <input placeholder='Password' id="password" type='password' value={ password } onChange={handlePasswordChange} />
         <input role='submit-button' id='submit' type="submit" value="Submit" />
       </form>
+      </>
     );
 }
 
