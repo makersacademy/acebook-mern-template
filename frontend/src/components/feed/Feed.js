@@ -4,11 +4,13 @@ import PostCreateForm from "../post/PostCreateForm";
 import BarLoader from "react-spinners/BarLoader";
 import Navbar from "../navbar/Navbar";
 import "./Feed.css";
+import jwt_decode from "jwt-decode";
 
 const Feed = ({ navigate }) => {
   const [posts, setPosts] = useState([]);
   const [token, setToken] = useState(window.localStorage.getItem("token")); // Retrieves a token from the browser storage
   const [loading, setLoading] = useState(true);
+  const [userId, setUserId] = useState("");
 
   useEffect(() => {
     // Will send a fetch request if a valid token is found
@@ -47,7 +49,13 @@ const Feed = ({ navigate }) => {
             <h2>Posts</h2>
             <PostCreateForm />
             <div id="feed" role="feed">
-              {posts.length === 0 ? <p>There are no posts yet.</p> : posts.map(post => <Post post={post} key={post._id} />)}
+              { 
+                if (posts.length === 0) { 
+                  <p>There are no posts yet.</p> 
+                } else {
+                  posts.map(post => <Post post={post} key={post._id} userId={ userId } />)
+                }
+              }
             </div>
           </div>
         </>
