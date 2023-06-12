@@ -3,6 +3,13 @@ const express = require("express");
 const path = require("path");
 const logger = require("morgan");
 const JWT = require("jsonwebtoken");
+const cloudinary = require('cloudinary');
+
+cloudinary.config({ 
+  cloud_name: 'acebook', 
+  api_key: '991882213457318', 
+  api_secret: 'yfQu3l56kX1eMpHoUYSFNjxbtgU' 
+});
 
 const postsRouter = require("./routes/posts");
 const tokensRouter = require("./routes/tokens");
