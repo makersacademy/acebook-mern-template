@@ -1,6 +1,7 @@
 {
   "dependencies": {
     "bcrypt": "^5.1.0",
-    "eslint": "^8.42.0"
+    "eslint": "^8.42.0",
+    "faker": "^6.6.6"
   }
 }
