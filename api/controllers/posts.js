@@ -9,7 +9,7 @@ const PostsController = {
     // in the current format, if time is exactly the same it will sort alphabetically by message
     // note: (this is purely for the proof of concept, sounds silly to take into account)
     Post.find()
-      .populate({ path: "user", select: "name" })
+      .populate({ path: "user", select: ["name", "avatar"] })
       .sort({ time: -1, message: 1 })
       .exec((err, posts) => {
         if (err) {
@@ -34,6 +34,7 @@ const PostsController = {
       res.status(201).json({ message: "OK", token: token });
     });
   },
+
   Update: (req, res) => {
     // .findOneAndUpdate(filter, changes, return function)
     Post.findOneAndUpdate({ _id: req.body.postId }, { likes: req.body.likes }, async (err, posts) => {
