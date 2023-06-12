@@ -14,7 +14,6 @@ describe("/users", () => {
         .post("/users")
         .send({email: "poppy@email.com", password: "1234"})
       expect(response.statusCode).toBe(201)
-      console.log(response.body.user);
       expect(response.body.message).toBe('OK')
     })
 
