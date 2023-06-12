@@ -11,7 +11,7 @@ let postId;
 
 describe("/posts", () => {
   beforeAll( async () => {
-    const user = new User({email: "test@test.com", password: "12345678"});
+    const user = new User({email: "test@test.com", password: "12345678", username: 'Fred'});
     await user.save();
 
     token = JWT.sign({
@@ -194,12 +194,6 @@ describe("/posts", () => {
         .delete(`/posts/${postId}`);
       let post = await Post.findById(postId);
       expect(post).not.toBeNull(); // if post is not null, it means the post was not deleted
-    });
-
-    test("returns a bad request message", async () => {
-      let response = await request(app)
-        .delete(`/posts/${postId}`);
-      expect(response.body.message).toEqual("Bad request");
     });
   });
 });

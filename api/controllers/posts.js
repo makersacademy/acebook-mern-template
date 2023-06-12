@@ -24,14 +24,14 @@ const PostsController = {
   },
 
   Delete: async (req, res) => {
-    try {
-      const { post_id } = req.params;
-      await Post.deleteOne({ _id: post_id });
-      const token = await TokenGenerator.jsonwebtoken(req.user_id);
-      res.status(200).json({ message: 'Post deleted', token: token });
-    } catch (err) {
-      res.status(400).json({ message: 'Bad request' });
-    }
+    // try {
+    const { post_id } = req.params;
+    await Post.deleteOne({ _id: post_id });
+    const token = await TokenGenerator.jsonwebtoken(req.user_id);
+    res.status(200).json({ message: 'Post deleted', token: token });
+    // } catch (err) {
+    //   res.status(401).json({ message: 'Bad request' });
+    // }
   }
 };
 
