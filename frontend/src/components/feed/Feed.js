@@ -29,6 +29,9 @@ const Feed = ({ navigate }) => {
             setToken(window.localStorage.getItem("token"));
             setPosts(data.posts);
             setLoading(false);
+            // jwt_decode decodes the data without accessing the secret key, therefore there are no security issues currently present
+           // This line is equivalent to putting the token into jwt.io debugger
+           setUserId(jwt_decode(token).user_id)
           } else {
             // navigate to login if token but not valid (timed-out)
             navigate("/login");
@@ -49,13 +52,9 @@ const Feed = ({ navigate }) => {
             <h2>Posts</h2>
             <PostCreateForm />
             <div id="feed" role="feed">
-              { 
-                if (posts.length === 0) { 
-                  <p>There are no posts yet.</p> 
-                } else {
-                  posts.map(post => <Post post={post} key={post._id} userId={ userId } />)
-                }
-              }
+              {posts.length === 0 
+                ? <p>There are no posts yet.</p> 
+                : posts.map(post => <Post post={post} key={post._id} userId={userId} />)}
             </div>
           </div>
         </>
