@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import './SignUpForm.css';
+import { Link } from "react-router-dom";
 
 const SignUpForm = ({ navigate }) => {
   const [email, setEmail] = useState("");
@@ -77,29 +78,38 @@ const SignUpForm = ({ navigate }) => {
 
   return (
     <>
-    <div className="signup" >
-      <h1>Sign Up</h1>
+      <div className="main">
+       <div className="sub-main">
+       <div>
+           <h1>Sign Up</h1>
+      <div>
+        <p> Already registered? <Link to="/login">Log In</Link></p>
+      </div>
 
       <form onSubmit={handleSubmit} noValidate>
         <div>
-          <label htmlFor="name">Name:</label>
+          <label htmlFor="name"></label>
           <input placeholder="Name" id="name" type="text" value={name} onChange={handleNameChange} />
           <p className="validation-error">{validationError?.name}</p>
         </div>
         <div>
-          <label htmlFor="email">Email: </label>
+          <label htmlFor="email"></label>
           <input placeholder="Email" id="email" type="email" value={email} onChange={handleEmailChange} />
           <p className="validation-error">{validationError?.email}</p>
         </div>
         <div>
-          <label htmlFor="password">Password: </label>
+          <label htmlFor="password"></label>
           <input placeholder="Password" id="password" type="password" value={password} onChange={handlePasswordChange} />
           <p className="validation-error">{validationError?.password}</p>
         </div>
 
-        <input id="submit" type="submit" value="Submit" />
+        <div>
+        <input id="submit" type="submit" value="Sign Up" />
+        </div>
       </form>
-    </div>
+         </div>
+        </div>
+      </div>
     </>
   );
 };
