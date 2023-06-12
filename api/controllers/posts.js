@@ -9,29 +9,29 @@ const PostsController = {
     // in the current format, if time is exactly the same it will sort alphabetically by message
     // note: (this is purely for the proof of concept, sounds silly to take into account)
     Post.find()
-      .populate({ path: 'user', select: 'name' })
-      .sort({time: -1, message: 1})
+      .populate({ path: "user", select: "name" })
+      .sort({ time: -1, message: 1 })
       .exec((err, posts) => {
         if (err) {
           throw err;
         }
-        const token = TokenGenerator.jsonwebtoken(req.user_id)
+        const token = TokenGenerator.jsonwebtoken(req.user_id);
         // .json() on the backend sends an http response containing a json.
         res.status(200).json({ posts: posts, token: token });
-    })
+      });
   },
 
   Create: (req, res) => {
     const post = new Post(req.body);
     post.user = req.user_id;
 
-    post.save((err) => {
+    post.save(err => {
       if (err) {
         throw err;
       }
-    
-      const token = TokenGenerator.jsonwebtoken(req.user_id)
-      res.status(201).json({ message: 'OK', token: token });
+
+      const token = TokenGenerator.jsonwebtoken(req.user_id);
+      res.status(201).json({ message: "OK", token: token });
     });
   },
   Update: (req, res) => {
@@ -41,9 +41,19 @@ const PostsController = {
         throw err;
       }
       const token = await TokenGenerator.jsonwebtoken(req.user_id);
-      res.status(201).json({ message: 'Post liked', token: token});
-    })
-  }
+      res.status(201).json({ message: "Post liked", token: token });
+    });
+  },
+
+  UpdateComment: (req, res) => {
+    Post.findOneAndUpdate({ _id: req.body.postId }, { comments: req.body.comment }, async (err, posts) => {
+      if (err) {
+        throw err;
+      }
+      const token = await TokenGenerator.jsonwebtoken(req.user_id);
+      res.status(201).json({ posts: posts, token: token });
+    });
+  },
 };
 
 module.exports = PostsController;
