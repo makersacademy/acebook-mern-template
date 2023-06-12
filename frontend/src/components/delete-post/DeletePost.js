@@ -5,7 +5,7 @@ import { useParams } from "react-router";
 const DeletePost = ({navigate}) => {
   const [token, setToken] = useState(window.localStorage.getItem("token"));
   const post_id = useParams();
-
+  
   if(token) {
     fetch("/posts/" + post_id.id , {
       method: "DELETE",
@@ -14,6 +14,8 @@ const DeletePost = ({navigate}) => {
       }
       .then(response => response.json())
       .then(async data => {
+        window.localStorage.setItem("token", data.token)
+        setToken(window.localStorage.getItem("token"))
         console.log(data.message);
       })
     })

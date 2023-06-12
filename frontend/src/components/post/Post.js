@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 
 const Post = ({post}) => {
   const updateLink = `/posts/${post._id}/update`;
-  const deleteLink = `/posts/${post._id}/delete`;
+  const deleteLink = `/posts`;
 
   return(
     <article data-cy="post" key={ post._id }>
