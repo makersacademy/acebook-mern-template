@@ -49,13 +49,7 @@ const Feed = ({ navigate }) => {
             <h2>Posts</h2>
             <PostCreateForm />
             <div id="feed" role="feed">
-              { 
-                if (posts.length === 0) { 
-                  <p>There are no posts yet.</p> 
-                } else {
-                  posts.map(post => <Post post={post} key={post._id} userId={ userId } />)
-                }
-              }
+              {posts.length === 0 ? <p>There are no posts yet.</p> : posts.map(post => <Post post={post} key={post._id} userId={userId} />)}
             </div>
           </div>
         </>
