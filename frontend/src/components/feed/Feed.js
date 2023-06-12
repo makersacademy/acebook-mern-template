@@ -29,6 +29,9 @@ const Feed = ({ navigate }) => {
             setToken(window.localStorage.getItem("token"));
             setPosts(data.posts);
             setLoading(false);
+            // jwt_decode decodes the data without accessing the secret key, therefore there are no security issues currently present
+           // This line is equivalent to putting the token into jwt.io debugger
+           setUserId(jwt_decode(token).user_id)
           } else {
             // navigate to login if token but not valid (timed-out)
             navigate("/login");
