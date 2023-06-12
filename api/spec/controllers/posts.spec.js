@@ -135,31 +135,48 @@ describe("/posts", () => {
   });
 
   describe("PATCH to add comments", () => {
-    xtest("creates a new post and a comment to it", () => {
-      request(app)
-        .post("/posts")
-        .set("Authorization", `Bearer ${token}`)
-        .send({ message: "hello world", token: token })
-        .then(() => {
-          Post.find().then(posts => {
-            expect(posts.length).toEqual(1);
-            expect(posts[0].message).toEqual("hello world");
-          });
-        });
-    });
+    // This works, keeping it here to re-use
+    // test("creates a new post", done => {
+    //   request(app)
+    //     .post("/posts")
+    //     .set("Authorization", `Bearer ${token}`)
+    //     .send({ message: "hello world", token: token })
+    //     .then(() => {
+    //       return Post.find().then(posts => {
+    //         expect(posts.length).toEqual(1);
+    //         expect(posts[0].message).toEqual("hello world");
+    //         done();
+    //       });
+    //     });
+    // });
 
-    test("creates a new post", done => {
+    test("Posts have a comments array", done => {
       request(app)
         .post("/posts")
         .set("Authorization", `Bearer ${token}`)
-        .send({ message: "hello world", token: token })
+        .send({ message: "i am post", token: token })
         .then(() => {
           return Post.find().then(posts => {
-            expect(posts.length).toEqual(1);
-            expect(posts[0].message).toEqual("hello world");
+            expect(posts[0].comments).toEqual([]);
             done();
           });
         });
     });
+  });
+
+  test("A post has one comment", done => {
+    let comment = new Post({ message: "I am comment!" });
+
+    request(app)
+      .post("/posts")
+      .set("Authorization", `Bearer ${token}`)
+      .send({ message: "i am post", comments: [comment], token: token })
+
+      .then(() => {
+        return Post.find().then(posts => {
+          expect(posts[0].comments[0].message).toEqual("I am comment!");
+          done();
+        });
+      });
   });
 });
