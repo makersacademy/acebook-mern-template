@@ -10,7 +10,7 @@ describe("Post model", () => {
     });
   });
 
-  it("has a username", () => {
+  it("has a username when saved with username attribute", () => {
     const post = new Post({ username: "GandiTOTS" });
     expect(post.username).toEqual("GandiTOTS");
   });
