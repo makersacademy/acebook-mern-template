@@ -18,8 +18,9 @@ const Feed = ({ navigate }) => {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    handleSendingNewPost(token, message, "/posts").then(
+    handleSendingNewPost(token, message, "/posts").then(() => {
       fetchPosts(token, setToken, setPosts)
+    }
     )
     setMessage('');
   }
