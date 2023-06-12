@@ -36,5 +36,39 @@ describe("Post model", () => {
         done();
       });
     });
+
   });
+
+  it("can save multiple posts", async () => {
+    var post1 = new Post({ message: "this is a post" });
+    var post2 = new Post({ message: "this is another post" });
+
+    await post1.save();
+    await post2.save();
+
+    let posts = await Post.find();
+    expect(posts.length).toBe(2);
+  })
+
+  it("can find a single post once multiple posts are added", async () => {
+    var post1 = new Post({ message: "this is a post" });
+    var post2 = new Post({ message: "this is another post" });
+
+    await post1.save();
+    await post2.save();
+
+    let post = await Post.findById(post1._id);
+    expect(post).toMatchObject({ message: "this is a post" });
+  })
+
+  it("can update a post based on post object id", async () => {
+    var post = new Post({ message: "This text will change" });
+    const newMessage = "This is the new text";
+
+    await post.save();
+
+    await Post.findByIdAndUpdate(post._id, { message: newMessage });
+    let result = await Post.findById(post._id);
+    expect(result).toMatchObject({ message: "This is the new text" });
+  })
 });
