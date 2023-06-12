@@ -1,4 +1,5 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
+
 
 const PostCreateForm = () => {
   const [post, setPost] = useState("");
@@ -24,6 +25,7 @@ const PostCreateForm = () => {
       if (response.status === 201) {
         // TODO: Will need to renavigate back to /posts upon 201 status
         console.log("Successfully submitted");
+        return refreshPage();
       } else {
         console.log("Failed to submit");
         setValidationError("Server error");
@@ -41,6 +43,11 @@ const PostCreateForm = () => {
     }
   };
 
+  const refreshPage = () => {
+    window.location.reload(false);
+  };
+
+
   const handlePostChange = event => {
     setPost(event.target.value);
   };
@@ -48,7 +55,7 @@ const PostCreateForm = () => {
   return (
     <form onSubmit={submitPost} noValidate>
       <input placeholder="What's on your mind?" id="newPost" type="text" value={post} onChange={handlePostChange} required />
-      <input id="submit" type="submit" value="Post" />
+      <input id="submit" type="submit" value="Post" onClick={refreshPage}/>
       <p className="validation-error">{validationError}</p>
     </form>
   );
