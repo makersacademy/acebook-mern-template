@@ -7,6 +7,6 @@ router.get("/", PostsController.Index);
 router.post("/", PostsController.Create);
 router.get("/:id", PostsController.ShowPost);
 router.patch("/:id/update", PostsController.UpdatePost);
-router.delete("/:id/delete", PostsController.DeletePost);
+// router.delete("/:id/delete", PostsController.DeletePost);
 
 module.exports = router;
