@@ -12,7 +12,6 @@ export const handleSendingNewPost = async (token, message, url) => {
         body: JSON.stringify({ message: message })
       });
       const data = await response.json();
-      console.log(data)
       return data
     } catch(e) {
       console.log(e)

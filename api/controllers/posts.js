@@ -12,34 +12,23 @@ const PostsController = {
       res.status(200).json({ posts: posts, token: token });
     });
   },
-  // Create: (req, res) => {
-  //   // Need to first get the User from the ID
-  //   const post = new Post(req.body);
-  //   post.save(async (err) => {
-  //     if (err) {
-  //       throw err;
-  //     }
-  //     const token = await TokenGenerator.jsonwebtoken(req.user_id)
-  //     res.status(201).json({ message: 'OK', token: token });
-  //   });
-  // },
 
   Create: (req, res) => {
     User.findById(req.user_id).then((user) => {
-    console.log(user.username)
-    console.log(req.body.message)
-    const requestObj = {
-      username: user.username,
-      message: req.body.message
-    }
-    const post = new Post(requestObj);
-    post.save(async (err) => {
-      if (err) {
-        throw err;
+      const requestObj = {
+        username: user.username,
+        message: req.body.message
       }
-      const token = await TokenGenerator.jsonwebtoken(req.user_id)
-      res.status(201).json({ message: 'OK', token: token });
-     });
+      const post = new Post(requestObj);
+      post.save(async (egg) => {
+        if (egg) {
+          console.log("ERROR:")
+          console.log(egg)
+          throw egg;
+        }
+        const token = await TokenGenerator.jsonwebtoken(req.user_id)
+        res.status(201).json({ message: 'OK', token: token });
+      });
     });
   },
 
