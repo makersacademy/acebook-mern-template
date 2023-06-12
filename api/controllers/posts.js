@@ -40,6 +40,7 @@ const PostsController = {
       if (err) {
         throw err;
       }
+      console.log("this is the posts:" + posts);
       const token = await TokenGenerator.jsonwebtoken(req.user_id);
       res.status(201).json({ message: 'Post liked', token: token});
     })
