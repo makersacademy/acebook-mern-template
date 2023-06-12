@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import "./LoginForm.css";
+import { Link } from "react-router-dom";
+import profile from "./profile.png";
 
 const LogInForm = ({ navigate }) => {
   const [email, setEmail] = useState("");
@@ -63,25 +65,38 @@ const LogInForm = ({ navigate }) => {
 
   return (
     <>
-      <div className="login" >
-      <h1>Log in</h1>
+      <div className="main">
+          <div className="sub-main">
+         <div>
+           <h1>Login</h1>
+          <div>
+
       <form onSubmit={handleSubmit} noValidate>
         <div>
-          <label htmlFor="email">Email: </label>
+          <label htmlFor="email"></label>
           <input placeholder="Email" id="email" type="email" value={email} onChange={handleEmailChange} />
           <p className="validation-error">{validationError?.email}</p>
         </div>
         <div>
-          <label htmlFor="email">Password: </label>
+          <label htmlFor="email"></label>
           <input placeholder="Password" id="password" type="password" value={password} onChange={handlePasswordChange} />
           <p className="validation-error">{validationError?.password}</p>
         </div>
 
-        <input id="submit" type="submit" value="Submit" />
+        <div>
+        <input id="submit" type="submit" value="Login" />
+        </div>
       </form>
+
+      <div>
+        <p> Don't have an account? <Link to="/signup">Sign Up</Link></p>
+      </div>
+      </div>
+      </div>
+          </div>
       </div>
     </>
-  );
+  )
 };
 
 export default LogInForm;
