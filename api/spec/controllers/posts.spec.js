@@ -166,13 +166,11 @@ describe("/posts", () => {
         .get("/posts")
         .set("Authorization", `Bearer ${token}`)
         .send({token: token});
-        console.log(token);
       let id = response.body.posts[0]._id
       response = await request(app)
         .patch("/posts")
         .set("Authorization", `Bearer ${token}`)
         .send( { postId: id, likes: ["1"] } );
-        console.log(response.body)
       response = await request(app)
         .get("/posts")
         .set("Authorization", `Bearer ${token}`)
