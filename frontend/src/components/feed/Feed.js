@@ -1,13 +1,14 @@
 import React, { useEffect, useState } from "react";
 import Post from "../post/Post";
 import PostCreateForm from "../post/PostCreateForm";
-import BarLoader from 'react-spinners/BarLoader';
-import Navbar from '../navbar/Navbar';
-import './Feed.css';
+import BarLoader from "react-spinners/BarLoader";
+import Navbar from "../navbar/Navbar";
+import "./Feed.css";
 
 const Feed = ({ navigate }) => {
   const [posts, setPosts] = useState([]);
   const [token, setToken] = useState(window.localStorage.getItem("token")); // Retrieves a token from the browser storage
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     // Will send a fetch request if a valid token is found
@@ -21,9 +22,11 @@ const Feed = ({ navigate }) => {
         .then(response => response.json())
         .then(data => {
           if (data.posts) {
+            console.log("data.posts");
             window.localStorage.setItem("token", data.token);
             setToken(window.localStorage.getItem("token"));
             setPosts(data.posts);
+            setLoading(false);
           } else {
             // navigate to login if token but not valid (timed-out)
             navigate("/login");
@@ -37,18 +40,20 @@ const Feed = ({ navigate }) => {
 
   return (
     <>
-    {posts.length > 0 ? (<>
-      <Navbar navigate={navigate}/>
-      <div className='posts'>
-        <h2>Posts</h2>
-        <PostCreateForm />
-        <div id="feed" role="feed">
-          {posts.map(post => (
-            <Post post={post} key={post._id} />
-          ))}
-        </div>
-      </div>
-    </>) : (<BarLoader color='#1877f2'/>)}
+      {!loading ? (
+        <>
+          <Navbar navigate={navigate} />
+          <div className="posts">
+            <h2>Posts</h2>
+            <PostCreateForm />
+            <div id="feed" role="feed">
+              {posts.length === 0 ? <p>There are no posts yet.</p> : posts.map(post => <Post post={post} key={post._id} />)}
+            </div>
+          </div>
+        </>
+      ) : (
+        <BarLoader color="#1877f2" />
+      )}
     </>
   );
 };
