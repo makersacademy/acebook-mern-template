@@ -13,10 +13,13 @@ const PostsController = {
   },
   Create: (req, res) => {
     const post = new Post(req.body);
+    console.log("HI THERE FROM CONTORLLER")
+    console.log(req.user_id);
     post.save(async (err) => {
       if (err) {
         throw err;
       }
+      console.log("MAKING TOKEN!")
       const token = await TokenGenerator.jsonwebtoken(req.user_id)
       res.status(201).json({ message: 'OK', token: token });
     });

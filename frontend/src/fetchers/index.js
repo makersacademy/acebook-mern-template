@@ -1,10 +1,9 @@
 // made seperate fetchers folder for code re-use
-import jwt_decode from 'jwt-decode';
 
 export const handleSendingNewPost = async (token, message, url) => {
     // try catch are essential for async fucntions for cathing errors
     try {
-      console.log(jwt_decode(token));
+      //console.log(jwt_decode(token).user_id.username);
       const response = await fetch(`${url}`, {
         method: 'post',
         headers: {
