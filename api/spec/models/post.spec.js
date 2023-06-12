@@ -39,6 +39,29 @@ describe("Post model", () => {
 
   });
 
+  it("can delete a post", (done) => {
+    var post = new Post({ message: "delete post" });
+  
+    post.save((err, savedPost) => {
+      expect(err).toBeNull();
+  
+      Post.findById(savedPost._id, (err, foundPost) => {
+        expect(err).toBeNull();
+        expect(foundPost).toBeDefined();
+  
+        foundPost.deleteOne((err) => {
+          expect(err).toBeNull();
+  
+          Post.find((err, posts) => {
+            expect(err).toBeNull();
+            expect(posts).toEqual([]);
+            done();
+          });
+        });
+      });
+    });
+  });
+
   it("can save multiple posts", async () => {
     var post1 = new Post({ message: "this is a post" });
     var post2 = new Post({ message: "this is another post" });
