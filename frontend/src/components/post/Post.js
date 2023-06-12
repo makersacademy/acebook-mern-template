@@ -42,11 +42,11 @@ const Post = ({post, userId}) => {
     minute: 'numeric',
   });
   
-// The default image is accessed in the public folder, 
-// refactoring needed when upload image API is implimented
+  // The default image is accessed in the public folder, 
+  // refactoring needed when upload image API is implimented
   return(
     <article data-cy="post" key={ post._id }>
-      <img src={ process.env.PUBLIC_URL + post.user.avatar } alt='avatar' width='50'></img> 
+      <img src={ post.user.avatar } alt='avatar' width='50'></img> 
       <p>{ post.user.name }</p>
       <p>{ formattedDate } </p>
       <p>{ post.message }</p>
