@@ -1,7 +1,7 @@
 import React from 'react';
 import { useState, useEffect } from 'react';
 import { handleSendingNewComment } from '../../fetchers';
-
+import Comment from '../comment/Comment';
 // one state that defaults as an empty string
 // apply the state to the form
 // useEffect hook
@@ -34,7 +34,14 @@ const Post = ({post}) => {
         </textarea>
         <button>Submit</button>
       </form>
+
+      <div id='comment-feed' role="feed">
+       {post.comments.map(
+          (comment, index) => ( <Comment comment={ comment } key={ comment._id + index}/>)
+       )}
+      </div>
     </>
+
   )
 }
 
