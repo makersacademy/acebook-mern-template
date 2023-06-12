@@ -12,7 +12,7 @@ const Post = ({post}) => {
   const [token, setToken] = useState(window.localStorage.getItem("token"));
 
   // useEffect(() => {
-  //   fetchPosts(token, setToken, setPosts);
+  //   // handleSendingNewComment(token, post, { message: commentMessage }, '/posts/add-comment');
   // }, [])
 
   const handleCommentSubmit = (event) => {
