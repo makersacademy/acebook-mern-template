@@ -25,7 +25,7 @@ describe("Post model", () => {
 
   it("can save a post", (done) => {
     var post = new Post({ message: "some message" });
-
+    console.log(post);
     post.save((err) => {
       expect(err).toBeNull();
 
