@@ -7,6 +7,7 @@ const CommentsSchema = new mongoose.Schema({
 const PostSchema = new mongoose.Schema({
   message: String,
   comments: [CommentsSchema],
+  likeCount: {type: Number, default: 0}
 });
 
 const Post = mongoose.model("Post", PostSchema);
