@@ -64,7 +64,7 @@ export const fetchPosts = (token, setToken, setPosts) => {
         })
     }
 }
-
+// returns the comments array of a single post using a postID
 export const fetchComments = (token, setToken, setCommentsText, postId) => {
   if(token) {
     fetch("/posts", {

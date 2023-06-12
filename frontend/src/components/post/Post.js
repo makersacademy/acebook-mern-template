@@ -2,24 +2,24 @@ import React from 'react';
 import { useState, useEffect } from 'react';
 import { fetchComments, handleSendingNewComment } from '../../fetchers';
 import Comment from '../comment/Comment';
-// one state that defaults as an empty string
-// apply the state to the form
-// useEffect hook
-// handleCommentSubmit function
 
 const Post = ({post}) => {
   const [commentMessage, setCommentMessage] = useState('');
   const [commentsText, setCommentsText] = useState([]);
   const [token, setToken] = useState(window.localStorage.getItem("token"));
-
+  // adds the comments in the comment feed on first render
   useEffect(() => {
     fetchComments(token, setToken, setCommentsText, post._id)
-  }, [])
-
-  const handleCommentSubmit = (event) => {
+    console.log('this is useEffect')
+  }, []);
+  // submits a comment on clicking submit button
+  const handleCommentSubmit = async (event) => {
     event.preventDefault();
-    handleSendingNewComment(token, post, { message: commentMessage }, '/posts/add-comment');
-    fetchComments(token, setToken, setCommentsText, post._id)
+    await handleSendingNewComment(token, post, { message: commentMessage }, '/posts/add-comment');
+    // re-renders the comment feed with the new comment
+    await fetchComments(token, setToken, setCommentsText, post._id)
+    // sets the input field back to empty string
+    console.log(commentsText);
     setCommentMessage("");
   }
 
@@ -43,19 +43,8 @@ const Post = ({post}) => {
        )}
       </div>
     </>
-
   )
 }
 
 export default Post;
 
-// post.comment. i need an area for someone to make a comment
-// this is also where we can add our likes
-
-// add text area
-// add submit button
-// setup handleSubmit
-
-// make a like component 
-
-// research making a folder called fetchers
