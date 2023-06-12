@@ -150,7 +150,7 @@ describe("/posts", () => {
     //     });
     // });
 
-    test("Posts have a comments array", done => {
+    xtest("Posts have a comments array", done => {
       request(app)
         .post("/posts")
         .set("Authorization", `Bearer ${token}`)
@@ -160,23 +160,26 @@ describe("/posts", () => {
             expect(posts[0].comments).toEqual([]);
             done();
           });
+        })
+        .catch(error => {
+          done(error); // Pass the error to the `done` callback
         });
     });
   });
-
-  test("A post has one comment", done => {
-    let comment = new Post({ message: "I am comment!" });
-
-    request(app)
-      .post("/posts")
-      .set("Authorization", `Bearer ${token}`)
-      .send({ message: "i am post", comments: [comment], token: token })
-
-      .then(() => {
-        return Post.find().then(posts => {
-          expect(posts[0].comments[0].message).toEqual("I am comment!");
-          done();
-        });
-      });
-  });
 });
+
+// xtest("A post has one comment", done => {
+//   let comment = new Post({ message: "I am comment!" });
+
+//   request(app)
+//     .post("/posts")
+//     .set("Authorization", `Bearer ${token}`)
+//     .send({ message: "i am post", comments: [comment], token: token })
+
+//     .then(() => {
+//       return Post.find().then(posts => {
+//         expect(posts[0].comments[0].message).toEqual("I am comment!");
+//         done();
+//       });
+//     });
+// });

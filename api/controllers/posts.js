@@ -47,13 +47,21 @@ const PostsController = {
   },
 
   UpdateComment: (req, res) => {
-    Post.findOneAndUpdate({ _id: req.body.postId }, { comments: req.body.comment }, async (err, posts) => {
-      if (err) {
-        throw err;
-      }
-      const token = await TokenGenerator.jsonwebtoken(req.user_id);
-      res.status(201).json({ posts: posts, token: token });
-    });
+    // req.body
+    // {
+    //   postId: 1,
+    //   comment: { message: "I am comment" }
+    // }
+    const comment = new Post(req.body.comment);
+
+    Post.findOneAndUpdate({ _id: req.body.postId }, { $push: { comments: comment } }, { new: true })
+      .then(post => {
+        const token = TokenGenerator.jsonwebtoken(req.user_id);
+        res.status(201).json({ post: post, token: token });
+      })
+      .catch(error => {
+        console.error(error);
+      });
   },
 };
 
