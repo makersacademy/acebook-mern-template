@@ -1,8 +1,39 @@
-import React from 'react';
+import React, { useState } from 'react';
 
-const Post = ({post}) => {
+const Post = ({post, userId}) => {
+  const [numberOfLikes, setNumberOfLikes] = useState(post.likes.length);
 
-  console.log(post);
+  const postLiked = async (event) => {
+
+    const likes = post.likes;
+    
+    if(!likes.includes(userId)) {
+
+      likes.push(userId)
+      
+      const token = window.localStorage.getItem("token")
+      let response = await fetch('/posts', {
+        method: 'PATCH',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}`
+        },
+        body: JSON.stringify({ postId: post._id, likes: likes })
+      })
+  
+      if(response.status === 201) {
+        console.log(response);
+        // TODO: This makes me feel dirty, but until a better solution to update just this component, as opposed to
+        // reloading the entirety of the parent feed on every like, I propose we leave this here.
+        setNumberOfLikes(numberOfLikes + 1)
+        console.log("Like request sent successfully");
+      } else {
+        console.log('Failed to send like request');
+      }
+    } else {
+      console.log("You've already liked this.");
+    }
+  }
 
   const formattedDate = new Date(post.time).toLocaleString('en-GB', {
     day: 'numeric',
@@ -16,6 +47,8 @@ const Post = ({post}) => {
       <p>{ post.user.name }</p>
       <p>{ formattedDate } </p>
       <p>{ post.message }</p>
+      <p>Likes: { numberOfLikes } </p>
+      <button onClick={postLiked}>Like</button>
     </article>
   )
 };
