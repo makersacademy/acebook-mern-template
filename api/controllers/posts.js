@@ -8,7 +8,7 @@ const PostsController = {
         throw err;
       }
       const token = await TokenGenerator.jsonwebtoken(req.user_id)
-      res.status(200).json({ posts: posts, token: token });
+      res.status(200).json({ posts: posts, token: token });//posts are contained here with the token
     });
   },
   Create: (req, res) => {
@@ -22,6 +22,17 @@ const PostsController = {
       res.status(201).json({ message: 'OK', token: token });
     });
   },
+
+  Delete: async (req, res) => {
+    // try {
+    const { post_id } = req.params;
+    await Post.deleteOne({ _id: post_id });
+    const token = await TokenGenerator.jsonwebtoken(req.user_id);
+    res.status(200).json({ message: 'Post deleted', token: token });
+    // } catch (err) {
+    //   res.status(401).json({ message: 'Bad request' });
+    // }
+  }
 };
 
 module.exports = PostsController;
