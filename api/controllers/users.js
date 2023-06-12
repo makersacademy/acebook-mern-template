@@ -1,4 +1,5 @@
 const User = require("../models/user");
+const bcrypt = require("bcrypt");
 
 const UsersController = {
   Create: (req, res) => {
@@ -32,7 +33,7 @@ const UsersController = {
         }
       }
     });
-  }
+  },
 };
 
 module.exports = UsersController;
