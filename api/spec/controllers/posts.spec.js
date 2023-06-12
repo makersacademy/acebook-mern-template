@@ -86,7 +86,7 @@ describe("/posts", () => {
   })
 
   describe("GET, when token is present", () => {
-    test("returns every post in the collection", async () => {
+    test("returns every post in the collection in reverse order", async () => {
       let post1 = new Post({message: "howdy!"});
       let post2 = new Post({message: "hola!"});
       await post1.save();
@@ -156,5 +156,27 @@ describe("/posts", () => {
         .get("/posts");
       expect(response.body.token).toEqual(undefined);
     })
+  })
+
+  describe("PATCH", () => {
+    test('updates likes', async () => {
+      let post1 = new Post({message: "howdy!"});
+      await post1.save(); 
+      let response = await request(app)
+        .get("/posts")
+        .set("Authorization", `Bearer ${token}`)
+        .send({token: token});
+      let id = response.body.posts[0]._id
+      response = await request(app)
+        .patch("/posts")
+        .set("Authorization", `Bearer ${token}`)
+        .send( { postId: id, likes: ["1"] } );
+      response = await request(app)
+        .get("/posts")
+        .set("Authorization", `Bearer ${token}`)
+        .send({token: token});
+        expect(response.body.posts[0]._id).toEqual(id)
+        expect(response.body.posts[0].likes).toEqual(["1"]);
+    });
   })
 });
