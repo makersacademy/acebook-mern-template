@@ -65,7 +65,7 @@ export const fetchPosts = (token, setToken, setPosts) => {
     }
 }
 
-export const fetchComments = (token, setToken, setCommentMessage) => {
+export const fetchComments = (token, setToken, setCommentsText, postId) => {
   if(token) {
     fetch("/posts", {
       headers: {
@@ -76,7 +76,11 @@ export const fetchComments = (token, setToken, setCommentMessage) => {
       .then(async data => {
         window.localStorage.setItem("token", data.token)
         setToken(window.localStorage.getItem("token"))
-        setCommentMessage(data.posts);
+        let commentData = data.posts.filter((post) => {
+          return post._id === postId
+        })[0].comments
+        setCommentsText(commentData);
+        console.log(commentData)
       })
   }
 }

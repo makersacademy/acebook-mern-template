@@ -1,6 +1,6 @@
 import React from 'react';
 import { useState, useEffect } from 'react';
-import { handleSendingNewComment } from '../../fetchers';
+import { fetchComments, handleSendingNewComment } from '../../fetchers';
 import Comment from '../comment/Comment';
 // one state that defaults as an empty string
 // apply the state to the form
@@ -9,15 +9,17 @@ import Comment from '../comment/Comment';
 
 const Post = ({post}) => {
   const [commentMessage, setCommentMessage] = useState('');
+  const [commentsText, setCommentsText] = useState([]);
   const [token, setToken] = useState(window.localStorage.getItem("token"));
 
-  // useEffect(() => {
-  //   // handleSendingNewComment(token, post, { message: commentMessage }, '/posts/add-comment');
-  // }, [])
+  useEffect(() => {
+    fetchComments(token, setToken, setCommentsText, post._id)
+  }, [])
 
   const handleCommentSubmit = (event) => {
     event.preventDefault();
     handleSendingNewComment(token, post, { message: commentMessage }, '/posts/add-comment');
+    fetchComments(token, setToken, setCommentsText, post._id)
     setCommentMessage("");
   }
 
@@ -36,7 +38,7 @@ const Post = ({post}) => {
       </form>
 
       <div id='comment-feed' role="feed">
-       {post.comments.map(
+       {commentsText.map(
           (comment, index) => ( <Comment comment={ comment } key={ comment._id + index}/>)
        )}
       </div>
