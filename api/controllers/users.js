@@ -1,16 +1,25 @@
 const User = require("../models/user");
+const bcrypt = require("bcrypt");
 
 const UsersController = {
   Create: (req, res) => {
     const user = new User(req.body);
+    
     if (user.password) {
-      user.password = 'new password';
+      const saltRounds = 10;
+      const password = user.password;
+      bcrypt.genSalt(saltRounds, function(err, salt) {
+        bcrypt.hash(password, salt, function(err, hash) {
+          user.password = hash;
+        })
+      })
     }
+
     user.save((err) => {
       if (err) {
         res.status(400).json({message: 'Bad request'})
       } else {
-        res.status(201).json({ user: user, message: 'OK' });
+        res.status(201).json({ user: user.password , message: 'OK' });
       }
     });
   },
