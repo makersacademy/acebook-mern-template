@@ -3,7 +3,6 @@
 export const handleSendingNewPost = async (token, message, url) => {
     // try catch are essential for async fucntions for cathing errors
     try {
-      //console.log(jwt_decode(token).user_id.username);
       const response = await fetch(`${url}`, {
         method: 'post',
         headers: {
@@ -14,6 +13,7 @@ export const handleSendingNewPost = async (token, message, url) => {
       });
       const data = await response.json();
       console.log(data)
+      return data
     } catch(e) {
       console.log(e)
     }
@@ -21,13 +21,13 @@ export const handleSendingNewPost = async (token, message, url) => {
 
 export const fetchPosts = (token, setToken, setPosts) => {
     if(token) {
-      fetch("/posts", {
+      return fetch("/posts", {
         headers: {
           'Authorization': `Bearer ${token}`
         }
       })
         .then(response => response.json())
-        .then(async data => {
+        .then(data => {
           window.localStorage.setItem("token", data.token)
           setToken(window.localStorage.getItem("token"))
           setPosts(data.posts);
