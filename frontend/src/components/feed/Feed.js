@@ -1,11 +1,16 @@
 import React, { useEffect, useState } from "react";
 import Post from "../post/Post";
 import PostCreateForm from "../post/PostCreateForm";
-import BarLoader from 'react-spinners/BarLoader';
+import BarLoader from "react-spinners/BarLoader";
+import Navbar from "../navbar/Navbar";
+import "./Feed.css";
+import jwt_decode from "jwt-decode";
 
 const Feed = ({ navigate }) => {
   const [posts, setPosts] = useState([]);
   const [token, setToken] = useState(window.localStorage.getItem("token")); // Retrieves a token from the browser storage
+  const [loading, setLoading] = useState(true);
+  const [userId, setUserId] = useState("");
 
   useEffect(() => {
     // Will send a fetch request if a valid token is found
@@ -19,9 +24,14 @@ const Feed = ({ navigate }) => {
         .then(response => response.json())
         .then(data => {
           if (data.posts) {
+            console.log("data.posts");
             window.localStorage.setItem("token", data.token);
             setToken(window.localStorage.getItem("token"));
             setPosts(data.posts);
+            setLoading(false);
+            // jwt_decode decodes the data without accessing the secret key, therefore there are no security issues currently present
+           // This line is equivalent to putting the token into jwt.io debugger
+           setUserId(jwt_decode(token).user_id)
           } else {
             // navigate to login if token but not valid (timed-out)
             navigate("/login");
@@ -33,25 +43,24 @@ const Feed = ({ navigate }) => {
     }
   }, [navigate, token]);
 
-  const logout = () => {
-    window.localStorage.removeItem("token");
-    navigate("/login");
-  };
-
   return (
     <>
-    {posts.length > 0 ? (<>
-      <h2>Posts</h2>
-      <button onClick={logout}>Logout</button>
-      <PostCreateForm />
-      <div id="feed" role="feed">
-        {posts.map(post => (
-          <Post post={post} key={post._id} />
-        ))}
-      </div>
-       </>) : (<BarLoader color='#1877f2'/>)}
-      
-      
+      {!loading ? (
+        <>
+          <Navbar navigate={navigate} />
+          <div className="posts">
+            <h2>Posts</h2>
+            <PostCreateForm />
+            <div id="feed" role="feed">
+              {posts.length === 0 
+                ? <p>There are no posts yet.</p> 
+                : posts.map(post => <Post post={post} key={post._id} userId={userId} />)}
+            </div>
+          </div>
+        </>
+      ) : (
+        <BarLoader color="#1877f2" />
+      )}
     </>
   );
 };
