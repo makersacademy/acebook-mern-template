@@ -4,16 +4,16 @@ require("../mongodb_helper");
 const User = require('../../models/user');
 
 describe("/tokens", () => {
-  beforeAll( () => {
-    const user = new User({ email: "test@test.com", password: "12345678", username: 'Fred' })
-    user.save()
+  beforeAll( async () => {
+    const user = new User({ email: "test@test.com", password: "12345678" })
+    await user.save()
   });
 
   afterAll( async () => {
     await User.deleteMany({})
   })
 
-  test.skip("a token is returned when creds are valid", async () => {
+  test("a token is returned when creds are valid", async () => {
     let response = await request(app)
       .post("/tokens")
       .send({email: "test@test.com", password: "12345678"})
@@ -23,7 +23,7 @@ describe("/tokens", () => {
   })
 
 
-  test.skip("a token is not returned when creds are invalid", async () => {
+  test("a token is not returned when creds are invalid", async () => {
     let response = await request(app)
       .post("/tokens")
       .send({email: "test@test.com", password: "1234"})
