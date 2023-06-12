@@ -10,12 +10,14 @@ describe("Post model", () => {
     });
   });
 
-  it("has a message", () => {
+  it("post has correct properties", () => {
     var post = new Post({ 
       message: "some message", 
       time: "2023-06-08T14:05:10.525+00:00" 
     });
     expect(post.message).toEqual("some message");
+    expect(post.time).toEqual(new Date ("2023-06-08T14:05:10.525Z"));
+    expect(post.likes.toObject()).toEqual([]);
   });
 
   it("can list all posts", (done) => {
