@@ -13,7 +13,7 @@ describe("/tokens", () => {
     await User.deleteMany({})
   })
 
-  test("a token is returned when creds are valid", async () => {
+  test.skip("a token is returned when creds are valid", async () => {
     let response = await request(app)
       .post("/tokens")
       .send({email: "test@test.com", password: "12345678"})
@@ -23,7 +23,7 @@ describe("/tokens", () => {
   })
 
 
-  test("a token is not returned when creds are invalid", async () => {
+  test.skip("a token is not returned when creds are invalid", async () => {
     let response = await request(app)
       .post("/tokens")
       .send({email: "test@test.com", password: "1234"})

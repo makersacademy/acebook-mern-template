@@ -12,7 +12,7 @@ describe("/users", () => {
     test("the response code is 201", async () => {
       let response = await request(app)
         .post("/users")
-        .send({email: "poppy@email.com", password: "1234", username: 'Fred' })
+        .send({email: "poppy@email.com", password: "1234"})
       expect(response.statusCode).toBe(201)
       console.log(response.body.user);
       expect(response.body.message).toBe('OK')
@@ -21,7 +21,7 @@ describe("/users", () => {
     test("a user is created", async () => {
       await request(app)
         .post("/users")
-        .send({email: "scarlett@email.com", password: "1234", username: 'Fred' })
+        .send({email: "scarlett@email.com", password: "1234"})
       let users = await User.find()
       let newUser = users[users.length - 1]
       expect(newUser.email).toEqual("scarlett@email.com")
