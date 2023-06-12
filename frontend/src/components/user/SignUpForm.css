@@ -1,0 +1,70 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;900&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Poppins', sans-serif;
+}
+
+.signUpForm {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  margin-top: 100px;
+}
+
+.signUpContainer {
+  background: linear-gradient( rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5) ), url("../../../public/signup-mordor.jpeg");
+  background-position: center; 
+  background-repeat: no-repeat; 
+  background-size: cover; 
+  height: 100vh;
+  padding-top: 150px;
+}
+
+.formInput {
+  margin: 7px;
+  padding: 7px;
+  padding-left: 20px;
+  width: 250px;
+  border: 2px solid whitesmoke;
+  border-radius: 10px;
+  color: black;
+}
+
+.inputButton {
+  margin-top: 40px;
+  background: none;
+  border: 2px solid white;
+  border-radius: 100px;
+  padding: 20px;
+  cursor: url(../../../public/sword-cursor.png), auto;
+  font-size: 20px;
+  color: whitesmoke;
+  transition: 0.5s ease-in-out;
+  background: rgba(0, 0, 0, 0.2);
+  backdrop-filter: blur(10px);
+}
+
+.inputButton:hover {
+  color: red;
+  border: 2px solid red;
+  transform: scale(1.1);  
+  
+}
+
+.signUpHeading {
+  color: whitesmoke;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 2px solid red;
+  margin-left: 400px;
+  margin-right: 400px;
+  padding: 20px;
+  border-radius: 10px;
+  background: rgba(0, 0, 0, 0.2);
+  backdrop-filter: blur(5px);
+} 
