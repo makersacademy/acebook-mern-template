@@ -1,0 +1,39 @@
+@import url('https://fonts.googleapis.com/css2?family=Bilbo+Swash+Caps&display=swap');
+
+
+.feedContainer{
+  background: linear-gradient( rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5) ), url("../../../public/TOTS_Feed_Page.jpg");
+  background-position: center; 
+  background-repeat: no-repeat; 
+  background-size: cover; 
+  height: 100vh;
+  padding-left: 50px;
+  padding-top: 50px;
+}
+
+h1 {
+  color: white;
+  text-align: center;
+  padding-bottom: 5px;
+  font-family: 'Bilbo Swash Caps', cursive;
+  font-size: 350%;
+}
+
+.submit-button{ 
+    opacity: 1.0;
+    margin: 15px;
+}
+
+.submit-button:hover{
+  opacity: 0.5;
+}
+
+#message{
+  border-radius: 10px;
+  padding-left: 10px;
+}
+
+
+/* .postForm {
+  padding-left: 10px;
+} */
