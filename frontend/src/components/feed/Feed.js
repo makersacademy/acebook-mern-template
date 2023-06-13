@@ -18,6 +18,8 @@ const Feed = ({ navigate }) => {
           setToken(window.localStorage.getItem("token"))
           setPosts(data.posts);
         })
+    } else {
+      navigate('/login')
     }
   }, [])
     
@@ -41,8 +43,6 @@ const Feed = ({ navigate }) => {
           </div>
         </>
       )
-    } else {
-      navigate('/signin')
     }
 }
 

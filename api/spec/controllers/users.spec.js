@@ -12,17 +12,32 @@ describe("/users", () => {
     test("the response code is 201", async () => {
       let response = await request(app)
         .post("/users")
-        .send({email: "poppy@email.com", password: "1234", username: 'Fred' })
+        .send({email: "poppy@email.com", password: "1234"})
       expect(response.statusCode).toBe(201)
+      expect(response.body.message).toBe('OK')
     })
 
     test("a user is created", async () => {
       await request(app)
         .post("/users")
-        .send({email: "scarlett@email.com", password: "1234", username: 'Fred' })
+        .send({email: "scarlett@email.com", password: "1234"})
       let users = await User.find()
       let newUser = users[users.length - 1]
       expect(newUser.email).toEqual("scarlett@email.com")
+    })
+
+    test("if the email is already taken a user is not created", async () => {
+      let response = await request(app)
+        .post("/users")
+        .send({email: "email@test.com", password: "1234"})
+      expect(response.statusCode).toBe(201)
+      expect(response.body.message).toBe('OK')
+
+      response = await request(app)
+        .post("/users")
+        .send({email: "email@test.com", password: "1234"})
+      expect(response.statusCode).toBe(400)
+      expect(response.body.message).toBe('Email already signed up')
     })
   })
 
