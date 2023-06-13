@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import './Post.css'
 
 const Post = ({post, userId}) => {
   const [numberOfLikes, setNumberOfLikes] = useState(post.likes.length);
@@ -45,13 +46,19 @@ const Post = ({post, userId}) => {
 // The default image is accessed in the public folder, 
 // refactoring needed when upload image API is implimented
   return(
-    <article data-cy="post" key={ post._id }>
-      <img src={ process.env.PUBLIC_URL + post.user.avatar } alt='avatar' width='50'></img> 
-      <p>{ post.user.name }</p>
-      <p>{ formattedDate } </p>
-      <p>{ post.message }</p>
-      <p>Likes: { numberOfLikes } </p>
-      <button onClick={postLiked}>Like</button>
+    <article class="post" data-cy="post" key={ post._id }>
+      <img class="avatar" src={ process.env.PUBLIC_URL + post.user.avatar } alt='avatar' width='50'></img> 
+      <div>
+        <div class="top-container">
+          <div class="userName">{ post.user.name }</div>
+          <div class="date">{ formattedDate } </div>
+        </div>
+        <div class="message">{ post.message }</div>
+        <div class="like-container">
+          <button class="like-button" onClick={postLiked}>Like</button>
+          <div class="likes">♡ { numberOfLikes } </div>
+        </div>
+      </div>
     </article>
   )
 };
