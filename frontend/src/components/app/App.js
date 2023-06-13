@@ -23,7 +23,7 @@ const App = () => {
           {/* this adds a route to retrieve a username */}
           <Route path='/create-post' element={<CreatePostForm navigate={ useNavigate() }/>}/>
           <Route path='/posts/:id/update' element={<UpdatePost navigate={ useNavigate() }/>}/>
-          <Route path='/posts/:id' element={<DeletePost navigate={ useNavigate() }/>}/>
+          <Route path='/posts/:id/delete' element={<DeletePost navigate={ useNavigate() }/>}/>
         </Routes>
     );
 }
