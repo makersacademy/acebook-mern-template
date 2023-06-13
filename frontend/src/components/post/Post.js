@@ -13,6 +13,7 @@ const Post = ({post}) => {
   }
 
   return (
+    <p>{ post.username }</p>
     <article class='post' data-cy="post" key={post._id}>
       {post.message} - Likes: {likeCount}
       <LikeButton onLike={handleLike} />

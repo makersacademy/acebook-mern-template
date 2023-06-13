@@ -5,6 +5,7 @@ const CommentsSchema = new mongoose.Schema({
 });
 
 const PostSchema = new mongoose.Schema({
+  username: String,
   message: String,
   comments: [CommentsSchema],
   likeCount: {type: Number, default: 0}
