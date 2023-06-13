@@ -2,7 +2,6 @@ const User = require("../models/user");
 
 const UsersController = {
   Create: (req, res) => {
-    console.log("UsersController activated", req.body);
     const user = new User(req.body);
     user.save((err) => {
       if (err) {
