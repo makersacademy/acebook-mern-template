@@ -28,13 +28,14 @@ const Post = ({post}) => {
       <article data-cy="post" key={post._id}>{post.message}</article>
       <form onSubmit={handleCommentSubmit}>
         <textarea
+          data-cy="comment-input-field"
           value={commentMessage}
           onChange={(event) => setCommentMessage(event.target.value)}
           type="text"
           placeholder='What do you think?'
           required>  
         </textarea>
-        <button>Submit</button>
+        <button data-cy="submit">Submit</button>
       </form>
 
       <div id='comment-feed' role="feed">
