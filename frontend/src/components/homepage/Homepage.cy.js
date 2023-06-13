@@ -11,34 +11,4 @@ describe("Visiting the homepage", () => {
     cy.get("#signup-btn").should("be.visible")
     .should('contain.text', "Sign up!")
   })
-
-  // it("should navigate to log in page when button clicked", () => {
-  //   cy.mount(<Homepage navigate={navigate} />)
-
-  //   cy.get("#login-btn")
-  //   .click()
-  //   // cy.on("url:changed", (newUrl) => {
-  //   //   expect(newUrl).to.contain("/login")
-  //   //   cy.url().should("include", "/login")
-  //   // })
-  // })
-
-  // xit("should navigate to sign up page when button clicked", () => {
-  //   cy.mount(<Homepage navigate={navigate} />)
-
-  //   cy.get("#signup-btn").click()
-
-  //   cy.on("url:changed", (newUrl) => {
-  //     expect(newUrl).to.contain("/signup")
-  //     cy.url().should("include", "/signup")
-  //   })
-  // })
-
-  // xit("should redirect to posts if user is logged in", () => {
-  //   window.localStorage.setItem("token", "fakeToken")
-
-  //   cy.mount(<Homepage navigate={navigate} />)
-
-  //   cy.url().should("include", "/posts");
-  // })
 })

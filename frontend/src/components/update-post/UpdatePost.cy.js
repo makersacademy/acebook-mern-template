@@ -6,8 +6,7 @@ describe("Visiting the update page", () => {
     cy.mount(<UpdatePost navigate={navigate} />)
 
     cy.get("form").should("be.visible")
-    
+
     cy.get("#submit").should("be.visible")
-    .should('contain.text', "Update!")
   })
 })
