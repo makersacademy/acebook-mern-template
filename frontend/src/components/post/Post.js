@@ -13,11 +13,13 @@ const Post = ({post}) => {
   }
 
   return (
-    <p>{ post.username }</p>
-    <article class='post' data-cy="post" key={post._id}>
-      {post.message} - Likes: {likeCount}
-      <LikeButton onLike={handleLike} />
-    </article>
+    <>
+      <h2>{ post.username }</h2>
+      <article class='post' data-cy="post" key={post._id}>
+        {post.message} - Likes: {likeCount}
+        <LikeButton onLike={handleLike} />
+      </article>
+    </>
   );
 };
 
