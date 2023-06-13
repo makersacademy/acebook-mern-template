@@ -36,6 +36,7 @@
   display: flex;
   border: 3px inset rgba(118, 116, 116, 0.187);
   gap: 10px;
+  margin-bottom: 10px;
 }
 
 .top-container {
