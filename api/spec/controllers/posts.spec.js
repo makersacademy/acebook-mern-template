@@ -158,80 +158,6 @@ describe("/posts", () => {
     })
   })
 
-  describe("POST /add-like, when token is present", () => {
-    test("responds with 201 and like count of 1", async () => {
-      const post = new Post({message: 'my first post'});
-      await post.save();
-      let response = await request(app)
-        .post('/posts/add-like')
-        .set("Authorization", `Bearer ${token}`)
-        .send(
-          { 
-            postId: post._id,
-            token: token,
-          }
-        );
-
-      expect(response.status).toEqual(201);
-      expect(response.body.likeCount).toEqual(1);
-    });
-
-    test("responds with like count 0 when sending request twice", async () => {
-      const post = new Post({message: 'my first post'});
-      await post.save();
-      await request(app)
-        .post('/posts/add-like')
-        .set("Authorization", `Bearer ${token}`)
-        .send(
-          { 
-            postId: post._id,
-            token: token,
-          }
-        );
-
-        let response = await request(app)
-        .post('/posts/add-like')
-        .set("Authorization", `Bearer ${token}`)
-        .send(
-          { 
-            postId: post._id,
-            token: token,
-          }
-        );
-
-      expect(response.body.likeCount).toEqual(0);
-    });
-  })
-
-  describe("POST /add-like, when token is missing", () => {
-    test("responds with a 401", async () => {
-      const post = new Post({message: 'my first post'});
-      await post.save();
-      // no token attached this time
-      let response = await request(app)
-        .post("/posts/add-like")
-        .send(
-          { postId: post._id }
-        );
-      // checks for 401
-      expect(response.status).toEqual(401)
-    });
-
-    test("does not update the likedByUsers array", async () => {
-      const post = new Post({message: 'my first post'});
-      await post.save();
-      // no token attached this time
-      let response = await request(app)
-        .post("/posts/add-like")
-        .send(
-          { postId: post._id }
-        );
-      // checks for 401
-      let postFromDatabase = await Post.findById(post._id)
-      expect(postFromDatabase.likedByUsers.length).toEqual(0);
-    });
-  });
-
   describe("POST /addCommentToPost, when token is present", () => {
     test("responds with a 202", async () => {
       // creates a new post
@@ -361,6 +287,80 @@ describe("/posts", () => {
         );
       // checks that the response doesn't have a token attached
       expect(response.body.token).toEqual(undefined);
+    });
+  });
+
+  describe("POST /add-like, when token is present", () => {
+    test("responds with 201 and like count of 1", async () => {
+      const post = new Post({message: 'my first post'});
+      await post.save();
+      let response = await request(app)
+        .post('/posts/add-like')
+        .set("Authorization", `Bearer ${token}`)
+        .send(
+          { 
+            postId: post._id,
+            token: token,
+          }
+        );
+
+      expect(response.status).toEqual(201);
+      expect(response.body.likeCount).toEqual(1);
+    });
+
+    test("responds with like count 0 when sending request twice", async () => {
+      const post = new Post({message: 'my first post'});
+      await post.save();
+      await request(app)
+        .post('/posts/add-like')
+        .set("Authorization", `Bearer ${token}`)
+        .send(
+          { 
+            postId: post._id,
+            token: token,
+          }
+        );
+
+        let response = await request(app)
+        .post('/posts/add-like')
+        .set("Authorization", `Bearer ${token}`)
+        .send(
+          { 
+            postId: post._id,
+            token: token,
+          }
+        );
+
+      expect(response.body.likeCount).toEqual(0);
+    });
+  })
+
+  describe("POST /add-like, when token is missing", () => {
+    test("responds with a 401", async () => {
+      const post = new Post({message: 'my first post'});
+      await post.save();
+      // no token attached this time
+      let response = await request(app)
+        .post("/posts/add-like")
+        .send(
+          { postId: post._id }
+        );
+      // checks for 401
+      expect(response.status).toEqual(401)
+    });
+
+    test("does not update the likedByUsers array", async () => {
+      const post = new Post({message: 'my first post'});
+      await post.save();
+      // no token attached this time
+      let response = await request(app)
+        .post("/posts/add-like")
+        .send(
+          { postId: post._id }
+        );
+      // checks for 401
+      let postFromDatabase = await Post.findById(post._id)
+      expect(postFromDatabase.likedByUsers.length).toEqual(0);
     });
   });
 });
