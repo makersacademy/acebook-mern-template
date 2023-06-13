@@ -16,14 +16,21 @@ const Homepage = ({ navigate }) => {
   const navigateToSignup = () => {
     navigate('/signup')
   }
-
-  return(
+  
+  if(token) {
+    return (
       <>
-        <p>{token}</p>
-        <button type="button" id="login-btn" onClick={navigateToLogin}>Log in!</button>
-        <button type="button" id="signup-btn" onClick={navigateToSignup}>Sign up!</button>
+      <h1>hehehehehehehehehehehehehehe</h1>
       </>
     )
+  } else {
+    return(
+        <>
+          <button type="button" id="login-btn" onClick={navigateToLogin}>Log in!</button>
+          <button type="button" id="signup-btn" onClick={navigateToSignup}>Sign up!</button>
+        </>
+      )
+  }
 }
 
 export default Homepage;
