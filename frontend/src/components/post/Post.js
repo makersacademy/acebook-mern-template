@@ -46,17 +46,17 @@ const Post = ({post, userId}) => {
 // The default image is accessed in the public folder, 
 // refactoring needed when upload image API is implimented
   return(
-    <article class="post" data-cy="post" key={ post._id }>
-      <img class="avatar" src={ process.env.PUBLIC_URL + post.user.avatar } alt='avatar' width='50'></img> 
+    <article className="post" data-cy="post" key={ post._id }>
+      <img className="avatar" src={ process.env.PUBLIC_URL + post.user.avatar } alt='avatar' width='50'></img> 
       <div>
-        <div class="top-container">
-          <div class="userName">{ post.user.name }</div>
-          <div class="date">{ formattedDate } </div>
+        <div className="top-container">
+          <div className="userName">{ post.user.name }</div>
+          <div className="date">{ formattedDate } </div>
         </div>
-        <div class="message">{ post.message }</div>
-        <div class="like-container">
-          <button class="like-button" onClick={postLiked}>Like</button>
-          <div class="likes">♡ { numberOfLikes } </div>
+        <div className="message">{ post.message }</div>
+        <div className="like-container">
+          <button className="like-button" onClick={postLiked}>Like</button>
+          <div className="likes">♡ { numberOfLikes } </div>
         </div>
       </div>
     </article>
