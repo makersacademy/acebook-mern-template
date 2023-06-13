@@ -20,6 +20,16 @@ describe("Post model", () => {
     expect(post.message).toEqual("some message");
   });
 
+  it("has an empty users array for likes", () => {
+    const post = new Post(
+      { 
+      message: "some message", 
+    }
+    );
+
+    expect(post.likedByUsers).toBeTruthy();
+  });
+
   it("has an empty array for comments", () => {
     const post = new Post(
       { 
