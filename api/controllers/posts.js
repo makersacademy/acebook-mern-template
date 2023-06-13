@@ -52,10 +52,16 @@ const PostsController = {
     });
 
   },
-  AddLike: (req, res) => {
+
+  UpdateLike: (req, res) => {
     Post.findById(req.body.postId)
     .then((post) => {
-      post.likeCount ++
+      const userID = req.user_id
+      if (post.likedByUsers.includes(userID)) {
+        post.likedByUsers.remove(userID)
+      } else {
+        post.likedByUsers.push(userID)
+      }
     post.save(async (err) => {
       if (err) {
         throw err;

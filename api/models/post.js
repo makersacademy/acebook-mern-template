@@ -9,8 +9,6 @@ const PostSchema = new mongoose.Schema({
   message: String,
   comments: [CommentsSchema],
   likedByUsers: []
-
-  //likeCount: {type: Number, default: 0}
 });
 
 const Post = mongoose.model("Post", PostSchema);
