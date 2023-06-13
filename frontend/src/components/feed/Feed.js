@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import Post from '../post/Post';
 import { fetchPosts, handleSendingNewPost } from '../../fetchers';
+import Navbar from '../navbar/Navbar';
 
 const Feed = ({ navigate }) => {
   const [message, setMessage] = useState('');
@@ -26,6 +27,7 @@ const Feed = ({ navigate }) => {
     if(token) {
       return(
         <>
+          <Navbar />
             <h1>Posts</h1>
             <h2>What's up?</h2>
             <form onSubmit={handleSubmit}>
