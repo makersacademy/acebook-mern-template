@@ -1,4 +1,5 @@
 const Post = require("../models/post");
+const Comment = require("../models/comment");
 const TokenGenerator = require("../models/token_generator");
 
 const PostsController = {
@@ -10,6 +11,7 @@ const PostsController = {
     // note: (this is purely for the proof of concept, sounds silly to take into account)
     Post.find()
       .populate({ path: "user", select: ["name", "avatar"] })
+      .populate({ path: "comment" })
       .sort({ time: -1, message: 1 })
       .exec((err, posts) => {
         if (err) {
@@ -25,7 +27,7 @@ const PostsController = {
     const post = new Post(req.body);
     post.user = req.user_id;
 
-    post.save(err => {
+    post.save((err) => {
       if (err) {
         throw err;
       }
@@ -37,31 +39,49 @@ const PostsController = {
 
   Update: (req, res) => {
     // .findOneAndUpdate(filter, changes, return function)
-    Post.findOneAndUpdate({ _id: req.body.postId }, { likes: req.body.likes }, async (err, posts) => {
+    Post.findOneAndUpdate(
+      { _id: req.body.postId },
+      { likes: req.body.likes },
+      async (err, posts) => {
+        if (err) {
+          throw err;
+        }
+        const token = await TokenGenerator.jsonwebtoken(req.user_id);
+        res.status(201).json({ message: "Post liked", token: token });
+      }
+    );
+  },
+
+  CreateComment: (req, res) => {
+    // {
+    //   post_id
+    //   message
+    // }
+
+    const comment = new Comment(req.body);
+    comment.user = req.user_id;
+
+    comment.save((err) => {
       if (err) {
         throw err;
       }
-      const token = await TokenGenerator.jsonwebtoken(req.user_id);
-      res.status(201).json({ message: "Post liked", token: token });
+
+      const token = TokenGenerator.jsonwebtoken(req.user_id);
+      res.status(201).json({ message: "Comment posted", token: token });
     });
   },
 
-  UpdateComment: (req, res) => {
-    // req.body
-    // {
-    //   postId: 1,
-    //   comment: { message: "I am comment" }
-    // }
-    const comment = new Post(req.body.comment);
+  UpdatePost: (req, res) => {
+    // Comments array inside Post contains a list of comment IDs
 
-    Post.findOneAndUpdate({ _id: req.body.postId }, { $push: { comments: comment } }, { new: true })
-      .then(post => {
-        const token = TokenGenerator.jsonwebtoken(req.user_id);
-        res.status(201).json({ post: post, token: token });
-      })
-      .catch(error => {
-        console.error(error);
-      });
+    Post.findOneAndUpdate(
+      { _id: req.body.postId },
+      { $push: { comments: req.body.commentId } },
+      { new: true }
+    ).then((post) => {
+      const token = TokenGenerator.jsonwebtoken(req.user_id);
+      res.status(201).json({ post: post, token: token });
+    });
   },
 };
 
