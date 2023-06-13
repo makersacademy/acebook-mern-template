@@ -50,7 +50,7 @@ const Feed = ({ navigate }) => {
           <Navbar navigate={navigate} />
           <div className="posts">
             <h2>Posts</h2>
-            <PostCreateForm />
+            <PostCreateForm token={token} setToken={setToken}/>
             <div id="feed" role="feed">
               {posts.length === 0 
                 ? <p>There are no posts yet.</p> 

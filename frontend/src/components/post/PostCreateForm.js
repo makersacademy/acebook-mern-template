@@ -1,12 +1,10 @@
 import React, { useState } from "react";
 
-
-const PostCreateForm = () => {
+const PostCreateForm = ({token, setToken}) => {
   const [post, setPost] = useState("");
-  const [token, setToken] = useState(window.localStorage.getItem("token"));
   const [validationError, setValidationError] = useState("");
 
-  const submitPost = async event => {
+  const submitPost = async (event) => {
     // Sends a fetch request to router
     event.preventDefault();
 
@@ -24,8 +22,9 @@ const PostCreateForm = () => {
 
       if (response.status === 201) {
         // TODO: Will need to renavigate back to /posts upon 201 status
-        console.log("Successfully submitted");
-        return refreshPage();
+        let data = await response.json();
+        setToken(data.token);
+        setPost("");
       } else {
         console.log("Failed to submit");
         setValidationError("Server error");
@@ -42,11 +41,6 @@ const PostCreateForm = () => {
       return false;
     }
   };
-
-  const refreshPage = () => {
-    window.location.reload(false);
-  };
-
 
   const handlePostChange = event => {
     setPost(event.target.value);

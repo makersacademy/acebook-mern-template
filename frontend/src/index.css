@@ -13,3 +13,10 @@ code {
   color: red;
   font-size: 0.75rem;
 }
+
+input[type=email],
+input[type=password],
+input[type=text]
+{
+  padding-left: 20px;
+}
