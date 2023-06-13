@@ -16,7 +16,7 @@ const Homepage = ({ navigate }) => {
   const navigateToSignup = () => {
     navigate('/signup')
   }
-  
+
   if(token) {
     return (
       <>
