@@ -70,7 +70,7 @@ const PostsController = {
   UpdatePost: (req, res) => {
     // Comments array inside Post contains a list of comment IDs
 
-    Post.findOneAndUpdate({ _id: req.body.postId }, { $push: { comments: req.body.commentId } }, { new: true }).then(post => {
+    Post.findOneAndUpdate({ _id: req.body.postId }, { $addToSet: { comments: req.body.commentId } }, { new: true }).then(post => {
       const token = TokenGenerator.jsonwebtoken(req.user_id);
       res.status(201).json({ post: post, token: token });
     });
