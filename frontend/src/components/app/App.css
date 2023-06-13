@@ -1,0 +1,10 @@
+.logo {
+  position: absolute;
+  top: 5px;
+  left: 10px;
+}
+
+.logo img {
+  width: 180px; /* Adjust the width as needed */
+  height: auto; /* Maintain aspect ratio */
+}
