@@ -6,6 +6,7 @@ describe("Posting a message", () => {
       cy.get("#submit").click();
       cy.visit("/posts")
       cy.get("#message").type("Test post")
+      cy.get("#submit").click();
       cy.contains("Test post");
       cy.contains("username1");
     })
