@@ -158,6 +158,26 @@ describe("/posts", () => {
     })
   })
 
+  describe("POST /add-like, when token is present", () => {
+    test("responds with 201 and the correct like count", async () => {
+      const post = new Post({message: 'my first post'});
+      await post.save();
+      let response = await request(app)
+        .post('/posts/add-like')
+        .set("Authorization", `Bearer ${token}`)
+        .send(
+          { 
+            postId: post._id,
+            token: token,
+          }
+        );
+
+      expect(response.status).toEqual(201);
+      expect(response.body.likeCount).toEqual(1);
+    })
+    
+  })
+
   describe("POST /addCommentToPost, when token is present", () => {
     test("responds with a 202", async () => {
       // creates a new post
