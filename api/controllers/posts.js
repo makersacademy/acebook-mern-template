@@ -15,6 +15,7 @@ const PostsController = {
         path: "comments",
         populate: {
           path: "user",
+          select: ["name", "avatar"],
         },
       })
       .sort({ time: -1, message: 1 })
