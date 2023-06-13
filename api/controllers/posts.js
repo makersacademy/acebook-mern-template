@@ -14,18 +14,16 @@ const PostsController = {
   },
 
   Create: (req, res) => {
-    console.log("Request: ", req);
     User.findById(req.user_id).then((user) => {
       const requestObj = {
         username: user.username,
         message: req.body.message
       }
       const post = new Post(requestObj);
-      post.save(async (egg) => {
-        if (egg) {
-          console.log("ERROR:")
-          console.log(egg)
-          throw egg;
+      post.save(async (err) => {
+        if (err) {
+          console.log(err)
+          throw err;
         }
         const token = await TokenGenerator.jsonwebtoken(req.user_id)
         res.status(201).json({ message: 'OK', token: token });
