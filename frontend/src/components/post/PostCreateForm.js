@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 
+
 const PostCreateForm = () => {
   const [post, setPost] = useState("");
   const [token, setToken] = useState(window.localStorage.getItem("token"));
@@ -46,6 +47,7 @@ const PostCreateForm = () => {
     window.location.reload(false);
   };
 
+
   const handlePostChange = event => {
     setPost(event.target.value);
   };
@@ -53,7 +55,7 @@ const PostCreateForm = () => {
   return (
     <form onSubmit={submitPost} noValidate>
       <input placeholder="What's on your mind?" id="newPost" type="text" value={post} onChange={handlePostChange} required />
-      <input id="submit" type="submit" value="Post" />
+      <input id="submit" type="submit" value="Post" onClick={refreshPage}/>
       <p className="validation-error">{validationError}</p>
     </form>
   );
