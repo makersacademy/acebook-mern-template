@@ -41,14 +41,6 @@ export const handleSendingNewComment = async (token, post, comment, url) => {
     }
 }
 
-// { 
-//   postId: post._id,
-//   comment: {
-//     message: 'a comment',
-//   },
-//   token: token,
-// }
-
 export const fetchPosts = (token, setToken, setPosts) => {
     if(token) {
       fetch("/posts", {
@@ -64,6 +56,7 @@ export const fetchPosts = (token, setToken, setPosts) => {
         })
     }
 }
+
 // returns the comments array of a single post using a postID
 export const fetchComments = (token, setToken, setComments, postId) => {
   if(token) {
@@ -78,9 +71,8 @@ export const fetchComments = (token, setToken, setComments, postId) => {
         setToken(window.localStorage.getItem("token"))
         let commentData = data.posts.filter((post) => {
           return post._id === postId
-        })[0].comments
+        })[0].comments;
         setComments(commentData);
-        console.log(commentData)
       })
   }
 }
