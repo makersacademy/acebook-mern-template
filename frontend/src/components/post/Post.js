@@ -1,23 +1,23 @@
+import React, { useState } from 'react';
+import LikeButton from '../LikeButton/LikeButton';
+import { handleSendingNewLike } from '../../fetchers';
 import './Post.css';
-import React from 'react';
 
 const Post = ({post}) => {
-  return(
-    <div>
-      <article class="post" data-cy="post" key={ post._id }>{ post.message }</article>
-    </div>
-  )
-}
+  const [likeCount, setLikeCount] = useState(post.likeCount);
+  const [token, setToken] = useState(window.localStorage.getItem("token"));
+  const handleLike = async () => {
+    let newCount = likeCount + 1
+    await handleSendingNewLike(token, post, '/posts/add-like');
+    setLikeCount(newCount);
+  }
+
+  return (
+    <article class='post' data-cy="post" key={post._id}>
+      {post.message} - Likes: {likeCount}
+      <LikeButton onLike={handleLike} />
+    </article>
+  );
+};
 
 export default Post;
-
-// post.comment. i need an area for someone to make a comment
-// this is also where we can add our likes
-
-// add text area
-// add submit button
-// setup handleSubmit
-
-// make a like component 
-
-// research making a folder called fetchers
