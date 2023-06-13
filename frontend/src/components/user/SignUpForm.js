@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import './SignUpForm.css';
+import CloudinaryUploadWidget from "../cloudinary/CloudinaryUploadWidget";
 import { Link } from "react-router-dom";
 
 const SignUpForm = ({ navigate }) => {
@@ -102,9 +103,9 @@ const SignUpForm = ({ navigate }) => {
           <input placeholder="Password" id="password" type="password" value={password} onChange={handlePasswordChange} />
           <p className="validation-error">{validationError?.password}</p>
         </div>
-
+        <CloudinaryUploadWidget/>
         <div>
-        <input id="submit" type="submit" value="Sign Up" />
+          <input id="submit" type="submit" value="Sign Up" />
         </div>
       </form>
          </div>
