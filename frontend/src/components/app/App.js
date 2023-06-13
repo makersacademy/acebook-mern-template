@@ -4,6 +4,7 @@ import SignUpForm from '../user/SignUpForm'
 import UsernamePage from '../user/UsernamePage'
 import CreatePostForm from '../create-post/CreatePostForm';
 import UpdatePost from '../update-post/UpdatePost';
+import ViewPost from '../view-post/ViewPost'; 
 import React, { useState } from 'react';
 import Feed from '../feed/Feed'
 import {
@@ -21,6 +22,7 @@ const App = () => {
           <Route path='/username' element={<UsernamePage />} /> // this adds a route to retrieve a username
           <Route path='/create-post' element={<CreatePostForm navigate={ useNavigate() }/>}/>
           <Route path='/posts/:id/update' element={<UpdatePost navigate={ useNavigate() }/>}/>
+          <Route path='/posts/:id' element={<ViewPost navigate={ useNavigate() }/>} /> // this route allows us to view a single post by post_id
         </Routes>
     );
 }
