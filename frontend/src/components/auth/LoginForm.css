@@ -6,6 +6,7 @@
   padding-bottom: 1500px;
   background-color: #d0dee8;
 }
+
 .sub-main {
   display: flex;
   justify-content: center;
@@ -17,10 +18,8 @@
   background-color: rgb(137, 162, 200);
 }
 
-
-
 input{
-   font-size: 18px;
+    font-size: 18px;
     width: 250px;
     height: 40px;
     border-radius: 60px;
@@ -29,26 +28,6 @@ input{
     outline: none;
     background-color: rgb(223, 225, 235);
 }
-
-/* button{
-    width: 150px;
-    height: 50px;
-    border-radius: 60px;
-    background-color: #c76a89;
-    color: white;
-    font-size: 20px;
-    border: none;
-} */
-/* .login-button{
-  width: 150px;
-  height: 50px;
-  border-radius: 60px;
-  background-color: #c76a89;
-  color: white;
-  font-size: 20px;
-  border: none;
-  padding-top: 25px;
-} */
 
 .link{
     font-size: 25px;
