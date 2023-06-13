@@ -65,7 +65,7 @@ export const fetchPosts = (token, setToken, setPosts) => {
     }
 }
 // returns the comments array of a single post using a postID
-export const fetchComments = (token, setToken, setCommentsText, postId) => {
+export const fetchComments = (token, setToken, setComments, postId) => {
   if(token) {
     fetch("/posts", {
       headers: {
@@ -79,7 +79,7 @@ export const fetchComments = (token, setToken, setCommentsText, postId) => {
         let commentData = data.posts.filter((post) => {
           return post._id === postId
         })[0].comments
-        setCommentsText(commentData);
+        setComments(commentData);
         console.log(commentData)
       })
   }
