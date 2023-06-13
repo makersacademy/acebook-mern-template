@@ -14,6 +14,7 @@ const PostsController = {
   },
 
   Create: (req, res) => {
+    console.log("Request: ", req);
     User.findById(req.user_id).then((user) => {
       const requestObj = {
         username: user.username,
