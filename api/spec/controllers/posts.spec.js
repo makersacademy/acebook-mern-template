@@ -36,19 +36,28 @@ describe("/posts", () => {
 
   describe("POST, when token is present", () => {
     test("responds with a 201", async () => {
-      let response = await request(app).post("/posts").set("Authorization", `Bearer ${token}`).send({ message: "hello world", token: token });
+      let response = await request(app)
+        .post("/posts")
+        .set("Authorization", `Bearer ${token}`)
+        .send({ message: "hello world", token: token });
       expect(response.status).toEqual(201);
     });
 
     test("creates a new post", async () => {
-      await request(app).post("/posts").set("Authorization", `Bearer ${token}`).send({ message: "hello world", token: token });
+      await request(app)
+        .post("/posts")
+        .set("Authorization", `Bearer ${token}`)
+        .send({ message: "hello world", token: token });
       let posts = await Post.find();
       expect(posts.length).toEqual(1);
       expect(posts[0].message).toEqual("hello world");
     });
 
     test("returns a new token", async () => {
-      let response = await request(app).post("/posts").set("Authorization", `Bearer ${token}`).send({ message: "hello world", token: token });
+      let response = await request(app)
+        .post("/posts")
+        .set("Authorization", `Bearer ${token}`)
+        .send({ message: "hello world", token: token });
       let newPayload = JWT.decode(response.body.token, process.env.JWT_SECRET);
       let originalPayload = JWT.decode(token, process.env.JWT_SECRET);
       expect(newPayload.iat > originalPayload.iat).toEqual(true);
@@ -57,7 +66,9 @@ describe("/posts", () => {
 
   describe("POST, when token is missing", () => {
     test("responds with a 401", async () => {
-      let response = await request(app).post("/posts").send({ message: "hello again world" });
+      let response = await request(app)
+        .post("/posts")
+        .send({ message: "hello again world" });
       expect(response.status).toEqual(401);
     });
 
@@ -68,19 +79,24 @@ describe("/posts", () => {
     });
 
     test("a token is not returned", async () => {
-      let response = await request(app).post("/posts").send({ message: "hello again world" });
+      let response = await request(app)
+        .post("/posts")
+        .send({ message: "hello again world" });
       expect(response.body.token).toEqual(undefined);
     });
   });
 
   describe("GET, when token is present", () => {
-    test("returns every post in the collection", async () => {
+    test("returns every post in the collection in reverse order", async () => {
       let post1 = new Post({ message: "howdy!" });
       let post2 = new Post({ message: "hola!" });
       await post1.save();
       await post2.save();
-      let response = await request(app).get("/posts").set("Authorization", `Bearer ${token}`).send({ token: token });
-      let messages = response.body.posts.map(post => post.message);
+      let response = await request(app)
+        .get("/posts")
+        .set("Authorization", `Bearer ${token}`)
+        .send({ token: token });
+      let messages = response.body.posts.map((post) => post.message);
       expect(messages).toEqual(["hola!", "howdy!"]);
     });
 
@@ -89,7 +105,10 @@ describe("/posts", () => {
       let post2 = new Post({ message: "hola!" });
       await post1.save();
       await post2.save();
-      let response = await request(app).get("/posts").set("Authorization", `Bearer ${token}`).send({ token: token });
+      let response = await request(app)
+        .get("/posts")
+        .set("Authorization", `Bearer ${token}`)
+        .send({ token: token });
       expect(response.status).toEqual(200);
     });
 
@@ -98,7 +117,10 @@ describe("/posts", () => {
       let post2 = new Post({ message: "hola!" });
       await post1.save();
       await post2.save();
-      let response = await request(app).get("/posts").set("Authorization", `Bearer ${token}`).send({ token: token });
+      let response = await request(app)
+        .get("/posts")
+        .set("Authorization", `Bearer ${token}`)
+        .send({ token: token });
       let newPayload = JWT.decode(response.body.token, process.env.JWT_SECRET);
       let originalPayload = JWT.decode(token, process.env.JWT_SECRET);
       expect(newPayload.iat > originalPayload.iat).toEqual(true);
@@ -150,36 +172,58 @@ describe("/posts", () => {
     //     });
     // });
 
-    xtest("Posts have a comments array", done => {
+    xtest("Posts have a comments array", (done) => {
       request(app)
         .post("/posts")
         .set("Authorization", `Bearer ${token}`)
         .send({ message: "i am post", token: token })
         .then(() => {
-          return Post.find().then(posts => {
+          return Post.find().then((posts) => {
             expect(posts[0].comments).toEqual([]);
             done();
           });
         })
-        .catch(error => {
+        .catch((error) => {
           done(error); // Pass the error to the `done` callback
         });
     });
   });
+
+  // xtest("A post has one comment", done => {
+  //   let comment = new Post({ message: "I am comment!" });
+
+  //   request(app)
+  //     .post("/posts")
+  //     .set("Authorization", `Bearer ${token}`)
+  //     .send({ message: "i am post", comments: [comment], token: token })
+
+  //     .then(() => {
+  //       return Post.find().then(posts => {
+  //         expect(posts[0].comments[0].message).toEqual("I am comment!");
+  //         done();
+  //       });
+  //     });
+  // });
+
+  describe("PATCH", () => {
+    test("updates likes", async () => {
+      let post1 = new Post({ message: "howdy!" });
+      await post1.save();
+      let response = await request(app)
+        .get("/posts")
+        .set("Authorization", `Bearer ${token}`)
+        .send({ token: token });
+      let id = response.body.posts[0]._id;
+      response = await request(app)
+        .patch("/posts")
+        .set("Authorization", `Bearer ${token}`)
+        .send({ postId: id, likes: ["1"] });
+      response = await request(app)
+        .get("/posts")
+        .set("Authorization", `Bearer ${token}`)
+        .send({ token: token });
+      expect(response.body.posts[0]._id).toEqual(id);
+      expect(response.body.posts[0].likes).toEqual(["1"]);
+    });
+  });
 });
-
-// xtest("A post has one comment", done => {
-//   let comment = new Post({ message: "I am comment!" });
-
-//   request(app)
-//     .post("/posts")
-//     .set("Authorization", `Bearer ${token}`)
-//     .send({ message: "i am post", comments: [comment], token: token })
-
-//     .then(() => {
-//       return Post.find().then(posts => {
-//         expect(posts[0].comments[0].message).toEqual("I am comment!");
-//         done();
-//       });
-//     });
-// });
