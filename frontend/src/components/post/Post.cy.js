@@ -50,7 +50,7 @@ describe("Post", () => {
     cy.intercept('POST', 'posts/add-comment', {message: "OK"}).as("postAddComment")
 
     cy.get('[data-cy="comment-input-field"]').type("Making a comment");
-    cy.get('[data-cy="submit"]').click();
+    cy.get('[data-cy="submit-comment"]').click();
     cy.wait('@postAddComment').then( interception => {
       expect(interception.response.body.message).to.eq("OK")
     })

@@ -35,7 +35,7 @@ const Post = ({post}) => {
           placeholder='What do you think?'
           required>  
         </textarea>
-        <button data-cy="submit">Submit</button>
+        <button data-cy="submit-comment">Submit</button>
       </form>
 
       <div id='comment-feed' role="feed">
