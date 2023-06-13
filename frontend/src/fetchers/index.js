@@ -33,3 +33,20 @@ export const fetchPosts = (token, setToken, setPosts) => {
         })
     }
 }
+
+export const handleSendingNewLike = async (token, post, url) => {
+  try {
+      await fetch(`${url}`, {
+      method: 'post',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${token}`
+      },
+      body: JSON.stringify({
+        postId: post._id,
+      })
+    });
+  } catch(e) {
+    console.log(e)
+  }
+}
