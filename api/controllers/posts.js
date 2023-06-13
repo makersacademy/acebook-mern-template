@@ -11,7 +11,12 @@ const PostsController = {
     // note: (this is purely for the proof of concept, sounds silly to take into account)
     Post.find()
       .populate({ path: "user", select: ["name", "avatar"] })
-      .populate({ path: "comments" })
+      .populate({
+        path: "comments",
+        populate: {
+          path: "user",
+        },
+      })
       .sort({ time: -1, message: 1 })
       .exec((err, posts) => {
         if (err) {
@@ -49,10 +54,9 @@ const PostsController = {
   },
 
   CreateComment: (req, res) => {
-    // {
-    //   post_id
-    //   message
-    // }
+    // POST http://localhost:8080/posts/comments
+    // Header - Authorization: "bearer {token}"
+    // Body - { "postId": "64887a8097403dcf437532d0", "message": "i am comment" }
 
     const comment = new Comment(req.body);
     comment.user = req.user_id;
@@ -69,6 +73,9 @@ const PostsController = {
 
   UpdatePost: (req, res) => {
     // Comments array inside Post contains a list of comment IDs
+    // PATCH http://localhost:8080/posts/comments
+    // Header - Authorization: "bearer {token}"
+    // Body = {"postId": "64887a8097403dcf437532d0", "commentId": "64888985ee20f9d200ee9e0a"}
 
     Post.findOneAndUpdate({ _id: req.body.postId }, { $addToSet: { comments: req.body.commentId } }, { new: true }).then(post => {
       const token = TokenGenerator.jsonwebtoken(req.user_id);
