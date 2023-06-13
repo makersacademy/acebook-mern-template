@@ -1,7 +1,4 @@
 describe("Commenting on a post", () => {
-
-  before
-
   it("Adds a comment to the post with valid input", () => {
     cy.visit("/login");
     cy.get("#email").type("someone@example.com");
