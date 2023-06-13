@@ -4,6 +4,7 @@ import { handleSendingNewLike } from '../../fetchers';
 import './Post.css';
 
 const Post = ({post}) => {
+  console.log(post)
   const [likeCount, setLikeCount] = useState(post.likedByUsers.length);
   const [token, setToken] = useState(window.localStorage.getItem("token"));
   
