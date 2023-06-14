@@ -23,9 +23,7 @@ const Feed = ({ navigate }) => {
     }
   }, [])
     
-  // const create_post = () => {
-  //   navigate('/create-post')
-  // }
+  const postsArray = posts.map((post) => ( <Post post={ post } key={ post._id } /> ))
 
   // const logout = () => {
   //   window.localStorage.removeItem("token")
@@ -37,9 +35,7 @@ const Feed = ({ navigate }) => {
         <>
           <h2>Posts</h2>
           <div id='feed' role="feed">
-              {posts.map(
-                (post) => ( <Post post={ post } key={ post._id } /> )
-              )}
+              { postsArray.reverse().map(a => a) }
           </div>
         </>
       )
