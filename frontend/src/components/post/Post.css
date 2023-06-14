@@ -1,0 +1,11 @@
+.post {
+  background-color: rgb(200, 200, 29);
+  border-width: 2px;
+  border-style: dashed;
+  padding-left: 50px;
+  padding-bottom: 10px;
+  display: inline-block;
+  margin-bottom: 10px;
+  padding: 5px;
+  border: 1px solid rgb(244, 241, 241);
+}

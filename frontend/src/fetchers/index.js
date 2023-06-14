@@ -12,7 +12,7 @@ export const handleSendingNewPost = async (token, message, url) => {
         body: JSON.stringify({ message: message })
       });
       const data = await response.json();
-      console.log(data)
+      return data
     } catch(e) {
       console.log(e)
     }
@@ -43,13 +43,13 @@ export const handleSendingNewComment = async (token, post, comment, url) => {
 
 export const fetchPosts = (token, setToken, setPosts) => {
     if(token) {
-      fetch("/posts", {
+      return fetch("/posts", {
         headers: {
           'Authorization': `Bearer ${token}`
         }
       })
         .then(response => response.json())
-        .then(async data => {
+        .then(data => {
           window.localStorage.setItem("token", data.token)
           setToken(window.localStorage.getItem("token"))
           setPosts(data.posts);
@@ -77,3 +77,20 @@ export const fetchComments = (token, setToken, setComments, postId) => {
   }
 }
 
+export const handleSendingNewLike = async (token, post, url) => {
+  try {
+      const response = await fetch(`${url}`, {
+      method: 'post',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${token}`
+      },
+      body: JSON.stringify({
+        postId: post._id,
+      })
+    });
+    return response;
+  } catch(e) {
+    console.log(e)
+  }
+}

@@ -1,0 +1,59 @@
+.loginForm {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  margin-top: 100px;
+}
+
+.loginContainer{
+  background: linear-gradient( rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5) ), url("../../../public/login-rivendell.jpeg");
+  background-position: center; 
+  background-repeat: no-repeat; 
+  background-size: cover; 
+  height: 100vh;
+  padding-top: 150px;
+}
+
+.loginHeading {
+  color: whitesmoke;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 2px solid hsl(51, 100%, 37%);
+  margin-left: 400px;
+  margin-right: 400px;
+  padding: 20px;
+  border-radius: 10px;
+  background: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(5px);
+}
+
+.loginInput {
+  margin: 7px;
+  padding: 7px;
+  padding-left: 20px;
+  width: 250px;
+  border: 2px solid whitesmoke;
+  border-radius: 10px;
+  color: black;
+}
+
+.loginButton {
+  margin-top: 40px;
+  background: none;
+  border: 2px solid white;
+  border-radius: 100px;
+  padding: 20px;
+  cursor: url(../../../public/sword-cursor.png), auto;  font-size: 20px;
+  color: whitesmoke;
+  transition: 0.5s ease-in-out;
+  background: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(10px);
+}
+
+.loginButton:hover {
+  color: hsl(51, 100%, 37%);
+  border: 2px solid hsl(51, 100%, 37%);
+  transform: scale(1.1); 
+}
