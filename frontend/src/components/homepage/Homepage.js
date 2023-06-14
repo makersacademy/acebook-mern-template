@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 
 const Homepage = ({ navigate }) => {
-  const [token,] = useState(window.localStorage.getItem("token"));
+  const [token] = useState(window.localStorage.getItem("token"));
 
   useEffect(() => {
     if(token) {

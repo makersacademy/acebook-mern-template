@@ -11,7 +11,7 @@ describe('Making a post', () => {
   it('should make a post when user is logged in', () => {
     cy.login("duck@pond.com", "Il0veBread");
     cy.url().should("include", "/posts");
-    cy.visit('/create-post');
+    cy.get('#create_post').click();
     cy.url().should("include", "/create-post");
     cy.get('#message').type('ducklings');
     cy.get('#submit').click();
