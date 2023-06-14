@@ -62,7 +62,7 @@ const PostUploadWidget = ({setImageUrl}) => {
 
   return (
     <div>
-      <button onClick={openWidget}>Choose an image to upload as your avatar</button>
+      <button className="post-image-upload-button" type="button" onClick={openWidget}>Choose an image to upload as your avatar</button>
     </div>
   );
 }

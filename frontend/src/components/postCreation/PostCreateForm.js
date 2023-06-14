@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import PostUploadWidget from "../cloudinary/PostUploadWidget";
+import './PostCreateForm.css';
 
 const PostCreateForm = ({token, setToken}) => {
   const [post, setPost] = useState("");
