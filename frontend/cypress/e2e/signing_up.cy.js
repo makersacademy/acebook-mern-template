@@ -1,6 +1,7 @@
 describe("Signing up", () => {
   it("with valid credentials, redirects to '/login'", () => {
     cy.visit("/signup");
+    cy.get("#name").type("Someone")
     cy.get("#email").type("someone@example.com");
     cy.get("#password").type("password");
     cy.get("#submit").click();
