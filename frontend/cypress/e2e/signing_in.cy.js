@@ -27,5 +27,6 @@ describe("Signing in", () => {
     cy.get("#submit").click();
 
     cy.url().should("include", "/posts");
+    cy.get('nav').find('#logout');
   });
 });

@@ -29,10 +29,11 @@ const LogInForm = ({ navigate }) => {
       console.log("yay")
       let data = await response.json()
       window.localStorage.setItem("token", data.token)
+      window.location.reload(false);
       navigate('/posts');
     }
   }
-
+  
   const handleEmailChange = (event) => {
     setEmail(event.target.value)
   }

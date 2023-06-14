@@ -5,6 +5,7 @@ import SignUpForm from '../user/SignUpForm';
 import UsernamePage from '../user/UsernamePage';
 import CreatePostForm from '../create-post/CreatePostForm';
 import UpdatePost from '../update-post/UpdatePost';
+import Navbar from '../navbar/navbar';
 import DeletePost from '../delete-post/DeletePost';
 import React, { useState } from 'react';
 import Feed from '../feed/Feed'
@@ -16,6 +17,8 @@ import {
 
 const App = () => {
     return (
+      <>
+        <Navbar navigate={ useNavigate() } />
         <Routes>
           <Route path='/' element={<Homepage navigate={ useNavigate() }/>}/>
           <Route path='/posts'  element={<Feed navigate={ useNavigate() }/>}/>
@@ -26,6 +29,7 @@ const App = () => {
           <Route path='/posts/:id/update' element={<UpdatePost navigate={ useNavigate() }/>}/>
           <Route path='/posts/:id/delete' element={<DeletePost navigate={ useNavigate() }/>}/>
         </Routes>
+      </>
     );
 }
 
