@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import CommentCreateForm from './CommentCreateForm.js';
+import Comment from './Comment.js';
 import './Post.css';
 
 const Post = ({post, userId, token, setToken}) => {
@@ -59,9 +60,12 @@ const Post = ({post, userId, token, setToken}) => {
           <button className="like-button" onClick={postLiked}>Like</button>
           <div className="likes">♡ { numberOfLikes } </div>
         </div>
-      </div>
-      <div>
         <CommentCreateForm token={token} setToken={setToken} postId={post._id}/>
+        <div if="comments" role="feed">
+          {post.comments === 0
+            ? <p>There are no comments yet.</p>
+            : post.comments.map(comment => <Comment comment={comment}/>)}
+        </div>
       </div>
     </article>
   )

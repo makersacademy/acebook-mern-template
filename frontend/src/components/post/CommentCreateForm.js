@@ -26,7 +26,6 @@ const CommentCreateForm = ({postId, token, setToken}) => {
         setValidationError("Server error at POST /posts/comments");
       } else {
         let data = await response.json();
-        console.log(data);
         commentId = data.commentId;
       }
 
@@ -39,6 +38,12 @@ const CommentCreateForm = ({postId, token, setToken}) => {
           },
           body: JSON.stringify({ postId: postId, commentId: commentId })
         })
+
+        if (response.status === 201) {
+          let data = await response.json();
+          setToken(data.token);
+          setComment("");
+        }
       }
     }
   }
@@ -59,7 +64,7 @@ const CommentCreateForm = ({postId, token, setToken}) => {
 
   return (
     <form className="comment-create-form" onSubmit={submitComment} noValidate>
-      <input className="comment-input" placeholder="Write a comment..." onChange={handleCommentChange} required/>
+      <input className="comment-input" type="text" placeholder="Write a comment..." onChange={handleCommentChange} required/>
       <input className="comment-submit" id="comment-submit" type="submit" value="Comment"/>
       <p className="validation-error">{validationError}</p>
     </form>
