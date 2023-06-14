@@ -8,7 +8,7 @@
 // via a `useState` callback passed in by parent
 // and used on line 6.
 
-const CloudinaryUploadWidget = () => {
+const PostUploadWidget = ({setImageUrl}) => {
 
   // Depending on your use case, you may need to wrap this in a useEffect?
   // In which case, the nature of the return may need to change.
@@ -28,8 +28,8 @@ const CloudinaryUploadWidget = () => {
     {
       cloudName: "acebook",
       uploadPreset: "acebook_unsigned_preset",
-      cropping: true, //add a cropping step
-      multiple: false,  //restrict upload to a single file
+      // cropping: true, //add a cropping step
+      // multiple: false,  //restrict upload to a single file
       // showAdvancedOptions: true,  //add advanced options (public_id and tag)
       // sources: [ "local", "url"], // restrict the upload sources to URL and local files
       // folder: "user_images", //upload files to the specified folder
@@ -44,8 +44,8 @@ const CloudinaryUploadWidget = () => {
       if (!error && result && result.event === "success") {
         console.log("Done! Here is the image info: ", result.info);
         // To capture the url from the result:
-        // const imageUrl = result.info.secure_url;
-
+        const url = result.info.secure_url;
+        setImageUrl(url);
         // add backend fetch here, for example
         // If you were to modify the user:avatar, you could do:
 
@@ -67,4 +67,4 @@ const CloudinaryUploadWidget = () => {
   );
 }
 
-export default CloudinaryUploadWidget;
+export default PostUploadWidget;
