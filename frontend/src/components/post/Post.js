@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import CommentCreateForm from './CommentCreateForm.js';
 import Comment from './Comment.js';
+import Collapsible from 'react-collapsible';
 import './Post.css';
 
 const Post = ({post, userId, token, setToken}) => {
@@ -60,12 +61,14 @@ const Post = ({post, userId, token, setToken}) => {
           <button className="like-button" onClick={postLiked}>Like</button>
           <div className="likes">♡ { numberOfLikes } </div>
         </div>
-        <CommentCreateForm token={token} setToken={setToken} postId={post._id}/>
-        <div id="comments" role="feed">
-          {post.comments === 0
-            ? <p>There are no comments yet.</p>
-            : post.comments.map(comment => <Comment comment={comment}/>)}
-        </div>
+        <Collapsible trigger="Comments">
+          <CommentCreateForm token={token} setToken={setToken} postId={post._id}/>
+          <div id="comments" role="feed">
+            {post.comments === 0
+              ? <p>There are no comments yet.</p>
+              : post.comments.map(comment => <Comment comment={comment}/>)}
+          </div>
+        </Collapsible>
       </div>
     </article>
   )

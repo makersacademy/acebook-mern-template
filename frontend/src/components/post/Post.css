@@ -55,3 +55,46 @@
   gap: 10px;
   width: 95%;
 }
+
+.Collapsible {
+  background-color: base;
+}
+
+.Collapsible__trigger:hover {
+  background-color: rgb(215, 215, 215);
+}
+
+/* The link which when clicked opens the collapsable area */
+.Collapsible__trigger {
+  display: block;
+  font-weight: 400;
+  text-decoration: none;
+  position: relative;
+  border: 1px solid white;
+  padding: 10px;
+
+  &:after {
+    font-family: 'FontAwesome';
+    content: '\f107';
+    position: absolute;
+    right: 10px;
+    top: 10px;
+    display: block;
+    transition: transform 300ms;
+  }
+
+  &.is-open {
+    &:after {
+      transform: rotateZ(180deg);
+    }
+  }
+
+  &.is-disabled {
+    opacity: 0.5;
+    background-color: grey;
+  }
+
+  /* &.is-closed {
+    max-width: 20%;
+  } */
+}
