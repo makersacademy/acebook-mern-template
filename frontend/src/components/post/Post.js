@@ -8,8 +8,8 @@ const Post = ({post}) => {
   return(
     <article data-cy="post" key={ post._id }>
       { post.message }
-      <Link to={updateLink}>Update post</Link>
       <Link to={deleteLink}>Delete post</Link>
+      <Link to={updateLink} id="update-link">Update post</Link>
     </article>
   )
 }

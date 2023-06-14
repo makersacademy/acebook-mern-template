@@ -51,7 +51,7 @@ const UpdatePost = ({ navigate }) => {
       <p>{placeholderContent}</p>
       <form onSubmit={handleSubmit}>
       <input placeholder={placeholderContent} id="message" type="text" value={message} onChange={handleMessageChange} />
-      <input role='submit-button' id='submit' type="submit" value="Post!" />
+      <input role='submit-button' id='submit' type="submit" value="Update!" />
     </form>
     </>
   )

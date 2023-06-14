@@ -1,15 +1,25 @@
 const User = require("../models/user");
+const bcrypt = require("bcrypt");
 
 const UsersController = {
   Create: (req, res) => {
-    const user = new User(req.body);
-    user.save((err) => {
-      if (err) {
-        res.status(400).json({message: 'Bad request'})
+    const checkEmail = req.body.email;
+    
+    User.findOne({ email: checkEmail }).then((user) => {
+      if (user ) {
+        console.log('Email already signed up')
+        res.status(400).json({message: 'Email already signed up'})
       } else {
-        res.status(201).json({ message: 'OK' });
+        const user = new User(req.body);
+        user.save((err) => {
+          if (err) {
+            res.status(400).json({message: 'Bad request'})
+          } else {
+            res.status(201).json({ message: 'OK' });
+          }
+        });
       }
-    });
+    })
   },
 
   //This gets the user's username based on their userId
@@ -32,7 +42,7 @@ const UsersController = {
         }
       }
     });
-  }
+  },
 };
 
 module.exports = UsersController;
