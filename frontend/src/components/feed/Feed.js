@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import Post from "../post/Post";
-import PostCreateForm from "../post/PostCreateForm";
+import PostCreateForm from "../postCreation/PostCreateForm";
 import BarLoader from "react-spinners/BarLoader";
 import Navbar from "../navbar/Navbar";
 import "./Feed.css";
