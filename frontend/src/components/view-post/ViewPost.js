@@ -1,28 +1,30 @@
 import { useEffect, useState } from "react";
-import { useParams, useNavigate } from "react-router";
+import { useParams } from "react-router";
 
-const ViewPost = () => {
-  const [post, setPost] = useState(null);
+
+const ViewPost = ({ navigate }) => {
+  const [post, setPost] = useState("test message");
   const { id } = useParams(); // this extracts the post id from the URL params
-  const navigate = useNavigate();
-  const [token, setToken] = useState(window.localStorage.getItem("token")); // Get the token from local storage
+  const [token] = useState(window.localStorage.getItem("token")); // Get the token from local storage
 
   useEffect(() => {
-    const fetchPost = async () => {
-      if (token) {
-        const response = await fetch(`/posts/${id}`, {
-          headers: {
-            Authorization: `Bearer ${token}`, // Include the token in the request headers
-          },
-        });
+  const fetchPost = async () => {
+  console.log("Fetching post with id:", id);
+  if (token) {
+    const response = await fetch(`/posts/${id}`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
 
-        if (response.ok) {
-          const data = await response.json();
-          setPost(data.post); // Set the fetched post data to the state
-        } else {
-          console.error("Error fetching post:", response.status); // Log an error if the response status is not OK
-        }
-      }
+    if (response.ok) {
+      const data = await response.json();
+      console.log("Fetched post data:", data);
+      setPost(data.post);
+    } else {
+      console.error("Error fetching post:", response.status);
+    }
+  }
     };
 
     fetchPost(); // this calls the fetchPost function when the id or token changes
