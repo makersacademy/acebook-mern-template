@@ -23,23 +23,19 @@ const Feed = ({ navigate }) => {
     }
   }, [])
     
+  const postsArray = posts.map((post) => ( <Post post={ post } key={ post._id } /> ))
 
-  const logout = () => {
-    window.localStorage.removeItem("token")
-    navigate('/login')
-  }
+  // const logout = () => {
+  //   window.localStorage.removeItem("token")
+  //   navigate('/login')
+  // }
   
     if(token) {
       return(
         <>
           <h2>Posts</h2>
-            <button onClick={logout}>
-              Logout
-            </button>
           <div id='feed' role="feed">
-              {posts.map(
-                (post) => ( <Post post={ post } key={ post._id } /> )
-              )}
+              { postsArray.reverse().map(a => a) }
           </div>
         </>
       )
