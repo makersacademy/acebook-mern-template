@@ -44,6 +44,11 @@ const Navbar = ({navigate}) => {
     } else {
       return (
         <nav>
+          <div className="logo">
+            <Link to='/login'>
+              <img className="navImage" src='logo-airbook-removebg.png' alt="logo" />
+            </Link>
+          </div>
           <button type="button" id="login-btn" onClick={navigateToLogin}>Log in!</button>
           <button type="button" id="signup-btn" onClick={navigateToSignup}>Sign up!</button>
         </nav>
