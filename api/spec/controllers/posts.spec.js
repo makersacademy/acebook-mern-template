@@ -194,15 +194,12 @@ describe("/posts", () => {
   })
 
   describe("DELETE, when token is present", () => {
-    beforeEach(async () => {
+    test("deletes a post and returns a confirmation message", async () => {
       const post = new Post({ message: "Delete" });
       await post.save();
-      postId = post._id;
-    });
 
-    test("deletes a post and returns a confirmation message", async () => {
       let response = await request(app)
-        .delete(`/posts/${postId}/delete`)
+        .delete(`/posts/${post._id}/delete`)
         .set("Authorization", `Bearer ${token}`);
       expect(response.status).toEqual(200);
       expect(response.body.message).toEqual("Post deleted");
