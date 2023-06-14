@@ -8,14 +8,14 @@ describe('Deleting a post', () => {
       cy.url().should("include", "/posts");
       cy.visit('/create-post');
       cy.url().should("include", "/create-post");
-      cy.get('#message').type('quacky');
+      cy.get('#message').type('quack-test');
       cy.get('#submit').click();
       cy.url().should("include", "/posts");
-      cy.contains('quacky');
+      cy.contains('quack-test');
       cy.get('#delete-link').click();
       
       cy.get('#submit').click();
       cy.url().should("include", "/posts");
-      cy.contains('quacky').should('not.exist');
+      cy.contains('quack-test').should('not.exist');
     })
   })
