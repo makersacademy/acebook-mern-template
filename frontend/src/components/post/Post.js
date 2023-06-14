@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
-import './Post.css'
+import CommentCreateForm from './CommentCreateForm.js';
+import './Post.css';
 
-const Post = ({post, userId}) => {
+const Post = ({post, userId, token, setToken}) => {
   const [numberOfLikes, setNumberOfLikes] = useState(post.likes.length);
 
   const postLiked = async (event) => {
@@ -58,6 +59,9 @@ const Post = ({post, userId}) => {
           <button className="like-button" onClick={postLiked}>Like</button>
           <div className="likes">♡ { numberOfLikes } </div>
         </div>
+      </div>
+      <div>
+        <CommentCreateForm token={token} setToken={setToken} postId={post._id}/>
       </div>
     </article>
   )
