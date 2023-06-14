@@ -26,8 +26,8 @@ const Homepage = ({ navigate }) => {
   } else {
     return(
         <>
-          <button type="button" id="login-btn" onClick={navigateToLogin}>Log in!</button>
-          <button type="button" id="signup-btn" onClick={navigateToSignup}>Sign up!</button>
+          {/* <button type="button" id="login-btn" onClick={navigateToLogin}>Log in!</button>
+          <button type="button" id="signup-btn" onClick={navigateToSignup}>Sign up!</button> */}
         </>
       )
   }

@@ -23,23 +23,19 @@ const Feed = ({ navigate }) => {
     }
   }, [])
     
-  const create_post = () => {
-    navigate('/create-post')
-  }
+  // const create_post = () => {
+  //   navigate('/create-post')
+  // }
 
-  const logout = () => {
-    window.localStorage.removeItem("token")
-    navigate('/login')
-  }
+  // const logout = () => {
+  //   window.localStorage.removeItem("token")
+  //   navigate('/login')
+  // }
   
     if(token) {
       return(
         <>
           <h2>Posts</h2>
-            <button id='create_post' onClick={create_post}>Create Your Own Damn Post, Asshole</button>
-            <button onClick={logout}>
-              Logout
-            </button>
           <div id='feed' role="feed">
               {posts.map(
                 (post) => ( <Post post={ post } key={ post._id } /> )
