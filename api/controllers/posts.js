@@ -27,10 +27,10 @@ const PostsController = {
       return res.status(500).json({ error: 'An error occurred while saving the post' });
     }
   },
-  Delete: async (req, res) => {
+  DeletePost: async (req, res) => {
     // try {
     const { post_id } = req.params;
-    await Post.deleteOne({ _id: post_id });
+    await Post.deleteOne({ id: post_id });
     const token = await TokenGenerator.jsonwebtoken(req.user_id);
     res.status(200).json({ message: 'Post deleted', token: token });
     // } catch (err) {

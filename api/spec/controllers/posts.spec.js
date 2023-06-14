@@ -202,7 +202,7 @@ describe("/posts", () => {
 
     test("deletes a post and returns a confirmation message", async () => {
       let response = await request(app)
-        .delete(`/posts/${postId}`)
+        .delete(`/posts/${postId}/delete`)
         .set("Authorization", `Bearer ${token}`);
       expect(response.status).toEqual(200);
       expect(response.body.message).toEqual("Post deleted");
