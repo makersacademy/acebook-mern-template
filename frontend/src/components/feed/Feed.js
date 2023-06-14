@@ -29,9 +29,9 @@ const Feed = ({ navigate }) => {
 
     if(token) {
       return(
-        <div class="feedContainer">
+        <div className="feedContainer">
             <h1>Enter the Trelloship</h1>
-            <form class="postForm" onSubmit={handleSubmit}>
+            <form className="postForm" onSubmit={handleSubmit}>
               <textarea 
                 id='message'
                 value={message}

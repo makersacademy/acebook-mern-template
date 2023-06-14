@@ -36,7 +36,7 @@ export const fetchPosts = (token, setToken, setPosts) => {
 
 export const handleSendingNewLike = async (token, post, url) => {
   try {
-      await fetch(`${url}`, {
+      const response = await fetch(`${url}`, {
       method: 'post',
       headers: {
         'Content-Type': 'application/json',
@@ -46,6 +46,7 @@ export const handleSendingNewLike = async (token, post, url) => {
         postId: post._id,
       })
     });
+    return response;
   } catch(e) {
     console.log(e)
   }
