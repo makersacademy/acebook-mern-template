@@ -62,13 +62,12 @@ const PostsController = {
     const comment = new Comment(req.body);
     comment.user = req.user_id;
 
-    comment.save(err => {
+    comment.save((err, comment) => {
       if (err) {
         throw err;
       }
-
       const token = TokenGenerator.jsonwebtoken(req.user_id);
-      res.status(201).json({ message: "Comment posted", token: token });
+      res.status(201).json({ message: "Comment posted", commentId: comment._id });
     });
   },
 

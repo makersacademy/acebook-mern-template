@@ -10,7 +10,7 @@ const CommentCreateForm = ({postId, token, setToken}) => {
     if (validateInput()) {
       let time = new Date();
 
-      await fetch("/posts/comments", {
+      let response = await fetch("/posts/comments", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -18,6 +18,28 @@ const CommentCreateForm = ({postId, token, setToken}) => {
         },
         body: JSON.stringify({ postId: postId, message: comment, time: time})
       })
+
+      let commentId = undefined
+
+      if (response.status !== 201) {
+        console.log("Failed to submit POST request");
+        setValidationError("Server error at POST /posts/comments");
+      } else {
+        let data = await response.json();
+        console.log(data);
+        commentId = data.commentId;
+      }
+
+      if (commentId !== undefined) {
+        response = await fetch("/posts/comments", {
+          method: "PATCH",
+          headers: {
+            "Content-Type": "application/json",
+            "Authorization": `Bearer ${token}`
+          },
+          body: JSON.stringify({ postId: postId, commentId: commentId })
+        })
+      }
     }
   }
 
