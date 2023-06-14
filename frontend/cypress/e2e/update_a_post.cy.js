@@ -12,6 +12,7 @@ describe('Updating a post', () => {
     cy.get('#submit').click();
     cy.url().should("include", "/posts");
     cy.contains('ducklings');
+    cy.get('#view-post-link').click();
     cy.get('#update-link').click();
     
     cy.get('#message').type('new message');

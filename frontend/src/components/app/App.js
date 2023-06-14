@@ -5,6 +5,8 @@ import SignUpForm from '../user/SignUpForm';
 import UsernamePage from '../user/UsernamePage';
 import CreatePostForm from '../create-post/CreatePostForm';
 import UpdatePost from '../update-post/UpdatePost';
+import ViewPost from '../view-post/ViewPost'; 
+import React from 'react';
 import Navbar from '../navbar/navbar';
 import DeletePost from '../delete-post/DeletePost';
 import React, { useState } from 'react';
@@ -24,9 +26,10 @@ const App = () => {
           <Route path='/posts'  element={<Feed navigate={ useNavigate() }/>}/>
           <Route path='/login'  element={<LoginForm  navigate={ useNavigate() }/>}/>
           <Route path='/signup' element={<SignUpForm navigate={ useNavigate() }/>}/>
-          <Route path='/username' element={<UsernamePage />} /> (// this adds a route to retrieve a username)
+          <Route path='/username' element={<UsernamePage />} />
           <Route path='/create-post' element={<CreatePostForm navigate={ useNavigate() }/>}/>
           <Route path='/posts/:id/update' element={<UpdatePost navigate={ useNavigate() }/>}/>
+          <Route path='/posts/:id' element={<ViewPost navigate={ useNavigate() }/>} />
           <Route path='/posts/:id/delete' element={<DeletePost navigate={ useNavigate() }/>}/>
         </Routes>
       </>
