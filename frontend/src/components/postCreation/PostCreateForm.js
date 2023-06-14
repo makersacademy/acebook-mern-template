@@ -19,7 +19,7 @@ const PostCreateForm = ({token, setToken}) => {
           "Content-Type": "application/json",
           Authorization: `Bearer ${token}`,
         },
-        body: JSON.stringify({ message: post, time: time }),
+        body: JSON.stringify({ message: post, time: time, imageUrl: imageUrl }),
       });
 
       if (response.status === 201) {
@@ -51,7 +51,7 @@ const PostCreateForm = ({token, setToken}) => {
   return (
     <form onSubmit={submitPost} noValidate>
       <input placeholder="What's on your mind?" id="newPost" type="text" value={post} onChange={handlePostChange} required />
-      <PostCreateForm setImageUrl={setImageUrl}/>
+      <PostUploadWidget setImageUrl={setImageUrl}/>
       <input id="submit" type="submit" value="Post"/>
       <p className="validation-error">{validationError}</p>
     </form>
