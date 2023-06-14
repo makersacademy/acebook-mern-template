@@ -101,10 +101,7 @@ const SignUpForm = ({ navigate }) => {
           <label htmlFor="password"></label>
           <input placeholder="Password" id="password" type="password" value={password} onChange={handlePasswordChange} />
           <p className="validation-error">{validationError?.password}</p>
-        </div>
-
-        <div>
-        <input id="submit" type="submit" value="Sign Up" />
+          <input id="submit" type="submit" value="Sign Up" />
         </div>
       </form>
          </div>
