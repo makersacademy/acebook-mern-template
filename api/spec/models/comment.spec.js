@@ -10,34 +10,27 @@ describe("Comment model", () => {
     });
   });
 
-  it("comment has correct properties", () => {
+  it("Comment has correct properties", () => {
     let comment = new Comment({ 
       message: "some comment", 
-      time: "2023-06-08T14:05:10.525+00:00" 
+      time: "2023-06-14T09:50:21.734Z",
+      userId: "648988588abefa9e0cc86fff"
     });
-    expect(comment.message).toEqual("some message");
-    expect(comment.time).toEqual(new Date ("2023-06-08T14:05:10.525Z"));
-    expect(comment.likes.toObject()).toEqual([]);
+    expect(comment.message).toEqual("some comment");
+    expect(comment.time).toEqual(new Date ("2023-06-14T09:50:21.734Z"));
+    expect(comment.userId).not.toBe(null);
   });
 
-  it("can list all posts", (done) => {
-    Post.find((err, posts) => {
-      expect(err).toBeNull();
-      expect(posts).toEqual([]);
-      done();
-    });
-  });
+  it("Can save a comment", (done) => {
+    let comment = new Comment({ message: "some comment" });
 
-  it("can save a post", (done) => {
-    var post = new Post({ message: "some message" });
-
-    post.save((err) => {
+    comment.save((err) => {
       expect(err).toBeNull();
 
-      Post.find((err, posts) => {
+      Comment.find((err, comments) => {
         expect(err).toBeNull();
 
-        expect(posts[0]).toMatchObject({ message: "some message" });
+        expect(comments[0]).toMatchObject({ message: "some comment" });
         done();
       });
     });
