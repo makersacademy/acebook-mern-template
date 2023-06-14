@@ -25,6 +25,7 @@ const ViewPost = ({ navigate }) => {
   }, [])
 
   const updateLink = `/posts/${post._id}/update`;
+  const deleteLink = `/posts/${post._id}/delete`;
 
   // useEffect(() => {
   // const fetchPost = async () => {
@@ -59,7 +60,10 @@ const ViewPost = ({ navigate }) => {
           <h2>View Post: {post._id}</h2>
           <p>Author: {post.author}</p>
           <p>Message: {post.message}</p>
-          <Link to={updateLink} id="update-link">Update post</Link>
+          <div>
+            <Link to={updateLink} id="update-link">Update post</Link>
+            <Link to={deleteLink} id="delete-link">Delete post</Link>
+          </div>
         </>
     </div>
   );

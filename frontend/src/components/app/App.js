@@ -6,7 +6,6 @@ import UsernamePage from '../user/UsernamePage';
 import CreatePostForm from '../create-post/CreatePostForm';
 import UpdatePost from '../update-post/UpdatePost';
 import ViewPost from '../view-post/ViewPost'; 
-import React from 'react';
 import Navbar from '../navbar/navbar';
 import DeletePost from '../delete-post/DeletePost';
 import React, { useState } from 'react';
