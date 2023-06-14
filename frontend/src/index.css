@@ -11,3 +11,19 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+nav {
+  /* background-color: pink; */
+  height: 150px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: Orem calc((100vw - 1300px) / 2) ;
+  background-color: #53434f;
+  box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.5);
+}
+
+.navImage {
+  width: 100px;
+  height: auto;
+}

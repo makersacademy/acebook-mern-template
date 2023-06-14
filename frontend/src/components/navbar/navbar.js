@@ -30,6 +30,11 @@ const Navbar = ({navigate}) => {
   if (token) {
     return (
     <nav>
+      <div className="logo">
+        <Link to='/posts'>
+          <img className="navImage" src='logo-airbook-removebg.png' alt="logo" />
+        </Link>
+      </div>
       <button type="button" id="create-post-button" onClick={createPost}>Create Your Own Damn Post, Asshole</button>
       <button type="button" id="logout" onClick={logout}>
         Logout
