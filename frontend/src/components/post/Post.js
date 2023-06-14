@@ -50,7 +50,7 @@ const Post = ({post, userId, token, setToken}) => {
   return(
     <article className="post" data-cy="post" key={ post._id }>
       <img className="avatar" src={ process.env.PUBLIC_URL + post.user.avatar } alt='avatar' width='50'></img> 
-      <div>
+      <div className="right-container">
         <div className="top-container">
           <div className="userName">{ post.user.name }</div>
           <div className="date">{ formattedDate } </div>
@@ -61,7 +61,7 @@ const Post = ({post, userId, token, setToken}) => {
           <div className="likes">♡ { numberOfLikes } </div>
         </div>
         <CommentCreateForm token={token} setToken={setToken} postId={post._id}/>
-        <div if="comments" role="feed">
+        <div id="comments" role="feed">
           {post.comments === 0
             ? <p>There are no comments yet.</p>
             : post.comments.map(comment => <Comment comment={comment}/>)}

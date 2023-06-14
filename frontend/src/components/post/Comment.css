@@ -6,24 +6,6 @@
   font-size: smaller;
 }
 
-.like-container {
-  display: flex;
-  gap: 10px;
-}
-
-.like-button {
-  font-size: smaller;
-  color: #fff;
-  background-color: #3b5998;
-  border: none;
-  border-radius: 6px;
-  padding: 2px 7px 2px 7px;
-}
-
-.like-button:active {
-  transform: translateY(2px);
-}
-
 .message {
   text-align: justify;
   padding-top: 10px;
@@ -31,7 +13,7 @@
   padding-right: 10px;
 }
 
-.post {
+.comment {
   padding: 5px;
   display: flex;
   border: 3px inset rgba(118, 116, 116, 0.187);
@@ -39,7 +21,7 @@
   margin-bottom: 10px;
 }
 
-.name-date-container {
+.top-container {
   align-items: baseline;
   display: flex;
   gap: 10px;
@@ -47,11 +29,4 @@
 
 .userName {
   font-weight: 800;
-}
-
-.right-container {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-  width: 95%;
 }

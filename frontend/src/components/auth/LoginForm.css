@@ -18,7 +18,8 @@
   background-color: rgb(137, 162, 200);
 }
 
-input{
+/* Used for login form and signup form fields */
+.auth-input {
     font-size: 18px;
     width: 250px;
     height: 40px;
@@ -33,6 +34,7 @@ input{
     font-size: 25px;
     font-weight: 400;
 }
- a{
-     color: rgb(10, 10, 217);
- }
+
+a {
+  color: rgb(10, 10, 217);
+}

@@ -1,4 +1,5 @@
 import React from 'react';
+import './Comment.css';
 
 const Comment = ({ comment }) => {
 
@@ -12,8 +13,8 @@ const Comment = ({ comment }) => {
   return (
     <article className="comment" data-cy="comment" key={ comment._id }>
       <img className="avatar" src={ process.env.PUBLIC_URL + comment.user.avatar } alt='avatar' width='50'></img> 
-      <div>
-        <div className="top-container">
+      <div className="right-container">
+        <div className="name-date-container">
           <div className="userName">{ comment.user.name }</div>
           <div className="date">{ formattedDate } </div>
         </div>
