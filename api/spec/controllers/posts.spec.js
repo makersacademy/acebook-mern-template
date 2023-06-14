@@ -156,6 +156,17 @@ describe("/posts", () => {
     });
   });
 
+  describe("POST to add commment", () => {
+    // Test that a comment can be created (incl. token checker)
+  })
+
+  describe("PATCH to add a comment to an existing post", () => {
+    // Create a new post
+    // Test that a comment can be added to post
+  })
+
+
+  // IGNORE leaving for now
   describe("PATCH to add comments", () => {
     // This works, keeping it here to re-use
     // test("creates a new post", done => {
