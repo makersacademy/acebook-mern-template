@@ -43,8 +43,7 @@ const SignUpForm = ({ navigate }) => {
   const handleNameChange = (event) => {
     setName(event.target.value)
   }
-
-
+  
     return (
       <div className="signUpContainer">
         <h1 className="signUpHeading"> Start your journey to Mordor.... </h1>

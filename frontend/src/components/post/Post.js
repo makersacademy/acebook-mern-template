@@ -15,6 +15,7 @@ const Post = ({post}) => {
   return (
     <>
       <h2>{ post.username }</h2>
+      <img alt='sauron' src='/sauron.jpg' />
       <article class='post' data-cy="post" key={post._id}>
         {post.message} - Likes: {likeCount}
         <LikeButton onLike={handleLike} />
