@@ -19,7 +19,7 @@ const PostCreateForm = ({token, setToken}) => {
           "Content-Type": "application/json",
           Authorization: `Bearer ${token}`,
         },
-        body: JSON.stringify({ message: post, time: time, imageUrl: imageUrl }),
+        body: JSON.stringify({ message: post, imageUrl: imageUrl, time: time }),
       });
 
       if (response.status === 201) {
