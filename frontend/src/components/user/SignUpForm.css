@@ -1,0 +1,19 @@
+.upload-avatar {
+    font:inherit;
+    font-size: 14px;
+    width: 150px;
+    height: 40px;
+    border-radius: 40px;
+    border: none;
+    outline: none;
+    background-color: rgb(45, 56, 110);
+    margin-bottom: 12px;
+    color: white;
+
+}
+
+.text {
+    font:inherit;
+    font-size: 15px;
+    width: 272px;
+}

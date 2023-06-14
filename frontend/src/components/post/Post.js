@@ -47,7 +47,7 @@ const Post = ({post, userId}) => {
   // refactoring needed when upload image API is implimented
   return(
     <article className="post" data-cy="post" key={ post._id }>
-      <img className="avatar" src={ process.env.PUBLIC_URL + post.user.avatar } alt='avatar' width='50'></img> 
+      <img className="avatar" src={ process.env.PUBLIC_URL + post.user.avatar } alt='avatar' width='80'></img> 
       <div>
         <div className="top-container">
           <div className="userName">{ post.user.name }</div>

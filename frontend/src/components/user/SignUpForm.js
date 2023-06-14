@@ -1,13 +1,16 @@
 import React, { useState } from "react";
 import './SignUpForm.css';
 import { Link } from "react-router-dom";
+import CloudinaryUploadWidget from "./SignUpCloudinaryWidget"
 
 const SignUpForm = ({ navigate }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [name, setName] = useState("");
+  const [avatar, setAvatar]  = useState("");
   const [validationError, setValidationError] = useState({ name: "", email: "", password: "" });
 
+  console.log(avatar);
   const handleSubmit = async event => {
     event.preventDefault();
 
@@ -17,7 +20,7 @@ const SignUpForm = ({ navigate }) => {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ name: name, email: email, password: password }),
+        body: JSON.stringify({ name: name, email: email, password: password, avatar: avatar }),
       }).then(response => {
         if (response.status === 201) {
           navigate("/login");
@@ -97,6 +100,8 @@ const SignUpForm = ({ navigate }) => {
           <input placeholder="Email" id="email" type="email" value={email} onChange={handleEmailChange} />
           <p className="validation-error">{validationError?.email}</p>
         </div>
+        <p className="text">If you'd like, you can upload an avatar</p>
+        <CloudinaryUploadWidget setAvatar={setAvatar}/>
         <div>
           <label htmlFor="password"></label>
           <input placeholder="Password" id="password" type="password" value={password} onChange={handlePasswordChange} />
