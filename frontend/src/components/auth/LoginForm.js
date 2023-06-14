@@ -5,11 +5,11 @@ const LogInForm = ({ navigate }) => {
   const [password, setPassword] = useState("");
   const [token] = useState(window.localStorage.getItem("token"));
 
-  useEffect(() => {
-    if(token) {
-      navigate('/posts')
-    }
-  }, [])
+    useEffect(() => {
+      if(token) {
+        navigate('/posts')
+      }
+    }, [])
 
   const handleSubmit = async (event) => {
     event.preventDefault();

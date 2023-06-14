@@ -1,9 +1,14 @@
 import Navbar from "./navbar";
+import { MemoryRouter } from 'react-router'
 const navigate = () => {}
 
 describe("Seeing the Navbar", () => {
   it("should show the log in / sign up buttons if not logged in", () => {
-    cy.mount(<Navbar navigate={navigate} />)
+    cy.mount(
+      <MemoryRouter>
+        <Navbar navigate={navigate}/>
+      </MemoryRouter>
+    )
 
     cy.get("#login-btn").should("be.visible")
     .should('contain.text', "Log in!")
