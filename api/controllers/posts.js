@@ -17,7 +17,8 @@ const PostsController = {
     User.findById(req.user_id).then((user) => {
       const requestObj = {
         username: user.username,
-        message: req.body.message
+        message: req.body.message,
+        usersRace: user.race
       }
       const post = new Post(requestObj);
       post.save(async (err) => {
