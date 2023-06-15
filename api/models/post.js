@@ -5,8 +5,10 @@ const CommentsSchema = new mongoose.Schema({
 });
 
 const PostSchema = new mongoose.Schema({
+  username: String,
   message: String,
   comments: [CommentsSchema],
+  likedByUsers: []
 });
 
 const Post = mongoose.model("Post", PostSchema);
