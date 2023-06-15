@@ -10,10 +10,7 @@ const UserConnections = {
   },
 
   GetFriends: (req, res) => {
-    User.findOne({ _id: req.body.userId }).exec((err, user) => {
-      if (err) {
-        throw err;
-      }
+    User.findOne({ _id: req.body.userId }).then(async (user) => {
       res.status(201).json({ friends: user.friends });
     });
   },

@@ -13,7 +13,12 @@ const Feed = ({ navigate }) => {
   const [friendFeed, setFriendFeed] = useState(true);
   const [token, setToken] = useState(window.localStorage.getItem("token")); // Retrieves a token from the browser storage
   const [loading, setLoading] = useState(true);
-  const [userId, setUserId] = useState("");
+  const [userId, setUserId] = useState();
+  const [friends, setFriends] = useState([]);
+
+   // get posts - sets userId
+  // then need to get friends (userId)
+  // set friends posts (filter posts)
 
   useEffect(() => {
     // Will send a fetch request if a valid token is found
@@ -30,7 +35,6 @@ const Feed = ({ navigate }) => {
             window.localStorage.setItem("token", data.token);
             setToken(window.localStorage.getItem("token"));
             setPosts(data.posts);
-            setFriendPosts(filterFriendsPosts(data.posts));
             setLoading(false);
             // jwt_decode decodes the data without accessing the secret key, therefore there are no security issues currently present
             // This line is equivalent to putting the token into jwt.io debugger
@@ -46,21 +50,51 @@ const Feed = ({ navigate }) => {
     }
   }, [navigate, token]);
 
-  const filterFriendsPosts = posts => {
-    return posts.filter(post => post.user._id);
-  };
+  useEffect(() => {
+    if (userId) {
+      fetch("/userconnections", {
+        method: "POST",
+        headers: {
+          Authorization: `Bearer ${token}`,
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({ userId: userId })
+      }).then(response => response.json())
+        .then(data => {
+          setFriends(data.friends);
+        })
+    }
+  }, [userId, token]);
+
+  useEffect(() => {
+    if (friends) {
+      let friendsPosts = posts.filter(post => (friends.includes(post.user._id) || post.user._id === userId));
+      setFriendPosts(friendsPosts);
+    }
+  }, [friends, posts, userId])
+
+  const handleFeedChange = () => {
+    setFriendFeed(!friendFeed);
+  }
 
   return (
     <>
       {!loading ? (
         <>
           <Navbar navigate={navigate} />
-          <UserConnections userId={userId} token={token} setToken={setToken} />
+          <div className="user-connections">
+            <UserConnections userId={userId} token={token} setToken={setToken} />
+          </div>
           <div className="posts">
             <h2>Posts</h2>
+            <button onClick={handleFeedChange}>{friendFeed ? "Show All Posts" : "Show Friends Posts"}</button>
             <PostCreateForm token={token} setToken={setToken} />
             <div id="feed" role="feed">
-              {posts.length === 0 ? <p>There are no posts yet.</p> : posts.map(post => <Post post={post} key={post._id} userId={userId} token={token} setToken={setToken} />)}
+              {
+              friendFeed ?
+              friendPosts.length === 0 ? <p>Your friends are boring as fuck.</p> : friendPosts.map(post => <Post post={post} key={post._id} userId={userId} token={token} setToken={setToken} />)
+              : posts.length === 0 ? <p>There are no posts yet.</p> : posts.map(post => <Post post={post} key={post._id} userId={userId} token={token} setToken={setToken} />)
+              }
             </div>
           </div>
         </>

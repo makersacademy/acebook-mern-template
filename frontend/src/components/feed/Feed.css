@@ -1,6 +1,5 @@
-
-
-.posts {
+.posts,
+.user-connections {
   margin: auto;
   width: 90%;
 }

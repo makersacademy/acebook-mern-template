@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import './userConnections.css';
 
 const UserConnections = ({userId, token, setToken}) => {
   const [users, setUsers] = useState([]);
@@ -48,8 +49,8 @@ const UserConnections = ({userId, token, setToken}) => {
 
   return (
     <>
-      <p>Find friends</p>
-      <div>
+      <div className="friend-container">
+        <h2>Find friends</h2>
         <input type="text" value={userInput} onChange={handleUserInput} placeholder="Friend's name" />
         {(userInput !== "") && (<div>
           {
@@ -61,7 +62,6 @@ const UserConnections = ({userId, token, setToken}) => {
               </div>)
           }
         </div>)}
-        
       </div>
     </>
   );
