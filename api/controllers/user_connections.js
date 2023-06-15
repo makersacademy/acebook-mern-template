@@ -7,7 +7,16 @@ const UserConnections = {
       const token = TokenGenerator.jsonwebtoken(req.user_id);
       res.status(201).json({ token: token });
     });
-  }
-}
+  },
+
+  GetFriends: (req, res) => {
+    User.findOne({ _id: req.body.userId }).exec((err, user) => {
+      if (err) {
+        throw err;
+      }
+      res.status(201).json({ friends: user.friends });
+    });
+  },
+};
 
 module.exports = UserConnections;

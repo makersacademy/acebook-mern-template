@@ -1,11 +1,10 @@
+import React, { useState } from "react";
+import CommentCreateForm from "./CommentCreateForm.js";
+import Comment from "./Comment.js";
+import Collapsible from "react-collapsible";
+import "./Post.css";
 
-import React, { useState } from 'react';
-import CommentCreateForm from './CommentCreateForm.js';
-import Comment from './Comment.js';
-import Collapsible from 'react-collapsible';
-import './Post.css';
-
-const Post = ({post, userId, token, setToken}) => {
+const Post = ({ post, userId, token, setToken }) => {
   const [numberOfLikes, setNumberOfLikes] = useState(post.likes.length);
 
   const postLiked = async event => {
@@ -52,13 +51,12 @@ const Post = ({post, userId, token, setToken}) => {
     <article className="post" data-cy="post" key={post._id}>
       <img className="avatar" src={process.env.PUBLIC_URL + post.user.avatar} alt="avatar" width="80" height="80" />
       <div className="right-container">
-
         <div className="top-container">
           <div className="userName">{post.user.name}</div>
           <div className="date">{formattedDate} </div>
         </div>
-        <div className="message">{ post.message }</div>
-        <img className="image" src={ post.imageUrl } alt=""></img>
+        <div className="message">{post.message}</div>
+        <img className="image" src={post.imageUrl} alt=""></img>
         <div className="like-container">
           <button className="like-button" onClick={postLiked}>
             Like
@@ -66,11 +64,9 @@ const Post = ({post, userId, token, setToken}) => {
           <div className="likes">♡ {numberOfLikes} </div>
         </div>
         <Collapsible trigger="Comments">
-          <CommentCreateForm token={token} setToken={setToken} postId={post._id}/>
+          <CommentCreateForm token={token} setToken={setToken} postId={post._id} />
           <div id="comments" role="feed">
-            {post.comments === 0
-              ? <p>There are no comments yet.</p>
-              : post.comments.map(comment => <Comment comment={comment}/>)}
+            {post.comments === 0 ? <p>There are no comments yet.</p> : post.comments.map(comment => <Comment key={comment._id} comment={comment} />)}
           </div>
         </Collapsible>
       </div>
