@@ -28,8 +28,10 @@ const PostUploadWidget = ({setImageUrl}) => {
     {
       cloudName: "acebook",
       uploadPreset: "acebook_unsigned_preset",
-      // cropping: true, //add a cropping step
-      // multiple: false,  //restrict upload to a single file
+      cropping: true, //add a cropping step
+      croppingCoordinatesMode: 'custom',
+      multiple: false,  //restrict upload to a single file
+      singleUploadAutoClose: false, // false => click 'Done' to close widget 
       // showAdvancedOptions: true,  //add advanced options (public_id and tag)
       // sources: [ "local", "url"], // restrict the upload sources to URL and local files
       // folder: "user_images", //upload files to the specified folder
@@ -62,7 +64,7 @@ const PostUploadWidget = ({setImageUrl}) => {
 
   return (
     <div>
-      <button className="post-image-upload-button" type="button" onClick={openWidget}>Choose an image to upload as your avatar</button>
+      <button className="post-image-upload-button" type="button" onClick={openWidget}>Add a photo to your post</button>
     </div>
   );
 }
