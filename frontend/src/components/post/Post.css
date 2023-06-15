@@ -9,3 +9,9 @@
   padding: 5px;
   border: 1px solid rgb(244, 241, 241);
 }
+
+img { 
+  width: 50px;
+  border-radius: 50%;
+  border: 5px solid #555;
+}
