@@ -9,6 +9,8 @@ import jwt_decode from "jwt-decode";
 
 const Feed = ({ navigate }) => {
   const [posts, setPosts] = useState([]);
+  const [friendPosts, setFriendPosts] = useState([]);
+  const [friendFeed, setFriendFeed] = useState(true);
   const [token, setToken] = useState(window.localStorage.getItem("token")); // Retrieves a token from the browser storage
   const [loading, setLoading] = useState(true);
   const [userId, setUserId] = useState("");
@@ -25,10 +27,10 @@ const Feed = ({ navigate }) => {
         .then(response => response.json())
         .then(data => {
           if (data.posts) {
-            console.log("data.posts");
             window.localStorage.setItem("token", data.token);
             setToken(window.localStorage.getItem("token"));
             setPosts(data.posts);
+            setFriendPosts(filterFriendsPosts(data.posts));
             setLoading(false);
             // jwt_decode decodes the data without accessing the secret key, therefore there are no security issues currently present
             // This line is equivalent to putting the token into jwt.io debugger
@@ -44,12 +46,16 @@ const Feed = ({ navigate }) => {
     }
   }, [navigate, token]);
 
+  const filterFriendsPosts = posts => {
+    return posts.filter(post => post.user._id);
+  };
+
   return (
     <>
       {!loading ? (
         <>
           <Navbar navigate={navigate} />
-          <UserConnections userId={userId} token={token} setToken={setToken}/>
+          <UserConnections userId={userId} token={token} setToken={setToken} />
           <div className="posts">
             <h2>Posts</h2>
             <PostCreateForm token={token} setToken={setToken} />
