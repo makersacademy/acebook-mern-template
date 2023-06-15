@@ -38,11 +38,10 @@ describe("Signing in", () => {
       cy.get("#newPost").type("Let's chat!");
       cy.get("#post-submit").click();
   
-      // cy.contains('div.message', "Let's chat!").should('be.visible');
+      cy.get('span[id^="collapsible-trigger"]').first().click();
+      cy.get("input.comment-input").first().type("great!");
+      cy.get("input.comment-submit").first().click();
       cy.contains("Let's chat!");
-      // cy.get("#collapsible-trigger-1686843365440").click();
-      cy.get("#comment-input").type("great!");
-      cy.get("#comment-submit").click();
       cy.contains("great!")
 
     });
