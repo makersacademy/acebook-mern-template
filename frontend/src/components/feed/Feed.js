@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import Post from "../post/Post";
-import PostCreateForm from "../post/PostCreateForm";
+import PostCreateForm from "../postCreation/PostCreateForm";
 import BarLoader from "react-spinners/BarLoader";
 import Navbar from "../navbar/Navbar";
 import "./Feed.css";
@@ -54,7 +54,7 @@ const Feed = ({ navigate }) => {
             <div id="feed" role="feed">
               {posts.length === 0 
                 ? <p>There are no posts yet.</p> 
-                : posts.map(post => <Post post={post} key={post._id} userId={userId} />)}
+                : posts.map(post => <Post post={post} key={post._id} userId={userId} token={token} setToken={setToken} />)}
             </div>
           </div>
         </>
