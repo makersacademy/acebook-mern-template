@@ -193,9 +193,7 @@ describe("/posts", () => {
         .send(
           { 
             postId: post._id,
-            comment: {
-              message: 'a comment',
-            },
+            commentMessage: 'a comment',
             token: token,
           }
         );

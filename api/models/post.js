@@ -1,6 +1,7 @@
 const mongoose = require("mongoose");
 
 const CommentsSchema = new mongoose.Schema({
+  username: String,
   message: String,
 });
 
