@@ -6,7 +6,8 @@ const UserSchema = new Schema({
   name: { type: String, required: true, default: "Name" },
   email: { type: String, required: true, unique: true },
   password: { type: String, required: true },
-  avatar: { type: String, default: '/default_avatar.png'}
+  avatar: { type: String, default: '/default_avatar.png'},
+  friends: [{ type: Schema.Types.ObjectId, ref: "User", default: [] }]
 });
 
 UserSchema.pre('save', async function (next) {
