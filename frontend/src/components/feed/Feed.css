@@ -1,0 +1,55 @@
+.lake {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  background-color: lightblue;
+  overflow: hidden;
+  z-index: 0;
+}
+
+.duck {
+  position: absolute;
+  width: 100px; 
+  height: 80px;
+  background-image: url('duck.png');
+  background-size: cover;
+  animation-name: floating;
+  animation-duration: 5s;
+  animation-iteration-count: infinite;
+}
+
+.overlay {
+  position: relative;
+  z-index: 1;
+  background-color: rgba(255, 255, 255, 0);
+}
+
+.post-list {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 20px;
+  position: relative;
+}
+
+.post {
+  width: 80%;
+  padding: 20px;
+  margin-bottom: 20px;
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+@keyframes floating {
+  0% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+  100% {
+    transform: translateY(0);
+  }
+}
+

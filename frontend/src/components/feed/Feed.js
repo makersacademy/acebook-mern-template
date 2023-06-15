@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import Post from '../post/Post'
+import './Feed.css';
 
 const Feed = ({ navigate }) => {
   const [posts, setPosts] = useState([]);
@@ -23,7 +24,11 @@ const Feed = ({ navigate }) => {
     }
   }, [])
     
-  const postsArray = posts.map((post) => ( <Post post={ post } key={ post._id } /> ))
+  const postsArray = posts.map((post) => ( 
+    <div className="post" key={ post._id }>
+      <Post post={ post }  />
+    </div> 
+  ));
 
   // const logout = () => {
   //   window.localStorage.removeItem("token")
@@ -33,9 +38,24 @@ const Feed = ({ navigate }) => {
     if(token) {
       return(
         <>
-          <h2>Posts</h2>
-          <div id='feed' role="feed">
-              { postsArray.reverse().map(a => a) }
+          <div className="lake">
+            {posts.map((post) => (
+              <div
+                className="duck"
+                key={post._id}
+                style={{
+                  left: `${Math.floor(Math.random() * 80)}%`,
+                  top: `${Math.floor(Math.random() * 80)}%`,
+                }}
+              ></div>
+            ))}
+            <div className="overlay">
+              <div className="post-list">
+                <div id='feed' role="feed">
+                  { postsArray.reverse().map(a => a) }
+                </div>
+              </div>
+            </div>
           </div>
         </>
       )
