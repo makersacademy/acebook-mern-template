@@ -28,6 +28,7 @@ const PostCreateForm = ({token, setToken}) => {
         let data = await response.json();
         setToken(data.token);
         setPost("");
+        setImageUrl("");
       } else {
         console.log("Failed to submit");
         setValidationError("Server error");
