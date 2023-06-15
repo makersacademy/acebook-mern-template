@@ -74,12 +74,12 @@ const LogInForm = ({ navigate }) => {
       <form onSubmit={handleSubmit} noValidate>
         <div>
           <label htmlFor="email"></label>
-          <input placeholder="Email" id="email" type="email" value={email} onChange={handleEmailChange} />
+          <input className="auth-input" placeholder="Email" id="email" type="email" value={email} onChange={handleEmailChange} />
           <p className="validation-error">{validationError?.email}</p>
         </div>
         <div>
           <label htmlFor="email"></label>
-          <input placeholder="Password" id="password" type="password" value={password} onChange={handlePasswordChange} />
+          <input className="auth-input" placeholder="Password" id="password" type="password" value={password} onChange={handlePasswordChange} />
           <p className="validation-error">{validationError?.password}</p>
         </div>
 

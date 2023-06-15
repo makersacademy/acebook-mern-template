@@ -18,21 +18,23 @@
   background-color: rgb(137, 162, 200);
 }
 
-input {
-  font-size: 18px;
-  width: 250px;
-  height: 40px;
-  border-radius: 60px;
-  box-shadow: inset 0px 0px 25px 0px #f1ecec;
-  border: none;
-  outline: none;
-  background-color: rgb(223, 225, 235);
+/* Used for login form and signup form fields */
+.auth-input {
+    font-size: 18px;
+    width: 250px;
+    height: 40px;
+    border-radius: 60px;
+    box-shadow: inset 0px 0px 25px 0px #f1ecec;
+    border: none;
+    outline: none;
+    background-color: rgb(223, 225, 235);
 }
 
 .link {
   font-size: 25px;
   font-weight: 400;
 }
+
 a {
   color: rgb(10, 10, 217);
 }

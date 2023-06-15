@@ -1,7 +1,11 @@
-import React, { useState } from "react";
-import "./Post.css";
 
-const Post = ({ post, userId }) => {
+import React, { useState } from 'react';
+import CommentCreateForm from './CommentCreateForm.js';
+import Comment from './Comment.js';
+import Collapsible from 'react-collapsible';
+import './Post.css';
+
+const Post = ({post, userId, token, setToken}) => {
   const [numberOfLikes, setNumberOfLikes] = useState(post.likes.length);
 
   const postLiked = async event => {
@@ -43,10 +47,12 @@ const Post = ({ post, userId }) => {
 
   // The default image is accessed in the public folder,
   // refactoring needed when upload image API is implimented
+
   return (
     <article className="post" data-cy="post" key={post._id}>
       <img className="avatar" src={process.env.PUBLIC_URL + post.user.avatar} alt="avatar" width="80" height="80" />
-      <div>
+      <div className="right-container">
+
         <div className="top-container">
           <div className="userName">{post.user.name}</div>
           <div className="date">{formattedDate} </div>
@@ -59,6 +65,14 @@ const Post = ({ post, userId }) => {
           </button>
           <div className="likes">♡ {numberOfLikes} </div>
         </div>
+        <Collapsible trigger="Comments">
+          <CommentCreateForm token={token} setToken={setToken} postId={post._id}/>
+          <div id="comments" role="feed">
+            {post.comments === 0
+              ? <p>There are no comments yet.</p>
+              : post.comments.map(comment => <Comment comment={comment}/>)}
+          </div>
+        </Collapsible>
       </div>
     </article>
   );
