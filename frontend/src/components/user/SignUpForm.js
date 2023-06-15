@@ -1,13 +1,17 @@
 import React, { useState } from "react";
-import './SignUpForm.css';
+import "./SignUpForm.css";
 import { Link } from "react-router-dom";
+import CloudinaryUploadWidget from "./SignUpCloudinaryWidget";
 
 const SignUpForm = ({ navigate }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [name, setName] = useState("");
+  const [avatar, setAvatar] = useState("");
+  const [deleteToken, setDeleteToken] = useState("");
   const [validationError, setValidationError] = useState({ name: "", email: "", password: "" });
 
+  console.log(avatar);
   const handleSubmit = async event => {
     event.preventDefault();
 
@@ -17,7 +21,7 @@ const SignUpForm = ({ navigate }) => {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ name: name, email: email, password: password }),
+        body: JSON.stringify({ name: name, email: email, password: password, avatar: avatar }),
       }).then(response => {
         if (response.status === 201) {
           navigate("/login");
@@ -76,35 +80,63 @@ const SignUpForm = ({ navigate }) => {
     setPassword(event.target.value);
   };
 
+  const deleteImage = () => {
+    fetch("https://api.cloudinary.com/v1_1/acebook/delete_by_token", {
+      method: "post",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ token: deleteToken }),
+    }).then(response => {
+      console.log(response);
+      setAvatar("");
+      setDeleteToken("");
+    });
+  };
+
   return (
     <>
       <div className="main">
-       <div className="sub-main">
-       <div>
-           <h1>Sign Up</h1>
-      <div>
-        <p> Already registered? <Link to="/login">Log In</Link></p>
-      </div>
+        <div className="sub-main">
+          <div>
+            <h1>Sign Up</h1>
+            <div>
+              <p>
+                {" "}
+                Already registered? <Link to="/login">Log In</Link>
+              </p>
+            </div>
 
-      <form onSubmit={handleSubmit} noValidate>
-        <div>
-          <label htmlFor="name"></label>
-          <input placeholder="Name" id="name" type="text" value={name} onChange={handleNameChange} />
-          <p className="validation-error">{validationError?.name}</p>
-        </div>
-        <div>
-          <label htmlFor="email"></label>
-          <input placeholder="Email" id="email" type="email" value={email} onChange={handleEmailChange} />
-          <p className="validation-error">{validationError?.email}</p>
-        </div>
-        <div>
-          <label htmlFor="password"></label>
-          <input placeholder="Password" id="password" type="password" value={password} onChange={handlePasswordChange} />
-          <p className="validation-error">{validationError?.password}</p>
-          <input id="submit" type="submit" value="Sign Up" />
-        </div>
-      </form>
-         </div>
+            <form onSubmit={handleSubmit} noValidate>
+              <div>
+                <label htmlFor="name"></label>
+                <input placeholder="Name" id="name" type="text" value={name} onChange={handleNameChange} />
+                <p className="validation-error">{validationError?.name}</p>
+              </div>
+              <div>
+                <label htmlFor="email"></label>
+                <input placeholder="Email" id="email" type="email" value={email} onChange={handleEmailChange} />
+                <p className="validation-error">{validationError?.email}</p>
+              </div>
+              <p className="text">If you'd like, you can upload an avatar</p>
+              <CloudinaryUploadWidget setAvatar={setAvatar} setDeleteToken={setDeleteToken} />
+              {avatar !== "" && (
+                <div className="avatar-preview">
+                  <button className="close" type="button" onClick={deleteImage}>
+                    X
+                  </button>
+                  <p>Preview:</p>
+                  <img src={avatar} alt="avatar preview" height="80" width="80" className="avatar" />
+                </div>
+              )}
+              <div>
+                <label htmlFor="password"></label>
+                <input placeholder="Password" id="password" type="password" value={password} onChange={handlePasswordChange} />
+                <p className="validation-error">{validationError?.password}</p>
+                <input id="submit" type="submit" value="Sign Up" />
+              </div>
+            </form>
+          </div>
         </div>
       </div>
     </>

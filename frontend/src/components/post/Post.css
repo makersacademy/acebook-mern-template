@@ -1,5 +1,6 @@
 .avatar {
   align-self: flex-start;
+  border-radius: 100px;
 }
 
 .date {
@@ -32,10 +33,10 @@
 }
 
 .post {
-  padding: 5px;
+  padding: 10px;
   display: flex;
   border: 3px inset rgba(118, 116, 116, 0.187);
-  gap: 10px;
+  gap: 15px;
   margin-bottom: 10px;
 }
 
