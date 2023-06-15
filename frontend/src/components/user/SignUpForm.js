@@ -7,7 +7,7 @@ const SignUpForm = ({ navigate }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [name, setName] = useState("");
-  const [avatar, setAvatar] = useState("");
+  const [avatar, setAvatar] = useState();
   const [deleteToken, setDeleteToken] = useState("");
   const [validationError, setValidationError] = useState({ name: "", email: "", password: "" });
 
@@ -120,7 +120,7 @@ const SignUpForm = ({ navigate }) => {
               </div>
               <p className="text">If you'd like, you can upload an avatar</p>
               <CloudinaryUploadWidget setAvatar={setAvatar} setDeleteToken={setDeleteToken} />
-              {avatar !== "" && (
+              {avatar && (
                 <div className="avatar-preview">
                   <button className="close" type="button" onClick={deleteImage}>
                     X
@@ -137,7 +137,6 @@ const SignUpForm = ({ navigate }) => {
               </div>
             </form>
           </div>
-
         </div>
       </div>
     </>
