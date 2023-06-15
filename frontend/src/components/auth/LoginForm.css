@@ -4,18 +4,18 @@
   display: flex;
   padding-top: 150px;
   padding-bottom: 1500px;
-  background-color: #d0dee8;
+  background-color: #cad9ef;
 }
 
 .sub-main {
   display: flex;
   justify-content: center;
   /* height: 450px; */
-  width: 80%;
+  width: 29%;
   box-shadow: 11px 12px 13px 12px rgb(207, 207, 207);
   padding: 80px 0;
   border-radius: 60px;
-  background-color: rgb(137, 162, 200);
+  background-color: rgb(117, 162, 228);
 }
 
 input {

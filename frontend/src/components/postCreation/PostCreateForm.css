@@ -1,5 +1,5 @@
 .post-image-upload-button{
-  font-size: 14px;
+  font-size: 17px;
   width: 250px;
   height: 40px;
   border-radius: 60px;
@@ -7,4 +7,27 @@
   border: none;
   outline: none;
   background-color: rgb(223, 225, 235);
+  margin: 10px;
 }
+
+.form-container {
+  display: flex;  /* Set the container to use flexbox layout */
+  align-items: center;  /* Center align items vertically within the container */
+  justify-content: left;
+  margin-bottom: 20px; 
+}
+
+.form-container input,
+.form-container p {
+  margin-right: 5px !important;  /* Add some spacing between elements */
+}
+
+button:hover {
+  background-color: #f0f0f0; /* Change to your desired color */
+}
+
+/* CSS code */
+input[type="submit"]:hover {
+  background-color: #f0f0f0; /* Change to your desired color */
+}
+

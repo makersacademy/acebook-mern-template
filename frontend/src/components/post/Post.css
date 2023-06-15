@@ -49,3 +49,13 @@
 .userName {
   font-weight: 800;
 }
+
+.like-container.liked {
+  /* Add your desired styles here */
+}
+
+/* Define styles for the likes when red */
+.likes.red {
+  color: red; /* Change text color to red */
+  /* Add any other desired styles here */
+}
