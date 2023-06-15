@@ -25,7 +25,7 @@ const Post = ({post}) => {
   // submits a comment on clicking submit button
   const handleCommentSubmit = async (event) => {
     event.preventDefault();
-    await handleSendingNewComment(token, post, { message: commentMessage }, '/posts/add-comment');
+    await handleSendingNewComment(token, post, commentMessage, '/posts/add-comment');
     // re-renders the comment feed with the new comment
     await fetchComments(token, setToken, setComments, post._id)
     // sets the input field back to empty string

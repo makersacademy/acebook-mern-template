@@ -18,7 +18,7 @@ export const handleSendingNewPost = async (token, message, url) => {
     }
 }
 
-export const handleSendingNewComment = async (token, post, comment, url) => {
+export const handleSendingNewComment = async (token, post, commentMessage, url) => {
     // try catch are essential for async fucntions for cathing errors
     try {
       const response = await fetch(`${url}`, {
@@ -29,7 +29,7 @@ export const handleSendingNewComment = async (token, post, comment, url) => {
         },
         body: JSON.stringify({
             postId: post._id,
-            comment: comment,
+            commentMessage: commentMessage,
             token: token, 
           }
         )
