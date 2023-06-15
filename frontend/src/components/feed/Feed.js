@@ -49,7 +49,7 @@ const Feed = ({ navigate }) => {
       {!loading ? (
         <>
           <Navbar navigate={navigate} />
-          <UserConnections />
+          <UserConnections userId={userId} token={token} setToken={setToken}/>
           <div className="posts">
             <h2>Posts</h2>
             <PostCreateForm token={token} setToken={setToken} />

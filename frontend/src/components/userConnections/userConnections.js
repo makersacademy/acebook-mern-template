@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react";
 
-const UserConnections = () => {
+const UserConnections = ({userId, token, setToken}) => {
   const [users, setUsers] = useState([]);
   const [userInput, setUserInput] = useState("");
-  const [filteredUsers, setFilteredUsers] = useState("");
-  console.log(filteredUsers);
+  const [filteredUsers, setFilteredUsers] = useState([]);
+
 
   useEffect(() => {
     fetch("/users")
@@ -28,18 +28,40 @@ const UserConnections = () => {
     setUserInput(e.target.value);
   };
 
+  const addFriend = async (friendId) => {
+    let response = await fetch("/userconnections", {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`
+      },
+      body: JSON.stringify({ userId: userId, friendId: friendId })
+    })
+
+    if (response.status === 201) {
+      let data = await response.json();
+      setToken(data.token);
+    } else {
+      console.log("Failed to add friend");
+    }
+  }
+
   return (
     <>
       <p>Find friends</p>
       <div>
         <input type="text" value={userInput} onChange={handleUserInput} placeholder="Friend's name" />
-        <div>
-          {users.forEach(user => {
-            if (user.name.match(userInput)) {
-              return <div>hello</div>;
-            }
-          })}
-        </div>
+        {(userInput !== "") && (<div>
+          {
+            filteredUsers.map(user => 
+              <div className="friend" key={user._id}>
+                <img src={user.avatar} alt="user avatar" width="20"/>
+                <p>{user.name}</p>
+                <button onClick={() => addFriend(user._id)}>Add friend</button>
+              </div>)
+          }
+        </div>)}
+        
       </div>
     </>
   );
