@@ -3,6 +3,7 @@ import './Feed.css'
 import React, { useEffect, useState } from 'react';
 import Post from '../post/Post';
 import { fetchPosts, handleSendingNewPost } from '../../fetchers';
+import Navbar from '../navbar/Navbar';
 
 const Feed = ({ navigate }) => {
   const [message, setMessage] = useState('');
@@ -29,6 +30,8 @@ const Feed = ({ navigate }) => {
 
     if(token) {
       return(
+        <>
+          <Navbar />
         <div className="feedContainer">
             <h1>Enter the Trelloship</h1>
             <form className="postForm" onSubmit={handleSubmit}>
@@ -54,7 +57,8 @@ const Feed = ({ navigate }) => {
               Logout
             </button>
         </div>
-      )
+      </>
+    )
     } else {
       navigate('/signin')
     }
