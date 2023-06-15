@@ -10,16 +10,25 @@
   margin: 10px;
 }
 
+#newPost {
+  width: 666px; /* Set the desired width */
+  height: 50px; /* Set the desired height */
+  
+}
+
 .form-container {
   display: flex;  /* Set the container to use flexbox layout */
   align-items: center;  /* Center align items vertically within the container */
   justify-content: left;
-  margin-bottom: 20px; 
+  margin-bottom: 20px;
+  margin-left: 320px;
+  width:375px
 }
 
 .form-container input,
 .form-container p {
   margin-right: 5px !important;  /* Add some spacing between elements */
+
 }
 
 button:hover {
