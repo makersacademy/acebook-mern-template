@@ -3,6 +3,7 @@ import Post from "../post/Post";
 import PostCreateForm from "../postCreation/PostCreateForm";
 import BarLoader from "react-spinners/BarLoader";
 import Navbar from "../navbar/Navbar";
+import UserConnections from "../userConnections/userConnections";
 import "./Feed.css";
 import jwt_decode from "jwt-decode";
 
@@ -30,8 +31,8 @@ const Feed = ({ navigate }) => {
             setPosts(data.posts);
             setLoading(false);
             // jwt_decode decodes the data without accessing the secret key, therefore there are no security issues currently present
-           // This line is equivalent to putting the token into jwt.io debugger
-           setUserId(jwt_decode(token).user_id)
+            // This line is equivalent to putting the token into jwt.io debugger
+            setUserId(jwt_decode(token).user_id);
           } else {
             // navigate to login if token but not valid (timed-out)
             navigate("/login");
@@ -48,13 +49,12 @@ const Feed = ({ navigate }) => {
       {!loading ? (
         <>
           <Navbar navigate={navigate} />
+          <UserConnections />
           <div className="posts">
             <h2>Posts</h2>
-            <PostCreateForm token={token} setToken={setToken}/>
+            <PostCreateForm token={token} setToken={setToken} />
             <div id="feed" role="feed">
-              {posts.length === 0 
-                ? <p>There are no posts yet.</p> 
-                : posts.map(post => <Post post={post} key={post._id} userId={userId} token={token} setToken={setToken} />)}
+              {posts.length === 0 ? <p>There are no posts yet.</p> : posts.map(post => <Post post={post} key={post._id} userId={userId} token={token} setToken={setToken} />)}
             </div>
           </div>
         </>
