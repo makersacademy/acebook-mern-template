@@ -41,7 +41,7 @@ const PostCreateForm = ({token, setToken}) => {
       setValidationError("");
       return true;
     } else {
-      setValidationError("Please enter a post");
+      setValidationError("Please enter a message to post");
       return false;
     }
   };
