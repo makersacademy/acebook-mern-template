@@ -1,47 +1,102 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
+import "./LoginForm.css";
+import { Link } from "react-router-dom";
+import profile from "./profile.png";
 
 const LogInForm = ({ navigate }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [validationError, setValidationError] = useState({ email: "", password: "" });
 
-  const handleSubmit = async (event) => {
+  const handleSubmit = async event => {
     event.preventDefault();
 
-    let response = await fetch( '/tokens', {
-      method: 'post',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({ email: email, password: password })
-    })
+    if (validateEmail() && validatePassword()) {
+      let response = await fetch("/tokens", {
+        method: "post",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ email: email, password: password }),
+      });
 
-    if(response.status !== 201) {
-      console.log("yay")
-      navigate('/login')
-    } else {
-      console.log("oop")
-      let data = await response.json()
-      window.localStorage.setItem("token", data.token)
-      navigate('/posts');
+      if (response.status !== 201) {
+        setValidationError({ password: "Username and password do not match" });
+        // navigate("/login");
+      } else {
+        let data = await response.json();
+        window.localStorage.setItem("token", data.token);
+        navigate("/posts");
+      }
     }
-  }
+  };
 
-  const handleEmailChange = (event) => {
-    setEmail(event.target.value)
-  }
+  const validateEmail = () => {
+    const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|.(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 
-  const handlePasswordChange = (event) => {
-    setPassword(event.target.value)
-  }
+    const validEmail = re.test(email);
 
+    if (validEmail) {
+      setValidationError({ email: "", password: "" });
+      return true;
+    } else {
+      setValidationError(prevState => ({ ...prevState, email: "Email address is not valid" }));
+      return false;
+    }
+  };
 
-    return (
-      <form onSubmit={handleSubmit}>
-        <input placeholder='Email' id="email" type='text' value={ email } onChange={handleEmailChange} />
-        <input placeholder='Password' id="password" type='password' value={ password } onChange={handlePasswordChange} />
-        <input role='submit-button' id='submit' type="submit" value="Submit" />
+  const validatePassword = () => {
+    if (password.length > 0) {
+      setValidationError({ email: "", password: "" });
+      return true;
+    } else {
+      setValidationError(prevState => ({ ...prevState, password: "Invalid password" }));
+      return false;
+    }
+  };
+
+  const handleEmailChange = event => {
+    setEmail(event.target.value);
+  };
+
+  const handlePasswordChange = event => {
+    setPassword(event.target.value);
+  };
+
+  return (
+    <>
+      <div className="main">
+          <div className="sub-main">
+         <div>
+           <h1>Login</h1>
+          <div>
+
+      <form onSubmit={handleSubmit} noValidate>
+        <div>
+          <label htmlFor="email"></label>
+          <input className="auth-input" placeholder="Email" id="email" type="email" value={email} onChange={handleEmailChange} />
+          <p className="validation-error">{validationError?.email}</p>
+        </div>
+        <div>
+          <label htmlFor="email"></label>
+          <input className="auth-input" placeholder="Password" id="password" type="password" value={password} onChange={handlePasswordChange} />
+          <p className="validation-error">{validationError?.password}</p>
+        </div>
+
+        <div>
+        <input id="submit" type="submit" value="Login" />
+        </div>
       </form>
-    );
-}
+
+      <div>
+        <p> Don't have an account? <Link to="/signup">Sign Up</Link></p>
+      </div>
+      </div>
+      </div>
+          </div>
+      </div>
+    </>
+  )
+};
 
 export default LogInForm;

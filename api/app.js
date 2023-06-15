@@ -39,13 +39,13 @@ const tokenChecker = (req, res, next) => {
 };
 
 // route setup
-app.use("/posts", tokenChecker, postsRouter);
+app.use("/posts", tokenChecker, postsRouter); // tokenChecker is a middleware function
 app.use("/tokens", tokensRouter);
 app.use("/users", usersRouter);
 
 // catch 404 and forward to error handler
 app.use((req, res, next) => {
-  next(createError(404));
+  next(createError(404)); 
 });
 
 // error handler

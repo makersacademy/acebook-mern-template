@@ -59,4 +59,16 @@ describe("/users", () => {
       expect(users.length).toEqual(0)
     });
   })
+
+  describe("POST, forces unique emails", () => {
+    test("response code is 409", async () => {
+      await request(app)
+        .post("/users")
+        .send({email: "poppy@email.com", password: "1234"})
+      let response = await request(app)
+        .post("/users")
+        .send({email: "poppy@email.com", password: "1234"})
+      expect(response.statusCode).toBe(409)
+    })
+  })
 })

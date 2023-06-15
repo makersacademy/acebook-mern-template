@@ -4,10 +4,11 @@ require("../mongodb_helper");
 const User = require('../../models/user');
 
 describe("/tokens", () => {
-  beforeAll( () => {
-    const user = new User({ email: "test@test.com", password: "12345678" })
-    user.save()
+  beforeAll(async () => {
+    const user = new User({ email: "test@test.com", password: "12345678" });
+    await user.save();
   });
+  
 
   afterAll( async () => {
     await User.deleteMany({})
@@ -22,6 +23,14 @@ describe("/tokens", () => {
     expect(response.body.message).toEqual("OK")
   })
 
+  test("a token is not returned when user does not exist", async () => {
+    let response = await request(app)
+    .post("/tokens")
+    .send({email: "bananas@test.com", password: "1234"})
+    expect(response.status).toEqual(401)
+    expect(response.body.token).toEqual(undefined)
+    expect(response.body.message).toEqual("auth error, user does not exist")
+  })
 
   test("a token is not returned when creds are invalid", async () => {
     let response = await request(app)
@@ -29,6 +38,7 @@ describe("/tokens", () => {
       .send({email: "test@test.com", password: "1234"})
     expect(response.status).toEqual(401)
     expect(response.body.token).toEqual(undefined)
-    expect(response.body.message).toEqual("auth error")
+    expect(response.body.message).toEqual("auth error, password incorrect")
   })
+
 })

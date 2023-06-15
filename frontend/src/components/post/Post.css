@@ -1,0 +1,101 @@
+.avatar {
+  align-self: flex-start;
+  border-radius: 100px;
+}
+
+.date {
+  font-size: smaller;
+}
+
+.like-container {
+  display: flex;
+  gap: 10px;
+}
+
+.like-button {
+  font-size: smaller;
+  color: #fff;
+  background-color: #3b5998;
+  border: none;
+  border-radius: 6px;
+  padding: 2px 7px 2px 7px;
+}
+
+.like-button:active {
+  transform: translateY(2px);
+}
+
+.message {
+  text-align: justify;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  padding-right: 10px;
+}
+
+.post {
+  padding: 10px;
+  display: flex;
+  border: 3px inset rgba(118, 116, 116, 0.187);
+  gap: 15px;
+  margin-bottom: 10px;
+}
+
+.name-date-container {
+  align-items: baseline;
+  display: flex;
+  gap: 10px;
+}
+
+.userName {
+  font-weight: 800;
+}
+
+.right-container {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 95%;
+}
+
+.Collapsible {
+  background-color: base;
+}
+
+.Collapsible__trigger:hover {
+  background-color: rgb(215, 215, 215);
+}
+
+/* The link which when clicked opens the collapsable area */
+.Collapsible__trigger {
+  display: block;
+  font-weight: 400;
+  text-decoration: none;
+  position: relative;
+  border: 1px solid white;
+  padding: 10px;
+
+  &:after {
+    font-family: 'FontAwesome';
+    content: '\f107';
+    position: absolute;
+    right: 10px;
+    top: 10px;
+    display: block;
+    transition: transform 300ms;
+  }
+
+  &.is-open {
+    &:after {
+      transform: rotateZ(180deg);
+    }
+  }
+
+  &.is-disabled {
+    opacity: 0.5;
+    background-color: grey;
+  }
+
+  /* &.is-closed {
+    max-width: 20%;
+  } */
+}
