@@ -1,4 +1,4 @@
-// This is a multipurpose template. 
+// This is a multipurpose template.
 // No integration solutions are fully tested.
 // To use this file, create a copy, rename it,
 // and build from there.
@@ -8,11 +8,10 @@
 // via a `useState` callback passed in by parent
 // and used on line 6.
 
-const CloudinaryUploadWidget = ({setAvatar}) => {
-
+const CloudinaryUploadWidget = ({ setAvatar, setDeleteToken }) => {
   // Depending on your use case, you may need to wrap this in a useEffect?
   // In which case, the nature of the return may need to change.
-  // When we had this on /signup without a useEffect, 
+  // When we had this on /signup without a useEffect,
   // clicking the widget button sent the parent form data if
   // it was valid (so a user was created as if they had clicked 'Sign Up'.
 
@@ -24,47 +23,57 @@ const CloudinaryUploadWidget = ({setAvatar}) => {
   // can add see:
   //   https://cloudinary.com/documentation/upload_widget_reference
 
-  const openWidget = () => { window.cloudinary.createUploadWidget(
-    {
-      cloudName: "acebook",
-      uploadPreset: "acebook_unsigned_preset",
-      cropping: true, //add a cropping step
-      multiple: false,  //restrict upload to a single file
-      // showAdvancedOptions: true,  //add advanced options (public_id and tag)
-      // sources: [ "local", "url"], // restrict the upload sources to URL and local files
-      // folder: "user_images", //upload files to the specified folder
-      // tags: ["users", "profile"], //add the given tags to the uploaded files
-      // context: {alt: "user_uploaded"}, //add the given context data to the uploaded files
-      // clientAllowedFormats: ["images"], //restrict uploading to image files only
-      // maxImageFileSize: 2000000,  //restrict file size to less than 2MB
-      // maxImageWidth: 2000, //Scales the image down to a width of 2000 pixels before uploading
-      // theme: "purple", //change to a purple theme
-    },
-    (error, result) => {
-      if (!error && result && result.event === "success") {
-        console.log("Done! Here is the image info: ", result.info);
-        // To capture the url from the result:
-        const imageUrl = result.info.secure_url;
-         setAvatar(imageUrl)
-        // add backend fetch here, for example
-        // If you were to modify the user:avatar, you could do:
+  const openWidget = () => {
+    window.cloudinary
+      .createUploadWidget(
+        {
+          cloudName: "acebook",
+          uploadPreset: "acebook_unsigned_preset",
+          cropping: true, //add a cropping step
+          croppingAspectRatio: 1,
+          showSkipCropButton: false,
+          singleUploadAutoClose: false,
+          multiple: false, //restrict upload to a single file
+          // showAdvancedOptions: true,  //add advanced options (public_id and tag)
+          // sources: [ "local", "url"], // restrict the upload sources to URL and local files
+          // folder: "user_images", //upload files to the specified folder
+          // tags: ["users", "profile"], //add the given tags to the uploaded files
+          // context: {alt: "user_uploaded"}, //add the given context data to the uploaded files
+          // clientAllowedFormats: ["images"], //restrict uploading to image files only
+          maxImageFileSize: 2000000, //restrict file size to less than 2MB
+          // maxImageWidth: 2000, //Scales the image down to a width of 2000 pixels before uploading
+          // theme: "purple", //change to a purple theme
+        },
+        (error, result) => {
+          if (!error && result && result.event === "success") {
+            console.log("Done! Here is the image info: ", result.info);
+            // To capture the url from the result:
+            const imageUrl = result.info.secure_url;
+            setAvatar(imageUrl);
+            setDeleteToken(result.info.delete_token);
+            // add backend fetch here, for example
+            // If you were to modify the user:avatar, you could do:
 
-        // fetch('/users', {
-        //   method: 'patch',
-        //   headers: {
-        //     "Content-Type": "application/json",
-        //   },
-        //   body: JSON.stringify({ imageURL: imageUrl }),
-        // })
-      }
-    }).open();
+            // fetch('/users', {
+            //   method: 'patch',
+            //   headers: {
+            //     "Content-Type": "application/json",
+            //   },
+            //   body: JSON.stringify({ imageURL: imageUrl }),
+            // })
+          }
+        }
+      )
+      .open();
   };
 
   return (
     <div>
-      <button className="upload-avatar"  type="button" onClick={openWidget}>Upload photo</button>
+      <button className="upload-avatar" type="button" onClick={openWidget}>
+        Upload photo
+      </button>
     </div>
   );
-}
+};
 
 export default CloudinaryUploadWidget;
