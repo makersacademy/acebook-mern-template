@@ -34,22 +34,19 @@ describe("Signing in", () => {
     })
 
     it("you can write a comment on a post", () => {
-
-    });
-
-    it("you can make a post with a picture", () => {
+      cy.login("user@email.com", "12345678");
       cy.get("#newPost").type("Let's chat!");
-      cy.get().includes("https://res.cloudinary.com/acebook/image/upload/v1686824029/tnckfiyuwxsqigfztbuv.webp")
       cy.get("#post-submit").click();
-
+  
+      // cy.contains('div.message', "Let's chat!").should('be.visible');
       cy.contains("Let's chat!");
-      cy.contains()
-    });
+      // cy.get("#collapsible-trigger-1686843365440").click();
+      cy.get("#comment-input").type("great!");
+      cy.get("#comment-submit").click();
+      cy.contains("great!")
 
-    it("stops you from posting a picture if it doesn't have a caption", () => {
-
     });
-  });
+  })
 
 /*
 import cloudinaryUpload from 'cypress-cloudinary-upload';
