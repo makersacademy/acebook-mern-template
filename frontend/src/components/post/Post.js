@@ -57,7 +57,8 @@ const Post = ({post, userId, token, setToken}) => {
           <div className="userName">{post.user.name}</div>
           <div className="date">{formattedDate} </div>
         </div>
-        <div className="message">{post.message}</div>
+        <div className="message">{ post.message }</div>
+        <img className="image" src={ post.imageUrl } alt=""></img>
         <div className="like-container">
           <button className="like-button" onClick={postLiked}>
             Like
