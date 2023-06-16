@@ -5,7 +5,8 @@ import './PostCreateForm.css';
 const PostCreateForm = ({token, setToken}) => {
   const [post, setPost] = useState("");
   const [validationError, setValidationError] = useState("");
-  const [imageUrl, setImageUrl] = useState("");
+  const [imageUrl, setImageUrl] = useState('');
+  const [uploadStatus, setUploadStatus] = useState("");
 
   const submitPost = async (event) => {
     // Sends a fetch request to router
@@ -29,6 +30,7 @@ const PostCreateForm = ({token, setToken}) => {
         setToken(data.token);
         setPost("");
         setImageUrl("");
+        setUploadStatus("");
       } else {
         console.log("Failed to submit");
         setValidationError("Server error");
@@ -54,7 +56,8 @@ const PostCreateForm = ({token, setToken}) => {
     <form onSubmit={submitPost} noValidate>
         <input placeholder="What's on your mind?" id="newPost" type="text" value={post} onChange={handlePostChange} required />
         <div className="form-container">
-        <PostUploadWidget setImageUrl={setImageUrl}/>
+        <p className="upload-status">{uploadStatus}</p>
+        <PostUploadWidget setImageUrl={setImageUrl} setUploadStatus={setUploadStatus}/>
         <input id="submit" type="submit" value="Post"/>
         <p className="validation-error">{validationError}</p>
       </div>

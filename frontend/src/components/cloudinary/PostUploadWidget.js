@@ -8,7 +8,7 @@
 // via a `useState` callback passed in by parent
 // and used on line 6.
 
-const PostUploadWidget = ({setImageUrl}) => {
+const PostUploadWidget = ({setImageUrl, setUploadStatus}) => {
 
   // Depending on your use case, you may need to wrap this in a useEffect?
   // In which case, the nature of the return may need to change.
@@ -48,6 +48,7 @@ const PostUploadWidget = ({setImageUrl}) => {
         // To capture the url from the result:
         const url = result.info.secure_url;
         setImageUrl(url);
+        setUploadStatus("Photo uploaded successfully");  
         // add backend fetch here, for example
         // If you were to modify the user:avatar, you could do:
 
