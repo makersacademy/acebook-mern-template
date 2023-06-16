@@ -11,9 +11,14 @@
 }
 
 #newPost {
-  width: 666px; /* Set the desired width */
-  height: 50px; /* Set the desired height */
-  
+  font-size: 18px;
+  width: 665px;
+  height: 40px;
+  border-radius: 60px;
+  box-shadow: inset 0px 0px 25px 0px #f1ecec;
+  border: none;
+  outline: none;
+  background-color: rgb(223, 225, 235);
 }
 
 .form-container {
@@ -38,5 +43,16 @@ button:hover {
 /* CSS code */
 input[type="submit"]:hover {
   background-color: #f0f0f0; /* Change to your desired color */
+}
+
+#submit {
+  font-size: 18px;
+  width: 250px;
+  height: 40px;
+  border-radius: 60px;
+  box-shadow: inset 0px 0px 25px 0px #f1ecec;
+  border: none;
+  outline: none;
+  background-color: rgb(223, 225, 235);
 }
 
