@@ -54,7 +54,7 @@ const Feed = ({ navigate }) => {
             <div id="feed" role="feed">
               {posts.length === 0 
                 ? <p></p> 
-                : posts.map(post => <Post post={post} key={post._id} userId={userId} />)}
+                : posts.map(post => <Post post={post} key={post._id} userId={userId} setToken={setToken} token={token} />)}
             </div>
           </div>
         </>
