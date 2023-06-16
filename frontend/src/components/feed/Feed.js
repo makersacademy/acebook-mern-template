@@ -92,8 +92,8 @@ const Feed = ({ navigate }) => {
             <div id="feed" role="feed">
               {
               friendFeed ?
-              friendPosts.length === 0 ? <p>Your friends are boring as fuck.</p> : friendPosts.map(post => <Post post={post} key={post._id} userId={userId} token={token} setToken={setToken} />)
-              : posts.length === 0 ? <p>There are no posts yet.</p> : posts.map(post => <Post post={post} key={post._id} userId={userId} token={token} setToken={setToken} />)
+              friendPosts.length === 0 ? <p>There are no posts here yet.</p> : friendPosts.map(post => <Post post={post} key={post._id} userId={userId} token={token} setToken={setToken} />)
+              : posts.length === 0 ? <p>There are no posts here yet.</p> : posts.map(post => <Post post={post} key={post._id} userId={userId} token={token} setToken={setToken} />)
               }
             </div>
           </div>
