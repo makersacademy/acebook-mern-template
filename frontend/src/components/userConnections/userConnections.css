@@ -1,0 +1,23 @@
+.friend {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.friend + .friend {
+  border-top: 1px solid lightgrey;
+}
+
+.friend-container {
+  display: flex;
+  flex-direction: column;
+  border: 3px inset rgba(118, 116, 116, 0.187);
+  width: fit-content;
+  padding-right: 10px;
+  padding-left: 10px;
+  margin-top: 10px;
+}
+
+.friend > button {
+  margin-left: auto;
+}

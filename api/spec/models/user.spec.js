@@ -28,6 +28,15 @@ describe("User model", () => {
     expect(user.password).toEqual("password");
   });
 
+  it("has a friends array", () => {
+    const user = new User({
+      email: "someone@example.com",
+      password: "password",
+      name: "someone",
+    });
+    expect(user.friends.toObject()).toEqual([])
+  })
+
   it("has a name", () => {
     const user = new User({
       email: "someone@example.com",
