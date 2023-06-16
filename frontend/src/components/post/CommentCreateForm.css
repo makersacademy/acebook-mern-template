@@ -8,12 +8,13 @@
   border: none;
   outline: none;
   background-color: rgb(223, 225, 235);
+  margin-top: 5px;
 }
 
 .comment-submit {
   width: 100px;
   height: 40px;
-  font-size: smaller;
+  font-size: medium;
   color: #fff;
   background-color: #3b5998;
   border: none;
