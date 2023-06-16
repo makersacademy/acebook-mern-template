@@ -7,7 +7,7 @@ const SignUpForm = ({ navigate }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [name, setName] = useState("");
-  const [avatar, setAvatar] = useState("");
+  const [avatar, setAvatar] = useState();
   const [deleteToken, setDeleteToken] = useState("");
   const [validationError, setValidationError] = useState({ name: "", email: "", password: "" });
 
@@ -110,17 +110,17 @@ const SignUpForm = ({ navigate }) => {
             <form onSubmit={handleSubmit} noValidate>
               <div>
                 <label htmlFor="name"></label>
-                <input placeholder="Name" id="name" type="text" value={name} onChange={handleNameChange} />
+                <input className="auth-input" placeholder="Name" id="name" type="text" value={name} onChange={handleNameChange} />
                 <p className="validation-error">{validationError?.name}</p>
               </div>
               <div>
                 <label htmlFor="email"></label>
-                <input placeholder="Email" id="email" type="email" value={email} onChange={handleEmailChange} />
+                <input className="auth-input" placeholder="Email" id="email" type="email" value={email} onChange={handleEmailChange} />
                 <p className="validation-error">{validationError?.email}</p>
               </div>
               <p className="text">If you'd like, you can upload an avatar</p>
               <CloudinaryUploadWidget setAvatar={setAvatar} setDeleteToken={setDeleteToken} />
-              {avatar !== "" && (
+              {avatar && (
                 <div className="avatar-preview">
                   <button className="close" type="button" onClick={deleteImage}>
                     X
@@ -131,7 +131,7 @@ const SignUpForm = ({ navigate }) => {
               )}
               <div>
                 <label htmlFor="password"></label>
-                <input placeholder="Password" id="password" type="password" value={password} onChange={handlePasswordChange} />
+                <input className="auth-input" placeholder="Password" id="password" type="password" value={password} onChange={handlePasswordChange} />
                 <p className="validation-error">{validationError?.password}</p>
                 <input id="submit" type="submit" value="Sign Up" />
               </div>

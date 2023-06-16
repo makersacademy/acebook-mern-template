@@ -1,0 +1,12 @@
+.comment-submit {
+  font-size: smaller;
+  color: #fff;
+  background-color: #3b5998;
+  border: none;
+  border-radius: 6px;
+  padding: 2px 7px 2px 7px;
+}
+
+.comment-submit:active {
+  transform: translateY(2px);
+}
