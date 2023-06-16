@@ -52,10 +52,12 @@ const PostCreateForm = ({token, setToken}) => {
 
   return (
     <form onSubmit={submitPost} noValidate>
-      <input placeholder="What's on your mind?" id="newPost" type="text" value={post} onChange={handlePostChange} required />
-      <PostUploadWidget setImageUrl={setImageUrl}/>
-      <input id="post-submit" type="submit" value="Post"/>
-      <p className="validation-error">{validationError}</p>
+        <input placeholder="What's on your mind?" id="newPost" type="text" value={post} onChange={handlePostChange} required />
+        <div className="form-container">
+        <PostUploadWidget setImageUrl={setImageUrl}/>
+        <input id="submit" type="submit" value="Post"/>
+        <p className="validation-error">{validationError}</p>
+      </div>
     </form>
   );
 };

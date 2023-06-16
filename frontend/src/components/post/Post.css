@@ -9,20 +9,38 @@
 
 .like-container {
   display: flex;
-  gap: 10px;
+  gap: 2px;
+  align-items: center; 
 }
 
 .like-button {
   font-size: smaller;
-  color: #fff;
-  background-color: #3b5998;
+  color: #0e0000;
+  background: none; /* Remove the background color */
   border: none;
-  border-radius: 6px;
-  padding: 2px 7px 2px 7px;
+  padding: 0; /* Remove padding to eliminate extra space */
 }
 
-.like-button:active {
+
+.like-button:hover {
+  background-color: #999999; /* Change to the desired hover color */
+  color: #ffffff; /* Change to the desired text color on hover */
+  border-radius: 10%;
+}
+
+.small-image {
+    width: 38px;
+    height: 30px;
+}
+  
+/* .like-button:active {
   transform: translateY(2px);
+} 
+
+Not sure if above is necessary, but left it commented just in case. */
+
+.likes {
+  height: 22px
 }
 
 .message {
@@ -95,7 +113,7 @@
     background-color: grey;
   }
 
-  /* &.is-closed {
+  &.is-closed {
     max-width: 20%;
-  } */
+  }
 }
