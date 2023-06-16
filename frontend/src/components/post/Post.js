@@ -59,9 +59,9 @@ const Post = ({ post, userId, token, setToken }) => {
         <img className="image" src={post.imageUrl} alt=""></img>
         <div className="like-container">
           <button className="like-button" onClick={postLiked}>
-            Like
+          <img src="https://www.dropbox.com/s/k8vstbjdd45ydid/Facebook_Thumb_icon.svg.png?raw=1" alt="Logo" class="small-image"/>
           </button>
-          <div className="likes">♡ {numberOfLikes} </div>
+          <div className="likes"> {numberOfLikes} </div>
         </div>
         <Collapsible trigger="Comments">
           <CommentCreateForm token={token} setToken={setToken} postId={post._id} />

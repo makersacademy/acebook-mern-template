@@ -91,9 +91,9 @@ const Feed = ({ navigate }) => {
             <PostCreateForm token={token} setToken={setToken} />
             <div id="feed" role="feed">
               {
-              friendFeed ?
-              friendPosts.length === 0 ? <p>There are no posts here yet.</p> : friendPosts.map(post => <Post post={post} key={post._id} userId={userId} token={token} setToken={setToken} />)
-              : posts.length === 0 ? <p>There are no posts here yet.</p> : posts.map(post => <Post post={post} key={post._id} userId={userId} token={token} setToken={setToken} />)
+              friendFeed 
+              ? friendPosts.map(post => <Post post={post} key={post._id} userId={userId} token={token} setToken={setToken} />)
+              : posts.map(post => <Post post={post} key={post._id} userId={userId} token={token} setToken={setToken} />)
               }
             </div>
           </div>
