@@ -63,10 +63,10 @@ const Post = ({ post, userId, token, setToken }) => {
           </button>
           <div className="likes"> {numberOfLikes} </div>
         </div>
-        <Collapsible trigger="Comments">
+        <Collapsible trigger={`Comments: ${post.comments.length}`}>
           <CommentCreateForm token={token} setToken={setToken} postId={post._id} />
           <div id="comments" role="feed">
-            {post.comments === 0 ? <p>There are no comments yet.</p> : post.comments.map(comment => <Comment key={comment._id} comment={comment} />)}
+            {post.comments.map(comment => <Comment key={comment._id} comment={comment} />)}
           </div>
         </Collapsible>
       </div>
