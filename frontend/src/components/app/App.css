@@ -75,6 +75,31 @@ body {
   padding: 10px;
 }
 
+.new-post-container {
+  background-color: #f0f0f0;
+  padding: 10px;
+  margin-bottom: 20px;
+}
+
+.new-post-form {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.new-post-input {
+  flex-grow: 1;
+  padding: 5px;
+  border: 1px solid #ccc;
+}
+
+.new-post-button {
+  padding: 5px 10px;
+  background-color: #ccc;
+  border: none;
+  cursor: pointer;
+}
+
 /* LoginForm styles */
 .login-form {
   margin-top: 20px;
