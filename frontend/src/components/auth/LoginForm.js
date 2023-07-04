@@ -42,6 +42,17 @@ const LogInForm = ({ navigate }) => {
         <input role='submit-button' id='submit' type="submit" value="Submit" />
       </form>
     );
+
+    // return (
+    //   <div className="banner">
+    //     <img src={banner} alt="Banner" />
+    //     <div className="banner-content">
+    //     <h1>aGuideHub</h1>
+    //     <p>Welcome To aGuideHub! </p>
+    //   </div>
+    // </div>
+    // )
+    
 }
 
 export default LogInForm;
