@@ -6,7 +6,9 @@ const Feed = ({ navigate }) => {
   const [token, setToken] = useState(window.localStorage.getItem("token"));
 
   useEffect(() => {
+    console.log('Token before fetch:', token);
     if (token) {
+      
       fetch("/posts", {
         headers: {
           Authorization: `Bearer ${token}`,
