@@ -8,4 +8,5 @@ const UserSchema = new mongoose.Schema({
 
 const User = mongoose.model("User", UserSchema);
 
+console.log(email);
 module.exports = User;
