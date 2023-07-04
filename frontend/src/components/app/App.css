@@ -1,0 +1,112 @@
+/* App.css */
+
+/* Global styles */
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+.app-container {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  height: 100vh;
+}
+
+.content {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+}
+
+.top-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.top-left {
+  flex-grow: 1;
+}
+
+.top-right {
+  display: flex;
+  align-items: center;
+}
+
+.feed-container {
+  background-color: #f0f0f0;
+  padding: 20px;
+}
+
+/* Navbar styles */
+.navbar {
+  background-color: #f0f0f0;
+  padding: 10px;
+}
+
+/* SearchBar styles */
+.search-bar {
+  margin-bottom: 10px;
+}
+
+.search-bar input {
+  width: 100%;
+  padding: 5px;
+  border: 1px solid #ccc;
+}
+
+/* NotificationButton styles */
+.notification-button {
+  margin-right: 10px;
+}
+
+/* ProfileButton styles */
+.profile-button {
+  margin-right: 10px;
+}
+
+/* Feed styles */
+.feed {
+  background-color: #fff;
+  padding: 10px;
+}
+
+/* LoginForm styles */
+.login-form {
+  margin-top: 20px;
+}
+
+.login-form input {
+  width: 100%;
+  padding: 5px;
+  border: 1px solid #ccc;
+}
+
+.login-form button {
+  padding: 5px 10px;
+  background-color: #ccc;
+  border: none;
+  cursor: pointer;
+}
+
+/* SignUpForm styles */
+.sign-up-form {
+  margin-top: 20px;
+}
+
+.sign-up-form input {
+  width: 100%;
+  padding: 5px;
+  border: 1px solid #ccc;
+}
+
+.sign-up-form button {
+  padding: 5px 10px;
+  background-color: #ccc;
+  border: none;
+  cursor: pointer;
+}

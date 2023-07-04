@@ -1,0 +1,37 @@
+/* Style the form itself */
+.sign-up-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto;
+  width: 300px;
+  padding: 20px;
+  background-color: #f2f2f2;
+  border-radius: 8px;
+}
+
+/* Style the form input fields */
+.sign-up-form input[type="text"],
+.sign-up-form input[type="password"] {
+  width: 100%;
+  padding: 10px;
+  margin: 10px 0;
+  border-radius: 4px;
+  border: 1px solid #ddd;
+}
+
+/* Style the submit button */
+.sign-up-form input[type="submit"] {
+  padding: 10px;
+  background-color: #0099cc;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  margin-top: 10px;
+}
+
+.sign-up-form input[type="submit"]:hover {
+  background-color: #006699;
+}
