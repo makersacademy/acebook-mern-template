@@ -48,7 +48,10 @@ describe("/posts", () => {
       let posts = await Post.find();
       expect(posts.length).toEqual(1);
       expect(posts[0].message).toEqual("hello world");
+      //expect(posts[0].user_id).toEqual("");
     });
+
+  
   
     test("returns a new token", async () => {
       let response = await request(app)
