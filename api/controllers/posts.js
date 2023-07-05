@@ -2,16 +2,6 @@ const Post = require("../models/post");
 const TokenGenerator = require("../models/token_generator");
 const User = require("../models/user");
 
-const time = () => {
-  const now = new Date();
-  const year = now.getFullYear();
-  const month = now.getMonth() + 1; // Months are zero-based, so add 1
-  const day = now.getDate();
-  const hours = now.getHours();
-  const minutes = now.getMinutes();
-  return `${hours}:${minutes} ${day}-${month}-${year}`;
-};
-
 const PostsController = {
   Index: (req, res) => {
     Post.find(async (err, posts) => {
