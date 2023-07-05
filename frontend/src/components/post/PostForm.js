@@ -3,7 +3,7 @@ import React, { useState } from "react";
 const PostForm = (props) => {
   const [message, setMessage] = useState("");
 
-  const handleSubmit = async (event) => {
+  const handleSubmit = (event) => {
     event.preventDefault();
 
     fetch("/posts", {

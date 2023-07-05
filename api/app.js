@@ -24,7 +24,6 @@ const tokenChecker = (req, res, next) => {
 
   if (authHeader) {
     token = authHeader.slice(7);
-    console.log(token);
   }
 
   JWT.verify(token, process.env.JWT_SECRET, (err, payload) => {
@@ -32,9 +31,7 @@ const tokenChecker = (req, res, next) => {
       console.log(err);
       res.status(401).json({ message: "auth error" });
     } else {
-      console.log(payload);
       req.user_id = payload.user_id;
-      console.log(req.user_id);
       next();
     }
   });

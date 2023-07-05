@@ -35,34 +35,34 @@ const Feed = ({ navigate }) => {
     navigate("/login"); // This is correctly placed
   };
 
-  const handleNewPostChange = (event) => {
-    setNewPost(event.target.value);
-  };
+  // const handleNewPostChange = (event) => {
+  //   setNewPost(event.target.value);
+  // };
 
-  const createNewPost = async (event) => {
-    event.preventDefault();
+  // const createNewPost = async (event) => {
+  //   event.preventDefault();
 
-    try {
-      const response = await fetch("/posts", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`,
-        },
-        body: JSON.stringify({ message: newPost }),
-      });
+  //   try {
+  //     const response = await fetch("/posts", {
+  //       method: "POST",
+  //       headers: {
+  //         "Content-Type": "application/json",
+  //         Authorization: `Bearer ${token}`,
+  //       },
+  //       body: JSON.stringify({ message: newPost }),
+  //     });
 
-      if (response.status === 201) {
-        const data = await response.json();
-        setPosts([data.post, ...posts]);
-        setNewPost("");
-      } else {
-        console.log("Failed to create new post");
-      }
-    } catch (error) {
-      console.log(error);
-    }
-  };
+  //     if (response.status === 201) {
+  //       const data = await response.json();
+  //       setPosts([data.post, ...posts]);
+  //       setNewPost("");
+  //     } else {
+  //       console.log("Failed to create new post");
+  //     }
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+  // };
 
   if (token) {
     return (

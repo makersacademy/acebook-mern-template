@@ -1,5 +1,6 @@
 const Post = require("../models/post");
 const TokenGenerator = require("../models/token_generator");
+const User = require("../models/user");
 
 const time = () => {
   const now = new Date();
@@ -17,22 +18,54 @@ const PostsController = {
       if (err) {
         throw err;
       }
-      const token = await TokenGenerator.jsonwebtoken(req.username);
+      const token = await TokenGenerator.jsonwebtoken(req.user_id);
       res.status(200).json({ posts: posts, token: token });
     });
   },
   Create: (req, res) => {
-    const current_time = time();
-    console.log(req.user_id);
-    const post = new Post(req.username, current_time, req.body);
-    post.save(async (err) => {
-      if (err) {
-        throw err;
-      }
+    const timeCalc = () => {
+      const now = new Date();
+      const year = now.getFullYear();
+      const month = now.getMonth() + 1; // Months are zero-based, so add 1
+      const day = now.getDate();
+      const hours = now.getHours();
+      const minutes = now.getMinutes();
+      const seconds = now.getSeconds();
+      return `${hours}:${minutes}:${seconds} ${day}-${month}-${year}`;
+    };
+    // const time = timeCalc();
+    // const message = req.body;
+    // console.log(message);
+    // const userId = req.user_id;
+    // console.log(userId);
+    // console.log(time);
 
-      const token = await TokenGenerator.jsonwebtoken(req.username);
-      res.status(201).json({ message: "OK", token: token });
-    });
+    const findUser = () => {
+      return User.findById(req.user_id)
+        .then((user) => {
+          return user.username;
+        })
+        .then((username) => {
+          const post = new Post({
+            username: username,
+            time: timeCalc(),
+            message: req.body.message,
+          });
+          post.save(async (err) => {
+            if (err) {
+              throw err;
+            }
+
+            const token = await TokenGenerator.jsonwebtoken(req.user_id);
+            res.status(201).json({ message: "OK", token: token });
+          });
+        })
+        .catch((err) => {
+          console.error(err);
+          return err;
+        });
+    };
+    findUser();
   },
 };
 
