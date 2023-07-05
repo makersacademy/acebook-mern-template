@@ -7,7 +7,7 @@ const PostsController = {
       if (err) {
         throw err;
       }
-      const token = await TokenGenerator.jsonwebtoken(req.user_id)
+      const token = await TokenGenerator.jsonwebtoken(req.user_id);
       res.status(200).json({ posts: posts, token: token });
     });
   },
@@ -18,8 +18,8 @@ const PostsController = {
         throw err;
       }
 
-      const token = await TokenGenerator.jsonwebtoken(req.user_id)
-      res.status(201).json({ message: 'OK', token: token });
+      const token = await TokenGenerator.jsonwebtoken(req.user_id);
+      res.status(201).json({ message: "OK", token: token });
     });
   },
 };
