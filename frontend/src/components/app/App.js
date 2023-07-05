@@ -23,12 +23,14 @@ const App = () => {
 
   return (
     <div className="app-container">
-      <Navbar />
+      <div className="header">
+        <h1>ACEBOOK</h1>
+      </div>
 
       <div className="content">
         <div className="top-bar">
           <div className="top-left">
-            <SearchBar />
+            <Navbar />
           </div>
           <div className="top-right">
             <NotificationButton />
@@ -39,6 +41,7 @@ const App = () => {
         </div>
 
         <div className="feed-container">
+          <SearchBar />
           <Feed navigate={navigate} />
         </div>
       </div>
