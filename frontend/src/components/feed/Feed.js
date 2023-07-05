@@ -50,6 +50,19 @@ const Feed = ({ navigate }) => {
         </div>
       </>
     );
+  } else {
+    return (
+      <>
+        <div>
+          <h2>Posts</h2>
+          <div id="feed" role="feed">
+            {posts.map((post) => (
+              <Post post={post} key={post._id} />
+            ))}
+          </div>
+        </div>
+      </>
+    );
   }
 };
 

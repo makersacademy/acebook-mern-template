@@ -23,7 +23,7 @@ const LogInForm = ({ navigate, onClose }) => {
       console.log("oop");
       let data = await response.json();
       window.localStorage.setItem("token", data.token);
-      navigate("/posts");
+      navigate("/");
       onClose(); // Close the form when the submission is successful
     }
   };
