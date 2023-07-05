@@ -22,7 +22,7 @@ function Profile() {
         <div className="user-data">
           <h2>Name: John Doe</h2>
           <h2>Username: johndoe123</h2>
-          <h2>Bio: Lorem ipsum dolor sit amet, consectetur adipiscing elit.</h2>
+          <h2>Bio: 🌟 Dreamer | 📚 Book Lover | 🌍 Wanderlust | 💡 Curious coder.</h2>
           <h2>Followers: 1000</h2>
         </div>
       </div>
@@ -31,6 +31,9 @@ function Profile() {
         <h2>My Posts</h2>
         <div className="my-posts">
           {/* Placeholder for posts */}
+        </div>
+        <div className="create-post">
+
         </div>
       </div>
     </div>
