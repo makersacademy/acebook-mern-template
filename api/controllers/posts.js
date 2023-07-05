@@ -19,9 +19,8 @@ const PostsController = {
       const month = now.getMonth() + 1; // Months are zero-based, so add 1
       const day = now.getDate();
       const hours = now.getHours();
-      const minutes = now.getMinutes();
-      const seconds = now.getSeconds();
-      return `${hours}:${minutes}:${seconds} ${day}-${month}-${year}`;
+      const minutes = (now.getMinutes() < 10 ? "0" : "") + now.getMinutes();
+      return `${hours}:${minutes} ${day}-${month}-${year}`;
     };
 
     const findUser = () => {
