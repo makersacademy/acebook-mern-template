@@ -3,11 +3,7 @@ import React from "react";
 // import './ProfileButton.css';
 
 const ProfileButton = () => {
-  return (
-    <div className="profile-button-placeholder">
-      <button className="profile-button">Profile</button>
-    </div>
-  );
+  return <button className="profile-button">Profile</button>;
 };
 
 export default ProfileButton;

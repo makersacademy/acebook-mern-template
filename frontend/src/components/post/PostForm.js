@@ -33,7 +33,7 @@ const PostForm = (props) => {
   return (
     <>
       <h2>Create New Post</h2>
-      <form onSubmit={handleSubmit}>
+      <form className="post-form" onSubmit={handleSubmit}>
         <input
           type="text"
           placeholder="Enter your post"

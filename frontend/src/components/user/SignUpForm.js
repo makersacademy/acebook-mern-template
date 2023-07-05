@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-// import "./SignUpForm.css";
+import "./SignUpForm.css";
 import Modal from "../common/Modal";
 
 const SignUpForm = ({ onClose }) => {
@@ -42,31 +42,41 @@ const SignUpForm = ({ onClose }) => {
   return (
     <Modal open={true} onClose={onClose}>
       <div className="modal-content">
-        <button onClick={onClose}>Close</button>
-        <form onSubmit={handleSubmit}>
-          <input
-            placeholder="Email"
-            id="email"
-            type="text"
-            value={email}
-            onChange={handleEmailChange}
-          />
-          <input
-            placeholder="Password"
-            id="password"
-            type="password"
-            value={password}
-            onChange={handlePasswordChange}
-          />
-          <input
-            placeholder="Username"
-            id="username"
-            type="text"
-            value={username}
-            onChange={handleUsernameChange}
-          />
-          <input id="submit" type="submit" value="Submit" />
-        </form>
+        <button className="close-button" onClick={onClose}>
+          X
+        </button>
+        <div className="signup-form">
+          <form onSubmit={handleSubmit}>
+            <label>
+              <input
+                placeholder="Email"
+                id="email"
+                type="text"
+                value={email}
+                onChange={handleEmailChange}
+              />
+            </label>
+            <label>
+              <input
+                placeholder="Password"
+                id="password"
+                type="password"
+                value={password}
+                onChange={handlePasswordChange}
+              />
+            </label>
+            <label>
+              <input
+                placeholder="Username"
+                id="username"
+                type="text"
+                value={username}
+                onChange={handleUsernameChange}
+              />
+            </label>
+            <input id="submit" type="submit" value="Submit" />
+          </form>
+        </div>
       </div>
     </Modal>
   );

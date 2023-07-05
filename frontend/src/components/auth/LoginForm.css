@@ -1,37 +1,48 @@
-/* Style the form itself */
+/* LoginForm.css */
+
 .login-form {
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  margin: 0 auto;
-  width: 300px;
-  padding: 20px;
-  background-color: #f2f2f2;
-  border-radius: 8px;
+  margin-top: 30px;
 }
 
-/* Style the form input fields */
-.login-form input[type="text"],
-.login-form input[type="password"] {
-  width: 100%;
+.login-form input {
+  margin-bottom: 10px;
   padding: 10px;
-  margin: 10px 0;
+  border: 1px solid #ccc;
   border-radius: 4px;
-  border: 1px solid #ddd;
 }
 
-/* Style the submit button */
-.login-form input[type="submit"] {
-  padding: 10px;
-  background-color: #0099cc;
-  color: white;
+.login-form #submit {
+  padding: 8px 16px;
+  background-color: #4267b2;
+  color: #fff;
   border: none;
   border-radius: 4px;
   cursor: pointer;
-  margin-top: 10px;
+  transition: background-color 0.2s ease-in-out;
+}
+.modal-content {
+  position: relative;
 }
 
-.login-form input[type="submit"]:hover {
-  background-color: #006699;
+.login-form #submit:hover {
+  background-color: #365899;
 }
+
+.close-button {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  font-size: 18px;
+  color: #888;
+  z-index: 1;
+}
+
+.close-button:hover {
+  color: #555;
+}
+

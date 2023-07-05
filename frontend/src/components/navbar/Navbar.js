@@ -1,12 +1,15 @@
 import React from "react";
-import "./Navbar.css";
+// import "./Navbar.css";
 
-const Navbar = () => {
+const Navbar = ({ onLogin, onSignup }) => {
   return (
     <div className="navbar">
-      <button className="navbar-button">Button 1</button>
-      <button className="navbar-button">Button 2</button>
-      <button className="navbar-button">Button 3</button>
+      <button className="navbar-button" onClick={onLogin}>
+        Log In
+      </button>
+      <button className="navbar-button" onClick={onSignup}>
+        Sign Up
+      </button>
     </div>
   );
 };

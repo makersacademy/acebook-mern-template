@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-// import "./LoginForm.css";
+import "./LoginForm.css";
 import Modal from "../common/Modal";
 
 const LogInForm = ({ navigate, onClose }) => {
@@ -39,8 +39,10 @@ const LogInForm = ({ navigate, onClose }) => {
   return (
     <Modal open={true} onClose={onClose}>
       <div className="modal-content">
-        <button onClick={onClose}>Close</button>
-        <form onSubmit={handleSubmit}>
+        <button className="close-button" onClick={onClose}>
+          X
+        </button>
+        <form className="login-form" onSubmit={handleSubmit}>
           <input
             placeholder="Email"
             id="email"

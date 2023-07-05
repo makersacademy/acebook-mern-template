@@ -15,11 +15,8 @@ const App = () => {
 
   const navigate = useNavigate();
 
-  const openLoginForm = () => setShowLoginForm(true);
-  const closeLoginForm = () => setShowLoginForm(false);
-
-  const openSignUpForm = () => setShowSignUpForm(true);
-  const closeSignUpForm = () => setShowSignUpForm(false);
+  const handleLogin = () => setShowLoginForm(true); // Renamed to handleLogin
+  const handleSignup = () => setShowSignUpForm(true); // Renamed to handleSignup
 
   return (
     <div className="app-container">
@@ -27,31 +24,36 @@ const App = () => {
         <h1>ACEBOOK</h1>
       </div>
 
-      <div className="content">
-        <div className="top-bar">
-          <div className="top-left">
-            <Navbar />
-          </div>
-          <div className="top-right">
-            <NotificationButton />
-            <button onClick={openLoginForm}>Log In</button>
-            <button onClick={openSignUpForm}>Sign Up</button>
-            <ProfileButton />
-          </div>
-        </div>
+      <div className="main-content">
+        <Navbar onLogin={handleLogin} onSignup={handleSignup} />
 
-        <div className="feed-container">
-          <SearchBar />
-          <Feed navigate={navigate} />
+        <div className="content">
+          <div className="top-bar">
+            <div className="top-right">
+              <NotificationButton />
+              <ProfileButton />
+            </div>
+          </div>
+
+          <div className="feed-container">
+            <SearchBar />
+            <Feed navigate={navigate} />
+          </div>
         </div>
       </div>
 
       {showLoginForm && (
-        <LoginForm navigate={navigate} onClose={closeLoginForm} />
+        <LoginForm
+          navigate={navigate}
+          onClose={() => setShowLoginForm(false)}
+        />
       )}
 
       {showSignUpForm && (
-        <SignUpForm navigate={navigate} onClose={closeSignUpForm} />
+        <SignUpForm
+          navigate={navigate}
+          onClose={() => setShowSignUpForm(false)}
+        />
       )}
     </div>
   );

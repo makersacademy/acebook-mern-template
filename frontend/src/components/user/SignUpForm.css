@@ -1,37 +1,51 @@
-/* Style the form itself */
-.sign-up-form {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  margin: 0 auto;
-  width: 300px;
-  padding: 20px;
-  background-color: #f2f2f2;
-  border-radius: 8px;
+/* SignUpForm.css */
+
+.modal-content {
+  position: relative;
 }
 
-/* Style the form input fields */
-.sign-up-form input[type="text"],
-.sign-up-form input[type="password"] {
-  width: 100%;
+.close-button {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  font-size: 18px;
+  color: #888;
+  z-index: 1;
+}
+
+.close-button:hover {
+  color: #555;
+}
+
+.signup-form {
+  margin-top: 30px;
+}
+
+.signup-form label {
+  display: block;
+  margin-bottom: 10px;
+}
+
+.signup-form input {
   padding: 10px;
-  margin: 10px 0;
+  border: 1px solid #ccc;
   border-radius: 4px;
-  border: 1px solid #ddd;
+  margin-bottom: 10px;
 }
 
-/* Style the submit button */
-.sign-up-form input[type="submit"] {
-  padding: 10px;
-  background-color: #0099cc;
-  color: white;
+.signup-form #submit {
+  padding: 8px 16px;
+  background-color: #4267b2;
+  color: #fff;
   border: none;
   border-radius: 4px;
   cursor: pointer;
-  margin-top: 10px;
+  transition: background-color 0.2s ease-in-out;
 }
 
-.sign-up-form input[type="submit"]:hover {
-  background-color: #006699;
+.signup-form #submit:hover {
+  background-color: #365899;
 }

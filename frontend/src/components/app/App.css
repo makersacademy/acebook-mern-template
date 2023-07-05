@@ -1,24 +1,31 @@
-/* App.css */
-
-/* Global styles */
 body {
   font-family: Arial, sans-serif;
   margin: 0;
   padding: 0;
+  background-color: #f5f6f7;
+  height: 100vh; /* Full height */
 }
 
 .app-container {
+  height: 100%;
   display: flex;
   flex-direction: column;
-  align-items: stretch;
-  height: 100vh;
 }
 
 .header {
-  background-color: #3b5998;
+  background-color: #4267b2;
   color: #fff;
   padding: 10px;
   text-align: center;
+  width: 100%;
+  border-bottom: 1px solid #29487d;
+}
+
+.main-content {
+  display: flex;
+  height: calc(100% - 60px); /* Subtract header height */
+  justify-content: space-between;
+  margin-right: 200px;
 }
 
 .content {
@@ -26,74 +33,154 @@ body {
   display: flex;
   flex-direction: column;
   padding: 20px;
+  background-color: #fff;
+  border: 1px solid #dddfe2;
+  border-radius: 8px;
+  margin: 10px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .top-bar {
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-end;
   align-items: center;
-  margin-bottom: 20px;
+  padding: 10px 0;
+  border-bottom: 1px solid #dddfe2;
 }
 
-.top-left {
-  display: flex;
-  flex-direction: column;
-}
-
+.top-left,
 .top-right {
   display: flex;
   align-items: center;
 }
 
+.top-right {
+  justify-content: flex-end;
+}
+
+.top-right > *:not(:last-child) {
+  margin-right: 10px;
+}
+
 .feed-container {
-  margin: 0 auto; /* Center the container horizontally */
-  width: 800px; /* Set a maximum width for the container */
-  margin-bottom: 20px;
-  background-color: #f0f0f0;
   padding: 20px;
+  margin-left: 10px;
+  margin-right: 10px;
 }
 
 /* Navbar styles */
 .navbar {
-  background-color: #f0f0f0;
+  width: 200px;
+  background-color: #f5f6f7;
   padding: 10px;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  align-items: flex-start;
+  border-right: 1px solid #dddfe2;
 }
 
 .navbar-button {
-  background-color: #ccc;
+  display: block;
+  background-color: #4267b2;
   border: none;
   border-radius: 4px;
   padding: 8px 16px;
   margin: 4px 0;
   color: #fff;
+  text-align: left;
+  transition: background-color 0.2s ease-in-out;
   cursor: pointer;
 }
 
 .navbar-button:hover {
-  background-color: #aaa;
+  background-color: #365899;
 }
 
 /* SearchBar styles */
 .search-bar {
-  margin-bottom: 10px;
+  margin: 10px 0;
 }
 
 .search-bar input {
   width: 100%;
-  padding: 5px;
-  border: 1px solid #ccc;
+  padding: 10px;
+  border: 1px solid #ccd0d5;
+  border-radius: 20px;
+  transition: border 0.2s ease-in-out;
 }
 
-/* NotificationButton styles */
-.notification-button {
-  margin-right: 10px;
+.search-bar input:focus {
+  border: 1px solid #4b9cfb;
+  outline: none;
 }
 
-/* ProfileButton styles */
+/* NotificationButton and ProfileButton styles */
+.notification-button,
 .profile-button {
-  margin-right: 10px;
+  padding: 6px 16px;
+  font-weight: 600;
+  color: #4b4f56;
+  background-color: #f5f6f7;
+  border: 1px solid #ccd0d5;
+  border-radius: 50%; /* Changed to circle */
+  cursor: pointer;
+  transition: background-color 0.2s ease-in-out, transform 0.2s ease-in-out;
+}
+
+.notification-button:hover,
+.profile-button:hover {
+  background-color: #e4e6e9;
+  transform: scale(1.1); /* Adding hover effect */
+}
+
+.navbar-button.login,
+.navbar-button.signup {
+  background-color: #4b4b4b;
+}
+
+/* Post styles */
+.post-container {
+  border: 1px solid #dddfe2;
+  border-radius: 8px;
+  padding: 10px;
+  margin-bottom: 10px;
+  background-color: #fff;
+}
+
+.username {
+  font-weight: 600;
+  color: #365899;
+}
+
+.time {
+  color: #606770;
+  font-size: 0.9em;
+}
+
+.message {
+  margin-top: 10px;
+}
+
+/* PostForm styles */
+.post-form {
+  margin-top: 20px;
+}
+
+.post-form input {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccd0d5;
+  border-radius: 20px;
+}
+
+.post-form button {
+  margin-top: 10px;
+  padding: 8px 16px;
+  background-color: #4267b2;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.2s ease-in-out;
+}
+
+.post-form button:hover {
+  background-color: #365899;
 }

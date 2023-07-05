@@ -1,8 +1,11 @@
 import React from "react";
-// import './SearchBar.css';
 
 const SearchBar = () => {
-  return <div className="searchbar-placeholder">Search bar goes here</div>;
+  return (
+    <div className="search-bar">
+      <input type="text" placeholder="Search" />
+    </div>
+  );
 };
 
 export default SearchBar;
