@@ -23,12 +23,6 @@ const PostsController = {
       const seconds = now.getSeconds();
       return `${hours}:${minutes}:${seconds} ${day}-${month}-${year}`;
     };
-    // const time = timeCalc();
-    // const message = req.body;
-    // console.log(message);
-    // const userId = req.user_id;
-    // console.log(userId);
-    // console.log(time);
 
     const findUser = () => {
       return User.findById(req.user_id)
@@ -47,7 +41,7 @@ const PostsController = {
             }
 
             const token = await TokenGenerator.jsonwebtoken(req.user_id);
-            res.status(201).json({ message: "OK", token: token });
+            res.status(201).json({ message: "OK", token: token, post: post }); // Return the post
           });
         })
         .catch((err) => {

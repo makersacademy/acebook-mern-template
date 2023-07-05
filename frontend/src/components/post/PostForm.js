@@ -15,11 +15,15 @@ const PostForm = (props) => {
       body: JSON.stringify({
         message: message,
       }),
-    }).then((response) => {
-      if (response.status === 201) {
-        console.log("Ok");
-      }
-    });
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        console.log("Response data:", data);
+        if (data.post) {
+          props.onNewPost(data.post);
+          setMessage("");
+        }
+      });
   };
 
   const handleMessageChange = (event) => {
