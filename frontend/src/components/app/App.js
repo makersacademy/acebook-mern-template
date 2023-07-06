@@ -7,6 +7,7 @@ import Navbar from "../navbar/Navbar";
 import SearchBar from "../searchbar/SearchBar";
 import NotificationButton from "../notification/NotificationButton";
 import ProfileButton from "../profile/ProfileButton";
+import useNotifications from "../notification/useNotifications";
 import "./App.css";
 
 const App = () => {
@@ -17,6 +18,8 @@ const App = () => {
 
   const handleLogin = () => setShowLoginForm(true); // Renamed to handleLogin
   const handleSignup = () => setShowSignUpForm(true); // Renamed to handleSignup
+
+  const notifications = useNotifications();
 
   return (
     <div className="app-container">
@@ -30,7 +33,7 @@ const App = () => {
         <div className="content">
           <div className="top-bar">
             <div className="top-right">
-              <NotificationButton />
+              <NotificationButton notifications={notifications} />
               <ProfileButton />
             </div>
           </div>
