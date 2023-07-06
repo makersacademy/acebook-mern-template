@@ -1,5 +1,5 @@
 import React from "react";
-import "./LoginForm.css";
+import "./LogoutForm.css";
 import Modal from "../common/Modal";
 
 const LogOutForm = ({ onClose, setIsUserLoggedIn }) => {
