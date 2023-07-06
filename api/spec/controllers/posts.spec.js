@@ -52,7 +52,6 @@ describe("/posts", () => {
     });
 
   
-  
     test("returns a new token", async () => {
       let response = await request(app)
         .post("/posts")
@@ -89,17 +88,17 @@ describe("/posts", () => {
   })
 
   describe("GET, when token is present", () => {
-    test("returns every post in the collection", async () => {
+    test("returns every post in the collection in order of most recent first", async () => {
       let post1 = new Post({message: "howdy!"});
-      let post2 = new Post({message: "hola!"});
       await post1.save();
+      let post2 = new Post({message: "hola!"});
       await post2.save();
       let response = await request(app)
         .get("/posts")
         .set("Authorization", `Bearer ${token}`)
         .send({token: token});
       let messages = response.body.posts.map((post) => ( post.message ));
-      expect(messages).toEqual(["howdy!", "hola!"]);
+      expect(messages).toEqual(["hola!", "howdy!"]);
     })
 
     test("the response code is 200", async () => {
@@ -158,6 +157,21 @@ describe("/posts", () => {
       let response = await request(app)
         .get("/posts");
       expect(response.body.token).toEqual(undefined);
+    })
+
+    test("finds a single post by id", async () => {
+      let postID = ''
+      let post1 = new Post({message: "howdy!"});
+      await post1.save(function(err,post){
+        postID = post._id;
+      });
+      console.log(postID);
+      let response = await request(app)
+      .get(`/post/${postID}`)
+      .set("Authorization", `Bearer ${token}`)
+      .send({token: token});
+      let messages = response.body.message;
+      expect(messages).toEqual(["howdy!"]);
     })
   })
 });
