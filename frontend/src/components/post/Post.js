@@ -1,6 +1,7 @@
 import React from "react";
 
 const Post = ({ post }) => {
+  console.log(post);
   return (
     <div className="post-container" data-cy="post" key={post._id} id={post._id}>
       <div className="username">{post.username}</div>
