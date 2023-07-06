@@ -10,7 +10,7 @@ describe("Create a post", () => {
         cy.get("#submit").click();
         cy.wait('@CreatePost').then( interception => {
             expect(interception.response.body.message).to.eq("OK")
-        })
-    })
+        });
+    });
 
-})
+});
