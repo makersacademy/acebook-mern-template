@@ -69,8 +69,10 @@ const Feed = ({ navigate }) => {
   if (token) {
     return (
       <>
-        <PostForm token={token} onNewPost={handleNewPost} />
-        <div>
+        <div className="create-post-container">
+          <PostForm token={token} onNewPost={handleNewPost} />
+        </div>
+        <div className="main-posts-container">
           <h2>Posts</h2>
           <div id="feed" role="feed">
             {posts.map((post) => (

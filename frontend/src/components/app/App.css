@@ -266,3 +266,21 @@ body {
 .comment-form button:hover {
   background-color: #365899;
 }
+
+/* Styling for the div that wraps around PostForm */
+.create-post-container {
+  display: flex;
+  flex-direction: column; /* aligns items vertically */
+  justify-content: center; /* center items vertically */
+  align-items: center; /* center items horizontally */
+  padding: 10px;
+  border: 1px solid #dddfe2;
+  border-radius: 5px;
+  background-color: #f5f6f7;
+  transition: all 0.2s ease-in-out;
+}
+
+.create-post-container:hover {
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  background-color: #e4e6e9;
+}
