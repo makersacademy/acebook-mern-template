@@ -159,7 +159,7 @@ body {
 }
 
 /* PostForm styles */
-.post-form {
+.post-form .comment {
   margin-top: 20px;
 }
 
