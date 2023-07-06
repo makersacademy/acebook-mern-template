@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import LoginForm from "../auth/LoginForm";
 import LogoutForm from "../auth/LogoutForm";
@@ -29,6 +29,13 @@ const App = () => {
     console.log(isUserLoggedIn);
     // ...other stuff, like closing the modal
   };
+
+  useEffect(() => {
+    const token = window.localStorage.getItem("token");
+    if (token) {
+      setIsUserLoggedIn(true);
+    }
+  }, []);
 
   return (
     <div className="app-container">
