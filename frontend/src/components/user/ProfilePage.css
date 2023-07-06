@@ -1,0 +1,82 @@
+/* Header */
+.header {
+  margin-top: 20px;
+  display: flex;
+  justify-content: space-between;
+  padding: 10px;
+  background-color: rgb(158, 151, 151);
+}
+
+.header-button {
+  background-color: #ccc;
+  color: #fff;
+  border: none;
+  padding: 5px 10px;
+  cursor: pointer;
+}
+
+/* Banner */
+.banner {
+  margin-top: 20px;
+  position: relative;
+  width: 100%;
+  height: 250px;
+  overflow: hidden;
+}
+
+.banner-picture {
+  width: 100%;
+  height: auto;
+}
+
+
+.profile-picture-container {
+  position: absolute;
+  top: 50%;
+  left: 20px;
+  transform: translateY(-50%);
+  display: flex;
+  align-items: center;
+}
+
+.profile-picture {
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  margin-right: 10px;
+}
+
+/* User Info Container */
+.user-info-container {
+  background-color: #f5f5f5;
+  border: 1px solid #ccc;
+  padding: 20px;
+  margin-bottom: 20px;
+}
+
+.user-data h2 {
+  margin: 5px 0;
+}
+
+/* My Posts Container */
+.my-posts-container {
+  background-color: #f5f5f5;
+  border: 1px solid #ccc;
+  padding: 20px;
+}
+
+.my-posts-container h2 {
+  margin-bottom: 10px;
+}
+
+.my-posts {
+  /* Add your styles for the posts container */
+}
+
+.my-posts div {
+  margin-bottom: 10px;
+}
+
+.my-posts h3 {
+  margin: 0;
+}
