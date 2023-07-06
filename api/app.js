@@ -3,6 +3,10 @@ const express = require("express");
 const path = require("path");
 const logger = require("morgan");
 const JWT = require("jsonwebtoken");
+const bodyParser = require('body-parser');
+const mongoose = require('mongoose');
+const imgSchema = require('../models/image.js');
+const fs = require('fs');
 
 const postsRouter = require("./routes/posts");
 const commentsRouter = require("./routes/comments");
@@ -61,5 +65,65 @@ app.use((err, req, res) => {
   // respond with details of the error
   res.status(err.status || 500).json({ message: "server error" });
 });
+
+const db = mongoose.connection;
+db.on("error", console.error.bind(console, "MongoDB connection error:"));
+
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
+
+const multer = require('multer');
+
+const storage = multer.diskStorage({
+  destination: (req, file, cb) => {
+    cb(null, 'uploads');
+  },
+  filename: (req, file, cb) => {
+    cb(null, file.fieldname + '-' + Date.now());
+  },
+});
+
+const upload = multer({ storage: storage });
+
+app.get('/', (req, res) => {
+  imgSchema.find({})
+    .then((data, err) => {
+      if (err) {
+        console.log(err);
+      }
+      res.render('imagepage', { items: data });
+    });
+});
+
+
+app.post('/', upload.single('image'), (req, res, next) => {
+
+  const obj = {
+    name: req.body.name,
+    desc: req.body.desc,
+    img: {
+      data: fs.readFileSync(path.join(__dirname + '/uploads/' + req.file.filename)),
+      contentType: 'image/png',
+    },
+  };
+  imgSchema.create(obj)
+    .then((item) => {
+      res.redirect('/');
+    })
+    .catch((err) => {
+      console.log(err);
+      res.status(500).json({ message: "server error" });
+    });
+});
+
+mongoose.connect(process.env.MONGO_URL)
+  .then(() => {
+    app.listen(process.env.PORT || 3000, () => {
+      console.log("Server started on port " + (process.env.PORT || 3000));
+    });
+  })
+  .catch((err) => {
+    console.log("DB connection error:", err);
+  });
 
 module.exports = app;
