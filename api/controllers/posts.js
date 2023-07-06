@@ -84,6 +84,26 @@ const PostsController = {
       }
     });
   },
+ AddLike: (req, res) => {
+    const postId = req.params.post_id; // Assuming the post_id is passed as a URL parameter
+    
+    Post.findById(postId)
+      .then((post) => {
+        if (!post) {
+          return res.status(404).json({ error: 'Post not found' });
+        }
+
+        post.likes += 1; // Increment the likes count by 1
+        return post.save();
+      })
+      .then((updatedPost) => {
+        res.json({ post: updatedPost });
+      })
+      .catch((error) => {
+        console.error('Error adding like:', error);
+        res.status(500).json({ error: 'An error occurred while adding a like' });
+      });
+  }
 };
 
 module.exports = PostsController;

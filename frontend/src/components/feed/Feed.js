@@ -65,7 +65,7 @@ const Feed = ({ navigate }) => {
     });
   };
 
-  if (token && token !== "null" && token !== "undefined") {
+  if (token) {
     return (
       <>
         <div className="create-post-container">

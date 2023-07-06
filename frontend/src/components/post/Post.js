@@ -79,12 +79,12 @@ const Post = ({ post }) => {
     👍
   </span>
 </button>
-<button onClick={handleLike}>
+{/* <button onClick={handleLike}> */}
   {/* Use an emoji, such as a thumbs-up */}
-  <span role="img" aria-label="dis-like">
+  {/* <span role="img" aria-label="dis-like">
     👎
   </span>
-</button>
+</button> */}
  {/* Add a like button */}
     </div>
   );
