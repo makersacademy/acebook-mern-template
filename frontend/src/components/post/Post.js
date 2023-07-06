@@ -36,6 +36,8 @@ const Post = ({ post, token }) => {
     }
   }, [post, token]);
 
+const Post = ({ post }) => {
+  console.log(post);
   return (
     <div className="post-container" data-cy="post" key={post._id} id={post._id}>
       <div className="author-details">
@@ -70,10 +72,23 @@ const Post = ({ post, token }) => {
         </div>
       )}
 
-      <div className="comments">{post.comments}</div>
-      {/* <input type="text"></input> */}
+      <div className="likes">Likes: {likes}</div> {/* Display the likes count */}
+      <button onClick={handleLike}>
+  {/* Use an emoji, such as a thumbs-up */}
+  <span role="img" aria-label="like">
+    👍
+  </span>
+</button>
+<button onClick={handleLike}>
+  {/* Use an emoji, such as a thumbs-up */}
+  <span role="img" aria-label="dis-like">
+    👎
+  </span>
+</button>
+ {/* Add a like button */}
     </div>
   );
 };
 
 export default Post;
+
