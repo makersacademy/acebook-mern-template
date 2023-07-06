@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import Modal from "../common/Modal";
-import Notification from "../notification/Notification";
 
 const NotificationModal = ({ onClose }) => {
   const [notifications, setNotifications] = useState([]);
@@ -36,11 +35,20 @@ const NotificationModal = ({ onClose }) => {
           X
         </button>
         <div className="notifications-list">
-          {notifications.map((notification) => (
-            <div className="notification-item" key={notification._id}>
-              <Notification notification={notification} />
-            </div>
-          ))}
+          {notifications.map((notification) => {
+            const scrollToPost = () => {
+              const postElement = document.getElementById(notification.postId);
+              postElement?.scrollIntoView({ behavior: "smooth" });
+              onClose();
+            };
+
+            return (
+              <div className="notification-item" key={notification._id}>
+                <p>{notification.message}</p>
+                <button onClick={scrollToPost}>View Post</button>
+              </div>
+            );
+          })}
         </div>
       </div>
     </Modal>
