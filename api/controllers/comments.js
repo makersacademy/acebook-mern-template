@@ -33,6 +33,7 @@ const CommentsController = {
             username: username,
             time: timeCalc(),
             comment: req.body.comment,
+            postId: req.body.postId,
           });
           comment.save(async (err) => {
             if (err) {

@@ -74,32 +74,21 @@ const Feed = ({ navigate }) => {
           <h2>Posts</h2>
           <div id="feed" role="feed">
             {posts.map((post) => (
-              <>
-                <Post post={post} key={post._id} />
-                <CommentForm token={token} onNewComment={handleNewComment} />
-                <div>
-                  <div id="feed" role="feed">
-                    {comments.map((comment) => (
-                      <>
-                        <Comment comment={comment} key={comment._id} />
-                      </>
+              <div key={post._id} className="post-container">
+                <Post post={post} />
+                <CommentForm
+                  token={token}
+                  onNewComment={handleNewComment}
+                  postId={post._id}
+                />
+                <div id="comment-feed">
+                  {comments
+                    .filter((comment) => comment.postId === post._id)
+                    .map((comment) => (
+                      <Comment comment={comment} key={comment._id} />
                     ))}
-                  </div>
                 </div>
-              </>
-            ))}
-          </div>
-        </div>
-      </>
-    );
-  } else {
-    return (
-      <>
-        <div>
-          <h2>Posts</h2>
-          <div id="feed" role="feed">
-            {posts.map((post) => (
-              <Post post={post} key={post._id} />
+              </div>
             ))}
           </div>
         </div>

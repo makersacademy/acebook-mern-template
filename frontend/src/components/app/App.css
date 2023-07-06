@@ -135,15 +135,6 @@ body {
   background-color: #4b4b4b;
 }
 
-/* Post styles */
-.post-container {
-  border: 1px solid #dddfe2;
-  border-radius: 8px;
-  padding: 10px;
-  margin-bottom: 10px;
-  background-color: #fff;
-}
-
 .username {
   font-weight: 600;
   color: #365899;
@@ -159,7 +150,7 @@ body {
 }
 
 /* PostForm styles */
-.post-form .comment {
+.post-form {
   margin-top: 20px;
 }
 
@@ -185,32 +176,6 @@ body {
   background-color: #365899;
 }
 
-.comment-form .comment {
-  margin-top: 20px;
-}
-
-.comment-form input {
-  width: 100%;
-  padding: 10px;
-  border: 1px solid #ccd0d5;
-  border-radius: 20px;
-}
-
-.comment-form button {
-  margin-top: 10px;
-  padding: 8px 16px;
-  background-color: #4267b2;
-  color: #fff;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-  transition: background-color 0.2s ease-in-out;
-}
-
-.comment-form button:hover {
-  background-color: #365899;
-}
-
 .notification-container {
   position: relative;
 }
@@ -228,4 +193,76 @@ body {
 .notification-item {
   border-bottom: 1px solid #f0f0f0;
   padding: 8px 0;
+}
+
+/* Customise the comment section for tree-style view */
+.comment-container {
+  border: 1px solid #dddfe2;
+  padding: 10px;
+  background-color: #f5f6f7;
+  margin-left: 15px;
+  border-radius: 5px;
+  transition: all 0.2s ease-in-out;
+}
+
+.comment-container:hover {
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  background-color: #e4e6e9;
+}
+
+.comment-container .username {
+  color: #365899;
+  font-weight: bold;
+}
+
+.comment-container .time {
+  font-size: 0.8em;
+  color: #606770;
+}
+
+.comment-container .comment {
+  color: #1d2129;
+}
+
+/* Redesign post container */
+.post-container {
+  border: 1px solid #dddfe2;
+  border-radius: 8px;
+  padding: 15px;
+  background-color: #ffffff;
+  margin-bottom: 20px;
+  transition: all 0.2s ease-in-out;
+}
+
+.post-container:hover {
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+/* Redesign comment form */
+.comment-form {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 10px;
+}
+
+.comment-form input {
+  flex-grow: 1;
+  height: 35px;
+  padding: 10px;
+  border: 1px solid #ccd0d5;
+  border-radius: 20px;
+}
+
+.comment-form button {
+  padding: 8px 16px;
+  background-color: #4267b2;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.2s ease-in-out;
+}
+
+.comment-form button:hover {
+  background-color: #365899;
 }

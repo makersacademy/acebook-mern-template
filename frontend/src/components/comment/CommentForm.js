@@ -1,25 +1,27 @@
 import React, { useState } from "react";
 
-const CommentForm = (props) => {
+const CommentForm = ({ token, onNewComment, postId }) => {
   const [comment, setComment] = useState("");
+
   const handleSubmit = (event) => {
     event.preventDefault();
 
     fetch("/comments", {
       method: "post",
       headers: {
-        Authorization: `Bearer ${props.token}`,
+        Authorization: `Bearer ${token}`,
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
         comment: comment,
+        postId: postId,
       }),
     })
       .then((response) => response.json())
       .then((data) => {
         console.log("Response data:", data);
         if (data.comment) {
-          props.onNewComment(data.comment);
+          onNewComment(data.comment);
           setComment("");
         }
       });
@@ -30,19 +32,18 @@ const CommentForm = (props) => {
   };
 
   return (
-    <>
-      <form className="comment-form" onSubmit={handleSubmit}>
-        <input
-          type="text"
-          id="comment"
-          comment="comment"
-          required
-          value={comment}
-          onChange={handleCommentChange}
-        />
-        <button type="submit">Comment</button>
-      </form>
-    </>
+    <form className="comment-form" onSubmit={handleSubmit}>
+      <input
+        type="text"
+        id="comment"
+        name="comment"
+        placeholder="Write a comment..."
+        required
+        value={comment}
+        onChange={handleCommentChange}
+      />
+      <button type="submit">Post</button>
+    </form>
   );
 };
 
