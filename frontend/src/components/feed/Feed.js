@@ -7,25 +7,29 @@ const Feed = ({ navigate }) => {
   const [token, setToken] = useState(window.localStorage.getItem("token"));
 
   useEffect(() => {
-    if (token) {
-      fetch("/posts", {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      })
-        .then((response) => response.json())
-        .then(async (data) => {
-          console.log(data);
-          window.localStorage.setItem("token", data.token);
-          setToken(window.localStorage.getItem("token"));
-          setPosts(data.posts);
+    const fetchData = async () => {
+      if (token) {
+        const response = await fetch("/posts", {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
         });
-    }
+        const data = await response.json();
+        console.log(data);
+        window.localStorage.setItem("token", data.token);
+        setToken(window.localStorage.getItem("token"));
+        setPosts(data.posts);
+      } else {
+        navigate("/");
+      }
+    };
+
+    fetchData();
   }, [token, navigate]);
 
   const logout = () => {
     window.localStorage.removeItem("token");
-    navigate("/login"); // This is correctly placed
+    navigate("/"); // This is correctly placed
   };
 
   const handleNewPost = (post) => {
