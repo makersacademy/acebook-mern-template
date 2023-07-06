@@ -185,6 +185,32 @@ body {
   background-color: #365899;
 }
 
+.comment-form .comment {
+  margin-top: 20px;
+}
+
+.comment-form input {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccd0d5;
+  border-radius: 20px;
+}
+
+.comment-form button {
+  margin-top: 10px;
+  padding: 8px 16px;
+  background-color: #4267b2;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.2s ease-in-out;
+}
+
+.comment-form button:hover {
+  background-color: #365899;
+}
+
 .notification-container {
   position: relative;
 }
@@ -202,9 +228,4 @@ body {
 .notification-item {
   border-bottom: 1px solid #f0f0f0;
   padding: 8px 0;
-}
-
-.notification-item p {
-  font-size: 16px;
-  color: #333;
 }
