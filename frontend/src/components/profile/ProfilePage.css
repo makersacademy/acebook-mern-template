@@ -29,7 +29,6 @@
   height: auto;
 }
 
-
 .profile-picture-container {
   position: absolute;
   top: 50%;
@@ -67,10 +66,6 @@
 
 .my-posts-container h2 {
   margin-bottom: 10px;
-}
-
-.my-posts {
-  /* Add your styles for the posts container */
 }
 
 .my-posts div {
