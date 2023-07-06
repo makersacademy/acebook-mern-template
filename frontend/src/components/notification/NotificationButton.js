@@ -1,24 +1,50 @@
-import React, { useState } from "react";
-import Modal from "../common/Modal"; // Import the modal component
-import Notification from "../notification/Notification"; // Import the notification component
+import React, { useState, useEffect } from "react";
+import Modal from "../common/Modal";
+import Notification from "../notification/Notification";
 
-const NotificationButton = ({ notifications }) => {
-  const [isModalOpen, setIsModalOpen] = useState(false);
+const NotificationModal = ({ onClose }) => {
+  const [notifications, setNotifications] = useState([]);
+  const token = window.localStorage.getItem("token");
 
-  const handleOpenModal = () => setIsModalOpen(true);
-  const handleCloseModal = () => setIsModalOpen(false);
+  useEffect(() => {
+    if (token) {
+      fetch("/notifications", {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      })
+        .then((response) => {
+          if (!response.ok) {
+            throw new Error("Network response was not ok");
+          }
+          return response.json();
+        })
+        .then((data) => setNotifications(data.notifications))
+        .catch((error) => {
+          console.error(
+            "There has been a problem with your fetch operation:",
+            error
+          );
+        });
+    }
+  }, [token]);
 
   return (
-    <>
-      <button onClick={handleOpenModal}>Notifications</button>
-
-      <Modal isOpen={isModalOpen} onRequestClose={handleCloseModal}>
-        {notifications.map((notification) => (
-          <Notification notification={notification} key={notification._id} />
-        ))}
-      </Modal>
-    </>
+    <Modal open={true} onClose={onClose}>
+      <div className="modal-content">
+        <button className="close-button" onClick={onClose}>
+          X
+        </button>
+        <div className="notifications-list">
+          {notifications.map((notification) => (
+            <div className="notification-item" key={notification._id}>
+              <Notification notification={notification} />
+            </div>
+          ))}
+        </div>
+      </div>
+    </Modal>
   );
 };
 
-export default NotificationButton;
+export default NotificationModal;

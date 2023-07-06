@@ -1,4 +1,5 @@
 const Post = require("../models/post");
+const Notification = require("../models/notification");
 const TokenGenerator = require("../models/token_generator");
 const User = require("../models/user");
 
@@ -12,7 +13,7 @@ const PostsController = {
       res.status(200).json({ posts: posts, token: token });
     });
   },
-  Create: (req, res) => {
+  Create: async (req, res) => {
     const timeCalc = () => {
       const now = new Date();
       const year = now.getFullYear();
@@ -23,32 +24,42 @@ const PostsController = {
       return `${hours}:${minutes} ${day}-${month}-${year}`;
     };
 
-    const findUser = () => {
-      return User.findById(req.user_id)
-        .then((user) => {
-          return user.username;
-        })
-        .then((username) => {
-          const post = new Post({
-            username: username,
-            time: timeCalc(),
-            message: req.body.message,
-          });
-          post.save(async (err) => {
-            if (err) {
-              throw err;
-            }
+    try {
+      const user = await User.findById(req.user_id);
+      const username = user.username;
 
-            const token = await TokenGenerator.jsonwebtoken(req.user_id);
-            res.status(201).json({ message: "OK", token: token, post: post }); // Return the post
-          });
-        })
-        .catch((err) => {
-          console.error(err);
-          return err;
+      const post = new Post({
+        username: username,
+        time: timeCalc(),
+        message: req.body.message,
+      });
+
+      await post.save();
+
+      const mentionedUsernames = req.body.message.match(/@(\w+)/g) || [];  
+      for (let mentionedUsername of mentionedUsernames) {
+        const mentionedUser = await User.findOne({
+          username: mentionedUsername.replace("@", ""),
         });
-    };
-    findUser();
+
+        if (mentionedUser) {
+          const notification = new Notification({
+            type: "mention",
+            postId: post._id,
+            userId: mentionedUser._id,
+            message: `You have been mentioned in a post by the user @${username}.`,
+          });
+
+          await notification.save();
+        }
+      }
+
+      const token = await TokenGenerator.jsonwebtoken(req.user_id);
+      res.status(201).json({ message: "OK", token: token, post: post }); // Return the post
+    } catch (err) {
+      console.error(err);
+      res.status(500).json({ error: err.toString() });
+    }
   },
 };
 

@@ -5,7 +5,7 @@ import SignUpForm from "../user/SignUpForm";
 import Feed from "../feed/Feed";
 import Navbar from "../navbar/Navbar";
 import SearchBar from "../searchbar/SearchBar";
-import NotificationButton from "../notification/NotificationButton";
+import NotificationModal from "../notification/NotificationButton";
 import ProfileButton from "../profile/ProfileButton";
 import useNotifications from "../notification/useNotifications";
 import "./App.css";
@@ -13,11 +13,13 @@ import "./App.css";
 const App = () => {
   const [showLoginForm, setShowLoginForm] = useState(false);
   const [showSignUpForm, setShowSignUpForm] = useState(false);
+  const [showNotificationModal, setShowNotificationModal] = useState(false);
 
   const navigate = useNavigate();
 
   const handleLogin = () => setShowLoginForm(true); // Renamed to handleLogin
   const handleSignup = () => setShowSignUpForm(true); // Renamed to handleSignup
+  const handleNotifications = () => setShowNotificationModal(true);
 
   const notifications = useNotifications();
 
@@ -28,12 +30,15 @@ const App = () => {
       </div>
 
       <div className="main-content">
-        <Navbar onLogin={handleLogin} onSignup={handleSignup} />
+        <Navbar
+          onLogin={handleLogin}
+          onSignup={handleSignup}
+          onNotifications={handleNotifications}
+        />
 
         <div className="content">
           <div className="top-bar">
             <div className="top-right">
-              <NotificationButton notifications={notifications} />
               <ProfileButton />
             </div>
           </div>
@@ -56,6 +61,13 @@ const App = () => {
         <SignUpForm
           navigate={navigate}
           onClose={() => setShowSignUpForm(false)}
+        />
+      )}
+
+      {showNotificationModal && (
+        <NotificationModal
+          notifications={notifications}
+          onClose={() => setShowNotificationModal(false)}
         />
       )}
     </div>
