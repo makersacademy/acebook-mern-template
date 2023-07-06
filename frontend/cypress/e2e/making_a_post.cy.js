@@ -6,10 +6,16 @@ describe("making a post", () => {
     })
 
     it(" creates a post and submits to the backend", () => {
-        cy.visit("/Posts");
-        cy.get("#message").type("somestring");
+        cy.visit("/posts");
+        const message = "something"
+        // Function to create a post
+        const createPost = (message) => {
+        cy.get("#message").type(message);
         cy.get("#submit").click();
+      };
+  
+      createPost(message);
     
-        cy.contains("somestring").should("exist"); // need to figure what to put here!!!!!!!!
+        cy.contains(message).should("exist"); // need to figure what to put here!!!!!!!!
       });
 });
