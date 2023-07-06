@@ -1,5 +1,10 @@
 import React, { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  useNavigate,
+} from "react-router-dom";
 import LoginForm from "../auth/LoginForm";
 import LogoutForm from "../auth/LogoutForm";
 import SignUpForm from "../user/SignUpForm";
@@ -8,6 +13,9 @@ import Navbar from "../navbar/Navbar";
 import SearchBar from "../searchbar/SearchBar";
 import NotificationModal from "../notification/NotificationButton";
 import ProfileButton from "../profile/ProfileButton";
+import Profile from "../profile/ProfilePage";
+import FeedButton from "../feed/FeedButton";
+
 import "./App.css";
 
 const App = () => {
@@ -54,17 +62,35 @@ const App = () => {
         <div className="content">
           <div className="top-bar">
             <div className="top-right">
+              <FeedButton />
               <ProfileButton />
             </div>
           </div>
 
           <div className="feed-container">
             <SearchBar />
-            {isUserLoggedIn ? (
-              <Feed navigate={navigate} />
-            ) : (
-              <div>Please log in to see the feed.</div>
-            )}
+            <Routes>
+              <Route
+                path="/"
+                element={
+                  isUserLoggedIn ? (
+                    <Feed navigate={navigate} />
+                  ) : (
+                    <div>Please log in to see the feed.</div>
+                  )
+                }
+              />
+              <Route
+                path="/profile"
+                element={
+                  isUserLoggedIn ? (
+                    <Profile />
+                  ) : (
+                    <div>Please log in to see the feed.</div>
+                  )
+                }
+              />
+            </Routes>
           </div>
         </div>
       </div>

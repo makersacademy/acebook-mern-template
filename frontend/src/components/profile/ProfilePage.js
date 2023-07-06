@@ -10,8 +10,7 @@ function Profile() {
   return (
     <div>
       <header className="header">
-        <button className="header-button">Back to Feed</button>
-        <button className="header-button">Logout</button>
+        <h1>My Profile</h1>
       </header>
 
       <div className="banner">
