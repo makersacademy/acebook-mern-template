@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import '/Users/shaiby/Desktop/Acebook_Project/acebook-mern-template/frontend/src/index.css'
 
 const LogInForm = ({ navigate }) => {
   const [email, setEmail] = useState("");
@@ -34,14 +35,53 @@ const LogInForm = ({ navigate }) => {
     setPassword(event.target.value)
   }
 
+  const handleForgotPassword = () => {
+    //Logic needs to be added
+    navigate('/forgot-password')
+  }
 
-    return (
-      <form onSubmit={handleSubmit}>
-        <input placeholder='Email' id="email" type='text' value={ email } onChange={handleEmailChange} />
-        <input placeholder='Password' id="password" type='password' value={ password } onChange={handlePasswordChange} />
-        <input role='submit-button' id='submit' type="submit" value="Submit" />
-      </form>
-    );
-}
+  const handleCreateAccount = () => {
+    navigate('/signup')
+  }
+
+
+  return (
+    <div className="container">
+      <div className="form-container">
+      <form onSubmit={handleSubmit} className="form">
+      <input
+        placeholder="Email"
+        id="email"
+        type="text"
+        value={email}
+        onChange={handleEmailChange}
+        className="input"
+      />
+      <input
+        placeholder="Password"
+        id="password"
+        type="password"
+        value={password}
+        onChange={handlePasswordChange}
+        className="input"
+      />
+      <input
+        role="submit-button"
+        id="submit"
+        type="submit"
+        value="Submit"
+        className="submit-button"
+      />
+    </form>
+    <button className="forgot-password-button" onClick={handleForgotPassword}>
+          Forgot Password?
+    </button>
+      <button className="sign-up-button" onClick={handleCreateAccount}>
+          Not a user? Sign up here
+      </button>
+    </div>
+    </div>
+  );
+};
 
 export default LogInForm;
