@@ -31,7 +31,8 @@ const Feed = ({ navigate }) => {
   const handleNewPost = (post) => {
     setPosts((prevPosts) => {
       const newPosts = [...prevPosts, post];
-      return newPosts;
+      const reversedPosts = newPosts.reverse();
+      return reversedPosts;
     });
   };
 
