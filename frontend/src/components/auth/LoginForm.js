@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import '/Users/shaiby/Desktop/Acebook_Project/acebook-mern-template/frontend/src/index.css'
+import '../../index.css'
 
 const LogInForm = ({ navigate }) => {
   const [email, setEmail] = useState("");
