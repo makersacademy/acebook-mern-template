@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import LoginForm from "../auth/LoginForm";
+import LogoutForm from "../auth/LogoutForm";
 import SignUpForm from "../user/SignUpForm";
 import Feed from "../feed/Feed";
 import Navbar from "../navbar/Navbar";
@@ -11,14 +12,23 @@ import "./App.css";
 
 const App = () => {
   const [showLoginForm, setShowLoginForm] = useState(false);
+  const [showLogoutForm, setShowLogoutForm] = useState(false);
   const [showSignUpForm, setShowSignUpForm] = useState(false);
   const [showNotificationModal, setShowNotificationModal] = useState(false);
+  const [isUserLoggedIn, setIsUserLoggedIn] = useState(false);
 
   const navigate = useNavigate();
 
   const handleLogin = () => setShowLoginForm(true); // Renamed to handleLogin
   const handleSignup = () => setShowSignUpForm(true); // Renamed to handleSignup
   const handleNotifications = () => setShowNotificationModal(true);
+  const handleLogout = () => setShowLogoutForm(true);
+
+  const handleSuccessfulLogin = () => {
+    setIsUserLoggedIn(true);
+    console.log(isUserLoggedIn);
+    // ...other stuff, like closing the modal
+  };
 
   return (
     <div className="app-container">
@@ -31,6 +41,7 @@ const App = () => {
           onLogin={handleLogin}
           onSignup={handleSignup}
           onNotifications={handleNotifications}
+          onLogout={handleLogout}
         />
 
         <div className="content">
@@ -42,7 +53,11 @@ const App = () => {
 
           <div className="feed-container">
             <SearchBar />
-            <Feed navigate={navigate} />
+            {isUserLoggedIn ? (
+              <Feed navigate={navigate} />
+            ) : (
+              <div>Please log in to see the feed.</div>
+            )}
           </div>
         </div>
       </div>
@@ -51,6 +66,15 @@ const App = () => {
         <LoginForm
           navigate={navigate}
           onClose={() => setShowLoginForm(false)}
+          handleSuccessfulLogin={handleSuccessfulLogin} // <-- pass this method to the LoginForm component
+        />
+      )}
+
+      {showLogoutForm && (
+        <LogoutForm
+          navigate={navigate}
+          onClose={() => setShowLogoutForm(false)}
+          setIsUserLoggedIn={setIsUserLoggedIn}
         />
       )}
 

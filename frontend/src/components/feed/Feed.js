@@ -19,18 +19,11 @@ const Feed = ({ navigate }) => {
         window.localStorage.setItem("token", data.token);
         setToken(window.localStorage.getItem("token"));
         setPosts(data.posts);
-      } else {
-        navigate("/");
       }
     };
 
     fetchData();
   }, [token, navigate]);
-
-  const logout = () => {
-    window.localStorage.removeItem("token");
-    navigate("/"); // This is correctly placed
-  };
 
   const handleNewPost = (post) => {
     setPosts((prevPosts) => {
@@ -46,7 +39,6 @@ const Feed = ({ navigate }) => {
         <PostForm token={token} onNewPost={handleNewPost} />
         <div>
           <h2>Posts</h2>
-          <button onClick={logout}>Logout</button>
           <div id="feed" role="feed">
             {posts.map((post) => (
               <Post post={post} key={post._id} />

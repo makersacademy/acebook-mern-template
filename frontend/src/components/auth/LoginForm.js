@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import "./LoginForm.css";
 import Modal from "../common/Modal";
 
-const LogInForm = ({ navigate, onClose }) => {
+const LogInForm = ({ navigate, onClose, handleSuccessfulLogin }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
@@ -23,8 +23,8 @@ const LogInForm = ({ navigate, onClose }) => {
       console.log("oop");
       let data = await response.json();
       window.localStorage.setItem("token", data.token);
-      navigate("/");
       onClose(); // Close the form when the submission is successful
+      handleSuccessfulLogin();
     }
   };
 
