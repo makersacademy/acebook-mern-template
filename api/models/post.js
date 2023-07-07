@@ -8,7 +8,6 @@ const PostSchema = new mongoose.Schema({
     data: Buffer,
     contentType: String,
   },
-  authorId: { type: mongoose.Schema.Types.ObjectId, ref: "users" },
 });
 
 const Post = mongoose.model("Post", PostSchema);
