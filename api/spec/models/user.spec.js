@@ -1,3 +1,5 @@
+jest.setTimeout(10000)
+
 const mongoose = require("mongoose");
 
 require("../mongodb_helper");

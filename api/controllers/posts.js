@@ -13,6 +13,8 @@ const PostsController = {
   },
   Create: (req, res) => {
     const post = new Post(req.body);
+    post.user_id = req.user_id; 
+    
     post.save(async (err) => {
       if (err) {
         throw err;

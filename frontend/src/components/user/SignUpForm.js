@@ -1,4 +1,6 @@
 import React, { useState } from 'react';
+import '../../index.css'
+
 
 const SignUpForm = ({ navigate }) => {
 
@@ -32,13 +34,49 @@ const SignUpForm = ({ navigate }) => {
     setPassword(event.target.value)
   }
 
+  const handleUserLogin = () => {
+
+  }
+
 
     return (
-      <form onSubmit={handleSubmit}>
-          <input placeholder="Email" id="email" type='text' value={ email } onChange={handleEmailChange} />
-          <input placeholder="Password" id="password" type='password' value={ password } onChange={handlePasswordChange} />
-        <input id='submit' type="submit" value="Submit" />
-      </form>
+      
+      // <form onSubmit={handleSubmit}>
+      //     <input placeholder="Email" id="email" type='text' value={ email } onChange={handleEmailChange} />
+      //     <input placeholder="Password" id="password" type='password' value={ password } onChange={handlePasswordChange} />
+      //   <input id='submit' type="submit" value="Submit" />
+      // </form>
+
+
+      <div className="container">
+      <div className="form-container">
+      <form onSubmit={handleSubmit} className="form">
+      <input
+        placeholder="Email"
+        id="email"
+        type="text"
+        value={email}
+        onChange={handleEmailChange}
+        className="input"
+      />
+      <input
+        placeholder="Password"
+        id="password"
+        type="password"
+        value={password}
+        onChange={handlePasswordChange}
+        className="input"
+      />
+      <input
+        role="submit-button"
+        id="submit"
+        type="submit"
+        value="Submit"
+        className="submit-button"
+      />
+    </form>
+    </div>
+    </div>
     );
 }
 

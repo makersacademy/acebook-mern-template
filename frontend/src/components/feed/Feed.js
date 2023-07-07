@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Post from "../post/Post";
 import CreatePost from "../createPost/CreatePost";
+import '../../index.css'
 
 const Feed = ({ navigate }) => {
   const [posts, setPosts] = useState([]);
@@ -39,13 +40,15 @@ const Feed = ({ navigate }) => {
   if (token) {
     return (
       <>
+
         <h2>Posts</h2>
         <button onClick={handleRefresh}>Update Feed</button> 
+
         <button onClick={logout}>Logout</button>
         <div id="new-post">
           <CreatePost />
         </div>
-        <div id="feed" role="feed">
+        <div id="feed" role="feed" className="posts">
           {posts.map((post) => (
             <Post post={post} key={post._id} />
           ))}
