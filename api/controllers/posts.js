@@ -10,13 +10,13 @@ const PostsController = {
       if (err) {
         throw err;
       }
+      console.log(req);
       const token = await TokenGenerator.jsonwebtoken(req.user_id);
+      console.log(token);
       res.status(200).json({ posts: posts, token: token });
     });
   },
   Create: async (req, res) => {
-    console.log("this is creaate function");
-    console.log(req.user_id);
     const timeCalc = () => {
       const now = new Date();
       const year = now.getFullYear();
@@ -28,7 +28,6 @@ const PostsController = {
     };
 
     try {
-      console.log(req.user_id);
       const user = await User.findById(req.user_id);
 
       const username = user.username;
