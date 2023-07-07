@@ -46,7 +46,7 @@ const Feed = ({ navigate }) => {
 
         <button onClick={logout}>Logout</button>
         <div id="new-post">
-          <CreatePost />
+          <CreatePost handleRefresh={handleRefresh} />
         </div>
         <div id="feed" role="feed" className="posts">
           {posts.map((post) => (
