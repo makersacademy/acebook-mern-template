@@ -17,6 +17,8 @@ const PostsController = {
     });
   },
   Create: async (req, res) => {
+    console.log(req);
+
     const timeCalc = () => {
       const now = new Date();
       const year = now.getFullYear();
@@ -28,6 +30,7 @@ const PostsController = {
     };
 
     try {
+      console.log(req.body);
       const user = await User.findById(req.user_id);
 
       const username = user.username;
@@ -46,8 +49,8 @@ const PostsController = {
       }
 
       await post.save();
-
-      const mentionedUsernames = req.body.message.match(/@(\w+)/g) || [];
+      console.log(req.body);
+      const mentionedUsernames = req.body.message?.match(/@(\w+)/g) || [];
       for (let mentionedUsername of mentionedUsernames) {
         const mentionedUser = await User.findOne({
           username: mentionedUsername.replace("@", ""),
