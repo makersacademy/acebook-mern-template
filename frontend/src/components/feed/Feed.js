@@ -28,7 +28,7 @@ const Feed = ({ navigate }) => {
     };
 
     fetchPosts();
-  }, [token]);
+  }, [token, navigate]);
 
   useEffect(() => {
     const fetchComments = async () => {

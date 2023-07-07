@@ -34,16 +34,17 @@ const App = () => {
 
   const handleSuccessfulLogin = () => {
     setIsUserLoggedIn(true);
-    console.log(isUserLoggedIn);
     // ...other stuff, like closing the modal
   };
 
   useEffect(() => {
     const token = window.localStorage.getItem("token");
-    if (token) {
+    if (token !== "undefined") {
+      console.log(`token in if statement ${token}`);
       setIsUserLoggedIn(true);
     }
   }, []);
+  console.log(isUserLoggedIn);
 
   return (
     <div className="app-container">
