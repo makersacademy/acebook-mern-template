@@ -6,6 +6,7 @@ import '../../index.css'
 const Feed = ({ navigate }) => {
   const [posts, setPosts] = useState([]);
   const [token, setToken] = useState(window.localStorage.getItem("token"));
+  const [refreshFeed, setRefreshFeed] = useState(false); // State variable to track refresh action
 
   useEffect(() => {
     if (token) {
@@ -19,19 +20,30 @@ const Feed = ({ navigate }) => {
           window.localStorage.setItem("token", data.token);
           setToken(window.localStorage.getItem("token"));
           setPosts(data.posts);
+          setRefreshFeed(false)
         });
     }
-  }, []);
+  }, [refreshFeed]); // check array and how this works. 
 
   const logout = () => {
     window.localStorage.removeItem("token");
     navigate("/login");
   };
 
+ // code here to refresh feed  
+   const handleRefresh = () => {
+    setRefreshFeed(true); // Trigger the refresh action
+  };
+//
+
+
   if (token) {
     return (
       <>
-        <h1>Posts</h1>
+
+        <h2>Posts</h2>
+        <button onClick={handleRefresh}>Update Feed</button> 
+
         <button onClick={logout}>Logout</button>
         <div id="new-post">
           <CreatePost />
@@ -41,6 +53,7 @@ const Feed = ({ navigate }) => {
             <Post post={post} key={post._id} />
           ))}
         </div>
+        <div></div>
       </>
     );
   } else {
