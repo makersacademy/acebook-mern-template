@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import '../../index.css'
 
 
-const CreatePost = () => {
+const CreatePost = ({ handleRefresh }) => {
   const [message, setMessage] = useState("");
   const [token] = useState(window.localStorage.getItem("token"));
 
@@ -17,6 +17,12 @@ const CreatePost = () => {
       },
       body: JSON.stringify({ message: message, createdAt: new Date().toISOString()  }),
     });
+
+    if (response.ok) {
+      setMessage(""); 
+      handleRefresh(); 
+    }
+
   };
 
   const handleMessageChange = (event) => {
