@@ -3,6 +3,8 @@ import Post from "../post/Post";
 import Comment from "../comment/Comment";
 import PostForm from "../post/PostForm";
 import CommentForm from "../comment/CommentForm";
+import LikeForm from "../likes/LikeForm";
+import Like from "../likes/Like";
 
 const Feed = ({ navigate }) => {
   const [posts, setPosts] = useState([]);
@@ -47,6 +49,26 @@ const Feed = ({ navigate }) => {
     };
 
     fetchComments();
+  }, [token]);
+
+  useEffect(() => {
+    const fetchLikes = async () => {
+      if (token) {
+        const response = await fetch("/likes", {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
+        const data = await response.json();
+        window.localStorage.setItem("token", data.token);
+        setToken(window.localStorage.getItem("token"));
+        setLikes(data.likes);
+      } else {
+        setLikes([]); // Set empty comments array when there is no token
+      }
+    };
+
+    fetchLikes();
   }, [token]);
 
   const handleNewPost = (post) => {
