@@ -104,12 +104,10 @@ describe("/posts", () => {
     test("finds a single post by id", async () => {
       let post1 = new Post({ message: "howdy!" });
       await post1.save();
-      console.log(`** Post 1 ID: ${post1.id}`);
       let response = await request(app)
         .get(`/posts/${post1.id}`)
         .set("Authorization", `Bearer ${token}`)
         .send({ token: token });
-      console.log(`** Response body: ${response.body}`);
       let body = response.body.post;
       expect(body.message).toEqual("howdy!");
     });
