@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+import '../../index.css'
+
 
 const CreatePost = () => {
   const [message, setMessage] = useState("");
@@ -13,7 +15,7 @@ const CreatePost = () => {
         Authorization: `Bearer ${token}`,
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({ message: message }),
+      body: JSON.stringify({ message: message, createdAt: new Date().toISOString()  }),
     });
   };
 
@@ -30,7 +32,12 @@ const CreatePost = () => {
         value={message}
         onChange={handleMessageChange}
       />
-      <input role="submit-button" id="submit" type="submit" value="Submit" />
+      <input 
+      role="submit-button" 
+      id="submit" 
+      type="submit" 
+      value="Submit" 
+      className="submit-button" />
     </form>
   );
 };
