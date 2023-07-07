@@ -3,7 +3,11 @@ import { useParams } from "react-router-dom";
 import Post from "../post/Post";
 
 const SinglePost = ({ navigate }) => {
-  const [post, setPost] = useState([]);
+  const [post, setPost] = useState({
+    user: { email: "" },
+    message: "",
+    _id: "",
+  });
   const [token, setToken] = useState(window.localStorage.getItem("token"));
   const params = useParams();
 
