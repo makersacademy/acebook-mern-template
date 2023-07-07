@@ -23,12 +23,12 @@ const Feed = ({ navigate }) => {
         setToken(window.localStorage.getItem("token"));
         setPosts(data.posts);
       } else {
-        navigate("/");
+        setPosts([]); // Set empty posts array when there is no token
       }
     };
 
     fetchPosts();
-  }, [token, navigate]);
+  }, [token]);
 
   useEffect(() => {
     const fetchComments = async () => {
@@ -43,12 +43,12 @@ const Feed = ({ navigate }) => {
         setToken(window.localStorage.getItem("token"));
         setComments(data.comments);
       } else {
-        navigate("/");
+        setComments([]); // Set empty comments array when there is no token
       }
     };
 
     fetchComments();
-  }, [token, navigate]);
+  }, [token]);
 
   const handleNewPost = (post) => {
     setPosts((prevPosts) => {
