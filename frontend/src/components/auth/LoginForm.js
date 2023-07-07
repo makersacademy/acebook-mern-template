@@ -46,42 +46,47 @@ const LogInForm = ({ navigate }) => {
 
 
   return (
-    <div className="container">
-      <div className="form-container">
-      <form onSubmit={handleSubmit} className="form">
-      <input
-        placeholder="Email"
-        id="email"
-        type="text"
-        value={email}
-        onChange={handleEmailChange}
-        className="input"
-      />
-      <input
-        placeholder="Password"
-        id="password"
-        type="password"
-        value={password}
-        onChange={handlePasswordChange}
-        className="input"
-      />
-      <input
-        role="submit-button"
-        id="submit"
-        type="submit"
-        value="Submit"
-        className="submit-button"
-      />
-    </form>
-    <button className="forgot-password-button" onClick={handleForgotPassword}>
-          Forgot Password?
-    </button>
-      <button className="sign-up-button" onClick={handleCreateAccount}>
-          Not a user? Sign up here
-      </button>
-    </div>
+    <div className="wrapper">
+      <div className="image-container"></div>
+      <div className="container">
+        <h1>Welcome to Acebook</h1>
+        <div className="form-container">
+          <form onSubmit={handleSubmit} className="form">
+            <input
+              placeholder="Email"
+              id="email"
+              type="text"
+              value={email}
+              onChange={handleEmailChange}
+              className="input"
+            />
+            <input
+              placeholder="Password"
+              id="password"
+              type="password"
+              value={password}
+              onChange={handlePasswordChange}
+              className="input"
+            />
+            <input
+              role="submit-button"
+              id="submit"
+              type="submit"
+              value="Submit"
+              className="submit-button"
+            />
+          </form>
+          <button className="forgot-password-button" onClick={handleForgotPassword}>
+            Forgot Password?
+          </button>
+          <button className="sign-up-button" onClick={handleCreateAccount}>
+            Not a user? Sign up here
+          </button>
+        </div>
+      </div>
     </div>
   );
+  
 };
 
 export default LogInForm;

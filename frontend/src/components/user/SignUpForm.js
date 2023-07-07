@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import '../../index.css'
 
+
 const SignUpForm = ({ navigate }) => {
 
   const [email, setEmail] = useState("");
