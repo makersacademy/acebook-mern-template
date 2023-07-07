@@ -39,7 +39,7 @@ const App = () => {
 
   useEffect(() => {
     const token = window.localStorage.getItem("token");
-    if (token !== "undefined") {
+    if (token && token !== "null" && token !== "undefined") {
       console.log(`token in if statement ${token}`);
       setIsUserLoggedIn(true);
     }

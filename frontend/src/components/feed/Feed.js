@@ -12,7 +12,7 @@ const Feed = ({ navigate }) => {
 
   useEffect(() => {
     const fetchPosts = async () => {
-      if (token) {
+      if (token && token !== "null" && token !== "undefined") {
         const response = await fetch("/posts", {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -32,7 +32,7 @@ const Feed = ({ navigate }) => {
 
   useEffect(() => {
     const fetchComments = async () => {
-      if (token) {
+      if (token && token !== "null" && token !== "undefined") {
         const response = await fetch("/comments", {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -66,7 +66,7 @@ const Feed = ({ navigate }) => {
     });
   };
 
-  if (token) {
+  if (token && token !== "null" && token !== "undefined") {
     return (
       <>
         <div className="create-post-container">

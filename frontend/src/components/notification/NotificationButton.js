@@ -6,7 +6,7 @@ const NotificationModal = ({ onClose }) => {
   const token = window.localStorage.getItem("token");
 
   useEffect(() => {
-    if (token) {
+    if (token && token !== "null" && token !== "undefined") {
       fetch("/notifications", {
         headers: {
           Authorization: `Bearer ${token}`,
