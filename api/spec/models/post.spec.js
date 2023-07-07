@@ -1,6 +1,4 @@
-
 let mongoose = require("mongoose");
-
 
 require("../mongodb_helper");
 let Post = require("../../models/post");
@@ -13,8 +11,12 @@ describe("Post model", () => {
   });
 
   it("has a message", () => {
-    let post = new Post({ user_id: "1", message: "some message", created_at: { type: Date, default: Date.now } });
-    expect(post.user_id).toEqual("1");
+    let post = new Post({
+      user: "1",
+      message: "some message",
+      created_at: { type: Date, default: Date.now },
+    });
+    expect(post.user).toEqual("1");
     expect(post.message).toEqual("some message");
     expect(post.created_at).toBeInstanceOf(Date);
   });

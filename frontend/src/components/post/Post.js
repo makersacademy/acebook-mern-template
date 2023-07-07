@@ -1,17 +1,18 @@
-import React from 'react';
-import '../../index.css'
+import React from "react";
 
-const Post = ({post}) => {
-
-  console.log(post.createdAt);
-  return(
-    <article className="posts" 
-    data-cy="post" 
-    key={ post._id }>{ post.message }
-          <p className="post-time">Posted on: {new Date(post.createdAt).toLocaleDateString()} at {new Date(post.createdAt).toLocaleTimeString()}</p>
+const Post = ({ post }) => {
+  return (
+    <article data-cy="post" key={post._id}>
+      {post.message}
+      <br />
+      {/* Posted by: {post.user.email} */}
+      <br />
+      <a href={`/posts/${post._id}`}>View post</a>
+      <br />
+      <br />
     </article>
-  )
-  
-}
+  );
+};
+
 
 export default Post;
