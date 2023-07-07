@@ -40,11 +40,9 @@ const App = () => {
   useEffect(() => {
     const token = window.localStorage.getItem("token");
     if (token !== "undefined") {
-      console.log(`token in if statement ${token}`);
       setIsUserLoggedIn(true);
     }
   }, []);
-  console.log(isUserLoggedIn);
 
   return (
     <div className="app-container">

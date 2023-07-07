@@ -8,7 +8,6 @@ const Feed = ({ navigate }) => {
   const [posts, setPosts] = useState([]);
   const [token, setToken] = useState(window.localStorage.getItem("token"));
   const [comments, setComments] = useState([]);
-  console.log(comments);
 
   useEffect(() => {
     const fetchPosts = async () => {
