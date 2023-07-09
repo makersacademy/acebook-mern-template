@@ -1,11 +1,19 @@
 import React, { useState, useEffect } from "react";
+import ProfileImageForm from "./ProfileImageForm";
+import ProfileInfoForm from "./ProfileInfoForm";
 import "./ProfilePage.css";
 
 const ProfilePage = () => {
   const [profileData, setProfileData] = useState(null);
+  const [name, setName] = useState("");
+  const [bio, setBio] = useState("");
+  const [profileImageSrc, setProfileImageSrc] = useState(null);
 
   useEffect(() => {
-    // Fetch profile data
+    fetchProfileData();
+  }, []);
+
+  const fetchProfileData = () => {
     fetch("/profiles", {
       headers: {
         Authorization: `Bearer ${localStorage.getItem("token")}`,
@@ -14,52 +22,81 @@ const ProfilePage = () => {
       .then((response) => response.json())
       .then((data) => {
         setProfileData(data);
+        setName(data.name);
+        setBio(data.bio);
+
+        if (data.image) {
+          fetch("/profiles/profileImage", {
+            headers: {
+              Authorization: `Bearer ${localStorage.getItem("token")}`,
+            },
+          })
+            .then((response) => response.blob())
+            .then((blob) => {
+              const objectURL = URL.createObjectURL(blob);
+              setProfileImageSrc(objectURL);
+            })
+            .catch((error) => {
+              console.error("Error fetching profile image:", error);
+            });
+        }
       })
       .catch((error) => {
         console.error("Error fetching profile data:", error);
       });
-  }, []);
+  };
+
+  const handleProfileDataChange = () => {
+    fetchProfileData();
+  };
+
+  const handleProfileImageChange = () => {
+    fetchProfileData();
+  };
 
   if (!profileData) {
     return <div>Loading profile...</div>;
   }
 
-  const { name, username, bio, followers } = profileData;
+  const { username, followers } = profileData;
 
   return (
-    <div>
+    <div className="container">
       <header className="header">
         <h1>My Profile</h1>
       </header>
 
       <div className="banner">
-        <img
-          src={profileData.bannerUrl}
-          alt="Banner"
-          className="banner-picture"
-        />
         <div className="profile-picture-container">
-          <img
-            src={profileData.pictureUrl}
-            alt="Profile"
-            className="profile-picture"
+          <div className="profile-photo">
+            <img
+              src={profileImageSrc}
+              alt="Profile"
+              className="profile-picture"
+            />
+          </div>
+          <ProfileImageForm
+            token={localStorage.getItem("token")}
+            onProfileImageChange={handleProfileImageChange}
           />
         </div>
       </div>
 
       <div className="user-info-container">
-        <div className="user-data">
-          <h2>Name: {name}</h2>
-          <h2>Username: {username}</h2>
-          <h2>Bio: {bio}</h2>
-          <h2>Followers: {followers}</h2>
-        </div>
+        <h2 className="name">{name}</h2>
+        <p className="username">@{username}</p>
+        <p className="followers">{followers} Followers</p>
+        <p className="bio">{bio}</p>
+        <ProfileInfoForm
+          token={localStorage.getItem("token")}
+          onProfileDataChange={handleProfileDataChange}
+          currentData={profileData}
+        />
       </div>
 
       <div className="my-posts-container">
         <h2>My Posts</h2>
         <div className="my-posts">{/* Placeholder for posts */}</div>
-        <div className="create-post"></div>
       </div>
     </div>
   );
