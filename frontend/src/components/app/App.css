@@ -248,6 +248,20 @@ body {
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 }
 
+.profile-image-container {
+  width: 50px; /* Adjust the width as desired */
+  height: 50px; /* Adjust the height as desired */
+  border-radius: 50%;
+  overflow: hidden;
+  margin-right: 10px; /* Add spacing between profile image and username */
+}
+
+.profile-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
 .author-details {
   display: flex;
   align-items: center;
