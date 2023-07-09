@@ -4,6 +4,7 @@ import {
   Routes,
   Route,
   useNavigate,
+  Link,
 } from "react-router-dom";
 import LoginForm from "../auth/LoginForm";
 import LogoutForm from "../auth/LogoutForm";
@@ -47,8 +48,10 @@ const App = () => {
 
   return (
     <div className="app-container">
-      <div className="header">
-        <h1>ACEBOOK</h1>
+      <div class="header">
+        <Link class="header-link" to="/">
+          <h1 class="header-title">ACEBOOK</h1>
+        </Link>
       </div>
 
       <div className="main-content">
