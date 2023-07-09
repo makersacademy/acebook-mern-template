@@ -20,7 +20,7 @@ const Feed = ({ navigate }) => {
         const data = await response.json();
         window.localStorage.setItem("token", data.token);
         setToken(window.localStorage.getItem("token"));
-        setPosts(data.posts);
+        setPosts(data.posts.reverse());
       } else {
         setPosts([]); // Set empty posts array when there is no token
       }
@@ -40,7 +40,7 @@ const Feed = ({ navigate }) => {
         const data = await response.json();
         window.localStorage.setItem("token", data.token);
         setToken(window.localStorage.getItem("token"));
-        setComments(data.comments);
+        setComments(data.comments.reverse());
       } else {
         setComments([]); // Set empty comments array when there is no token
       }
