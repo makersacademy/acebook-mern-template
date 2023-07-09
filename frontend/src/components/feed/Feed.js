@@ -99,7 +99,7 @@ const Feed = ({ navigate }) => {
           <div id="feed" role="feed">
             {posts.map((post) => (
               <div key={post._id} className="post-container">
-                <Post post={post} />
+                <Post post={post} token={token} />
                 {/* <LikeForm token={token} postId={post._id} />
                 <Like like={likes} /> */}
                 <CommentForm
