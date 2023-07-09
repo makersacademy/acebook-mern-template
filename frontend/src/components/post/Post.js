@@ -53,12 +53,16 @@ const Post = ({ post, token }) => {
           <img
             className="post-image"
             src={imgSrc}
-            alt="Post"
+            alt="Post Image"
             onClick={handleZoom}
           />
           {isZoomed && (
             <div className="zoomed-image-container">
-              <img className="zoomed-image" src={imgSrc} alt="Zoomed Post" />
+              <img
+                className="zoomed-image"
+                src={imgSrc}
+                alt="Zoomed Post Image"
+              />
               <button
                 className="zoomed-image-close-button"
                 onClick={() => setIsZoomed(false)}
