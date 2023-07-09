@@ -17,8 +17,6 @@ const PostsController = {
     });
   },
   Create: async (req, res) => {
-    console.log(req);
-
     const timeCalc = () => {
       const now = new Date();
       const year = now.getFullYear();
@@ -30,7 +28,6 @@ const PostsController = {
     };
 
     try {
-      console.log(req.body);
       const user = await User.findById(req.user_id);
 
       const username = user.username;
@@ -44,9 +41,8 @@ const PostsController = {
 
       if (req.file) {
         // Handle image upload if a file is provided
-        post.image.data = fs.readFileSync(req.file.path);
+        post.image.data = req.file.buffer; // You should access the buffer directly since you are using multer.memoryStorage()
         post.image.contentType = req.file.mimetype;
-        fs.unlinkSync(req.file.path); // Remove the temporary file after reading its data
       }
 
       await post.save();
@@ -91,28 +87,6 @@ const PostsController = {
       }
     });
   },
-  //   AddLike: (req, res) => {
-  //     const postId = req.params.post_id; // Assuming the post_id is passed as a URL parameter
-
-  //     Post.findById(postId)
-  //       .then((post) => {
-  //         if (!post) {
-  //           return res.status(404).json({ error: "Post not found" });
-  //         }
-
-  //         post.likes += 1; // Increment the likes count by 1
-  //         return post.save();
-  //       })
-  //       .then((updatedPost) => {
-  //         res.json({ post: updatedPost });
-  //       })
-  //       .catch((error) => {
-  //         console.error("Error adding like:", error);
-  //         res
-  //           .status(500)
-  //           .json({ error: "An error occurred while adding a like" });
-  //       });
-  //   },
 };
 
 module.exports = PostsController;
