@@ -70,9 +70,7 @@ const ProfilePage = ({ userId, onClose }) => {
       </header>
 
       <div className="banner">
-        <div className="wave"></div>
-        <div className="wave"></div>
-        <div className="wave"></div>
+        <img src={bannerUrl} alt="Banner" className="banner-picture" />
         <div className="profile-picture-container">
           <div className="profile-photo">
             <img
