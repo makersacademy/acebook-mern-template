@@ -45,6 +45,9 @@ const App = () => {
   useEffect(() => {
     const token = window.localStorage.getItem("token");
     if (token && token !== "null" && token !== "undefined") {
+      console.log(`token in if statement ${token}`);
+      const decodedToken = jwt_decode(token);
+      setUserId(decodedToken.user_id); // <-- Use 'setUserId' here instead of declaring a new 'userId'
       setIsUserLoggedIn(true);
       const userIdFromStorage = window.localStorage.getItem("userId");
       if (

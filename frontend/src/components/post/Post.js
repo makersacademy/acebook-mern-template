@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 const Post = ({ post, token }) => {
   const [imgSrc, setImgSrc] = useState(null);
   const [isZoomed, setIsZoomed] = useState(false);
+  const [authorImgSrc, setAuthorImgSrc] = useState(null);
 
   const handleZoom = () => {
     setIsZoomed(true);
@@ -18,6 +19,19 @@ const Post = ({ post, token }) => {
         .then((blob) => {
           const objectURL = URL.createObjectURL(blob);
           setImgSrc(objectURL);
+        });
+    }
+  }, [post, token]);
+
+  useEffect(() => {
+    if (post.authorId) {
+      fetch(`/profiles/${post.authorId}/profileImage`, {
+        headers: { Authorization: `Bearer ${token}` },
+      })
+        .then((res) => res.blob())
+        .then((blob) => {
+          const objectURL = URL.createObjectURL(blob);
+          setAuthorImgSrc(objectURL);
         });
     }
   }, [post, token]);
@@ -39,16 +53,12 @@ const Post = ({ post, token }) => {
           <img
             className="post-image"
             src={imgSrc}
-            alt="Post Image"
+            alt="Post"
             onClick={handleZoom}
           />
           {isZoomed && (
             <div className="zoomed-image-container">
-              <img
-                className="zoomed-image"
-                src={imgSrc}
-                alt="Zoomed Post Image"
-              />
+              <img className="zoomed-image" src={imgSrc} alt="Zoomed Post" />
               <button
                 className="zoomed-image-close-button"
                 onClick={() => setIsZoomed(false)}
