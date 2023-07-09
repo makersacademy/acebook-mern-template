@@ -323,7 +323,7 @@ body {
 
 .post-image {
   width: 100%;
-  height: auto; /* Remove fixed height to allow for variable height in zoomed view */
+  height: auto;
   border-radius: 8px;
 }
 
