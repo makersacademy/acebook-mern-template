@@ -1,4 +1,16 @@
 const User = require("../models/user");
+const fs = require("fs");
+const path = require("path");
+
+const defaultImagePath = path.join(
+  __dirname,
+  "../public/images/default.svg.png"
+);
+
+const defaultImage = {
+  data: fs.readFileSync(defaultImagePath),
+  contentType: "image/png", // Adjust the content type based on your default image format
+};
 const JWT = require("jsonwebtoken");
 
 const UsersController = {
