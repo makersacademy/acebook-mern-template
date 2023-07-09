@@ -36,7 +36,6 @@ const Post = ({ post, token }) => {
     }
   }, [post, token]);
 
-const Post = ({ post }) => {
   return (
     <div className="post-container" data-cy="post" key={post._id} id={post._id}>
       <div className="author-details">

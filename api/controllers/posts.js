@@ -15,8 +15,6 @@ const PostsController = {
     });
   },
   Create: async (req, res) => {
-    console.log(req);
-
     const timeCalc = () => {
       const now = new Date();
       const year = now.getFullYear();
@@ -28,7 +26,6 @@ const PostsController = {
     };
 
     try {
-      console.log(req.body);
       const user = await User.findById(req.user_id);
 
       const username = user.username;
@@ -42,9 +39,8 @@ const PostsController = {
 
       if (req.file) {
         // Handle image upload if a file is provided
-        post.image.data = fs.readFileSync(req.file.path);
+        post.image.data = req.file.buffer; // You should access the buffer directly since you are using multer.memoryStorage()
         post.image.contentType = req.file.mimetype;
-        fs.unlinkSync(req.file.path); // Remove the temporary file after reading its data
       }
 
       await post.save();
@@ -64,7 +60,7 @@ const PostsController = {
           await notification.save();
         }
       }
-
+      console.log(req.body);
       const token = await TokenGenerator.jsonwebtoken(req.user_id);
       res.status(201).json({ message: "OK", token: token, post: post }); // Return the post
     } catch (err) {
