@@ -12,7 +12,7 @@ const ProfileInfoForm = (props) => {
       bio,
     };
 
-    fetch("/profiles", {
+    fetch(`/profiles/${props.userId}`, {
       method: "PATCH",
       headers: {
         "Content-Type": "application/json",

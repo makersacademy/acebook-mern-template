@@ -7,14 +7,14 @@ const upload = multer({ storage: storage });
 const ProfileController = require("../controllers/profiles");
 
 // Define routes for profiles
-router.get("/", ProfileController.GetProfile);
-router.patch("/", ProfileController.UpdateProfile);
+router.get("/:id", ProfileController.GetProfile);
+router.patch("/:id", ProfileController.UpdateProfile);
 router.patch(
-  "/profileImage",
+  "/:id/profileImage",
   upload.single("image"),
   ProfileController.UpdateProfileImage
 );
 
-router.get("/profileImage", ProfileController.GetProfileImage);
+router.get("/:id/profileImage", ProfileController.GetProfileImage);
 
 module.exports = router;

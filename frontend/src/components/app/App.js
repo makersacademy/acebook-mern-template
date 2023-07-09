@@ -16,6 +16,7 @@ import NotificationModal from "../notification/NotificationButton";
 import ProfileButton from "../profile/ProfileButton";
 import Profile from "../profile/ProfilePage";
 import FeedButton from "../feed/FeedButton";
+import jwt_decode from "jwt-decode";
 
 import "./App.css";
 
@@ -25,6 +26,7 @@ const App = () => {
   const [showSignUpForm, setShowSignUpForm] = useState(false);
   const [showNotificationModal, setShowNotificationModal] = useState(false);
   const [isUserLoggedIn, setIsUserLoggedIn] = useState(false);
+  const [userId, setUserId] = useState(null);
 
   const navigate = useNavigate();
 
@@ -42,15 +44,17 @@ const App = () => {
     const token = window.localStorage.getItem("token");
     if (token && token !== "null" && token !== "undefined") {
       console.log(`token in if statement ${token}`);
+      const decodedToken = jwt_decode(token);
+      setUserId(decodedToken.user_id); // <-- Use 'setUserId' here instead of declaring a new 'userId'
       setIsUserLoggedIn(true);
     }
   }, []);
 
   return (
     <div className="app-container">
-      <div class="header">
-        <Link class="header-link" to="/">
-          <h1 class="header-title">ACEBOOK</h1>
+      <div className="header">
+        <Link className="header-link" to="/">
+          <h1 className="header-title">ACEBOOK</h1>
         </Link>
       </div>
 
@@ -66,7 +70,7 @@ const App = () => {
           <div className="top-bar">
             <div className="top-right">
               <FeedButton />
-              <ProfileButton />
+              <ProfileButton userId={userId} />
             </div>
           </div>
 
@@ -84,12 +88,12 @@ const App = () => {
                 }
               />
               <Route
-                path="/profile"
+                path="/profile/:id"
                 element={
                   isUserLoggedIn ? (
                     <Profile />
                   ) : (
-                    <div>Please log in to see the feed.</div>
+                    <div>Please log in to see the profile.</div>
                   )
                 }
               />

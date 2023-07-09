@@ -33,6 +33,7 @@ const PostsController = {
         username: username,
         time: timeCalc(),
         message: req.body.message,
+        authorId: req.user_id,
       });
 
       if (req.file) {

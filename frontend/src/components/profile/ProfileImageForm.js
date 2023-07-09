@@ -11,7 +11,7 @@ const ProfileImageForm = (props) => {
       formData.append("image", image);
     }
 
-    fetch("/profiles/profileImage", {
+    fetch(`/profiles/${props.userId}/profileImage`, {
       method: "PATCH",
       headers: {
         Authorization: `Bearer ${props.token}`,

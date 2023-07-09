@@ -4,13 +4,13 @@ const TokenGenerator = require("../models/token_generator");
 const ProfileController = {
   GetProfile: async (req, res) => {
     try {
-      const user = await User.findById(req.user_id);
+      const user = await User.findById(req.params.id);
 
       if (!user) {
         res.status(404).json({ message: "User not found" });
       } else {
         const { name, username, bio, followers, image } = user;
-        const token = await TokenGenerator.jsonwebtoken(req.user_id);
+        const token = await TokenGenerator.jsonwebtoken(req.params.id);
 
         res.status(200).json({
           name,
@@ -29,7 +29,7 @@ const ProfileController = {
 
   UpdateProfile: async (req, res) => {
     try {
-      const user = await User.findById(req.user_id);
+      const user = await User.findById(req.params.id);
 
       if (!user) {
         res.status(404).json({ message: "User not found" });
@@ -39,7 +39,7 @@ const ProfileController = {
         user.bio = bio || user.bio;
 
         await user.save();
-        const token = await TokenGenerator.jsonwebtoken(req.user_id);
+        const token = await TokenGenerator.jsonwebtoken(req.params.id);
 
         res.status(200).json({
           message: "Profile updated successfully.",
@@ -54,7 +54,7 @@ const ProfileController = {
 
   UpdateProfileImage: async (req, res) => {
     try {
-      const user = await User.findById(req.user_id);
+      const user = await User.findById(req.params.id);
 
       if (!user) {
         res.status(404).json({ message: "User not found" });
@@ -64,7 +64,7 @@ const ProfileController = {
           user.image.contentType = req.file.mimetype;
 
           await user.save();
-          const token = await TokenGenerator.jsonwebtoken(req.user_id);
+          const token = await TokenGenerator.jsonwebtoken(req.params.id);
 
           res.status(200).json({
             message: "Profile image updated successfully.",
@@ -82,7 +82,7 @@ const ProfileController = {
 
   GetProfileImage: async (req, res) => {
     try {
-      const user = await User.findById(req.user_id);
+      const user = await User.findById(req.params.id);
 
       if (!user || !user.image.data) {
         res.status(404).json({ message: "Image not found" });
