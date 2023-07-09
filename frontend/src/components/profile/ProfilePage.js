@@ -70,11 +70,6 @@ const ProfilePage = ({ userId, onClose }) => {
       </header>
 
       <div className="banner">
-        <img
-          src={profileData.bannerUrl}
-          alt="Banner"
-          className="banner-picture"
-        />
         <div className="profile-picture-container">
           <div className="profile-photo">
             <img
