@@ -304,7 +304,8 @@ body {
 
 .post-image {
   width: 100%;
-  height: auto;
+  height: 200px; /* Adjust the height as desired */
+  object-fit: cover;
   border-radius: 8px;
 }
 
