@@ -14,6 +14,7 @@ const commentsRouter = require("./routes/comments");
 const tokensRouter = require("./routes/tokens");
 const usersRouter = require("./routes/users");
 const notificationsRouter = require("./routes/notifications");
+const profilesRouter = require("./routes/profiles");
 const likesRouter = require("./routes/likes");
 const profilesRouter = require("./routes/profiles");
 
