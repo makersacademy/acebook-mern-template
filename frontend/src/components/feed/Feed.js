@@ -8,7 +8,6 @@ const Feed = ({ navigate }) => {
   const [posts, setPosts] = useState([]);
   const [token, setToken] = useState(window.localStorage.getItem("token"));
   const [comments, setComments] = useState([]);
-  console.log(comments);
 
   useEffect(() => {
     const fetchPosts = async () => {
@@ -77,7 +76,7 @@ const Feed = ({ navigate }) => {
           <div id="feed" role="feed">
             {posts.map((post) => (
               <div key={post._id} className="post-container">
-                <Post post={post} />
+                <Post post={post} token={token} />
                 <CommentForm
                   token={token}
                   onNewComment={handleNewComment}

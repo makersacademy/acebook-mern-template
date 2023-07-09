@@ -4,6 +4,10 @@ const PostSchema = new mongoose.Schema({
   username: String,
   time: String,
   message: String,
+  image: {
+    data: Buffer,
+    contentType: String,
+  },
 });
 
 const Post = mongoose.model("Post", PostSchema);

@@ -44,7 +44,6 @@ const App = () => {
       setIsUserLoggedIn(true);
     }
   }, []);
-  console.log(isUserLoggedIn);
 
   return (
     <div className="app-container">

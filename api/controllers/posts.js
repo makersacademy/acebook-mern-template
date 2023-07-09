@@ -2,6 +2,7 @@ const Post = require("../models/post");
 const Notification = require("../models/notification");
 const TokenGenerator = require("../models/token_generator");
 const User = require("../models/user");
+const fs = require("fs");
 
 const PostsController = {
   Index: (req, res) => {
@@ -34,14 +35,18 @@ const PostsController = {
         message: req.body.message,
       });
 
-      await post.save();
+      if (req.file) {
+        // Handle image upload if a file is provided
+        post.image.data = req.file.buffer; // You should access the buffer directly since you are using multer.memoryStorage()
+        post.image.contentType = req.file.mimetype;
+      }
 
-      const mentionedUsernames = req.body.message.match(/@(\w+)/g) || [];  
+      await post.save();
+      const mentionedUsernames = req.body.message?.match(/@(\w+)/g) || [];
       for (let mentionedUsername of mentionedUsernames) {
         const mentionedUser = await User.findOne({
           username: mentionedUsername.replace("@", ""),
         });
-
         if (mentionedUser) {
           const notification = new Notification({
             type: "mention",
@@ -53,13 +58,30 @@ const PostsController = {
           await notification.save();
         }
       }
-
       const token = await TokenGenerator.jsonwebtoken(req.user_id);
       res.status(201).json({ message: "OK", token: token, post: post }); // Return the post
     } catch (err) {
       console.error(err);
       res.status(500).json({ error: err.toString() });
     }
+  },
+  GetImage: (req, res) => {
+    console.log(req);
+    Post.findById(req.params.postId, (err, post) => {
+      if (err) {
+        console.error(err);
+        res.status(500).json({ error: err.toString() });
+      } else if (!post || !post.image.data) {
+        res.status(404).send("Not found");
+      } else {
+        const image = Buffer.from(post.image.data, "base64");
+        res.writeHead(200, {
+          "Content-Type": post.image.contentType,
+          "Content-Length": image.length,
+        });
+        res.end(image);
+      }
+    });
   },
 };
 
