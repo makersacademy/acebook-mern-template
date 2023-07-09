@@ -5,7 +5,6 @@ const logger = require("morgan");
 const JWT = require("jsonwebtoken");
 const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
-const imgSchema = require("./models/image");
 const fs = require("fs");
 const multer = require("multer");
 const upload = multer({ storage: multer.memoryStorage() });
@@ -15,6 +14,7 @@ const commentsRouter = require("./routes/comments");
 const tokensRouter = require("./routes/tokens");
 const usersRouter = require("./routes/users");
 const notificationsRouter = require("./routes/notifications");
+const profilesRouter = require("./routes/profiles");
 
 const app = express();
 
@@ -43,6 +43,7 @@ app.use(express.json());
 app.use(express.static(path.join(__dirname, "public")));
 // route setup
 app.use("/posts", tokenChecker, postsRouter);
+app.use("/profiles", tokenChecker, profilesRouter);
 app.use("/notifications", tokenChecker, notificationsRouter);
 app.use("/comments", tokenChecker, commentsRouter);
 app.use("/tokens", tokensRouter);

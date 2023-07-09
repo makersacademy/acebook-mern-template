@@ -1,11 +1,30 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./ProfilePage.css";
 
-function Profile() {
-  const bannerUrl =
-    "https://venngage-wordpress.s3.amazonaws.com/uploads/2018/10/28.-Screen-Shot-2018-09-27-at-8.23.58-AM.png";
-  const pictureUrl =
-    "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png";
+const ProfilePage = () => {
+  const [profileData, setProfileData] = useState(null);
+
+  useEffect(() => {
+    // Fetch profile data
+    fetch("/profiles", {
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem("token")}`,
+      },
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        setProfileData(data);
+      })
+      .catch((error) => {
+        console.error("Error fetching profile data:", error);
+      });
+  }, []);
+
+  if (!profileData) {
+    return <div>Loading profile...</div>;
+  }
+
+  const { name, username, bio, followers } = profileData;
 
   return (
     <div>
@@ -14,20 +33,26 @@ function Profile() {
       </header>
 
       <div className="banner">
-        <img src={bannerUrl} alt="Banner" className="banner-picture" />
+        <img
+          src={profileData.bannerUrl}
+          alt="Banner"
+          className="banner-picture"
+        />
         <div className="profile-picture-container">
-          <img src={pictureUrl} alt="Profile" className="profile-picture" />
+          <img
+            src={profileData.pictureUrl}
+            alt="Profile"
+            className="profile-picture"
+          />
         </div>
       </div>
 
       <div className="user-info-container">
         <div className="user-data">
-          <h2>Name: John Doe</h2>
-          <h2>Username: johndoe123</h2>
-          <h2>
-            Bio: 🌟 Dreamer | 📚 Book Lover | 🌍 Wanderlust | 💡 Curious coder.
-          </h2>
-          <h2>Followers: 1000</h2>
+          <h2>Name: {name}</h2>
+          <h2>Username: {username}</h2>
+          <h2>Bio: {bio}</h2>
+          <h2>Followers: {followers}</h2>
         </div>
       </div>
 
@@ -38,6 +63,6 @@ function Profile() {
       </div>
     </div>
   );
-}
+};
 
-export default Profile;
+export default ProfilePage;
