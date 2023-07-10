@@ -40,11 +40,7 @@ const Feed = ({ navigate }) => {
   if (token) {
     return (
       <>
-
         <h2>Posts</h2>
-        <button onClick={handleRefresh}>Update Feed</button> 
-
-        <button onClick={logout}>Logout</button>
         <div id="new-post">
           <CreatePost handleRefresh={handleRefresh} />
         </div>
@@ -53,6 +49,7 @@ const Feed = ({ navigate }) => {
             <Post post={post} key={post._id} />
           ))}
         </div>
+        <button onClick={logout}>Logout</button>
         <div></div>
       </>
     );
