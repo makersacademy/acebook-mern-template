@@ -36,8 +36,6 @@ const tokenChecker = (req, res, next) => {
       res.status(401).json({ message: "auth error" });
     } else {
       req.user_id = payload.user_id;
-      console.log("this is in the payload");
-      console.log(payload.user_id);
       next();
     }
   });
@@ -52,7 +50,7 @@ app.use("/notifications", tokenChecker, notificationsRouter);
 app.use("/comments", tokenChecker, commentsRouter);
 app.use("/tokens", tokensRouter);
 app.use("/users", usersRouter);
-// app.use("/likes", likesRouter);
+app.use("/likes", tokenChecker, likesRouter);
 // app.use("/", postsRouter); // work this out!!
 
 // catch 404 and forward to error handler
