@@ -1,13 +1,22 @@
 const mongoose = require("mongoose");
-
-require("../mongodb_helper");
 const User = require("../../models/user");
 
+jest.mock("../../models/user", () => {
+  return jest.fn().mockImplementation((user) => {
+    return {
+      email: user.email,
+      password: user.password,
+      save: jest.fn().mockImplementationOnce((callback) => callback(null)),
+      toObject: () => ({ ...user }),
+    };
+  });
+});
+
+User.find = jest.fn().mockImplementationOnce((callback) => callback(null, []));
+
 describe("User model", () => {
-  beforeEach((done) => {
-    mongoose.connection.collections.users.drop(() => {
-      done();
-    });
+  beforeEach(() => {
+    jest.clearAllMocks();
   });
 
   it("has an email address", () => {
@@ -27,6 +36,9 @@ describe("User model", () => {
   });
 
   it("can list all users", (done) => {
+    const findSpy = jest.spyOn(User, "find");
+    findSpy.mockImplementationOnce((callback) => callback(null, []));
+
     User.find((err, users) => {
       expect(err).toBeNull();
       expect(users).toEqual([]);
@@ -40,13 +52,19 @@ describe("User model", () => {
       password: "password",
     });
 
+    User.find = jest
+      .fn()
+      .mockImplementationOnce((callback) => callback(null, [user]));
+
     user.save((err) => {
       expect(err).toBeNull();
 
       User.find((err, users) => {
         expect(err).toBeNull();
 
-        expect(users[0]).toMatchObject({
+        const userObject = users[0].toObject();
+
+        expect(userObject).toMatchObject({
           email: "someone@example.com",
           password: "password",
         });
