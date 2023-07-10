@@ -10,7 +10,7 @@ const Feed = ({ navigate }) => {
   const [posts, setPosts] = useState([]);
   const [token, setToken] = useState(window.localStorage.getItem("token"));
   const [comments, setComments] = useState([]);
-  const [likes, setLikes] = useState(0);
+  const [likes, setLikes] = useState([]);
 
   useEffect(() => {
     const fetchPosts = async () => {
@@ -62,6 +62,7 @@ const Feed = ({ navigate }) => {
         });
         const data = await response.json();
         window.localStorage.setItem("token", data.token);
+        setToken(window.localStorage.getItem("token"));
         setLikes(data.likes);
       } else {
         setLikes([]); // Set empty likes array when there is no token
@@ -69,7 +70,7 @@ const Feed = ({ navigate }) => {
     };
 
     fetchLikes();
-  }, []);
+  }, [token]);
 
   const handleNewPost = (post) => {
     setPosts((prevPosts) => {
@@ -78,17 +79,26 @@ const Feed = ({ navigate }) => {
       return reversedPosts;
     });
   };
+
   const handleNewComment = (comment) => {
-    // console.log(`This is in handleNewComment ${comment}`);
     setComments((prevComments) => {
       const newComments = [...prevComments, comment];
       const reversedComments = newComments.reverse();
       return reversedComments;
     });
   };
-  const handleNewLike = () => {
-    setLikes((prevLikes) => prevLikes + 1); // Update likes with the previous state value
-    console.log(setLikes);
+
+  const handleNewLike = (postId) => {
+    setLikes((prevLikes) => {
+      const existingLike = prevLikes.find((like) => like.postId === postId);
+      if (existingLike) {
+        // Remove the like from the likes array
+        return prevLikes.filter((like) => like.postId !== postId);
+      } else {
+        // Add the new like to the likes array
+        return [...prevLikes, { postId }];
+      }
+    });
   };
 
   if (token) {
@@ -108,7 +118,9 @@ const Feed = ({ navigate }) => {
                   postId={post._id}
                   onNewLike={handleNewLike}
                 />
-                <Like like={likes} />
+                <Like
+                  like={likes.filter((like) => like.postId === post._id).length}
+                />
                 <CommentForm
                   token={token}
                   onNewComment={handleNewComment}

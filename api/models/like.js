@@ -6,7 +6,6 @@ const LikeSchema = new mongoose.Schema({
     type: mongoose.Schema.Types.ObjectId,
     ref: "posts",
   },
-  likes: Number,
 });
 
 const Like = mongoose.model("Like", LikeSchema);

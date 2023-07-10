@@ -1,35 +1,41 @@
 import React, { useState } from "react";
 
-const LikeForm = (props) => {
-  const [likes, setLikes] = useState(0); // Initialize likes with the existing value or 0
+const LikeForm = ({ token, postId, onNewLike }) => {
+  const [liked, setLiked] = useState(false); // Track whether the user has liked the post
 
-  const handleLike = (event) => {
-    event.preventDefault();
-    console.log(props.postId);
-
-    fetch(`/likes`, {
-      method: "post",
-      headers: {
-        Authorization: `Bearer ${props.token}`,
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        token: props.token,
-      }),
-    })
-      .then((response) => response.json())
-      .then((data) => {
-        console.log("Response data:", data);
-        setLikes(likes + 1);
-      });
+  const handleLike = async () => {
+    try {
+      if (!liked) {
+        await fetch(`/likes`, {
+          method: "post",
+          headers: {
+            Authorization: `Bearer ${token}`,
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ token }),
+        });
+        setLiked(true); // Set liked state to true when like is successful
+        onNewLike(postId); // Call the onNewLike callback to update the likes count
+      } else {
+        await fetch(`/likes/${postId}/unlike`, {
+          method: "post",
+          headers: {
+            Authorization: `Bearer ${token}`,
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ token }),
+        });
+        setLiked(false); // Set liked state to false when unlike is successful
+        onNewLike(postId); // Call the onNewLike callback to update the likes count
+      }
+    } catch (error) {
+      console.error("Error liking/unliking post:", error);
+    }
   };
 
   return (
     <>
-      <div className="likes">Likes: {likes}</div>{" "}
-      {/* Display the likes count */}
       <button onClick={handleLike}>
-        {/* Use an emoji, such as a thumbs-up */}
         <span role="img" aria-label="like">
           👍
         </span>

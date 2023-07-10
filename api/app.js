@@ -22,7 +22,6 @@ const app = express();
 
 // middleware function to check for valid tokens
 const tokenChecker = (req, res, next) => {
-  console.log(req.body);
   let token;
   const authHeader = req.get("Authorization");
 
@@ -49,7 +48,7 @@ app.use("/profiles", tokenChecker, profilesRouter);
 app.use("/notifications", tokenChecker, notificationsRouter);
 app.use("/comments", tokenChecker, commentsRouter);
 app.use("/tokens", tokensRouter);
-app.use("/users", usersRouter);
+app.use("/users", tokenChecker, usersRouter);
 app.use("/likes", tokenChecker, likesRouter);
 // app.use("/", postsRouter); // work this out!!
 
