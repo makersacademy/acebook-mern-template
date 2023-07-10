@@ -52,7 +52,7 @@ app.use("/notifications", tokenChecker, notificationsRouter);
 app.use("/comments", tokenChecker, commentsRouter);
 app.use("/tokens", tokensRouter);
 app.use("/users", usersRouter);
-app.use("/likes", likesRouter);
+// app.use("/likes", likesRouter);
 // app.use("/", postsRouter); // work this out!!
 
 // catch 404 and forward to error handler
