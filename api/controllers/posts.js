@@ -10,9 +10,7 @@ const PostsController = {
       if (err) {
         throw err;
       }
-      console.log(req);
       const token = await TokenGenerator.jsonwebtoken(req.user_id);
-      console.log(token);
       res.status(200).json({ posts: posts, token: token });
     });
   },
@@ -70,7 +68,6 @@ const PostsController = {
     }
   },
   GetImage: (req, res) => {
-    console.log(req);
     Post.findById(req.params.postId, (err, post) => {
       if (err) {
         console.error(err);

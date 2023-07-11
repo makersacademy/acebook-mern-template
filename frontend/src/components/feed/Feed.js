@@ -3,14 +3,17 @@ import Post from "../post/Post";
 import Comment from "../comment/Comment";
 import PostForm from "../post/PostForm";
 import CommentForm from "../comment/CommentForm";
-import LikeForm from "../likes/LikeForm";
-import Like from "../likes/Like";
+import PostLikeForm from "../likes/PostLikeForm";
+import CommentLikeForm from "../likes/CommentLikeForm";
+import PostLike from "../likes/PostLike";
+import CommentLike from "../likes/CommentLike";
 
 const Feed = ({ navigate }) => {
   const [posts, setPosts] = useState([]);
   const [token, setToken] = useState(window.localStorage.getItem("token"));
   const [comments, setComments] = useState([]);
-  const [likes, setLikes] = useState([]);
+  const [postlikes, setPostLikes] = useState([]);
+  const [commentlikes, setCommentLikes] = useState([]);
 
   useEffect(() => {
     const fetchPosts = async () => {
@@ -53,9 +56,9 @@ const Feed = ({ navigate }) => {
   }, [token]);
 
   useEffect(() => {
-    const fetchLikes = async () => {
+    const fetchPostLikes = async () => {
       if (token && token !== "null" && token !== "undefined") {
-        const response = await fetch("/likes", {
+        const response = await fetch("/postlikes", {
           headers: {
             Authorization: `Bearer ${token}`,
           },
@@ -63,13 +66,33 @@ const Feed = ({ navigate }) => {
         const data = await response.json();
         window.localStorage.setItem("token", data.token);
         setToken(window.localStorage.getItem("token"));
-        setLikes(data.likes);
+        setPostLikes(data.likes);
       } else {
-        setLikes([]); // Set empty likes array when there is no token
+        setPostLikes([]); // Set empty likes array when there is no token
       }
     };
 
-    fetchLikes();
+    fetchPostLikes();
+  }, [token]);
+
+  useEffect(() => {
+    const fetchCommentLikes = async () => {
+      if (token && token !== "null" && token !== "undefined") {
+        const response = await fetch("/commentlikes", {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
+        const data = await response.json();
+        window.localStorage.setItem("token", data.token);
+        setToken(window.localStorage.getItem("token"));
+        setCommentLikes(data.likes);
+      } else {
+        setCommentLikes([]); // Set empty likes array when there is no token
+      }
+    };
+
+    fetchCommentLikes();
   }, [token]);
 
   const handleNewPost = (post) => {
@@ -88,8 +111,8 @@ const Feed = ({ navigate }) => {
     });
   };
 
-  const handleNewLike = (postId) => {
-    setLikes((prevLikes) => {
+  const handleNewPostLike = (postId, token) => {
+    setPostLikes((prevLikes) => {
       const existingLike = prevLikes.find((like) => like.postId === postId);
       if (existingLike) {
         // Remove the like from the likes array
@@ -101,7 +124,22 @@ const Feed = ({ navigate }) => {
     });
   };
 
-  if (token) {
+  const handleNewCommentLike = (commentId, token) => {
+    setCommentLikes((prevLikes) => {
+      const existingLike = prevLikes.find(
+        (like) => like.commentId === commentId
+      );
+      if (existingLike) {
+        // Remove the like from the likes array
+        return prevLikes.filter((like) => like.commentId !== commentId);
+      } else {
+        // Add the new like to the likes array
+        return [...prevLikes, { commentId }];
+      }
+    });
+  };
+
+  if (token && token !== "null" && token !== "undefined") {
     return (
       <>
         <div className="create-post-container">
@@ -113,13 +151,15 @@ const Feed = ({ navigate }) => {
             {posts.map((post) => (
               <div key={post._id} className="post-container">
                 <Post post={post} token={token} />
-                <LikeForm
+                <PostLikeForm
                   token={token}
                   postId={post._id}
-                  onNewLike={handleNewLike}
+                  onNewLike={(postId) => handleNewPostLike(postId, token)} // Pass token along with postId
                 />
-                <Like
-                  like={likes.filter((like) => like.postId === post._id).length}
+                <PostLike
+                  like={
+                    postlikes.filter((like) => like.postId === post._id).length
+                  }
                 />
                 <CommentForm
                   token={token}
@@ -130,7 +170,23 @@ const Feed = ({ navigate }) => {
                   {comments
                     .filter((comment) => comment.postId === post._id)
                     .map((comment) => (
-                      <Comment comment={comment} key={comment._id} />
+                      <>
+                        <Comment comment={comment} key={comment._id} />
+                        <CommentLikeForm
+                          token={token}
+                          commentId={comment._id}
+                          onNewLike={(commentId) =>
+                            handleNewCommentLike(commentId, token)
+                          } // Pass token along with postId
+                        />
+                        <CommentLike
+                          like={
+                            commentlikes.filter(
+                              (like) => like.commentId === comment._id
+                            ).length
+                          }
+                        />
+                      </>
                     ))}
                 </div>
               </div>

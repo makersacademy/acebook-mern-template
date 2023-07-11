@@ -15,8 +15,8 @@ const tokensRouter = require("./routes/tokens");
 const usersRouter = require("./routes/users");
 const notificationsRouter = require("./routes/notifications");
 const profilesRouter = require("./routes/profiles");
-const likesRouter = require("./routes/likes");
-const profilesRouter = require("./routes/profiles");
+const postlikesRouter = require("./routes/postlikes");
+const commentlikesRouter = require("./routes/commentlikes");
 
 const app = express();
 
@@ -49,8 +49,9 @@ app.use("/profiles", tokenChecker, profilesRouter);
 app.use("/notifications", tokenChecker, notificationsRouter);
 app.use("/comments", tokenChecker, commentsRouter);
 app.use("/tokens", tokensRouter);
-app.use("/users", tokenChecker, usersRouter);
-app.use("/likes", tokenChecker, likesRouter);
+app.use("/users", usersRouter);
+app.use("/postlikes", tokenChecker, postlikesRouter);
+app.use("/commentlikes", tokenChecker, commentlikesRouter);
 // app.use("/", postsRouter); // work this out!!
 
 // catch 404 and forward to error handler
