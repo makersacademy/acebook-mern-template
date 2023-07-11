@@ -24,6 +24,8 @@ const storage = multer.diskStorage({
 
 const upload = multer({ storage: storage });
 
+// Check if this needs to be required by controller. 
+
 // setup for receiving JSON
 app.use(express.json());
 app.use(logger("dev"));

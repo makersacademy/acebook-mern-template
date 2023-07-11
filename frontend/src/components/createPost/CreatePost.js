@@ -5,7 +5,7 @@ import '../../index.css';
 const CreatePost = ({ handleRefresh }) => {
   const [message, setMessage] = useState("");
   const [token] = useState(window.localStorage.getItem("token"));
-  const [file, setFile] = useState(null);
+  const [file, setFile] = useState("");
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -36,7 +36,7 @@ const CreatePost = ({ handleRefresh }) => {
     if (response.ok) {
       setMessage(""); 
       handleRefresh(); 
-      setFile(null);
+      setFile("");
     }
 
   };
