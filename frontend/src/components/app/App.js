@@ -44,6 +44,7 @@ const App = () => {
     const token = window.localStorage.getItem("token");
     if (token && token !== "null" && token !== "undefined") {
       const decodedToken = jwt_decode(token);
+      console.log(decodedToken.user_id);
       setUserId(decodedToken.user_id); // <-- Use 'setUserId' here instead of declaring a new 'userId'
       setIsUserLoggedIn(true);
     }
@@ -87,7 +88,7 @@ const App = () => {
                 }
               />
               <Route
-                path="/profile/:id"
+                path="/profiles/:id"
                 element={
                   isUserLoggedIn ? (
                     <Profile />
