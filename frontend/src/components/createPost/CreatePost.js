@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import '../../index.css';
-import axios from "axios";
 
 
 const CreatePost = ({ handleRefresh }) => {
@@ -53,7 +52,7 @@ const CreatePost = ({ handleRefresh }) => {
 
 
   return (
-    <form onSubmit={handleSubmit}>
+    <form onSubmit={handleSubmit} encType="multipart/form-data">
       Post:{" "}
       <input
         id="message"
