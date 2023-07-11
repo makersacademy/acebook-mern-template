@@ -17,7 +17,7 @@ const CreatePost = ({ handleRefresh }) => {
     
     const formData = new FormData(); // added this line to convert data to JSON, also added the image file. 
     formData.append("data", JSON.stringify(jsonData));
-    formData.append("image", file);
+    formData.append("photo", file);
 
 
     let response = await fetch("/posts", {
@@ -47,7 +47,6 @@ const CreatePost = ({ handleRefresh }) => {
 
   const handleFileChange = (event) => {
     setFile(event.target.files[0]);
-    console.log(file)
   };
 
 
@@ -61,12 +60,9 @@ const CreatePost = ({ handleRefresh }) => {
         onChange={handleMessageChange}
       />
         <input
-        id="image"
+        id="photo"
         type="file"
-        accept=" .png, .jpeg, .jpg"
-        name="image"
-        value={image}
-        onChange={handleFileChange}
+        onSubmit={handleFileChange}
       />
       <input 
       role="submit-button" 

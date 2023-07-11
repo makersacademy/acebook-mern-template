@@ -26,10 +26,9 @@ const upload = multer({ storage: storage });
 
 // setup for receiving JSON
 app.use(express.json());
-
 app.use(logger("dev"));
 app.use(express.json());
-app.use(express.static(path.join(__dirname, "uploads"))); //check
+app.use(express.static(path.join(__dirname, 'uploads'))); //check
 
 // middleware function to check for valid tokens
 const tokenChecker = (req, res, next) => {

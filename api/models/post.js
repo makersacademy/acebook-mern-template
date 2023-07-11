@@ -3,7 +3,7 @@ const mongoose = require("mongoose");
 const PostSchema = new mongoose.Schema({
   user: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
   message: String,
-  image: { type: String },
+  photo: { type: String },
   created_at: {
     type: Date,
     default: Date.now,
