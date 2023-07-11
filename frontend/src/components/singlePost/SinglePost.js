@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import Post from "../post/Post";
+import CreateComment from "../createComment/CreateComment";
 
 const SinglePost = ({ navigate }) => {
   const [post, setPost] = useState({
@@ -10,6 +11,7 @@ const SinglePost = ({ navigate }) => {
   });
   const [token, setToken] = useState(window.localStorage.getItem("token"));
   const params = useParams();
+  const [refreshFeed, setRefreshFeed] = useState(false);
 
   useEffect(() => {
     if (token) {
@@ -23,9 +25,14 @@ const SinglePost = ({ navigate }) => {
           window.localStorage.setItem("token", data.token);
           setToken(window.localStorage.getItem("token"));
           setPost(data.post);
+          setRefreshFeed(false);
         });
     }
-  }, []);
+  }, [refreshFeed]);
+
+  const handleRefresh = () => {
+    setRefreshFeed(true); // Trigger the refresh action
+  };
 
   if (token) {
     return (
@@ -33,6 +40,9 @@ const SinglePost = ({ navigate }) => {
         <h2>Post</h2>
         <div id="feed" role="feed">
           <Post post={post} key={post._id} />
+        </div>
+        <div id="new-comment">
+          <CreateComment handleRefresh={handleRefresh}/>
         </div>
       </>
     );
