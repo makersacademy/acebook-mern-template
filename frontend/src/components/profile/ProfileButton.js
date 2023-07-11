@@ -4,7 +4,7 @@ import React from "react";
 
 const ProfileButton = ({ userId }) => {
   return (
-    <Link to={`/profile/${userId}`}>
+    <Link to={`/profiles/${userId}`}>
       <button className="profile-button">Profile</button>
     </Link>
   );

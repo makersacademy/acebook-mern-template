@@ -87,10 +87,10 @@ const App = () => {
                 }
               />
               <Route
-                path="/profile/:id"
+                path="/profiles/:id"
                 element={
                   isUserLoggedIn ? (
-                    <Profile />
+                    <Profile userId={userId} />
                   ) : (
                     <div>Please log in to see the profile.</div>
                   )

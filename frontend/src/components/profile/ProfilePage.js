@@ -4,20 +4,19 @@ import ProfileInfoForm from "./ProfileInfoForm";
 import { useParams } from "react-router-dom";
 import "./ProfilePage.css";
 
-const ProfilePage = () => {
+const ProfilePage = ({ userId }) => {
   const [profileData, setProfileData] = useState(null);
   const [name, setName] = useState("");
   const [bio, setBio] = useState("");
   const [profileImageSrc, setProfileImageSrc] = useState(null);
 
-  const { id } = useParams();
 
   useEffect(() => {
     fetchProfileData();
   }, []);
 
   const fetchProfileData = () => {
-    fetch(`/profiles/${id}`, {
+    fetch(`/profiles/${userId}`, {
       headers: {
         Authorization: `Bearer ${localStorage.getItem("token")}`,
       },
@@ -29,7 +28,7 @@ const ProfilePage = () => {
         setBio(data.bio);
 
         if (data.image) {
-          fetch(`/profiles/${id}/profileImage`, {
+          fetch(`/profiles/${userId}/profileImage`, {
             headers: {
               Authorization: `Bearer ${localStorage.getItem("token")}`,
             },
@@ -81,7 +80,7 @@ const ProfilePage = () => {
           <ProfileImageForm
             token={localStorage.getItem("token")}
             onProfileImageChange={handleProfileImageChange}
-            userId={id}
+            userId={userId}
           />
         </div>
       </div>
@@ -95,7 +94,7 @@ const ProfilePage = () => {
           token={localStorage.getItem("token")}
           onProfileDataChange={handleProfileDataChange}
           currentData={profileData}
-          userId={id}
+          userId={userId}
         />
       </div>
 
