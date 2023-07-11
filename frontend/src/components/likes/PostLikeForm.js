@@ -45,7 +45,7 @@ const PostLikeForm = ({ token, postId, onNewLike }) => {
     <>
       <button onClick={handleLike}>
         <span role="img" aria-label="like">
-          {liked ? "👍" : "👍"}
+          {liked ? "_xxxxxx👍" : "👍"}
         </span>
       </button>
     </>

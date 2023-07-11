@@ -14,6 +14,17 @@ const PostLikesController = {
     }
   },
 
+  FindPostLike: async (req, res) => {
+    try {
+      const likes = await PostLike.findById(req.postId);
+      const token = await TokenGenerator.jsonwebtoken(req.user_id);
+      res.status(200).json({ likes: likes, token: token });
+    } catch (err) {
+      console.error(err);
+      res.status(500).json({ message: "Internal Server Error" });
+    }
+  },
+
   Create: async (req, res) => {
     const postId = req.body.postId;
     const userId = req.user_id;

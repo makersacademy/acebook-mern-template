@@ -14,7 +14,7 @@ const CommentLikesController = {
     }
   },
 
-  Create: async (req, res) => {
+  Like: async (req, res) => {
     const commentId = req.body.commentId;
     const userId = req.user_id;
 
@@ -52,7 +52,7 @@ const CommentLikesController = {
     }
   },
 
-  Delete: async (req, res) => {
+  Unlike: async (req, res) => {
     try {
       const commentId = req.body.commentId;
       const userId = req.user_id;

@@ -24,6 +24,8 @@ const Feed = ({ navigate }) => {
           },
         });
         const data = await response.json();
+        console.log("console log from line 27. Print out all posts");
+        console.log(data);
         window.localStorage.setItem("token", data.token);
         setToken(window.localStorage.getItem("token"));
         setPosts(data.posts.reverse());
@@ -113,13 +115,15 @@ const Feed = ({ navigate }) => {
 
   const handleNewPostLike = (postId, token) => {
     setPostLikes((prevLikes) => {
-      const existingLike = prevLikes.find((like) => like.postId === postId);
-      if (existingLike) {
-        // Remove the like from the likes array
-        return prevLikes.filter((like) => like.postId !== postId);
-      } else {
-        // Add the new like to the likes array
-        return [...prevLikes, { postId }];
+      if (prevLikes !== null) {
+        const existingLike = prevLikes.find((like) => like.postId === postId);
+        if (existingLike) {
+          // Remove the like from the likes array
+          return prevLikes.filter((like) => like.postId !== postId);
+        } else {
+          // Add the new like to the likes array
+          return [...prevLikes, { postId }];
+        }
       }
     });
   };
@@ -157,8 +161,12 @@ const Feed = ({ navigate }) => {
                   onNewLike={(postId) => handleNewPostLike(postId, token)} // Pass token along with postId
                 />
                 <PostLike
+                  haha={console.log(postlikes)}
                   like={
-                    postlikes.filter((like) => like.postId === post._id).length
+                    postlikes !== null
+                      ? postlikes.filter((like) => like.postId === post._id)[0]
+                          .likes.length
+                      : null
                   }
                 />
                 <CommentForm
@@ -181,9 +189,11 @@ const Feed = ({ navigate }) => {
                         />
                         <CommentLike
                           like={
-                            commentlikes.filter(
-                              (like) => like.commentId === comment._id
-                            ).length
+                            postlikes !== null
+                              ? postlikes.filter(
+                                  (like) => like.postId === post._id
+                                ).length
+                              : null
                           }
                         />
                       </>
