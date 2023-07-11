@@ -3,45 +3,66 @@ const User = require("../models/user");
 const TokenGenerator = require("../models/token_generator");
 
 const PostsController = {
-  Index: (req, res) => {
-    console.log("Index query...");
-    Post.find()
-      .populate("user")
-      .sort({ created_at: -1 })
-      .exec(async (err, posts) => {
-        if (err) {
-          throw err;
-        }
-        const token = await TokenGenerator.jsonwebtoken(req.user_id);
-        res.status(200).json({ posts: posts, token: token });
-      });
-  },
-  SinglePost: (req, res) => {
-    console.log("Single post query...");
-    Post.findById(req.params.id)
-      .populate("user")
-      .exec(async (err, post) => {
-        if (err) {
-          throw err;
-        }
-        console.log(post);
-        const token = await TokenGenerator.jsonwebtoken(req.user_id);
-        res.status(200).json({ post: post, token: token });
-      });
-  },
-  Create: (req, res) => {
-    const post = new Post(req.body);
-
-    User.findById(req.user_id).exec(async (err, user) => {
-      console.log(user);
-      post.user = user._id;
-      await post.save();
-
-      console.log(post);
+  Index: async (req, res) => {
+    try {
+      console.log("Index query...");
+      const posts = await Post.find()
+        .populate("user")
+        .sort({ created_at: -1 })
+        .exec();
 
       const token = await TokenGenerator.jsonwebtoken(req.user_id);
-      res.status(201).json({ message: "OK", token: token });
-    });
+      res.status(200).json({ posts: posts, token: token });
+    } catch (err) {
+      res.status(500).json({ error: err.message });
+    }
+  },
+  SinglePost: async (req, res) => {
+    try {
+      console.log("Single post query...");
+      const post = await Post.findById(req.params.id)
+        .populate("user")
+        .exec();
+
+      const token = await TokenGenerator.jsonwebtoken(req.user_id);
+      res.status(200).json({ post: post, token: token });
+    } catch (err) {
+      res.status(500).json({ error: err.message });
+    }
+  },
+  Create: async (req, res) => {
+    // if (!req.file) {
+    //   return res.status(400).json({ error: "Photo is required." });
+    // }
+    console.log(req.body.message);
+    try {
+      const user = await User.findById(req.user_id).exec();
+      if (!user) {
+        return res.status(404).json({ error: "User not found." });
+      }
+      console.log(req.file.filename);
+      console.log(typeof(req.file.filename));
+       if (req.file.filename) { 
+        const post = new Post({
+          message: req.body.message,
+          photo: req.file.filename,
+          user: user._id,
+        });
+      } else {
+        const post = new Post({
+          message: req.body.message,
+          user: user._id,
+        });
+      }
+      
+
+      await post.save();
+
+      const token = await TokenGenerator.jsonwebtoken(req.user_id);
+      res.status(201).json({ message: "Post created successfully.", token });
+    } catch (err) {
+      res.status(500).json({ error: err.message });
+    }
   },
 };
 

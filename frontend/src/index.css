@@ -95,7 +95,7 @@ h1 {
 
 
 .posts {
-  display: flex;
+  /* display: flex; */
   flex-direction: column;
   justify-content: center;
   color: #f21847;

@@ -1,44 +1,38 @@
 import React, { useState } from "react";
-import '../../index.css';
-
+import "../../index.css";
 
 const CreatePost = ({ handleRefresh }) => {
   const [message, setMessage] = useState("");
   const [token] = useState(window.localStorage.getItem("token"));
-  const [file, setFile] = useState("");
+  const [file, setFile] = useState(null);
 
   const handleSubmit = async (event) => {
     event.preventDefault();
 
-    const jsonData = {
-      message: message,
-      createdAt: new Date().toISOString(),
-    };
-    
-    const formData = new FormData(); // added this line to convert data to JSON, also added the image file. 
-    formData.append("data", JSON.stringify(jsonData));
-    formData.append("photo", file);
+    const formData = new FormData();
+    formData.append("message", message);
+    formData.append("image", file);
 
+    try {
+      const response = await fetch("/posts", {
+        method: "POST",
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+        body: formData,
+      });
 
-    let response = await fetch("/posts", {
-      method: "post",
-      headers: {
-        Authorization: `Bearer ${token}`,
-        "Content-Type": "multipart/form-data", // changed this line from "application/json"
-        body: formData  // changed this line to formData
-      },
-      // removed this line, and added const above fetch req was: body: JSON.stringify({ message: message, createdAt: new Date().toISOString() }),
-      
-    });
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
 
-    // amend the fetch request, to include sending across a photo...
-
-    if (response.ok) {
-      setMessage(""); 
-      handleRefresh(); 
-      setFile("");
+      setMessage("");
+      handleRefresh();
+      setFile(null);
+    } catch (error) {
+      console.error("An error occurred while creating the post", error);
+      // Here you could also update your UI to notify the user that an error occurred
     }
-
   };
 
   const handleMessageChange = (event) => {
@@ -49,7 +43,6 @@ const CreatePost = ({ handleRefresh }) => {
     setFile(event.target.files[0]);
   };
 
-
   return (
     <form onSubmit={handleSubmit} encType="multipart/form-data">
       Post:{" "}
@@ -59,17 +52,14 @@ const CreatePost = ({ handleRefresh }) => {
         value={message}
         onChange={handleMessageChange}
       />
-        <input
-        id="photo"
-        type="file"
-        onSubmit={handleFileChange}
+      <input id="photo" type="file" onChange={handleFileChange} />
+      <input
+        role="submit-button"
+        id="submit"
+        type="submit"
+        value="Submit"
+        className="submit-button"
       />
-      <input 
-      role="submit-button" 
-      id="submit" 
-      type="submit" 
-      value="Submit" 
-      className="submit-button" />
     </form>
   );
 };

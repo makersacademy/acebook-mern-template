@@ -1,99 +1,87 @@
-body {
-    background-color: #e9ebee;
-    font-family: Arial, sans-serif;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    margin: 0;
-    padding: 0;
-  }
-  
-  h1 {
-    text-align: center;
-    color: #166fe5;
+.container {
+  display: flex;
+  flex-wrap: wrap;
 }
-  .wrapper {
-    display: flex;
-    flex-direction: row-reverse;
-    justify-content: center;
-    align-items: stretch; 
-    width: 700px; 
-    max-width: 800px;
-    margin: auto; 
-    gap: 20px;   
-  }
-  
-  .image-container {
-    background-image: url('https://media.istockphoto.com/id/1371940128/photo/multiracial-friends-taking-big-group-selfie-shot-smiling-at-camera-laughing-young-people.jpg?s=1024x1024&w=is&k=20&c=X-lSpe2zwmknKdbGN1dYNk0VL8FoHFQzlhsjICaUkVA=');
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-position: center;
-    width: 125%;
-  }
-  
-  .container {
-    background-color: #fff;
-    padding: 20px;
-    border-radius: 0px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    width: 125%;
-  }
 
+/* .left-side {
+  flex: 0 0 30%;
+  padding: 20px;
+  border-right: 1px solid #ccc;
+}
 
-.container input[type="text"],
-  .container input[type="password"] {
-    width: 100%;
-    padding: 10px;
-    margin-bottom: 15px;
-    border: 1px solid #ddd;
-    border-radius: 3px;
-    box-sizing: border-box;
-  }
-  
-  .container input[type="submit"],
-  .container button {
-    width: 100%;
-    padding: 10px;
-    background-color: #f21847;
-    border: none;
-    color: #fff;
-    font-weight: bold;
-    border-radius: 3px;
-    cursor: pointer;
-    margin-bottom: 10px;
-    background-color: #166fe5;
+.right-side {
+  flex: 1;
+  padding: 20px;
+  overflow-y: auto;
+} */
 
-  }
-  
-  .container input[type="submit"]:hover,
-  .container button:hover {
-    background-color: #166fe5;
-  }
-  
-  .forgot-password,
-  .create-account {
-    text-align: center;
-    margin: 10px 0;
-  }
-  
-  .sign-up-button {
-    background-color: #008000 !important;
+.post {
+  background-color: #fff;
+  border: 1px solid #ccc;
+  padding: 10px;
+  margin-bottom: 10px;
+  border-radius: 10px;
+}
 
-  }
-  
-  .sign-up-button:hover {
-    background-color: #006600; 
-  }
+.post-header {
+  display: flex;
+  align-items: center;
+  margin-bottom: 5px;
+}
 
+.post-username {
+  font-weight: bold;
+  margin-right: 5px;
+}
+
+.post-date {
+  color: #999;
+  font-size: 0.8rem;
+}
+
+.post-message {
+  margin-bottom: 10px;
+}
+
+.post-image {
+  max-width: 50%;
+  height: 30%;
+  margin-bottom: 10px;
+}
+
+.post-link {
+  color: #1e90ff;
+}
+
+/* Custom scrollbar for the feed */
+.right-side::-webkit-scrollbar {
+  width: 6px;
+}
+
+.right-side::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+.right-side::-webkit-scrollbar-thumb {
+  background: #888;
+}
+
+.right-side::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
 
 /* Mobile view */
 @media (max-width: 768px) {
-  .image-container {
-    display: none;
-  }
-  
   .container {
-    width: 100%;
+    flex-direction: column;
+  }
+
+  .left-side {
+    flex: 0 0 100%;
+    border-right: none;
+  }
+
+  .right-side {
+    flex: 0 0 100%;
   }
 }
