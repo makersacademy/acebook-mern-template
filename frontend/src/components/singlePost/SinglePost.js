@@ -2,12 +2,14 @@ import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import Post from "../post/Post";
 import CreateComment from "../createComment/CreateComment";
+import Comment from "./Comment";
 
 const SinglePost = ({ navigate }) => {
   const [post, setPost] = useState({
     user: { email: "" },
     message: "",
     _id: "",
+    comments: [{user: {email:""}, comment: "", _id: ""}],
   });
   const [token, setToken] = useState(window.localStorage.getItem("token"));
   const params = useParams();
@@ -44,6 +46,13 @@ const SinglePost = ({ navigate }) => {
         <div id="new-comment">
           <CreateComment handleRefresh={handleRefresh}/>
         </div>
+        <div id="comments" role="comment">
+          {/* {post.comments.map((comment) => {
+              console.log(comment);
+              return <Comment comment={comment} key={comment._id} />;
+          })} */}
+          <Comment comment={post.comments[0]} key={post.comments[0]._id} />
+</div>
       </>
     );
   } else {
