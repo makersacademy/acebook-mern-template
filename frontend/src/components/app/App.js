@@ -63,6 +63,7 @@ const App = () => {
           onSignup={handleSignup}
           onNotifications={handleNotifications}
           onLogout={handleLogout}
+          isUserLoggedIn={isUserLoggedIn}
         />
 
         <div className="content">
