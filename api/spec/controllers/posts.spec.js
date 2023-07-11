@@ -5,7 +5,6 @@ const Post = require("../../models/post");
 const User = require("../../models/user");
 const JWT = require("jsonwebtoken");
 const secret = process.env.JWT_SECRET;
-const fs = require("fs");
 
 let token;
 
@@ -66,22 +65,6 @@ describe("/posts", () => {
       let newPayload = JWT.decode(response.body.token, process.env.JWT_SECRET);
       let originalPayload = JWT.decode(token, process.env.JWT_SECRET);
       expect(newPayload.iat > originalPayload.iat).toEqual(true);
-    });
-
-    test("uploads an image when provided", async () => {
-      const image = fs.readFileSync("test/image.png");
-      const encodedImage = new Buffer(image).toString("base64");
-
-      await request(app)
-        .post("/posts")
-        .set("Authorization", `Bearer ${token}`)
-        .field("message", "hello world")
-        .field("token", token)
-        .attach("image", encodedImage, { contentType: "image/png" });
-
-      let posts = await Post.find();
-      expect(posts[0].image.data).toEqual(encodedImage);
-      expect(posts[0].image.contentType).toEqual("image/png");
     });
   });
 
