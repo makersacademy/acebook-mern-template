@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import ProfileImageForm from "./ProfileImageForm";
 import ProfileInfoForm from "./ProfileInfoForm";
-import Modal from "../common/Modal"; // Import your Modal component
+import Post from "../post/Post";
 import "./ProfilePage.css";
 
 const ProfilePage = ({ userId, onClose }) => {
@@ -61,7 +61,7 @@ const ProfilePage = ({ userId, onClose }) => {
     return <div>Loading profile...</div>;
   }
 
-  const { username, followers } = profileData;
+  const { username, followers, posts } = profileData;
 
   return (
     <div className="container">
@@ -131,7 +131,15 @@ const ProfilePage = ({ userId, onClose }) => {
 
       <div className="my-posts-container">
         <h2>My Posts</h2>
-        <div className="my-posts">{/* Placeholder for posts */}</div>
+        <div className="my-posts">
+          {posts.map((post) => (
+            <Post
+              post={post}
+              token={localStorage.getItem("token")}
+              key={post._id}
+            />
+          ))}
+        </div>
       </div>
     </div>
   );

@@ -1,15 +1,18 @@
 const User = require("../models/user");
 const TokenGenerator = require("../models/token_generator");
+const Post = require("../models/post");
 
 const ProfileController = {
   GetProfile: async (req, res) => {
     try {
       const user = await User.findById(req.params.id);
-
       if (!user) {
         res.status(404).json({ message: "User not found" });
       } else {
         const { name, username, bio, followers, image } = user;
+
+        const posts = await Post.find({ authorId: user._id });
+
         const token = await TokenGenerator.jsonwebtoken(req.params.id);
 
         res.status(200).json({
@@ -18,7 +21,9 @@ const ProfileController = {
           bio,
           followers,
           image,
+          posts,
           token,
+          posts,
         });
       }
     } catch (err) {

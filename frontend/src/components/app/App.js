@@ -27,6 +27,9 @@ const App = () => {
   const [showNotificationModal, setShowNotificationModal] = useState(false);
   const [isUserLoggedIn, setIsUserLoggedIn] = useState(false);
   const [userId, setUserId] = useState(null);
+  const [selectedPost, setSelectedPost] = useState("");
+  const [showModal, setShowModal] = useState(false);
+
   const navigate = useNavigate();
 
   const handleLogin = () => setShowLoginForm(true); // Renamed to handleLogin
