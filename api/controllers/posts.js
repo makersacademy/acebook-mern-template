@@ -27,16 +27,25 @@ const PostsController = {
         res.status(200).json({ post: post, token: token });
       });
   },
-  Create: (req, res) => {
-    const post = new Post(req.body);
+  Create: async (req, res, next) => {
+    try {
+      const post = new Post({
+        user: req.user_id,
+        message: req.body.message,
+        photo: req.file ? req.file.filename : undefined,
+      });
+
 
     User.findById(req.user_id).exec(async (err, user) => {
       post.user = user._id;
+
       await post.save();
 
       const token = await TokenGenerator.jsonwebtoken(req.user_id);
       res.status(201).json({ message: "OK", token: token });
-    });
+    } catch (error) {
+      next(error);
+    }
   },
 };
 

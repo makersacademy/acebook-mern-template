@@ -14,10 +14,8 @@ const app = express();
 
 // setup for receiving JSON
 app.use(express.json());
-
 app.use(logger("dev"));
 app.use(express.json());
-app.use(express.static(path.join(__dirname, "public")));
 
 // middleware function to check for valid tokens
 const tokenChecker = (req, res, next) => {
@@ -30,7 +28,6 @@ const tokenChecker = (req, res, next) => {
 
   JWT.verify(token, process.env.JWT_SECRET, (err, payload) => {
     if (err) {
-      // console.log(err);
       res.status(401).json({ message: "auth error" });
     } else {
       req.user_id = payload.user_id;
@@ -39,11 +36,15 @@ const tokenChecker = (req, res, next) => {
   });
 };
 
+
 app.use("/posts", tokenChecker, postsRouter);
 app.use("/comments", tokenChecker, commentsRouter);
 app.use("/tokens", tokensRouter);
 app.use("/users", usersRouter);
 app.use("/likes", tokenChecker, likesRouter);
+
+// Serve static files from the 'uploads' directory
+app.use('/uploads', express.static('uploads'));
 
 // catch 404 and forward to error handler
 app.use((req, res, next) => {
