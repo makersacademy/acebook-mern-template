@@ -34,17 +34,10 @@ const Feed = ({ navigate }) => {
     setRefreshFeed(true); // Trigger the refresh action
   };
 
-  const handleLike = (postId) => {
-    // Logic to handle the like action
-    // Make a request to the backend API to update the likes count for the post
-    // Update the posts state with the updated post data
-  };
-
-  const handleUnlike = (postId) => {
-    // Logic to handle the unlike action
-    // Make a request to the backend API to update the likes count for the post
-    // Update the posts state with the updated post data
-  };
+  // const handleLike = (postId) => { 
+  // }; connect with backend
+  // const handleUnlike = (postId) => {
+  // }; connect with backend
 
   if (token) {
     return (
@@ -58,8 +51,8 @@ const Feed = ({ navigate }) => {
             <Post
               post={post}
               key={post._id}
-              onLike={handleLike}
-              onUnlike={handleUnlike}
+              // onLike={handleLike}
+              // onUnlike={handleUnlike}
             />
           ))}
         </div>
