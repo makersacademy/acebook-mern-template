@@ -17,6 +17,18 @@ describe("/posts", () => {
     });
     await user.save();
 
+    testPost = new Post({
+      username: "testUser",
+      time: "12:34 01-01-2023",
+      message: "Test post",
+      authorId: "testAuthorId",
+      image: {
+        data: Buffer.from("mockImageData").toString("base64"),
+        contentType: "image/jpeg",
+      },
+    });
+    await testPost.save();
+
     token = JWT.sign(
       {
         user_id: user.id,
@@ -74,6 +86,14 @@ describe("/posts", () => {
         .post("/posts")
         .send({ message: "hello again world" });
       expect(response.status).toEqual(401);
+    });
+
+    test("a token is not returned", async () => {
+      const response = await request(app)
+        .post("/posts")
+        .send({ message: "hello again world" });
+
+      expect(response.body.token).toBeUndefined();
     });
 
     test("a post is not created", async () => {
@@ -157,6 +177,159 @@ describe("/posts", () => {
       await post2.save();
       let response = await request(app).get("/posts");
       expect(response.body.token).toEqual(undefined);
+    });
+  });
+
+  const Notification = {
+    find: jest.fn(),
+  };
+
+  // Then you can use this mock in your test like this:
+
+  describe("POST, with a mention to a non-existing user", () => {
+    test("creates a post and no notification", async () => {
+      Notification.find.mockResolvedValue([]); // Mock the find method to return an empty array
+
+      let response = await request(app)
+        .post("/posts")
+        .set("Authorization", `Bearer ${token}`)
+        .send({ message: "hello @fakeUser" });
+      let posts = await Post.find();
+      expect(posts.length).toEqual(1);
+      expect(posts[0].message).toEqual("hello @fakeUser");
+
+      let notifications = await Notification.find();
+      expect(notifications.length).toEqual(0); // no notification should be created
+    });
+  });
+
+  describe("POST, with an image", () => {
+    test("uploads the image and adds it to the new post", async () => {
+      // Create a buffer that simulates an image file
+      const mockImage = Buffer.from([1, 0, 1, 0, 1, 0, 1, 0, 1, 0]);
+
+      let response = await request(app)
+        .post("/posts")
+        .set("Authorization", `Bearer ${token}`)
+        .attach("image", mockImage, "mock_image.jpg") // Attach the buffer as a file to the request
+        .field("message", "hello world");
+
+      // Assertions...
+
+      // For example, you could assert that the response's post object has an image property
+      expect(response.body.post.image).toBeTruthy();
+
+      // Or if the post model saves the image's data and contentType, you could retrieve the created post and compare the image data
+      let post = await Post.findById(response.body.post._id);
+      expect(post.image.data.toString()).toEqual(mockImage.toString());
+
+      expect(post.image.contentType).toEqual("image/jpeg"); // Assuming multer sets this contentType
+    });
+  });
+
+  describe("POST, with a valid request", () => {
+    test("creates a new post with a timestamp", async () => {
+      const OriginalDate = Date;
+      const mockDate = new Date(2023, 6, 12, 11, 21); // Month is 0-indexed
+      global.Date = jest.fn(() => mockDate);
+      global.Date.now = OriginalDate.now;
+
+      let response = await request(app)
+        .post("/posts")
+        .set("Authorization", `Bearer ${token}`)
+        .send({ message: "hello world" });
+
+      // Verify that the post object in the response has a 'time' property
+      expect(response.body.post.time).toBeTruthy();
+
+      // If the format of 'time' is known and consistent, you could even check that
+      // For example, if time is in the format "HH:MM DD-MM-YYYY"
+      expect(response.body.post.time).toMatch("11:21 12-7-2023");
+
+      global.Date = OriginalDate; // Remember to restore the original Date function after the test
+    });
+  });
+
+  describe("GET /posts - error case", () => {
+    beforeEach(() => {
+      server = app.listen();
+      jest
+        .spyOn(Post, "find")
+        .mockRejectedValue(new Error("Mock database error"));
+    });
+
+    afterEach((done) => {
+      Post.find.mockRestore();
+      server.close(done);
+    });
+
+    xit("handles database error", async () => {
+      const response = await request(server)
+        .get("/posts")
+        .set("Authorization", `Bearer ${token}`);
+
+      expect(response.status).toEqual(500);
+      expect(response.body.error).toEqual("Error: Mock database error");
+    });
+
+    describe("GET /posts/:postId/image - no image", () => {
+      it("should handle when the post does not have an image", async () => {
+        const postWithoutImage = new Post({ message: "post without image" });
+        await postWithoutImage.save();
+
+        const response = await request(app)
+          .get(`/posts/${postWithoutImage._id}/image`)
+          .set("Authorization", `Bearer ${token}`);
+
+        expect(response.status).toEqual(404);
+      });
+    });
+  });
+
+  describe("GET /image/:postId", () => {
+    test("returns the image for a valid post ID", async () => {
+      const postId = "fakePostId"; // Specify a fake post ID
+
+      // Mock the Post.findById method to return a post with mocked image data
+      const mockPost = {
+        _id: postId,
+        image: {
+          data: "mockImageData", // Mocked image data
+          contentType: "image/jpeg", // Mocked content type
+        },
+      };
+      jest.spyOn(Post, "findById").mockImplementation((postId, callback) => {
+        callback(null, mockPost);
+      });
+
+      // Perform a GET request to retrieve the image
+      const response = await request(app).get(`/posts/image/${postId}`);
+
+      // Assertions...
+      expect(response.status).toEqual(200);
+      expect(response.headers["content-type"]).toEqual("image/jpeg");
+      expect(response.body).toEqual(Buffer.from("mockImageData", "base64"));
+
+      // Restore the original implementation of Post.findById
+      Post.findById.mockRestore();
+    });
+
+    test("returns a 404 for an invalid post ID", async () => {
+      const invalidPostId = "invalidPostId"; // Specify an invalid post ID
+
+      // Mock the Post.findById method to return no post
+      jest.spyOn(Post, "findById").mockImplementation((postId, callback) => {
+        callback(null, null); // Simulate no post found
+      });
+
+      // Perform a GET request to retrieve the image
+      const response = await request(app).get(`/posts/image/${invalidPostId}`);
+
+      // Assertions...
+      expect(response.status).toEqual(404);
+
+      // Restore the original implementation of Post.findById
+      Post.findById.mockRestore();
     });
   });
 });
