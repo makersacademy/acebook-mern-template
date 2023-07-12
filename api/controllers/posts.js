@@ -4,7 +4,6 @@ const TokenGenerator = require("../models/token_generator");
 
 const PostsController = {
   Index: (req, res) => {
-    console.log("Index query...");
     Post.find()
       .populate("user")
       .sort({ created_at: -1 })
@@ -17,14 +16,13 @@ const PostsController = {
       });
   },
   SinglePost: (req, res) => {
-    console.log("Single post query...");
     Post.findById(req.params.id)
       .populate("user")
+      .populate("comments.user")
       .exec(async (err, post) => {
         if (err) {
           throw err;
         }
-        console.log(post);
         const token = await TokenGenerator.jsonwebtoken(req.user_id);
         res.status(200).json({ post: post, token: token });
       });
@@ -33,11 +31,8 @@ const PostsController = {
     const post = new Post(req.body);
 
     User.findById(req.user_id).exec(async (err, user) => {
-      console.log(user);
       post.user = user._id;
       await post.save();
-
-      console.log(post);
 
       const token = await TokenGenerator.jsonwebtoken(req.user_id);
       res.status(201).json({ message: "OK", token: token });
