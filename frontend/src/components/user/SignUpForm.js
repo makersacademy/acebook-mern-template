@@ -54,6 +54,7 @@ const SignUpForm = ({ onClose }) => {
                 type="text"
                 value={email}
                 onChange={handleEmailChange}
+                required
               />
             </label>
             <label>
@@ -63,6 +64,7 @@ const SignUpForm = ({ onClose }) => {
                 type="password"
                 value={password}
                 onChange={handlePasswordChange}
+                required
               />
             </label>
             <label>
@@ -72,6 +74,7 @@ const SignUpForm = ({ onClose }) => {
                 type="text"
                 value={username}
                 onChange={handleUsernameChange}
+                required
               />
             </label>
             <input id="submit" type="submit" value="Submit" />

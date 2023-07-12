@@ -55,6 +55,7 @@ const LogInForm = ({ navigate, onClose, handleSuccessfulLogin, setUserId }) => {
             type="text"
             value={email}
             onChange={handleEmailChange}
+            required
           />
           <input
             placeholder="Password"
@@ -62,6 +63,7 @@ const LogInForm = ({ navigate, onClose, handleSuccessfulLogin, setUserId }) => {
             type="password"
             value={password}
             onChange={handlePasswordChange}
+            required
           />
           <input id="submit" type="submit" value="Submit" />
         </form>
