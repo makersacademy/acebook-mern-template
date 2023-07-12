@@ -3,7 +3,6 @@ const Notification = require("../models/notification");
 const TokenGenerator = require("../models/token_generator");
 const User = require("../models/user");
 const fs = require("fs");
-const fs = require("fs");
 
 const PostsController = {
   Index: (req, res) => {
