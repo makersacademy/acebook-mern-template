@@ -9,6 +9,12 @@ const PostSchema = new mongoose.Schema({
     contentType: String,
   },
   authorId: { type: mongoose.Schema.Types.ObjectId, ref: "users" },
+  likes: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "User",
+    },
+  ],
 });
 
 const Post = mongoose.model("Post", PostSchema);

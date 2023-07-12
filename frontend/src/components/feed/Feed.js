@@ -36,6 +36,14 @@ const Feed = ({ navigate }) => {
     });
   };
 
+  const handleUpdatedLikes = (postId, likes) => {
+    setPosts((prevPosts) =>
+      prevPosts.map((post) =>
+        post._id === postId ? { ...post, likes: likes } : post
+      )
+    );
+  };
+
   if (token && token !== "null" && token !== "undefined") {
     return (
       <>
@@ -47,7 +55,13 @@ const Feed = ({ navigate }) => {
           <div id="feed" role="feed">
             {posts.map((post) => (
               <div key={post._id} className="post-container">
-                <Post post={post} token={token} setToken={setToken} />
+                <Post
+                  post={post}
+                  token={token}
+                  setToken={setToken}
+                  likes={post.likes}
+                  onUpdatedLikes={handleUpdatedLikes}
+                />
               </div>
             ))}
           </div>

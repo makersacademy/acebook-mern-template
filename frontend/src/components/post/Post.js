@@ -4,16 +4,26 @@ import PostLikeForm from "../likes/PostLikeForm";
 import CommentForm from "../comment/CommentForm";
 import Comment from "../comment/Comment";
 
-const Post = ({ post, token, setToken }) => {
+const Post = ({ post, token, setToken, likes, onUpdatedLikes }) => {
   const [imgSrc, setImgSrc] = useState(null);
   const [isZoomed, setIsZoomed] = useState(false);
   const [authorImgSrc, setAuthorImgSrc] = useState(null);
-  const [postLikes, setPostLikes] = useState([{ likes: [] }]);
   const [comments, setComments] = useState([]);
-  const [liked, setLiked] = useState(false);
 
   const handleZoom = () => {
     setIsZoomed(true);
+  };
+
+  const handleLike = async () => {
+    console.log("handleLike is triggered");
+    const response = await fetch(`/posts/${post._id}/like`, {
+      method: "PUT",
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+    const data = await response.json();
+    onUpdatedLikes(post._id, data.likes); // Use the function passed as a prop
   };
 
   useEffect(() => {
@@ -31,28 +41,6 @@ const Post = ({ post, token, setToken }) => {
   }, [post, token]);
 
   useEffect(() => {
-    const fetchPostLikes = async () => {
-      const response = await fetch("/postlikes", {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
-      const data = await response.json();
-      window.localStorage.setItem("token", data.token);
-      setToken(window.localStorage.getItem("token"));
-      if (data.likes.length !== 0) {
-        setPostLikes(data.likes);
-        console.log("this is data.likes");
-        console.log(data.likes);
-        console.log("this is data");
-        console.log(data);
-      }
-    };
-
-    fetchPostLikes();
-  }, [liked]);
-
-  useEffect(() => {
     const fetchComments = async () => {
       if (token && token !== "null" && token !== "undefined") {
         const response = await fetch("/comments", {
@@ -61,8 +49,6 @@ const Post = ({ post, token, setToken }) => {
           },
         });
         const data = await response.json();
-        window.localStorage.setItem("token", data.token);
-        setToken(window.localStorage.getItem("token"));
         setComments(data.comments.reverse());
       } else {
         setComments([]); // Set empty comments array when there is no token
@@ -93,7 +79,6 @@ const Post = ({ post, token, setToken }) => {
     });
   };
 
-  console.log(postLikes);
   return (
     <div>
       <div className="author-details">
@@ -106,13 +91,9 @@ const Post = ({ post, token, setToken }) => {
         </div>
       </div>
       <div className="message">{post.message}</div>
-      <PostLikeForm
-        token={token}
-        postId={post._id}
-        liked={liked}
-        setLiked={setLiked}
-      />
-      <PostLike like={postLikes[0].likes.length} />
+      <button onClick={handleLike}>Like</button>
+      <div>{post.likes ? post.likes.length : 0} likes</div>
+
       <div
         className="post-container"
         data-cy="post"

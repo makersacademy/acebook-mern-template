@@ -86,6 +86,45 @@ const PostsController = {
       }
     });
   },
+  GetLikes: (req, res) => {
+    Post.findById(req.params.postId, async (err, post) => {
+      if (err) {
+        console.error(err);
+        res.status(500).json({ error: err.toString() });
+      } else if (!post) {
+        res.status(404).json({ message: "Post not found" });
+      } else {
+        const token = await TokenGenerator.jsonwebtoken(req.user_id);
+        res.status(200).json({ likes: post.likes, token: token });
+      }
+    });
+  },
+
+  UpdateLikes: (req, res) => {
+    Post.findById(req.params.postId, async (err, post) => {
+      if (err) {
+        console.error(err);
+        res.status(500).json({ error: err.toString() });
+      } else if (!post) {
+        res.status(404).json({ message: "Post not found" });
+      } else {
+        const likes = post.likes.map((like) => like.toString());
+        const userId = req.user_id;
+
+        if (likes.includes(userId)) {
+          // Remove the like
+          post.likes = post.likes.filter((id) => id.toString() !== userId);
+        } else {
+          // Add the like
+          post.likes.push(userId);
+        }
+
+        await post.save();
+        const token = await TokenGenerator.jsonwebtoken(req.user_id);
+        res.status(200).json({ likes: post.likes, token: token });
+      }
+    });
+  },
 };
 
 module.exports = PostsController;
