@@ -46,13 +46,11 @@ const SinglePost = ({ navigate }) => {
         <div id="new-comment">
           <CreateComment handleRefresh={handleRefresh}/>
         </div>
-        <div id="comments" role="comment">
-          {/* {post.comments.map((comment) => {
-              console.log(comment);
-              return <Comment comment={comment} key={comment._id} />;
-          })} */}
-          <Comment comment={post.comments[0]} key={post.comments[0]._id} />
-</div>
+        <div id="comment" role="comment">
+           {post.comments.map((comment) => {
+              return <Comment comment={comment} key={ comment._id} />
+          })} 
+          </div> 
       </>
     );
   } else {
