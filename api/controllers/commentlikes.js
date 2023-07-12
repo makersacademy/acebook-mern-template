@@ -14,6 +14,17 @@ const CommentLikesController = {
     }
   },
 
+  FindCommentLike: async (req, res) => {
+    try {
+      const likes = await CommentLike.findById(req.commentId);
+      const token = await TokenGenerator.jsonwebtoken(req.user_id);
+      res.status(200).json({ likes: likes, token: token });
+    } catch (err) {
+      console.error(err);
+      res.status(500).json({ message: "Internal Server Error" });
+    }
+  },
+
   Like: async (req, res) => {
     const commentId = req.body.commentId;
     const userId = req.user_id;

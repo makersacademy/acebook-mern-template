@@ -1,8 +1,6 @@
 import React, { useState, useEffect } from "react";
 
-const PostLikeForm = ({ token, postId, onNewLike }) => {
-  const [liked, setLiked] = useState(false); // Track whether the user has liked the post
-
+const PostLikeForm = ({ token, postId, liked, setLiked }) => {
   useEffect(() => {
     const checkIfLiked = async () => {
       try {
@@ -12,7 +10,7 @@ const PostLikeForm = ({ token, postId, onNewLike }) => {
           },
         });
         const data = await response.json();
-        setLiked(data.liked);
+        if (data.likes) setLiked(true);
       } catch (error) {
         console.error("Error checking if liked:", error);
       }
@@ -35,7 +33,6 @@ const PostLikeForm = ({ token, postId, onNewLike }) => {
       });
 
       setLiked(!liked); // Toggle the liked state
-      onNewLike(postId); // Call the onNewLike callback with postId
     } catch (error) {
       console.error("Error liking/unliking post:", error);
     }
@@ -45,7 +42,7 @@ const PostLikeForm = ({ token, postId, onNewLike }) => {
     <>
       <button onClick={handleLike}>
         <span role="img" aria-label="like">
-          {liked ? "_xxxxxx👍" : "👍"}
+          {liked ? "👍" : "👍"}
         </span>
       </button>
     </>

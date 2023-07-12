@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 
-const PostForm = (props) => {
+const PostForm = ({ token, onNewPost }) => {
   const [message, setMessage] = useState("");
-  const [image, setImage] = useState(null); // Add state for the image file
+  const [image, setImage] = useState(null);
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -12,21 +12,18 @@ const PostForm = (props) => {
     if (image) {
       formData.append("image", image);
     }
-    console.log(formData.get("message"));
-    console.log(formData.get("image"));
 
     fetch("/posts", {
       method: "post",
       headers: {
-        Authorization: `Bearer ${props.token}`,
+        Authorization: `Bearer ${token}`,
       },
       body: formData,
     })
       .then((response) => response.json())
       .then((data) => {
-        console.log("Response data:", data);
         if (data.post) {
-          props.onNewPost(data.post);
+          onNewPost(data.post);
           setMessage("");
           setImage(null);
         }
