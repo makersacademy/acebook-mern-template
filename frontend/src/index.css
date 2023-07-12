@@ -5,24 +5,30 @@ body {
   justify-content: center;
   align-items: center;
   height: 100vh;
-  margin-top: 0;
+  margin: 10px;
   padding: 0;
 }
 
-h1 {
+.h1 {
   margin-top: 35px;
   text-align: center;
   color: #166fe5;
 }
+
+h2 {
+  text-align: center;
+  color: #166fe5;
+}
+
+
 .wrapper {
   display: flex;
-  flex-direction: row-reverse;
   justify-content: center;
-  align-items: stretch; 
-  width: 800px; 
-  max-width: 100%;
-  margin: auto; 
-  gap: 20px;   
+  align-items: stretch;
+  width: 100%;
+  max-width: 800px;
+  margin: auto;
+  gap: 20px;
 }
 
 .image-container {
@@ -30,7 +36,7 @@ h1 {
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
-  width: 60%;
+  width: 30%;
 }
 
 .container {
@@ -38,9 +44,8 @@ h1 {
   padding: 20px;
   border-radius: 0px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  width: 40%;
+  width: 70%;
 }
-
 
 .container input[type="text"],
 .container input[type="password"] {
@@ -65,7 +70,6 @@ h1 {
   cursor: pointer;
   margin-bottom: 10px;
   background-color: #166fe5;
-
 }
 
 .container input[type="submit"]:hover,
@@ -81,25 +85,21 @@ h1 {
 
 .sign-up-button {
   background-color: #008000 !important;
-
 }
 
 .sign-up-button:hover {
-  background-color: #006600; 
+  background-color: #006600;
 }
 
 #feed {
-  max-height: 90vh; /* adjust as needed */
-  overflow-y: auto;
+  max-height: fit-content;
 }
 
-
 .posts {
-  /* display: flex; */
   flex-direction: column;
   justify-content: center;
   color: #f21847;
-  border:  1px solid #ddd;
+  border: 1px solid #ddd;
   background-color: #c8cbce;
   padding: 5px;
   margin-bottom: 5px;
@@ -112,29 +112,32 @@ h1 {
 }
 
 .posts:hover {
-  transform: scale(1.05);
-  /* background-color: #3a1a54; */
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
 }
 
 .posts:active {
-  transform: scale(0.95);
   background-color: #0a7654;
 }
 
-.post-time {
-  font-size: 0.8em;
+.post:hover {
+  background-color: #f2f2f2;
 }
 
-
+.post:active {
+  background-color: #0a7654;
+}
 
 /* Mobile view */
 @media (max-width: 768px) {
-.image-container {
-  display: none;
-}
+  .image-container {
+    display: none;
+  }
 
-.container {
-  width: 100%;
-}
+  .wrapper {
+    flex-direction: column;
+  }
+
+  .container {
+    width: 100%;
+  }
 }

@@ -30,7 +30,7 @@
 }
 
 .post-username {
-  font-weight: bold;
+  color: #0a7654;
   margin-right: 5px;
 }
 
@@ -40,6 +40,7 @@
 }
 
 .post-message {
+  color: #0a7654;
   margin-bottom: 10px;
 }
 
@@ -53,7 +54,7 @@
   color: #1e90ff;
 }
 
-/* Custom scrollbar for the feed */
+
 .right-side::-webkit-scrollbar {
   width: 6px;
 }
@@ -70,7 +71,7 @@
   background: #555;
 }
 
-/* Mobile view */
+
 @media (max-width: 768px) {
   .container {
     flex-direction: column;

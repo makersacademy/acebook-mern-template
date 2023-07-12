@@ -46,24 +46,7 @@ const CreatePost = ({ handleRefresh }) => {
   };
 
   return (
-    // <form onSubmit={handleSubmit} encType="multipart/form-data">
-    //   Post:{" "}
-    //   <input
-    //     id="message"
-    //     type="text"
-    //     value={message}
-    //     onChange={handleMessageChange}
-    //   />
-    //   <input id="photo" type="file" onChange={handleFileChange} />
-    //   <input
-    //     role="submit-button"
-    //     id="submit"
-    //     type="submit"
-    //     value="Submit"
-    //     className="submit-button"
-    //   />
-    // </form>
-     <form onSubmit={handleSubmit} encType="multipart/form-data">
+    <form onSubmit={handleSubmit} encType="multipart/form-data">
      {file ? (
        <img src={URL.createObjectURL(file)} alt="Preview" />
      ) : null}

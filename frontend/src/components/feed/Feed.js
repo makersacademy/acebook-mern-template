@@ -23,38 +23,52 @@ const Feed = ({ navigate }) => {
           setRefreshFeed(false)
         });
     }
-  }, [refreshFeed]); // check array and how this works. 
+  }, [refreshFeed]);
 
   const logout = () => {
     window.localStorage.removeItem("token");
     navigate("/login");
   };
 
- // code here to refresh feed  
-   const handleRefresh = () => {
+  const handleRefresh = () => {
     setRefreshFeed(true); // Trigger the refresh action
   };
-//
 
+  const handleLike = (postId) => {
+    // Logic to handle the like action
+    // Make a request to the backend API to update the likes count for the post
+    // Update the posts state with the updated post data
+  };
+
+  const handleUnlike = (postId) => {
+    // Logic to handle the unlike action
+    // Make a request to the backend API to update the likes count for the post
+    // Update the posts state with the updated post data
+  };
 
   if (token) {
     return (
       <>
-        <h2>Posts</h2>
+        <h2 style={{ textAlign: "center", color: "#166fe5" }}>Posts</h2>
         <div id="new-post">
           <CreatePost handleRefresh={handleRefresh} />
         </div>
         <div id="feed" role="feed" className="posts">
           {posts.map((post) => (
-            <Post post={post} key={post._id} />
+            <Post
+              post={post}
+              key={post._id}
+              onLike={handleLike}
+              onUnlike={handleUnlike}
+            />
           ))}
         </div>
         <button onClick={logout}>Logout</button>
-        <div></div>
       </>
     );
   } else {
     navigate("/login");
+    return null;
   }
 };
 
