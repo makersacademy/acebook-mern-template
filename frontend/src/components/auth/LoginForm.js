@@ -27,6 +27,7 @@ const LogInForm = ({ navigate, onClose, handleSuccessfulLogin, setUserId }) => {
       const token = window.localStorage.getItem("token");
       const decodedToken = jwt_decode(token);
       setUserId(decodedToken.user_id);
+      window.localStorage.setItem("userId", decodedToken.user_id);
       onClose(); // Close the form when the submission is successful
       handleSuccessfulLogin();
       navigate("/");

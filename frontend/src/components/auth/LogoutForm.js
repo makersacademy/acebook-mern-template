@@ -5,6 +5,7 @@ import Modal from "../common/Modal";
 const LogOutForm = ({ onClose, setIsUserLoggedIn, setUserId }) => {
   const handleConfirm = () => {
     window.localStorage.removeItem("token");
+    window.localStorage.removeItem("userId");
     setIsUserLoggedIn(false);
     setUserId(null);
     onClose();

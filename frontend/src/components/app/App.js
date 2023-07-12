@@ -43,6 +43,14 @@ const App = () => {
     const token = window.localStorage.getItem("token");
     if (token && token !== "null" && token !== "undefined") {
       setIsUserLoggedIn(true);
+      const userIdFromStorage = window.localStorage.getItem("userId");
+      if (
+        userIdFromStorage &&
+        userIdFromStorage !== "null" &&
+        userIdFromStorage !== "undefined"
+      ) {
+        setUserId(userIdFromStorage); // Restore userId from localStorage
+      }
     }
   }, []);
 
