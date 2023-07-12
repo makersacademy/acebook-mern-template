@@ -1,6 +1,7 @@
 import React, { useState } from "react";
+import Modal from "../common/Modal";
 
-const ProfileImageForm = (props) => {
+const ProfileImageForm = ({ onClose, userId, token, onProfileImageChange }) => {
   const [image, setImage] = useState(null);
 
   const handleSubmit = (event) => {
@@ -11,10 +12,10 @@ const ProfileImageForm = (props) => {
       formData.append("image", image);
     }
 
-    fetch(`/profiles/${props.userId}/profileImage`, {
+    fetch(`/profiles/${userId}/profileImage`, {
       method: "PATCH",
       headers: {
-        Authorization: `Bearer ${props.token}`,
+        Authorization: `Bearer ${token}`,
       },
       body: formData,
     })
@@ -22,9 +23,10 @@ const ProfileImageForm = (props) => {
       .then((data) => {
         console.log("Response data:", data);
         if (data.message) {
-          props.onProfileImageChange();
+          onProfileImageChange();
           setImage(null);
         }
+        onClose();
       })
       .catch((error) => {
         console.error("Error:", error);
@@ -32,17 +34,19 @@ const ProfileImageForm = (props) => {
   };
 
   return (
-    <form className="profile-image-form" onSubmit={handleSubmit}>
-      <input
-        className="profile-image-input"
-        type="file"
-        accept="image/*"
-        onChange={(event) => setImage(event.target.files[0])}
-      />
-      <button className="profile-image-button" type="submit">
-        Update Profile Image
-      </button>
-    </form>
+    <Modal open={true} onClose={onClose}>
+      <form className="profile-image-form" onSubmit={handleSubmit}>
+        <input
+          className="profile-image-input"
+          type="file"
+          accept="image/*"
+          onChange={(event) => setImage(event.target.files[0])}
+        />
+        <button className="profile-image-button" type="submit">
+          Update Profile Image
+        </button>
+      </form>
+    </Modal>
   );
 };
 

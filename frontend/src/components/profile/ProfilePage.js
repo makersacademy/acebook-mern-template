@@ -1,13 +1,16 @@
 import React, { useState, useEffect } from "react";
 import ProfileImageForm from "./ProfileImageForm";
 import ProfileInfoForm from "./ProfileInfoForm";
+import Modal from "../common/Modal"; // Import your Modal component
 import "./ProfilePage.css";
 
-const ProfilePage = ({ userId }) => {
+const ProfilePage = ({ userId, onClose }) => {
   const [profileData, setProfileData] = useState(null);
   const [name, setName] = useState("");
   const [bio, setBio] = useState("");
   const [profileImageSrc, setProfileImageSrc] = useState(null);
+  const [showImageModal, setShowImageModal] = useState(false);
+  const [showInfoModal, setShowInfoModal] = useState(false);
 
   useEffect(() => {
     fetchProfileData();
@@ -75,11 +78,7 @@ const ProfilePage = ({ userId }) => {
               className="profile-picture"
             />
           </div>
-          <ProfileImageForm
-            token={localStorage.getItem("token")}
-            onProfileImageChange={handleProfileImageChange}
-            userId={userId}
-          />
+          <button onClick={() => setShowImageModal(true)}>Change Image</button>
         </div>
       </div>
 
@@ -88,13 +87,27 @@ const ProfilePage = ({ userId }) => {
         <p className="username">@{username}</p>
         <p className="followers">{followers} Followers</p>
         <p className="bio">{bio}</p>
+        <button onClick={() => setShowInfoModal(true)}>Edit Profile</button>
+      </div>
+
+      {/* Modals for image and info forms */}
+      {showImageModal && (
+        <ProfileImageForm
+          token={localStorage.getItem("token")}
+          onProfileImageChange={handleProfileImageChange}
+          userId={userId}
+          onClose={() => setShowImageModal(false)}
+        />
+      )}
+      {showInfoModal && (
         <ProfileInfoForm
           token={localStorage.getItem("token")}
           onProfileDataChange={handleProfileDataChange}
           currentData={profileData}
           userId={userId}
+          onClose={() => setShowInfoModal(false)}
         />
-      </div>
+      )}
 
       <div className="my-posts-container">
         <h2>My Posts</h2>
