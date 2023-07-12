@@ -42,7 +42,7 @@ const PostsController = {
       await post.save();
 
       const token = await TokenGenerator.jsonwebtoken(req.user_id);
-      res.status(201).json({ message: "OK", token: token });
+      res.status(201).json({ message: "OK", token: token });});
     } catch (error) {
       next(error);
     }
