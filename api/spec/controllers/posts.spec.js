@@ -36,7 +36,6 @@ describe("/posts", () => {
   });
 
   test("POST, when token is present, responds with a 201", async () => {
-    console.log(user);
     let response = await request(app)
       .post("/posts")
       .set("Authorization", `Bearer ${token}`)
@@ -143,7 +142,7 @@ describe("/posts", () => {
     expect(response.body.posts).toEqual(undefined);
   });
 
-  test("GET, when token is missingthe response code is 401", async () => {
+  test("GET, when token is missing the response code is 401", async () => {
     let post1 = new Post({ message: "howdy!" });
     let post2 = new Post({ message: "hola!" });
     await post1.save();

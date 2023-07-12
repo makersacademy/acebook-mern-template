@@ -13,7 +13,6 @@ describe("/comments", () => {
   beforeAll(async () => {
     user = new User({ email: "test@test.com", password: "12345678" });
     await user.save();
-    console.log(user);
     token = JWT.sign(
       {
         user_id: user._id,
@@ -36,14 +35,12 @@ describe("/comments", () => {
   });
 
   test("POST, when token is present", async () => {
-    console.log(user);
     await request(app)
       .post("/posts")
       .set("Authorization", `Bearer ${token}`)
       .send({ message: "hello world", token: token });
     let posts = await Post.find();
     let postID = posts[0]._id;
-    console.log(`** POST ID: ** ${postID}`);
 
     await request(app)
       .post(`/comments/${postID}`)
@@ -54,10 +51,7 @@ describe("/comments", () => {
       .get(`/posts/${postID}`)
       .set("Authorization", `Bearer ${token}`)
       .send({ token: token });
-    let body = response.body.post;
-    expect(body.message).toEqual("new comment");
-
-    // let newPost = Post.findById(postID);
-    // expect(newPost.comments.length).toBe(1);
+    let body = response.body;
+    expect(body.post.comments[0].comment).toEqual("new comment");
   });
 });
