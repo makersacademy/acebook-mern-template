@@ -27,7 +27,6 @@ const App = () => {
   const [showNotificationModal, setShowNotificationModal] = useState(false);
   const [isUserLoggedIn, setIsUserLoggedIn] = useState(false);
   const [userId, setUserId] = useState(null);
-
   const navigate = useNavigate();
 
   const handleLogin = () => setShowLoginForm(true); // Renamed to handleLogin
@@ -43,8 +42,6 @@ const App = () => {
   useEffect(() => {
     const token = window.localStorage.getItem("token");
     if (token && token !== "null" && token !== "undefined") {
-      const decodedToken = jwt_decode(token);
-      setUserId(decodedToken.user_id); // <-- Use 'setUserId' here instead of declaring a new 'userId'
       setIsUserLoggedIn(true);
     }
   }, []);
@@ -107,6 +104,7 @@ const App = () => {
           navigate={navigate}
           onClose={() => setShowLoginForm(false)}
           handleSuccessfulLogin={handleSuccessfulLogin} // <-- pass this method to the LoginForm component
+          setUserId={setUserId}
         />
       )}
 
@@ -115,6 +113,7 @@ const App = () => {
           navigate={navigate}
           onClose={() => setShowLogoutForm(false)}
           setIsUserLoggedIn={setIsUserLoggedIn}
+          setUserId={setUserId}
         />
       )}
 

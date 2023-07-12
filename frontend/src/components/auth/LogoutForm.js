@@ -2,10 +2,11 @@ import React from "react";
 import "./LogoutForm.css";
 import Modal from "../common/Modal";
 
-const LogOutForm = ({ onClose, setIsUserLoggedIn }) => {
+const LogOutForm = ({ onClose, setIsUserLoggedIn, setUserId }) => {
   const handleConfirm = () => {
     window.localStorage.removeItem("token");
     setIsUserLoggedIn(false);
+    setUserId(null);
     onClose();
   };
 

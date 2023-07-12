@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import ProfileImageForm from "./ProfileImageForm";
 import ProfileInfoForm from "./ProfileInfoForm";
-import { useParams } from "react-router-dom";
 import "./ProfilePage.css";
 
 const ProfilePage = ({ userId }) => {
@@ -9,7 +8,6 @@ const ProfilePage = ({ userId }) => {
   const [name, setName] = useState("");
   const [bio, setBio] = useState("");
   const [profileImageSrc, setProfileImageSrc] = useState(null);
-
 
   useEffect(() => {
     fetchProfileData();

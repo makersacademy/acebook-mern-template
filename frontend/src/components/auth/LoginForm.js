@@ -1,8 +1,9 @@
 import React, { useState } from "react";
 import "./LoginForm.css";
 import Modal from "../common/Modal";
+import jwt_decode from "jwt-decode";
 
-const LogInForm = ({ navigate, onClose, handleSuccessfulLogin }) => {
+const LogInForm = ({ navigate, onClose, handleSuccessfulLogin, setUserId }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
@@ -23,8 +24,12 @@ const LogInForm = ({ navigate, onClose, handleSuccessfulLogin }) => {
       console.log("oop");
       let data = await response.json();
       window.localStorage.setItem("token", data.token);
+      const token = window.localStorage.getItem("token");
+      const decodedToken = jwt_decode(token);
+      setUserId(decodedToken.user_id);
       onClose(); // Close the form when the submission is successful
       handleSuccessfulLogin();
+      navigate("/");
     }
   };
 
