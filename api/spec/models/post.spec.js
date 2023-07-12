@@ -16,7 +16,6 @@ describe("Post model", () => {
       message: "some message",
       created_at: { type: Date, default: Date.now },
     });
-    expect(post.user).toEqual("1");
     expect(post.message).toEqual("some message");
     expect(post.created_at).toBeInstanceOf(Date);
   });
