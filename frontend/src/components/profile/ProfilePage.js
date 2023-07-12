@@ -11,6 +11,7 @@ const ProfilePage = ({ userId, onClose }) => {
   const [profileImageSrc, setProfileImageSrc] = useState(null);
   const [showImageModal, setShowImageModal] = useState(false);
   const [showInfoModal, setShowInfoModal] = useState(false);
+  const [profileImageFetched, setProfileImageFetched] = useState(false);
 
   useEffect(() => {
     fetchProfileData();
@@ -28,7 +29,9 @@ const ProfilePage = ({ userId, onClose }) => {
         setName(data.name);
         setBio(data.bio);
 
-        if (data.image) {
+        if (data.image && !profileImageFetched) {
+          // Check if image has been fetched
+          setProfileImageFetched(true);
           fetch(`/profiles/${userId}/profileImage`, {
             headers: {
               Authorization: `Bearer ${localStorage.getItem("token")}`,
@@ -134,6 +137,7 @@ const ProfilePage = ({ userId, onClose }) => {
               post={post}
               token={localStorage.getItem("token")}
               key={post._id}
+              onUpdatedLikes={handleProfileDataChange}
             />
           ))}
         </div>

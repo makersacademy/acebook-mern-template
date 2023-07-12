@@ -23,7 +23,9 @@ const Post = ({ post, token, setToken, likes, onUpdatedLikes }) => {
       },
     });
     const data = await response.json();
-    onUpdatedLikes(post._id, data.likes); // Use the function passed as a prop
+    if (onUpdatedLikes) {
+      onUpdatedLikes(post._id, data.likes);
+    }
   };
 
   useEffect(() => {
