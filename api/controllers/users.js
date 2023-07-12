@@ -3,7 +3,11 @@ const TokenGenerator = require("../models/token_generator");
 
 const UsersController = {
   Create: (req, res) => {
-    const user = new User(req.body);
+    const user = new User({
+      email: req.body.email,
+      password: req.body.password,
+      photo: req.file ? req.file.filename : undefined,
+    });
     user.save((err) => {
       if (err) {
         res.status(400).json({ message: "Bad request" });

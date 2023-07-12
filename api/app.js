@@ -36,7 +36,6 @@ const tokenChecker = (req, res, next) => {
   });
 };
 
-
 app.use("/posts", tokenChecker, postsRouter);
 app.use("/comments", tokenChecker, commentsRouter);
 app.use("/tokens", tokensRouter);
@@ -44,7 +43,8 @@ app.use("/users", usersRouter);
 app.use("/likes", tokenChecker, likesRouter);
 
 // Serve static files from the 'uploads' directory
-app.use('/uploads', express.static('uploads'));
+app.use("/uploads", express.static("uploads"));
+app.use("/profilePhotos", express.static("profilePhotos"));
 
 // catch 404 and forward to error handler
 app.use((req, res, next) => {

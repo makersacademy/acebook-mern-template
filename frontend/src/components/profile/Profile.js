@@ -44,6 +44,15 @@ const Profile = ({ navigate }) => {
       <>
         <h1>Profile page</h1>
         <h2>Email: {user.email}</h2>
+        <div>
+          {user.photo && (
+            <img
+              className="profile-photo"
+              src={`/profilePhotos/${user.photo}`}
+              alt="Post"
+            />
+          )}
+        </div>
         <div id="feed" role="feed" className="posts">
           {posts.map((post) => (
             <Post
