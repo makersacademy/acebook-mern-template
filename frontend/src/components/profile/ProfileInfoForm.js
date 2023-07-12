@@ -50,6 +50,9 @@ const ProfileInfoForm = ({
   return (
     <Modal open={true} onClose={onClose}>
       <div className="modal-content">
+        <button className="close-button" onClick={onClose}>
+          X
+        </button>
         <form className="profile-info-form" onSubmit={handleSubmit}>
           <label>Name: </label>
           <input

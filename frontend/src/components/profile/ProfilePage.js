@@ -78,7 +78,12 @@ const ProfilePage = ({ userId, onClose }) => {
               className="profile-picture"
             />
           </div>
-          <button onClick={() => setShowImageModal(true)}>Change Image</button>
+          <button
+            className="change-image-button"
+            onClick={() => setShowImageModal(true)}
+          >
+            Change Image
+          </button>
         </div>
       </div>
 
