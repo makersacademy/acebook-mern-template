@@ -70,6 +70,9 @@ const ProfilePage = ({ userId, onClose }) => {
       </header>
 
       <div className="banner">
+        <div className="wave"></div>
+        <div className="wave"></div>
+        <div className="wave"></div>
         <div className="profile-picture-container">
           <div className="profile-photo">
             <img
@@ -88,11 +91,23 @@ const ProfilePage = ({ userId, onClose }) => {
       </div>
 
       <div className="user-info-container">
-        <h2 className="name">{name}</h2>
-        <p className="username">@{username}</p>
-        <p className="followers">{followers} Followers</p>
-        <p className="bio">{bio}</p>
-        <button onClick={() => setShowInfoModal(true)}>Edit Profile</button>
+        <div className="name-container">
+          <h2 className="name">{name}</h2>
+        </div>
+        <div className="username-followers-container">
+          <p className="username">@{username}</p>
+          <p className="followers">{followers} Followers</p>
+        </div>
+        <div className="bio-container">
+          <h3 className="bio-label">Biography</h3>
+          <p className="bio">{bio}</p>
+        </div>
+        <button
+          className="edit-profile-btn"
+          onClick={() => setShowInfoModal(true)}
+        >
+          Edit Profile
+        </button>
       </div>
 
       {/* Modals for image and info forms */}
