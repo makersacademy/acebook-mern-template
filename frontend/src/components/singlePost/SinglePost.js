@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom";
 import Post from "../post/Post";
 import CreateComment from "../createComment/CreateComment";
 import Comment from "./Comment";
+import CreateLike from "../createLike/CreateLike";
 
 const SinglePost = ({ navigate }) => {
   const [post, setPost] = useState({
@@ -42,6 +43,9 @@ const SinglePost = ({ navigate }) => {
         <h2>Post</h2>
         <div id="feed" role="feed">
           <Post post={post} key={post._id} />
+        </div>
+        <div id="like" >
+          <CreateLike handleRefresh={handleRefresh}/>
         </div>
         <div id="new-comment">
           <CreateComment handleRefresh={handleRefresh}/>
