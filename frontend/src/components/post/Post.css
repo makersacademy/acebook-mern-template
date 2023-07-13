@@ -3,13 +3,23 @@
   padding: 20px;
   border-radius: 15px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  margin-bottom: 20px;
+  width: 500px;
+  color: #000;
 }
 
 .post-header {
+  z-index: 100;
   display: flex;
   align-items: center;
+  justify-content: space-between;
   margin-bottom: 10px;
+  font-weight: bold;
+}
+
+.post-header a {
+  z-index: 100;
+  text-decoration: none;
+  color: black;
 }
 
 .post-header img {
@@ -19,21 +29,17 @@
   margin-right: 10px;
 }
 
-.post-username {
-  font-weight: bold;
-  margin-right: 10px;
+.post-header > .username {
+  display: flex;
+  align-items: center;
+}
+
+.post-content a {
+  color: black;
 }
 
 .post-date {
-  color: #666;
-}
-
-.post-content {
-  margin-bottom: 10px;
-}
-
-.post-message {
-  margin-bottom: 10px;
+  color: #aaaaaa;
 }
 
 .post-image {
@@ -55,11 +61,23 @@
   text-align: right;
 }
 
-.post-link {
+/* .post-link {
   color: #166fe5;
   text-decoration: none;
-}
+} */
 
 .post-link:hover {
   text-decoration: underline;
+}
+
+.posts:hover {
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+}
+
+.posts:active {
+  background-color: #0a7654;
+}
+
+.post:hover {
+  background-color: #f2f2f2;
 }

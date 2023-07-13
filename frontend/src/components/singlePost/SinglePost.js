@@ -11,10 +11,12 @@ const SinglePost = ({ navigate }) => {
     user: { email: "" },
     message: "",
     _id: "",
-    comments: [{user: {email:""}, comment: "", _id: ""}],
-    likes: [{
-      user: {}
-      }],
+    comments: [{ user: { email: "" }, comment: "", _id: "" }],
+    likes: [
+      {
+        user: {},
+      },
+    ],
   });
   const [token, setToken] = useState(window.localStorage.getItem("token"));
   const params = useParams();
@@ -45,27 +47,22 @@ const SinglePost = ({ navigate }) => {
   if (token) {
     return (
       <div className="wrapper">
-        <div className="left-side">
-          <h2>Post</h2>
-          <div id="feed" role="feed">
-            <Post post={post} key={post._id} handleRefresh={handleRefresh} />
-          </div>
+        <h2>Post</h2>
+        <div id="feed" role="feed">
+          <Post post={post} key={post._id} handleRefresh={handleRefresh} />
         </div>
-        <div className="middle-side">
-          <div id="like">
-            <CreateLike handleRefresh={handleRefresh} />
-          </div>
-          <div id="new-comment">
-            <CreateComment handleRefresh={handleRefresh} />
-          </div>
+
+        <div id="like">
+          <CreateLike handleRefresh={handleRefresh} />
+        </div>
+        <div id="new-comment">
+          <CreateComment handleRefresh={handleRefresh} />
+
           <div id="comment" role="comment">
             {post.comments.map((comment) => {
               return <Comment comment={comment} key={comment._id} />;
             })}
           </div>
-        </div>
-        <div className="right-side">
-          {/* Add your search component here */}
         </div>
       </div>
     );

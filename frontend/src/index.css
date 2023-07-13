@@ -1,0 +1,16 @@
+body {
+  padding: 0px;
+  margin: 0px;
+  font-family: sans-serif;
+}
+
+.main-container {
+  padding: 20px;
+  display: flex;
+  justify-content: center;
+  max-width: 100%;
+}
+
+a {
+  text-decoration: none;
+}

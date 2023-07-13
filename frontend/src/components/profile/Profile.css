@@ -1,3 +1,9 @@
+.profile-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
 .profile-photo {
   width: 250px;
   height: 250px;

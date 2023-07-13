@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Post from "../post/Post";
 import CreatePost from "../createPost/CreatePost";
-import './Feed.css';
+import "./Feed.css";
 import CreateLike from "../createLike/CreateLike";
 
 const Feed = ({ navigate }) => {
@@ -21,7 +21,7 @@ const Feed = ({ navigate }) => {
           window.localStorage.setItem("token", data.token);
           setToken(window.localStorage.getItem("token"));
           setPosts(data.posts);
-          setRefreshFeed(false)
+          setRefreshFeed(false);
         });
     }
   }, [refreshFeed]);
@@ -35,30 +35,17 @@ const Feed = ({ navigate }) => {
     setRefreshFeed(true); // Trigger the refresh action
   };
 
-  // const handleLike = (postId) => { 
-  // }; connect with backend
-  // const handleUnlike = (postId) => {
-  // }; connect with backend
-
   if (token) {
     return (
       <div className="feed-wrapper">
-        <div className="new-post">
-          <CreatePost handleRefresh={handleRefresh} />
-        </div>
-        <div id="feed" role="feed" className="posts">
+        <div role="feed" className="feed-posts">
+          <div className="new-post">
+            <CreatePost handleRefresh={handleRefresh} />
+          </div>
           {posts.map((post) => (
-            <Post 
-              post={post}
-              key={post._id} 
-              handleRefresh={handleRefresh}
-            />
+            <Post post={post} key={post._id} handleRefresh={handleRefresh} />
           ))}
         </div>
-        <div className="right-side">
-          {/* Add your search component here */}
-        </div>
-        {/* <button onClick={logout}>Logout</button> */}
       </div>
     );
   } else {
@@ -68,4 +55,3 @@ const Feed = ({ navigate }) => {
 };
 
 export default Feed;
-

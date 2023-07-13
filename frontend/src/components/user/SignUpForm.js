@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import "../../index.css";
+import "./SignUpForm.css";
 
 const SignUpForm = ({ navigate }) => {
   const [username, setUsername] = useState("");
@@ -51,12 +51,6 @@ const SignUpForm = ({ navigate }) => {
   };
 
   return (
-    // <form onSubmit={handleSubmit}>
-    //     <input placeholder="Email" id="email" type='text' value={ email } onChange={handleEmailChange} />
-    //     <input placeholder="Password" id="password" type='password' value={ password } onChange={handlePasswordChange} />
-    //   <input id='submit' type="submit" value="Submit" />
-    // </form>
-
     <div className="container">
       <div className="form-container">
         <form
@@ -64,7 +58,6 @@ const SignUpForm = ({ navigate }) => {
           onSubmit={handleSubmit}
           encType="multipart/form-data"
         >
-          {file ? <img src={URL.createObjectURL(file)} alt="Preview" /> : null}
           <input
             placeholder="Username"
             id="username"
