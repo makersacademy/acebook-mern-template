@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 // import LogoSearch from '../app/LogoSearch';
-import '../../index.css';
+import "../../index.css";
 
 const LogInForm = () => {
   const navigate = useNavigate();
@@ -11,39 +11,38 @@ const LogInForm = () => {
   const handleSubmit = async (event) => {
     event.preventDefault();
 
-    let response = await fetch('/tokens', {
-      method: 'post',
+    let response = await fetch("/tokens", {
+      method: "post",
       headers: {
-        'Content-Type': 'application/json',
+        "Content-Type": "application/json",
       },
-      body: JSON.stringify({ email: email, password: password })
-    })
+      body: JSON.stringify({ email: email, password: password }),
+    });
 
     if (response.status !== 201) {
-      navigate('/login');
+      navigate("/login");
     } else {
       let data = await response.json();
       window.localStorage.setItem("token", data.token);
-      navigate('/posts');
+      navigate("/posts");
     }
-  }
+  };
 
   const handleEmailChange = (event) => {
-    setEmail(event.target.value)
-  }
+    setEmail(event.target.value);
+  };
 
   const handlePasswordChange = (event) => {
-    setPassword(event.target.value)
-  }
+    setPassword(event.target.value);
+  };
 
   const handleForgotPassword = () => {
-    navigate('/forgot-password');
-  }
+    navigate("/forgot-password");
+  };
 
   const handleCreateAccount = () => {
-    navigate('/signup');
-  }
-
+    navigate("/signup");
+  };
 
   return (
     <div className="wrapper">
@@ -54,10 +53,11 @@ const LogInForm = () => {
             <input
               placeholder="Email"
               id="email"
-              type="text"
+              type="email"
               value={email}
               onChange={handleEmailChange}
               className="input"
+              required
             />
             <input
               placeholder="Password"
@@ -66,6 +66,7 @@ const LogInForm = () => {
               value={password}
               onChange={handlePasswordChange}
               className="input"
+              required
             />
             <input
               role="submit-button"
@@ -75,7 +76,10 @@ const LogInForm = () => {
               className="submit-button"
             />
           </form>
-          <button className="forgot-password-button" onClick={handleForgotPassword}>
+          <button
+            className="forgot-password-button"
+            onClick={handleForgotPassword}
+          >
             Forgot Password?
           </button>
           <button className="sign-up-button" onClick={handleCreateAccount}>

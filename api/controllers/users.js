@@ -4,6 +4,7 @@ const TokenGenerator = require("../models/token_generator");
 const UsersController = {
   Create: (req, res) => {
     const user = new User({
+      username: req.body.username,
       email: req.body.email,
       password: req.body.password,
       photo: req.file ? req.file.filename : undefined,

@@ -44,7 +44,7 @@ const Profile = ({ navigate }) => {
     return (
       <>
         <h1>Profile page</h1>
-        <h2>Email: {user.email}</h2>
+        <h2>Email: {user.username}</h2>
         <div>
           {user.photo && (
             <img
