@@ -63,3 +63,7 @@ typings/
 # cypress.io
 cypress/screenshots
 cypress/videos
+
+#uploads
+api/uploads
+api/profilePhotos

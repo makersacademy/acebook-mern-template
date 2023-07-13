@@ -70,6 +70,15 @@
   background: #555;
 }
 
+
+.feed-profile-photo {
+  width: 25px;
+  height: 25px;
+  object-fit: cover;
+  border-radius: 50%;
+  margin-right: 10px;
+}
+
 @media (max-width: 768px) {
   .container {
     flex-direction: column;

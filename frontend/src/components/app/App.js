@@ -1,11 +1,15 @@
+
 import React from 'react';
-import { useLocation, Routes, Route, Link } from 'react-router-dom';
 import LogoSearch from './LogoSearch';
-import LoginForm from '../auth/LoginForm';
-import SignUpForm from '../user/SignUpForm';
-import SinglePost from '../singlePost/SinglePost';
-import Feed from '../feed/Feed';
 import './navbar.css';
+import LoginForm from "../auth/LoginForm";
+import SignUpForm from "../user/SignUpForm";
+import SinglePost from "../singlePost/SinglePost";
+import Profile from "../profile/Profile";
+import React, { useState } from "react";
+import Feed from "../feed/Feed";
+import { useNavigate, Routes, Route, useLocation } from "react-router-dom";
+
 
 const Navbar = () => {
   return (
@@ -30,6 +34,7 @@ const App = () => {
   const location = useLocation();
 
   return (
+    <>
     <div className="app-wrapper">
       <div className="left-side">
         {/* Place the post element component here */}
@@ -42,12 +47,14 @@ const App = () => {
           <Route path="/posts" element={<Feed navigate={() => {}} />} />
           <Route path="/login" element={<LoginForm navigate={() => {}} />} />
           <Route path="/signup" element={<SignUpForm navigate={() => {}} />} />
-        </Routes>
+          <Route path="/users/:id" element={<Profile navigate={useNavigate()} />}/>
+      </Routes>
       </div>
-      <div className="right-side">
-        {/* Place the search element component here */}
+     <div className="right-side">
+         {/* Place the search element component here */}
       </div>
     </div>
+    </>
   );
 };
 
