@@ -52,7 +52,9 @@ const PostForm = ({ token, onNewPost }) => {
           onChange={handleMessageChange}
         />
         <input type="file" accept="image/*" onChange={handleImageChange} />
-        <button type="submit">Post</button>
+        <button id="post-submit" type="submit">
+          Post
+        </button>
       </form>
     </>
   );

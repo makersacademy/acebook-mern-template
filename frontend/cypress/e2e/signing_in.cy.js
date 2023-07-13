@@ -1,5 +1,5 @@
 describe("Signing in", () => {
-  it("with valid credentials, redirects to '/posts'", () => {
+  it("with valid credentials, shows posts", () => {
     cy.visit("/");
     cy.contains("Sign Up").click();
     cy.get("#email").type("someone@example.com");
