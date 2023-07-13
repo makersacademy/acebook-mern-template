@@ -53,6 +53,33 @@ const CommentsController = {
     };
     findUser();
   },
+  UpdateLikes: (req, res) => {
+    Comment.findById(req.params.commentId, async (err, comment) => {
+      if (err) {
+        console.error(err);
+        res.status(500).json({ error: err.toString() });
+      } else if (!comment) {
+        res.status(404).json({ message: "Post not found" });
+      } else {
+        const likes = comment.likes.map((like) => like.toString());
+        const userId = req.user_id;
+
+        if (likes.includes(userId)) {
+          // Remove the like
+          comment.likes = comment.likes.filter(
+            (id) => id.toString() !== userId
+          );
+        } else {
+          // Add the like
+          comment.likes.push(userId);
+        }
+
+        await comment.save();
+        const token = await TokenGenerator.jsonwebtoken(req.user_id);
+        res.status(200).json({ likes: comment.likes, token: token });
+      }
+    });
+  },
 };
 
 module.exports = CommentsController;

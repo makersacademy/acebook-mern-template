@@ -4,6 +4,7 @@ import PostForm from "../post/PostForm";
 
 const Feed = ({ navigate }) => {
   const [posts, setPosts] = useState([]);
+  const [comments, setComments] = useState([]);
   const [token, setToken] = useState(window.localStorage.getItem("token"));
 
   useEffect(() => {
@@ -28,11 +29,36 @@ const Feed = ({ navigate }) => {
     fetchPosts();
   }, [token, navigate]);
 
+  useEffect(() => {
+    const fetchComments = async () => {
+      if (token && token !== "null" && token !== "undefined") {
+        const response = await fetch("/comments", {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
+        const data = await response.json();
+        setComments(data.comments.reverse());
+      } else {
+        setComments([]); // Set empty comments array when there is no token
+      }
+    };
+
+    fetchComments();
+  }, [token]);
+
   const handleNewPost = (post) => {
     setPosts((prevPosts) => {
       const newPosts = [...prevPosts, post];
       const reversedPosts = newPosts.reverse();
       return reversedPosts;
+    });
+  };
+  const handleNewComment = (comment) => {
+    setComments((prevComments) => {
+      const newComments = [...prevComments, comment];
+      const reversedComments = newComments.reverse();
+      return reversedComments;
     });
   };
 
@@ -61,6 +87,9 @@ const Feed = ({ navigate }) => {
                   setToken={setToken}
                   likes={post.likes}
                   onUpdatedLikes={handleUpdatedLikes}
+                  navigate={navigate}
+                  handleNewComment={handleNewComment}
+                  comments={comments}
                 />
               </div>
             ))}

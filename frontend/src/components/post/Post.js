@@ -4,17 +4,24 @@ import PostLikeForm from "../likes/PostLikeForm";
 import CommentForm from "../comment/CommentForm";
 import Comment from "../comment/Comment";
 
-const Post = ({ post, token, setToken, likes, onUpdatedLikes }) => {
+const Post = ({
+  post,
+  token,
+  setToken,
+  likes,
+  onUpdatedLikes,
+  handleNewComment,
+  comments,
+}) => {
   const [imgSrc, setImgSrc] = useState(null);
   const [isZoomed, setIsZoomed] = useState(false);
   const [authorImgSrc, setAuthorImgSrc] = useState(null);
-  const [comments, setComments] = useState([]);
 
   const handleZoom = () => {
     setIsZoomed(true);
   };
 
-  const handleLike = async () => {
+  const handlePostLike = async () => {
     console.log("handleLike is triggered");
     const response = await fetch(`/posts/${post._id}/like`, {
       method: "PUT",
@@ -43,24 +50,6 @@ const Post = ({ post, token, setToken, likes, onUpdatedLikes }) => {
   }, [post, token]);
 
   useEffect(() => {
-    const fetchComments = async () => {
-      if (token && token !== "null" && token !== "undefined") {
-        const response = await fetch("/comments", {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        });
-        const data = await response.json();
-        setComments(data.comments.reverse());
-      } else {
-        setComments([]); // Set empty comments array when there is no token
-      }
-    };
-
-    fetchComments();
-  }, [token]);
-
-  useEffect(() => {
     if (post.authorId) {
       fetch(`/profiles/${post.authorId}/profileImage`, {
         headers: { Authorization: `Bearer ${token}` },
@@ -73,14 +62,7 @@ const Post = ({ post, token, setToken, likes, onUpdatedLikes }) => {
     }
   }, [post, token]);
 
-  const handleNewComment = (comment) => {
-    setComments((prevComments) => {
-      const newComments = [...prevComments, comment];
-      const reversedComments = newComments.reverse();
-      return reversedComments;
-    });
-  };
-
+  console.log(comments);
   return (
     <div>
       <div className="author-details">
@@ -93,7 +75,11 @@ const Post = ({ post, token, setToken, likes, onUpdatedLikes }) => {
         </div>
       </div>
       <div className="message">{post.message}</div>
-      <button onClick={handleLike}>Like</button>
+      <button onClick={handlePostLike}>
+        <span role="img" aria-label="like">
+          {"👍"}
+        </span>
+      </button>
       <div>{post.likes ? post.likes.length : 0} likes</div>
 
       <div
@@ -112,7 +98,11 @@ const Post = ({ post, token, setToken, likes, onUpdatedLikes }) => {
             .filter((comment) => comment.postId === post._id)
             .map((comment) => (
               <div key={comment._id}>
-                <Comment comment={comment} />
+                <Comment
+                  comment={comment}
+                  onNewComment={handleNewComment}
+                  token={token}
+                />
               </div>
             ))}
         </div>
