@@ -1,23 +1,25 @@
-import "./App.css";
-import LoginForm from "../auth/LoginForm";
-import SignUpForm from "../user/SignUpForm";
-import SinglePost from "../singlePost/SinglePost";
-import React, { useState } from "react";
-import Feed from "../feed/Feed";
-import { useNavigate, Routes, Route, useLocation } from "react-router-dom";
+import React from 'react';
+import { useLocation, Routes, Route, Link } from 'react-router-dom';
+import LogoSearch from './LogoSearch';
+import LoginForm from '../auth/LoginForm';
+import SignUpForm from '../user/SignUpForm';
+import SinglePost from '../singlePost/SinglePost';
+import Feed from '../feed/Feed';
+import './navbar.css';
 
 const Navbar = () => {
   return (
     <nav className="navbar">
-      <ul>
+      <LogoSearch />
+      <ul className="nav-links">
         <li>
-          <a href="/posts">Posts</a>
+          <Link to="/posts">Posts</Link>
         </li>
         <li>
-          <a href="/login">Home</a>
+          <Link to="/login">Home</Link>
         </li>
         <li>
-          <a href="/help">Help</a>
+          <Link to="/help">Logout</Link>
         </li>
       </ul>
     </nav>
@@ -28,16 +30,24 @@ const App = () => {
   const location = useLocation();
 
   return (
-    <>
-      {location.pathname !== "/login" && <Navbar />}
-      <Routes>
-        <Route path="/posts/:id" element={<SinglePost navigate={useNavigate()} />} />
-        <Route path="/" element={<Feed navigate={useNavigate()} />} />
-        <Route path="/posts" element={<Feed navigate={useNavigate()} />} />
-        <Route path="/login" element={<LoginForm navigate={useNavigate()} />} />
-        <Route path="/signup" element={<SignUpForm navigate={useNavigate()} />} />
-      </Routes>
-    </>
+    <div className="app-wrapper">
+      <div className="left-side">
+        {/* Place the post element component here */}
+      </div>
+      <div className="middle-side">
+        {location.pathname !== '/login' && <Navbar />}
+        <Routes>
+          <Route path="/posts/:id" element={<SinglePost navigate={() => {}} />} />
+          <Route path="/" element={<Feed navigate={() => {}} />} />
+          <Route path="/posts" element={<Feed navigate={() => {}} />} />
+          <Route path="/login" element={<LoginForm navigate={() => {}} />} />
+          <Route path="/signup" element={<SignUpForm navigate={() => {}} />} />
+        </Routes>
+      </div>
+      <div className="right-side">
+        {/* Place the search element component here */}
+      </div>
+    </div>
   );
 };
 

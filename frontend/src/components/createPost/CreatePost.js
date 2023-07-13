@@ -46,24 +46,33 @@ const CreatePost = ({ handleRefresh }) => {
   };
 
   return (
-    <form className="form" onSubmit={handleSubmit} encType="multipart/form-data">
-      {file ? <img src={URL.createObjectURL(file)} alt="Preview" /> : null}
-      <textarea
-        id="message"
-        placeholder="Enter your message..."
-        value={message}
-        onChange={handleMessageChange}
-      />
-      <input id="photo" type="file" onChange={handleFileChange} />
-      <input
-        role="submit-button"
-        id="submit"
-        type="submit"
-        value="Submit"
-        className="submit-button"
-      />
-    </form>
+    <div className="container">
+      <div className="wrapper">
+        <form className="form" onSubmit={handleSubmit} encType="multipart/form-data">
+          {file ? <img src={URL.createObjectURL(file)} alt="Preview" /> : null}
+          <textarea
+            id="message"
+            placeholder="Enter your message..."
+            value={message}
+            onChange={handleMessageChange}
+          />
+          <input id="photo" type="file" onChange={handleFileChange} />
+          <input
+            role="submit-button"
+            id="submit"
+            type="submit"
+            value="Submit"
+            className="submit-button"
+          />
+        </form>
+      </div>
+      <div className="feed">
+        {/* Render Feed Posts here */}
+      </div>
+    </div>
   );
+  
+
   
 };
 

@@ -1,9 +1,9 @@
 .container {
-  display: flex;
+  display: inline-block;
   flex-wrap: wrap;
 }
 
-.left-side {
+/* .left-side {
   flex: 0 0 30%;
   padding: 20px;
   border-right: 1px solid #ccc;
@@ -13,7 +13,7 @@
   flex: 1;
   padding: 20px;
   overflow-y: auto;
-}
+} */
 
 .post {
   background-color: #fff;
@@ -54,7 +54,6 @@
   color: #1e90ff;
 }
 
-
 .right-side::-webkit-scrollbar {
   width: 6px;
 }
@@ -70,7 +69,6 @@
 .right-side::-webkit-scrollbar-thumb:hover {
   background: #555;
 }
-
 
 @media (max-width: 768px) {
   .container {
