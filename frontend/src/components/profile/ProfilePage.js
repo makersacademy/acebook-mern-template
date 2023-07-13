@@ -29,9 +29,7 @@ const ProfilePage = ({ userId, onClose }) => {
         setName(data.name);
         setBio(data.bio);
 
-        if (data.image && !profileImageFetched) {
-          // Check if image has been fetched
-          setProfileImageFetched(true);
+        if (data.image) {
           fetch(`/profiles/${userId}/profileImage`, {
             headers: {
               Authorization: `Bearer ${localStorage.getItem("token")}`,
