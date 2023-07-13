@@ -1,29 +1,23 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import "./Post.css";
 import CreateLike from "../createLike/CreateLike";
-
 
 const formatDate = (date) => {
   // Implement your date formatting logic here
   return new Date(date).toLocaleDateString();
 };
 
-
 const Post = ({ post, handleRefresh }) => {
-
   return (
-    <>
     <article className="post" key={post._id}>
       <div className="post-header">
-        <div>
-          {post.user.photo && (
-            <img
-              className="feed-profile-photo"
-              src={`/profilePhotos/${post.user.photo}`}
-              alt="Profile photo"
-            />
-          )}
-        </div>
+        {post.user.photo && (
+          <img
+            className="feed-profile-photo"
+            src={`/profilePhotos/${post.user.photo}`}
+            alt="Profile photo"
+          />
+        )}
         <span className="post-username">
           <a href={"/users/" + post.user._id}>{post.user.username}</a>
         </span>
@@ -40,18 +34,17 @@ const Post = ({ post, handleRefresh }) => {
         )}
       </div>
       <div className="post-likes">
-       <p className="likes-count">Likes: {post.likes.length}</p>
+        <p className="likes-count">Likes: {post.likes.length}</p>
       </div>
-      <div id="like" >
-          <CreateLike postId={post._id} handleRefresh={handleRefresh} />
-        </div>
+      <div id="like">
+        <CreateLike postId={post._id} handleRefresh={handleRefresh} />
+      </div>
       <div className="post-footer">
         <a className="post-link" href={`/posts/${post._id}`}>
           View post
         </a>
       </div>
     </article>
-    </>
   );
 };
 

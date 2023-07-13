@@ -1,0 +1,139 @@
+
+  .h1 {
+    text-align: center;
+    color: #166fe5;
+  }
+  
+  .wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    width: 100%;
+    /* max-width: 800px; Remove or comment out this line */
+    margin: auto;
+    gap: 20px;
+  }
+  
+  .new-post {
+    flex: 0 0 30%;
+  }
+  
+  .image-container {
+    flex: 0 0 40%;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+  }
+  
+  .container {
+    flex: inherit;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 15px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .container input[type="text"],
+  .container input[type="email"],
+  .container input[type="password"] {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ddd;
+    border-radius: 3px;
+    box-sizing: border-box;
+  }
+  
+  .container input[type="submit"],
+  .container button {
+    width: 100%;
+    padding: 10px;
+    background-color: #f21847;
+    border: none;
+    color: #fff;
+    font-weight: bold;
+    border-radius: 3px;
+    cursor: pointer;
+    margin-bottom: 10px;
+    background-color: #166fe5;
+  }
+  
+  .container input[type="submit"]:hover,
+  .container button:hover {
+    background-color: #166fe5;
+  }
+  
+  .forgot-password,
+  .create-account {
+    text-align: center;
+    margin: 10px 0;
+  }
+  
+  .sign-up-button {
+    background-color: #008000 !important;
+  }
+  
+  .sign-up-button:hover {
+    background-color: #006600;
+  }
+  
+  #feed {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    max-height: fit-content;
+    width: min-content;
+    margin: 0 auto;
+  }
+  
+  .posts {
+    flex-direction: column;
+    justify-content: center;
+    color: #f21847;
+    border: 1px solid #ddd;
+    background-color: #c8cbce;
+    padding: 5px;
+    margin-bottom: 5px;
+    color: #fff;
+    font-weight: bold;
+    border-radius: 15px;
+    transition: 0.3s ease-in-out;
+    cursor: pointer;
+    text-align: center;
+  }
+  
+  .posts:hover {
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+  }
+  
+  .posts:active {
+    background-color: #0a7654;
+  }
+  
+  .post:hover {
+    background-color: #f2f2f2;
+  }
+  
+  .post:active {
+    background-color: #0a7654;
+  }
+  
+  /* Mobile view */
+  @media (max-width: 768px) {
+    .image-container {
+      display: none;
+    }
+  
+    .wrapper {
+      flex-direction: column;
+    }
+  
+    .container {
+      width: 100%;
+    }
+  }
+  

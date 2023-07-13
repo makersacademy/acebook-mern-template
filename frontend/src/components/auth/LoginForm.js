@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 // import LogoSearch from '../app/LogoSearch';
-import "../../index.css";
+import "./LoginForm.css";
 
 const LogInForm = () => {
   const navigate = useNavigate();

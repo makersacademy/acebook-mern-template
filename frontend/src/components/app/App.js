@@ -38,7 +38,7 @@ const App = () => {
   return (
     <>
       {location.pathname !== "/login" && <Navbar />}
-      <div className="app-wrapper">
+      {/* <div className="app-wrapper"> */}
         <div className="left-side">
           {/* Place the post element component here */}
         </div>
@@ -67,7 +67,7 @@ const App = () => {
         <div className="right-side">
           {/* Place the search element component here */}
         </div>
-      </div>
+      {/* </div> */}
     </>
   );
 };

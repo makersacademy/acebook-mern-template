@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Post from "../post/Post";
 import CreatePost from "../createPost/CreatePost";
-import '../../index.css'
+import './Feed.css';
 import CreateLike from "../createLike/CreateLike";
 
 const Feed = ({ navigate }) => {
@@ -42,15 +42,16 @@ const Feed = ({ navigate }) => {
 
   if (token) {
     return (
-      <div className="wrapper">
+      <div className="feed-wrapper">
         <div className="new-post">
           <CreatePost handleRefresh={handleRefresh} />
         </div>
         <div id="feed" role="feed" className="posts">
           {posts.map((post) => (
             <Post 
-            post={post}
-            key={post._id} handleRefresh={handleRefresh}
+              post={post}
+              key={post._id} 
+              handleRefresh={handleRefresh}
             />
           ))}
         </div>
@@ -67,3 +68,4 @@ const Feed = ({ navigate }) => {
 };
 
 export default Feed;
+
