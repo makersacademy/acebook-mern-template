@@ -28,6 +28,7 @@ const SinglePost = ({ navigate }) => {
       })
         .then((response) => response.json())
         .then(async (data) => {
+          console.log(data);
           window.localStorage.setItem("token", data.token);
           setToken(window.localStorage.getItem("token"));
           setPost(data.post);
@@ -45,10 +46,7 @@ const SinglePost = ({ navigate }) => {
       <>
         <h2>Post</h2>
         <div id="feed" role="feed">
-          <Post post={post} key={post._id} />  
-        </div>
-        <div id="like" >
-          <CreateLike handleRefresh={handleRefresh}/>
+          <Post post={post} key={post._id} handleRefresh={handleRefresh} />  
         </div>
         <div id="new-comment">
           <CreateComment handleRefresh={handleRefresh}/>

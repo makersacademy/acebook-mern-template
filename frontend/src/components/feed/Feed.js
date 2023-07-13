@@ -49,14 +49,10 @@ const Feed = ({ navigate }) => {
         </div>
         <div id="feed" role="feed" className="posts">
           {posts.map((post) => (
-            <>
             <Post 
             post={post}
-            key={post._id}
+            key={post._id} handleRefresh={handleRefresh}
             />
-            {/* <CreateLike handleRefresh={handleRefresh}/> */}
-            </>
-              
           ))}
         </div>
         <button onClick={logout}>Logout</button>

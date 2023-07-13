@@ -9,7 +9,7 @@ const formatDate = (date) => {
 };
 
 
-const Post = ({ post }) => {
+const Post = ({ post, handleRefresh }) => {
 
   return (
     <>
@@ -28,7 +28,7 @@ const Post = ({ post }) => {
        <p className="likes-count">Likes: {post.likes.length}</p>
       </div>
       <div id="like" >
-          <CreateLike/>
+          <CreateLike postId={post._id} handleRefresh={handleRefresh} />
         </div>
       <div className="post-footer">
         <a className="post-link" href={`/posts/${post._id}`}>View post</a>
