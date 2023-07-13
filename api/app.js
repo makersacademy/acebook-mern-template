@@ -36,10 +36,29 @@ const tokenChecker = (req, res, next) => {
   });
 };
 
+// This is a variant of the token checker which doesn't error out if no token is set
+// We're using it to pass the UserID into the Users route
+const passUserId = (req, res, next) => {
+  let token;
+  const authHeader = req.get("Authorization");
+
+  if (authHeader) {
+    token = authHeader.slice(7);
+  }
+
+  JWT.verify(token, process.env.JWT_SECRET, (err, payload) => {
+    if (err) {
+    } else {
+      req.user_id = payload.user_id;
+      next();
+    }
+  });
+};
+
 app.use("/posts", tokenChecker, postsRouter);
 app.use("/comments", tokenChecker, commentsRouter);
 app.use("/tokens", tokensRouter);
-app.use("/users", usersRouter);
+app.use("/users", passUserId, usersRouter);
 app.use("/likes", tokenChecker, likesRouter);
 
 // Serve static files from the 'uploads' directory

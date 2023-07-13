@@ -27,7 +27,7 @@ const Navbar = () => {
           <Link to="/posts">Feed</Link>
         </li>
         <li>
-          <Link to="/login">Profile</Link>
+          <Link to="/users/me">Profile</Link>
         </li>
         <li>
           <a href="#" onClick={logout}>
@@ -63,6 +63,10 @@ const App = () => {
           />
           <Route
             path="/users/:id"
+            element={<Profile navigate={useNavigate()} />}
+          />
+          <Route
+            path="/profile"
             element={<Profile navigate={useNavigate()} />}
           />
         </Routes>

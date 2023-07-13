@@ -16,7 +16,13 @@ const PostsController = {
       });
   },
   PostsByUser: (req, res) => {
-    Post.find({ user: req.params.id })
+    let userID;
+    if (req.params.id === "me") {
+      userID = req.user_id;
+    } else {
+      userID = req.params.id;
+    }
+    Post.find({ user: userID })
       .populate("user")
       .sort({ created_at: -1 })
       .exec(async (err, posts) => {

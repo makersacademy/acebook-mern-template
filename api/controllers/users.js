@@ -18,7 +18,14 @@ const UsersController = {
     });
   },
   Profile: (req, res) => {
-    User.findById(req.params.id).exec(async (err, user) => {
+    let userID;
+    if (req.params.id === "me") {
+      userID = req.user_id;
+    } else {
+      userID = req.params.id;
+    }
+
+    User.findById(userID).exec(async (err, user) => {
       if (err) {
         throw err;
       }
