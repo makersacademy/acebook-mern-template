@@ -14,6 +14,11 @@ import Profile from "../profile/Profile";
 import Feed from "../feed/Feed";
 import "./navbar.css";
 
+const logout = () => {
+  window.localStorage.removeItem("token");
+  window.location.href = "/login";
+};
+
 const Navbar = () => {
   return (
     <nav className="navbar">
@@ -25,7 +30,9 @@ const Navbar = () => {
           <Link to="/login">Profile</Link>
         </li>
         <li>
-          <Link to="/help">Logout</Link>
+          <a href="#" onClick={logout}>
+            Logout
+          </a>
         </li>
       </ul>
     </nav>
@@ -38,36 +45,28 @@ const App = () => {
   return (
     <>
       {location.pathname !== "/login" && <Navbar />}
-      {/* <div className="app-wrapper"> */}
-        <div className="left-side">
-          {/* Place the post element component here */}
-        </div>
-        <div className="middle-side">
-          <Routes>
-            <Route
-              path="/posts/:id"
-              element={<SinglePost navigate={useNavigate()} />}
-            />
-            <Route path="/" element={<Feed navigate={useNavigate()} />} />
-            <Route path="/posts" element={<Feed navigate={useNavigate()} />} />
-            <Route
-              path="/login"
-              element={<LoginForm navigate={useNavigate()} />}
-            />
-            <Route
-              path="/signup"
-              element={<SignUpForm navigate={useNavigate()} />}
-            />
-            <Route
-              path="/users/:id"
-              element={<Profile navigate={useNavigate()} />}
-            />
-          </Routes>
-        </div>
-        <div className="right-side">
-          {/* Place the search element component here */}
-        </div>
-      {/* </div> */}
+      <div class="main-container">
+        <Routes>
+          <Route
+            path="/posts/:id"
+            element={<SinglePost navigate={useNavigate()} />}
+          />
+          <Route path="/" element={<Feed navigate={useNavigate()} />} />
+          <Route path="/posts" element={<Feed navigate={useNavigate()} />} />
+          <Route
+            path="/login"
+            element={<LoginForm navigate={useNavigate()} />}
+          />
+          <Route
+            path="/signup"
+            element={<SignUpForm navigate={useNavigate()} />}
+          />
+          <Route
+            path="/users/:id"
+            element={<Profile navigate={useNavigate()} />}
+          />
+        </Routes>
+      </div>
     </>
   );
 };
