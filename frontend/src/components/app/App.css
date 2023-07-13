@@ -280,50 +280,22 @@ body {
   flex-direction: column;
 }
 
+.zoomed-image {
+  max-width: 90vw; /* viewport width */
+  max-height: 90vh; /* viewport height */
+  object-fit: contain; /* to maintain aspect ratio */
+}
+
 .post-image-container {
   position: relative;
   overflow: hidden;
   cursor: pointer;
 }
 
-.post-image-container.zoomed {
-  cursor: zoom-out;
-}
-
 .post-image {
   width: 100%;
   height: auto;
   border-radius: 8px;
-}
-
-.post-image-container.zoomed .zoomed-image-container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-color: rgba(0, 0, 0, 0.9);
-  z-index: 9999;
-}
-
-.post-image-container.zoomed .zoomed-image {
-  max-width: 90%;
-  max-height: 90%;
-}
-
-.post-image-container.zoomed .zoomed-image-close-button {
-  position: absolute;
-  top: 10px;
-  right: 10px;
-  padding: 5px;
-  font-size: 16px;
-  color: #fff;
-  background-color: transparent;
-  border: none;
-  cursor: pointer;
 }
 
 /* Redesign comment form */
@@ -452,4 +424,8 @@ body {
 .interactive-area {
   display: flex;
   justify-content: flex-end;
+}
+
+.image-zoom {
+  margin-top: 20px;
 }
