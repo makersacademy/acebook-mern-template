@@ -47,7 +47,7 @@ const Post = ({
           setImgSrc(objectURL);
         });
     }
-  }, [post]);
+  }, [post, token]);
 
   useEffect(() => {
     if (post.authorId) {
@@ -60,7 +60,7 @@ const Post = ({
           setAuthorImgSrc(objectURL);
         });
     }
-  }, [post]);
+  }, [post, token]);
 
   console.log(comments);
   return (
