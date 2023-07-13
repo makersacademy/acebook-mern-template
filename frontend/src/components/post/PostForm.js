@@ -43,16 +43,24 @@ const PostForm = ({ token, onNewPost }) => {
 
   return (
     <>
-      <h2>Create New Post</h2>
+      <h2 className="post-form-title">Got something to share?</h2>
       <form className="post-form" onSubmit={handleSubmit}>
         <input
           type="text"
-          placeholder="Enter your post"
+          placeholder="Share it here..."
           value={message}
           onChange={handleMessageChange}
+          className="post-form-input"
         />
-        <input type="file" accept="image/*" onChange={handleImageChange} />
-        <button type="submit">Post</button>
+        <input
+          type="file"
+          accept="image/*"
+          onChange={handleImageChange}
+          className="post-form-file"
+        />
+        <button type="submit" className="post-form-button">
+          Share Now
+        </button>
       </form>
     </>
   );
