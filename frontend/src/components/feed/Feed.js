@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import Post from "../post/Post";
 import PostForm from "../post/PostForm";
 
-const Feed = ({ navigate }) => {
+const Feed = ({ navigate, searchTerm }) => {
   const [posts, setPosts] = useState([]);
   const [comments, setComments] = useState([]);
   const [token, setToken] = useState(window.localStorage.getItem("token"));
@@ -87,21 +87,25 @@ const Feed = ({ navigate }) => {
         <div className="main-posts-container">
           <h2>Posts</h2>
           <div id="feed" role="feed">
-            {posts.map((post) => (
-              <div key={post._id} className="post-container">
-                <Post
-                  post={post}
-                  token={token}
-                  setToken={setToken}
-                  likes={post.likes}
-                  onUpdatedLikes={handleUpdatedLikes}
-                  navigate={navigate}
-                  handleNewComment={handleNewComment}
-                  comments={comments}
-                  handleUpdatedCommentLikes={handleUpdatedCommentLikes}
-                />
-              </div>
-            ))}
+            {posts
+              .filter((post) =>
+                post.message.toLowerCase().includes(searchTerm.toLowerCase())
+              ) // Add filtering based on searchTerm here
+              .map((post) => (
+                <div key={post._id} className="post-container">
+                  <Post
+                    post={post}
+                    token={token}
+                    setToken={setToken}
+                    likes={post.likes}
+                    onUpdatedLikes={handleUpdatedLikes}
+                    navigate={navigate}
+                    handleNewComment={handleNewComment}
+                    comments={comments}
+                    handleUpdatedCommentLikes={handleUpdatedCommentLikes}
+                  />
+                </div>
+              ))}
           </div>
         </div>
       </>
