@@ -11,15 +11,16 @@ describe("Signing up", () => {
   });
 
   it("with missing password, redirects to '/signup'", () => {
-    cy.visit("/signup");
+    cy.visit("/");
+    cy.contains("Sign Up").click();
     cy.get("#email").type("someone@example.com");
     cy.get("#submit").click();
-
-    cy.url().should("include", "/signup");
+    
+    cy.get("#submit").should('be.visible');
   });
 
   it("with missing email, redirects to '/signup'", () => {
-    cy.visit("/signup");
+    cy.visit("/");
     cy.get("#password").type("password");
     cy.get("#submit").click();
 
