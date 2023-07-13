@@ -42,9 +42,8 @@ const Feed = ({ navigate }) => {
 
   if (token) {
     return (
-      <>
-        <h2 style={{ textAlign: "center", color: "#166fe5" }}>Posts</h2>
-        <div id="new-post">
+      <div className="wrapper">
+        <div className="new-post">
           <CreatePost handleRefresh={handleRefresh} />
         </div>
         <div id="feed" role="feed" className="posts">
@@ -55,8 +54,11 @@ const Feed = ({ navigate }) => {
             />
           ))}
         </div>
-        <button onClick={logout}>Logout</button>
-      </>
+        <div className="right-side">
+          {/* Add your search component here */}
+        </div>
+        {/* <button onClick={logout}>Logout</button> */}
+      </div>
     );
   } else {
     navigate("/login");

@@ -4,6 +4,7 @@ import Post from "../post/Post";
 import CreateComment from "../createComment/CreateComment";
 import Comment from "./Comment";
 import CreateLike from "../createLike/CreateLike";
+import "../../index.css";
 
 const SinglePost = ({ navigate }) => {
   const [post, setPost] = useState({
@@ -43,23 +44,34 @@ const SinglePost = ({ navigate }) => {
 
   if (token) {
     return (
-      <>
-        <h2>Post</h2>
-        <div id="feed" role="feed">
-          <Post post={post} key={post._id} handleRefresh={handleRefresh} />  
+      <div className="wrapper">
+        <div className="left-side">
+          <h2>Post</h2>
+          <div id="feed" role="feed">
+            <Post post={post} key={post._id} handleRefresh={handleRefresh} />
+          </div>
         </div>
-        <div id="new-comment">
-          <CreateComment handleRefresh={handleRefresh}/>
+        <div className="middle-side">
+          <div id="like">
+            <CreateLike handleRefresh={handleRefresh} />
+          </div>
+          <div id="new-comment">
+            <CreateComment handleRefresh={handleRefresh} />
+          </div>
+          <div id="comment" role="comment">
+            {post.comments.map((comment) => {
+              return <Comment comment={comment} key={comment._id} />;
+            })}
+          </div>
         </div>
-        <div id="comment" role="comment">
-           {post.comments.map((comment) => {
-              return <Comment comment={comment} key={ comment._id} />
-          })} 
-          </div> 
-      </>
+        <div className="right-side">
+          {/* Add your search component here */}
+        </div>
+      </div>
     );
   } else {
     navigate("/login");
+    return null;
   }
 };
 

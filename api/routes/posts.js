@@ -17,6 +17,7 @@ const storage = multer.diskStorage({
 const upload = multer({ storage: storage });
 
 router.get("/:id", PostsController.SinglePost);
+router.get("/user/:id", PostsController.PostsByUser);
 router.get("/", PostsController.Index);
 router.post("/", upload.single("image"), PostsController.Create); // Updated here
 
