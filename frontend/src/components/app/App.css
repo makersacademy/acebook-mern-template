@@ -250,6 +250,7 @@ body {
   transition: all 0.2s ease-in-out;
 }
 
+.post-content:hover,
 .post-container:hover {
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 }
@@ -368,11 +369,13 @@ body {
   box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
 }
 
+.post-container:hover,
 .create-post-container:hover {
   transform: translateY(-3px);
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
 }
 
+.post-container:active,
 .create-post-container:active {
   transform: translateY(1px);
   box-shadow: 0 3px 15px rgba(0, 0, 0, 0.2);
