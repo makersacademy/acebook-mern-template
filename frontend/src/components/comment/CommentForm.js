@@ -42,7 +42,7 @@ const CommentForm = ({ token, onNewComment, postId }) => {
         value={comment}
         onChange={handleCommentChange}
       />
-      <button id="comment-submit" type="submit">Post</button>
+      <button id="comment-post-button" type="submit">Post</button>
     </form>
   );
 };
