@@ -1,14 +1,17 @@
 import React, { useState } from 'react';
-import '../../index.css'
+import { useNavigate } from 'react-router-dom';
+// import LogoSearch from '../app/LogoSearch';
+import '../../index.css';
 
-const LogInForm = ({ navigate }) => {
+const LogInForm = () => {
+  const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
   const handleSubmit = async (event) => {
     event.preventDefault();
 
-    let response = await fetch( '/tokens', {
+    let response = await fetch('/tokens', {
       method: 'post',
       headers: {
         'Content-Type': 'application/json',
@@ -16,13 +19,11 @@ const LogInForm = ({ navigate }) => {
       body: JSON.stringify({ email: email, password: password })
     })
 
-    if(response.status !== 201) {
-      console.log("yay")
-      navigate('/login')
+    if (response.status !== 201) {
+      navigate('/login');
     } else {
-      console.log("oop")
-      let data = await response.json()
-      window.localStorage.setItem("token", data.token)
+      let data = await response.json();
+      window.localStorage.setItem("token", data.token);
       navigate('/posts');
     }
   }
@@ -36,18 +37,16 @@ const LogInForm = ({ navigate }) => {
   }
 
   const handleForgotPassword = () => {
-    //Logic needs to be added
-    navigate('/forgot-password')
+    navigate('/forgot-password');
   }
 
   const handleCreateAccount = () => {
-    navigate('/signup')
+    navigate('/signup');
   }
 
 
   return (
     <div className="wrapper">
-      <div className="image-container"></div>
       <div className="container">
         <h1>Welcome to Acebook</h1>
         <div className="form-container">
@@ -86,7 +85,6 @@ const LogInForm = ({ navigate }) => {
       </div>
     </div>
   );
-  
 };
 
 export default LogInForm;

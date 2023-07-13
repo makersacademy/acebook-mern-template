@@ -4,13 +4,14 @@ import Post from "../post/Post";
 import CreateComment from "../createComment/CreateComment";
 import Comment from "./Comment";
 import CreateLike from "../createLike/CreateLike";
+import "../../index.css";
 
 const SinglePost = ({ navigate }) => {
   const [post, setPost] = useState({
     user: { email: "" },
     message: "",
     _id: "",
-    comments: [{user: {email:""}, comment: "", _id: ""}],
+    comments: [{ user: { email: "" }, comment: "", _id: "" }],
   });
   const [token, setToken] = useState(window.localStorage.getItem("token"));
   const params = useParams();
@@ -39,26 +40,34 @@ const SinglePost = ({ navigate }) => {
 
   if (token) {
     return (
-      <>
-        <h2>Post</h2>
-        <div id="feed" role="feed">
-          <Post post={post} key={post._id} />
+      <div className="wrapper">
+        <div className="left-side">
+          <h2>Post</h2>
+          <div id="feed" role="feed">
+            <Post post={post} key={post._id} />
+          </div>
         </div>
-        <div id="like" >
-          <CreateLike handleRefresh={handleRefresh}/>
+        <div className="middle-side">
+          <div id="like">
+            <CreateLike handleRefresh={handleRefresh} />
+          </div>
+          <div id="new-comment">
+            <CreateComment handleRefresh={handleRefresh} />
+          </div>
+          <div id="comment" role="comment">
+            {post.comments.map((comment) => {
+              return <Comment comment={comment} key={comment._id} />;
+            })}
+          </div>
         </div>
-        <div id="new-comment">
-          <CreateComment handleRefresh={handleRefresh}/>
+        <div className="right-side">
+          {/* Add your search component here */}
         </div>
-        <div id="comment" role="comment">
-           {post.comments.map((comment) => {
-              return <Comment comment={comment} key={ comment._id} />
-          })} 
-          </div> 
-      </>
+      </div>
     );
   } else {
     navigate("/login");
+    return null;
   }
 };
 
