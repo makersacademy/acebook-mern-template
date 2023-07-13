@@ -73,11 +73,11 @@ const Post = ({
       </div>
       <div className="message">{post.message}</div>
       <button onClick={handlePostLike}>
-        <span role="img" aria-label="like">
+        <span id="post-likes" role="img" aria-label="like">
           {"👍"}
         </span>
       </button>
-      <div>{post.likes ? post.likes.length : 0} likes</div>
+      <div id="post-like-counter">{post.likes ? post.likes.length : 0} likes</div>
 
       <div
         className="post-container"

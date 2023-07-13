@@ -30,11 +30,11 @@ const Comment = ({
       <div className="time">{comment.time}</div>
       <div className="comment">{comment.comment}</div>
       <button onClick={handleCommentLike}>
-        <span role="img" aria-label="like">
+        <span id="comment-like" role="img" aria-label="like">
           {"👍"}
         </span>
       </button>
-      <div>{comment.likes ? comment.likes.length : 0} likes</div>
+      <div id="comment-like-counter">{comment.likes ? comment.likes.length : 0} likes</div>
     </div>
   );
 };
