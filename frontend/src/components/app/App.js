@@ -1,14 +1,13 @@
-
-import React from 'react';
+import React, { useState } from "react";
+import { useNavigate, Routes, Route, Link, useLocation } from "react-router-dom";
 import LogoSearch from './LogoSearch';
-import './navbar.css';
 import LoginForm from "../auth/LoginForm";
 import SignUpForm from "../user/SignUpForm";
 import SinglePost from "../singlePost/SinglePost";
 import Profile from "../profile/Profile";
-import React, { useState } from "react";
 import Feed from "../feed/Feed";
-import { useNavigate, Routes, Route, useLocation } from "react-router-dom";
+import './navbar.css';
+
 
 
 const Navbar = () => {
