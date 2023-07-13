@@ -226,7 +226,7 @@ body {
   background-color: #e4e6e9;
 }
 
-.comment-container {
+.comment-container .username {
   color: #365899;
   font-weight: bold;
 }
