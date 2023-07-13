@@ -12,6 +12,7 @@ const Post = ({
   onUpdatedLikes,
   handleNewComment,
   comments,
+  handleUpdatedCommentLikes,
 }) => {
   const [imgSrc, setImgSrc] = useState(null);
   const [isZoomed, setIsZoomed] = useState(false);
@@ -102,6 +103,7 @@ const Post = ({
                   comment={comment}
                   onNewComment={handleNewComment}
                   token={token}
+                  handleUpdatedCommentLikes={handleUpdatedCommentLikes}
                 />
               </div>
             ))}

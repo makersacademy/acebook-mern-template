@@ -70,6 +70,14 @@ const Feed = ({ navigate }) => {
     );
   };
 
+  const handleUpdatedCommentLikes = (commentId, likes) => {
+    setComments((prevComments) =>
+      prevComments.map((comment) =>
+        comment._id === commentId ? { ...comment, likes: likes } : comment
+      )
+    );
+  };
+
   if (token && token !== "null" && token !== "undefined") {
     return (
       <>
@@ -90,6 +98,7 @@ const Feed = ({ navigate }) => {
                   navigate={navigate}
                   handleNewComment={handleNewComment}
                   comments={comments}
+                  handleUpdatedCommentLikes={handleUpdatedCommentLikes}
                 />
               </div>
             ))}
