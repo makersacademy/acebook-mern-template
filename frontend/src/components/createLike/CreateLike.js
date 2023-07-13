@@ -3,14 +3,15 @@ import { useParams } from "react-router-dom";
 import '../../index.css'
 
 
-const CreateLike = ({ handleRefresh }) => {
+const CreateLike = ({ postId, handleRefresh }) => {
   const [token] = useState(window.localStorage.getItem("token"));
   const params = useParams();
+
 
   const handleSubmit = async (event) => {
     event.preventDefault();
 
-    let response = await fetch(`/likes/${params.id}`, {
+    let response = await fetch(`/likes/${postId}`, {
       method: "post",
       headers: {
         Authorization: `Bearer ${token}`,
@@ -28,22 +29,6 @@ const CreateLike = ({ handleRefresh }) => {
   return (
    <button onClick={handleSubmit}>like post</button>
    
-    /* <form onSubmit={handleSubmit}>
-      Comment:{" "}
-      <input
-        id="message"
-        type="text"
-        value={message}
-        onChange={handleMessageChange}
-      />
-      <input 
-      role="submit-button" 
-      id="submit" 
-      type="submit" 
-      value="Submit" 
-      className="submit-button" />
-    </form>
-     */
   );
 };
 

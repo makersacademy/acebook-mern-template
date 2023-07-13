@@ -11,7 +11,10 @@ const SinglePost = ({ navigate }) => {
     user: { email: "" },
     message: "",
     _id: "",
-    comments: [{ user: { email: "" }, comment: "", _id: "" }],
+    comments: [{user: {email:""}, comment: "", _id: ""}],
+    likes: [{
+      user: {}
+      }],
   });
   const [token, setToken] = useState(window.localStorage.getItem("token"));
   const params = useParams();
@@ -26,6 +29,7 @@ const SinglePost = ({ navigate }) => {
       })
         .then((response) => response.json())
         .then(async (data) => {
+          console.log(data);
           window.localStorage.setItem("token", data.token);
           setToken(window.localStorage.getItem("token"));
           setPost(data.post);
@@ -44,7 +48,7 @@ const SinglePost = ({ navigate }) => {
         <div className="left-side">
           <h2>Post</h2>
           <div id="feed" role="feed">
-            <Post post={post} key={post._id} />
+            <Post post={post} key={post._id} handleRefresh={handleRefresh} />
           </div>
         </div>
         <div className="middle-side">

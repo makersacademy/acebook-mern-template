@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import Post from "../post/Post";
 import CreatePost from "../createPost/CreatePost";
 import '../../index.css'
+import CreateLike from "../createLike/CreateLike";
 
 const Feed = ({ navigate }) => {
   const [posts, setPosts] = useState([]);
@@ -45,18 +46,13 @@ const Feed = ({ navigate }) => {
         <div className="new-post">
           <CreatePost handleRefresh={handleRefresh} />
         </div>
-        <div className="feed">
-          <h2 className="feed-heading">Posts</h2>
-          <div className="posts">
-            {posts.map((post) => (
-              <Post
-                post={post}
-                key={post._id}
-                // onLike={handleLike}
-                // onUnlike={handleUnlike}
-              />
-            ))}
-          </div>
+        <div id="feed" role="feed" className="posts">
+          {posts.map((post) => (
+            <Post 
+            post={post}
+            key={post._id} handleRefresh={handleRefresh}
+            />
+          ))}
         </div>
         <div className="right-side">
           {/* Add your search component here */}

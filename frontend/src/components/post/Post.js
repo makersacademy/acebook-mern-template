@@ -1,13 +1,18 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "./Post.css";
+import CreateLike from "../createLike/CreateLike";
+
 
 const formatDate = (date) => {
   // Implement your date formatting logic here
   return new Date(date).toLocaleDateString();
 };
 
-const Post = ({ post }) => {
+
+const Post = ({ post, handleRefresh }) => {
+
   return (
+    <>
     <article className="post" key={post._id}>
       <div className="post-header">
         <div>
@@ -34,12 +39,19 @@ const Post = ({ post }) => {
           />
         )}
       </div>
+      <div className="post-likes">
+       <p className="likes-count">Likes: {post.likes.length}</p>
+      </div>
+      <div id="like" >
+          <CreateLike postId={post._id} handleRefresh={handleRefresh} />
+        </div>
       <div className="post-footer">
         <a className="post-link" href={`/posts/${post._id}`}>
           View post
         </a>
       </div>
     </article>
+    </>
   );
 };
 
