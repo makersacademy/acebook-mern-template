@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import "../../index.css";
 
 const SignUpForm = ({ navigate }) => {
+  const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [file, setFile] = useState(null);
@@ -10,6 +11,7 @@ const SignUpForm = ({ navigate }) => {
     event.preventDefault();
 
     const formData = new FormData();
+    formData.append("username", username);
     formData.append("email", email);
     formData.append("password", password);
 
@@ -24,6 +26,7 @@ const SignUpForm = ({ navigate }) => {
       body: formData,
     }).then((response) => {
       if (response.status === 201) {
+        console.log("user created...");
         navigate("/login");
       } else {
         navigate("/signup");
@@ -39,11 +42,13 @@ const SignUpForm = ({ navigate }) => {
     setPassword(event.target.value);
   };
 
+  const handleUsernameChange = (event) => {
+    setUsername(event.target.value);
+  };
+
   const handleFileChange = (event) => {
     setFile(event.target.files[0]);
   };
-
-  const handleUserLogin = () => {};
 
   return (
     // <form onSubmit={handleSubmit}>
@@ -60,14 +65,23 @@ const SignUpForm = ({ navigate }) => {
           encType="multipart/form-data"
         >
           {file ? <img src={URL.createObjectURL(file)} alt="Preview" /> : null}
-
+          <input
+            placeholder="Username"
+            id="username"
+            type="text"
+            value={username}
+            onChange={handleUsernameChange}
+            className="input"
+            required
+          />
           <input
             placeholder="Email"
             id="email"
-            type="text"
+            type="email"
             value={email}
             onChange={handleEmailChange}
             className="input"
+            required
           />
           <input
             placeholder="Password"
@@ -76,6 +90,7 @@ const SignUpForm = ({ navigate }) => {
             value={password}
             onChange={handlePasswordChange}
             className="input"
+            required
           />
           <input id="photo" type="file" onChange={handleFileChange} />
           <input

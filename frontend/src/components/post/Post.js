@@ -20,7 +20,7 @@ const Post = ({ post }) => {
           )}
         </div>
         <span className="post-username">
-          <a href={"/users/" + post.user._id}>{post.user.email}</a>
+          <a href={"/users/" + post.user._id}>{post.user.username}</a>
         </span>
         <span className="post-date">{formatDate(post.created_at)}</span>
       </div>
