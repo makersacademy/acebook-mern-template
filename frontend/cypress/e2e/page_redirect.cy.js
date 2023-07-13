@@ -11,7 +11,7 @@ describe("Page Redirect", () => {
     cy.get("#password").type("password");
     cy.get("#submit").click();
     cy.contains("Profile").click();
-    cy.url().should("include", "/profile:id");
+    cy.url().should("include", "/profile"); // /profile/:id [:id not included]
   });
 
   it("redirects user to their feed after clicking the Acebook button", () => {
