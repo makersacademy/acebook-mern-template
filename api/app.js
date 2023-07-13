@@ -3,9 +3,6 @@ const express = require("express");
 const path = require("path");
 const logger = require("morgan");
 const JWT = require("jsonwebtoken");
-const bodyParser = require("body-parser");
-const mongoose = require("mongoose");
-const fs = require("fs");
 const multer = require("multer");
 const upload = multer({ storage: multer.memoryStorage() });
 
@@ -15,8 +12,6 @@ const tokensRouter = require("./routes/tokens");
 const usersRouter = require("./routes/users");
 const notificationsRouter = require("./routes/notifications");
 const profilesRouter = require("./routes/profiles");
-const postlikesRouter = require("./routes/postlikes");
-const commentlikesRouter = require("./routes/commentlikes");
 
 const app = express();
 

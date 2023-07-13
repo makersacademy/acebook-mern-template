@@ -27,8 +27,7 @@ const App = () => {
   const [showNotificationModal, setShowNotificationModal] = useState(false);
   const [isUserLoggedIn, setIsUserLoggedIn] = useState(false);
   const [userId, setUserId] = useState(null);
-  const [selectedPost, setSelectedPost] = useState("");
-  const [showModal, setShowModal] = useState(false);
+  const [searchTerm, setSearchTerm] = useState("");
 
   const navigate = useNavigate();
 
@@ -85,13 +84,15 @@ const App = () => {
           </div>
 
           <div className="feed-container">
-            <SearchBar />
+            {isUserLoggedIn ? (
+              <SearchBar setSearchTerm={setSearchTerm} />
+            ) : null}
             <Routes>
               <Route
                 path="/"
                 element={
                   isUserLoggedIn ? (
-                    <Feed navigate={navigate} />
+                    <Feed navigate={navigate} searchTerm={searchTerm} />
                   ) : (
                     <div id="login-placeholder">
                       Please log in to see the feed.
