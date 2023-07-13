@@ -7,6 +7,7 @@ const CreateLike = ({ handleRefresh }) => {
   const [token] = useState(window.localStorage.getItem("token"));
   const params = useParams();
 
+
   const handleSubmit = async (event) => {
     event.preventDefault();
 
@@ -28,22 +29,6 @@ const CreateLike = ({ handleRefresh }) => {
   return (
    <button onClick={handleSubmit}>like post</button>
    
-    /* <form onSubmit={handleSubmit}>
-      Comment:{" "}
-      <input
-        id="message"
-        type="text"
-        value={message}
-        onChange={handleMessageChange}
-      />
-      <input 
-      role="submit-button" 
-      id="submit" 
-      type="submit" 
-      value="Submit" 
-      className="submit-button" />
-    </form>
-     */
   );
 };
 

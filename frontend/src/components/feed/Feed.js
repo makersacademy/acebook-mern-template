@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import Post from "../post/Post";
 import CreatePost from "../createPost/CreatePost";
 import '../../index.css'
+import CreateLike from "../createLike/CreateLike";
 
 const Feed = ({ navigate }) => {
   const [posts, setPosts] = useState([]);
@@ -48,12 +49,14 @@ const Feed = ({ navigate }) => {
         </div>
         <div id="feed" role="feed" className="posts">
           {posts.map((post) => (
-            <Post
-              post={post}
-              key={post._id}
-              // onLike={handleLike}
-              // onUnlike={handleUnlike}
+            <>
+            <Post 
+            post={post}
+            key={post._id}
             />
+            {/* <CreateLike handleRefresh={handleRefresh}/> */}
+            </>
+              
           ))}
         </div>
         <button onClick={logout}>Logout</button>

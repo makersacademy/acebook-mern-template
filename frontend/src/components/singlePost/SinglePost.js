@@ -11,6 +11,9 @@ const SinglePost = ({ navigate }) => {
     message: "",
     _id: "",
     comments: [{user: {email:""}, comment: "", _id: ""}],
+    likes: [{
+      user: {}
+      }],
   });
   const [token, setToken] = useState(window.localStorage.getItem("token"));
   const params = useParams();
@@ -42,7 +45,7 @@ const SinglePost = ({ navigate }) => {
       <>
         <h2>Post</h2>
         <div id="feed" role="feed">
-          <Post post={post} key={post._id} />
+          <Post post={post} key={post._id} />  
         </div>
         <div id="like" >
           <CreateLike handleRefresh={handleRefresh}/>
