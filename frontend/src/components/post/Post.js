@@ -113,18 +113,19 @@ const Post = ({
         />
 
         <div id="comment-feed">
-          {comments
-            .filter((comment) => comment.postId === post._id)
-            .map((comment) => (
-              <div key={comment._id}>
-                <Comment
-                  comment={comment}
-                  onNewComment={handleNewComment}
-                  token={token}
-                  handleUpdatedCommentLikes={handleUpdatedCommentLikes}
-                />
-              </div>
-            ))}
+          {comments &&
+            comments
+              .filter((comment) => comment.postId === post._id)
+              .map((comment) => (
+                <div key={comment._id}>
+                  <Comment
+                    comment={comment}
+                    onNewComment={handleNewComment}
+                    token={token}
+                    handleUpdatedCommentLikes={handleUpdatedCommentLikes}
+                  />
+                </div>
+              ))}
         </div>
       </div>
     </div>
