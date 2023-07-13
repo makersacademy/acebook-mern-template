@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import Post from "../post/Post";
+import "./Profile.css";
 
 const Profile = ({ navigate }) => {
   const [user, setUser] = useState({
@@ -49,7 +50,7 @@ const Profile = ({ navigate }) => {
             <img
               className="profile-photo"
               src={`/profilePhotos/${user.photo}`}
-              alt="Post"
+              alt="Profile photo"
             />
           )}
         </div>

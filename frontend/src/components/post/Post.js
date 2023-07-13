@@ -10,6 +10,15 @@ const Post = ({ post }) => {
   return (
     <article className="post" key={post._id}>
       <div className="post-header">
+        <div>
+          {post.user.photo && (
+            <img
+              className="feed-profile-photo"
+              src={`/profilePhotos/${post.user.photo}`}
+              alt="Profile photo"
+            />
+          )}
+        </div>
         <span className="post-username">
           <a href={"/users/" + post.user._id}>{post.user.email}</a>
         </span>
