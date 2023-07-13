@@ -1,14 +1,10 @@
 import React, { useEffect, useState } from "react";
-import PostLike from "../likes/PostLike";
-import PostLikeForm from "../likes/PostLikeForm";
 import CommentForm from "../comment/CommentForm";
 import Comment from "../comment/Comment";
 
 const Post = ({
   post,
   token,
-  setToken,
-  likes,
   onUpdatedLikes,
   handleNewComment,
   comments,
@@ -89,11 +85,33 @@ const Post = ({
         key={post._id}
         id={post._id}
       >
+        {imgSrc && (
+          <div className={`post-image-container ${isZoomed ? "zoomed" : ""}`}>
+            <img
+              className="post-image"
+              src={imgSrc}
+              alt="Post"
+              onClick={handleZoom}
+            />
+            {isZoomed && (
+              <div className="zoomed-image-container">
+                <img className="zoomed-image" src={imgSrc} alt="Zoomed Post" />
+                <button
+                  className="zoomed-image-close-button"
+                  onClick={() => setIsZoomed(false)}
+                >
+                  Close
+                </button>
+              </div>
+            )}
+          </div>
+        )}
         <CommentForm
           token={token}
           onNewComment={handleNewComment}
           postId={post._id}
         />
+
         <div id="comment-feed">
           {comments
             .filter((comment) => comment.postId === post._id)
@@ -109,27 +127,6 @@ const Post = ({
             ))}
         </div>
       </div>
-      {imgSrc && (
-        <div className={`post-image-container ${isZoomed ? "zoomed" : ""}`}>
-          <img
-            className="post-image"
-            src={imgSrc}
-            alt="Post"
-            onClick={handleZoom}
-          />
-          {isZoomed && (
-            <div className="zoomed-image-container">
-              <img className="zoomed-image" src={imgSrc} alt="Zoomed Post" />
-              <button
-                className="zoomed-image-close-button"
-                onClick={() => setIsZoomed(false)}
-              >
-                Close
-              </button>
-            </div>
-          )}
-        </div>
-      )}
     </div>
   );
 };
