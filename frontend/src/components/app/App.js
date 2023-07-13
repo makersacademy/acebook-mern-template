@@ -93,7 +93,9 @@ const App = () => {
                   isUserLoggedIn ? (
                     <Feed navigate={navigate} />
                   ) : (
-                    <div>Please log in to see the feed.</div>
+                    <div id="login-placeholder">
+                      Please log in to see the feed.
+                    </div>
                   )
                 }
               />
@@ -103,7 +105,9 @@ const App = () => {
                   isUserLoggedIn ? (
                     <Profile userId={userId} />
                   ) : (
-                    <div>Please log in to see the profile.</div>
+                    <div id="login-placeholder">
+                      Please log in to see the profile.
+                    </div>
                   )
                 }
               />

@@ -24,8 +24,12 @@ const LogOutForm = ({ onClose, setIsUserLoggedIn, setUserId }) => {
         <div className="logout-form">
           <h2>Are you sure you want to log out?</h2>
           <div className="logout-buttons">
-            <button onClick={handleConfirm}>Yes</button>
-            <button onClick={handleCancel}>No</button>
+            <button id="yes-button" onClick={handleConfirm}>
+              Yes
+            </button>
+            <button id="no-button" onClick={handleCancel}>
+              No
+            </button>
           </div>
         </div>
       </div>
