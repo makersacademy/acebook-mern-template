@@ -35,7 +35,7 @@ body {
   display: flex;
   height: calc(100% - 60px); /* Subtract header height */
   justify-content: space-between;
-  margin-right: 200px;
+  margin-right: 400px;
 }
 
 .content {
@@ -292,12 +292,16 @@ body {
   position: relative;
   overflow: hidden;
   cursor: pointer;
+  display: flex;
+  justify-content: center; /* for horizontal centering */
+  align-items: center; /* for vertical centering */
 }
 
 .post-image {
-  width: 100%;
+  width: 90%;
   height: auto;
   border-radius: 8px;
+  margin: auto; /* this is also needed to ensure the image is centered vertically and horizontally */
 }
 
 /* Redesign comment form */
