@@ -58,8 +58,9 @@ const PostForm = ({ token, onNewPost }) => {
           onChange={handleImageChange}
           className="post-form-file"
         />
-        <input type="file" accept="image/*" onChange={handleImageChange} />
-        <button id="post-submit" type="submit">Post</button>
+        <button id="post-submit" type="submit">
+          Post
+        </button>
       </form>
     </>
   );
