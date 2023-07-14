@@ -78,6 +78,17 @@ const App = () => {
         <div className="content">
           <div className="top-bar">
             <div className="top-right">
+              {isUserLoggedIn ? (
+                <>
+                  <button
+                    className="navbar-button-top"
+                    id="notification-button"
+                    onClick={handleNotifications}
+                  >
+                    🔔
+                  </button>
+                </>
+              ) : null}
               <FeedButton />
               <ProfileButton userId={userId} />
             </div>

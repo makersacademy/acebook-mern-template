@@ -123,6 +123,7 @@ body {
 
 /* NotificationButton and ProfileButton styles */
 .notification-button,
+.navbar-button-top,
 .profile-button {
   padding: 6px 16px;
   font-weight: 600;
@@ -135,6 +136,7 @@ body {
 }
 
 .notification-button:hover,
+.navbar-button-top:hover,
 .profile-button:hover {
   background-color: #e4e6e9;
   transform: scale(1.1); /* Adding hover effect */

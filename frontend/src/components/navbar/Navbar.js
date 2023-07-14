@@ -23,7 +23,7 @@ const Navbar = ({
             id="notification-button"
             onClick={onNotifications}
           >
-            🔔
+            Notification
           </button>
           <button className="navbar-button" onClick={onLogout}>
             Logout
