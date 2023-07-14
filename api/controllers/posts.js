@@ -86,19 +86,6 @@ const PostsController = {
       }
     });
   },
-  GetLikes: (req, res) => {
-    Post.findById(req.params.postId, async (err, post) => {
-      if (err) {
-        console.error(err);
-        res.status(500).json({ error: err.toString() });
-      } else if (!post) {
-        res.status(404).json({ message: "Post not found" });
-      } else {
-        const token = await TokenGenerator.jsonwebtoken(req.user_id);
-        res.status(200).json({ likes: post.likes, token: token });
-      }
-    });
-  },
 
   UpdateLikes: (req, res) => {
     Post.findById(req.params.postId, async (err, post) => {

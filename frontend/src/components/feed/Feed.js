@@ -49,16 +49,13 @@ const Feed = ({ navigate, searchTerm }) => {
 
   const handleNewPost = (post) => {
     setPosts((prevPosts) => {
-      const newPosts = [...prevPosts, post];
-      const reversedPosts = newPosts.reverse();
-      return reversedPosts;
+      return [post, ...prevPosts];
     });
   };
+
   const handleNewComment = (comment) => {
     setComments((prevComments) => {
-      const newComments = [...prevComments, comment];
-      const reversedComments = newComments.reverse();
-      return reversedComments;
+      return [comment, ...prevComments];
     });
   };
 

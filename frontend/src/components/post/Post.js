@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import CommentForm from "../comment/CommentForm";
 import Comment from "../comment/Comment";
+import Modal from "../common/Modal";
 
 const Post = ({
   post,
@@ -13,12 +14,18 @@ const Post = ({
   const [imgSrc, setImgSrc] = useState(null);
   const [isZoomed, setIsZoomed] = useState(false);
   const [authorImgSrc, setAuthorImgSrc] = useState(null);
+  const [liked, setLiked] = useState(false);
+
+  const onClose = () => {
+    setIsZoomed(false);
+  };
 
   const handleZoom = () => {
     setIsZoomed(true);
   };
 
   const handlePostLike = async () => {
+    setLiked(!liked);
     console.log("handleLike is triggered");
     const response = await fetch(`/posts/${post._id}/like`, {
       method: "PUT",
@@ -59,9 +66,8 @@ const Post = ({
     }
   }, [post, token]);
 
-  console.log(comments);
   return (
-    <div>
+    <div className="post-wrapper">
       <div className="author-details">
         <div className="author">
           <img className="author-image" src={authorImgSrc} alt="Author" />
@@ -80,30 +86,34 @@ const Post = ({
       <div id="post-like-counter">{post.likes ? post.likes.length : 0} likes</div>
 
       <div
-        className="post-container"
+        className={`post-container ${isZoomed ? "zoom-active" : ""}`}
         data-cy="post"
         key={post._id}
         id={post._id}
       >
         {imgSrc && (
-          <div className={`post-image-container ${isZoomed ? "zoomed" : ""}`}>
+          <div className="post-image-container">
             <img
               className="post-image"
               src={imgSrc}
               alt="Post"
               onClick={handleZoom}
             />
-            {isZoomed && (
-              <div className="zoomed-image-container">
-                <img className="zoomed-image" src={imgSrc} alt="Zoomed Post" />
-                <button
-                  className="zoomed-image-close-button"
-                  onClick={() => setIsZoomed(false)}
-                >
-                  Close
+
+            <Modal open={isZoomed} onClose={onClose}>
+              <div className="modal-content">
+                <button className="close-button" onClick={onClose}>
+                  X
                 </button>
+                <div className="image-zoom">
+                  <img
+                    className="zoomed-image"
+                    src={imgSrc}
+                    alt="Zoomed Post"
+                  />
+                </div>
               </div>
-            )}
+            </Modal>
           </div>
         )}
         <CommentForm

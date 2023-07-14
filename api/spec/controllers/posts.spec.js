@@ -314,4 +314,63 @@ describe("/posts", () => {
       Post.findById.mockRestore();
     });
   });
+
+  // describe("POST /posts/:postId/likes", () => {
+  //   let postId;
+
+  //   beforeEach(async () => {
+  //     let post = new Post({ message: "Hello there!", likes: [] });
+  //     await post.save();
+  //     postId = post._id;
+  //   });
+
+  //   test("increments the like count when a user likes a post", async () => {
+  //     let response = await request(app)
+  //       .put(`/posts/${postId}/like`)
+  //       .set("Authorization", `Bearer ${token}`);
+
+  //     expect(response.status).toEqual(200);
+  //     expect(response.body.likes.length).toEqual(1);
+  //     expect(response.body.likes[0]).toEqual(token.user_id); // user_id from token
+
+  //     let post = await Post.findById(postId);
+  //     expect(post.likes.length).toEqual(1);
+  //     expect(post.likes[0]).toString().toEqual(token.user_id);
+  //   });
+
+  //   test("decrements the like count when a user unlikes a post", async () => {
+  //     // Manually set a like for the post
+  //     let post = await Post.findById(postId);
+  //     post.likes.push(token.user_id);
+  //     await post.save();
+
+  //     let response = await request(app)
+  //       .put(`/posts/${postId}/like`)
+  //       .set("Authorization", `Bearer ${token}`);
+
+  //     expect(response.status).toEqual(200);
+  //     expect(response.body.likes.length).toEqual(0);
+
+  //     post = await Post.findById(postId);
+  //     expect(post.likes.length).toEqual(0);
+  //   });
+
+  //   test("returns a 404 when the post does not exist", async () => {
+  //     let response = await request(app)
+  //       .put(`/posts/invalidPostId/like`)
+  //       .set("Authorization", `Bearer ${token}`);
+
+  //     expect(response.status).toEqual(404);
+  //   });
+
+  //   test("returns a new token", async () => {
+  //     let response = await request(app)
+  //       .put(`/posts/${postId}/like`)
+  //       .set("Authorization", `Bearer ${token}`);
+
+  //     let newPayload = JWT.decode(response.body.token, secret);
+  //     let originalPayload = JWT.decode(token, secret);
+  //     expect(newPayload.iat > originalPayload.iat).toEqual(true);
+  //   });
+  // });
 });

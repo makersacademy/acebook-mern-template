@@ -8,7 +8,6 @@ const PostsController = require("../controllers/posts");
 router.get("/", PostsController.Index);
 router.post("/", upload.single("image"), PostsController.Create);
 router.get("/image/:postId", PostsController.GetImage);
-router.get("/:postId/likes", PostsController.GetLikes);
 router.put("/:postId/like", PostsController.UpdateLikes);
 
 module.exports = router;
