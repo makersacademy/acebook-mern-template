@@ -45,7 +45,7 @@ const App = () => {
   return (
     <>
       {location.pathname !== "/login" && <Navbar />}
-      <div class="main-container">
+      <div className="main-container">
         <Routes>
           <Route
             path="/posts/:id"
