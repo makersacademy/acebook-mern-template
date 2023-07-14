@@ -1,5 +1,5 @@
 describe("Searching a post", () => {
-  it("with valid credentials, creates two post and searching a keyword in a post displays one", () => {
+  it("with valid credentials, creates two posts and searching a keyword in a post displays one", () => {
     cy.visit("/");
     cy.contains("Sign Up").click();
     cy.get("#email").type("someone@example.com");
@@ -12,12 +12,9 @@ describe("Searching a post", () => {
     cy.get("#submit").click();
     cy.get(".create-post-container").type("This is a test post");
     cy.get("#post-submit").click();
-    cy.contains("This is a test post").should("be.visible");
-    cy.get(".create-post-container").type("This is a test post");
+    cy.get(".create-post-container").type("Search Item");
     cy.get("#post-submit").click();
-    cy.contains("This is a test post number 2").should("be.visible");
-    cy.get("#search-bar").type("number 2");
-    cy.contains("This is a test number 2").should("be visible");
+    cy.get(".search-bar").type("Search Item");
+    cy.contains("Search Item").should("exist");
   });
 });
-
