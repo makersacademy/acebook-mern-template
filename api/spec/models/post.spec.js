@@ -1,7 +1,7 @@
-var mongoose = require("mongoose");
+let mongoose = require("mongoose");
 
 require("../mongodb_helper");
-var Post = require("../../models/post");
+let Post = require("../../models/post");
 
 describe("Post model", () => {
   beforeEach((done) => {
@@ -11,8 +11,13 @@ describe("Post model", () => {
   });
 
   it("has a message", () => {
-    var post = new Post({ message: "some message" });
+    let post = new Post({
+      user: "1",
+      message: "some message",
+      created_at: { type: Date, default: Date.now },
+    });
     expect(post.message).toEqual("some message");
+    expect(post.created_at).toBeInstanceOf(Date);
   });
 
   it("can list all posts", (done) => {

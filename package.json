@@ -1,0 +1,10 @@
+{
+  "dependencies": {
+    "@google-cloud/storage": "^6.11.0",
+    "@iconscout/react-unicons": "^2.0.2",
+    "axios": "^1.4.0",
+    "body-parser": "^1.20.2",
+    "cypress": "^12.16.0",
+    "multer": "^1.4.5-lts.1"
+  }
+}

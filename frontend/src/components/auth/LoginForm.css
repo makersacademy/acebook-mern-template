@@ -1,0 +1,55 @@
+.h1 {
+  text-align: center;
+  color: #166fe5;
+}
+
+.image-container {
+  flex: 0 0 40%;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="password"] {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 15px;
+  border: 1px solid #ddd;
+  border-radius: 3px;
+  box-sizing: border-box;
+}
+
+input[type="submit"],
+button {
+  width: 100%;
+  padding: 10px;
+  background-color: #f21847;
+  border: none;
+  color: #fff;
+  font-weight: bold;
+  border-radius: 3px;
+  cursor: pointer;
+  margin-bottom: 10px;
+  background-color: #166fe5;
+}
+
+input[type="submit"]:hover,
+button:hover {
+  background-color: #166fe5;
+}
+
+.forgot-password,
+.create-account {
+  text-align: center;
+  margin: 10px 0;
+}
+
+.sign-up-button {
+  background-color: #008000;
+}
+
+.sign-up-button:hover {
+  background-color: #006600;
+}
