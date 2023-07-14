@@ -8,6 +8,7 @@ const CommentSchema = new mongoose.Schema({
   },
   time: String,
   comment: String,
+  authorId: { type: mongoose.Schema.Types.ObjectId, ref: "users" },
   likes: [
     {
       type: mongoose.Schema.Types.ObjectId,

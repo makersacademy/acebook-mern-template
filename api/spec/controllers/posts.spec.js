@@ -1,6 +1,7 @@
 const app = require("../../app");
 const request = require("supertest");
 require("../mongodb_helper");
+const mongoose = require("mongoose");
 const Post = require("../../models/post");
 const User = require("../../models/user");
 const JWT = require("jsonwebtoken");
@@ -19,7 +20,7 @@ describe("/posts", () => {
 
     token = JWT.sign(
       {
-        user_id: user.id,
+        user_id: user._id,
         // Backdate this token of 5 minutes
         iat: Math.floor(Date.now() / 1000) - 5 * 60,
         // Set the JWT token to expire in 10 minutes
@@ -314,63 +315,73 @@ describe("/posts", () => {
       Post.findById.mockRestore();
     });
   });
+});
 
-  // describe("POST /posts/:postId/likes", () => {
-  //   let postId;
+describe("PUT /posts/:postId/like", () => {
+  let post;
+  let user;
+  let test_token;
 
-  //   beforeEach(async () => {
-  //     let post = new Post({ message: "Hello there!", likes: [] });
-  //     await post.save();
-  //     postId = post._id;
-  //   });
+  beforeEach(async () => {
+    user = new User({
+      username: "testUser",
+      password: "testPassword",
+      email: "email@email.com",
+    });
+    await user.save();
 
-  //   test("increments the like count when a user likes a post", async () => {
-  //     let response = await request(app)
-  //       .put(`/posts/${postId}/like`)
-  //       .set("Authorization", `Bearer ${token}`);
+    post = new Post({
+      username: "test",
+      time: "2023-07-14T11:30:00",
+      message: "hello world",
+      authorId: user._id,
+    });
+    await post.save();
 
-  //     expect(response.status).toEqual(200);
-  //     expect(response.body.likes.length).toEqual(1);
-  //     expect(response.body.likes[0]).toEqual(token.user_id); // user_id from token
+    test_token = JWT.sign(
+      {
+        user_id: user._id,
+        // Backdate this token of 5 minutes
+        iat: Math.floor(Date.now() / 1000) - 5 * 60,
+        // Set the JWT token to expire in 10 minutes
+        exp: Math.floor(Date.now() / 1000) + 10 * 60,
+      },
+      secret
+    );
+  });
 
-  //     let post = await Post.findById(postId);
-  //     expect(post.likes.length).toEqual(1);
-  //     expect(post.likes[0]).toString().toEqual(token.user_id);
-  //   });
+  test("should add user to likes array if user hasn't liked the post yet", async () => {
+    const response = await request(app)
+      .put(`/posts/${post._id}/like`)
+      .set("Authorization", `Bearer ${test_token}`);
 
-  //   test("decrements the like count when a user unlikes a post", async () => {
-  //     // Manually set a like for the post
-  //     let post = await Post.findById(postId);
-  //     post.likes.push(token.user_id);
-  //     await post.save();
+    expect(response.status).toEqual(200);
+    expect(response.body.likes).toContainEqual(user._id.toString());
 
-  //     let response = await request(app)
-  //       .put(`/posts/${postId}/like`)
-  //       .set("Authorization", `Bearer ${token}`);
+    const updatedPost = await Post.findById(post._id);
+    expect(updatedPost.likes).toContainEqual(user._id);
+  });
 
-  //     expect(response.status).toEqual(200);
-  //     expect(response.body.likes.length).toEqual(0);
+  test("should remove user from likes array if user has already liked the post", async () => {
+    post.likes.push(user._id);
+    await post.save();
 
-  //     post = await Post.findById(postId);
-  //     expect(post.likes.length).toEqual(0);
-  //   });
+    const response = await request(app)
+      .put(`/posts/${post._id}/like`)
+      .set("Authorization", `Bearer ${test_token}`);
 
-  //   test("returns a 404 when the post does not exist", async () => {
-  //     let response = await request(app)
-  //       .put(`/posts/invalidPostId/like`)
-  //       .set("Authorization", `Bearer ${token}`);
+    expect(response.status).toEqual(200);
+    expect(response.body.likes).not.toContainEqual(user._id.toString());
 
-  //     expect(response.status).toEqual(404);
-  //   });
+    const updatedPost = await Post.findById(post._id);
+    expect(updatedPost.likes).not.toContainEqual(user._id);
+  });
 
-  //   test("returns a new token", async () => {
-  //     let response = await request(app)
-  //       .put(`/posts/${postId}/like`)
-  //       .set("Authorization", `Bearer ${token}`);
+  test("should respond with a 404 if post does not exist", async () => {
+    const response = await request(app)
+      .put(`/posts/${mongoose.Types.ObjectId()}/like`)
+      .set("Authorization", `Bearer ${test_token}`);
 
-  //     let newPayload = JWT.decode(response.body.token, secret);
-  //     let originalPayload = JWT.decode(token, secret);
-  //     expect(newPayload.iat > originalPayload.iat).toEqual(true);
-  //   });
-  // });
+    expect(response.status).toEqual(404);
+  });
 });
