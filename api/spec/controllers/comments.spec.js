@@ -1,6 +1,7 @@
 const app = require("../../app");
 const request = require("supertest");
 require("../mongodb_helper");
+const mongoose = require("mongoose");
 const Comment = require("../../models/comment");
 const User = require("../../models/user");
 const JWT = require("jsonwebtoken");
@@ -158,5 +159,74 @@ describe("/comments", () => {
       let response = await request(app).get("/comments");
       expect(response.body.token).toEqual(undefined);
     });
+  });
+});
+
+describe("PUT /posts/:postId/like", () => {
+  let post;
+  let user;
+  let test_token;
+
+  beforeEach(async () => {
+    user = new User({
+      username: "testUser",
+      password: "testPassword",
+      email: "email@email.com",
+    });
+    await user.save();
+
+    comment = new Comment({
+      username: "test",
+      time: "2023-07-14T11:30:00",
+      comment: "hello world",
+      authorId: user._id,
+    });
+    await comment.save();
+
+    test_token = JWT.sign(
+      {
+        user_id: user._id,
+        // Backdate this token of 5 minutes
+        iat: Math.floor(Date.now() / 1000) - 5 * 60,
+        // Set the JWT token to expire in 10 minutes
+        exp: Math.floor(Date.now() / 1000) + 10 * 60,
+      },
+      secret
+    );
+  });
+
+  test("should add user to likes array if user hasn't liked the comment yet", async () => {
+    const response = await request(app)
+      .put(`/comments/${comment._id}/like`)
+      .set("Authorization", `Bearer ${test_token}`);
+
+    expect(response.status).toEqual(200);
+    expect(response.body.likes).toContainEqual(user._id.toString());
+
+    const updatedComment = await Comment.findById(comment._id);
+    expect(updatedComment.likes).toContainEqual(user._id);
+  });
+
+  test("should remove user from likes array if user has already liked the post", async () => {
+    comment.likes.push(user._id);
+    await comment.save();
+
+    const response = await request(app)
+      .put(`/comments/${comment._id}/like`)
+      .set("Authorization", `Bearer ${test_token}`);
+
+    expect(response.status).toEqual(200);
+    expect(response.body.likes).not.toContainEqual(user._id.toString());
+
+    const updatedComment = await Comment.findById(comment._id);
+    expect(updatedComment.likes).not.toContainEqual(user._id);
+  });
+
+  test("should respond with a 404 if post does not exist", async () => {
+    const response = await request(app)
+      .put(`/comments/${mongoose.Types.ObjectId()}/like`)
+      .set("Authorization", `Bearer ${test_token}`);
+
+    expect(response.status).toEqual(404);
   });
 });
