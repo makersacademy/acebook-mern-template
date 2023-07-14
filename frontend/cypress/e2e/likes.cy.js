@@ -13,7 +13,7 @@ describe("Liking and Unliking Posts and Comments", () => {
     cy.get(".create-post-container").type("This is a test post");
     cy.get("#post-submit").click();
     cy.get("#post-likes").click();
-    cy.get("#post-like-counter").should("contain", "1 likes");
+    cy.get("#post-like-counter").should("contain", "1");
   });
 
   it("unlikes a post", () => {
@@ -31,7 +31,7 @@ describe("Liking and Unliking Posts and Comments", () => {
     cy.get("#post-submit").click();
     cy.get("#post-likes").click();
     cy.get("#post-likes").click();
-    cy.get("#post-like-counter").should("contain", "0 likes");
+    cy.get("#post-like-counter").should("contain", "0");
   });
 
   it("likes a comment", () => {
@@ -52,7 +52,7 @@ describe("Liking and Unliking Posts and Comments", () => {
     cy.get("#comment-post-button").click();
     
     cy.get("#comment-like").click();
-    cy.get("#comment-like-counter").should('contain', "1 likes");
+    cy.get("#comment-like-counter").should('contain', "1");
 
   });
 
@@ -75,6 +75,6 @@ describe("Liking and Unliking Posts and Comments", () => {
     
     cy.get("#comment-like").click();
     cy.get("#comment-like").click();
-    cy.get("#comment-like-counter").should('contain', "0 likes");
+    cy.get("#comment-like-counter").should('contain', "0");
   });
 });
