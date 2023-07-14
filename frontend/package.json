@@ -5,6 +5,7 @@
   "proxy": "http://localhost:8080",
   "dependencies": {
     "cypress": "^10.7.0",
+    "cypress-file-upload": "^5.0.8",
     "eslint": "^8.23.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",

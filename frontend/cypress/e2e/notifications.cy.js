@@ -12,7 +12,9 @@ describe("getting a notification", () => {
     cy.get("#submit").click();
     cy.get(".create-post-container").type("@username");
     cy.get("#post-submit").click();
-    cy.contains("Notifications").click();
-    cy.contains("You have been mentioned in a post by the user @username").should("be.visible");
+    cy.get("#notification-button").click();
+    cy.contains(
+      "You have been mentioned in a post by the user @username"
+    ).should("be.visible");
   });
 });

@@ -18,8 +18,12 @@ const Navbar = ({
       </button>
       {isUserLoggedIn ? (
         <>
-          <button className="navbar-button" onClick={onNotifications}>
-            Notifications
+          <button
+            className="navbar-button"
+            id="notification-button"
+            onClick={onNotifications}
+          >
+            🔔
           </button>
           <button className="navbar-button" onClick={onLogout}>
             Logout
