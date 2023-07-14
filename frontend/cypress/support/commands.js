@@ -16,8 +16,6 @@ Cypress.Commands.add('signup', (email, password) => {
   cy.get("#password").type(password);
   cy.get("#submit").click();
 })
-
-addMatchImageSnapshotCommand();
 //
 //
 // -- This is a child command --
