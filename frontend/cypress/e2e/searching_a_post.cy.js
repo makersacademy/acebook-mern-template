@@ -20,3 +20,4 @@ describe("Searching a post", () => {
     cy.contains("This is a test number 2").should("be visible");
   });
 });
+
