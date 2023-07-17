@@ -1,0 +1,48 @@
+/* Modal.css */
+
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  backdrop-filter: blur(2px); /* To give a blurred effect to the background */
+}
+
+.modal {
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 12px; /* Increase border radius for a more rounded look */
+  box-shadow: 0px 10px 30px -5px rgba(0, 0, 0, 0.3); /* More dramatic box shadow for a lifted appearance */
+  width: 60%; /* Define a width for the modal */
+  max-width: 500px; /* Set a maximum width for the modal */
+  position: relative; /* Relative positioning for close button positioning */
+}
+
+.modal-content {
+  padding: 15px;
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.12), 0px 1px 2px rgba(0, 0, 0, 0.24);
+  margin-bottom: 20px;
+}
+
+.close-button {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  font-size: 18px;
+  color: #888;
+  transition: color 0.2s ease-in-out; /* Smooth transition for hover effect */
+}
+
+.close-button:hover {
+  color: #666; /* Darker color when hovering over the close button */
+}

@@ -1,0 +1,11 @@
+.navbar-placeholder {
+  height: 60px;
+  width: 100%;
+  background-color: #ddd;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #333;
+  font-size: 1.2rem;
+  box-shadow: 0px 1px 5px rgba(0, 0, 0, 0.1);
+}

@@ -1,0 +1,52 @@
+/* LoginForm.css */
+
+.logout-form {
+  display: flex;
+  flex-direction: column;
+  margin-top: 30px;
+}
+
+.logout-form h2 {
+  margin-bottom: 10px;
+}
+
+.logout-buttons {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.logout-buttons button {
+  margin: 0 10px;
+  padding: 8px 16px;
+  background-color: #4267b2;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.2s ease-in-out;
+}
+
+.logout-buttons button:hover {
+  background-color: #365899;
+}
+
+.modal-content {
+  position: relative;
+}
+
+.close-button {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  font-size: 18px;
+  color: #888;
+  z-index: 1;
+}
+
+.close-button:hover {
+  color: #555;
+}

@@ -1,0 +1,48 @@
+/* LoginForm.css */
+
+.login-form {
+  display: flex;
+  flex-direction: column;
+  margin-top: 30px;
+}
+
+.login-form input {
+  margin-bottom: 10px;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.login-form #submit {
+  padding: 8px 16px;
+  background-color: #4267b2;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.2s ease-in-out;
+}
+.modal-content {
+  position: relative;
+}
+
+.login-form #submit:hover {
+  background-color: #365899;
+}
+
+.close-button {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  font-size: 18px;
+  color: #888;
+  z-index: 1;
+}
+
+.close-button:hover {
+  color: #555;
+}
+

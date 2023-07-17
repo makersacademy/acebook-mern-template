@@ -1,31 +1,32 @@
 describe("Signing in", () => {
-
-  before(() => {
-    cy.signup("user@email.com", "12345678")
-  })
-
-  it("with valid credentials, redirects to '/posts'", () => {
-    cy.visit("/login");
+  it("with valid credentials, shows posts", () => {
+    cy.visit("/");
+    cy.contains("Sign Up").click();
+    cy.get("#email").type("someone@example.com");
+    cy.get("#password").type("password");
+    cy.get("#username").type("username");
+    cy.get("#submit").click();
+    cy.contains("Log In").click();
     cy.get("#email").type("someone@example.com");
     cy.get("#password").type("password");
     cy.get("#submit").click();
-
-    cy.url().should("include", "/posts");
+    cy.get(".create-post-container").should("be.visible");
   });
 
   it("with missing password, redirects to '/login'", () => {
-    cy.visit("/login");
+    cy.visit("/");
+    cy.contains("Log In").click();
     cy.get("#email").type("someone@example.com");
     cy.get("#submit").click();
-
-    cy.url().should("include", "/login");
+    cy.get("#submit").should("be.visible");
   });
 
   it("with missing email, redirects to '/login'", () => {
-    cy.visit("/login");
+    cy.visit("/");
+    cy.contains("Log In").click();
     cy.get("#password").type("password");
     cy.get("#submit").click();
 
-    cy.url().should("include", "/login");
+    cy.get("#submit").should("be.visible");
   });
 });

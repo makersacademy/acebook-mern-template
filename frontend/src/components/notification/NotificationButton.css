@@ -1,0 +1,13 @@
+/* NotificationButton.css */
+.notification-button-placeholder {
+  height: 40px;
+  width: 200px;
+  background-color: #ddd;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #333;
+  font-size: 1rem;
+  border-radius: 8px;
+  margin: 10px;
+}

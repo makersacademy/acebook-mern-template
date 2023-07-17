@@ -1,0 +1,437 @@
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #f5f6f7;
+  height: 100vh; /* Full height */
+}
+
+.app-container {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.header {
+  background-color: #4267b2;
+  color: #fff;
+  padding: 10px;
+  text-align: center;
+  width: 100%;
+  border-bottom: 1px solid #29487d;
+}
+
+.header-link {
+  text-decoration: none;
+}
+
+.header-title {
+  margin: 0;
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.main-content {
+  display: flex;
+  height: calc(100% - 60px); /* Subtract header height */
+  justify-content: space-between;
+  margin-right: 400px;
+}
+
+.content {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+  background-color: #fff;
+  border: 1px solid #dddfe2;
+  border-radius: 8px;
+  margin: 10px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.top-bar {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  padding: 10px 0;
+  border-bottom: 1px solid #dddfe2;
+}
+
+.top-left,
+.top-right {
+  display: flex;
+  align-items: center;
+}
+
+.top-right {
+  justify-content: flex-end;
+}
+
+.top-right > *:not(:last-child) {
+  margin-right: 10px;
+}
+
+.feed-container {
+  padding: 20px;
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
+/* Navbar styles */
+.navbar {
+  width: 200px;
+  background-color: #f5f6f7;
+  padding: 10px;
+  border-right: 1px solid #dddfe2;
+}
+
+.navbar-button {
+  display: block;
+  background-color: #4267b2;
+  border: none;
+  border-radius: 4px;
+  padding: 8px 16px;
+  margin: 4px 0;
+  color: #fff;
+  text-align: left;
+  transition: background-color 0.2s ease-in-out;
+  cursor: pointer;
+}
+
+.navbar-button:hover {
+  background-color: #365899;
+}
+
+/* SearchBar styles */
+.search-bar {
+  margin: 10px 0;
+}
+
+.search-bar input {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccd0d5;
+  border-radius: 20px;
+  transition: border 0.2s ease-in-out;
+}
+
+.search-bar input:focus {
+  border: 1px solid #4b9cfb;
+  outline: none;
+}
+
+/* NotificationButton and ProfileButton styles */
+.notification-button,
+.navbar-button-top,
+.profile-button {
+  padding: 6px 16px;
+  font-weight: 600;
+  color: #4b4f56;
+  background-color: #f5f6f7;
+  border: 1px solid #ccd0d5;
+  border-radius: 50%; /* Changed to circle */
+  cursor: pointer;
+  transition: background-color 0.2s ease-in-out, transform 0.2s ease-in-out;
+}
+
+.notification-button:hover,
+.navbar-button-top:hover,
+.profile-button:hover {
+  background-color: #e4e6e9;
+  transform: scale(1.1); /* Adding hover effect */
+}
+
+.navbar-button.login,
+.navbar-button.signup {
+  background-color: #4b4b4b;
+}
+
+.username {
+  font-size: 1.1em;
+  font-weight: bold;
+  color: #365899;
+  cursor: pointer;
+}
+
+.username:hover {
+  text-decoration: underline;
+}
+
+.time {
+  font-size: 0.8em;
+  color: #606770;
+  margin-top: 5px;
+}
+
+.post-content {
+  padding: 15px;
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.12), 0px 1px 2px rgba(0, 0, 0, 0.24);
+  margin-bottom: 20px;
+}
+
+.message {
+  font-size: 1.2em;
+  color: #333;
+  margin-bottom: 15px;
+}
+
+/* PostForm styles */
+.post-form {
+  margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+}
+
+.post-form input,
+.post-form-file {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccd0d5;
+  border-radius: 20px;
+  margin: 10px 0;
+}
+
+.notification-container {
+  position: relative;
+}
+
+.notifications-list {
+  margin-top: 20px;
+  max-height: 400px;
+  overflow-y: auto;
+  padding: 16px;
+  border-radius: 4px;
+  background-color: white;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.notification-item {
+  border-bottom: 1px solid #f0f0f0;
+  padding: 8px 0;
+}
+
+/* Customise the comment section for tree-style view */
+.comment-container {
+  border: 1px solid #dddfe2;
+  padding: 10px;
+  background-color: #f5f6f7;
+  margin-left: 15px;
+  border-radius: 5px;
+  transition: all 0.2s ease-in-out;
+}
+
+.comment-container:hover {
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  background-color: #e4e6e9;
+}
+
+.comment-container .username {
+  color: #365899;
+  font-weight: bold;
+}
+
+.comment-container .time {
+  font-size: 0.8em;
+  color: #606770;
+}
+
+.comment-container .comment {
+  color: #1d2129;
+}
+
+/* Redesign post container */
+.post-container {
+  border: 1px solid #dddfe2;
+  border-radius: 8px;
+  padding: 15px;
+  background-color: #ffffff;
+  margin-bottom: 20px;
+  transition: all 0.2s ease-in-out;
+}
+
+.post-content:hover,
+.post-container:hover {
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.author-details {
+  display: flex;
+  align-items: center;
+  margin-bottom: 15px;
+}
+
+.author {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  overflow: hidden;
+  margin-right: 15px;
+}
+
+.author-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.text-details {
+  display: flex;
+  flex-direction: column;
+}
+
+.zoomed-image {
+  max-width: 90vw; /* viewport width */
+  max-height: 90vh; /* viewport height */
+  object-fit: contain; /* to maintain aspect ratio */
+}
+
+.post-image-container {
+  position: relative;
+  overflow: hidden;
+  cursor: pointer;
+  display: flex;
+  justify-content: center; /* for horizontal centering */
+  align-items: center; /* for vertical centering */
+}
+
+.post-image {
+  width: 90%;
+  height: auto;
+  border-radius: 8px;
+  margin: auto; /* this is also needed to ensure the image is centered vertically and horizontally */
+}
+
+/* Redesign comment form */
+.comment-form {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 10px;
+}
+
+.comment-form input {
+  flex-grow: 1;
+  height: 35px;
+  padding: 10px;
+  border: 1px solid #ccd0d5;
+  border-radius: 20px;
+}
+
+.comment-form button {
+  padding: 8px 16px;
+  background-color: #4267b2;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.2s ease-in-out;
+}
+
+.comment-form button:hover {
+  background-color: #365899;
+}
+
+/* Wrapper for PostForm */
+.create-post-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+  border: 1px solid #dddfe2;
+  border-radius: 10px;
+  background-color: #f5f6f7;
+  transition: all 0.3s ease-in-out;
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+}
+
+.post-container:hover,
+.create-post-container:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+}
+
+.post-container:active,
+.create-post-container:active {
+  transform: translateY(1px);
+  box-shadow: 0 3px 15px rgba(0, 0, 0, 0.2);
+}
+
+.post-form-title {
+  color: #365899; /* Or any other warm color you prefer */
+}
+
+.post-form button,
+.post-form-button {
+  margin-top: 10px;
+  padding: 8px 16px;
+  background-color: #4267b2;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.2s ease-in-out;
+}
+
+.post-form button:hover,
+.post-form-button:hover {
+  background-color: #365899;
+}
+
+.like-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  background-color: transparent;
+  color: #365899;
+  cursor: pointer;
+  transition: color 0.2s ease-in-out;
+  font-size: 0; /* This hides the space between inline-block elements */
+}
+
+.like-button:hover {
+  color: #1d2e8c;
+}
+
+.like-count {
+  color: currentColor;
+  font-size: 16px; /* adjust size as necessary */
+  font-weight: bold;
+  display: inline-block;
+  margin-left: 8px;
+  vertical-align: middle;
+}
+
+.like-icon {
+  width: 20px;
+  height: 20px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2;
+  transition: fill 0.2s ease-in-out;
+  display: inline-block;
+  vertical-align: middle;
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.2);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+.interactive-area {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.image-zoom {
+  margin-top: 20px;
+}
