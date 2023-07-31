@@ -10,7 +10,9 @@ In this project, you are tasked with working on an existing application. A signi
 
 ## Card wall
 
-REPLACE THIS TEXT WITH A LINK TO YOUR CARD WALL
+HERE IS OUR FANCY CARD WALL!
+https://trello.com/b/LFLx9O1P/team-wind-acebook-project
+
 
 ## Quickstart
 
