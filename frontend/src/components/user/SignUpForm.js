@@ -5,6 +5,7 @@ const SignUpForm = ({ navigate }) => {
   const [email, setEmail] = useState("");
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const [errorMessage, setErrorMessage] = useState("");
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -20,6 +21,7 @@ const SignUpForm = ({ navigate }) => {
         if(response.status === 201) {
           navigate('/login')
         } else {
+          setErrorMessage('Invalid user!');
           navigate('/signup')
         }
       })
@@ -45,6 +47,10 @@ const SignUpForm = ({ navigate }) => {
           <input placeholder="Username" id="username" type='text' value={ username } onChange={handleUsernameChange} />
           <input placeholder="Password" id="password" type='password' value={ password } onChange={handlePasswordChange} />
         <input id='submit' type="submit" value="Submit" />
+        {errorMessage && (
+  <p className="error"> {errorMessage} </p>
+)}
+      
       </form>
     );
 }
