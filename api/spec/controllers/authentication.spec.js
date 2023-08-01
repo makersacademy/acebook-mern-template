@@ -3,9 +3,10 @@ const request = require("supertest");
 require("../mongodb_helper");
 const User = require('../../models/user');
 
+
 describe("/tokens", () => {
   beforeAll(async () => {
-    const user = new User({ email: "test@test.com", password: "12345678" })
+    const user = new User({ email: "test@test.com", password: "12345678", username: "person1"})
 
     // We need to use `await` so the
     // "beforeAll" setup function waits for the
@@ -23,7 +24,7 @@ describe("/tokens", () => {
   test("a token is returned when creds are valid", async () => {
     let response = await request(app)
       .post("/tokens")
-      .send({email: "test@test.com", password: "12345678"})
+      .send({email: "test@test.com", password: "12345678"}) 
     expect(response.status).toEqual(201)
     expect(response.body.token).not.toEqual(undefined)
     expect(response.body.message).toEqual("OK")
