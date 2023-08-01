@@ -7,10 +7,11 @@ const JWT = require("jsonwebtoken");
 const secret = process.env.JWT_SECRET;
 
 let token;
+let user;
 
 describe("/posts", () => {
   beforeAll( async () => {
-    const user = new User({email: "test@test.com", password: "12345678"});
+    user = new User({email: "test@test.com", password: "12345678"});
     await user.save();
 
     token = JWT.sign({
@@ -58,7 +59,16 @@ describe("/posts", () => {
       let newPayload = JWT.decode(response.body.token, process.env.JWT_SECRET);
       let originalPayload = JWT.decode(token, process.env.JWT_SECRET);
       expect(newPayload.iat > originalPayload.iat).toEqual(true);
-    });  
+    });
+
+    test("check post linked to user", async() => {
+      let response = await request(app)
+        .post("/posts")
+        .set("Authorization", `Bearer ${token}`)
+        .send({ message: "hello world", token: token, user_id: user.id});
+        let posts = await Post.find();
+        expect(posts[0].user_id).toBe(user.id)
+    });
   });
   
   describe("POST, when token is missing", () => {
