@@ -5,6 +5,7 @@ const AuthenticationController = {
 
   Authenticate: (req, res) => {
     const email = req.body.email;
+    const username = req.body.username;
     const password = req.body.password;
 
     User.findOne({ email: email }).then((user) => {
