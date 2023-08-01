@@ -8,6 +8,7 @@ describe("Logging in", () => {
     cy.intercept('POST', '/tokens', { token: "fakeToken" }).as("loginRequest")
 
     cy.get("#email").type("someone@example.com");
+    cy.get("#username").type("exampleusername");
     cy.get("#password").type("password");
     cy.get("#submit").click();
     cy.wait('@loginRequest').then( interception => {
