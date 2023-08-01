@@ -133,6 +133,22 @@ describe("/posts", () => {
       let newPayload = JWT.decode(response.body.token, process.env.JWT_SECRET);
       let originalPayload = JWT.decode(token, process.env.JWT_SECRET);
       expect(newPayload.iat > originalPayload.iat).toEqual(true);
+    });
+
+    test("user id included in post data", async () => {
+      user2 = new User({email: "test2@test.com", password: "12345678"});
+      await user2.save();
+  
+      let post1 = new Post({message: "howdy!", user_id: user.id});
+      await post1.save();
+      let post2 = new Post({message: "hello!", user_id: user2.id});
+      await post2.save();
+      let response = await request(app)
+        .get("/posts")
+        .set("Authorization", `Bearer ${token}`)
+        .send({token: token});
+      expect(response.body.posts[0].user_id).toBe(user.id)
+      expect(response.body.posts[1].user_id).toBe(user2.id)
     })
   })
 
