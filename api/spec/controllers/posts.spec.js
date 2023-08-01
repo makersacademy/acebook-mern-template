@@ -10,7 +10,11 @@ let token;
 
 describe("/posts", () => {
   beforeAll( async () => {
-    const user = new User({email: "test@test.com", username: "testusername", password: "12345678"});
+    user = new User({
+      email: "test@test.com", 
+      username: "testusername", 
+      password: "12345678"
+    });
     await user.save();
 
     token = JWT.sign({
@@ -58,7 +62,19 @@ describe("/posts", () => {
       let newPayload = JWT.decode(response.body.token, process.env.JWT_SECRET);
       let originalPayload = JWT.decode(token, process.env.JWT_SECRET);
       expect(newPayload.iat > originalPayload.iat).toEqual(true);
-    });  
+    });
+
+    test("creates a post linked to the user", async () => {
+      await request(app)
+        .post("/posts")
+        .set('Authorization', `Bearer ${token}`)
+        .send({ 
+          message: "hello world"
+        })
+      const post = await Post.findOne();
+      // Assert post is linked to user
+      expect(post.user).toEqual(user._id);
+    });
   });
   
   describe("POST, when token is missing", () => {
