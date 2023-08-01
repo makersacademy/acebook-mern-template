@@ -10,6 +10,15 @@ describe("User model", () => {
     });
   });
 
+  it('has a username', () => {
+    const user = new User ({
+      email: "someone@example.com",
+      password: "password",
+      username: "person1"
+    });
+    expect(user.username).toEqual("person1");
+  });
+
   it("has an email address", () => {
     const user = new User({
       email: "someone@example.com",
@@ -38,6 +47,7 @@ describe("User model", () => {
     const user = new User({
       email: "someone@example.com",
       password: "password",
+      username: "person1"
     });
 
     user.save((err) => {
