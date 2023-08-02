@@ -59,4 +59,38 @@ describe("/users", () => {
       expect(users.length).toEqual(0)
     });
   })
+
+  describe("GET, when path with user ID", () => {
+    test("gets user info if user is authenticated", async () => {
+      await request(app)
+      // post a new user
+        .post("/users")
+        .send({email: "jo@email.com", password: "1234", username: 'person2'})
+      // get the id of the user
+      let users = await User.find()
+      let id = users[users.length - 1]._id
+      // get the user info
+      let response = await request(app)
+        .get(`/users/${id}`)
+      let user = response.body
+      // expect the user info to be returned
+      console.log(user)
+      expect(response.statusCode).toBe(200)
+      expect(user).not.toEqual(undefined)
+      expect(user.email).toEqual("jo@email.com")
+      expect(user.username).toEqual("person2")
+
+
+    })
+
+
+    // test("a user is created", async () => {
+    //   await request(app)
+    //     .post("/users")
+    //     .send({email: "scarlett@email.com", password: "1234", username: 'person1'})
+    //   let users = await User.find()
+    //   let newUser = users[users.length - 1]
+    //   expect(newUser.email).toEqual("scarlett@email.com")
+    // })
+  })
 })
