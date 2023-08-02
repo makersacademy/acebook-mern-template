@@ -4,7 +4,6 @@ require("../mongodb_helper");
 const Post = require('../../models/post');
 const User = require('../../models/user');
 const JWT = require("jsonwebtoken");
-const { ObjectId } = require('mongodb');
 const secret = process.env.JWT_SECRET;
 
 let token;
@@ -192,16 +191,18 @@ describe("/posts", () => {
         .put(`/posts/${post1.id}`)
         .set("Authorization", `Bearer ${token}`)
         .send({token: token, message: "I meant to say Hello!"});
-      expect(response.status).toEqual(200);})
-
-    test("the post body is updated message", async () => {
-      let post1 = new Post({message: "howdy!"});
-      await post1.save();
-      let response = await request(app)
-        .put(`/posts/${post1.id}`)
-        .set("Authorization", `Bearer ${token}`)
-        .send({token: token, message: "I meant to say Hello!"});
-      expect(response.body.post.message).toEqual("I meant to say Hello!")
+        expect(response.status).toEqual(200);})
+        
+        test("the post's message gets updated", async () => {
+          let post1 = new Post({message: "howdy!"});
+          await post1.save();
+          let response = await request(app)
+          .put(`/posts/${post1.id}`)
+          .set("Authorization", `Bearer ${token}`)
+          .send({token: token, message: "I meant to say Hello!"});
+          let posts = await Post.find();
+        expect(posts[0].message).toEqual("I meant to say Hello!")
+        expect(response.body.post.message).toEqual("I meant to say Hello!")
     });
 
     test("returns a new token", async () => {
@@ -217,7 +218,7 @@ describe("/posts", () => {
     });
 
     test("when post doesn't exist response code is 404", async () => {
-      const post_id = ObjectId("4eb6e7e7e9b7f4194e000001");
+      const post_id = "4eb6e7e7e9b7f4194e000001";
       let response = await request(app)
       .put(`/posts/${post_id}`)
       .set("Authorization", `Bearer ${token}`)
@@ -226,7 +227,38 @@ describe("/posts", () => {
     })
   });
 
-
-
-
+  describe("PUT, when token is not present", () => {
+    test("the response code is 401", async () => {
+      let post1 = new Post({message: "howdy!"});
+      await post1.save();
+      let response = await request(app)
+      .put(`/posts/${post1.id}`)
+      .send({message: "I meant to say Hello!"});
+      expect(response.status).toEqual(401)
+    })
+    test("a token is not returned", async () => {
+      let post1 = new Post({message: "howdy!"});
+      await post1.save();
+      let response = await request(app)
+      .put(`/posts/${post1.id}`)
+      .send({message: "I meant to say Hello!"});
+      expect(response.body.token).toEqual(undefined);
+    })
+    test("when post doesn't exist response code is 404", async () => {
+      const post_id = "4eb6e7e7e9b7f4194e000001";
+      let response = await request(app)
+      .put(`/posts/${post_id}`)
+      .send({message: "I meant to say Hello!"});
+      expect(response.status).toEqual(401)
+    })
+    test("the post message doesn't change", async () => {
+      let post1 = new Post({message: "howdy!"});
+      await post1.save();
+      await request(app)
+      .put(`/posts/${post1.id}`)
+      .send({message: "I meant to say Hello!"});
+      let posts = await Post.find();
+      expect(posts[0].message).toEqual("howdy!")
+    })
+  });
 });
