@@ -6,7 +6,8 @@ const User = require('../../models/user')
 describe("/users", () => {
   beforeEach( async () => {
     await User.deleteMany({});
-  });
+  })
+  
 
   describe("POST, when email, username and password are provided", () => {
     test("the response code is 201", async () => {
@@ -58,5 +59,29 @@ describe("/users", () => {
       let users = await User.find()
       expect(users.length).toEqual(0)
     });
+
+    
   })
-})
+
+  describe("GET /users/:id", () => {
+    test("returns correct user when valid ID provided", async () => {
+      // create new user
+      const user = {
+        email: "someone@example.com",
+        username: "someusername",
+        password: "somepassword"
+      }
+      //make a post request to save the new user
+      let response = await request(app)
+        .post("/users")
+        .send(user);
+      //extract user id from created user
+      const userId = response.body.id;
+      //make the GET request to users/:id using the user id above
+      let getResponse = await request(app)
+        .get(`/users/${userId}`)
+      expect(getResponse.statusCode).toBe(200)
+      expect(getResponse.body.username).toEqual(user.username)
+    })
+  })
+});
