@@ -2,6 +2,12 @@ const app = require("../../app");
 const request = require("supertest");
 require("../mongodb_helper");
 const User = require('../../models/user')
+const JWT = require("jsonwebtoken");
+const secret = process.env.JWT_SECRET;
+
+let token;
+
+
 
 describe("/users", () => {
   beforeEach( async () => {
@@ -62,35 +68,40 @@ describe("/users", () => {
 
   describe("GET, when path with user ID", () => {
     test("gets user info if user is authenticated", async () => {
-      await request(app)
-      // post a new user
+      const user = new User({email: 'email@email.com', password: '12345678', username: 'person'});
+      const response1 = await request(app)
         .post("/users")
-        .send({email: "jo@email.com", password: "1234", username: 'person2'})
-      // get the id of the user
-      let users = await User.find()
-      let id = users[users.length - 1]._id
-      // get the user info
-      let response = await request(app)
-        .get(`/users/${id}`)
-      let user = response.body
-      // expect the user info to be returned
-      console.log(user)
-      expect(response.statusCode).toBe(200)
-      expect(user).not.toEqual(undefined)
-      expect(user.email).toEqual("jo@email.com")
-      expect(user.username).toEqual("person2")
-
-
+        .send({email: user.email, password: user.password, username: user.username});
+      const user_id = response1.id;
+      console.log(response1)
+      const response = await request(app).get(`/users/${user.id}`)
+        .set("Authorization", `Bearer ${token}`)
+        .send({user_id: user_id});
+      expect(response.statusCode).toBe(200);
+      expect(response).not.toEqual(undefined);
+      expect(response.body.email).toEqual("email@email.com");
+      expect(response.body.username).toEqual("person");
+      expect(response.body.password).toEqual(undefined);
     })
-
-
-    // test("a user is created", async () => {
+    
+    // test("get user info returns error with wrong info", async () => { 
+    //   const user = new User({email: 'email@email.com', password: '12345678', username: 'person'});
+    //   await user.save();
     //   await request(app)
-    //     .post("/users")
-    //     .send({email: "scarlett@email.com", password: "1234", username: 'person1'})
-    //   let users = await User.find()
-    //   let newUser = users[users.length - 1]
-    //   expect(newUser.email).toEqual("scarlett@email.com")
+    //     .post("/tokens")
+    //     .send({email: user.email, password: user.password});
+    //   const response = await request(app).get('/users/4eb6e7e7e9b7f4194e000001')
+    //     .set("Authorization", `Bearer ${token}`);
+    //   expect(response.statusCode).toBe(401)
+    // })
+
+    // test("get user info not returned if not authentic token", async () => {
+    //   const user = new User({email: 'email@email.com', password: '12345678', username: 'person'})
+    //   await user.save()
+
+    //   // find by id with no authentic token returns 401
+    //   const response = await request(app).get(`/users/${user.id}`)
+    //   expect(response.statusCode).toBe(401)
     // })
   })
 })
