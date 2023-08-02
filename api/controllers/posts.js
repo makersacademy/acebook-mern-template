@@ -30,6 +30,10 @@ const PostsController = {
       if (err) {
         throw err;
       }
+
+      if (!post) {
+        return res.status(404).json({error: "Post not found"});
+      }
       
       const token = TokenGenerator.jsonwebtoken(req.user_id)
       res.status(200).json({post: post, token: token});

@@ -4,6 +4,7 @@ require("../mongodb_helper");
 const Post = require('../../models/post');
 const User = require('../../models/user');
 const JWT = require("jsonwebtoken");
+const { ObjectId } = require('mongodb');
 const secret = process.env.JWT_SECRET;
 
 let token;
@@ -214,13 +215,15 @@ describe("/posts", () => {
       let originalPayload = JWT.decode(token, process.env.JWT_SECRET);
       expect(newPayload.iat > originalPayload.iat).toEqual(true);
     });
-    // test("when post doesn't exist response code is 404", async () => {
-    //   let response = await request(app)
-    //   .put("/posts/1234")
-    //   .set("Authorization", `Bearer ${token}`)
-    //   .send({token: token, message: "I meant to say Hello!"});
-    //   expect(response.status).toEqual
-    // }) 
+
+    test("when post doesn't exist response code is 404", async () => {
+      const post_id = ObjectId("4eb6e7e7e9b7f4194e000001");
+      let response = await request(app)
+      .put(`/posts/${post_id}`)
+      .set("Authorization", `Bearer ${token}`)
+      .send({token: token, message: "I meant to say Hello!"});
+      expect(response.status).toEqual(404)
+    })
   });
 
 
