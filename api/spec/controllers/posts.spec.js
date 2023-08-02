@@ -11,7 +11,7 @@ let user;
 
 describe("/posts", () => {
   beforeAll( async () => {
-    const user = new User({email: "test@test.com", password: "12345678", username: 'person1'});
+    user = new User({email: "test@test.com", password: "12345678", username: 'person1'});
     await user.save();
 
     token = JWT.sign({
@@ -136,7 +136,7 @@ describe("/posts", () => {
     });
 
     test("user id included in post data", async () => {
-      user2 = new User({email: "test2@test.com", password: "12345678"});
+      user2 = new User({email: "test2@test.com", password: "12345678", username: "person2"});
       await user2.save();
   
       let post1 = new Post({message: "howdy!", user_id: user.id});
@@ -183,4 +183,22 @@ describe("/posts", () => {
       expect(response.body.token).toEqual(undefined);
     })
   })
+  describe("PUT, when token is present", () => {
+    test("the response code is 200", async () => {
+      let post1 = new Post({message: "howdy!"});
+      await post1.save();
+      let response = await request(app)
+        .put(`/posts/${post1.id}`)
+        .set("Authorization", `Bearer ${token}`)
+        .send({token: token, message: "I meant to say Hello!"});
+      expect(response.status).toEqual(200);
+      console.log(response.body)
+      expect(response.body.post.message).toEqual("I meant to say Hello!")
+    });
+    // test("when post doesn't exist response code is 404")
+  });
+
+
+
+
 });

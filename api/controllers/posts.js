@@ -22,6 +22,19 @@ const PostsController = {
       res.status(201).json({ message: 'OK', token: token });
     });
   },
-};
+  Update: (req, res) => {
+    const updated_post = req.body.message;
+    let post_id = req.params.id;
+    Post.findByIdAndUpdate(post_id, {"message": updated_post}, { new: true},
+    (err, post) => {
+      if (err) {
+        throw err;
+      }
+      
+      const token = TokenGenerator.jsonwebtoken(req.user_id)
+      res.status(200).json({post: post, token: token});
+    });
+},
+}
 
 module.exports = PostsController;
