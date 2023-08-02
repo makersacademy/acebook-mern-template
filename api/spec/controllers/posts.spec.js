@@ -191,11 +191,36 @@ describe("/posts", () => {
         .put(`/posts/${post1.id}`)
         .set("Authorization", `Bearer ${token}`)
         .send({token: token, message: "I meant to say Hello!"});
-      expect(response.status).toEqual(200);
-      console.log(response.body)
+      expect(response.status).toEqual(200);})
+
+    test("the post body is updated message", async () => {
+      let post1 = new Post({message: "howdy!"});
+      await post1.save();
+      let response = await request(app)
+        .put(`/posts/${post1.id}`)
+        .set("Authorization", `Bearer ${token}`)
+        .send({token: token, message: "I meant to say Hello!"});
       expect(response.body.post.message).toEqual("I meant to say Hello!")
     });
-    // test("when post doesn't exist response code is 404")
+
+    test("returns a new token", async () => {
+      let post1 = new Post({message: "howdy!"});
+      await post1.save();
+      let response = await request(app)
+        .put(`/posts/${post1.id}`)
+        .set("Authorization", `Bearer ${token}`)
+        .send({token: token, message: "I meant to say Hello!"});
+      let newPayload = JWT.decode(response.body.token, process.env.JWT_SECRET);
+      let originalPayload = JWT.decode(token, process.env.JWT_SECRET);
+      expect(newPayload.iat > originalPayload.iat).toEqual(true);
+    });
+    // test("when post doesn't exist response code is 404", async () => {
+    //   let response = await request(app)
+    //   .put("/posts/1234")
+    //   .set("Authorization", `Bearer ${token}`)
+    //   .send({token: token, message: "I meant to say Hello!"});
+    //   expect(response.status).toEqual
+    // }) 
   });
 
 
