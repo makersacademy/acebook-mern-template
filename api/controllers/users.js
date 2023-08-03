@@ -25,23 +25,24 @@ const UsersController = {
     
     if (signedInUserId !== urlId) {
       res.status(401).json({ message: 'Unauthorized' });
-  };
+  } else {
   
   User.findById(urlId, (err, user) => {
     if (err) {
-      return res.status(400).json({message: 'Bad request'})
+      res.status(400).json({message: 'Bad request'})
     }
     if (!user) {
-      return res.status(401).json({message: 'User not found'})
+      res.status(401).json({message: 'User not found'})
     } else {
     const token = TokenGenerator.jsonwebtoken(req.user_id)
     res.status(200).json({id: user.id, 
                           email: user.email, 
                           username: user.username, 
                           token: token})
-      }
-  });
-  } catch (error) {
+      } 
+    })
+  }
+ } catch (error) {
     return res.status(401).json({ message: 'Unauthorized' });
   }
 }

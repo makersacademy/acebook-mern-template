@@ -67,13 +67,14 @@ describe("/users", () => {
     });
   })
 
+  
+
   describe("GET, when path with user ID", () => {
     test("gets user info if user is authenticated", async () => {
       const user = new User({email: 'email@email.com', password: '12345678', username: 'person'});
       const savedUser = await user.save();
       const user_id = savedUser.id;
       const token = TokenGenerator.jsonwebtoken(user_id)
-      
       const response = await request(app)
         .get(`/users/${user_id}`)
         .set("Authorization", `Bearer ${token}`)
@@ -84,25 +85,16 @@ describe("/users", () => {
       expect(response.body.username).toEqual("person");
       expect(response.body.password).toBeUndefined();
     })
-    
-    // test("get user info returns error with wrong info", async () => { 
-    //   const user = new User({email: 'email@email.com', password: '12345678', username: 'person'});
-    //   await user.save();
-    //   await request(app)
-    //     .post("/tokens")
-    //     .send({email: user.email, password: user.password});
-    //   const response = await request(app).get('/users/4eb6e7e7e9b7f4194e000001')
-    //     .set("Authorization", `Bearer ${token}`);
-    //   expect(response.statusCode).toBe(401)
-    // })
+    test("get user info returns error with wrong info", async () => { 
+      const user = new User({email: 'email@email.com', password: '12345678', username: 'person'});
+      const savedUser = await user.save();
+      const user_id = savedUser.id;
+      const token = TokenGenerator.jsonwebtoken(user_id)
+      const response = await request(app)
+        .get(`/users/4eb6e7e7e9b7f4194e000001`)
+        .set("Authorization", `Bearer ${token}`)
 
-    // test("get user info not returned if not authentic token", async () => {
-    //   const user = new User({email: 'email@email.com', password: '12345678', username: 'person'})
-    //   await user.save()
-
-    //   // find by id with no authentic token returns 401
-    //   const response = await request(app).get(`/users/${user.id}`)
-    //   expect(response.statusCode).toBe(401)
-    // })
+      expect(response.statusCode).toBe(401);
+    })
   })
-})
+});
