@@ -8,7 +8,7 @@ const PostsController = {
       if (err) {
         throw err;
       }
-      const token = TokenGenerator.jsonwebtoken(req.user_id)
+      const token = TokenGenerator.jsonwebtoken(req.user_id);
       res.status(200).json({ posts: posts, token: token });
     });
   },
@@ -22,6 +22,7 @@ const PostsController = {
       if (!post) {
         return res.status(404).json({ message: "post not found!" });
       }
+
       const updatedMessage = req.body.message;
       const userID = post.user;
       
@@ -31,6 +32,7 @@ const PostsController = {
       } else {
         return res.status(401).json({ message: "auth error" });
       }
+
       post.save((err) => {
         if (err) {
           res.status(500).json({ message: "error" });
@@ -45,15 +47,15 @@ const PostsController = {
   Create: (req, res) => {
     const post = new Post({
       message: req.body.message,
-      user: req.user_id
+      user: req.user_id,
     });
     post.save((err) => {
       if (err) {
         throw err;
       }
 
-      const token = TokenGenerator.jsonwebtoken(req.user_id)
-      res.status(201).json({ message: 'OK', token: token });
+      const token = TokenGenerator.jsonwebtoken(req.user_id);
+      res.status(201).json({ message: "OK", token: token });
     });
   },
 };

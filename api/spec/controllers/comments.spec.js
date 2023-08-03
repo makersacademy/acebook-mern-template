@@ -88,8 +88,6 @@ describe("/comments", () => {
 				expect(JSON.stringify(post_id)).toEqual(JSON.stringify(comments.post));
 			});
 		
-
-  
  
   })
 });
