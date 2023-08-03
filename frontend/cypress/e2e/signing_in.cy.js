@@ -11,7 +11,6 @@ const testUsername= "usernamenamer"
     cy.get("#email").type(testEmail);
     cy.get("#password").type(testPassword);
     cy.get("#submit").click();
-    cy.screenshot()
     cy.url().should("include", "/posts");
   });
 
