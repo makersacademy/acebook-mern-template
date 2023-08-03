@@ -10,8 +10,6 @@ const { post } = require("superagent");
 const secret = process.env.JWT_SECRET;
 
 let token;
-let post_id;
-let user_id;
 
 describe("/comments", () => {
   beforeAll( async () => {
@@ -95,8 +93,67 @@ describe("/comments", () => {
 				let originalPayload = JWT.decode(token, process.env.JWT_SECRET);
 				expect(newPayload.iat > originalPayload.iat).toEqual(true);
 			});
-
-		
- 
-  })
+	});
+	describe("POST, when token is missing", () => {
+		test("responds with a 401", async () => {
+			let response = await request(app)
+				.post("/posts")
+				.send({post: post_id, user: user_id, comment: "hello world"});
+			expect(response.status).toEqual(401);
+		});
+		test("a comment is not created", async () => {
+			await request(app)
+				.post("/comments")
+				.send({ post: post_id, user: user_id, comment: "hello world" });
+			let comments = await Comment.find();
+			expect(comments.length).toEqual(0);
+		});
+		test("a token is not returned", async () => {
+			let response = await request(app)
+				.post("/comments")
+				.send({ post: post_id, user: user_id, comment: "hello world" });
+			expect(response.body.token).toEqual(undefined);
+		});
+  });
+	
+	describe("GET, when token is present", () => {
+		test("returns every comment in the collection", async () => {
+			let comment1 = new Comment({ post: post_id, user: user_id, comment: "hello men" });
+			let comment2 = new Comment({ post: post_id, user: user_id, comment: "hello women" });
+			await comment1.save();
+			await comment2.save();
+			let response = await request(app)
+				.get("/comments")
+				.set("Authorization", `Bearer ${token}`)
+				.send({ token: token });
+			expect(response.status).toEqual(200);
+			let comments = response.body.comments.map((comment) => comment.comment);
+			expect(comments).toEqual(["hello men", "hello women"]);
+		});
+		test("returns a new token", async () => {
+			let comment1 = new Comment({ post: post_id, user: user_id, comment: "hello men" });
+			let comment2 = new Comment({ post: post_id, user: user_id, comment: "hello women" });
+			await comment1.save();
+			await comment2.save();
+			let response = await request(app)
+				.get("/comments")
+				.set("Authorization", `Bearer ${token}`)
+				.send({ token: token });
+			let newPayload = JWT.decode(response.body.token, process.env.JWT_SECRET);
+			let originalPayload = JWT.decode(token, process.env.JWT_SECRET);
+			expect(newPayload.iat > originalPayload.iat).toEqual(true);
+			});
+	});
+	describe("GET, when token is missing", () => {
+    test("returns no comments, error 401 and no token", async () => {
+			let comment1 = new Comment({ post: post_id, user: user_id, comment: "hello men" });
+			let comment2 = new Comment({ post: post_id, user: user_id, comment: "hello women" });
+			await comment1.save();
+			await comment2.save();
+      let response = await request(app).get("/comments");
+			expect(response.status).toEqual(401);
+      expect(response.body.comments).toEqual(undefined);
+			expect(response.body.token).toEqual(undefined);
+    });
+	});	
 });
