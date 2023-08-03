@@ -6,8 +6,10 @@ const JWT = require("jsonwebtoken");
 const TokenGenerator = require("../../lib/token_generator");
 const secret = process.env.JWT_SECRET;
 
+let user;
 let token;
-
+let savedUser;
+let user_id;
 
 
 describe("/users", () => {
@@ -70,14 +72,24 @@ describe("/users", () => {
   
 
   describe("GET, when path with user ID", () => {
+    beforeEach( async () => {
+      user = new User({email: 'email@email.com', password: '12345678', username: 'person'});
+      savedUser = await user.save();
+      user_id = savedUser.id;
+      token = TokenGenerator.jsonwebtoken(user_id)
+    })
+
+    afterAll( async () => {
+      await User.deleteMany({});
+    })
+
     test("gets user info if user is authenticated", async () => {
-      const user = new User({email: 'email@email.com', password: '12345678', username: 'person'});
-      const savedUser = await user.save();
-      const user_id = savedUser.id;
-      const token = TokenGenerator.jsonwebtoken(user_id)
+      //makes a user, saves it, extracts the userid and uses it to make a token
+      console.log(user_id)
+      console.log(token)
       const response = await request(app)
-        .get(`/users/${user_id}`)
-        .set("Authorization", `Bearer ${token}`)
+      .get(`/users/${user_id}`)
+      .set("Authorization", `Bearer ${token}`)
 
       expect(response.statusCode).toBe(200);
       expect(response).not.toEqual(undefined);
@@ -86,10 +98,6 @@ describe("/users", () => {
       expect(response.body.password).toBeUndefined();
     })
     test("get user info returns error when accessing other users data", async () => { 
-      const user = new User({email: 'email@email.com', password: '12345678', username: 'person'});
-      const savedUser = await user.save();
-      const user_id = savedUser.id;
-      const token = TokenGenerator.jsonwebtoken(user_id)
       const response = await request(app)
         .get(`/users/4eb6e7e7e9b7f4194e000001`)
         .set("Authorization", `Bearer ${token}`)
@@ -97,9 +105,6 @@ describe("/users", () => {
       expect(response.statusCode).toBe(401);
     })
     test("get user info returns error when user not signed in or authenticated", async () => { 
-      const user = new User({email: 'email@email.com', password: '12345678', username: 'person'});
-      const savedUser = await user.save();
-      const user_id = savedUser.id;
       const response = await request(app)
         .get(`/users/${user_id}`)
       expect(response.statusCode).toBe(401);
