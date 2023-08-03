@@ -18,7 +18,6 @@ const UsersController = {
       const token = req.headers["authorization"].split(' ')[1]
       const decodedToken = jwt.verify(token, process.env.JWT_SECRET)
       const signedInUserId = decodedToken.user_id;
-
       const urlId = req.params.id
       if (signedInUserId !== urlId) {
         res.status(401).json({ message: 'Unauthorized' });
@@ -40,7 +39,7 @@ const UsersController = {
         })
       }
     } catch (error) {
-      return res.status(401).json({ message: 'Unauthorized' });
+      return res.status(401).json({ "error": error });
     }
   }
 };
