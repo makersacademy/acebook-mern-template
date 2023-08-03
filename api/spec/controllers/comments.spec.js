@@ -53,8 +53,7 @@ describe("/comments", () => {
         .post("/comments")
         .set("Authorization", `Bearer ${token}`)
         .send({post: post_id, user: user_id, comment: "testing comments", token: token });
-				expect(response.status).toEqual(201);
-
+			expect(response.status).toEqual(201);
 			});
 		
 			test("creates a new comment", async () => {
@@ -87,6 +86,16 @@ describe("/comments", () => {
 				// Assert comment is linked to user
 				expect(JSON.stringify(post_id)).toEqual(JSON.stringify(comments.post));
 			});
+			test("returns a new token", async () => {
+				let response = await request(app)
+					.post("/comments")
+					.set("Authorization", `Bearer ${token}`)
+					.send({post: post_id, user: user_id, comment: "hello world", token: token  })
+				let newPayload = JWT.decode(response.body.token, process.env.JWT_SECRET);
+				let originalPayload = JWT.decode(token, process.env.JWT_SECRET);
+				expect(newPayload.iat > originalPayload.iat).toEqual(true);
+			});
+
 		
  
   })
