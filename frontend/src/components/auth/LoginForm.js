@@ -7,22 +7,22 @@ const LogInForm = ({ navigate }) => {
   const handleSubmit = async (event) => {
     event.preventDefault();
 
-    let response = await fetch( '/tokens', {
-      method: 'post',
+    let response = await fetch("/tokens", {
+      method: "post",
       headers: {
-        'Content-Type': 'application/json',
+        "Content-Type": "application/json",
       },
-      body: JSON.stringify({ email: email, password: password })
-    })
-
-    if(response.status !== 201) {
-      console.log("yay")
-      navigate('/login')
+      body: JSON.stringify({ email: email, password: password }),
+    });
+    // 201 indicates the successful creation of a new resource on the server.
+    if (response.status !== 201) {
+      console.log("oop");
+      navigate("/login");
     } else {
-      console.log("oop")
-      let data = await response.json()
-      window.localStorage.setItem("token", data.token)
-      navigate('/posts');
+      console.log("yay");
+      let data = await response.json();
+      window.localStorage.setItem("token", data.token);
+      navigate("/posts");
     }
   }
 
