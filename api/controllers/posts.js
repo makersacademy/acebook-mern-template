@@ -7,19 +7,44 @@ const PostsController = {
       if (err) {
         throw err;
       }
-      const token = TokenGenerator.jsonwebtoken(req.user_id)
+      const token = TokenGenerator.jsonwebtoken(req.user_id);
       res.status(200).json({ posts: posts, token: token });
     });
   },
+  Update: (req, res) => {
+    const postId = req.params.id;
+    const updatedMessage = req.body.message;
+    Post.findById(postId, (err, post) => {
+      if (err) {
+        throw err;
+      }
+      if (!post) {
+        return res.status(404).json({ message: "post not found!" });
+      }
+      post.message = updatedMessage;
+      post.save((err) => {
+        if (err) {
+          res.status(500).json({ message: "error" });
+        }
+        const token = TokenGenerator.jsonwebtoken(req.user_id);
+        res
+          .status(200)
+          .json({ message: "Post updated successfully", token: token });
+      });
+    });
+  },
   Create: (req, res) => {
-    const post = new Post(req.body);
+    const post = new Post({
+      message: req.body.message,
+      user: req.user_id,
+    });
     post.save((err) => {
       if (err) {
         throw err;
       }
 
-      const token = TokenGenerator.jsonwebtoken(req.user_id)
-      res.status(201).json({ message: 'OK', token: token });
+      const token = TokenGenerator.jsonwebtoken(req.user_id);
+      res.status(201).json({ message: "OK", token: token });
     });
   },
 };
