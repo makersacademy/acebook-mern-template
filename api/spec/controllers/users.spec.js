@@ -85,7 +85,7 @@ describe("/users", () => {
       expect(response.body.username).toEqual("person");
       expect(response.body.password).toBeUndefined();
     })
-    test("get user info returns error with wrong info", async () => { 
+    test("get user info returns error when accessing other users data", async () => { 
       const user = new User({email: 'email@email.com', password: '12345678', username: 'person'});
       const savedUser = await user.save();
       const user_id = savedUser.id;
@@ -94,6 +94,14 @@ describe("/users", () => {
         .get(`/users/4eb6e7e7e9b7f4194e000001`)
         .set("Authorization", `Bearer ${token}`)
 
+      expect(response.statusCode).toBe(401);
+    })
+    test("get user info returns error when user not signed in or authenticated", async () => { 
+      const user = new User({email: 'email@email.com', password: '12345678', username: 'person'});
+      const savedUser = await user.save();
+      const user_id = savedUser.id;
+      const response = await request(app)
+        .get(`/users/${user_id}`)
       expect(response.statusCode).toBe(401);
     })
   })
