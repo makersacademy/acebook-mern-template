@@ -24,7 +24,7 @@ const PostsController = {
       post.message = updatedMessage;
       post.save((err) => {
         if (err) {
-          throw err;
+          res.status(500).json({ message: "error" });
         }
         const token = TokenGenerator.jsonwebtoken(req.user_id);
         res
