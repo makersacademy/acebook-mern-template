@@ -2,6 +2,8 @@ const app = require("../../app");
 const request = require("supertest");
 require("../mongodb_helper");
 const User = require('../../models/user')
+const JWT = require("jsonwebtoken");
+const secret = process.env.JWT_SECRET;
 
 describe("/users", () => {
   beforeEach( async () => {
@@ -62,26 +64,71 @@ describe("/users", () => {
 
     
   })
+});
 
-  describe("GET /users/:id", () => {
-    test("returns correct user when valid ID provided", async () => {
-      // create new user
-      const user = {
-        email: "someone@example.com",
-        username: "someusername",
-        password: "somepassword"
-      }
-      //make a post request to save the new user
-      let response = await request(app)
-        .post("/users")
-        .send(user);
-      //extract user id from created user
-      const userId = response.body.id;
-      //make the GET request to users/:id using the user id above
-      let getResponse = await request(app)
-        .get(`/users/${userId}`)
-      expect(getResponse.statusCode).toBe(200)
-      expect(getResponse.body.username).toEqual(user.username)
-    })
+describe("GET /users/:id when token is present", () => {
+  
+  beforeEach( async () => {
+    await User.deleteMany({});
   })
+  
+  test("returns correct user when valid ID provided", async () => {
+    // create new user
+    const user = new User ({
+      email: "someone@example.com",
+      username: "someusername",
+      password: "somepassword"
+    });
+    await user.save();
+    
+    let token = JWT.sign({
+      user_id: user.id,
+      // Backdate this token of 5 minutes
+      iat: Math.floor(Date.now() / 1000) - (5 * 60),
+      // Set the JWT token to expire in 10 minutes
+      exp: Math.floor(Date.now() / 1000) + (10 * 60)
+    }, secret);
+    const userId = user.id
+    //make the GET request to users/:id using the user id above
+    let getResponse = await request(app)
+      .get(`/users/${userId}`)
+      .set("Authorization", `Bearer ${token}`)
+      .send({user: user, token: token});
+    expect(getResponse.statusCode).toBe(200)
+    expect(getResponse.body.username).toEqual(user.username)
+  })
+  
+  // test("returns 401 user when invalid ID provided", async () => {
+  //   // create new user
+  //   const user1 = new User ({
+  //     email: "someone1@example.com",
+  //     username: "some1username",
+  //     password: "somepassword"
+  //   });
+  //   await user1.save();
+    
+  //   let token = JWT.sign({
+  //     user_id: user1.id,
+  //     // Backdate this token of 5 minutes
+  //     iat: Math.floor(Date.now() / 1000) - (5 * 60),
+  //     // Set the JWT token to expire in 10 minutes
+  //     exp: Math.floor(Date.now() / 1000) + (10 * 60)
+  //   }, secret);
+
+  //   const user2 = new User ({
+  //     email: "someone2@example.com",
+  //     username: "someusername2",
+  //     password: "somepassword2"
+  //   });
+  //   await user2.save();
+    
+  //   const userId = user2.id
+  //   //make the GET request to users/:id using the user id above
+  //   let getResponse = await request(app)
+  //     .get(`/users/${userId}`)
+  //     // .set("Authorization", `Bearer ${token}`)
+  //     // .send({user: user2, token: token});
+  //   expect(getResponse.statusCode).toBe(401)
+
+  // })
 });

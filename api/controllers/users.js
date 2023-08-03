@@ -1,6 +1,7 @@
 const User = require("../models/user");
 const TokenGenerator = require("../lib/token_generator");
 
+
 const UsersController = {
   Create: (req, res) => {
     const user = new User(req.body);
