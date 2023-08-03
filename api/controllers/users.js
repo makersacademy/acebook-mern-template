@@ -23,10 +23,11 @@ const UsersController = {
       if (err) {
         throw err;
       }
-      // generate new token
-      const token = TokenGenerator.jsonwebtoken(req.user_id)
-      // response contains status, user object with username and email properties, and token
-      res.status(200).json({username: user.username, token: token });
+        // generate new token
+        const token = TokenGenerator.jsonwebtoken(req.user_id)
+        // response contains status, user object with username and email properties, and token
+        res.status(200).json({username: user.username, token: token });
+      
     });
   },
 };

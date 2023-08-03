@@ -97,38 +97,4 @@ describe("GET /users/:id when token is present", () => {
     expect(getResponse.statusCode).toBe(200)
     expect(getResponse.body.username).toEqual(user.username)
   })
-  
-  // test("returns 401 user when invalid ID provided", async () => {
-  //   // create new user
-  //   const user1 = new User ({
-  //     email: "someone1@example.com",
-  //     username: "some1username",
-  //     password: "somepassword"
-  //   });
-  //   await user1.save();
-    
-  //   let token = JWT.sign({
-  //     user_id: user1.id,
-  //     // Backdate this token of 5 minutes
-  //     iat: Math.floor(Date.now() / 1000) - (5 * 60),
-  //     // Set the JWT token to expire in 10 minutes
-  //     exp: Math.floor(Date.now() / 1000) + (10 * 60)
-  //   }, secret);
-
-  //   const user2 = new User ({
-  //     email: "someone2@example.com",
-  //     username: "someusername2",
-  //     password: "somepassword2"
-  //   });
-  //   await user2.save();
-    
-  //   const userId = user2.id
-  //   //make the GET request to users/:id using the user id above
-  //   let getResponse = await request(app)
-  //     .get(`/users/${userId}`)
-  //     // .set("Authorization", `Bearer ${token}`)
-  //     // .send({user: user2, token: token});
-  //   expect(getResponse.statusCode).toBe(401)
-
-  // })
 });
