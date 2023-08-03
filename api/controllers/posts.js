@@ -5,7 +5,7 @@ const PostsController = {
   Index: (req, res) => {
     Post.find((err, posts) => {
       if (err) {
-        throw err;
+        return res.status(500).json({error: "Unauthorised"});
       }
       const token = TokenGenerator.jsonwebtoken(req.user_id)
       res.status(200).json({ posts: posts, token: token });
@@ -13,15 +13,33 @@ const PostsController = {
   },
   Create: (req, res) => {
     const post = new Post(req.body);
+    post.user_id = req.user_id;
     post.save((err) => {
       if (err) {
-        throw err;
+        return res.status(500).json({error: "Unauthorised"});
       }
 
       const token = TokenGenerator.jsonwebtoken(req.user_id)
       res.status(201).json({ message: 'OK', token: token });
     });
   },
-};
+  Update: async (req, res) => {
+      const post = await Post.findById(req.params.id);
+      if (!post) {
+        return res.status(404).json({error: "Post not found"});
+      }
+      if (post.user_id != req.user_id) {
+        return res.status(401).json({ error: 'Unauthorised' })
+      };
+      post.message = req.body.message;
+      post.save((err) => {
+        if (err) {
+          return res.status(500).json({error: "Unauthorised"});
+        }
+        const token = TokenGenerator.jsonwebtoken(req.user_id)
+        res.status(201).json({ message: 'OK', token: token, post:post });
+      });
+    }
+}
 
 module.exports = PostsController;

@@ -8,14 +8,18 @@ const secret = process.env.JWT_SECRET;
 
 let token;
 let user;
+let logged_in_user_id;
+let savedUser;
+
 
 describe("/posts", () => {
   beforeAll( async () => {
-    const user = new User({email: "test@test.com", password: "12345678", username: 'person1'});
-    await user.save();
+    user = new User({email: "test@test.com", password: "12345678", username: 'person1'});
+    savedUser = await user.save();
+    logged_in_user_id = savedUser.id
 
     token = JWT.sign({
-      user_id: user.id,
+      user_id: logged_in_user_id,
       // Backdate this token of 5 minutes
       iat: Math.floor(Date.now() / 1000) - (5 * 60),
       // Set the JWT token to expire in 10 minutes
@@ -136,7 +140,7 @@ describe("/posts", () => {
     });
 
     test("user id included in post data", async () => {
-      user2 = new User({email: "test2@test.com", password: "12345678"});
+      user2 = new User({email: "test2@test.com", password: "12345678", username: "person2"});
       await user2.save();
   
       let post1 = new Post({message: "howdy!", user_id: user.id});
@@ -183,4 +187,116 @@ describe("/posts", () => {
       expect(response.body.token).toEqual(undefined);
     })
   })
-});
+  describe("PUT, when logged in user is post author", () => {
+    test("the response code is 201", async () => {
+      let post1 = new Post({message: "howdy!", user_id: logged_in_user_id});
+      await post1.save();
+      let response = await request(app)
+        .put(`/posts/${post1.id}`)
+        .set("Authorization", `Bearer ${token}`)
+        .send({token: token, message: "I meant to say Hello!"});
+      expect(response.status).toEqual(201);
+    })
+        
+    test("the post's message gets updated", async () => {
+      let post1 = new Post({message: "howdy!", user_id: logged_in_user_id});
+      await post1.save();
+      let response = await request(app)
+        .put(`/posts/${post1.id}`)
+        .set("Authorization", `Bearer ${token}`)
+        .send({token: token, message: "I meant to say Hello!"});
+      let posts = await Post.find();
+      expect(posts[0].message).toEqual("I meant to say Hello!")
+      expect(response.body.post.message).toEqual("I meant to say Hello!")
+    });
+
+    test("returns a new token", async () => {
+      let post1 = new Post({message: "howdy!", user_id: logged_in_user_id});
+      await post1.save();
+      let response = await request(app)
+        .put(`/posts/${post1.id}`)
+        .set("Authorization", `Bearer ${token}`)
+        .send({token: token, message: "I meant to say Hello!"});
+      let newPayload = JWT.decode(response.body.token, process.env.JWT_SECRET);
+      let originalPayload = JWT.decode(token, process.env.JWT_SECRET);
+      expect(newPayload.iat > originalPayload.iat).toEqual(true);
+    });
+
+    test("when post doesn't exist response code is 404", async () => {
+      const post_id = "4eb6e7e7e9b7f4194e000001";
+      let response = await request(app)
+        .put(`/posts/${post_id}`)
+        .set("Authorization", `Bearer ${token}`)
+        .send({token: token, message: "I meant to say Hello!"});
+      expect(response.status).toEqual(404)
+    })
+  });
+
+  describe("PUT, when token is not present", () => {
+    test("the response code is 401", async () => {
+      let post1 = new Post({message: "howdy!"});
+      await post1.save();
+      let response = await request(app)
+        .put(`/posts/${post1.id}`)
+        .send({message: "I meant to say Hello!"});
+      expect(response.status).toEqual(401)
+    })
+    test("a token is not returned", async () => {
+      let post1 = new Post({message: "howdy!"});
+      await post1.save();
+      let response = await request(app)
+        .put(`/posts/${post1.id}`)
+        .send({message: "I meant to say Hello!"});
+      expect(response.body.token).toEqual(undefined);
+    })
+    test("when post doesn't exist response code is 404", async () => {
+      const post_id = "4eb6e7e7e9b7f4194e000001";
+      let response = await request(app)
+        .put(`/posts/${post_id}`)
+        .send({message: "I meant to say Hello!"});
+      expect(response.status).toEqual(401)
+    })
+    test("the post message doesn't change", async () => {
+      let post1 = new Post({message: "howdy!"});
+      await post1.save();
+      await request(app)
+        .put(`/posts/${post1.id}`)
+        .send({message: "I meant to say Hello!"});
+      let posts = await Post.find();
+      expect(posts[0].message).toEqual("howdy!");
+    })
+  });
+
+  describe("PUT when logged in user is not post author", () => {
+    test("the response code is 401", async () => {
+      let post1 = new Post({message: "howdy!", user_id: "4eb6e7e7e9b7f4194e000001"});
+      await post1.save();
+      let response = await request(app)
+        .put(`/posts/${post1.id}`)
+        .set("Authorization", `Bearer ${token}`)
+        .send({message: "I meant to say Hello!"});
+      expect(response.status).toEqual(401);
+    });
+    
+    test("the post message should not change", async () => {
+      let post1 = new Post({message: "howdy!", user_id: "4eb6e7e7e9b7f4194e000001"});
+      await post1.save();
+      let response = await request(app)
+        .put(`/posts/${post1.id}`)
+        .set("Authorization", `Bearer ${token}`)
+        .send({message: "I meant to say Hello!"});
+      let posts = await Post.find();
+      expect(posts[0].message).toEqual("howdy!");
+    });
+
+    test("a token is not returned", async () => {
+      let post1 = new Post({message: "howdy!", user_id: "4eb6e7e7e9b7f4194e000001"});
+      await post1.save();
+      let response = await request(app)
+        .put(`/posts/${post1.id}`)
+        .set("Authorization", `Bearer ${token}`)
+        .send({message: "I meant to say Hello!"});
+      expect(response.body.token).toEqual(undefined);
+    });
+    })
+  });
