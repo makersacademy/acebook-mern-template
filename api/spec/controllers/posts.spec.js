@@ -5,6 +5,8 @@ const Post = require("../../models/post");
 const User = require("../../models/user");
 const JWT = require("jsonwebtoken");
 const secret = process.env.JWT_SECRET;
+const TokenGenerator = require("../../lib/token_generator");
+
 
 let token;
 
@@ -36,12 +38,12 @@ describe("/posts", () => {
   afterAll(async () => {
     await User.deleteMany({});
     await Post.deleteMany({});
-  });
-  //
-
+  })
+  
   describe("PUT, when token is present", () => {
     test("response with a 200, and message updated", async () => {
-      const post = new Post({ message: "test post" });
+      const post = new Post({ message: "test  post 1", user: user._id});
+
       await post.save();
       const updatedMessage = "updated message";
       // Perform the PUT request with the correct headers
@@ -54,6 +56,31 @@ describe("/posts", () => {
       const updatedPost = await Post.findById(post.id);
       expect(updatedPost.message).toEqual("updated message");
     });
+
+
+
+    test("response with an auth error if wrong user, and message consequently does not update", async () => {
+      const post = new Post({ message: "test post 2", user: user._id });
+      await post.save();
+      const updatedMessage = "updated message";
+      // Perform the PUT request with the correct headers
+      // Create a different user and generate a token for them
+      const anotherUser = new User({
+        email: "another@test.com",
+        username: "anotheruser",
+        password: "12345678",
+      });
+      await anotherUser.save();
+      const anotherToken = TokenGenerator.jsonwebtoken(anotherUser._id);
+      let response = await request(app)
+        .put(`/posts/${post.id}`)
+        .set("Authorization", `Bearer ${anotherToken}`)
+        .send({ message: updatedMessage });
+      expect(response.status).toEqual(401);
+      const updatedPost = await Post.findById(post.id);
+      expect(updatedPost.message).toEqual("test post 2");
+    });
+
   });
 
   describe("POST, when token is present", () => {

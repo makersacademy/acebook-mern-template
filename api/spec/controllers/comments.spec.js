@@ -88,19 +88,6 @@ describe("/comments", () => {
 				expect(JSON.stringify(post_id)).toEqual(JSON.stringify(comments.post));
 			});
 		
-			// test("returns every comment in to ", async () => {
-			// 	let post1 = new Post({message: "howdy!"});
-			// 	let post2 = new Post({message: "hola!"});
-			// 	await post1.save();
-			// 	await post2.save();
-			// 	let response = await request(app)
-			// 		.get("/posts")
-			// 		.set("Authorization", `Bearer ${token}`)
-			// 		.send({token: token});
-			// 	let messages = response.body.posts.map((post) => ( post.message ));
-			// 	expect(messages).toEqual(["howdy!", "hola!"]);
-			// })
-  
  
   })
 });

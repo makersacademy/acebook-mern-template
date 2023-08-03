@@ -1,5 +1,6 @@
 const Post = require("../models/post");
 const TokenGenerator = require("../lib/token_generator");
+const { post } = require("superagent");
 
 const PostsController = {
   Index: (req, res) => {
@@ -13,7 +14,7 @@ const PostsController = {
   },
   Update: (req, res) => {
     const postId = req.params.id;
-    const updatedMessage = req.body.message;
+
     Post.findById(postId, (err, post) => {
       if (err) {
         throw err;
@@ -21,7 +22,17 @@ const PostsController = {
       if (!post) {
         return res.status(404).json({ message: "post not found!" });
       }
-      post.message = updatedMessage;
+
+      const updatedMessage = req.body.message;
+      const userID = post.user;
+      
+      if (userID == req.user_id) {
+        post.message = updatedMessage;
+        
+      } else {
+        return res.status(401).json({ message: "auth error" });
+      }
+
       post.save((err) => {
         if (err) {
           res.status(500).json({ message: "error" });
