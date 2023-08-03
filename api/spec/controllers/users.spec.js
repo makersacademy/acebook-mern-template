@@ -3,6 +3,7 @@ const request = require("supertest");
 require("../mongodb_helper");
 const User = require('../../models/user')
 const JWT = require("jsonwebtoken");
+const TokenGenerator = require("../../lib/token_generator");
 const secret = process.env.JWT_SECRET;
 
 let token;
@@ -69,19 +70,19 @@ describe("/users", () => {
   describe("GET, when path with user ID", () => {
     test("gets user info if user is authenticated", async () => {
       const user = new User({email: 'email@email.com', password: '12345678', username: 'person'});
-      const response1 = await request(app)
-        .post("/users")
-        .send({email: user.email, password: user.password, username: user.username});
-      const user_id = response1.id;
-      console.log(response1)
-      const response = await request(app).get(`/users/${user.id}`)
+      const savedUser = await user.save();
+      const user_id = savedUser.id;
+      const token = TokenGenerator.jsonwebtoken(user_id)
+      
+      const response = await request(app)
+        .get(`/users/${user_id}`)
         .set("Authorization", `Bearer ${token}`)
-        .send({user_id: user_id});
+
       expect(response.statusCode).toBe(200);
       expect(response).not.toEqual(undefined);
       expect(response.body.email).toEqual("email@email.com");
       expect(response.body.username).toEqual("person");
-      expect(response.body.password).toEqual(undefined);
+      expect(response.body.password).toBeUndefined();
     })
     
     // test("get user info returns error with wrong info", async () => { 
