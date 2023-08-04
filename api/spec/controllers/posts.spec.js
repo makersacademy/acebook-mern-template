@@ -216,6 +216,19 @@ describe("/posts", () => {
       expect(response.body.token).toEqual(undefined);
     });
   });
-
-  
+  describe("DELETE, when token is present", () => {
+		test("delete a post with 200 response", async () => {
+      let post = new Post({ message: "to delete", user: user._id })
+      await post.save();
+      // Send a request to delete the posts
+			const response = await request(app)
+        .delete(`/posts/${post._id}`)
+        .set('Authorization', `Bearer ${token}`)
+      // Check the response status
+      expect(response.status).toEqual(200);
+      // Check if the post is deleted from the database
+      const deleted_post = await Post.findById(post._id);
+      expect(deleted_post).toBe(null);
+    })
+  });
 });

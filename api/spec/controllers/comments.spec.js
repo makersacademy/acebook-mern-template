@@ -98,7 +98,7 @@ describe("/comments", () => {
 	describe("POST, when token is missing", () => {
 		test("responds with a 401", async () => {
 			let response = await request(app)
-				.post("/posts")
+				.post("/comments")
 				.send({post: post_id, user: user_id, comment: "hello world"});
 			expect(response.status).toEqual(401);
 		});
@@ -168,7 +168,7 @@ describe("/comments", () => {
 			// Check the response status
 			expect(response.status).toEqual(200);
 			// Check if the comment is deleted from the database
-			const deleted_comment = await Comment.findById(comment._id_);
+			const deleted_comment = await Comment.findById(comment._id);
 			expect(deleted_comment).toBe(null);
 		});
 		test("returns a new token", async () => {
