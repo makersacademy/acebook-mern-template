@@ -36,10 +36,19 @@ const Feed = ({ navigate }) => {
             </button>
           <div id='feed' role="feed">
               {posts.map(
-                (post) => ( <Post post={ post } key={ post._id } /> )
+                (post) => ( <a href= {`#${post._id}`} key={post._id}><Post post={ post } key={ post._id } /></a> )
               )}
           </div>
         </>
+//<div id='feed' role="feed">
+// {posts.map((post) => (
+//   <a href={`#${post._id}`} key={post._id}>
+//       <Post post={post} key={post._id} />
+//   </a>
+// ))}
+// </div>
+
+
       )
     } else {
       navigate('/login')
