@@ -184,7 +184,7 @@ describe("/comments", () => {
 		});
 	});
 	describe("DELETE, when token is missing", () => {
-		test("delete a comment by other user with 403 response", async () => {
+		test("other user can't delete comment, 403 response", async () => {
 			const userId = mongoose.Types.ObjectId();
 			const postId = mongoose.Types.ObjectId();
 			const comment = new Comment({post: postId, user: userId, comment: "comment to delete"});
@@ -198,16 +198,17 @@ describe("/comments", () => {
 			// Check if the comment is still in the database
 			expect(Comment.findById(comment._id_)).not.toBe(null);
 		});
-		test("returns a new token", async () => {
-			let comment = new Comment({post: post_id, user: user_id, comment: "comment to delete"});
+		test("a token is not returned", async () => {
+			const userId = mongoose.Types.ObjectId();
+			const postId = mongoose.Types.ObjectId();
+			const comment = new Comment({post: postId, user: userId, comment: "comment to delete"});
 			await comment.save();
+			// Send a request to delete the comment
 			const response = await request(app)
 				.delete(`/comments/${comment._id}`)
 				.set('Authorization', `Bearer ${token}`)
 				.send({ token: token });
-			let newPayload = JWT.decode(response.body.token, process.env.JWT_SECRET);
-			let originalPayload = JWT.decode(token, process.env.JWT_SECRET);
-			expect(newPayload.iat > originalPayload.iat).toEqual(true);
+				expect(response.body.token).toEqual(undefined);
 		});
 	});
 });

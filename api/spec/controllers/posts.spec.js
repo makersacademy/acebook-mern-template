@@ -6,6 +6,7 @@ const User = require("../../models/user");
 const JWT = require("jsonwebtoken");
 const secret = process.env.JWT_SECRET;
 const TokenGenerator = require("../../lib/token_generator");
+const mongoose = require('mongoose');
 
 
 let token;
@@ -220,7 +221,7 @@ describe("/posts", () => {
 		test("delete a post with 200 response", async () => {
       let post = new Post({ message: "to delete", user: user._id })
       await post.save();
-      // Send a request to delete the posts
+      // Send a request to delete the post
 			const response = await request(app)
         .delete(`/posts/${post._id}`)
         .set('Authorization', `Bearer ${token}`)
@@ -229,6 +230,44 @@ describe("/posts", () => {
       // Check if the post is deleted from the database
       const deleted_post = await Post.findById(post._id);
       expect(deleted_post).toBe(null);
-    })
+    });
+    test("returns a new token", async () => {
+      let post = new Post({ message: "to delete", user: user._id })
+      await post.save();
+      // Send a request to delete the post
+			const response = await request(app)
+        .delete(`/posts/${post._id}`)
+        .set('Authorization', `Bearer ${token}`)
+        .send({ token: token });
+			let newPayload = JWT.decode(response.body.token, process.env.JWT_SECRET);
+			let originalPayload = JWT.decode(token, process.env.JWT_SECRET);
+			expect(newPayload.iat > originalPayload.iat).toEqual(true);
+    });
+  });
+  describe("DELETE, when token is missing", () => {
+    test("other user can't delete post, 403 response", async () => {
+			const userId = mongoose.Types.ObjectId();
+      let post = new Post({ message: "to delete", user: userId })
+      await post.save();
+      // Send a request to delete the post
+			const response = await request(app)
+        .delete(`/posts/${post._id}`)
+        .set('Authorization', `Bearer ${token}`)
+        // Check the response status
+			expect(response.status).toEqual(403);
+			// Check if the comment is still in the database
+			expect(Post.findById(post._id_)).not.toBe(null);
+    });
+    test("a token is not returned", async () => {
+      const userId = mongoose.Types.ObjectId();
+      let post = new Post({ message: "to delete", user: userId })
+      await post.save();
+      // Send a request to delete the post
+			const response = await request(app)
+        .delete(`/posts/${post._id}`)
+        .set('Authorization', `Bearer ${token}`)
+        .send({ token: token });
+      expect(response.body.token).toEqual(undefined);
+    });
   });
 });
