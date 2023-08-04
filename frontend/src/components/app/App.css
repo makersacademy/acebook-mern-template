@@ -27,9 +27,8 @@ input[type=submit]:hover {
 }
 
 p {
-    color: black;
+    color: white;
     text-align: center;
-    font-weight: bold;
     font-size: 20px;
     }
 
@@ -44,5 +43,5 @@ div {
     font-weight: bold;
     font-size: 20px;
     padding: 10px 25px;
-    
+
 }
