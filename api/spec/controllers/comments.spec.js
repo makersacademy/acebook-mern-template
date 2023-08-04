@@ -8,6 +8,7 @@ const Comment = require('../../models/comment')
 const JWT = require("jsonwebtoken");
 const { post } = require("superagent");
 const secret = process.env.JWT_SECRET;
+const mongoose = require('mongoose');
 
 let token;
 
@@ -45,7 +46,7 @@ describe("/comments", () => {
     await Comment.deleteMany({});
   })
 
-  describe("Comment, when token is present", () => {
+  describe("POST, when token is present", () => {
       test("responds with a 201", async () => {
       let response = await request(app)
         .post("/comments")
@@ -156,4 +157,57 @@ describe("/comments", () => {
 			expect(response.body.token).toEqual(undefined);
     });
 	});	
+	describe("DELETE, when token is present", () => {
+		test("delete a comment with 200 response", async () => {
+			const comment = new Comment({post: post_id, user: user_id, comment: "comment to delete"});
+			await comment.save();
+			// Send a request to delete the comment
+			const response = await request(app)
+				.delete(`/comments/${comment._id}`)
+				.set('Authorization', `Bearer ${token}`)
+			// Check the response status
+			expect(response.status).toEqual(200);
+			// Check if the comment is deleted from the database
+			const deleted_comment = await Comment.findById(comment._id_);
+			expect(deleted_comment).toBe(null);
+		});
+		test("returns a new token", async () => {
+			let comment = new Comment({post: post_id, user: user_id, comment: "comment to delete"});
+			await comment.save();
+			const response = await request(app)
+				.delete(`/comments/${comment._id}`)
+				.set('Authorization', `Bearer ${token}`)
+				.send({ token: token });
+			let newPayload = JWT.decode(response.body.token, process.env.JWT_SECRET);
+			let originalPayload = JWT.decode(token, process.env.JWT_SECRET);
+			expect(newPayload.iat > originalPayload.iat).toEqual(true);
+		});
+	});
+	describe("DELETE, when token is missing", () => {
+		test("delete a comment by other user with 403 response", async () => {
+			const userId = mongoose.Types.ObjectId();
+			const postId = mongoose.Types.ObjectId();
+			const comment = new Comment({post: postId, user: userId, comment: "comment to delete"});
+			await comment.save();
+			// Send a request to delete the comment
+			const response = await request(app)
+				.delete(`/comments/${comment._id}`)
+				.set('Authorization', `Bearer ${token}`)
+			// Check the response status
+			expect(response.status).toEqual(403);
+			// Check if the comment is still in the database
+			expect(Comment.findById(comment._id_)).not.toBe(null);
+		});
+		test("returns a new token", async () => {
+			let comment = new Comment({post: post_id, user: user_id, comment: "comment to delete"});
+			await comment.save();
+			const response = await request(app)
+				.delete(`/comments/${comment._id}`)
+				.set('Authorization', `Bearer ${token}`)
+				.send({ token: token });
+			let newPayload = JWT.decode(response.body.token, process.env.JWT_SECRET);
+			let originalPayload = JWT.decode(token, process.env.JWT_SECRET);
+			expect(newPayload.iat > originalPayload.iat).toEqual(true);
+		});
+	});
 });
