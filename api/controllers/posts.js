@@ -1,4 +1,5 @@
 const Post = require("../models/post");
+const Comment = require("../models/comment");
 const TokenGenerator = require("../lib/token_generator");
 const jwt = require("jsonwebtoken");
 
@@ -78,9 +79,15 @@ const PostsController = {
       const decodedToken = jwt.verify(token, process.env.JWT_SECRET);
       // user_id - who wants to delete post
       const user_id = decodedToken.user_id;
-      if (post.user.toString() !== user_id) {
-        return res.status(403).json({ error: 'Forbidden. You Are not allowed to delete this post.'});
+      if (post.user.toString() !== user_id &&
+      (await Post.exists({ _od: Comment.post, user: user_id })) === false
+      ) {
+        return res
+        .status(403)
+        .json({ error: 'Forbidden. You Are not allowed to delete this post.'});
       }
+      // Delete the associated comments
+      await Comment.deleteMany({ post: post._id });
       //delete the post
       await post.deleteOne();
       console.log("post.deleteOne(): ", post.deleteOne());

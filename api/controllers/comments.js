@@ -1,4 +1,5 @@
 const Comment = require("../models/comment");
+const Post = require("../models/post");
 const TokenGenerator = require("../lib/token_generator");
 const jwt = require("jsonwebtoken");
 
@@ -68,18 +69,25 @@ const CommentsController = {
       const decodedToken = jwt.verify(token, process.env.JWT_SECRET);
       // user_id - who wants to delete comment
       const user_id = decodedToken.user_id;
-
-      if (comment.user.toString() !== user_id) {
-        return res.status(403).json({ error: 'Forbidden. You Are not allowed to delete this comment.'});
+      // Retrieve the post associated with the comment
+      const post = await Post.findById(comment.post);
+      // console.log("comment.post", comment.post)
+      // console.log("user_id", user_id);
+      // console.log("comment.user.toString()",comment.user.toString())
+      // console.log("post", post);
+      if (comment.user.toString() !== user_id && post.user.toString() !== user_id) {
+        return res.status(403).json({ error: 'Forbidden. You are not allowed to delete this comment.' });
       }
       //delete the comment
-      await comment.deleteOne();
+      const deleteResult = await Comment.deleteOne({ _id: req.params.id });
+      if (deleteResult.deletedCount === 1) {
       //return success response
       const newToken = TokenGenerator.jsonwebtoken(user_id);
       res
         .status(200)
         .json({ message: 'Comment deleted succesfully.', token: newToken });
-    } 
+    }
+    }
     catch (err) {
       return res.status(500).json({ error: 'Unexpected error occured.' });
     }

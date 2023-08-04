@@ -19,7 +19,7 @@ describe("/comments", () => {
       username: "test31username", 
       password: "1234567890"
 		});
-		user_id = user.id;
+		user_id = user._id;
     const post = new Post({
     	message: "testing comments"
     })
@@ -158,7 +158,10 @@ describe("/comments", () => {
     });
 	});	
 	describe("DELETE, when token is present", () => {
-		test("delete a comment with 200 response", async () => {
+		test("delete a comment by comment's author with 200 response", async () => {
+			const userId = mongoose.Types.ObjectId();
+			const post = new Post({ message: "Пост с комментариями", user: userId });
+    		await post.save();
 			const comment = new Comment({post: post_id, user: user_id, comment: "comment to delete"});
 			await comment.save();
 			// Send a request to delete the comment
@@ -170,6 +173,24 @@ describe("/comments", () => {
 			// Check if the comment is deleted from the database
 			const deleted_comment = await Comment.findById(comment._id);
 			expect(deleted_comment).toBe(null);
+		});
+		test("delete a comment by post's author with 200 response", async () => {
+			const userId = mongoose.Types.ObjectId();
+			const post = new Post({ message: "Post with comments", user: user_id });
+			await post.save();
+			const comment = new Comment({post: post._id, user: userId, comment: "comment to delete"});
+			await comment.save();
+			// Send a request to delete the comment
+			const response = await request(app)
+				.delete(`/comments/${comment._id}`)
+				.set('Authorization', `Bearer ${token}`)
+			// Check the response status
+			expect(response.status).toEqual(200);
+			// Check if the comment is deleted from the database
+			const deleted_comment = await Comment.findById(comment._id);
+			expect(deleted_comment).toBe(null);
+			// Check if the response includes a new token
+			expect(response.body.token).toBeDefined();
 		});
 		test("returns a new token", async () => {
 			let comment = new Comment({post: post_id, user: user_id, comment: "comment to delete"});
@@ -186,9 +207,14 @@ describe("/comments", () => {
 	describe("DELETE, when token is missing", () => {
 		test("other user can't delete comment, 403 response", async () => {
 			const userId = mongoose.Types.ObjectId();
-			const postId = mongoose.Types.ObjectId();
-			const comment = new Comment({post: postId, user: userId, comment: "comment to delete"});
+			const post = new Post({ message: "Post with comments", user: userId });
+			await post.save();
+			const comment = new Comment({post: post._id, user: userId, comment: "comment to delete"});
 			await comment.save();
+			console.log("other user can't delete comment")
+			console.log('Post author', post.user);
+			console.log('Comment Author', comment.user);
+			console.log('Current User', user_id);
 			// Send a request to delete the comment
 			const response = await request(app)
 				.delete(`/comments/${comment._id}`)
@@ -196,7 +222,7 @@ describe("/comments", () => {
 			// Check the response status
 			expect(response.status).toEqual(403);
 			// Check if the comment is still in the database
-			expect(Comment.findById(comment._id_)).not.toBe(null);
+			expect(Comment.findById(comment._id)).not.toBe(null);
 		});
 		test("a token is not returned", async () => {
 			const userId = mongoose.Types.ObjectId();
@@ -208,7 +234,7 @@ describe("/comments", () => {
 				.delete(`/comments/${comment._id}`)
 				.set('Authorization', `Bearer ${token}`)
 				.send({ token: token });
-				expect(response.body.token).toEqual(undefined);
+			expect(response.body.token).toEqual(undefined);
 		});
 	});
 });
