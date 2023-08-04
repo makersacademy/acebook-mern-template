@@ -211,10 +211,6 @@ describe("/comments", () => {
 			await post.save();
 			const comment = new Comment({post: post._id, user: userId, comment: "comment to delete"});
 			await comment.save();
-			console.log("other user can't delete comment")
-			console.log('Post author', post.user);
-			console.log('Comment Author', comment.user);
-			console.log('Current User', user_id);
 			// Send a request to delete the comment
 			const response = await request(app)
 				.delete(`/comments/${comment._id}`)
