@@ -90,7 +90,6 @@ const PostsController = {
       await Comment.deleteMany({ post: post._id });
       //delete the post
       await post.deleteOne();
-      console.log("post.deleteOne(): ", post.deleteOne());
       //return success response
       const newToken = TokenGenerator.jsonwebtoken(user_id);
       res
