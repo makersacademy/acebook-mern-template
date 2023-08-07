@@ -2,9 +2,6 @@ describe("Signing in", () => {
 const testEmail = "someone@example.com"
 const testPassword = "password"
 const testUsername= "usernamenamer"
-  // before(() => {
-  //   cy.signup(testEmail, testPassword, testUsername)
-  // });
 
   it("with valid credentials, redirects to '/posts'", () => {
     cy.visit("/login");
