@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import Post from '../post/Post'
+import Comment from '../comment/Comment'
 
 import './Feed.css'
 
 const Feed = ({ navigate }) => {
   const [posts, setPosts] = useState([]);
+  const [comments, setComments] = useState([]);
   const [token, setToken] = useState(window.localStorage.getItem("token"));
   const [message, setMessage] = useState("");
   const handleMessageChange = (event) => {
@@ -61,6 +63,9 @@ const Feed = ({ navigate }) => {
       })
   }
   
+  // let commentsList = comments.map(
+  //   (post) => ( <p> <Post post={ post } key={ post._id }  /> </p>)
+  // )
 
   let postList = posts.map(
     (post) => ( <p> <Post post={ post } key={ post._id }  /> </p>)

@@ -34,16 +34,29 @@ const CommentsController = {
       const comment = new Comment({
         comment: req.body.comment,
         user: req.body.user,
-        post: req.body.post
       });
-      comment.save((err) => {
+      
+      const postId = req.body.post
+      console.log("req.body.post", req.body.post)
+      Post.findById(postId, (err, post) => {
         if (err) {
-          // Handle the error and send an appropriate response
-          return res.status(500).json({ error: 'Failed to save comment.' });
+          throw err;
         }
-        const token = TokenGenerator.jsonwebtoken(req.user_id);
-        res.status(201).json({ comment: 'OK', token: token });
+        comment.save((err) => {
+          if (err) {
+            // Handle the error and send an appropriate response
+            return res.status(500).json({ error: 'Failed to save comment.' });
+          }
+          console.log("Comment",comment);
+          console.log("post comment", post);
+          post.comments.push(comment)
+          const token = TokenGenerator.jsonwebtoken(req.user_id);
+          res.status(201).json({ comment: 'OK', token: token });
+      }); 
+      
       });
+
+      
     } catch (err) {
       // Handle any unexpected error
       return res.status(500).json({ error: 'Unexpected error occurred.' });

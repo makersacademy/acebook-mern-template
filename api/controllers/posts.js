@@ -3,15 +3,18 @@ const Comment = require("../models/comment");
 const TokenGenerator = require("../lib/token_generator");
 const jwt = require("jsonwebtoken");
 
+
+
 const PostsController = {
-  Index: (req, res) => {
-    Post.find((err, posts) => {
+  Index: async (req, res) => {
+    await Post.find().populate('comments').exec((err, posts) => {
       if (err) {
-        throw err;
+        console.error('Error:', err);
+        return;
       }
-      const token = TokenGenerator.jsonwebtoken(req.user_id);
-      res.status(200).json({ posts: posts, token: token });
-    });
+        const token = TokenGenerator.jsonwebtoken(req.user_id);
+        return res.status(200).json({ posts: posts, token: token });
+      })
   },
   Update: (req, res) => {
     const postId = req.params.id;
@@ -23,7 +26,7 @@ const PostsController = {
       if (!post) {
         return res.status(404).json({ message: "post not found!" });
       }
-
+     
       const updatedMessage = req.body.message;
       const userID = post.user;
       

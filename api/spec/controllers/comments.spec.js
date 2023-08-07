@@ -21,10 +21,12 @@ describe("/comments", () => {
 		});
 		user_id = user._id;
     const post = new Post({
-    	message: "testing comments"
+    	message: "testing comments",
+		comments: []
     })
 		await user.save();
-		post_id = post._id;
+	 	post_id = post._id;
+	  	console.log("POST ID", post._id);
 		await post.save();
 		
     token = JWT.sign({
@@ -46,81 +48,73 @@ describe("/comments", () => {
     await Comment.deleteMany({});
   })
 
-  describe("POST, when token is present", () => {
-      test("responds with a 201", async () => {
-      let response = await request(app)
-        .post("/comments")
-        .set("Authorization", `Bearer ${token}`)
-        .send({post: post_id, user: user_id, comment: "testing comments", token: token });
-			expect(response.status).toEqual(201);
-			});
-		
-			test("creates a new comment", async () => {
-				await request(app)
-					.post("/comments")
-					.set("Authorization", `Bearer ${token}`)
-					.send({post: post_id, user: user_id, comment: "hello world", token: token  });
-				let comments = await Comment.find();
-				expect(comments.length).toEqual(1);
-				expect(comments[0].comment).toEqual("hello world");
-			});
+  	describe("POST, when token is present", () => {
+		test("responds with a 201", async () => {
+			let response = await request(app)
+				.post("/comments")
+				.set("Authorization", `Bearer ${token}`)
+				.send({user: user_id, comment: "testing comments", token: token });
 			
+			expect(response.status).toEqual(201);
+		});
 		
-			test("creates a comment linked to the user", async () => {
-				await request(app)
-					.post("/comments")
-					.set('Authorization', `Bearer ${token}`)
-					.send({post: post_id, user: user_id, comment: "hello world", token: token  })
-				const comments = await Comment.findOne();
-				// Assert comment is linked to user
-				expect(JSON.stringify(user_id)).toEqual(JSON.stringify(comments.user));
-			});
+		test("creates a new comment", async () => {
+			await request(app)
+				.post("/comments")
+				.set("Authorization", `Bearer ${token}`)
+				.send({user: user_id, comment: "hello world", token: token  });
+			let comments = await Comment.find();
+			expect(comments.length).toEqual(1);
+			expect(comments[0].comment).toEqual("hello world");
+		});
 		
-			test("creates a comment linked to the post", async () => {
-				await request(app)
-					.post("/comments")
-					.set('Authorization', `Bearer ${token}`)
-					.send({post: post_id, user: user_id, comment: "hello world", token: token  })
-				const comments = await Comment.findOne();
-				// Assert comment is linked to user
-				expect(JSON.stringify(post_id)).toEqual(JSON.stringify(comments.post));
-			});
-			test("returns a new token", async () => {
-				let response = await request(app)
-					.post("/comments")
-					.set("Authorization", `Bearer ${token}`)
-					.send({post: post_id, user: user_id, comment: "hello world", token: token  })
-				let newPayload = JWT.decode(response.body.token, process.env.JWT_SECRET);
-				let originalPayload = JWT.decode(token, process.env.JWT_SECRET);
-				expect(newPayload.iat > originalPayload.iat).toEqual(true);
-			});
+
+		test("creates a comment linked to the user", async () => {
+			await request(app)
+				.post("/comments")
+				.set('Authorization', `Bearer ${token}`)
+				.send({user: user_id, comment: "hello world", token: token  })
+			const comments = await Comment.findOne();
+			// Assert comment is linked to user
+			expect(JSON.stringify(user_id)).toEqual(JSON.stringify(comments.user));
+		});
+
+		test("returns a new token", async () => {
+			let response = await request(app)
+				.post("/comments")
+				.set("Authorization", `Bearer ${token}`)
+				.send({user: user_id, comment: "hello world", token: token  })
+			let newPayload = JWT.decode(response.body.token, process.env.JWT_SECRET);
+			let originalPayload = JWT.decode(token, process.env.JWT_SECRET);
+			expect(newPayload.iat > originalPayload.iat).toEqual(true);
+		});
 	});
 	describe("POST, when token is missing", () => {
 		test("responds with a 401", async () => {
 			let response = await request(app)
 				.post("/comments")
-				.send({post: post_id, user: user_id, comment: "hello world"});
+				.send({user: user_id, comment: "hello world"});
 			expect(response.status).toEqual(401);
 		});
 		test("a comment is not created", async () => {
 			await request(app)
 				.post("/comments")
-				.send({ post: post_id, user: user_id, comment: "hello world" });
+				.send({user: user_id, comment: "hello world" });
 			let comments = await Comment.find();
 			expect(comments.length).toEqual(0);
 		});
 		test("a token is not returned", async () => {
 			let response = await request(app)
 				.post("/comments")
-				.send({ post: post_id, user: user_id, comment: "hello world" });
+				.send({user: user_id, comment: "hello world" });
 			expect(response.body.token).toEqual(undefined);
 		});
   });
 	
 	describe("GET, when token is present", () => {
 		test("returns every comment in the collection", async () => {
-			let comment1 = new Comment({ post: post_id, user: user_id, comment: "hello men" });
-			let comment2 = new Comment({ post: post_id, user: user_id, comment: "hello women" });
+			let comment1 = new Comment({user: user_id, comment: "hello men" });
+			let comment2 = new Comment({user: user_id, comment: "hello women" });
 			await comment1.save();
 			await comment2.save();
 			let response = await request(app)
@@ -132,8 +126,8 @@ describe("/comments", () => {
 			expect(comments).toEqual(["hello men", "hello women"]);
 		});
 		test("returns a new token", async () => {
-			let comment1 = new Comment({ post: post_id, user: user_id, comment: "hello men" });
-			let comment2 = new Comment({ post: post_id, user: user_id, comment: "hello women" });
+			let comment1 = new Comment({user: user_id, comment: "hello men" });
+			let comment2 = new Comment({user: user_id, comment: "hello women" });
 			await comment1.save();
 			await comment2.save();
 			let response = await request(app)
@@ -147,8 +141,8 @@ describe("/comments", () => {
 	});
 	describe("GET, when token is missing", () => {
     test("returns no comments, error 401 and no token", async () => {
-			let comment1 = new Comment({ post: post_id, user: user_id, comment: "hello men" });
-			let comment2 = new Comment({ post: post_id, user: user_id, comment: "hello women" });
+			let comment1 = new Comment({ user: user_id, comment: "hello men" });
+			let comment2 = new Comment({user: user_id, comment: "hello women" });
 			await comment1.save();
 			await comment2.save();
       let response = await request(app).get("/comments");
@@ -162,7 +156,7 @@ describe("/comments", () => {
 			const userId = mongoose.Types.ObjectId();
 			const post = new Post({ message: "Пост с комментариями", user: userId });
     		await post.save();
-			const comment = new Comment({post: post_id, user: user_id, comment: "comment to delete"});
+			const comment = new Comment({user: user_id, comment: "comment to delete"});
 			await comment.save();
 			// Send a request to delete the comment
 			const response = await request(app)
@@ -178,7 +172,7 @@ describe("/comments", () => {
 			const userId = mongoose.Types.ObjectId();
 			const post = new Post({ message: "Post with comments", user: user_id });
 			await post.save();
-			const comment = new Comment({post: post._id, user: userId, comment: "comment to delete"});
+			const comment = new Comment({user: userId, comment: "comment to delete"});
 			await comment.save();
 			// Send a request to delete the comment
 			const response = await request(app)
@@ -193,7 +187,7 @@ describe("/comments", () => {
 			expect(response.body.token).toBeDefined();
 		});
 		test("returns a new token", async () => {
-			let comment = new Comment({post: post_id, user: user_id, comment: "comment to delete"});
+			let comment = new Comment({user: user_id, comment: "comment to delete"});
 			await comment.save();
 			const response = await request(app)
 				.delete(`/comments/${comment._id}`)
@@ -209,7 +203,7 @@ describe("/comments", () => {
 			const userId = mongoose.Types.ObjectId();
 			const post = new Post({ message: "Post with comments", user: userId });
 			await post.save();
-			const comment = new Comment({post: post._id, user: userId, comment: "comment to delete"});
+			const comment = new Comment({user: userId, comment: "comment to delete"});
 			await comment.save();
 			// Send a request to delete the comment
 			const response = await request(app)
@@ -222,8 +216,7 @@ describe("/comments", () => {
 		});
 		test("a token is not returned", async () => {
 			const userId = mongoose.Types.ObjectId();
-			const postId = mongoose.Types.ObjectId();
-			const comment = new Comment({post: postId, user: userId, comment: "comment to delete"});
+			const comment = new Comment({user: userId, comment: "comment to delete"});
 			await comment.save();
 			// Send a request to delete the comment
 			const response = await request(app)
