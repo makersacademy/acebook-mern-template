@@ -2,9 +2,16 @@ import React from 'react';
 
 
 const Post = ({post}) => {
-  return(
-    <article data-cy="post" key={ post._id }><h2>{ post.user }:</h2><p>{ post.message }</p></article>
-  )
+  if (post.user === null){
+    return( 
+      <article data-cy="post" > <p>ERROR</p></article>
+    )
+  }
+  else{
+    return(
+      <article data-cy="post" key={ post._id }><h2>{ post.user.username }:</h2><p>{ post.message }</p></article>
+    )
+  }
 }
 
 

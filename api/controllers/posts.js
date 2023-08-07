@@ -2,16 +2,18 @@ const Post = require("../models/post");
 const Comment = require("../models/comment");
 const TokenGenerator = require("../lib/token_generator");
 const jwt = require("jsonwebtoken");
+const User = require("../models/user");
+const UsersController = require("../controllers/users")
 
 const PostsController = {
-  Index: (req, res) => {
-    Post.find((err, posts) => {
-      if (err) {
-        throw err;
-      }
-      const token = TokenGenerator.jsonwebtoken(req.user_id);
-      res.status(200).json({ posts: posts, token: token });
-    });
+  Index: async(req, res) => {
+    const posts = await Post.find().populate('user').exec();
+    if (!posts){
+      res.status(500);
+    }
+    const token = TokenGenerator.jsonwebtoken(req.user_id);
+    res.status(200).json({ posts: posts, token: token });
+    
   },
   Update: (req, res) => {
     const postId = req.params.id;
@@ -45,18 +47,23 @@ const PostsController = {
       });
     });
   },
-  Create: (req, res) => {
+  Create: async(req, res) => {
+    userid = req.user_id;
+    console.log(userid);
+    // // user = UsersController.GetUser(userid);
+    // console.log("hi" + user);
     const post = new Post({
       message: req.body.message,
       user: req.user_id,
+      // username : user.body.username
     });
-    post.save((err) => {
+    post.save(async(err) => {
       if (err) {
         throw err;
       }
-
+      const user = await User.findById(userid)
       const token = TokenGenerator.jsonwebtoken(req.user_id);
-      res.status(201).json({ message: "OK", token: token });
+      res.status(201).json({ message: "OK", user: user, token: token });
     });
   },
 

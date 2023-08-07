@@ -49,9 +49,10 @@ const Feed = ({ navigate }) => {
       },
       body: JSON.stringify({ message: message })
     })
-      .then(response => {
+      .then(async response => {
         if(response.status === 201) {
-          let newPosts = [...posts, {message: message}]
+          let data = await response.json()
+          let newPosts = [...posts, {message: message, user: data.user}]
           setPosts(newPosts)
           setMessage("")
         } else {
@@ -66,7 +67,7 @@ const Feed = ({ navigate }) => {
     (post) => ( <p> <Post post={ post } key={ post._id }  /> </p>)
   )
   let postListNewsestFirst = postList.reverse()
-  
+
     if(token) {
       return(
         <>
@@ -75,8 +76,8 @@ const Feed = ({ navigate }) => {
           </button>
           <h1>Posts</h1>
           <form onSubmit={handleSubmit}>
-            <input placeholder="Message" id="message" type='text' value={ message } onChange={handleMessageChange} />
-            <input id='submit' type="submit" value="Submit" />
+            <input placeholder="Make a post..." id="message" type='text' value={ message } onChange={handleMessageChange} />
+            <input id='submit' type="submit" value="Post!" />
             {errorMessage && (
             <p className="error"> {errorMessage} </p>)}
           </form>
