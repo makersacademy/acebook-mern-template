@@ -3,10 +3,12 @@ const request = require("supertest");
 require("../mongodb_helper");
 const Post = require("../../models/post");
 const User = require("../../models/user");
+const Comment = require('../../models/comment')
 const JWT = require("jsonwebtoken");
 const secret = process.env.JWT_SECRET;
 const TokenGenerator = require("../../lib/token_generator");
 const mongoose = require("mongoose");
+
 
 
 let token;
@@ -218,7 +220,91 @@ describe("/posts", () => {
       expect(response.body.token).toEqual(undefined);
     });
   });
+  describe("DELETE, when token is present", () => {
+		test("delete a post by post's author with 200 response", async () => {
+      let post = new Post({ message: "to delete", user: user._id })
+      await post.save();
+      // Send a request to delete the post
+			const response = await request(app)
+        .delete(`/posts/${post._id}`)
+        .set('Authorization', `Bearer ${token}`)
+      // Check the response status
+      expect(response.status).toEqual(200);
+      // Check if the post is deleted from the database
+      const deleted_post = await Post.findById(post._id);
+      expect(deleted_post).toBe(null);
+    });
+    test("when post is deleted, associated comments are deleted as well", async () => {
+      // Create a post with comments
+      const post = new Post({ message: "Post with comments", user: user._id});
+      await post.save();
+      const userId = mongoose.Types.ObjectId();
+      const comment1 = new Comment({ post: post._id, user: userId, comment: "Comment 1" });
+      const comment2 = new Comment({ post: post._id, user: userId, comment: "Comment 2" });
+      await comment1.save();
+      await comment2.save();
+ 
+      // Send a request to delete the post
+      const response = await request(app)
+        .delete(`/posts/${post._id}`)
+        .set('Authorization', `Bearer ${token}`);
 
+      // Check the response status
+      expect(response.status).toEqual(200);
+
+      // Check if the post and its associated comments are deleted from the database
+      const deleted_post = await Post.findById(post._id);
+      expect(deleted_post).toBe(null);
+      // Check if associated comment1 doesn't exists
+      const deleted_comment1 = await Comment.findById(comment1._id);
+      expect(deleted_comment1).toBe(null);
+      // Check if associated comment2 doesn't exists
+      const deleted_comment2 = await Comment.findById(comment2._id);
+      expect(deleted_comment2).toBe(null);
+      // Check if any associated comments are deleted from the database
+      const comments = await Comment.find({ post: post._id });
+      expect(comments).toEqual([]);
+    });
+    test("returns a new token", async () => {
+      let post = new Post({ message: "to delete", user: user._id })
+      await post.save();
+      // Send a request to delete the post
+			const response = await request(app)
+        .delete(`/posts/${post._id}`)
+        .set('Authorization', `Bearer ${token}`)
+        .send({ token: token });
+			let newPayload = JWT.decode(response.body.token, process.env.JWT_SECRET);
+			let originalPayload = JWT.decode(token, process.env.JWT_SECRET);
+			expect(newPayload.iat > originalPayload.iat).toEqual(true);
+    });
+  });
+  describe("DELETE, when token is missing", () => {
+    test("other user can't delete post, 403 response", async () => {
+			const userId = mongoose.Types.ObjectId();
+      let post = new Post({ message: "to delete", user: userId })
+      await post.save();
+      // Send a request to delete the post
+			const response = await request(app)
+        .delete(`/posts/${post._id}`)
+        .set('Authorization', `Bearer ${token}`)
+        // Check the response status
+			expect(response.status).toEqual(403);
+			// Check if the comment is still in the database
+			expect(Post.findById(post._id_)).not.toBe(null);
+    });
+    test("a token is not returned", async () => {
+      const userId = mongoose.Types.ObjectId();
+      let post = new Post({ message: "to delete", user: userId })
+      await post.save();
+      // Send a request to delete the post
+			const response = await request(app)
+        .delete(`/posts/${post._id}`)
+        .set('Authorization', `Bearer ${token}`)
+        .send({ token: token });
+      expect(response.body.token).toEqual(undefined);
+    });
+  });
+  
   describe ('POST /like', () => {
     it ('should add the users id to the likes array of the post being liked', async () => {
       const users = await User.find({}).limit(1);
@@ -231,9 +317,6 @@ describe("/posts", () => {
         exp: Math.floor(Date.now() / 1000) + (10 * 60)
       }, secret);
       const post = new Post({ message: "test  post 1", user: user._id, likes:[]});
-      console.log(post._id);
-      console.log(post);
-      console.log(user._id);
       await post.save();
       await request(app)
         .post("/posts/like")
@@ -247,5 +330,5 @@ describe("/posts", () => {
     })
   })
 
-  
+
 });
