@@ -5,22 +5,23 @@ const UserInfo = () => {
     const [userInfo, setUserInfo] = useState([])
     const [token, setToken] = useState(window.localStorage.getItem("token"));
     const { userId } = useParams();
+    console.log(userId)
 
     useEffect(() => {
         if(token) {
             fetch(`/users/${userId}`, {
-                headers: {
-                    'Authorization': `Bearer ${token}`
-                }
+              headers: {
+                  'Authorization': `Bearer ${token}`
+              }
             })
-            .then(response => response.json())
-            .then(async data => {
-            window.localStorage.setItem("token", data.token)
-            setToken(window.localStorage.getItem("token"))
-            setUserInfo(data.userInfo);
+              .then(response => response.json())
+              .then(async data => {
+                // window.localStorage.setItem("token", data.token)
+                // setToken(window.localStorage.getItem("token"))
+                setUserInfo(data.userInfo);
             })
         }
-    }, [token, userId])
+    }, [])
 
     // add an else block to redirect to somewhere 
     // or show message if no authorisation

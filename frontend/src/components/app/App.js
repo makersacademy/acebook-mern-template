@@ -13,7 +13,7 @@ import {
 const App = () => {
     return (
         <Routes>
-          <Route path="/users/:id" element={<UserInfo />}/>
+          <Route path="/users/:userId" element={<UserInfo />}/>
           <Route path='/posts'  element={<Feed navigate={ useNavigate() }/>}/>
           <Route path='/login'  element={<LoginForm  navigate={ useNavigate() }/>}/>
           <Route path='/signup' element={<SignUpForm navigate={ useNavigate() }/>}/>
