@@ -58,6 +58,26 @@ const PostsController = {
       res.status(201).json({ message: "OK", token: token });
     });
   },
+  Like: async (req, res) => {
+    const postId = req.body.post_id;
+    const userId = req.user_id;
+
+    const post = await Post.findById(postId);
+    if (post.likes.includes(userId)){
+      return res.status(401).json({ message: "Already Likes" });
+    }
+    else{
+    post.likes.push(userId);
+    }
+    post.save(async (err) => {
+      if (err) {
+        throw err;
+      }
+      
+      const token = await TokenGenerator.jsonwebtoken(userId)
+      res.status(201).json({ message: 'OK', token: token });
+    })
+  },
 };
 
 module.exports = PostsController;

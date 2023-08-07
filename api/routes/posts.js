@@ -6,5 +6,5 @@ const PostsController = require("../controllers/posts");
 router.get("/", PostsController.Index);
 router.post("/", PostsController.Create);
 router.put("/:id", PostsController.Update);
-
+router.post("/like", PostsController.Like);
 module.exports = router;
