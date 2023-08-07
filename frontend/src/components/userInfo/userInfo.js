@@ -18,7 +18,7 @@ const UserInfo = () => {
               .then(async data => {
                 // window.localStorage.setItem("token", data.token)
                 // setToken(window.localStorage.getItem("token"))
-                setUserInfo(data.userInfo);
+                setUserInfo(data);
             })
         }
     }, [])
