@@ -11,6 +11,21 @@ const UsersController = {
       }
     });
   },
+  GetUser: (req, res) => {
+    // access the request parameters and get the id (the named parameter from the route :id) and assign it to userId
+    const userId = req.params.id // https://expressjs.com/en/guide/routing.html#:~:text=)%0A%7D)-,Route,-parameters
+    // call findById mongoose method (https://masteringjs.io/tutorials/mongoose/find-by-id)with userId and callback func on User model
+    // finds user with matching id in database
+    User.findById(userId, (err, user) => {
+      if (err) {
+        throw err;
+      }
+        // generate new token
+        const token = TokenGenerator.jsonwebtoken(req.user_id)
+        // response contains status, user object with username and email properties, and token
+        res.status(200).json({username: user.username, token: token });
+    });
+  },
 };
 
 module.exports = UsersController;
