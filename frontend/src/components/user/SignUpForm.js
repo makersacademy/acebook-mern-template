@@ -35,10 +35,10 @@ const SignUpForm = ({ navigate }) => {
 
   const handleUsernameChange = (event) => {
     setUsername(event.target.value)
+  }  
+  const handleLoginClick = () => {
+    navigate("/login");
   }
-
-  
-
 
     return (
       <form onSubmit={handleSubmit}>
@@ -46,6 +46,8 @@ const SignUpForm = ({ navigate }) => {
           <input placeholder="Password" id="password" type='password' value={ password } onChange={handlePasswordChange} />
           <input placeholder="Username" id="username" type='text' value={ username } onChange={handleUsernameChange} />
         <input id='submit' type="submit" value="Submit" />
+        <p>Already a registered user?</p>
+        <button type="button" onClick={handleLoginClick}>Log in</button>
       </form>
     );
 }
