@@ -5,7 +5,7 @@ describe("Creating a new Post", () => {
     it("calls the /newPost endpoint", () => {
         window.localStorage.setItem("token", "fakeToken");
         cy.mount(<NewPostForm navigate={navigate}/>);
-        cy.intercept('POST', '/posts', {message: "OK"}).as("newPostRequest");
+        cy.intercept('POST', '/posts', {message: "OK", token:"fakeToken"}).as("newPostRequest");
         cy.get("#message").type("this is a new message");
         cy.get("#submit").click();
         cy.wait('@newPostRequest').then( interception => {

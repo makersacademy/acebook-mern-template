@@ -11,6 +11,7 @@ const NewPostForm = ({ navigate }) => {
             let response = await fetch( '/posts', {
             method: 'post',
             headers: {
+                'Content-Type': 'application/json',
                 'Authorization': `Bearer ${token}`
             },
             body: JSON.stringify({ message: message })
