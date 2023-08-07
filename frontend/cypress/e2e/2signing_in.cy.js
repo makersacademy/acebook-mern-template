@@ -24,5 +24,9 @@ const testUsername= "usernamenamer"
     cy.get("#submit").click();
     cy.url().should("include", "/login");
   });
-
+   it("navigate to sign up page when sign up button is clicked", () => {
+     cy.visit("/login");
+     cy.get("#sign-up-button").click();
+     cy.url().should("include", "/signup");
+   });
 });
