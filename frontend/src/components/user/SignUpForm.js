@@ -41,14 +41,36 @@ const SignUpForm = ({ navigate }) => {
   }
 
     return (
-      <form onSubmit={handleSubmit}>
-          <input placeholder="Email" id="email" type='text' value={ email } onChange={handleEmailChange} />
-          <input placeholder="Password" id="password" type='password' value={ password } onChange={handlePasswordChange} />
-          <input placeholder="Username" id="username" type='text' value={ username } onChange={handleUsernameChange} />
-        <input id='submit' type="submit" value="Submit" />
+      <>
+        <form onSubmit={handleSubmit}>
+          <input
+            placeholder="Email"
+            id="email"
+            type="text"
+            value={email}
+            onChange={handleEmailChange}
+          />
+          <input
+            placeholder="Password"
+            id="password"
+            type="password"
+            value={password}
+            onChange={handlePasswordChange}
+          />
+          <input
+            placeholder="Username"
+            id="username"
+            type="text"
+            value={username}
+            onChange={handleUsernameChange}
+          />
+          <input id="submit" type="submit" value="Submit" />
+        </form>
         <p>Already a registered user?</p>
-        <button type="button" onClick={handleLoginClick}>Log in</button>
-      </form>
+        <button type="button" id="button" onClick={handleLoginClick}>
+          Log in
+        </button>
+      </>
     );
 }
 
