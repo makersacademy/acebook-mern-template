@@ -7,10 +7,12 @@ const Comment = require('../../models/comment')
 const JWT = require("jsonwebtoken");
 const secret = process.env.JWT_SECRET;
 const TokenGenerator = require("../../lib/token_generator");
-const mongoose = require('mongoose');
+const mongoose = require("mongoose");
+
 
 
 let token;
+
 
 describe("/posts", () => {
   beforeAll(async () => {
@@ -241,7 +243,7 @@ describe("/posts", () => {
       const comment2 = new Comment({ post: post._id, user: userId, comment: "Comment 2" });
       await comment1.save();
       await comment2.save();
-
+ 
       // Send a request to delete the post
       const response = await request(app)
         .delete(`/posts/${post._id}`)
@@ -302,4 +304,31 @@ describe("/posts", () => {
       expect(response.body.token).toEqual(undefined);
     });
   });
+  
+  describe ('POST /like', () => {
+    it ('should add the users id to the likes array of the post being liked', async () => {
+      const users = await User.find({}).limit(1);
+      const user = users[0];
+      token = JWT.sign({
+        user_id: user.id,
+        // Backdate this token of 5 minutes
+        iat: Math.floor(Date.now() / 1000) - (5 * 60),
+        // Set the JWT token to expire in 10 minutes
+        exp: Math.floor(Date.now() / 1000) + (10 * 60)
+      }, secret);
+      const post = new Post({ message: "test  post 1", user: user._id, likes:[]});
+      await post.save();
+      await request(app)
+        .post("/posts/like")
+        .set("Authorization", `Bearer ${token}`)
+        .send({ post_id: post._id});
+
+      const updatedPost = await Post.findById(post._id);
+      expect(updatedPost.likes).toEqual(
+        expect.arrayContaining([user._id]),
+      );
+    })
+  })
+
+
 });
