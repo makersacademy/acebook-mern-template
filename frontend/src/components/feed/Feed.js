@@ -71,7 +71,6 @@ const Feed = ({ navigate }) => {
           setPosts(newPosts)
           setMessage("")
         } else {
-          console.log(response);
           setErrorMessage('Invalid message!');
           navigate('/posts')
         }

@@ -24,4 +24,5 @@ describe("Feed", () => {
       .and('contain.text', "Hello again, world")
     })
   })
+
 })
