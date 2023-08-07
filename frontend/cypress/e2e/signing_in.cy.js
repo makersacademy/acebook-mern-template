@@ -4,7 +4,7 @@ const testPassword = "12345678"
 const testUsername= "usernamenamer"
   before(() => {
     cy.signup(testEmail, testPassword, testUsername)
-  })
+  });
 
   it("with valid credentials, redirects to '/posts'", () => {
     cy.visit("/login");
@@ -27,6 +27,5 @@ const testUsername= "usernamenamer"
     cy.get("#submit").click();
     cy.url().should("include", "/login");
   });
-
 
 });
