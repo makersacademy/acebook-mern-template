@@ -65,11 +65,11 @@ const PostsController = {
     const userId = req.user_id;
 
     const post = await Post.findById(postId);
-    if (post.likes.includes(userId)){
+    if (post.likes.includes(userId)) {
       return res.status(401).json({ message: "Already Likes" });
     }
-    else{
-    post.likes.push(userId);
+    else {
+      post.likes.push(userId);
     }
     post.save(async (err) => {
       if (err) {
@@ -79,6 +79,7 @@ const PostsController = {
       const token = await TokenGenerator.jsonwebtoken(userId)
       res.status(201).json({ message: 'OK', token: token });
     })
+  },
 
   Delete: async (req, res) => {
     try {
@@ -90,7 +91,7 @@ const PostsController = {
       // checking if post exists
       const post = await Post.findById(req.params.id);
       if (!post) {
-        return res.status(404).json({ error: 'Post not found.'});
+        return res.status(404).json({ error: 'Post not found.' });
       }
       // To compare id's of users, we need to get access to the id of
       // of the user who's logged in. This parameter is unavailable 
@@ -101,11 +102,11 @@ const PostsController = {
       // user_id - who wants to delete post
       const user_id = decodedToken.user_id;
       if (post.user.toString() !== user_id &&
-      (await Post.exists({ _od: Comment.post, user: user_id })) === false
+        (await Post.exists({ _od: Comment.post, user: user_id })) === false
       ) {
         return res
-        .status(403)
-        .json({ error: 'Forbidden. You Are not allowed to delete this post.'});
+          .status(403)
+          .json({ error: 'Forbidden. You Are not allowed to delete this post.' });
       }
       // Delete the associated comments
       await Comment.deleteMany({ post: post._id });
@@ -116,7 +117,7 @@ const PostsController = {
       res
         .status(200)
         .json({ message: 'Post deleted succesfully.', token: newToken });
-    } 
+    }
     catch (err) {
       return res.status(500).json({ error: 'Unexpected error occured.' });
     }
