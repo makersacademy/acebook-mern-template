@@ -8,25 +8,22 @@ const NewPostForm = ({ navigate }) => {
     const handleSubmit = async (event) => {
         event.preventDefault();
         if(token) {
-            fetch( '/posts', {
+            let response = await fetch( '/posts', {
             method: 'post',
             headers: {
-                'Content-Type': 'application/json',
                 'Authorization': `Bearer ${token}`
             },
             body: JSON.stringify({ message: message })
-        })
-            .then(response => {
-                if(response.status === 201) {
-                    navigate('/posts')
-                } else {
-                    navigate('/login') //if the token expires while on the page, the post will not be created
-                }
-            })
-            .then(async data => {
-                // window.localStorage.setItem("token", data.token)
-                // setToken(window.localStorage.getItem("token")) //returns a new token
-            })
+            }); 
+            if(response.status === 201) {
+                let data = await response.json();
+                window.localStorage.setItem("token", data.token)
+                setToken(window.localStorage.getItem("token")) //returns a new token
+                navigate('/posts')
+            } else {
+                navigate('/login') //if the token expires while on the page, the post will not be created
+            }
+            
         }
     }
 
