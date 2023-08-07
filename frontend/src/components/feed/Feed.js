@@ -1,13 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import Post from '../post/Post'
-import User from '../user/User'
+
 import './Feed.css'
 
 const Feed = ({ navigate }) => {
   const [posts, setPosts] = useState([]);
   const [token, setToken] = useState(window.localStorage.getItem("token"));
   const [message, setMessage] = useState("");
-  const [users, setUsers] = useState([]);
   const handleMessageChange = (event) => {
     setMessage(event.target.value)
   }
@@ -31,22 +30,7 @@ const Feed = ({ navigate }) => {
   }, [])
 
 
-  //Not currently working as intended - only returning empty string. 
-  useEffect(() => {
-    if(token) {
-      fetch("/users", {
-        headers: {
-          'Authorization': `Bearer ${token}`
-        }
-      })
-        .then(response => response.json())
-        .then(async data => {
-          window.localStorage.setItem("token", data.token)
-          setToken(window.localStorage.getItem("token"))
-          setUsers(data.users);
-        })
-    }
-  }, [])
+
     
 
   const logout = () => {
@@ -77,11 +61,6 @@ const Feed = ({ navigate }) => {
       })
   }
   
-    //Not currently working as intended - only returning empty string.
-  let userName = users.map(
-    (user) => ( <p> <User user={ user } key={ user._id }  /> </p>)
-  )
-  console.log(userName)
 
   let postList = posts.map(
     (post) => ( <p> <Post post={ post } key={ post._id }  /> </p>)
