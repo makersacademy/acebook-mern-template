@@ -85,8 +85,6 @@ describe("/users", () => {
 
     test("gets user info if user is authenticated", async () => {
       //makes a user, saves it, extracts the userid and uses it to make a token
-      console.log(user_id)
-      console.log(token)
       const response = await request(app)
       .get(`/users/${user_id}`)
       .set("Authorization", `Bearer ${token}`)
