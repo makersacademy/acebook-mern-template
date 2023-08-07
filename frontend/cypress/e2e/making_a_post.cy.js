@@ -1,10 +1,6 @@
 describe("Making a new post", () => {
-    const testEmail = "user1@email.com"
-    const testPassword = "12345678"
-    const testUsername= "usernamenamer"
     beforeEach(() => {
-        cy.signup(testEmail, testPassword, testUsername)
-        cy.login(testEmail, testPassword)
+        cy.login("someone@example.com", "password")
         cy.visit("/posts");
     });
     
