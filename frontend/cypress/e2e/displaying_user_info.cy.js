@@ -17,7 +17,6 @@ describe("Displaying users account info", () => {
 
     it("shows username and email if user authorised", () => {
         cy.visit(`/users/${user_id}`)
-        cy.get("#username").type(testEmail);
-        cy.get("#email").type(testUsername)
+        cy.contains('username1')
     })
 })
