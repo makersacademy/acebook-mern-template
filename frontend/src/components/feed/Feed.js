@@ -36,7 +36,7 @@ const Feed = ({ navigate }) => {
             </button>
           <div id='feed' role="feed">
               {posts.map(
-                (post) => ( <a href= {`#${post._id}`} key={post._id}><Post post={ post } key={ post._id } /></a> )
+                (post) => ( <a href= {`posts/${post._id}`} key={post._id}><Post post={ post } key={ post._id } /></a> )
               )}
           </div>
         </>
