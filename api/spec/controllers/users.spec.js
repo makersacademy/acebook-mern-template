@@ -67,8 +67,18 @@ describe("/users", () => {
       let users = await User.find()
       expect(users.length).toEqual(0)
     });
-  })
 
+  describe("POST, when username is missing", () => {
+    test("response code is 400, and no user created", async () => {
+      let response = await request(app)
+        .post("/users")
+        .send({email: "scarlett@email.com", password: "1234"})
+        let users = await User.find()
+        expect(users.length).toEqual(0)  
+        expect(response.statusCode).toBe(400)
+    });
+  })
+})
   
 
   describe("GET, when path with user ID", () => {
@@ -84,7 +94,6 @@ describe("/users", () => {
     })
 
     test("gets user info if user is authenticated", async () => {
-      //makes a user, saves it, extracts the userid and uses it to make a token
       const response = await request(app)
       .get(`/users/${user_id}`)
       .set("Authorization", `Bearer ${token}`)

@@ -7,7 +7,6 @@ describe("Signing up", () => {
     cy.get("#username").type("usernamename");
     cy.get("#submit").click();
     cy.url().should("include", "/login");
-    cy.screenshot()
   });
 
   it("with missing password, redirects to '/signup'", () => {
@@ -32,5 +31,10 @@ describe("Signing up", () => {
     cy.get("#password").type("password");
     cy.get("#submit").click();
     cy.url().should("include", "/signup");
+  });
+  it("navigate to log in page when log in button is clicked", () => {
+    cy.visit("/signup");
+    cy.get("#button").click();
+    cy.url().should("include", "/login");
   });
 });

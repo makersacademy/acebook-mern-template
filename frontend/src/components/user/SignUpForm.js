@@ -35,18 +35,46 @@ const SignUpForm = ({ navigate }) => {
 
   const handleUsernameChange = (event) => {
     setUsername(event.target.value)
+  }  
+  const handleLoginClick = () => {
+    navigate("/login");
   }
 
-  
-
-
     return (
-      <form onSubmit={handleSubmit}>
-          <input placeholder="Email" id="email" type='text' value={ email } onChange={handleEmailChange} />
-          <input placeholder="Password" id="password" type='password' value={ password } onChange={handlePasswordChange} />
-          <input placeholder="Username" id="username" type='text' value={ username } onChange={handleUsernameChange} />
-        <input id='submit' type="submit" value="Submit" />
-      </form>
+      <>
+        <h3>Create a new account</h3>
+        <p>It's quick and easy.</p>
+
+        <form onSubmit={handleSubmit}>
+          <input
+            placeholder="Email"
+            id="email"
+            type="text"
+            value={email}
+            onChange={handleEmailChange}
+          />
+          <input
+            placeholder="Password"
+            id="password"
+            type="password"
+            value={password}
+            onChange={handlePasswordChange}
+          />
+          <input
+            placeholder="Username"
+            id="username"
+            type="text"
+            value={username}
+            onChange={handleUsernameChange}
+          />
+          <input id="submit" type="submit" value="Submit" />
+        </form>
+        <p>Already a registered user?</p>
+        <button type="button" id="button" onClick={handleLoginClick}>
+          Log in
+        </button>
+
+      </>
     );
 }
 
