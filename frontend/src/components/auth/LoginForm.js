@@ -41,6 +41,7 @@ const LogInForm = ({ navigate }) => {
 
     return (
       <>
+      <h3>Log in to Acebook</h3>
         <form onSubmit={handleSubmit}>
           <input
             placeholder="Email"
