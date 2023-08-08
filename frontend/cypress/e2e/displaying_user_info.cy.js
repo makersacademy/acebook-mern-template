@@ -19,12 +19,5 @@ describe("Displaying users account info", () => {
         cy.visit(`/users/${user_id}`)
         cy.get("#username").type(testEmail);
         cy.get("#email").type(testUsername)
-        // can add a cy.get("").click() to redirect to feed page
-        // and expect the url to be that of feed page
-        // cy.get("#link").click()
-        // cy.url().should("include", "/posts")
     })
-
-
-
 })
