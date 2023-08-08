@@ -43,7 +43,6 @@ const SignUpForm = ({ navigate }) => {
 
     return (
       <>
-        <NavigationBar />
         <h3>Create a new account</h3>
         <p>It's quick and easy.</p>
 

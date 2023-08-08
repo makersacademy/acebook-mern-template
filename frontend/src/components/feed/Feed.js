@@ -14,7 +14,7 @@ const Feed = ({ navigate }) => {
         }
       })
         .then(response => response.json())
-        .then(async data => {
+        .then( data => {
           window.localStorage.setItem("token", data.token)
           setToken(window.localStorage.getItem("token"))
           setPosts(data.posts);
