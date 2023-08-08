@@ -49,21 +49,19 @@ const PostsController = {
   },
   Create: async(req, res) => {
     userid = req.user_id;
-    console.log(userid);
-    // // user = UsersController.GetUser(userid);
-    // console.log("hi" + user);
     const post = new Post({
       message: req.body.message,
       user: req.user_id,
-      // username : user.body.username
     });
     post.save(async(err) => {
       if (err) {
         throw err;
       }
       const user = await User.findById(userid)
+      console.log("Post", post);
       const token = TokenGenerator.jsonwebtoken(req.user_id);
-      res.status(201).json({ message: "OK", user: user, token: token });
+      res.status(201).json({ message: "OK", user: user, post: post, token: token });
+      
     });
   },
 

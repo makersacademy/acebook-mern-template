@@ -51,10 +51,10 @@ const Feed = ({ navigate }) => {
     })
       .then(async response => {
         if(response.status === 201) {
-          let data = await response.json()
-          let newPosts = [...posts, {message: message, user: data.user}]
-          setPosts(newPosts)
-          setMessage("")
+          let data = await response.json();
+          let newPosts = [...posts, {_id: data.post._id, message: message, user: data.user}];
+          setPosts(newPosts);
+          setMessage("");
         } else {
           setErrorMessage('Invalid message!');
           navigate('/posts')
@@ -70,7 +70,7 @@ const Feed = ({ navigate }) => {
         post={ post } 
         key={ post._id }
         token={ token }
-        setPosts={setPosts}
+        setPosts={ setPosts }
       /> 
     </p>)
   )

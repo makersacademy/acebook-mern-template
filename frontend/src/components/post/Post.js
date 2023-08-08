@@ -30,6 +30,7 @@ const handleDelete = (postId, token, setPosts) => {
 const Post = ({ post, token, setPosts }) => {
   const userid = window.localStorage.getItem("userid");
   const showDeleteButton = post.user._id === userid;
+  console.log("POST", post);
   
   if (post.user === null){
     return( 
