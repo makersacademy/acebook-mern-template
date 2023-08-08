@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react';
 import Post from '../post/Post'
 import NavigationBar from '../navigation/Navigation';
 
-
 const Feed = ({ navigate }) => {
   const [posts, setPosts] = useState([]);
   const [token, setToken] = useState(window.localStorage.getItem("token"));
@@ -36,7 +35,7 @@ const Feed = ({ navigate }) => {
   if(token) {
     return(
       <>
-      <NavigationBar/>
+        <NavigationBar />
         <h2>Posts</h2>
         <button id='createNewPost' onClick={createNewPost}>
             Create New Post

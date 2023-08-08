@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import NavigationBar from '../navigation/Navigation';
 
 const LogInForm = ({ navigate }) => {
   const [email, setEmail] = useState("");
@@ -41,6 +42,7 @@ const LogInForm = ({ navigate }) => {
 
     return (
       <>
+      <NavigationBar />
       <h3>Log in to Acebook</h3>
         <form onSubmit={handleSubmit}>
           <input
