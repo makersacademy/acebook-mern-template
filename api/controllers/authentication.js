@@ -17,7 +17,8 @@ const AuthenticationController = {
         res.status(401).json({ message: "auth error" });
       } else {
         const token = TokenGenerator.jsonwebtoken(user.id)
-        res.status(201).json({ token: token, message: "OK" });
+        const currentUserId = user.id
+        res.status(201).json({ currentUserId: currentUserId , token: token, message: "OK" });
       }
     });
   }
