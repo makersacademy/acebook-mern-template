@@ -4,7 +4,7 @@ import { useParams } from "react-router-dom";
 
 const PostId = () => {
     const [post, setPost] = useState([]);
-    // const [token, setToken] = useState(window.localStorage.getItem("token"));
+
     const { id } = useParams();
 
     useEffect(() => {
