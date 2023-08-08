@@ -41,14 +41,12 @@ const PostsController = {
       });
     },
   Get: async (req, res) => {
-    const post = await Post.findById(req.params.id);
-    console.log(post)
+    const post = await Post.findById(req.params.id).populate("user_id", "username")
     if (!post) {
       return res.status(404).json({error: "Post not found"});
     }
     const token = TokenGenerator.jsonwebtoken(req.user_id)
-
-    res.status(200).json({message: post.message, token: token})
+    res.status(200).json({message: post.message, token: token, username: post.user_id.username})
   }
 }
 

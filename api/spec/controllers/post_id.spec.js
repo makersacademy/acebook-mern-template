@@ -15,10 +15,14 @@ let savedPost;
 describe("/posts/:id", () => {
     beforeAll( async () => {
     user = new User({email: "test@test.com", password: "12345678", username: 'person1'});
+    user2 = new User({email: "test1@test.com", password: "12345678", username: 'person12'});
     savedUser = await user.save();
+    savedUser2 = await user2.save();
 
-    post = new Post({ message: "Hello", user_id: "1234"})
+    post = new Post({ message: "Hello", user_id: savedUser._id})
+    post2 = new Post({ message: "Hello2", user_id: savedUser._id})
     savedPost = await post.save();
+    savedPost2 = await post2.save();
     })
 
     afterAll( async () => {
@@ -51,7 +55,10 @@ describe("/posts/:id", () => {
             .set("Authorization", `Bearer ${token}`)
         expect(response.status).toEqual(200)
         expect(response.body.message).toEqual("Hello")
+        expect(response.body.username).toEqual("person1")
+        expect(response.body.message).not.toEqual("Hello2")
         })
+
 
     describe("visibility without token", () => {
         test("invalid post id returns error", async () => {

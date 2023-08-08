@@ -16,8 +16,8 @@ describe("Post model", () => {
   });
 
   it("has a post user id", () => {
-    var post = new Post({ user_id: "1234" });
-    expect(post.user_id).toEqual("1234");
+    var post = new Post({ user_id: "64d252785e8bb4153df2c997" });
+    expect(post.user_id).toEqual("64d252785e8bb4153df2c997");
   });
 
   it("can list all posts", (done) => {
@@ -29,15 +29,17 @@ describe("Post model", () => {
   });
 
   it("can save a post", (done) => {
-    var post = new Post({ message: "some message" });
+    var post = new Post({ message: "some message", user_id: "64d252785e8bb4153df2c997"});
 
     post.save((err) => {
       expect(err).toBeNull();
 
       Post.find((err, posts) => {
         expect(err).toBeNull();
+        postid = posts[0]._id;
 
-        expect(posts[0]).toMatchObject({ message: "some message" });
+        expect(posts[0]).toHaveProperty("message", "some message");
+        expect(posts[0]._id).toBeDefined();
         done();
       });
     });
