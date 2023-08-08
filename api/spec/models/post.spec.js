@@ -43,7 +43,7 @@ describe("Post model", () => {
     });
   });
 
-  it("can save a comment", async () => {
+  it("can add a comment", async () => {
     const post = new Post({
       comments: [{ user_id: "1", comment: "new comment" }],
     });

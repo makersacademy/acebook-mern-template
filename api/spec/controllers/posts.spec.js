@@ -299,4 +299,24 @@ describe("/posts", () => {
       expect(response.body.token).toEqual(undefined);
     });
     })
+  // describe("POST /posts/:id", () => {
+  //   test("can add comments to post", async () => {
+  //     const post1 = new Post({ message: "post message"});
+  //     await post1.save();
+  //     const response = await request(app)
+  //       .post(`/posts/${post1.id}`)
+  //       .set("Authorization", `Bearer ${token}`)
+  //       //.send({message: "post message"});
+  //       .send({comment: "comment1"});
+  //     expect(response.status).toEqual(201);
+  //     const updatedPost = await Post.find()
+  //     expect(updatedPost[0].comments[0].comment).toEqual("comment1")
+      
+  //   // const newComment = new Post({
+  //   //   comments: [{ user_id: "1", comment: "new comment" }],
+  //   // });
+  
+  //   })
+  // })
+
   });
