@@ -42,9 +42,17 @@ describe("Post model", () => {
       });
     });
   });
-  it("can save a comment", (done) => {
-    const post = new Post({commentMessaga: "new comment"});
-    expect(post.commentMessaga).toEqual("new comment")
-  })
+
+  it("can save a comment", async () => {
+    const post = new Post({
+      comments: [{ user_id: "1", comment: "new comment" }],
+    });
+
+    await post.save();
+
+    const posts = await Post.find();
+    expect(posts[0].comments[0].user_id).toEqual("1");
+    expect(posts[0].comments[0].comment).toEqual("new comment");
+  });
 
 });

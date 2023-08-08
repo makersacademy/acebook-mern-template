@@ -5,9 +5,9 @@ const PostsController = {
   Index: (req, res) => {
     Post.find((err, posts) => {
       if (err) {
-        return res.status(500).json({error: "Unauthorised"});
+        return res.status(500).json({ error: "Unauthorised" });
       }
-      const token = TokenGenerator.jsonwebtoken(req.user_id)
+      const token = TokenGenerator.jsonwebtoken(req.user_id);
       res.status(200).json({ posts: posts, token: token });
     });
   },
@@ -16,30 +16,49 @@ const PostsController = {
     post.user_id = req.user_id;
     post.save((err) => {
       if (err) {
-        return res.status(500).json({error: "Unauthorised"});
+        return res.status(500).json({ error: "Unauthorised" });
       }
 
-      const token = TokenGenerator.jsonwebtoken(req.user_id)
-      res.status(201).json({ message: 'OK', token: token });
+      const token = TokenGenerator.jsonwebtoken(req.user_id);
+      res.status(201).json({ message: "OK", token: token });
     });
   },
   Update: async (req, res) => {
-      const post = await Post.findById(req.params.id);
-      if (!post) {
-        return res.status(404).json({error: "Post not found"});
-      }
-      if (post.user_id != req.user_id) {
-        return res.status(401).json({ error: 'Unauthorised' })
-      };
-      post.message = req.body.message;
-      post.save((err) => {
-        if (err) {
-          return res.status(500).json({error: "Unauthorised"});
-        }
-        const token = TokenGenerator.jsonwebtoken(req.user_id)
-        res.status(201).json({ message: 'OK', token: token, post:post });
-      });
+    const post = await Post.findById(req.params.id);
+    if (!post) {
+      return res.status(404).json({ error: "Post not found" });
     }
-}
+    if (post.user_id != req.user_id) {
+      return res.status(401).json({ error: "Unauthorised" });
+    }
+    post.message = req.body.message;
+    post.save((err) => {
+      if (err) {
+        return res.status(500).json({ error: "Unauthorised" });
+      }
+      const token = TokenGenerator.jsonwebtoken(req.user_id);
+      res.status(201).json({ message: "OK", token: token, post: post });
+    });
+  },
+  PostComment: async (req, res) => {
+    const postId = req.params.id;
+    const commentMessage = req.body.comment;
+
+    try {
+      const post = await Post.findById(postId);
+      if (!post) {
+        return res.status(404).json({ error: "Post not found" });
+      }
+      post.comments.push({ user_id: req.user_id, comment: commentMessage });
+      await post.save();
+      const token = TokenGenerator.jsonwebtoken(req.user_id);
+      res
+        .status(201)
+        .json({ message: "Comment added", token: token, post: post,  });
+    } catch (error) {
+      return res.status(500).json({ error: "Error adding comment" });
+    }
+  },
+};
 
 module.exports = PostsController;
