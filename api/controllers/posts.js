@@ -109,7 +109,7 @@ const PostsController = {
       // user_id - who wants to delete post
       const user_id = decodedToken.user_id;
       if (post.user.toString() !== user_id &&
-        (await Post.exists({ _od: Comment.post, user: user_id })) === false
+        (await Post.exists({ _id: Comment.post, user: user_id })) === false
       ) {
         return res
           .status(403)
