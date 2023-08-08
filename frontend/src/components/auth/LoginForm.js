@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 const LogInForm = ({ navigate }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [errorMessage, setErrorMessage] = useState("");
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -16,7 +17,7 @@ const LogInForm = ({ navigate }) => {
     })
 
     if(response.status !== 201) {
-      console.log("yay")
+      setErrorMessage('Invalid user!');
       navigate('/login')
     } else {
       console.log("oop")
@@ -50,6 +51,9 @@ const LogInForm = ({ navigate }) => {
         <br></br>
         <br></br>
         <input role='submit-button' id='submit' type="submit" value="Sign in!" />
+        {errorMessage && (
+          <p className="error"> {errorMessage} </p>
+          )}
         <br></br>
         <br></br>
       </form>
