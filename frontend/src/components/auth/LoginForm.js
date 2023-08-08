@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 
 const LogInForm = ({ navigate }) => {
   const [email, setEmail] = useState("");
-  const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
 
   const handleSubmit = async (event) => {
@@ -13,7 +12,7 @@ const LogInForm = ({ navigate }) => {
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({ email: email, username: username, password: password })
+      body: JSON.stringify({ email: email, password: password })
     })
 
     if(response.status !== 201) {
@@ -35,19 +34,30 @@ const LogInForm = ({ navigate }) => {
     setPassword(event.target.value)
   }
 
-  const handleUsernameChange = (event) => {
-    setUsername(event.target.value)
+
+  const signup = () => {
+    navigate('/signup')
   }
 
 
-
     return (
+      <div class='login'>
       <form onSubmit={handleSubmit}>
         <input placeholder='Email' id="email" type='text' value={ email } onChange={handleEmailChange} />
-        <input placeholder='Username' id="username" type='username' value={ username } onChange={handleUsernameChange} />
+        <br></br>
+        <br></br>
         <input placeholder='Password' id="password" type='password' value={ password } onChange={handlePasswordChange} />
-        <input role='submit-button' id='submit' type="submit" value="Submit" />
+        <br></br>
+        <br></br>
+        <input role='submit-button' id='submit' type="submit" value="Sign in!" />
+        <br></br>
+        <br></br>
       </form>
+      <br></br>
+      <button onClick={signup}>
+        Not registered? Sign up here!
+      </button>
+      </div>
     );
 }
 
