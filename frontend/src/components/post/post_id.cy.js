@@ -7,10 +7,9 @@ import {
 
 describe("info from post id", () => {
     it('renders correctly', () => {
-        // window.localStorage.setItem("token", "fakeToken")
         cy.intercept('GET', '/posts/64cbba05e72b5857555a24a2', {
                 statusCode: 200,
-                body: {message: 'Hello world'}
+                body: {message: 'Hello world', author: 'person1'}
             }).as("getPost")
         cy.mount(
             <MemoryRouter initialEntries={['/posts/64cbba05e72b5857555a24a2']}>  
@@ -21,5 +20,6 @@ describe("info from post id", () => {
           );
         cy.wait("@getPost")
         cy.get('[data-cy=post]').should('contain.text', 'Hello world')
+        cy.get('[data-cy=author]').should('contain.text', 'person1')
         })
     })

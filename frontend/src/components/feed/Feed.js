@@ -44,7 +44,7 @@ const Feed = ({ navigate }) => {
           <div id='feed' role="feed">
               {posts
               .sort((a,b) => { return a._id < b._id ? 1: -1; })
-              .map((post) => ( <a href= {`#${post._id}`} key={post._id}><Post post={ post } key={ post._id } /></a> ))
+              .map((post) => ( <a href= {`posts/${post._id}`} key={post._id}><Post post={ post } key={ post._id } /></a> ))
               }
           </div>
         </>
