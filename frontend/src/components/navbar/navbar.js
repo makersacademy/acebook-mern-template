@@ -1,25 +1,64 @@
 import React, { useState } from "react";
 
-const NavBar = () => {
-  const [signUp, changeSignUp] = useState("");
-  const [logIn, changeLogIn] = useState("");
-  const [signOut, changeLogOut] = useState("");
-  const [myInfo, changedIfLogged] = useState("");
+const NavBar = ({
+  isLoggedIn,
+  handleLogout,
+  handleLogin,
+  navigate,
+  setSearchQuery,
+}) => {
+  const [inputValue, setInputValue] = useState("");
 
-  //maybe the navbar is a component made up of all of these individual components so on the app.js it looks like this ---
-  //<navbar>
-  //      <sign in/>
-  //      <log out/>
-  //      <see posts/>
-  //      <search bar/>
-  //<navbar />
-  //in this navigation bar we need,
-  // take to signup - if state not logged in
-  // take to login if state - not logged in
-  //take to log out if state - logged in
-  //take to my posts - if  state - logged in
-  //take to all posts
-  // search bar that allows you to search for a username and returns the users posts that you have typed in
+  const handleOnChange = (event) => {
+    const newValue = event.target.value;
+    setInputValue(newValue);
+  };
+
+  const signUp = () => {
+    navigate("/signup");
+  };
+  const posts = () => {
+    navigate("/posts");
+  };
+  const myPosts = () => {
+    navigate("/myPosts");
+  };
+  const handleSearch = () => {
+    const API = `/posts/search?value=${inputValue}`;
+    fetch(API, {
+      headers: {
+        Authorization: `Bearer ${window.localStorage.getItem("token")}`,
+      },
+    })
+      .then((response) => response.json())
+      .then(async (data) => {
+        await setSearchQuery(data);
+        console.log({ data });
+      });
+  };
+
+  return (
+    <div>
+      {isLoggedIn ? (
+        <>
+          <button onClick={myPosts}>My Posts</button>
+          <button onClick={handleLogout}>Logout</button>
+        </>
+      ) : (
+        <>
+          <button onClick={signUp}>Sign Up</button>
+          <button onClick={handleLogin}>Login</button>
+        </>
+      )}
+      <button onClick={posts}>Posts</button>
+      <input
+        type="text"
+        placeholder="search"
+        onChange={(e) => handleOnChange(e)}
+      ></input>
+      <button onClick={handleSearch}>Search</button>
+    </div>
+  );
 };
 
 export default NavBar;

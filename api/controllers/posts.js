@@ -25,10 +25,9 @@ const PostsController = {
 
       const updatedMessage = req.body.message;
       const userID = post.user;
-      
+
       if (userID == req.user_id) {
         post.message = updatedMessage;
-        
       } else {
         return res.status(401).json({ message: "auth error" });
       }
@@ -42,6 +41,19 @@ const PostsController = {
           .status(200)
           .json({ message: "Post updated successfully", token: token });
       });
+    });
+  },
+  Search: (req, res) => {
+    const searchQuery = req.query.value;
+
+    Post.find((err, posts) => {
+      if (err) {
+        throw err;
+      }
+      const filteredPosts = posts.filter((post) =>
+        post.message.includes(searchQuery)
+      );
+      res.status(200).json({ posts: filteredPosts });
     });
   },
   Create: (req, res) => {
