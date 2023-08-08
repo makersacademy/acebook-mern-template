@@ -34,15 +34,40 @@ const LogInForm = ({ navigate }) => {
     setPassword(event.target.value)
   }
 
+  const handlesignupClick = () => {
+    navigate("/signup");
+  };
+
 
     return (
       <>
       <h3>Log in to Acebook</h3>
-      <form onSubmit={handleSubmit}>
-        <input placeholder='Email' id="email" type='text' value={ email } onChange={handleEmailChange} />
-        <input placeholder='Password' id="password" type='password' value={ password } onChange={handlePasswordChange} />
-        <input role='submit-button' id='submit' type="submit" value="Submit" />
-      </form>
+        <form onSubmit={handleSubmit}>
+          <input
+            placeholder="Email"
+            id="email"
+            type="text"
+            value={email}
+            onChange={handleEmailChange}
+          />
+          <input
+            placeholder="Password"
+            id="password"
+            type="password"
+            value={password}
+            onChange={handlePasswordChange}
+          />
+          <input
+            role="submit-button"
+            id="submit"
+            type="submit"
+            value="Submit"
+          />
+        </form>
+        <p>Not registered yet? Sign up for Acebook</p>
+        <button type="button" id="sign-up-button" onClick={handlesignupClick}>
+          Sign up
+        </button>
       </>
     );
 }

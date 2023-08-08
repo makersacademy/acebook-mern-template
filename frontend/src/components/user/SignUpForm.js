@@ -42,6 +42,9 @@ const SignUpForm = ({ navigate }) => {
 
     return (
       <>
+        <h3>Create a new account</h3>
+        <p>It's quick and easy.</p>
+
         <form onSubmit={handleSubmit}>
           <input
             placeholder="Email"
@@ -70,6 +73,7 @@ const SignUpForm = ({ navigate }) => {
         <button type="button" id="button" onClick={handleLoginClick}>
           Log in
         </button>
+
       </>
     );
 }
