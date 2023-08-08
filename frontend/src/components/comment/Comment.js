@@ -6,7 +6,7 @@ const Comment = ({comment}) => {
     console.log("comment user", comment.user)
     return(
         <article data-cy="comment" key={comment._id}>
-        <h2>{comment.user.username}:</h2>
+        <h2>{comment.username}:</h2>
         <p>{comment.comment}</p>
         </article>
     )

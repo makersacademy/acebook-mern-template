@@ -1,10 +1,12 @@
 import React from 'react';
 import Comment from '../comment/Comment';
 const Post = ({post}) => {
+  console.log("logging post", post)
   let comments = post.comments
   console.log("Comments", comments)
+ 
   let commentList = comments.map(
-    (comment) => ( <p> <Comment comment={ comment } key={ comment._id }  /> </p>)
+    (comment) => console.log("logging the comment", comment) || ( <p> <Comment comment={ comment } key={ comment._id }  /> </p>)
   )
   return(
     <article data-cy="post" key={post._id}>

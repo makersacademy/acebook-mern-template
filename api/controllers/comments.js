@@ -3,6 +3,8 @@ const Post = require("../models/post");
 const TokenGenerator = require("../lib/token_generator");
 const jwt = require("jsonwebtoken");
 const mongoose = require('mongoose');
+const User = require("../models/user")
+
 const CommentsController = {
   Index: (req, res) => {
     try {
@@ -40,89 +42,30 @@ const CommentsController = {
       if (!post) {
         return res.status(404).json({ error: 'Post not found.' });
       }
-
+      const user = await User.findById(req.body.user)
+      console.log(user)
+      console.log("username", user.username)
       // Create a new comment and save it
       const comment = new Comment({
               comment: req.body.comment,
               user: req.body.user,
-              post: req.body.post
+              post: req.body.post,
+              username: user.username
             });
 
       await comment.save();
-      
+     
       // Push the comment to the post's comments array
       post.comments.push(comment);
 
       await post.save();
-
+      console.log("this is the post", post)
       // console.log("See the whole post", post);
       const token = TokenGenerator.jsonwebtoken(req.user_id);
       return res.status(201).json({ message: 'Comment saved successfully.', token: token });
     } catch (err) {
       return res.status(500).json({ error: 'An error occurred.' });
     }
-
-  //   try {
-  //     // Added validation if the request hasn't got the "Authorization" header
-  //     // you are not able to make a comment
-  //     if (!req.headers.authorization) {
-  //       return res.status(401).json({ error: 'Unauthorized. Missing token.' });
-  //     }
-  //     const comment = new Comment({
-  //       comment: req.body.comment,
-  //       user: req.body.user,
-  //       post: req.body.post
-  //     });
-  //     console.log("Comment",comment);
-      
-  //     const postId = req.body.post
-  //     console.log("req.body.post", req.body.post)
-
-  //     const post = await Post.findById(postId)
-  //     console.log("See the whole post", post);
-
-  //     if(!post) {
-  //       return res.status(404).json({error: 'Post not found'})
-  //     }
-      
-  //     await comment.save((err) => {
-  //       if (err) {
-  //         // Handle the error and send an appropriate response
-  //         return res.status(500).json({ error: 'Failed to save comment.' });
-  //       }
-        
-        
-  //       post.comments.push(comment)
-  //       console.log("The new post with updated comments?", post)
-
-  //       post.save()
-  //       const token = TokenGenerator.jsonwebtoken(req.user_id);
-  //       res.status(201).json({ comment: 'OK', token: token });
-        
-  //   }); 
-
-  //     // Post.findById(postId, (err, post) => {
-  //     //   if (err) {
-  //     //     throw err;
-  //     //   }
-  //     //   comment.save((err) => {
-  //     //     if (err) {
-  //     //       // Handle the error and send an appropriate response
-  //     //       return res.status(500).json({ error: 'Failed to save comment.' });
-  //     //     }
-          
-  //     //     post.comments.push(comment)
-  //     //     const token = TokenGenerator.jsonwebtoken(req.user_id);
-  //     //     res.status(201).json({ comment: 'OK', token: token });
-  //     // }); 
-      
-  //     // });
-
-      
-  //   } catch (err) {
-  //     // Handle any unexpected error
-  //     return res.status(500).json({ error: 'Unexpected error occurred.' });
-  //   }
   },
   
   Delete: async (req, res) => {
