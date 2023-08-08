@@ -18,7 +18,7 @@ const PostsController = {
   },
   Update: (req, res) => {
     const postId = req.params.id;
-
+  
     Post.findById(postId, (err, post) => {
       if (err) {
         throw err;

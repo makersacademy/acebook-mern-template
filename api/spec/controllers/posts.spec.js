@@ -171,24 +171,26 @@ describe("/posts", () => {
         username: "testusername2",
         password: "123456782",
       })
-      let comment1 = new Comment({comment: "this is a comment", user: newUser.id})
-      await comment1.save();
 
-      let post1 = new Post({ message: "howdy!", comments: [comment1._id] });
+      // create a post
+      let post1 = new Post({ message: "August 8th POST!" });
       await post1.save();
-      console.log("This is post1", post1);
+      // use that posts id to create a comment
+      // creating comment should update the post to have the comment in comments field
+      const postId = post1._id
+      await request(app)
+      .post("/comments")
+      .set("Authorization", `Bearer ${token}`)
+      .send({ comment: "comment should link to August 8th", user: newUser.id, post: postId, token: token })
       
-      console.log('this is comment 1', comment1)
+      
       let response = await request(app)
-        .get("/posts")
-        .set("Authorization", `Bearer ${token}`)
-        .send({ token: token }); 
-      console.log("this is the response body posts", response.body.posts[0])
-      console.log("this is the response body posts comments", response.body.posts[0].comments)
-      let comments = response.body.posts.map((post) => post.comments);
-      console.log(comments)
-      expect(comments[0]).toEqual([{comment: "this is a comment", user: newUser.id, post: post1._id}])
-
+      .get("/posts")
+      .set("Authorization", `Bearer ${token}`)
+      .send({ token: token }); 
+      let postsList = response.body.posts;
+      let comments = postsList.map((post) => post.comments);
+      expect(comments[0][0].comment).toEqual("comment should link to August 8th")
     })
 
     test("the response code is 200", async () => {
