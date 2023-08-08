@@ -42,4 +42,9 @@ describe("Post model", () => {
       });
     });
   });
+  it("can save a comment", (done) => {
+    const post = new Post({commentMessaga: "new comment"});
+    expect(post.commentMessaga).toEqual("new comment")
+  })
+
 });
