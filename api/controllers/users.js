@@ -19,6 +19,7 @@ const UsersController = {
       const decodedToken = jwt.verify(token, process.env.JWT_SECRET)
       const signedInUserId = decodedToken.user_id;
       const urlId = req.params.id
+
       if (signedInUserId !== urlId) {
         res.status(401).json({ message: 'Unauthorized' });
       } else {
