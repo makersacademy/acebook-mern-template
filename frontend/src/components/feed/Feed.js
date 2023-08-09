@@ -18,7 +18,7 @@ const Feed = ({ navigate, searchQuery }) => {
     if (token) {
       fetch("/posts", {
         headers: {
-          Authorization: `Bearer ${token}`,
+          'Authorization': `Bearer ${token}`,
         },
       })
         .then((response) => response.json())
