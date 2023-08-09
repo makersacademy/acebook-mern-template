@@ -60,15 +60,8 @@ const PostsController = {
       const user = await User.findById(userid)
       console.log("Post", post);
       const token = TokenGenerator.jsonwebtoken(req.user_id);
-<<<<<<< HEAD
-      const postId = post.id;
-      console.log(postId);
-      console.log(post);
-      res.status(201).json({ message: "OK",postId:postId, user: user, token: token });
-=======
       res.status(201).json({ message: "OK", user: user, post: post, token: token });
       
->>>>>>> 23f88cfc903809e0374c4473357ae5a0da1fdadd
     });
   },
 

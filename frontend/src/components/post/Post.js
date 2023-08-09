@@ -2,13 +2,8 @@ import React, { useState, useEffect } from 'react';
 import './Post.css';
 
 
-<<<<<<< HEAD
 const Post = ({ post, setPosts , newPosts}) => {
-  const currentUserId = window.localStorage.getItem("currentUserId")
-=======
-const Post = ({ post, setPosts }) => {
   const userid = window.localStorage.getItem("userid")
->>>>>>> 23f88cfc903809e0374c4473357ae5a0da1fdadd
   const [token, setToken] = useState(window.localStorage.getItem("token"));
   const [liked, setLiked] = useState(post?.likes?.includes(userid));
   const length =post?.likes?.length;
