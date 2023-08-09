@@ -307,7 +307,6 @@ describe("/posts", () => {
       let response = await request(app)
         .post(`/posts/${post1.id}`)
         .set("Authorization", `Bearer ${token}`)
-        //.send({message: "post message"});
         .send({comment: "comment1"});
       expect(response.status).toEqual(201);
       const updatedPost = await Post.find()
@@ -321,7 +320,6 @@ describe("/posts", () => {
       .send({token: token, comment: "comment1"});
     expect(response.status).toEqual(404)
     })
-
   
   })
 
