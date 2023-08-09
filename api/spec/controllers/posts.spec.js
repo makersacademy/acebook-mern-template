@@ -312,17 +312,16 @@ describe("/posts", () => {
       expect(response.status).toEqual(201);
       const updatedPost = await Post.find()
       expect(updatedPost[0].comments[0].comment).toEqual("comment1")
-      
-    // const newComment = new Post({
-    //   comments: [{ user_id: "1", comment: "new comment" }],
-    // });
-
     })
-    // test("should return 404 when the post does not exist", async () => {
-    //   const postId = "12345"
-    //   const response = await request(app)
-    //   .post(`/posts/${postId.}`)
-    //})
+    test("should return 404 when the post does not exist", async () => {
+    const postId = "4eb6e7e7e9b7f4194e000001"
+    const response = await request(app)
+      .post(`/posts/${postId}`)
+      .set("Authorization", `Bearer ${token}`)
+      .send({token: token, comment: "comment1"});
+    expect(response.status).toEqual(404)
+    })
+
   
   })
 
