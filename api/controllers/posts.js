@@ -63,7 +63,10 @@ const PostsController = {
       }
       const user = await User.findById(userid)
       const token = TokenGenerator.jsonwebtoken(req.user_id);
-      res.status(201).json({ message: "OK", user: user, token: token });
+      const postId = post.id;
+      console.log(postId);
+      console.log(post);
+      res.status(201).json({ message: "OK",postId:postId, user: user, token: token });
     });
   },
 
@@ -73,7 +76,7 @@ const PostsController = {
 
     const post = await Post.findById(postId);
     if (post.likes.includes(userId)) {
-      return res.status(401).json({ message: "Already Likes" });
+      return res.status(400).json({ message: "Already Likes" });
     }
     else {
       post.likes.push(userId);

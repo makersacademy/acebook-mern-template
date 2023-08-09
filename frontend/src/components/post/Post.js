@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import './Post.css';
 
 
-const Post = ({ post }) => {
+const Post = ({ post, setPosts , newPosts}) => {
   const currentUserId = window.localStorage.getItem("currentUserId")
   const [token, setToken] = useState(window.localStorage.getItem("token"));
   const [liked, setLiked] = useState(post?.likes?.includes(currentUserId));
@@ -23,9 +23,29 @@ const Post = ({ post }) => {
       
       if (response.status === 201) {
         const data = await response.json();
-        console.log(data)
+        
         setLiked(true);
         setLikesCount(data.likes.length);
+        fetch( '/posts', {
+          method: 'get',
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}`
+          },
+        })
+        .then(async response => {
+          if(response.status === 200) {
+            let data1 = await response.json()
+            let UpdatedPosts = data1.posts;
+            setPosts(UpdatedPosts)
+            
+          } else {
+        
+          }
+        })
+        
+       
+        
       }
     } catch (error) {
       console.error(error);
