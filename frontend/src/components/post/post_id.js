@@ -16,8 +16,6 @@ const PostId = () => {
             })
                 .then(response => response.json())
                 .then(async data => {
-                    console.log("Full Data:", data);
-                    console.log("Author:", data.author);
                     window.localStorage.setItem("token", data.token)
                     setToken(window.localStorage.getItem("token"))
                     setPost(
@@ -27,8 +25,6 @@ const PostId = () => {
                     });
                 });
             }, {})
-    
-        console.log("Line 30 --- ", post)
     
         return(
             <div >
