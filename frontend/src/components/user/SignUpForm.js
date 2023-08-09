@@ -40,18 +40,33 @@ const SignUpForm = ({ navigate }) => {
     setUsername(event.target.value)
   }
 
+  const signin = () => {
+    navigate('/login')
+  }
+
 
     return (
+      <div class='signin'>
       <form onSubmit={handleSubmit}>
           <input placeholder="Email" id="email" type='text' value={ email } onChange={handleEmailChange} />
+          <br></br>
+          <br></br>
           <input placeholder="Username" id="username" type='text' value={ username } onChange={handleUsernameChange} />
+          <br></br>
+          <br></br>
           <input placeholder="Password" id="password" type='password' value={ password } onChange={handlePasswordChange} />
-        <input id='submit' type="submit" value="Submit" />
+          <br></br>
+          <br></br>
+        <input id='submit' type="submit" value="Sign up!" />
         {errorMessage && (
-  <p className="error"> {errorMessage} </p>
-)}
-      
+          <p className="error"> {errorMessage} </p>
+          )}
       </form>
+      <br></br>
+      <button onClick={signin}>
+        Already registered? Log in!
+      </button>
+      </div>
     );
 }
 

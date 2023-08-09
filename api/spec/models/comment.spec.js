@@ -25,12 +25,14 @@ describe("Comment model", () => {
 
 	it("can save a comment", (done) => {
 		const user_id = new mongoose.Types.ObjectId();
-		const post_id = new mongoose.Types.ObjectId();
+    const post_id = new mongoose.Types.ObjectId();
+    const username = "usernametest";
 
     	var comment = new Comment({
 				comment: "some comment",
 				user: user_id,
-				post: post_id
+        post: post_id,
+        username: username
        
       });
     

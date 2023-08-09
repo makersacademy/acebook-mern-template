@@ -1,10 +1,19 @@
-import React, { useEffect, useState } from "react";
-import Post from "../post/Post";
+
+import React, { useEffect, useState } from 'react';
+import Post, { handleDelete } from '../post/Post';
+import './Feed.css'
 
 const Feed = ({ navigate, searchQuery }) => {
   const [posts, setPosts] = useState([]);
   const [token, setToken] = useState(window.localStorage.getItem("token"));
+  const [message, setMessage] = useState("");
 
+  const handleMessageChange = (event) => {
+    setMessage(event.target.value)
+  }
+  const [errorMessage, setErrorMessage] = useState("");
+
+  
   useEffect(() => {
     if (token) {
       fetch("/posts", {
@@ -19,42 +28,94 @@ const Feed = ({ navigate, searchQuery }) => {
           setPosts(data.posts);
         });
     }
-  }, []);
 
-  useEffect(() => {
-    console.log("posts got updated; ", posts);
-  }, [posts]);
+  }, [])
+
+
+
+    
 
   const logout = () => {
-    window.localStorage.removeItem("token");
-    navigate("/login");
-  };
+    window.localStorage.removeItem("token")
+    window.localStorage.removeItem("username")
+    navigate('/login')
+  }
 
-  return (
-    <>
-      <h2>Posts</h2>
-      <button onClick={logout}>Logout</button>
-      <div id="feed" role="feed"></div>
-      {typeof searchQuery !== "undefined"
-        ? searchQuery.posts.map((post) => <Post post={post} key={post._id} />)
-        : posts.map((post) => <Post post={post} key={post._id} />)}
-      {/* <div id="feed" role="feed">
-        {posts.map((post) => (
-          <Post post={post} key={post._id} />
-        ))}
-      </div> */}
-    </>
-  );
-};
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+
+    fetch( '/posts', {
+      method: 'post',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${token}`
+      },
+      body: JSON.stringify({ message: message })
+    })
+      .then(async response => {
+        if(response.status === 201) {
+          let data = await response.json()
+          let newPosts = [...posts, { likes: [], message: message, _id: data.postId, user: data.user, }]
+          setPosts(newPosts)
+          setMessage("")
+        } else {
+          setErrorMessage('Invalid message!');
+          navigate('/posts')
+        }
+      })
+  }
+  
+  
+  let postList = posts.map(
+    (post) => ( 
+    <p> 
+      <Post 
+        post={ post } 
+        key={ post._id }
+        token={ token }
+        setPosts={ setPosts }
+        newPosts = {posts}
+      /> 
+    </p>)
+  )
+  let postListNewsestFirst = postList.reverse()
+
+    if(token) {
+      return(
+        <>
+          <button onClick={logout}>
+            Logout
+          </button>
+          <h1>Posts</h1>
+          <form onSubmit={handleSubmit}>
+            <input 
+              placeholder="Make a post..." 
+              id="message" 
+              type='text' 
+              value={ message } 
+              onChange={handleMessageChange} 
+                />
+                  <input 
+                  id='submit' 
+                  type="submit" 
+                  value="Post!" 
+                />
+            {errorMessage && (
+            <p className="error"> {errorMessage} </p>)}
+          </form>
+          <div id='feed' role="feed">
+          {typeof searchQuery !== "undefined"
+           ? searchQuery.posts.map((post) => <Post post={post} key={post._id} />)
+           : {postListNewsestFirst}}
+              
+// posts.map((post) => <Post post={post} key={post._id} />)
+          </div>
+        </>
+      )
+    } else {
+      navigate('/login')
+    }
+}
 
 export default Feed;
 
-// let searchResults = [];
-// for (let i = 0; i < posts.length; i++) {
-//   if (posts.includes(searchQuery)) {
-//     searchResults.push(posts);
-//   }
-// }
-// {searchResults.map((post) => (
-//   <Post post={post} key={post._id} />
-// ))}

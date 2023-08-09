@@ -2,8 +2,8 @@ import React, { useState } from "react";
 
 const LogInForm = ({ navigate, onSuccess }) => {
   const [email, setEmail] = useState("");
-  const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const [errorMessage, setErrorMessage] = useState("");
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -13,22 +13,23 @@ const LogInForm = ({ navigate, onSuccess }) => {
       headers: {
         "Content-Type": "application/json",
       },
+
       body: JSON.stringify({
         email: email,
-        username: username,
         password: password,
       }),
     });
 
     if (response.status !== 201) {
-      console.log("oh no");
+      setErrorMessage('Invalid user!');
       navigate("/login");
     } else {
-      console.log("oop");
       onSuccess();
       let data = await response.json();
+      window.localStorage.setItem("userid", data.userid)
       window.localStorage.setItem("token", data.token);
       navigate("/posts");
+
     }
   };
 
@@ -40,36 +41,34 @@ const LogInForm = ({ navigate, onSuccess }) => {
     setPassword(event.target.value);
   };
 
-  const handleUsernameChange = (event) => {
-    setUsername(event.target.value);
-  };
+  const signup = () => {
+    navigate('/signup')
+  }
 
-  return (
-    <form onSubmit={handleSubmit}>
-      <input
-        placeholder="Email"
-        id="email"
-        type="text"
-        value={email}
-        onChange={handleEmailChange}
-      />
-      <input
-        placeholder="Username"
-        id="username"
-        type="username"
-        value={username}
-        onChange={handleUsernameChange}
-      />
-      <input
-        placeholder="Password"
-        id="password"
-        type="password"
-        value={password}
-        onChange={handlePasswordChange}
-      />
-      <input role="submit-button" id="submit" type="submit" value="Login" />
-    </form>
-  );
-};
+
+    return (
+      <div class='login'>
+      <form onSubmit={handleSubmit}>
+        <input placeholder='Email' id="email" type='text' value={ email } onChange={handleEmailChange} />
+        <br></br>
+        <br></br>
+        <input placeholder='Password' id="password" type='password' value={ password } onChange={handlePasswordChange} />
+        <br></br>
+        <br></br>
+        <input role='submit-button' id='submit' type="submit" value="Sign in!" />
+        {errorMessage && (
+          <p className="error"> {errorMessage} </p>
+          )}
+        <br></br>
+        <br></br>
+      </form>
+      <br></br>
+      <button onClick={signup}>
+        Not registered? Sign up here!
+      </button>
+      </div>
+    );
+}
+
 
 export default LogInForm;

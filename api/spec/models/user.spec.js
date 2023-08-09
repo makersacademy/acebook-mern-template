@@ -46,6 +46,7 @@ describe("User model", () => {
   });
 
   it("can save a user", (done) => {
+    
     const user = new User({
       email: "someone@example.com",
       username: "exampleusername",

@@ -11,10 +11,13 @@ const CommentSchema = new mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Post',
         required: true
-      }
-  });
-  
-  const Comment = mongoose.model("Comment", CommentSchema);
-  
-  module.exports = Comment;
-  
+    },
+    username: {
+        type: String,
+        required: false
+    }
+});
+
+const Comment = mongoose.model("Comment", CommentSchema);
+
+module.exports = Comment;
