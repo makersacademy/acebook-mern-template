@@ -178,6 +178,36 @@ describe("/posts", () => {
       expect(messages).toEqual(["howdy!", "hola!"]);
     });
 
+    // test("returns comments as part of post", async () => {
+    //   let newUser = new User({
+    //     email: "test2@test.com",
+    //     username: "testusername2",
+    //     password: "123456782",
+    //   })
+
+    //   // create a post
+    //   let post1 = new Post({ message: "August 8th POST!" });
+    //   await post1.save();
+    //   // use that posts id to create a comment
+    //   // creating comment should update the post to have the comment in comments field
+    //   const postId = post1._id
+    //   await request(app)
+    //   .post("/comments")
+    //   .set("Authorization", `Bearer ${token}`)
+    //   .send({ comment: "comment should link to August 8th", username: newUser.username, user: newUser.id, post: postId, token: token })
+      
+      
+    //   let response = await request(app)
+    //   .get("/posts")
+    //   .set("Authorization", `Bearer ${token}`)
+    //   .send({ token: token }); 
+    //   let postsList = response.body.posts;
+    //   console.log("POSTLIST", postsList);
+    //   let comments = postsList.map((post) => post.comments);
+    //   console.log("COMMENT", comments);
+    //   expect(comments[0][0].comment).toEqual("comment should link to August 8th")
+    // })
+
     test("the response code is 200", async () => {
       let post1 = new Post({ message: "howdy!" });
       let post2 = new Post({ message: "hola!" });

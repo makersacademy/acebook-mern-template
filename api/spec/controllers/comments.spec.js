@@ -20,6 +20,7 @@ describe("/comments", () => {
       password: "1234567890"
 		});
 		user_id = user._id;
+	  username = user.username;
     const post = new Post({
     	message: "testing comments"
     })
@@ -47,54 +48,55 @@ describe("/comments", () => {
   })
 
   describe("POST, when token is present", () => {
-      test("responds with a 201", async () => {
-      let response = await request(app)
-        .post("/comments")
-        .set("Authorization", `Bearer ${token}`)
-        .send({post: post_id, user: user_id, comment: "testing comments", token: token });
+		test("responds with a 201", async () => {
+		let response = await request(app)
+		.post("/comments")
+		.set("Authorization", `Bearer ${token}`)
+		.send({post: post_id, user: user_id, comment: "testing comments", token: token });
 			expect(response.status).toEqual(201);
 			});
 		
-			test("creates a new comment", async () => {
-				await request(app)
-					.post("/comments")
-					.set("Authorization", `Bearer ${token}`)
-					.send({post: post_id, user: user_id, comment: "hello world", token: token  });
-				let comments = await Comment.find();
-				expect(comments.length).toEqual(1);
-				expect(comments[0].comment).toEqual("hello world");
-			});
+		test("creates a new comment", async () => {
+			await request(app)
+				.post("/comments")
+				.set("Authorization", `Bearer ${token}`)
+				.send({post: post_id, user: user_id, comment: "hello world", token: token  });
+			let comments = await Comment.find();
+			expect(comments.length).toEqual(1);
+			expect(comments[0].comment).toEqual("hello world");
+		});
 			
 		
-			test("creates a comment linked to the user", async () => {
-				await request(app)
-					.post("/comments")
-					.set('Authorization', `Bearer ${token}`)
-					.send({post: post_id, user: user_id, comment: "hello world", token: token  })
-				const comments = await Comment.findOne();
-				// Assert comment is linked to user
-				expect(JSON.stringify(user_id)).toEqual(JSON.stringify(comments.user));
-			});
-		
-			test("creates a comment linked to the post", async () => {
-				await request(app)
-					.post("/comments")
-					.set('Authorization', `Bearer ${token}`)
-					.send({post: post_id, user: user_id, comment: "hello world", token: token  })
-				const comments = await Comment.findOne();
-				// Assert comment is linked to user
-				expect(JSON.stringify(post_id)).toEqual(JSON.stringify(comments.post));
-			});
-			test("returns a new token", async () => {
-				let response = await request(app)
-					.post("/comments")
-					.set("Authorization", `Bearer ${token}`)
-					.send({post: post_id, user: user_id, comment: "hello world", token: token  })
-				let newPayload = JWT.decode(response.body.token, process.env.JWT_SECRET);
-				let originalPayload = JWT.decode(token, process.env.JWT_SECRET);
-				expect(newPayload.iat > originalPayload.iat).toEqual(true);
-			});
+		test("creates a comment linked to the user", async () => {
+			await request(app)
+				.post("/comments")
+				.set('Authorization', `Bearer ${token}`)
+				.send({post: post_id, user: user_id, comment: "hello world", token: token  })
+			const comments = await Comment.findOne();
+			// Assert comment is linked to user
+			expect(JSON.stringify(user_id)).toEqual(JSON.stringify(comments.user));
+		});
+	
+		test("creates a comment linked to the post", async () => {
+			await request(app)
+				.post("/comments")
+				.set('Authorization', `Bearer ${token}`)
+				.send({post: post_id, user: user_id, comment: "hello world", token: token  })
+			const comments = await Comment.findOne();
+			// Assert comment is linked to user
+			expect(JSON.stringify(post_id)).toEqual(JSON.stringify(comments.post));
+		});
+		test("returns a new token", async () => {
+			let response = await request(app)
+				.post("/comments")
+				.set("Authorization", `Bearer ${token}`)
+				.send({post: post_id, user: user_id, comment: "hello world", token: token  })
+			let newPayload = JWT.decode(response.body.token, process.env.JWT_SECRET);
+			let originalPayload = JWT.decode(token, process.env.JWT_SECRET);
+			expect(newPayload.iat > originalPayload.iat).toEqual(true);
+		});
 	});
+	
 	describe("POST, when token is missing", () => {
 		test("responds with a 401", async () => {
 			let response = await request(app)
@@ -119,8 +121,8 @@ describe("/comments", () => {
 	
 	describe("GET, when token is present", () => {
 		test("returns every comment in the collection", async () => {
-			let comment1 = new Comment({ post: post_id, user: user_id, comment: "hello men" });
-			let comment2 = new Comment({ post: post_id, user: user_id, comment: "hello women" });
+			let comment1 = new Comment({ post: post_id, username: username, user: user_id, comment: "hello men" });
+			let comment2 = new Comment({ post: post_id, username: username, user: user_id, comment: "hello women" });
 			await comment1.save();
 			await comment2.save();
 			let response = await request(app)

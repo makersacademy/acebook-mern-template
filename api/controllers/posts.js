@@ -5,18 +5,22 @@ const jwt = require("jsonwebtoken");
 const User = require("../models/user");
 const UsersController = require("../controllers/users")
 
+
+
 const PostsController = {
+
   Index: async(req, res) => {
-    const posts = await Post.find().populate('user').exec();
+    const posts = await Post.find().populate(['user','comments']).exec();
     if (!posts){
       res.status(500);
     }
     const token = TokenGenerator.jsonwebtoken(req.user_id);
     res.status(200).json({ posts: posts, token: token });
-    
+
   },
   Update: (req, res) => {
     const postId = req.params.id;
+  
 
     Post.findById(postId, (err, post) => {
       if (err) {
@@ -25,7 +29,7 @@ const PostsController = {
       if (!post) {
         return res.status(404).json({ message: "post not found!" });
       }
-
+     
       const updatedMessage = req.body.message;
       const userID = post.user;
       

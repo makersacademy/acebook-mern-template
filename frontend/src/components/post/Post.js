@@ -1,8 +1,15 @@
 import React, { useState, useEffect } from 'react';
+import Comment from '../comment/Comment';
 import './Post.css';
 
 
 const Post = ({ post, setPosts , newPosts}) => {
+  
+  let comments = post.comments
+  let commentList = comments.map(
+    (comment) => ( <p> <Comment comment={ comment } key={ comment._id }  /> </p>)
+  )
+  
   const userid = window.localStorage.getItem("userid")
   const [token, setToken] = useState(window.localStorage.getItem("token"));
   const [liked, setLiked] = useState(post?.likes?.includes(userid));
@@ -92,6 +99,9 @@ const Post = ({ post, setPosts , newPosts}) => {
     <p>
       <h1>{ post.message }</h1>
     </p>
+    <div>
+      {commentList}
+    </div>
         <button onClick={handleLike} disabled={liked}>
       {liked ? '❤️ Liked' : '🤍 Like'}
     </button>
