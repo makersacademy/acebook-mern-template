@@ -67,7 +67,23 @@ const PostsController = {
     const token = TokenGenerator.jsonwebtoken(req.user_id);
     const author = post.user_id.username
     res.status(200).json({ message: post.message, token: token, author: author})
+  },
+
+  AddLike: async (req, res) => {
+    const postId = req.params.id;
+    const post = await Post.findById(postId)
+
+    if (!post) {
+      return res.status(404).json({error: "Post not found"});
+    }
+
+    post.likes += 1;
+    await post.save();
+
+    const token = TokenGenerator.jsonwebtoken(req.user_id);
+    res.status(200).json({ message: post.message, token: token, likes: post.likes})
   }
+  
 }
 
 
