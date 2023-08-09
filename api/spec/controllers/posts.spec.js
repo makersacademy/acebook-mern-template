@@ -300,7 +300,7 @@ describe("/posts", () => {
     });
     })
   
-    describe("POST, can add comments to posts", () => {
+    describe("POST/:id, can add comments to posts", () => {
     test("when the reponse code is 201", async () => {
       let post1 = new Post({ message: "post message"});
       await post1.save();
@@ -309,8 +309,8 @@ describe("/posts", () => {
         .set("Authorization", `Bearer ${token}`)
         .send({comment: "comment1"});
       expect(response.status).toEqual(201);
-      const updatedPost = await Post.find()
-      expect(updatedPost[0].comments[0].comment).toEqual("comment1")
+      const listOfPosts = await Post.find()
+      expect(listOfPosts[0].comments[0].comment).toEqual("comment1");
     })
     test("should return 404 when the post does not exist", async () => {
     const postId = "4eb6e7e7e9b7f4194e000001"
