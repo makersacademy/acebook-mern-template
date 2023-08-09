@@ -1,0 +1,12 @@
+button[data-cy="delete-button"] {
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+    font-size: 16px;
+    padding: 5px 10px;
+    border-radius: 5px;
+    background-color: #f44336;
+    color: white;
+    border: none;
+    cursor: pointer;
+}

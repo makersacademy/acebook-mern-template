@@ -1,4 +1,5 @@
-import Feed from './Feed'
+import React from 'react';
+import Feed from './Feed';
 const navigate = () => {}
 
 describe("Feed", () => {
@@ -36,7 +37,6 @@ describe("Feed", () => {
       cy.get('[data-cy="post"]')
       .should('contain.text', "Hello, world")
       .and('contain.text', "Hello again, world")
-    })
-  })
-
-})
+    });
+  });
+});

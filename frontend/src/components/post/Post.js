@@ -31,8 +31,10 @@ const Post = ({ post, token, setPosts }) => {
   const userid = window.localStorage.getItem("userid");
   const showDeleteButton = post.user._id === userid;
   console.log("POST", post);
-  
+  console.log("POST.USER", post.user);
+  console.log("showDeleteButton", showDeleteButton);
   if (post.user === null){
+    
     return( 
       <article data-cy="post" > <p>ERROR</p></article>
     )
@@ -50,8 +52,10 @@ const Post = ({ post, token, setPosts }) => {
             { post.message }
           </p>
           <div>
+            
             {showDeleteButton && (
-              <button className="delete-button" 
+              <button 
+              data-cy="delete-button"
               onClick={() => handleDelete(post._id, token, setPosts)}>
                 Delete
               </button>
