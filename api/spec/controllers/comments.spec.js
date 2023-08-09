@@ -20,6 +20,7 @@ describe("/comments", () => {
       password: "1234567890"
 		});
 		user_id = user._id;
+	  username = user.username;
     const post = new Post({
     	message: "testing comments"
     })
@@ -120,8 +121,8 @@ describe("/comments", () => {
 	
 	describe("GET, when token is present", () => {
 		test("returns every comment in the collection", async () => {
-			let comment1 = new Comment({ post: post_id, user: user_id, comment: "hello men" });
-			let comment2 = new Comment({ post: post_id, user: user_id, comment: "hello women" });
+			let comment1 = new Comment({ post: post_id, username: username, user: user_id, comment: "hello men" });
+			let comment2 = new Comment({ post: post_id, username: username, user: user_id, comment: "hello women" });
 			await comment1.save();
 			await comment2.save();
 			let response = await request(app)

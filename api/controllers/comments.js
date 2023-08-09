@@ -43,8 +43,6 @@ const CommentsController = {
         return res.status(404).json({ error: 'Post not found.' });
       }
       const user = await User.findById(req.body.user)
-      console.log(user)
-      console.log("username", user.username)
       // Create a new comment and save it
       const comment = new Comment({
               comment: req.body.comment,
@@ -59,7 +57,6 @@ const CommentsController = {
       post.comments.push(comment);
 
       await post.save();
-      console.log("this is the post", post)
       // console.log("See the whole post", post);
       const token = TokenGenerator.jsonwebtoken(req.user_id);
       return res.status(201).json({ message: 'Comment saved successfully.', token: token });
