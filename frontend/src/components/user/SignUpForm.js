@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import NavigationBar from '../navigation/Navigation';
 
 const SignUpForm = ({ navigate }) => {
 
