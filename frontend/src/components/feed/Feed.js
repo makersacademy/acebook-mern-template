@@ -7,6 +7,7 @@ const Feed = ({ navigate }) => {
   const [posts, setPosts] = useState([]);
   const [token, setToken] = useState(window.localStorage.getItem("token"));
   const [message, setMessage] = useState("");
+
   const handleMessageChange = (event) => {
     setMessage(event.target.value)
   }
@@ -52,7 +53,7 @@ const Feed = ({ navigate }) => {
       .then(async response => {
         if(response.status === 201) {
           let data = await response.json()
-          let newPosts = [...posts, {message: message, user: data.user}]
+          let newPosts = [...posts, {likes:[], message: message, _id : data.postId, user: data.user , }]
           setPosts(newPosts)
           setMessage("")
         } else {
@@ -65,7 +66,7 @@ const Feed = ({ navigate }) => {
   
 
   let postList = posts.map(
-    (post) => ( <p> <Post post={ post } key={ post._id }  /> </p>)
+    (post) => ( <p> <Post post={ post } key={ post._id } setPosts={setPosts} newPosts = {posts} /> </p>)
   )
   let postListNewsestFirst = postList.reverse()
 
