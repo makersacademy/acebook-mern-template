@@ -44,5 +44,17 @@ describe("Post", () => {
   }}} />);
     cy.get('[data-cy="post"]').should('contain.text', "testname")
   })
+  it('renders a post with with likes', () => {
+    cy.mount(<Post post={{_id: 1, message: "Hello, world",
+    user: {
+      "_id": "64d10621593ed5d2b1a88b36",
+      "email": "test123@test",
+      "username": "testname",
+      "password": "pass",
+      "__v": 0
+  }}} />);
+    cy.get('[data-cy="post"]').should('contain.text', "likes")
+  })
+
 
 })
