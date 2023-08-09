@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import Post from '../post/Post'
+import NavigationBar from '../navigation/Navigation';
 
 const Feed = ({ navigate }) => {
   const [posts, setPosts] = useState([]);
@@ -13,7 +14,7 @@ const Feed = ({ navigate }) => {
         }
       })
         .then(response => response.json())
-        .then(async data => {
+        .then( async data => {
           window.localStorage.setItem("token", data.token)
           setToken(window.localStorage.getItem("token"))
           setPosts(data.posts);
@@ -34,6 +35,7 @@ const Feed = ({ navigate }) => {
     if(token) {
       return(
         <>
+          <NavigationBar />
           <h2>Posts</h2>
           <button id='createNewPost' onClick={createNewPost}>
               Create New Post
@@ -49,11 +51,11 @@ const Feed = ({ navigate }) => {
           </div>
         </>
 
-
       )
     } else {
       navigate('/login')
     }
+
 }
 
 export default Feed;

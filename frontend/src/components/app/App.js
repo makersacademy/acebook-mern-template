@@ -6,11 +6,13 @@ import NewPostForm from '../post/NewPostForm'
 import React, { useState } from 'react';
 import Feed from '../feed/Feed'
 import UserInfo from '../userInfo/userInfo';
+import 'bootstrap/dist/css/bootstrap.min.css';
 import {
   useNavigate,
   Routes,
   Route,
 } from "react-router-dom";
+
 
 const App = () => {
     return (

@@ -4,6 +4,7 @@ const LogInForm = ({ navigate }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
+
   const handleSubmit = async (event) => {
     event.preventDefault();
 
@@ -22,6 +23,7 @@ const LogInForm = ({ navigate }) => {
       console.log("yay");
       let data = await response.json();
       window.localStorage.setItem("token", data.token);
+      window.localStorage.setItem("userId", data.userId);
       navigate("/posts");
     }
   }
