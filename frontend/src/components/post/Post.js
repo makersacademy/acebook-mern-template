@@ -7,7 +7,7 @@ const Post = ({ post, setPosts , newPosts}) => {
   
   let comments = post.comments
   let commentList = comments.map(
-    (comment) => console.log("logging the comment", comment) || ( <p> <Comment comment={ comment } key={ comment._id }  /> </p>)
+    (comment) => ( <p> <Comment comment={ comment } key={ comment._id }  /> </p>)
   )
   
   const userid = window.localStorage.getItem("userid")
