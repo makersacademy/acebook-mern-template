@@ -53,7 +53,7 @@ const Feed = ({ navigate }) => {
       .then(async response => {
         if(response.status === 201) {
           let data = await response.json()
-          let newPosts = [...posts, {likes:[], message: message, _id : data.postId, user: data.user , }]
+          let newPosts = [...posts, { likes: [], message: message, _id: data.postId, user: data.user, }]
           setPosts(newPosts)
           setMessage("")
         } else {
@@ -64,7 +64,6 @@ const Feed = ({ navigate }) => {
   }
   
   
-
   let postList = posts.map(
     (post) => ( 
     <p> 
