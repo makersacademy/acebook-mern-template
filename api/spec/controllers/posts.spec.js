@@ -308,7 +308,7 @@ describe("/posts", () => {
         .post(`/posts/${post1.id}`)
         .set("Authorization", `Bearer ${token}`)
         //.send({message: "post message"});
-        .send({comment: "comment1", token: token});
+        .send({comment: "comment1"});
       expect(response.status).toEqual(201);
       const updatedPost = await Post.find()
       expect(updatedPost[0].comments[0].comment).toEqual("comment1")
