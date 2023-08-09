@@ -94,7 +94,7 @@ const Post = ({ post, setPosts, newPosts }) => {
             <h1>{post.message}</h1>
           </p>
           <div>{commentList}</div>
-          <button onClick={handleLike} disabled={liked}>
+          <button className="like-button" onClick={handleLike} disabled={liked}>
             {liked ? "❤️ Liked" : "🤍 Like"}
           </button>
           <span>

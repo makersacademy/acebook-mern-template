@@ -32,13 +32,13 @@
 
 
   /* Style for the number of likes */
-  .post span {
+  .post .like-button {
     margin-left: 10px;
     font-size: 20px;
     color: #000000;
   }
   .post .like-button:hover {
-    background-color: rgb(15, 37, 182);
+    background-color: rgb(144, 87, 243);
     transition: 0.5s;
   }
 
@@ -68,8 +68,8 @@
   .post .delete-button .button-text {
     display: none;
   }
-  post .delete-button:hover {
-    background-color: rgb(46, 38, 38);
+  .post .delete-button:hover {
+    background-color: rgb(255, 255, 255);
   }
 
   @media screen and (max-width: 768px) {

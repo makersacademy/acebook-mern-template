@@ -64,7 +64,7 @@ const Feed = ({ navigate }) => {
   }
   
   
-  let postList = posts.map(
+  let postList = posts?.map(
     (post) => ( 
     <p> 
       <Post 
@@ -76,7 +76,7 @@ const Feed = ({ navigate }) => {
       /> 
     </p>)
   )
-  let postListNewsestFirst = postList.reverse()
+  let postListNewsestFirst = postList?.reverse()
 
     if(token) {
       return(
