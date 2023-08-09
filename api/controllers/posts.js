@@ -43,7 +43,7 @@ const PostsController = {
   PostComment: async (req, res) => {
     const postId = req.params.id;
     const commentMessage = req.body.comment;
-
+    console.log(commentMessage);
     try {
       const post = await Post.findById(postId);
       if (!post) {
@@ -66,7 +66,7 @@ const PostsController = {
     }
     const token = TokenGenerator.jsonwebtoken(req.user_id);
     const author = post.user_id.username
-    res.status(200).json({ message: post.message, token: token, author: author})
+    res.status(200).json({ message: post.message, token: token, author: author, comments: post.comments})
   }
 }
 
