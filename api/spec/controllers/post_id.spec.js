@@ -50,6 +50,7 @@ describe("/posts/:id", () => {
         .get(`/posts/${savedPost.id}`)
         .set("Authorization", `Bearer ${token}`)
     expect(response.status).toEqual(200)
+    expect(response.body.author).toEqual('person1')
     })
     
 
