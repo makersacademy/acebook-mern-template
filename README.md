@@ -4,6 +4,13 @@ In this project, you are tasked with working on an existing application. A signi
 
 ## Documentation
 
+# Install dependencies
+Navigate to the frontend file and install bootstrap
+```
+cd frontend
+npm install react-bootstrap bootstrap
+```
+
 [More documentation of the codebase and its architecture can be found here.](./DOCUMENTATION.md) It's recommended you all read this _after making sure the whole setup below worked for everyone_. Then work together on a diagram describing how the application works.
 
 [A template Miro board for your diagrams can be found here.](https://miro.com/app/board/uXjVPqNzFfc=/?share_link_id=360271550320) Make sure your validate your diagrams with your coach.
