@@ -125,7 +125,20 @@ describe("/posts", () => {
         });
       const post = await Post.findOne();
       // Assert post is linked to user
-      expect(post.user).toEqual(user._id);
+      expect(post.user._id).toEqual(user._id);
+    });
+
+    test("creates a post linked to the username", async () => {
+      await request(app)
+        .post("/posts")
+        .set("Authorization", `Bearer ${token}`)
+        .send({
+          message: "hello world username",
+          });
+      const post = await Post.findOne().populate('user').exec();
+      // Assert post is linked to user
+      console.log(post);
+      await expect(post.user.username).toEqual(user.username);
     });
   });
 
@@ -349,9 +362,8 @@ describe("/posts", () => {
       const post = new Post({ message: "test  post 1", user: user._id, likes:[]});
       await post.save();
       await request(app)
-        .post("/posts/like")
-        .set("Authorization", `Bearer ${token}`)
-        .send({ post_id: post._id});
+        .post(`/posts/${post._id}/like`)
+        .set("Authorization", `Bearer ${token}`);
 
       const updatedPost = await Post.findById(post._id);
       expect(updatedPost.likes).toEqual(

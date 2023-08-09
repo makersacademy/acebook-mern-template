@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from 'react';
-import Post from '../post/Post';
-
+import Post, { handleDelete } from '../post/Post';
 import './Feed.css'
 
 const Feed = ({ navigate }) => {
   const [posts, setPosts] = useState([]);
   const [token, setToken] = useState(window.localStorage.getItem("token"));
   const [message, setMessage] = useState("");
+
   const handleMessageChange = (event) => {
     setMessage(event.target.value)
   }
@@ -35,6 +35,7 @@ const Feed = ({ navigate }) => {
 
   const logout = () => {
     window.localStorage.removeItem("token")
+    window.localStorage.removeItem("username")
     navigate('/login')
   }
 
@@ -49,9 +50,10 @@ const Feed = ({ navigate }) => {
       },
       body: JSON.stringify({ message: message })
     })
-      .then(response => {
+      .then(async response => {
         if(response.status === 201) {
-          let newPosts = [...posts, {message: message}]
+          let data = await response.json()
+          let newPosts = [...posts, { likes: [], message: message, _id: data.postId, user: data.user, }]
           setPosts(newPosts)
           setMessage("")
         } else {
@@ -63,10 +65,19 @@ const Feed = ({ navigate }) => {
   
   
   let postList = posts.map(
-    (post) => ( <p> <Post post={ post } key={ post._id }  /> </p>)
+    (post) => ( 
+    <p> 
+      <Post 
+        post={ post } 
+        key={ post._id }
+        token={ token }
+        setPosts={ setPosts }
+        newPosts = {posts}
+      /> 
+    </p>)
   )
   let postListNewsestFirst = postList.reverse()
-  
+
     if(token) {
       return(
         <>
@@ -75,8 +86,18 @@ const Feed = ({ navigate }) => {
           </button>
           <h1>Posts</h1>
           <form onSubmit={handleSubmit}>
-            <input placeholder="Message" id="message" type='text' value={ message } onChange={handleMessageChange} />
-            <input id='submit' type="submit" value="Submit" />
+            <input 
+              placeholder="Make a post..." 
+              id="message" 
+              type='text' 
+              value={ message } 
+              onChange={handleMessageChange} 
+                />
+                  <input 
+                  id='submit' 
+                  type="submit" 
+                  value="Post!" 
+                />
             {errorMessage && (
             <p className="error"> {errorMessage} </p>)}
           </form>

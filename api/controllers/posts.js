@@ -2,19 +2,21 @@ const Post = require("../models/post");
 const Comment = require("../models/comment");
 const TokenGenerator = require("../lib/token_generator");
 const jwt = require("jsonwebtoken");
+const User = require("../models/user");
+const UsersController = require("../controllers/users")
 
 
 
 const PostsController = {
-  Index: async (req, res) => {
-    await Post.find().populate('comments').exec((err, posts) => {
-      if (err) {
-        console.error('Error:', err);
-        return;
-      }
-        const token = TokenGenerator.jsonwebtoken(req.user_id);
-        return res.status(200).json({ posts: posts, token: token });
-      })
+
+  Index: async(req, res) => {
+    const posts = await Post.find().populate(['user','comments']).exec();
+    if (!posts){
+      res.status(500);
+    }
+    const token = TokenGenerator.jsonwebtoken(req.user_id);
+    res.status(200).json({ posts: posts, token: token });
+
   },
   Update: (req, res) => {
     const postId = req.params.id;
@@ -49,28 +51,31 @@ const PostsController = {
       });
     });
   },
-  Create: (req, res) => {
+  Create: async(req, res) => {
+    userid = req.user_id;
     const post = new Post({
       message: req.body.message,
       user: req.user_id,
     });
-    post.save((err) => {
+    post.save(async(err) => {
       if (err) {
         throw err;
       }
-
+      const user = await User.findById(userid)
+      console.log("Post", post);
       const token = TokenGenerator.jsonwebtoken(req.user_id);
-      res.status(201).json({ message: "OK", token: token });
+      const postId = post.id;
+      res.status(201).json({ message: "OK", postId:postId, user: user, token: token,post: post });
     });
   },
 
   Like: async (req, res) => {
-    const postId = req.body.post_id;
+    const postId = req.params.id;
     const userId = req.user_id;
 
     const post = await Post.findById(postId);
     if (post.likes.includes(userId)) {
-      return res.status(401).json({ message: "Already Likes" });
+      return res.status(400).json({ message: "Already Likes" });
     }
     else {
       post.likes.push(userId);
@@ -79,9 +84,9 @@ const PostsController = {
       if (err) {
         throw err;
       }
-      
+      const likes = post.likes ;
       const token = await TokenGenerator.jsonwebtoken(userId)
-      res.status(201).json({ message: 'OK', token: token });
+      res.status(201).json({ likes:likes ,message: 'OK', token: token });
     })
   },
 
@@ -106,7 +111,7 @@ const PostsController = {
       // user_id - who wants to delete post
       const user_id = decodedToken.user_id;
       if (post.user.toString() !== user_id &&
-        (await Post.exists({ _od: Comment.post, user: user_id })) === false
+        (await Post.exists({ _id: Comment.post, user: user_id })) === false
       ) {
         return res
           .status(403)
