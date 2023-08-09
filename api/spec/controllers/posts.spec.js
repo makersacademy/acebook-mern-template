@@ -71,7 +71,7 @@ describe("/posts", () => {
         .set("Authorization", `Bearer ${token}`)
         .send({ message: "hello world", token: token, user_id: user.id});
         let posts = await Post.find();
-        expect(posts[0].user_id).toBe(user.id)
+        expect(posts[0].user_id.toString()).toEqual(user.id.toString());
     });
   });
   

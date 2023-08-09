@@ -46,7 +46,8 @@ const PostsController = {
       return res.status(404).json({error: "Post not found"});
     }
     const token = TokenGenerator.jsonwebtoken(req.user_id)
-    res.status(200).json({message: post.message, token: token, username: post.user_id.username})
+    console.log("post data", post)
+    res.status(200).json({message: post.message, token: token, author: post.user_id.username})
   }
 }
 

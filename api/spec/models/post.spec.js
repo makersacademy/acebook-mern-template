@@ -17,7 +17,7 @@ describe("Post model", () => {
 
   it("has a post user id", () => {
     var post = new Post({ user_id: "64d252785e8bb4153df2c997" });
-    expect(post.user_id).toEqual("64d252785e8bb4153df2c997");
+    expect(post.user_id.toString()).toEqual("64d252785e8bb4153df2c997");
   });
 
   it("can list all posts", (done) => {
