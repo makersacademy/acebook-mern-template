@@ -312,6 +312,7 @@ describe("/posts", () => {
       const listOfPosts = await Post.find()
       expect(listOfPosts[0].comments[0].comment).toEqual("comment1");
     })
+
     test("should return 404 when the post does not exist", async () => {
     const postId = "4eb6e7e7e9b7f4194e000001"
     const response = await request(app)
@@ -332,9 +333,11 @@ describe("/posts", () => {
     await post1.save();
     let response = await request(app)
       .post(`/posts/${post1.id}/like`)
-      .set("Authorization", `Bearer ${token}`)
-    console.log(response)
-    expect(response.likes).toEqual(1)
+      .set("Authorization", `Bearer ${token}`);
+    let response2 = await request(app)
+      .post(`/posts/${post1.id}/like`)
+      .set("Authorization", `Bearer ${token}`);
+    expect(response2.body.likes).toEqual(2)
     })
   })
 
