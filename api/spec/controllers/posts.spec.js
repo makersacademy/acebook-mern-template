@@ -299,24 +299,31 @@ describe("/posts", () => {
       expect(response.body.token).toEqual(undefined);
     });
     })
-  // describe("POST /posts/:id", () => {
-  //   test("can add comments to post", async () => {
-  //     const post1 = new Post({ message: "post message"});
-  //     await post1.save();
-  //     const response = await request(app)
-  //       .post(`/posts/${post1.id}`)
-  //       .set("Authorization", `Bearer ${token}`)
-  //       //.send({message: "post message"});
-  //       .send({comment: "comment1"});
-  //     expect(response.status).toEqual(201);
-  //     const updatedPost = await Post.find()
-  //     expect(updatedPost[0].comments[0].comment).toEqual("comment1")
-      
-  //   // const newComment = new Post({
-  //   //   comments: [{ user_id: "1", comment: "new comment" }],
-  //   // });
   
-  //   })
-  // })
+    describe("POST, can add comments to posts", () => {
+    test("when the reponse code is 201", async () => {
+      let post1 = new Post({ message: "post message"});
+      await post1.save();
+      let response = await request(app)
+        .post(`/posts/${post1.id}`)
+        .set("Authorization", `Bearer ${token}`)
+        //.send({message: "post message"});
+        .send({comment: "comment1", token: token});
+      expect(response.status).toEqual(201);
+      const updatedPost = await Post.find()
+      expect(updatedPost[0].comments[0].comment).toEqual("comment1")
+      
+    // const newComment = new Post({
+    //   comments: [{ user_id: "1", comment: "new comment" }],
+    // });
+
+    })
+    // test("should return 404 when the post does not exist", async () => {
+    //   const postId = "12345"
+    //   const response = await request(app)
+    //   .post(`/posts/${postId.}`)
+    //})
+  
+  })
 
   });
