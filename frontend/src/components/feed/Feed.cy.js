@@ -1,3 +1,4 @@
+import { MemoryRouter } from 'react-router';
 import Feed from './Feed'
 const navigate = () => {}
 
@@ -13,7 +14,11 @@ describe("Feed", () => {
           ]}
         })
       }).as("getPosts")
-    cy.mount(<Feed navigate={navigate}/>)
+    cy.mount(
+      <MemoryRouter>
+        <Feed navigate={navigate}/>
+      </MemoryRouter>
+    )
     cy.wait("@getPosts").then(() =>{
       cy.get('[data-cy="post"]')
       .should('contain.text', "Hello, world")
@@ -32,7 +37,11 @@ describe("Feed", () => {
         ]}
       })
     }).as("getPosts")
-    cy.mount(<Feed navigate={navigate}/>)
+    cy.mount(
+      <MemoryRouter>
+        <Feed navigate={navigate}/>
+      </MemoryRouter>
+    )
     cy.wait("@getPosts").then(() =>{
       cy.get('[data-cy="post"]')
       cy.contains('Hello, world').click()
@@ -54,7 +63,11 @@ describe("Feed", () => {
         ]}
       })
     }).as("getPosts")
-    cy.mount(<Feed navigate={navigate}/>)
+    cy.mount(
+      <MemoryRouter>
+        <Feed navigate={navigate}/>
+      </MemoryRouter>
+    )
     cy.wait("@getPosts").then(() =>{
       cy.get('[data-cy="post"]')
         .eq(0)

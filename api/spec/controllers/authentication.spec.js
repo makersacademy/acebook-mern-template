@@ -5,7 +5,7 @@ const User = require('../../models/user');
 
 
 describe("/tokens", () => {
-  beforeAll(async () => {
+  beforeEach(async () => {
     const user = new User({ email: "test@test.com", password: "12345678", username: "person1"})
 
     // We need to use `await` so the
@@ -17,7 +17,7 @@ describe("/tokens", () => {
     await user.save()
   });
 
-  afterAll(async () => {
+  afterEach(async () => {
     await User.deleteMany({})
   })
 
