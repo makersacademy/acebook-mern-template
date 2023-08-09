@@ -9,14 +9,21 @@ input {
     width: 25%;
     margin-left: auto;
     margin-right: auto;
+    
     }
 
 input[type=submit]{
-    width:10%;
+    
     background-color: #010403;
     color: white;
     padding: 10px 25px;
-    cursor: pointer;    
+    cursor: pointer;   
+    border: 3px solid rgb(250, 247, 247);
+    text-align: center;
+    font-size: 25px;
+    width: 25%;
+    margin-left: 20px;
+    margin-right: auto;
 }
 
 input[type=submit]:hover {
@@ -47,12 +54,3 @@ div {
     font-size: 20px;
 }
 
-article {
-    color: white;
-    text-align: center;
-    font-size: 20px;
-    border: 2px solid rgb(255, 255, 255);
-    width: 50%;
-    margin-left: auto;
-    margin-right: auto;
-}

@@ -62,6 +62,7 @@ const Feed = ({ navigate }) => {
       })
   }
   
+  
 
   let postList = posts.map(
     (post) => ( <p> <Post post={ post } key={ post._id }  /> </p>)

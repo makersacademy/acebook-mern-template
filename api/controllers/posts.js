@@ -68,7 +68,7 @@ const PostsController = {
   },
 
   Like: async (req, res) => {
-    const postId = req.body.post_id;
+    const postId = req.params.id;
     const userId = req.user_id;
 
     const post = await Post.findById(postId);
@@ -82,9 +82,9 @@ const PostsController = {
       if (err) {
         throw err;
       }
-      
+      const likes = post.likes ;
       const token = await TokenGenerator.jsonwebtoken(userId)
-      res.status(201).json({ message: 'OK', token: token });
+      res.status(201).json({ likes:likes ,message: 'OK', token: token });
     })
   },
 
