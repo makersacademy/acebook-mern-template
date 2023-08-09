@@ -1,0 +1,19 @@
+.navbar .nav-link.active {
+    background-color: #7fafe2; 
+    color: white; 
+}
+
+.navbar-nav {
+    margin-left: 900px;
+    .nav-link {
+        margin-right: 10px; 
+    }
+}
+
+.navbar-brand {
+    margin-left: 0px
+}
+
+.navbar .container {
+    margin-left: 10px;
+}
