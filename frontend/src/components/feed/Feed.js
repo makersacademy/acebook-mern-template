@@ -31,10 +31,6 @@ const Feed = ({ navigate, searchQuery }) => {
 
   }, [])
 
-
-
-    
-
   const logout = () => {
     window.localStorage.removeItem("token")
     window.localStorage.removeItem("username")
@@ -65,7 +61,6 @@ const Feed = ({ navigate, searchQuery }) => {
       })
   }
   
-  
   let postList = posts.map(
     (post) => ( 
     <p> 
@@ -76,9 +71,10 @@ const Feed = ({ navigate, searchQuery }) => {
         setPosts={ setPosts }
         newPosts = {posts}
       /> 
-    </p>)
-  )
-  let postListNewsestFirst = postList.reverse()
+      </p>)
+    )
+  
+  
 
     if(token) {
       return(
@@ -105,10 +101,8 @@ const Feed = ({ navigate, searchQuery }) => {
           </form>
           <div id='feed' role="feed">
           {typeof searchQuery !== "undefined"
-           ? searchQuery.posts.map((post) => <Post post={post} key={post._id} />)
-           : {postListNewsestFirst}}
-              
-// posts.map((post) => <Post post={post} key={post._id} />)
+           ? searchQuery.posts.map((post) => <Post post={post} key={post._id} />).reverse()
+           :  posts.map((post) => <Post post={post} key={post._id} />).reverse()}
           </div>
         </>
       )
