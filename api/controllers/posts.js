@@ -49,24 +49,19 @@ const PostsController = {
   },
   Create: async(req, res) => {
     userid = req.user_id;
-    console.log(userid);
-    // // user = UsersController.GetUser(userid);
-    // console.log("hi" + user);
     const post = new Post({
       message: req.body.message,
       user: req.user_id,
-      // username : user.body.username
     });
     post.save(async(err) => {
       if (err) {
         throw err;
       }
       const user = await User.findById(userid)
+      console.log("Post", post);
       const token = TokenGenerator.jsonwebtoken(req.user_id);
-      const postId = post.id;
-      console.log(postId);
-      console.log(post);
-      res.status(201).json({ message: "OK",postId:postId, user: user, token: token });
+      res.status(201).json({ message: "OK", user: user, post: post, token: token });
+      
     });
   },
 
@@ -112,7 +107,7 @@ const PostsController = {
       // user_id - who wants to delete post
       const user_id = decodedToken.user_id;
       if (post.user.toString() !== user_id &&
-        (await Post.exists({ _od: Comment.post, user: user_id })) === false
+        (await Post.exists({ _id: Comment.post, user: user_id })) === false
       ) {
         return res
           .status(403)

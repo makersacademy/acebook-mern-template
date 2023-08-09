@@ -21,8 +21,7 @@ const LogInForm = ({ navigate }) => {
       navigate('/login')
     } else {
       let data = await response.json()
-      
-      window.localStorage.setItem("currentUserId", data.currentUserId)
+      window.localStorage.setItem("userid", data.userid)
       window.localStorage.setItem("token", data.token)
       navigate('/posts');
     }

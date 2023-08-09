@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import Post from '../post/Post'
-
+import Post, { handleDelete } from '../post/Post';
 import './Feed.css'
 
 const Feed = ({ navigate }) => {
@@ -36,6 +35,7 @@ const Feed = ({ navigate }) => {
 
   const logout = () => {
     window.localStorage.removeItem("token")
+    window.localStorage.removeItem("username")
     navigate('/login')
   }
 
@@ -66,7 +66,16 @@ const Feed = ({ navigate }) => {
   
 
   let postList = posts.map(
-    (post) => ( <p> <Post post={ post } key={ post._id } setPosts={setPosts} newPosts = {posts} /> </p>)
+    (post) => ( 
+    <p> 
+      <Post 
+        post={ post } 
+        key={ post._id }
+        token={ token }
+        setPosts={ setPosts }
+        newPosts = {posts}
+      /> 
+    </p>)
   )
   let postListNewsestFirst = postList.reverse()
 
@@ -78,8 +87,18 @@ const Feed = ({ navigate }) => {
           </button>
           <h1>Posts</h1>
           <form onSubmit={handleSubmit}>
-            <input placeholder="Make a post..." id="message" type='text' value={ message } onChange={handleMessageChange} />
-            <input id='submit' type="submit" value="Post!" />
+            <input 
+              placeholder="Make a post..." 
+              id="message" 
+              type='text' 
+              value={ message } 
+              onChange={handleMessageChange} 
+                />
+                  <input 
+                  id='submit' 
+                  type="submit" 
+                  value="Post!" 
+                />
             {errorMessage && (
             <p className="error"> {errorMessage} </p>)}
           </form>
