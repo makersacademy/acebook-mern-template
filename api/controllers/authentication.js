@@ -16,9 +16,9 @@ const AuthenticationController = {
         console.log("auth error: passwords do not match")
         res.status(401).json({ message: "auth error" });
       } else {
+        const userid = user.id;
         const token = TokenGenerator.jsonwebtoken(user.id)
-        const currentUserId = user.id
-        res.status(201).json({ currentUserId: currentUserId , token: token, message: "OK" });
+        res.status(201).json({userid: userid, token: token, message: "OK" });
       }
     });
   }

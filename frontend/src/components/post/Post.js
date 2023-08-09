@@ -1,11 +1,16 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './Post.css';
 
 
+<<<<<<< HEAD
 const Post = ({ post, setPosts , newPosts}) => {
   const currentUserId = window.localStorage.getItem("currentUserId")
+=======
+const Post = ({ post, setPosts }) => {
+  const userid = window.localStorage.getItem("userid")
+>>>>>>> 23f88cfc903809e0374c4473357ae5a0da1fdadd
   const [token, setToken] = useState(window.localStorage.getItem("token"));
-  const [liked, setLiked] = useState(post?.likes?.includes(currentUserId));
+  const [liked, setLiked] = useState(post?.likes?.includes(userid));
   const length =post?.likes?.length;
   const [likesCount, setLikesCount] = useState(length);
   const handleLike = async() => {
@@ -51,23 +56,62 @@ const Post = ({ post, setPosts , newPosts}) => {
       console.error(error);
     }
   };
+
+  const handleDelete = (postId, token, setPosts) => {
+    fetch(`/posts/${postId}`, {
+      method: 'DELETE',
+      headers: {
+        'Authorization': `Bearer ${token}`
+      }
+    })
+    .then(response => {
+      console.log("Response status:", response.status);
+      if (response.status === 200) {
+        // Remove the deleted post from the posts state
+        setPosts(prevPosts => prevPosts.filter(post => post._id !== postId));
+      } else if (response.status === 403) {
+        console.error('You are not allowed to delete this post.');
+      } else {
+        console.error('Error deleting a post');
+      }
+      })
+      .catch(error => {
+        console.error('Error:', error);
+      });
+  };
+
+  const showDeleteButton = post.user._id === userid;
   if (post.user === null){
+    
     return( 
       <article data-cy="post" > <p>ERROR</p></article>
     )
   }
   else{
     return(
-      <article data-cy="post" ><div className="post" key={ post._id }><h2>{ post.user.username }:</h2><p><h1>{ post.message }</h1></p>
-      <button onClick={handleLike} disabled={liked}>
-        {liked ? 'Liked' : 'Like'}
-      </button>
-      <span>{likesCount} {likesCount === 1 ? 'like' : 'likes'}</span></div></article>
+      <article data-cy="post" >
+  <div className="post" key={ post._id }>
+    <h2>
+      { post.user.username }:
+    </h2>
+    <p>
+      <h1>{ post.message }</h1>
+    </p>
+        <button onClick={handleLike} disabled={liked}>
+          {liked ? 'Liked' : 'Like'}
+        </button>
+      <span>{likesCount} {likesCount === 1 ? 'like' : 'likes'}</span>
+      {showDeleteButton && (
+              <button 
+              data-cy="delete-button"
+              onClick={() => handleDelete(post._id, token, setPosts)}>
+                Delete
+              </button>
+            )}
+  </div>
+</article>
     )
   }
 }
 
-
 export default Post;
-
-
