@@ -71,7 +71,7 @@ describe("Post", () => {
       }}/>);
     });
   
-    cy.get('[data-cy="delete-button"]').should('contain.text', "Delete");
+    cy.get('[data-cy="delete-button"]').should('contain.text',"🗑️");
   });
   
   it('renders a post with with likes', () => {
