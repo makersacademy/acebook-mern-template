@@ -18,29 +18,62 @@
     background-color: #ffffff;
     color: #000000;
     border: none;
-    padding: 5px 10px;
+    padding: 10px 10px;
     cursor: pointer;
     transition: background-color 0.3s;
     position: relative;
   }
 
   .post button:disabled {
-    background-color: #6e6b6b;
+    background-color: #ff0000;
     cursor: not-allowed;
   }
   ​
 
 
   /* Style for the number of likes */
-  .post .like-button {
-    margin-left: 10px;
-    font-size: 20px;
-    color: #000000;
-  }
-  .post .like-button:hover {
-    background-color: rgb(144, 87, 243);
-    transition: 0.5s;
-  }
+ .post .like-button {
+  position: absolute;
+  font-size: 20px;
+  color: #000000;
+}
+
+.post .like-button:hover {
+  background-color: rgb(126, 74, 215);
+  transition: 0.5s;
+}
+
+.post .like-container button.like-button {
+  background-color: #ffffff;
+  color: #000000;
+  border: none;
+  padding: 10px 10px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  position: relative;
+}
+
+.post .like-container button.like-button:disabled {
+  background-color: #ff0000;
+  cursor: not-allowed;
+}
+
+.post .like-container button.liked {
+  background-color: #6e6b6b;
+  color: white;
+}
+
+.post .like-container .like-count {
+  position: absolute;
+  bottom: -10px;
+  left: 25px;
+  background-color: white;
+  color: #000000;
+  font-size: 12px;
+  padding: 2px 5px;
+  border-radius: 10px;
+  z-index: 0;
+}
 
   .post .delete-button {
     position: absolute;
@@ -48,12 +81,11 @@
     right: 10px;
     width: 30px;
     height: 30px;
-    background-color: rgba(173, 173, 173, 0.5);
     border-radius: 15px;
     display: flex;
     align-items: center;
     justify-content: center;
-    transition: background-color 0.3s;
+    transition: background-color 0.5s;
   }
 
   .post .delete-button .button-icon {
@@ -69,7 +101,7 @@
     display: none;
   }
   .post .delete-button:hover {
-    background-color: rgb(255, 255, 255);
+    background-color: rgb(2, 151, 226);
   }
 
   @media screen and (max-width: 768px) {

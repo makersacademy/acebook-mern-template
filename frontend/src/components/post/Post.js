@@ -94,18 +94,23 @@ const Post = ({ post, setPosts, newPosts }) => {
             <h1>{post.message}</h1>
           </p>
           <div>{commentList}</div>
-          <button className="like-button" onClick={handleLike} disabled={liked}>
-            {liked ? "❤️ Liked" : "🤍 Like"}
-          </button>
-          <span>
-            {likesCount} {likesCount === 1 ? "like" : "likes"}
-          </span>
-
+          <button
+            className="like-button"
+            onClick={handleLike}
+            disabled={liked}
+            title={liked ? "You liked this post" : "Like this post"}
+          >
+      {liked ? "❤️" : "🤍"}
+      {likesCount > 0 && (
+        <span className="like-count">{likesCount}</span>
+          )}
+        </button>
           {showDeleteButton && (
             <button
               data-cy="delete-button"
               className="delete-button"
               onClick={() => handleDelete(post._id, token, setPosts)}
+              title="Delete this post"
             >
               <span className="button-icon">🗑️</span>
               <span className="button-text">Delete</span>
