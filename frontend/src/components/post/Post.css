@@ -1,12 +1,56 @@
-button[data-cy="delete-button"] {
+.post {
+    color: white;
+    text-align: center;
+    align-items: center;
+    font-size: 10px;
+    border: 2px solid rgb(0, 0, 0);
+    width: 50%;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  
+  .post button {
+    background-color: #ffffff;
+    color: #000000;
+    border: none;
+    padding: 5px 10px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  
+  .post button:disabled {
+    background-color: #6e6b6b;
+    cursor: not-allowed;
+  }
+
+  .post button:hover {
+    background-color:rgb(15, 37, 182);
+    transition: 0.5s;
+}
+  
+  /* Style for the number of likes */
+  .post span {
+    margin-left: 10px;
+    font-size: 20px;
+    color: #000000;
+  }
+  .button[data-cy="delete-button"] {
     position: absolute;
     bottom: 10px;
     right: 10px;
     font-size: 16px;
     padding: 5px 10px;
     border-radius: 5px;
-    background-color: #f44336;
+    background-color: #878787;
     color: white;
-    border: none;
+    border: 3px;
+    border: 1px solid #fffafa;
     cursor: pointer;
+}
+
+@media screen and (max-width: 768px) {
+  .button[data-cy="delete-button"] {
+    font-size: 14px;
+    padding: 4px 8px;
+  }
 }

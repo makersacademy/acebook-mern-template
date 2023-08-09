@@ -62,6 +62,7 @@ const Feed = ({ navigate }) => {
       })
   }
   
+  
 
   let postList = posts.map(
     (post) => ( 

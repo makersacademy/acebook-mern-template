@@ -1,38 +1,61 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import './Post.css';
 
 
-
-const handleDelete = (postId, token, setPosts) => {
-  console.log("token", token);
-  fetch(`/posts/${postId}`, {
-    method: 'DELETE',
-    headers: {
-      'Authorization': `Bearer ${token}`
+const Post = ({ post, setPosts }) => {
+  const userid = window.localStorage.getItem("userid")
+  const [token, setToken] = useState(window.localStorage.getItem("token"));
+  const [liked, setLiked] = useState(post?.likes?.includes(userid));
+  const length =post?.likes?.length;
+  const [likesCount, setLikesCount] = useState(length);
+  const handleLike = async() => {
+    try {
+      const response = await fetch(`posts/${post._id}/like`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}`
+        },
+        body: JSON.stringify({
+          
+        }),
+      });
+      
+      if (response.status === 201) {
+        const data = await response.json();
+        console.log(data)
+        setLiked(true);
+        setLikesCount(data.likes.length);
+      }
+    } catch (error) {
+      console.error(error);
     }
-  })
-  .then(response => {
-    console.log("Response status:", response.status);
-    if (response.status === 200) {
-      // Remove the deleted post from the posts state
-      setPosts(prevPosts => prevPosts.filter(post => post._id !== postId));
-      console.log("postId", postId);
-    } else if (response.status === 403) {
-      console.error('You are not allowed to delete this post.');
-    } else {
-      console.error('Error deleting a post');
-    }
+  };
+
+  const handleDelete = (postId, token, setPosts) => {
+    fetch(`/posts/${postId}`, {
+      method: 'DELETE',
+      headers: {
+        'Authorization': `Bearer ${token}`
+      }
     })
-    .catch(error => {
-      console.error('Error:', error);
-    });
-};
+    .then(response => {
+      console.log("Response status:", response.status);
+      if (response.status === 200) {
+        // Remove the deleted post from the posts state
+        setPosts(prevPosts => prevPosts.filter(post => post._id !== postId));
+      } else if (response.status === 403) {
+        console.error('You are not allowed to delete this post.');
+      } else {
+        console.error('Error deleting a post');
+      }
+      })
+      .catch(error => {
+        console.error('Error:', error);
+      });
+  };
 
-const Post = ({ post, token, setPosts }) => {
-  const userid = window.localStorage.getItem("userid");
   const showDeleteButton = post.user._id === userid;
-  console.log("POST", post);
-  console.log("POST.USER", post.user);
-  console.log("showDeleteButton", showDeleteButton);
   if (post.user === null){
     
     return( 
@@ -41,32 +64,29 @@ const Post = ({ post, token, setPosts }) => {
   }
   else{
     return(
-      <article 
-        data-cy="post" 
-        key={ post._id }
-        >
-          <h2>
-            { post.user.username }:
-          </h2>
-          <p>
-            { post.message }
-          </p>
-          <div>
-            
-            {showDeleteButton && (
+      <article data-cy="post" >
+  <div className="post" key={ post._id }>
+    <h2>
+      { post.user.username }:
+    </h2>
+    <p>
+      <h1>{ post.message }</h1>
+    </p>
+        <button onClick={handleLike} disabled={liked}>
+          {liked ? 'Liked' : 'Like'}
+        </button>
+      <span>{likesCount} {likesCount === 1 ? 'like' : 'likes'}</span>
+      {showDeleteButton && (
               <button 
               data-cy="delete-button"
               onClick={() => handleDelete(post._id, token, setPosts)}>
                 Delete
               </button>
             )}
-          </div>
-      </article>
+  </div>
+</article>
     )
   }
 }
 
-
 export default Post;
-export { handleDelete };
-

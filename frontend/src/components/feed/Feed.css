@@ -9,14 +9,21 @@ input {
     width: 25%;
     margin-left: auto;
     margin-right: auto;
+    
     }
 
 input[type=submit]{
-    width:10%;
+    
     background-color: #010403;
     color: white;
     padding: 10px 25px;
-    cursor: pointer;    
+    cursor: pointer;   
+    border: 3px solid rgb(250, 247, 247);
+    text-align: center;
+    font-size: 25px;
+    width: 25%;
+    margin-left: 20px;
+    margin-right: auto;
 }
 
 input[type=submit]:hover {
@@ -45,36 +52,4 @@ div {
     color: white;
     text-align: center;
     font-size: 20px;
-}
-
-article {
-    color: white;
-    text-align: center;
-    font-size: 20px;
-    border: 2px solid rgb(255, 255, 255);
-    width: 50%;
-    margin-left: auto;
-    margin-right: auto;
-    position: relative;
-}
-
-article button[data-cy="delete-button"] {
-    position: absolute;
-    bottom: 10px;
-    right: 10px;
-    font-size: 16px;
-    padding: 5px 10px;
-    border-radius: 5px;
-    background-color: #878787;
-    color: white;
-    border: 3px;
-    border: 1px solid #fffafa;
-    cursor: pointer;
-}
-
-@media screen and (max-width: 768px) {
-    article button[data-cy="delete-button"] {
-        font-size: 14px;
-        padding: 4px 8px;
-    }
 }

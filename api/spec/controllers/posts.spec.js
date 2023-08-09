@@ -332,9 +332,8 @@ describe("/posts", () => {
       const post = new Post({ message: "test  post 1", user: user._id, likes:[]});
       await post.save();
       await request(app)
-        .post("/posts/like")
-        .set("Authorization", `Bearer ${token}`)
-        .send({ post_id: post._id});
+        .post(`/posts/${post._id}/like`)
+        .set("Authorization", `Bearer ${token}`);
 
       const updatedPost = await Post.findById(post._id);
       expect(updatedPost.likes).toEqual(
