@@ -61,21 +61,6 @@ const Feed = ({ navigate, searchQuery, setSearchQuery }) => {
       })
   }
   
-  // let postList = posts.map(
-  //   (post) => ( 
-  //   <p> 
-  //     <Post 
-  //       post={ post } 
-  //       key={ post._id }
-  //       token={ token }
-  //       setPosts={ setPosts }
-  //       newPosts = {posts}
-  //     /> 
-  //     </p>)
-  //   )
-  
-  
-
     if(token) {
       return(
         <>
