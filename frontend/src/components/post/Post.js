@@ -132,6 +132,7 @@ const Post = ({ post, setPosts, newPosts }) => {
               <span className="post-message">{post.message}</span>
             </div>
           </p>
+          {comments && comments.length > 0 && (
             <div className="comments-box">
               <ul className="comments-list">
                 {comments && comments.map((comment, index) => (
@@ -146,7 +147,7 @@ const Post = ({ post, setPosts, newPosts }) => {
                 ))}
               </ul>
             </div>
-
+          )}
           <button
             className="like-button"
             onClick={handleLike}
