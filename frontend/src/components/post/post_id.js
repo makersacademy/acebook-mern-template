@@ -14,28 +14,29 @@ const PostId = () => {
   };
 
   const handleCommentSubmit = async () => {
-    let response = await fetch( `/posts/${id}`, {
-    method: 'post',
-    headers: {
-        'Content-Type': 'application/json',
-        'Authorization': `Bearer ${token}`
-    },
-    body: JSON.stringify({ comment: comment })
+    let response = await fetch(`/posts/${id}`, {
+      method: "post",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+      body: JSON.stringify({ comment: comment }),
     });
-    const responseStatus = response.status
-    response = await response.json()
+
+    const responseStatus = response.status;
+    response = await response.json();
 
     if (responseStatus === 201) {
       window.localStorage.setItem("token", response.token);
       setToken(window.localStorage.getItem("token"));
-      setPost({
-        message: response.post.message,
-        author: response.post.author,
+      
+      setPost((prevPost) => ({
+        ...prevPost,
         comments: response.post.comments,
-        
-      });
+      }));
     }
   };
+
 
 
   useEffect(() => {
@@ -64,7 +65,7 @@ const PostId = () => {
     <div>
       <div>
         <p data-cy="post">{post.message}</p>
-        <p data-cy="author">{post.author}</p>
+        <p data-cy="author">by {post.author}</p>
       </div>
 
       <div>
