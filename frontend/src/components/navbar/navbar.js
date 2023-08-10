@@ -22,8 +22,7 @@ const NavBar = ({
     navigate("/signup");
   };
   const posts = () => {
-    // setSearchQuery("undefined");
-    // navigate("/posts");
+  
     if (token) {
       fetch("/posts", {
         headers: {
