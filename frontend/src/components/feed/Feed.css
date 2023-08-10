@@ -20,8 +20,8 @@ input[type=submit]{
     cursor: pointer;   
     border: 3px solid rgb(250, 247, 247);
     text-align: center;
-    font-size: 25px;
-    width: 25%;
+    font-size: 20px;
+    width: auto;
     margin-left: 20px;
     margin-right: auto;
 }

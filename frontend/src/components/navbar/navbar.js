@@ -80,7 +80,7 @@ const NavBar = ({
         </>
       )}
       <button onClick={posts}>Posts</button>
-      <input
+      <input class='searchbar'
         type="text"
         placeholder="search"
         onChange={(e) => handleOnChange(e)}
