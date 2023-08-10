@@ -61,8 +61,9 @@ const PostsController = {
       const filteredPosts = posts.filter((post) =>
         post.message.includes(searchQuery)
       );
+      console.log("logging filtered posts", filteredPosts);
       res.status(200).json({ posts: filteredPosts });
-    });
+    }).populate(['user', 'comments']);
   },
 
   Create: async(req, res) => {
