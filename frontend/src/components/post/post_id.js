@@ -6,7 +6,7 @@ import NavigationBar from '../navigation/Navigation';
 const PostId = ({}) => {
     const [post, setPost] = useState({});
     const [token, setToken] = useState(window.localStorage.getItem("token"));
-    const [isLiked, setIsLiked] = useState(true);
+    const [isLiked, setIsLiked] = useState();
 
     const { id } = useParams();
 
