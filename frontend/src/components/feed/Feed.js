@@ -2,13 +2,11 @@
 import React, { useEffect, useState } from 'react';
 import Post from '../post/Post';
 import './Feed.css'
-import { useNavigate } from 'react-router-dom';
   
 const Feed = ({ navigate, searchQuery, setSearchQuery }) => {
   const [posts, setPosts] = useState([]);
   const [token, setToken] = useState(window.localStorage.getItem("token"));
   const [message, setMessage] = useState("");
-  const navigate = useNavigate();
   
   const handleMessageChange = (event) => {
     setMessage(event.target.value)
