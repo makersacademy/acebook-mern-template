@@ -18,10 +18,10 @@ input[type=submit]{
     box-sizing: border-box;
     border: 2px solid rgb(255, 255, 255);
     color: white;
-    padding: 10px 25px;
     cursor: pointer;  
     border-radius: 12px;
 }
+
 
 input[type=submit]:hover {
     background-color:rgb(15, 37, 182);

@@ -36,7 +36,7 @@ const Feed = ({ navigate, searchQuery, setSearchQuery }) => {
           setPosts(data.posts);
         });
     }
-  }, [token, navigate])
+  }, [token, navigate ])
 
 
   const handleSubmit = async (event) => {
@@ -57,6 +57,7 @@ const Feed = ({ navigate, searchQuery, setSearchQuery }) => {
           setPosts(newPosts)
           setSearchQuery(newPosts);
           setMessage("")
+          setErrorMessage();
         } else {
           setErrorMessage('Invalid message!');
           navigate('/posts')

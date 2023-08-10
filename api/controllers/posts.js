@@ -29,25 +29,30 @@ const PostsController = {
       if (!post) {
         return res.status(404).json({ message: "post not found!" });
       }
-     
-      const updatedMessage = req.body.message;
-      const userID = post.user;
+      if (req.body.message !== "") {
+        const updatedMessage = req.body.message;
+    
+      
+        const userID = post.user;
 
-      if (userID == req.user_id) {
-        post.message = updatedMessage;
-      } else {
-        return res.status(401).json({ message: "auth error" });
-      }
-
-      post.save((err) => {
-        if (err) {
-          res.status(500).json({ message: "error" });
+        if (userID == req.user_id) {
+          post.message = updatedMessage;
+        } else {
+          return res.status(401).json({ message: "auth error" });
         }
-        const token = TokenGenerator.jsonwebtoken(req.user_id);
-        res
-          .status(200)
-          .json({ message: "Post updated successfully", token: token });
-      });
+
+        post.save((err) => {
+          if (err) {
+            res.status(500).json({ message: "error" });
+          }
+          const token = TokenGenerator.jsonwebtoken(req.user_id);
+          res
+            .status(200)
+            .json({ message: "Post updated successfully", token: token });
+        });
+      } else {
+        return res.status(400).json({message: "Cannot submit empty post"})
+      }
     });
   },
 
@@ -72,12 +77,12 @@ const PostsController = {
       message: req.body.message,
       user: req.user_id,
     });
+    
     post.save(async(err) => {
       if (err) {
-        throw err;
+        return res.status(400).json({message: "Error"});
       }
       const user = await User.findById(userid)
-      console.log("Post", post);
       const token = TokenGenerator.jsonwebtoken(req.user_id);
       const postId = post.id;
       res.status(201).json({ message: "OK", postId:postId, user: user, token: token,post: post });
