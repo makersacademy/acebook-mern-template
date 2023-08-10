@@ -62,10 +62,6 @@ const Post = ({ post, setPosts, newPosts, setSearchQuery }) => {
       .then((response) => {
         console.log("Response status:", response.status);
         if (response.status === 200) {
-          // Remove the deleted post from the posts state
-          // setPosts((prevPosts) =>
-          //   prevPosts.filter((post) => post._id !== postId)
-          // );
           fetch("/posts", {
             method: "get",
             headers: {
