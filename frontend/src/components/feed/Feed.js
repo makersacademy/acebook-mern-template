@@ -64,10 +64,11 @@ const Feed = ({ navigate, searchQuery, setSearchQuery }) => {
     if(token) {
       return(
         <>
+        <h1 class='acebook'><img src="https://i.ibb.co/1Rsnzft/s-l1200.jpg" alt="s-l1200" width="70px" height="100px" border='3px solid'/>cebook</h1>
           <button onClick={logout}>
             Logout
           </button>
-          <h1>Posts</h1>
+          <h2 class='formheader'>Posts</h2>
           <form onSubmit={handleSubmit}>
             <input 
               placeholder="Make a post..." 

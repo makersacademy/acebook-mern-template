@@ -46,6 +46,8 @@ const Post = ({ post, setPosts, newPosts, setSearchQuery }) => {
           } else {
           }
         });
+
+        
       }
     } catch (error) {
       console.error(error);
