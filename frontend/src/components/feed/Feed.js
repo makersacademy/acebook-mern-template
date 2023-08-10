@@ -1,13 +1,12 @@
 
 import React, { useEffect, useState } from 'react';
-import Post, { handleDelete } from '../post/Post';
+import Post from '../post/Post';
 import './Feed.css'
 
-const Feed = ({ navigate, searchQuery }) => {
+const Feed = ({ navigate, searchQuery, setSearchQuery }) => {
   const [posts, setPosts] = useState([]);
   const [token, setToken] = useState(window.localStorage.getItem("token"));
   const [message, setMessage] = useState("");
-
   const handleMessageChange = (event) => {
     setMessage(event.target.value)
   }
@@ -31,10 +30,6 @@ const Feed = ({ navigate, searchQuery }) => {
 
   }, [])
 
-
-
-    
-
   const logout = () => {
     window.localStorage.removeItem("token")
     window.localStorage.removeItem("username")
@@ -57,6 +52,7 @@ const Feed = ({ navigate, searchQuery }) => {
           let data = await response.json()
           let newPosts = [...posts, { likes: [], message: message, _id: data.postId, user: data.user, }]
           setPosts(newPosts)
+          setSearchQuery(newPosts);
           setMessage("")
         } else {
           setErrorMessage('Invalid message!');
@@ -65,21 +61,6 @@ const Feed = ({ navigate, searchQuery }) => {
       })
   }
   
-  
-  let postList = posts.map(
-    (post) => ( 
-    <p> 
-      <Post 
-        post={ post } 
-        key={ post._id }
-        token={ token }
-        setPosts={ setPosts }
-        newPosts = {posts}
-      /> 
-    </p>)
-  )
-  let postListNewsestFirst = postList.reverse()
-
     if(token) {
       return(
         <>
@@ -105,16 +86,30 @@ const Feed = ({ navigate, searchQuery }) => {
           </form>
           <div id='feed' role="feed">
           {typeof searchQuery !== "undefined"
-           ? searchQuery.posts.map((post) => <Post post={post} key={post._id} />)
-           : {postListNewsestFirst}}
-              
-// posts.map((post) => <Post post={post} key={post._id} />)
+              ? searchQuery.map((post) => <Post
+                post={post}
+                token={token}
+                setPosts={ setPosts }
+                newPosts={posts}
+                setSearchQuery={setSearchQuery}
+                key={post._id} /> ).reverse()
+                
+              : posts.map((post) => <Post
+                post={post}
+                token={ token }
+                setPosts={ setPosts }
+                newPosts={posts}
+                setSearchQuery={setSearchQuery}
+                key={post._id} />).reverse()}
           </div>
         </>
+        
       )
+      
     } else {
       navigate('/login')
     }
+  
 }
 
 export default Feed;

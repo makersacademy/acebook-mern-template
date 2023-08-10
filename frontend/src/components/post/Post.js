@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import Comment from "../comment/Comment";
 import "./Post.css";
 
-const Post = ({ post, setPosts, newPosts }) => {
+const Post = ({ post, setPosts, newPosts, setSearchQuery }) => {
   let comments = post.comments;
   let commentList = comments?.map((comment) => (
     <p>
@@ -10,7 +10,7 @@ const Post = ({ post, setPosts, newPosts }) => {
       <Comment comment={comment} key={comment._id} />{" "}
     </p>
   ));
-
+ 
   const userid = window.localStorage.getItem("userid");
   const [token, setToken] = useState(window.localStorage.getItem("token"));
   const [liked, setLiked] = useState(post?.likes?.includes(userid));
@@ -52,8 +52,8 @@ const Post = ({ post, setPosts, newPosts }) => {
     }
   };
 
-  const handleDelete = (postId, token, setPosts) => {
-    fetch(`/posts/${postId}`, {
+  const handleDelete = () => {
+    fetch(`/posts/${post._id}`, {
       method: "DELETE",
       headers: {
         Authorization: `Bearer ${token}`,
@@ -62,10 +62,22 @@ const Post = ({ post, setPosts, newPosts }) => {
       .then((response) => {
         console.log("Response status:", response.status);
         if (response.status === 200) {
-          // Remove the deleted post from the posts state
-          setPosts((prevPosts) =>
-            prevPosts.filter((post) => post._id !== postId)
-          );
+          fetch("/posts", {
+            method: "get",
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: `Bearer ${token}`,
+            },
+          }).then(async (response) => {
+            if (response.status === 200) {
+              let data1 = await response.json();
+              let UpdatedPosts = data1.posts;
+              setPosts(UpdatedPosts);
+              setSearchQuery(UpdatedPosts);
+              console.log(UpdatedPosts)
+            } else {
+            }
+          });
         } else if (response.status === 403) {
           console.error("You are not allowed to delete this post.");
         } else {
@@ -105,7 +117,7 @@ const Post = ({ post, setPosts, newPosts }) => {
             <button
               data-cy="delete-button"
               className="delete-button"
-              onClick={() => handleDelete(post._id, token, setPosts)}
+              onClick={() => handleDelete()}
             >
               <span className="button-icon">🗑️</span>
               <span className="button-text">Delete</span>

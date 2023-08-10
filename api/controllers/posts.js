@@ -62,7 +62,7 @@ const PostsController = {
         post.message.includes(searchQuery)
       );
       res.status(200).json({ posts: filteredPosts });
-    });
+    }).populate(['user', 'comments']);
   },
 
   Create: async(req, res) => {

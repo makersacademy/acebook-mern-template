@@ -1,6 +1,10 @@
 import React, { useState } from "react";
 
+
 const NavBar = ({
+  token,
+  setToken,
+  setPosts,
   isLoggedIn,
   handleLogout,
   handleLogin,
@@ -18,7 +22,20 @@ const NavBar = ({
     navigate("/signup");
   };
   const posts = () => {
-    navigate("/posts");
+  
+    if (token) {
+      fetch("/posts", {
+        headers: {
+          'Authorization': `Bearer ${token}`,
+        },
+      })
+        .then((response) => response.json())
+        .then(async (data) => {
+          window.localStorage.setItem("token", data.token);
+          setToken(window.localStorage.getItem("token"));
+          setPosts(data.posts);
+        });
+    }
   };
   const myPosts = () => {
     navigate("/myPosts");
@@ -32,7 +49,8 @@ const NavBar = ({
     })
       .then((response) => response.json())
       .then(async (data) => {
-        await setSearchQuery(data);
+        console.log(data)
+        await setSearchQuery(data.posts);
         console.log({ data });
       });
   };
