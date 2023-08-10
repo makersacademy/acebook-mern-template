@@ -67,7 +67,6 @@ const PostsController = {
       return res.status(404).json({error: "Post not found"});
     }
     const token = TokenGenerator.jsonwebtoken(req.user_id);
-    console.log("------------", post)
     const author = post.user_id.username
 
     const logged_in_user = await User.findById(req.user_id)
@@ -100,26 +99,6 @@ const PostsController = {
     res.status(201).json({ message: "Post liked"})
   }
 
-  // RemoveLike: async (req, res) => {
-  //   const post = await Post.findById(req.params.id).populate("user_id")
-  //   const token = TokenGenerator.jsonwebtoken(req.user_id);
-  //   const logged_in_user = await User.findById(req.user_id);
-
-  //   if (!post) {
-  //     return res.status(404).json({error: "Post not found"});
-  //   }
-    
-  //   if (!token) {
-  //     return res.status(401).json({error: "Auth error"});
-  //   }
-
-  //   console.log("Likes before", post.likes)
-  //   post.likes = post.likes.filter(user => user !== logged_in_user.username)
-  //   console.log("Likes after", post.likes)
-  //   await post.save();
-        
-  //   res.status(200).json({ message: "Post unliked"})
-  // }
 }
 
 
