@@ -57,4 +57,11 @@ describe("Post model", () => {
     expect(posts[0].comments[0].comment).toEqual("new comment");
   });
 
+  it("has a like field and returns likes", async () => {
+    const post = new Post({ message: "some message", user_id: "64d252785e8bb4153df2c997", likes: 1});
+    await post.save();
+    const posts = await Post.find();
+    expect(posts[0].likes).toEqual(1);
+    })
+
 });
