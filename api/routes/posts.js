@@ -8,6 +8,6 @@ router.post("/", PostsController.Create);
 router.put("/:id", PostsController.Update);
 router.post("/:id", PostsController.PostComment);
 router.get("/:id", PostsController.Get);
-router.post("/:id/like", PostsController.AddLike)
+router.post("/:id/likeUnlike", PostsController.AddOrRemoveLike)
 
 module.exports = router;

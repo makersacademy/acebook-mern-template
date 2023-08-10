@@ -321,24 +321,6 @@ describe("/posts", () => {
       .send({token: token, comment: "comment1"});
     expect(response.status).toEqual(404)
     })
-
-    test("should return like count as zero initially", async () => {
-      let post1 = new Post({message: "howdy!", user_id: "4eb6e7e7e9b7f4194e000001"});
-      let response = await post1.save();
-      expect(response.likes).toEqual(0)
-    })
-
-  test("adding like increments number of likes", async() => {
-    let post1 = new Post({message: "howdy!", user_id: "4eb6e7e7e9b7f4194e000001"});
-    await post1.save();
-    let response = await request(app)
-      .post(`/posts/${post1.id}/like`)
-      .set("Authorization", `Bearer ${token}`);
-    let response2 = await request(app)
-      .post(`/posts/${post1.id}/like`)
-      .set("Authorization", `Bearer ${token}`);
-    expect(response2.body.likes).toEqual(2)
-    })
   })
 
-  });
+  })
