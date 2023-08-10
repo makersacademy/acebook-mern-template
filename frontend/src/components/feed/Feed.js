@@ -85,9 +85,6 @@ const Feed = ({ navigate, searchQuery, setSearchQuery }) => {
             <p className="error"> {errorMessage} </p>)}
           </form>
           <div id='feed' role="feed">
-          {/* searchbutton oncllick show - searchQuery.posts.map((post) => <Post post={post} key={post._id} 
-          returntoallposts button shows posts.map((post) => <Post post={post} key={post._id} />).reverse()}
-           */}
           {typeof searchQuery !== "undefined"
               ? searchQuery.map((post) => <Post
                 post={post}
