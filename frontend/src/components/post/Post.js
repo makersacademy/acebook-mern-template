@@ -15,6 +15,7 @@ const Post = ({ post, setPosts, newPosts, setSearchQuery }) => {
   const [token, setToken] = useState(window.localStorage.getItem("token"));
   const [liked, setLiked] = useState(post?.likes?.includes(userid));
   const length = post?.likes?.length;
+  const [editedMessage, setEditedMessage] = useState(post.message);
   const [likesCount, setLikesCount] = useState(length);
   const handleLike = async () => {
     try {
@@ -90,8 +91,42 @@ const Post = ({ post, setPosts, newPosts, setSearchQuery }) => {
         console.error("Error:", error);
       });
   };
+  const [isEditing, setIsEditing] = useState(false);
+  const handleEditClick = () => {
+    setIsEditing(true);
+  };
+  const handleUpdateClick = async () => {
+    try {
+      const response = await fetch(`/posts/${post._id}`, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify({ message: editedMessage }),
+      });
+
+      if (response.status === 200) {
+        setIsEditing(false);
+        // Update the post message in the posts state
+        setPosts((prevPosts) =>
+          prevPosts.map((editedPost) => (
+            editedPost._id === post._id ? { 
+              ...editedPost, message: editedMessage 
+            } 
+            : editedPost))
+        );
+      }
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  const showEditButton = post.user._id === userid;
+
 
   const showDeleteButton = post.user._id === userid;
+  
   if (post.user === null) {
     return (
       <article data-cy="post">
@@ -103,26 +138,74 @@ const Post = ({ post, setPosts, newPosts, setSearchQuery }) => {
     return (
       <article data-cy="post">
         <div className="post" key={post._id}>
-          <h2>{post.user.username}:</h2>
+          <div className="username-box">
+            <span className="username">{post.user.username}</span>
+          </div>
           <p>
-            <h1>{post.message}</h1>
+            <div className="post-box">
+              <span className="post-message">{post.message}</span>
+            </div>
           </p>
-          <div>{commentList}</div>
-          <button onClick={handleLike} disabled={liked}>
-            {liked ? "❤️ Liked" : "🤍 Like"}
+          {comments && comments.length > 0 && (
+            <div className="comments-box">
+              <ul className="comments-list">
+                {comments && comments.map((comment, index) => (
+                  <li className="comment" key={index}>
+                    <div className="comment-username-box">
+                      <div className="comment-user">
+                        <span className="username">{comment.username}</span>
+                      </div>
+                    </div>
+                    <div className="comment-content">{comment.comment}</div>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )}
+          <button
+            className="like-button"
+            onClick={handleLike}
+            disabled={liked}
+            title={liked ? "You liked this post" : "Like this post"}
+          >
+      {liked ? "🤍" : "❤️"}
+      {likesCount > 0 && (
+        <span className="like-count">{likesCount}</span>
+          )}
+        </button>
+
+        {showEditButton && !isEditing && (
+          <button
+            className="edit-button"
+            onClick={handleEditClick}
+            title="Edit this post"
+          >
+            <span className="button-icon">✏️</span>
           </button>
-          <span>
-            {likesCount} {likesCount === 1 ? "like" : "likes"}
-          </span>
+        )}
+
+        {isEditing ? (
+          <div className="edit-form">
+            <textarea
+              value={editedMessage}
+              onChange={(e) => setEditedMessage(e.target.value)}
+              rows={3}
+            />
+            <button 
+            onClick={handleUpdateClick} 
+            className="update-button"
+            title="Save changes">✅</button>
+          </div>
+        ) : null}
 
           {showDeleteButton && (
             <button
               data-cy="delete-button"
               className="delete-button"
-              onClick={() => handleDelete()}
+              onClick={() => handleDelete(post._id, token, setPosts)}
+              title="Delete this post"
             >
               <span className="button-icon">🗑️</span>
-              <span className="button-text">Delete</span>
             </button>
           )}
         </div>

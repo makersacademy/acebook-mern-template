@@ -1,76 +1,224 @@
-post {
+.post {
   color: white;
   text-align: center;
   align-items: center;
   font-size: 10px;
-  border: 2px solid rgb(0, 0, 0);
+  border: 2px solid rgb(255, 255, 255);
+  border-radius: 15px;
+  padding: 15px;
   width: 50%;
   margin-left: auto;
   margin-right: auto;
-  position: relative
+  position: relative;
 }
 
 .post button {
   background-color: #ffffff;
-  color: #000000;
+  color: #0026ff;
   border: none;
-  padding: 5px 10px;
+  padding: 10px 10px;
   cursor: pointer;
   transition: background-color 0.3s;
   position: relative;
 }
 
 .post button:disabled {
-  background-color: #6e6b6b;
+  background-color: #4a4a4a;
   cursor: not-allowed;
 }
-​
-.post button:hover {
-  background-color:rgb(15, 37, 182);
-  transition: 0.5s;
-}
+  .username-box {
+    position: absolute;
+    top: 5;
+    align-items: center;
+    background-color: rgb(255, 255, 255);
+    padding: 2px;
+    border: 2px solid rgb(0, 0, 0);
+    border-radius: 5px;
+  }
 
-/* Style for the number of likes */
-.post span {
-  margin-left: 10px;
-  font-size: 20px;
-  color: #000000;
-}
-/* .post .delete-button {
-  position: absolute;
-  bottom: 10px;
-  right: 10px;
-  width: 30px;
-  height: 30px;
-  background-color: rgba(173, 173, 173, 0.5);
-  border-radius: 15px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: background-color 0.3s;
-}
+  .username {
+    color: rgb(0, 0, 0);
+    font-weight: bold;
+    font-size: 12px;
+  }
 
-.post .delete-button .button-icon {
-  display: inline-block;
-  position: absolute;
-  bottom: 5px;
-  right: 7.8px;
-  font-size: 14px;
-  vertical-align: middle;
-}
+  .post .post-box {
+    background-color: rgba(255, 255, 255, 0.5);
+    border: 2px solid black;
+    padding: 10px;
+    color: black;
+    word-wrap: break-word;
+    white-space: pre-wrap;
+    border-radius: 15px;
+  }
+  
 
-.post .delete-button .button-text {
-  display: none;
-}
-.post .delete-button:hover {
-  background-color: rgb(46, 38, 38);
-}
+  .post .post-message {
+    display: inline-block;
+    vertical-align: middle;
+  }
 
-​
-​
-@media screen and (max-width: 768px) {
-.button[data-cy="delete-button"] {
-  font-size: 14px;
-  padding: 4px 8px;
-}
-} */
+  .post .like-button {
+    position: absolute;
+    bottom: 10px;
+    left: 10px;
+    width: 30px;
+    height: 30px;
+    border-radius: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color 0.5s;
+  }
+
+  .post .like-count {
+    display: inline-block;
+    color: #000000;
+    padding: 2px 5px;
+    border-radius: 5px;
+    background-color: #ffffff;
+    position: absolute;
+    bottom: 0px;
+    right: -10px;
+    font-size: 10px;
+    line-height: 1;
+  }
+  
+  .post .like-button:hover {
+    background-color: yellow;
+  }
+
+  .post .delete-button {
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+    width: 30px;
+    height: 30px;
+    border-radius: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color 0.5s;
+  }
+
+  .post .delete-button .button-icon {
+    display: inline-block;
+    position: absolute;
+    bottom: 5px;
+    right: 7.8px;
+    font-size: 14px;
+    vertical-align: middle;
+  }
+
+  .post .delete-button:hover {
+    background-color: yellow;
+  }
+
+  .post .edit-button {
+    position: absolute;
+    bottom: 10px;
+    right: 50px;
+    width: 30px;
+    height: 30px;
+    border-radius: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color 0.5s;
+  }
+
+  .post .edit-button .button-icon {
+    display: inline-block;
+    position: absolute;
+    bottom: 5px;
+    right: 7.8px;
+    font-size: 14px;
+    vertical-align: middle;
+  }
+  
+  .post .edit-button:hover {
+    background-color: yellow;
+  }
+
+  .post .edit-form {
+    margin-top: 10px;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .post .edit-form textarea {
+    width: 100%;
+    padding: 8px;
+    border: 2px solid #000000;
+    border-radius: 5px;
+    resize: vertical;
+  }
+
+  .post .update-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    bottom: 40px;
+    right: 30px;
+    width: 30px;
+    height: 30px;
+    border-radius: 15px;
+    border: 2px solid rgb(0, 0, 0);
+    font-size: 14px;
+    vertical-align: middle;
+  }
+  
+  .post .update-button:hover {
+    background-color: yellow;
+  }
+
+  .post .comment-user {
+    display: flex;
+    align-items: center;
+    margin-bottom: 5px;
+  }
+
+  .post .comment-username-box {
+    background-color: rgb(255, 255, 255);
+    padding: 2px;
+    text-align: right;
+    border: 2px solid rgb(0, 0, 0);
+    border-radius: 5px;
+    margin-right: 5px;
+    margin-left: auto;
+  }
+  .post .comments-box {
+    position: sticky;
+    margin-top: 5px;
+    padding: 0px;
+    border-radius: 15px;
+    background-color: rgba(66, 66, 66, 0.5);
+    border: 2px solid #ffffff;
+    width: auto;
+  }
+  
+  .post .comments-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    max-height: 150px;
+    font-size: 15px;
+    overflow-y: auto;
+  }
+  
+  .post .comment {
+    
+    padding: 5px 10px;
+    border-radius: 5px;
+    margin: 5px 0;
+    text-align: right;
+    word-wrap: break-word;
+    white-space: pre-wrap;
+  }
+
+  @media screen and (max-width: 768px) {
+  .button[data-cy="delete-button"] {
+    font-size: 14px;
+    padding: 4px 8px;
+  }}
