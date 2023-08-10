@@ -3,11 +3,10 @@ import React, { useEffect, useState } from 'react';
 import { useParams } from "react-router-dom";
 import NavigationBar from '../navigation/Navigation';
 
-
 const PostId = ({}) => {
     const [post, setPost] = useState({});
     const [token, setToken] = useState(window.localStorage.getItem("token"));
-    const [isLiked, setIsLiked] = useState(false);
+    const [isLiked, setIsLiked] = useState(true);
 
     const { id } = useParams();
 
@@ -21,6 +20,9 @@ const PostId = ({}) => {
                 .then(async data => {
                     window.localStorage.setItem("token", data.token)
                     setToken(window.localStorage.getItem("token"))
+                    const isPostLikedByUser = data.likes.includes(data.logged_in_user)
+                    setIsLiked(isPostLikedByUser)
+                    
                     setPost(
                         {
                         message: data.message,
