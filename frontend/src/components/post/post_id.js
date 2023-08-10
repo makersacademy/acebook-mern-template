@@ -5,6 +5,7 @@ const PostId = () => {
   const [post, setPost] = useState({});
   const [token, setToken] = useState(window.localStorage.getItem("token"));
   const [comment, setComment] = useState("");
+  const [allPostComments, setAllPostComments] = useState(["This post has no comments"]);
 
   const { id } = useParams();
 
@@ -13,27 +14,32 @@ const PostId = () => {
   };
 
   const handleCommentSubmit = async () => {
-           let response = await fetch( `/posts/${id}`, {
-            method: 'post',
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': `Bearer ${token}`
-            },
-            body: JSON.stringify({ comment: comment })
-            });
-            console.log(comment)
-            response = await response.json()
-            if(response.status === 201) {
-                window.localStorage.setItem("token", response.token);
-                setToken(window.localStorage.getItem("token"));
-                setPost({
-                  message: response.message,
-                  author: response.author,
-                  comments: response.post.comments,
-                });
-            }
+    let response = await fetch( `/posts/${id}`, {
+    method: 'post',
+    headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${token}`
+    },
+    body: JSON.stringify({ comment: comment })
+    });
+    const responseStatus = response.status
+    response = await response.json()
 
+    if (responseStatus === 201) {
+      window.localStorage.setItem("token", response.token);
+      setToken(window.localStorage.getItem("token"));
+      setPost({
+        message: response.message,
+        author: response.author,
+        comments: response.post.comments,
+      });
+    }
   };
+
+  
+  useEffect(() => {
+    setAllPostComments(post.comments)
+  }, [post]);
 
   useEffect(() => {
     fetch(`/posts/${id}`, {
@@ -51,19 +57,20 @@ const PostId = () => {
           comments: data.comments,
         });
       });
-  }, {});
+  }, []);
 
   return (
     <div>
       <p data-cy="post">{post.message}</p>
       <p data-cy="author">{post.author}</p>
-
       <div>
-          <p data-cy="comments">{post.comments}</p>
+        <ul data-cy="comments">
+          {allPostComments &&
+            allPostComments.map((commentObject, index) => {
+              return <li key={index}>{commentObject.comment}</li>;
+            })}
+        </ul>
       </div>
-
-        {/* {console.log(post.comments)} */}
-
       <div>
         <input
           type="text"
