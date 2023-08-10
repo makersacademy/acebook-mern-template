@@ -96,7 +96,11 @@ const Post = ({ post, setPosts, newPosts }) => {
         setIsEditing(false);
         // Update the post message in the posts state
         setPosts((prevPosts) =>
-          prevPosts.map((editedPost) => (editedPost._id === post._id ? { ...editedPost, message: editedMessage } : editedPost))
+          prevPosts.map((editedPost) => (
+            editedPost._id === post._id ? { 
+              ...editedPost, message: editedMessage 
+            } 
+            : editedPost))
         );
       }
     } catch (error) {
@@ -120,18 +124,36 @@ const Post = ({ post, setPosts, newPosts }) => {
     return (
       <article data-cy="post">
         <div className="post" key={post._id}>
-          <h2>{post.user.username}:</h2>
+          <div className="username-box">
+            <span className="username">{post.user.username}</span>
+          </div>
           <p>
-            <h1>{post.message}</h1>
+            <div className="post-box">
+              <span className="post-message">{post.message}</span>
+            </div>
           </p>
-          <div>{commentList}</div>
+            <div className="comments-box">
+              <ul className="comments-list">
+                {comments && comments.map((comment, index) => (
+                  <li className="comment" key={index}>
+                    <div className="comment-username-box">
+                      <div className="comment-user">
+                        <span className="username">{comment.username}</span>
+                      </div>
+                    </div>
+                    <div className="comment-content">{comment.comment}</div>
+                  </li>
+                ))}
+              </ul>
+            </div>
+
           <button
             className="like-button"
             onClick={handleLike}
             disabled={liked}
             title={liked ? "You liked this post" : "Like this post"}
           >
-      {liked ? "❤️" : "🤍"}
+      {liked ? "🤍" : "❤️"}
       {likesCount > 0 && (
         <span className="like-count">{likesCount}</span>
           )}
@@ -143,19 +165,21 @@ const Post = ({ post, setPosts, newPosts }) => {
             onClick={handleEditClick}
             title="Edit this post"
           >
-            <span className="button-icon">✎</span>
-            <span className="button-text">Edit</span>
+            <span className="button-icon">✏️</span>
           </button>
         )}
 
         {isEditing ? (
-          <div>
+          <div className="edit-form">
             <textarea
               value={editedMessage}
               onChange={(e) => setEditedMessage(e.target.value)}
-              rows={4}
+              rows={3}
             />
-            <button onClick={handleUpdateClick}>Update</button>
+            <button 
+            onClick={handleUpdateClick} 
+            className="update-button"
+            title="Save changes">✅</button>
           </div>
         ) : null}
 
@@ -167,7 +191,6 @@ const Post = ({ post, setPosts, newPosts }) => {
               title="Delete this post"
             >
               <span className="button-icon">🗑️</span>
-              <span className="button-text">Delete</span>
             </button>
           )}
         </div>

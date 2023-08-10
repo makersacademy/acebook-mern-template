@@ -9,43 +9,12 @@
   width: 50%;
   margin-left: auto;
   margin-right: auto;
-  position: relative
+  position: relative;
 }
 
-
-
-  .post button {
-    background-color: #ffffff;
-    color: #000000;
-    border: none;
-    padding: 10px 10px;
-    cursor: pointer;
-    transition: background-color 0.3s;
-    position: relative;
-  }
-
-  .post button:disabled {
-    background-color: #ff0000;
-    cursor: not-allowed;
-  }
-  ​
-
-
-  /* Style for the number of likes */
- .post .like-button {
-  position: absolute;
-  font-size: 20px;
-  color: #000000;
-}
-
-.post .like-button:hover {
-  background-color: rgb(126, 74, 215);
-  transition: 0.5s;
-}
-
-.post .like-container button.like-button {
+.post button {
   background-color: #ffffff;
-  color: #000000;
+  color: #0026ff;
   border: none;
   padding: 10px 10px;
   cursor: pointer;
@@ -53,27 +22,71 @@
   position: relative;
 }
 
-.post .like-container button.like-button:disabled {
-  background-color: #ff0000;
+.post button:disabled {
+  background-color: #4a4a4a;
   cursor: not-allowed;
 }
+  .username-box {
+    position: absolute;
+    top: 5;
+    align-items: center;
+    background-color: rgb(255, 255, 255);
+    padding: 2px;
+    border: 2px solid rgb(0, 0, 0);
+    border-radius: 5px;
+  }
 
-.post .like-container button.liked {
-  background-color: #6e6b6b;
-  color: white;
-}
+  .username {
+    color: rgb(0, 0, 0);
+    font-weight: bold;
+    font-size: 12px;
+  }
 
-.post .like-container .like-count {
-  position: absolute;
-  bottom: -10px;
-  left: 25px;
-  background-color: white;
-  color: #000000;
-  font-size: 12px;
-  padding: 2px 5px;
-  border-radius: 10px;
-  z-index: 0;
-}
+  .post .post-box {
+    background-color: rgba(255, 255, 255, 0.5);
+    border: 2px solid black;
+    padding: 10px;
+    color: black;
+    word-wrap: break-word;
+    white-space: pre-wrap;
+    border-radius: 15px;
+  }
+  
+
+  .post .post-message {
+    display: inline-block;
+    vertical-align: middle;
+  }
+
+  .post .like-button {
+    position: absolute;
+    bottom: 10px;
+    left: 10px;
+    width: 30px;
+    height: 30px;
+    border-radius: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color 0.5s;
+  }
+
+  .post .like-count {
+    display: inline-block;
+    color: #000000;
+    padding: 2px 5px;
+    border-radius: 5px;
+    background-color: #ffffff;
+    position: absolute;
+    bottom: 0px;
+    right: -10px;
+    font-size: 10px;
+    line-height: 1;
+  }
+  
+  .post .like-button:hover {
+    background-color: yellow;
+  }
 
   .post .delete-button {
     position: absolute;
@@ -97,11 +110,111 @@
     vertical-align: middle;
   }
 
-  .post .delete-button .button-text {
-    display: none;
-  }
   .post .delete-button:hover {
-    background-color: rgb(2, 151, 226);
+    background-color: yellow;
+  }
+
+  .post .edit-button {
+    position: absolute;
+    bottom: 10px;
+    right: 50px;
+    width: 30px;
+    height: 30px;
+    border-radius: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color 0.5s;
+  }
+
+  .post .edit-button .button-icon {
+    display: inline-block;
+    position: absolute;
+    bottom: 5px;
+    right: 7.8px;
+    font-size: 14px;
+    vertical-align: middle;
+  }
+  
+  .post .edit-button:hover {
+    background-color: yellow;
+  }
+
+  .post .edit-form {
+    margin-top: 10px;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .post .edit-form textarea {
+    width: 100%;
+    padding: 8px;
+    border: 2px solid #000000;
+    border-radius: 5px;
+    resize: vertical;
+  }
+
+  .post .update-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    bottom: 40px;
+    right: 30px;
+    width: 30px;
+    height: 30px;
+    border-radius: 15px;
+    border: 2px solid rgb(0, 0, 0);
+    font-size: 14px;
+    vertical-align: middle;
+  }
+  
+  .post .update-button:hover {
+    background-color: yellow;
+  }
+
+  .post .comment-user {
+    display: flex;
+    align-items: center;
+    margin-bottom: 5px;
+  }
+
+  .post .comment-username-box {
+    background-color: rgb(255, 255, 255);
+    padding: 2px;
+    text-align: right;
+    border: 2px solid rgb(0, 0, 0);
+    border-radius: 5px;
+    margin-right: 5px;
+    margin-left: auto;
+  }
+  .post .comments-box {
+    position: sticky;
+    margin-top: 5px;
+    padding: 0px;
+    border-radius: 15px;
+    background-color: rgba(66, 66, 66, 0.5);
+    border: 2px solid #ffffff;
+    width: auto;
+  }
+  
+  .post .comments-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    max-height: 150px;
+    font-size: 15px;
+    overflow-y: auto;
+  }
+  
+  .post .comment {
+    
+    padding: 5px 10px;
+    border-radius: 5px;
+    margin: 5px 0;
+    text-align: right;
+    word-wrap: break-word;
+    white-space: pre-wrap;
   }
 
   @media screen and (max-width: 768px) {

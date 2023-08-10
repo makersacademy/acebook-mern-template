@@ -27,7 +27,7 @@ input[type=submit]{
 }
 
 input[type=submit]:hover {
-    background-color:rgb(15, 37, 182);
+    background-color:rgb(91, 91, 91);
     transition: 0.5s;
 }
 
@@ -48,8 +48,8 @@ h2 {
     font-size: 20px;
 }
 
-/* div {
+div {
     color: white;
     text-align: center;
     font-size: 20px;
-} */
+}

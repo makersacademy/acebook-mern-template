@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import Post, { handleDelete } from '../post/Post';
-import './Feed.css'
+import './Feed.css';
+import { useNavigate } from 'react-router-dom';
 
-const Feed = ({ navigate }) => {
+const Feed = () => {
   const [posts, setPosts] = useState([]);
   const [token, setToken] = useState(window.localStorage.getItem("token"));
   const [message, setMessage] = useState("");
-
+  const navigate = useNavigate();
   const handleMessageChange = (event) => {
     setMessage(event.target.value)
   }
@@ -20,14 +21,21 @@ const Feed = ({ navigate }) => {
           'Authorization': `Bearer ${token}`
         }
       })
-        .then(response => response.json())
+        .then(response => {
+          if (response.status === 401) {
+            navigate('/login');
+            return;
+          }
+          return response.json();
+        })
         .then(async data => {
+          if (!data) return;
           window.localStorage.setItem("token", data.token)
           setToken(window.localStorage.getItem("token"))
           setPosts(data.posts);
         })
     }
-  }, [])
+  }, [token, navigate])
 
 
 
