@@ -1,13 +1,13 @@
 import NavigationBar from "../navigation/Navigation";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { useParams } from "react-router-dom";
 // import EditPostForm from "./editPostForm"; // don't have this in at the moment, we could add it back later to make the code more DRY
 
 const PostId = () => {
-    const [post, setPost] = useState({ message: "", author: "" }); // Initial state with empty values
+    const [post, setPost] = useState({ message: "", author: "", authorId: ""}); // Initial state with empty values
     const [token, setToken] = useState(window.localStorage.getItem("token"));
     const [editPostValue, setEditPostValue] = useState(""); // State for form input value
-
+    const ref = useRef(null);
     const { id } = useParams();
 
     useEffect(() => {
@@ -23,9 +23,10 @@ const PostId = () => {
                 setPost({
                     message: data.message,
                     author: data.author,
+                    authorId: data.authorId
                 });
             });
-    }, {});
+    }, []);
 
     const editPost = () => {
         fetch(`/posts/${id}`, {
@@ -39,7 +40,7 @@ const PostId = () => {
             }),
         })
             .then((response) => response.json())
-            .then(async (data) => {
+            .then( (data) => {
                 window.localStorage.setItem("token", data.token);
                 setToken(window.localStorage.getItem("token"));
                 setPost({ ...post, message: data.message }); // spread operator to update the message but keep the author
@@ -54,21 +55,22 @@ const PostId = () => {
                 <p data-cy="post">{post.message}</p>
                 <p data-cy="author">{post.author}</p>
             </div>
-            <div>
+            { window.localStorage.getItem("userId") === post.authorId ?
+            <div> 
                 <form data-cy="editPostForm" onSubmit={editPost}>
                     <label>
-                        Message:
                         <input
+                            ref={ref}
+                            defaultValue={post.message}
                             data-cy="editPost"
                             type="text"
                             name="message"
-                            value={editPostValue} // Use the state value here
                             onChange={(e) => setEditPostValue(e.target.value)}
                         />
                     </label>
-                    <input type="submit" value="Submit" />
+                    <input data-cy='submit' type="submit" value="Edit Post" />
                 </form>
-            </div>
+            </div> : null}
         </>
     );
 };
