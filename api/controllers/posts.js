@@ -10,7 +10,16 @@ const UsersController = require("../controllers/users")
 const PostsController = {
 
   Index: async(req, res) => {
-    const posts = await Post.find().populate(['user','comments']).exec();
+    const posts = await Post.find()
+    .populate({
+      path: 'user',
+      select: '-password -userid'
+    })
+    .populate({
+      path: 'comment',
+      select: '-user'
+    })
+    .exec();
     if (!posts){
       res.status(500);
     }
