@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
 
-const LogInForm = ({ navigate }) => {
+const LogInForm = ({ navigate, onSuccess }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
@@ -8,33 +8,38 @@ const LogInForm = ({ navigate }) => {
   const handleSubmit = async (event) => {
     event.preventDefault();
 
-    let response = await fetch( '/tokens', {
-      method: 'post',
+    let response = await fetch("/tokens", {
+      method: "post",
       headers: {
-        'Content-Type': 'application/json',
+        "Content-Type": "application/json",
       },
-      body: JSON.stringify({ email: email, password: password })
-    })
 
-    if(response.status !== 201) {
+      body: JSON.stringify({
+        email: email,
+        password: password,
+      }),
+    });
+
+    if (response.status !== 201) {
       setErrorMessage('Invalid user!');
-      navigate('/login')
+      navigate("/login");
     } else {
-      let data = await response.json()
+      onSuccess();
+      let data = await response.json();
       window.localStorage.setItem("userid", data.userid)
-      window.localStorage.setItem("token", data.token)
-      navigate('/posts');
+      window.localStorage.setItem("token", data.token);
+      navigate("/posts");
+
     }
-  }
+  };
 
   const handleEmailChange = (event) => {
-    setEmail(event.target.value)
-  }
+    setEmail(event.target.value);
+  };
 
   const handlePasswordChange = (event) => {
-    setPassword(event.target.value)
-  }
-
+    setPassword(event.target.value);
+  };
 
   const signup = () => {
     navigate('/signup')
@@ -66,5 +71,6 @@ const LogInForm = ({ navigate }) => {
         </div>
       );
 }
+
 
 export default LogInForm;

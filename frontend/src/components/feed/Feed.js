@@ -1,8 +1,9 @@
+
 import React, { useEffect, useState } from 'react';
 import Post, { handleDelete } from '../post/Post';
 import './Feed.css'
 
-const Feed = ({ navigate }) => {
+const Feed = ({ navigate, searchQuery }) => {
   const [posts, setPosts] = useState([]);
   const [token, setToken] = useState(window.localStorage.getItem("token"));
   const [message, setMessage] = useState("");
@@ -14,19 +15,20 @@ const Feed = ({ navigate }) => {
 
   
   useEffect(() => {
-    if(token) {
+    if (token) {
       fetch("/posts", {
         headers: {
-          'Authorization': `Bearer ${token}`
-        }
+          'Authorization': `Bearer ${token}`,
+        },
       })
-        .then(response => response.json())
-        .then(async data => {
-          window.localStorage.setItem("token", data.token)
-          setToken(window.localStorage.getItem("token"))
+        .then((response) => response.json())
+        .then(async (data) => {
+          window.localStorage.setItem("token", data.token);
+          setToken(window.localStorage.getItem("token"));
           setPosts(data.posts);
-        })
+        });
     }
+
   }, [])
 
 
@@ -103,7 +105,11 @@ const Feed = ({ navigate }) => {
             <p className="error"> {errorMessage} </p>)}
           </form>
           <div id='feed' role="feed">
-              {postListNewsestFirst}
+          {typeof searchQuery !== "undefined"
+           ? searchQuery.posts.map((post) => <Post post={post} key={post._id} />)
+           : {postListNewsestFirst}}
+              
+// posts.map((post) => <Post post={post} key={post._id} />)
           </div>
         </>
       )
@@ -113,3 +119,4 @@ const Feed = ({ navigate }) => {
 }
 
 export default Feed;
+

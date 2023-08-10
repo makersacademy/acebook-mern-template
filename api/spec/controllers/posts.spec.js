@@ -10,7 +10,6 @@ const TokenGenerator = require("../../lib/token_generator");
 const mongoose = require("mongoose");
 
 
-
 let token;
 
 
@@ -42,11 +41,11 @@ describe("/posts", () => {
   afterAll(async () => {
     await User.deleteMany({});
     await Post.deleteMany({});
-  })
-  
+  });
+
   describe("PUT, when token is present", () => {
     test("response with a 200, and message updated", async () => {
-      const post = new Post({ message: "test  post 1", user: user._id});
+      const post = new Post({ message: "test  post 1", user: user._id });
 
       await post.save();
       const updatedMessage = "updated message";
@@ -60,8 +59,6 @@ describe("/posts", () => {
       const updatedPost = await Post.findById(post.id);
       expect(updatedPost.message).toEqual("updated message");
     });
-
-
 
     test("response with an auth error if wrong user, and message consequently does not update", async () => {
       const post = new Post({ message: "test post 2", user: user._id });
@@ -84,7 +81,6 @@ describe("/posts", () => {
       const updatedPost = await Post.findById(post.id);
       expect(updatedPost.message).toEqual("test post 2");
     });
-
   });
 
   describe("POST, when token is present", () => {
@@ -263,6 +259,7 @@ describe("/posts", () => {
       expect(response.body.token).toEqual(undefined);
     });
   });
+
   describe("DELETE, when token is present", () => {
 		test("delete a post by post's author with 200 response", async () => {
       let post = new Post({ message: "to delete", user: user._id })
@@ -374,3 +371,4 @@ describe("/posts", () => {
 
 
 });
+
