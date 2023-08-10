@@ -29,14 +29,15 @@ const PostId = () => {
       window.localStorage.setItem("token", response.token);
       setToken(window.localStorage.getItem("token"));
       setPost({
-        message: response.message,
-        author: response.author,
+        message: response.post.message,
+        author: response.post.author,
         comments: response.post.comments,
+        
       });
     }
   };
 
-  
+
   useEffect(() => {
     setAllPostComments(post.comments)
   }, [post]);
@@ -61,8 +62,11 @@ const PostId = () => {
 
   return (
     <div>
-      <p data-cy="post">{post.message}</p>
-      <p data-cy="author">{post.author}</p>
+      <div>
+        <p data-cy="post">{post.message}</p>
+        <p data-cy="author">{post.author}</p>
+      </div>
+
       <div>
         <ul data-cy="comments">
           {allPostComments &&
