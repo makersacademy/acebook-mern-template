@@ -21,6 +21,17 @@ const NavBar = ({
   const signUp = () => {
     navigate("/signup");
   };
+
+  const logout = () => {
+    window.localStorage.removeItem("token")
+    window.localStorage.removeItem("username")
+    navigate('/login')
+  }
+
+  const login = () => {
+    navigate('/login')
+  }
+
   const posts = () => {
   
     if (token) {
@@ -60,12 +71,12 @@ const NavBar = ({
       {isLoggedIn ? (
         <>
           <button onClick={myPosts}>My Posts</button>
-          <button onClick={handleLogout}>Logout</button>
+          <button onClick={logout}>Logout</button>
         </>
       ) : (
         <>
           <button onClick={signUp}>Sign Up</button>
-          <button onClick={handleLogin}>Login</button>
+          <button onClick={login}>Login</button>
         </>
       )}
       <button onClick={posts}>Posts</button>

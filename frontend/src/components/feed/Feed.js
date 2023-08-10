@@ -39,12 +39,6 @@ const Feed = ({ navigate, searchQuery, setSearchQuery }) => {
   }, [token, navigate])
 
 
-  const logout = () => {
-    window.localStorage.removeItem("token")
-    window.localStorage.removeItem("username")
-    navigate('/login')
-  }
-
   const handleSubmit = async (event) => {
     event.preventDefault();
 
@@ -74,9 +68,6 @@ const Feed = ({ navigate, searchQuery, setSearchQuery }) => {
       return(
         <>
         <h1 class='acebook'><img src="https://i.ibb.co/1Rsnzft/s-l1200.jpg" alt="s-l1200" width="70px" height="100px" border='3px solid'/>cebook</h1>
-          <button onClick={logout}>
-            Logout
-          </button>
           <h2 class='formheader'>Posts</h2>
           <form onSubmit={handleSubmit}>
             <input 
