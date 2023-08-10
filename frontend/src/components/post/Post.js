@@ -109,13 +109,22 @@ const Post = ({ post, setPosts, newPosts, setSearchQuery }) => {
       if (response.status === 200) {
         setIsEditing(false);
         // Update the post message in the posts state
-        setPosts((prevPosts) =>
-          prevPosts.map((editedPost) => (
-            editedPost._id === post._id ? { 
-              ...editedPost, message: editedMessage 
-            } 
-            : editedPost))
-        );
+        fetch("/posts", {
+          method: "get",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+        }).then(async (response) => {
+          if (response.status === 200) {
+            let data1 = await response.json();
+            let UpdatedPosts = data1.posts;
+            setPosts(UpdatedPosts);
+            setSearchQuery(UpdatedPosts);
+            console.log(UpdatedPosts)
+          } else {
+          }
+        });
       }
     } catch (error) {
       console.error(error);
