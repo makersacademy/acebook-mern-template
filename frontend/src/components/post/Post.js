@@ -51,7 +51,6 @@ const Post = ({ post, setPosts , newPosts}) => {
           }
         })
         
-       
         
       }
     } catch (error) {

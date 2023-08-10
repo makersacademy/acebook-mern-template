@@ -42,27 +42,29 @@ const LogInForm = ({ navigate }) => {
 
 
     return (
-      <div class='login'>
-      <form onSubmit={handleSubmit}>
-        <input placeholder='Email' id="email" type='text' value={ email } onChange={handleEmailChange} />
+      <div class='signin'>
+        <h1 class='acebook'><img src="https://i.ibb.co/1Rsnzft/s-l1200.jpg" alt="s-l1200" width="70px" height="100px" border='3px solid'/>cebook</h1>
+        <h2 class='formheader'>Sign in</h2>
+        <form onSubmit={handleSubmit}>
+          <input placeholder='Email' id="email" type='text' value={ email } onChange={handleEmailChange} />
+          <br></br>
+          <br></br>
+          <input placeholder='Password' id="password" type='password' value={ password } onChange={handlePasswordChange} />
+          <br></br>
+          <br></br>
+          <input role='submit-button' id='submit' type="submit" value="Sign in!" />
+          {errorMessage && (
+            <p className="error"> {errorMessage} </p>
+            )}
+          <br></br>
+          <br></br>
+        </form>
         <br></br>
-        <br></br>
-        <input placeholder='Password' id="password" type='password' value={ password } onChange={handlePasswordChange} />
-        <br></br>
-        <br></br>
-        <input role='submit-button' id='submit' type="submit" value="Sign in!" />
-        {errorMessage && (
-          <p className="error"> {errorMessage} </p>
-          )}
-        <br></br>
-        <br></br>
-      </form>
-      <br></br>
-      <button onClick={signup}>
-        Not registered? Sign up here!
-      </button>
-      </div>
-    );
+        <button onClick={signup}>
+          Not registered? Sign up here!
+        </button>
+        </div>
+      );
 }
 
 export default LogInForm;

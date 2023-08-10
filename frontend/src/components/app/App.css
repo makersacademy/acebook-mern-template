@@ -44,15 +44,8 @@ button:hover {
     transition: 0.5s;
 }
 
-.login {
-    display: table;
-    width: 100%;
-    margin: auto;
-    left      : 50%;
-    top       : 50%;
-    position  : absolute;
-    transform : translate(-50%, -50%);
-}
+
+
 
 .signin {
     display: table;
@@ -75,6 +68,14 @@ h1 {
     font-size: 50px;
 }
 
+.formheader {
+    font-weight: bold;
+    font-size: 40px;
+    text-decoration: underline;
+    text-underline-offset: 8px;
+    text-decoration-color: #010403;
+}
+
 div {
     color: white;
     text-align: center;
@@ -82,4 +83,9 @@ div {
     font-size: 20px;
     padding: 10px 25px;
 
+}
+
+.acebook {
+    font-weight: bold;
+    font-size: 100px;
 }

@@ -47,6 +47,8 @@ const SignUpForm = ({ navigate }) => {
 
     return (
       <div class='signin'>
+        <h1 class='acebook'><img src="https://i.ibb.co/1Rsnzft/s-l1200.jpg" alt="s-l1200" width="70px" height="100px" border='3px solid'/>cebook</h1>
+        <h2 class='formheader'>Sign up</h2>
       <form onSubmit={handleSubmit}>
           <input placeholder="Email" id="email" type='text' value={ email } onChange={handleEmailChange} />
           <br></br>
