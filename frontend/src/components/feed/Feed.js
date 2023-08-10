@@ -52,7 +52,7 @@ const Feed = ({ navigate, searchQuery, setSearchQuery }) => {
           let data = await response.json()
           let newPosts = [...posts, { likes: [], message: message, _id: data.postId, user: data.user, }]
           setPosts(newPosts)
-          setSearchQuery(newPosts); //!!!!!!!
+          setSearchQuery(newPosts);
           setMessage("")
         } else {
           setErrorMessage('Invalid message!');
