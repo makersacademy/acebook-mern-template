@@ -67,7 +67,7 @@ describe("/posts/:id", () => {
 })
 
 
-describe("/posts", () => {
+describe("/posts/likeUnlike", () => {
     beforeAll( async () => {
       user = new User({email: "test@test.com", password: "12345678", username: 'person1'});
       savedUser = await user.save();
