@@ -15,7 +15,7 @@ const UserInfo = () => {
             })
             .then (response => response.json())
             .then( async data => {
-                window.localStorage.setItem("token", data.token);
+                window.localStorage.setItem("token", token);
                 setToken(window.localStorage.getItem("token"));
                 setUserInfo(data);
             })

@@ -45,7 +45,6 @@ const PostsController = {
   PostComment: async (req, res) => {
     const postId = req.params.id;
     const commentMessage = req.body.comment;
-
     try {
       const post = await Post.findById(postId);
       if (!post) {
@@ -67,11 +66,10 @@ const PostsController = {
       return res.status(404).json({error: "Post not found"});
     }
     const token = TokenGenerator.jsonwebtoken(req.user_id);
-    const author = post.user_id.username
-
+    const authorId = post.user_id.id;
+    const author = post.user_id.username;
     const logged_in_user = await User.findById(req.user_id)
-
-    res.status(200).json({ message: post.message, token: token, author: author, likes: post.likes, logged_in_user: logged_in_user.username})
+    res.status(200).json({ message: post.message, token: token, author: author, authorId: authorId, likes: post.likes, logged_in_user: logged_in_user.username, comments: post.comments})
   },
 
   AddOrRemoveLike: async (req, res) => {
