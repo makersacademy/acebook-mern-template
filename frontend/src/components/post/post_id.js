@@ -1,13 +1,15 @@
 import NavigationBar from "../navigation/Navigation";
 import React, { useEffect, useRef, useState } from "react";
 import { useParams } from "react-router-dom";
+import NavigationBar from '../navigation/Navigation';
 // import EditPostForm from "./editPostForm"; // don't have this in at the moment, we could add it back later to make the code more DRY
 
 const PostId = () => {
-    const [post, setPost] = useState({ message: "", author: "", authorId: ""}); // Initial state with empty values
+    const [post, setPost] = useState({});
     const [token, setToken] = useState(window.localStorage.getItem("token"));
     const [editPostValue, setEditPostValue] = useState(""); // State for form input value
     const ref = useRef(null);
+    const [isLiked, setIsLiked] = useState();
     const { id } = useParams();
 
     useEffect(() => {
@@ -20,10 +22,15 @@ const PostId = () => {
             .then(async (data) => {
                 window.localStorage.setItem("token", data.token);
                 setToken(window.localStorage.getItem("token"));
+                const isPostLikedByUser = data.likes.includes(data.logged_in_user)
+                setIsLiked(isPostLikedByUser)
                 setPost({
                     message: data.message,
                     author: data.author,
-                    authorId: data.authorId
+                    authorId: data.authorId,
+                    likedBy: data.likes,
+                    likes: data.likes.length,
+                    logged_in_user: data.logged_in_user
                 });
             });
     }, []);
@@ -47,6 +54,27 @@ const PostId = () => {
                 setEditPostValue("");
             });
     };
+  
+    const handleLike = async () => {
+        const response = await fetch(`/posts/${id}/likeUnlike`,{
+            method: 'post',
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
+        })
+
+        if (response.status === 201) {
+        const newLikesCount = post.likes + 1;
+        setPost(prevPost => ({ ...prevPost, likes: newLikesCount }));
+        setIsLiked(true)
+        }
+        
+        if (response.status === 200) {
+        const newLikesCount = post.likes - 1; 
+        setPost(prevPost => ({ ...prevPost, likes: newLikesCount }));
+        setIsLiked(false)
+        }
+    }
 
     return (
         <>
@@ -54,6 +82,13 @@ const PostId = () => {
             <div>
                 <p data-cy="post">{post.message}</p>
                 <p data-cy="author">{post.author}</p>
+                <p data-cy='likes'>{post.likes} Likes</p>
+            </div>
+            <div>
+                    <button id='likeUnlike' onClick={handleLike}>
+                        {isLiked ? '🧡' : '🤍'}
+                    </button>
+                    {isLiked ? <p>Unlike this post</p> : <p>Like this post</p>}
             </div>
             { window.localStorage.getItem("userId") === post.authorId ?
             <div> 
