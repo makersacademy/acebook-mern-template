@@ -7,10 +7,23 @@ import NavigationBar from '../navigation/Navigation';
 const PostId = () => {
     const [post, setPost] = useState({});
     const [token, setToken] = useState(window.localStorage.getItem("token"));
+    const [comment, setComment] = useState("");
+    const [allPostComments, setAllPostComments] = useState([
+        "This post has no comments",
+    ]);
     const [editPostValue, setEditPostValue] = useState(""); // State for form input value
     const ref = useRef(null);
     const [isLiked, setIsLiked] = useState();
     const { id } = useParams();
+    const handleCommentChange = (event) => {
+        setComment(event.target.value);
+    };
+
+
+
+    useEffect(() => {
+        setAllPostComments(post.comments);
+    }, [post]);
 
     useEffect(() => {
         fetch(`/posts/${id}`, {
@@ -30,10 +43,12 @@ const PostId = () => {
                     authorId: data.authorId,
                     likedBy: data.likes,
                     likes: data.likes.length,
-                    logged_in_user: data.logged_in_user
+                    logged_in_user: data.logged_in_user,
+                    comments: data.comments,
                 });
             });
     }, []);
+
 
     const editPost = () => {
         fetch(`/posts/${id}`, {
@@ -75,7 +90,32 @@ const PostId = () => {
         setIsLiked(false)
         }
     }
+    
+    const handleCommentSubmit = async () => {
+        let response = await fetch(`/posts/${id}`, {
+            method: "post",
+            headers: {
+                "Content-Type": "application/json",
+                Authorization: `Bearer ${token}`,
+            },
+            body: JSON.stringify({ comment: comment }),
+        });
 
+        const responseStatus = response.status;
+        response = await response.json();
+
+        if (responseStatus === 201) {
+            window.localStorage.setItem("token", response.token);
+            setToken(window.localStorage.getItem("token"));
+
+            setPost((prevPost) => ({
+                ...prevPost,
+                comments: response.post.comments,
+            }));
+        }
+    };
+
+  
     return (
         <>
             <NavigationBar />
@@ -106,6 +146,24 @@ const PostId = () => {
                     <input data-cy='submit' type="submit" value="Edit Post" />
                 </form>
             </div> : null}
+            <div>
+                <ul data-cy="comments">
+                    {allPostComments &&
+                        allPostComments.map((commentObject, index) => {
+                            return <li key={index}>{commentObject.comment}</li>;
+                        })}
+                </ul>
+            </div>
+            <div>
+                <input
+                    data-cy="commententry"
+                    type="text"
+                    value={comment}
+                    onChange={handleCommentChange}
+                    placeholder="Add a comment..."
+                />
+                <button onClick={handleCommentSubmit}>Submit Comment</button>
+            </div>
         </>
     );
 };
