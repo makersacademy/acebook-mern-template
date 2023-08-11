@@ -40,6 +40,7 @@ const NewPostForm = ({ navigate }) => {
                 <input placeholder="What's on your mind?" id="message" type='text' value={ message } onChange={handleMessageChange} />
                 <input id='submit' type="submit" value="Create New Post" />
             </form>
+            <a href="/posts">Go back to my feed </a>
         </div>
     );
 }

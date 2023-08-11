@@ -38,7 +38,7 @@ a:active {
 
 }
 
-button, #submit { 
+button, #submit, #edit { 
     border-radius: 4px;
     font-family: Roboto;
     color: rgb(90, 114, 170);

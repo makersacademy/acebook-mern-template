@@ -1,7 +1,6 @@
 import NavigationBar from "../navigation/Navigation";
 import React, { useEffect, useRef, useState } from "react";
 import { useParams } from "react-router-dom";
-import NavigationBar from '../navigation/Navigation';
 // import EditPostForm from "./editPostForm"; // don't have this in at the moment, we could add it back later to make the code more DRY
 
 const PostId = () => {
@@ -119,50 +118,54 @@ const PostId = () => {
     return (
         <>
             <NavigationBar />
-            <div>
-                <p data-cy="post">{post.message}</p>
-                <p data-cy="author">{post.author}</p>
-                <p data-cy='likes'>{post.likes} Likes</p>
-            </div>
-            <div>
-                    <button id='likeUnlike' onClick={handleLike}>
-                        {isLiked ? '🧡' : '🤍'}
-                    </button>
-                    {isLiked ? <p>Unlike this post</p> : <p>Like this post</p>}
-            </div>
-            { window.localStorage.getItem("userId") === post.authorId ?
-            <div> 
-                <form data-cy="editPostForm" onSubmit={editPost}>
-                    <label>
-                        <input
-                            ref={ref}
-                            defaultValue={post.message}
-                            data-cy="editPost"
-                            type="text"
-                            name="message"
-                            onChange={(e) => setEditPostValue(e.target.value)}
-                        />
-                    </label>
-                    <input data-cy='submit' type="submit" value="Edit Post" />
-                </form>
-            </div> : null}
-            <div>
-                <ul data-cy="comments">
-                    {allPostComments &&
-                        allPostComments.map((commentObject, index) => {
-                            return <li key={index}>{commentObject.comment}</li>;
-                        })}
-                </ul>
-            </div>
-            <div>
-                <input
-                    data-cy="commententry"
-                    type="text"
-                    value={comment}
-                    onChange={handleCommentChange}
-                    placeholder="Add a comment..."
-                />
-                <button onClick={handleCommentSubmit}>Submit Comment</button>
+            <div className="feed-container">
+                <div>
+                    <p id="post-box" data-cy="post">{post.message}</p>
+                    <h5 data-cy="author">Posted By: {post.author}</h5>
+                </div>
+                <div className="child">
+                        <p data-cy='likes'>{post.likes} Likes <button id='likeUnlike' onClick={handleLike}>
+                            {isLiked ? '🧡' : '🤍'}
+                        </button> {isLiked ? "Unlike this post" : "Like this post"}</p>       
+                </div>
+                { window.localStorage.getItem("userId") === post.authorId ?
+                <div> 
+                    <form data-cy="editPostForm" onSubmit={editPost}>
+                        <label>
+                            <input
+                                id="edit-post"
+                                ref={ref}
+                                defaultValue={post.message}
+                                data-cy="editPost"
+                                type="text"
+                                name="message"
+                                onChange={(e) => setEditPostValue(e.target.value)}
+                            />
+                        </label>
+                        <input id='edit' data-cy='submit' type="submit" value="Edit Post" />
+                    </form>
+                </div> : null}
+                <div>
+                    <h3 id="header"> Comments </h3>
+                    <ul data-cy="comments">
+                        {allPostComments &&
+                            allPostComments.map((commentObject, index) => {
+                                return <li key={index}>{commentObject.comment}</li>;
+                            })}
+                    </ul>
+                </div>
+                <div>
+                    <input
+                        id='comment'
+                        data-cy="commententry"
+                        type="text"
+                        value={comment}
+                        onChange={handleCommentChange}
+                        placeholder="Add a comment..."
+                    />
+                    <button onClick={handleCommentSubmit}>Submit Comment</button>
+                </div>
+                <a className='feed-redirect' href="/posts">Go back to my feed </a>
             </div>
         </>
     );

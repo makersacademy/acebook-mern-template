@@ -4,12 +4,13 @@
 }
 
 
-#password, #email, #username, #submit, #sign-up-button, #message {
+#comment, #edit-post, #password, #email, #username, #submit, #sign-up-button, #message {
     border-radius: 4px;
     font-family: Roboto;
     font-size: 18px;
     background-color: aliceblue;
     margin-right: 5px;
+    margin-bottom: 20px;
 }
 
 p {
