@@ -13,16 +13,14 @@ const handleClick = () => {
 const NavigationBar = () => {
     const userId = window.localStorage.getItem("userId");
     return (
-        <Navbar bg='light' expand="lg">
+        <Navbar expand="lg">
             <Container>
-                <Navbar.Brand>Windy Acebook</Navbar.Brand>
+                <Navbar.Brand id='navbar-brand'>Windy Acebook</Navbar.Brand>
                 <Navbar.Toggle aria-controls="basic-navbar-nav" />
                 <Navbar.Collapse id="basic-navbar-nav">
                     <Nav className="ms-auto">
-                        <CustomNavLink to="/posts">Posts</CustomNavLink>
-                        <CustomNavLink to="/login">Login</CustomNavLink>
-                        <CustomNavLink to="/signup">Sign Up</CustomNavLink>
-                        <CustomNavLink to={"/users/" + userId}>Your Account Info</CustomNavLink>
+                        <CustomNavLink className="nav-link" to="/posts">Posts</CustomNavLink>
+                        <CustomNavLink className="nav-link" to={"/users/" + userId}>Your Account Info</CustomNavLink>
                         <Link to='/login' onClick={handleClick} className="nav-link">
                             Logout
                         </Link>
@@ -35,7 +33,7 @@ const NavigationBar = () => {
 
 const CustomNavLink = ({ to, children }) => {
     return (
-        <NavLink to={to} activeclassname="active" className="nav-link">
+        <NavLink to={to} id='activeLink' activeclassname="active" className="nav-link">
             {children}
         </NavLink>
     );

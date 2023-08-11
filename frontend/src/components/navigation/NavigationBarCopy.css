@@ -1,12 +1,12 @@
 
 @import url('https://fonts.googleapis.com/css2?family=Sriracha&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Gantari&display=swap');
 
 .navbar .nav-link.active {
-    background-color: rgba(87, 142, 200, 0.262); 
-}
-
-#activeLink {
-    color:rgba(255, 255, 255, 0.744);
+    background-color: rgb(135, 179, 226, 0.4); 
+    &:active {
+        color: rgb(255, 255, 255);
+    }
 }
 
 .navbar {
@@ -16,17 +16,13 @@
     font-size: 18px;
 }
 
-#basic-navbar-nav {
-    margin-right: 0;
-}
-
 .navbar-nav {
     margin-left: 900px;
     .nav-link {
         margin-right: 10px; 
         color: rgb(255, 255, 255);
         &:hover {
-            color:rgba(112, 160, 244, 0.744);
+            color: rgb(90, 114, 170);
         }
     }
 }
@@ -42,4 +38,3 @@
     margin-left: 10px;
     margin-right: 0px;
 }
-

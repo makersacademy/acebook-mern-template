@@ -1,0 +1,33 @@
+/* .heading {
+    font-family: Roboto;
+    font-size: 45px;
+    font-weight: bold;
+    color:rgb(255, 255, 255);
+
+} */
+
+/* .feed-container {
+    margin-right: 250px;
+    padding: 40px;
+    text-align: center;
+} */
+
+#feed {
+  padding-bottom: 10px;
+}
+
+#createNewPost {
+    margin-bottom: 15px;
+}
+
+
+/* #createNewPost , .logout {
+    border-radius: 4px;
+    font-family: Roboto;
+    color: rgb(90, 114, 170);
+    font-size: 18px;
+    margin-right: 5px;
+    background-color: aliceblue;
+    border-color: rgb(214, 241, 255);
+
+} */

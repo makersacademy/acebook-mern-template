@@ -1,0 +1,51 @@
+.main-div {
+    background-image: url('./Background-without-logo.png');
+    height: 100%;
+    background-size: cover;
+    background-position: center;
+}
+
+html, body, #root {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+.feed-container {
+    margin-right: 400px;
+    padding: 40px;
+    text-align: center;
+}
+a:link {
+    color: rgb(110, 98, 170);
+    text-decoration: none;
+}
+a:visited {
+    color: rgb(71, 127, 151);
+}
+a:hover {
+    color: rgb(68, 88, 136);
+    text-decoration: underline;
+}
+a:active {
+    color: rgb(13, 8, 81);
+}
+
+.heading {
+    font-family: Roboto;
+    font-size: 45px;
+    font-weight: bold;
+    color:rgb(255, 255, 255);
+
+}
+
+button, #submit { 
+    border-radius: 4px;
+    font-family: Roboto;
+    color: rgb(90, 114, 170);
+    font-size: 18px;
+    margin-right: 5px;
+    background-color: aliceblue;
+    border-color: rgb(214, 241, 255);
+    margin-top: 15px;
+    /* border-bottom: 30px; */
+}

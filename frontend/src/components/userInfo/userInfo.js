@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import NavigationBar from '../navigation/Navigation';
+import './userInfo.css'
 
 const UserInfo = () => {
     const [userInfo, setUserInfo] = useState([])
@@ -24,12 +25,14 @@ const UserInfo = () => {
     return(
         <>
         <NavigationBar />
-        <h2>Your Account Information</h2>
+        <div className='info-div'>
+        <h2 className='heading'>Account Information</h2>
         <div>
-            <p data-cy="username">Username: {userInfo.username}</p>
-            <p data-cy="email">Email: {userInfo.email}</p>
+            <p className='username' data-cy="username">Username: {userInfo.username}</p>
+            <p className='email' data-cy="email">Email: {userInfo.email}</p>
         </div>
         <a href="/posts">Go back to my feed </a>
+        </div>
         </>
         ) 
 }

@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import NavigationBar from '../navigation/Navigation';
 
 const NewPostForm = ({ navigate }) => {
     
@@ -33,10 +34,13 @@ const NewPostForm = ({ navigate }) => {
     }
 
     return (
-        <form onSubmit={handleSubmit}>
-            <input placeholder="What's on your mind?" id="message" type='text' value={ message } onChange={handleMessageChange} />
-            <input id='submit' type="submit" value="Create New Post" />
-        </form>
+        <div className='feed-container'>
+            <NavigationBar />
+            <form onSubmit={handleSubmit}>
+                <input placeholder="What's on your mind?" id="message" type='text' value={ message } onChange={handleMessageChange} />
+                <input id='submit' type="submit" value="Create New Post" />
+            </form>
+        </div>
     );
 }
 

@@ -43,7 +43,8 @@ const SignUpForm = ({ navigate }) => {
 
     return (
       <>
-        <h3>Create a new account</h3>
+      <div className='feed-container'>
+        <h3 className='heading'>Create a new account</h3>
         <p>It's quick and easy.</p>
 
         <form onSubmit={handleSubmit}>
@@ -74,7 +75,7 @@ const SignUpForm = ({ navigate }) => {
         <button type="button" id="button" onClick={handleLoginClick}>
           Log in
         </button>
-
+        </div>
       </>
     );
 }

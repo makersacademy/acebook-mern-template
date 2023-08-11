@@ -1,0 +1,18 @@
+.form-container {
+    margin-left: 150px;
+    padding: 100px;
+}
+
+
+#password, #email, #username, #submit, #sign-up-button, #message {
+    border-radius: 4px;
+    font-family: Roboto;
+    font-size: 18px;
+    background-color: aliceblue;
+    margin-right: 5px;
+}
+
+p {
+    padding-top: 20px;
+    font-size: 18px;
+}

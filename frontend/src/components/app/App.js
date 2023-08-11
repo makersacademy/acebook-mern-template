@@ -16,6 +16,7 @@ import {
 
 const App = () => {
     return (
+      <div className='main-div'>
         <Routes>
           <Route path="/users/:userId" element={<UserInfo />}/>
           <Route path='/posts'  element={<Feed navigate={ useNavigate() }/>}/>
@@ -24,6 +25,7 @@ const App = () => {
           <Route path= '/posts/:id' element={ <PostId/>}/>
           <Route path='/createpost' element={<NewPostForm navigate={ useNavigate() }/>}/>
         </Routes>
+      </div>
     );
 }
 

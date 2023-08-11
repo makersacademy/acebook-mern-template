@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import './LoginForm.css'
 
 const LogInForm = ({ navigate }) => {
   const [email, setEmail] = useState("");
@@ -43,7 +44,9 @@ const LogInForm = ({ navigate }) => {
 
     return (
       <>
-      <h3>Log in to Acebook</h3>
+      <div className='form-container'>
+        
+      <h3 className='heading' >Log in to Acebook</h3>
         <form onSubmit={handleSubmit}>
           <input
             placeholder="Email"
@@ -70,6 +73,7 @@ const LogInForm = ({ navigate }) => {
         <button type="button" id="sign-up-button" onClick={handlesignupClick}>
           Sign up
         </button>
+        </div>
       </>
     );
 }
