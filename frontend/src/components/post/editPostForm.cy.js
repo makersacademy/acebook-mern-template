@@ -6,6 +6,5 @@ describe("editPost", () => {
     cy.get('form').contains('Message:')
     cy.get('input[type="text"]').should('exist')
     cy.get('form').contains('Submit')
-})
-
+  })
 })

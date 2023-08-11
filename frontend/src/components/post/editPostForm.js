@@ -8,7 +8,7 @@ const EditPostForm = ({post}) => {
     <form data-cy="editPostForm">
         <label>
             Message:
-            <input  type="text" name="message"/>
+            <input  data-cy='editPost' type="text" name="message"/>
         </label>
         <input type="submit" value="Submit"/>
     </form>
