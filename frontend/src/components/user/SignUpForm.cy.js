@@ -2,7 +2,6 @@ import SignUpForm from './SignUpForm'
 const navigate = () => {}
 
 describe("Signing up", () => {
- 
 
   it("calls the /users endpoint", () => {
     cy.mount(<SignUpForm navigate={navigate}/>)
