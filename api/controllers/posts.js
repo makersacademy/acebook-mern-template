@@ -45,7 +45,6 @@ const PostsController = {
   PostComment: async (req, res) => {
     const postId = req.params.id;
     const commentMessage = req.body.comment;
-    console.log(commentMessage);
     try {
       const post = await Post.findById(postId);
       if (!post) {
