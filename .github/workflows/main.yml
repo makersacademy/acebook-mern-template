@@ -1,0 +1,48 @@
+name: Trip Planner CI
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "*" ]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [18.x]
+        mongodb-version: ['5.0']
+
+    steps:
+    - name: Git checkout
+      uses: actions/checkout@v3
+
+    - name: Use Node.js ${{ matrix.node-version }}
+      uses: actions/setup-node@v3
+      with:
+        node-version: ${{ matrix.node-version }}
+
+    - name: Start MongoDB
+      uses: supercharge/mongodb-github-action@1.8.0
+      with:
+        mongodb-version: ${{ matrix.mongodb-version }}
+        mongodb-replica-set: tripPlanner_test
+        
+
+    - name: Install Deps
+      run: |
+        cd ./api && npm install && cd ..
+        cd ./frontend && npm install
+    
+    - name: Test API
+      run: cd api && JWT_SECRET=f6d278bb34e1d0e146a80b16ec254c05 npm test
+        
+    - name: Test Frontend Unit
+      env:
+        CI: false
+      run: |
+        cd frontend && npm run build
+        JWT_SECRET=f6d278bb34e1d0e146a80b16ec254c05 && npm run test:unit
