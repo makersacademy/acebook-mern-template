@@ -1,29 +1,33 @@
 import React, { useState } from 'react';
 
+// Signup Page
 const SignUpForm = ({ navigate }) => {
 
+  // STATE VARIABLES ==========================
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
+  // FORM SUBMISSION FOR NEW USER ====================
   const handleSubmit = async (event) => {
-    event.preventDefault();
-
+    event.preventDefault(); 
+    // Send POST request to '/users' endpoint
     fetch( '/users', {
       method: 'post',
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({ email: email, password: password })
+      body: JSON.stringify({ email: email, password: password }) // <===== BODY OF REQUEST: email and password
     })
       .then(response => {
         if(response.status === 201) {
-          navigate('/login')
+          navigate('/login') // If successful, navigate to login page
         } else {
-          navigate('/signup')
+          navigate('/signup') // If unsuccessful, stay on the signup page
         }
       })
   }
 
+  // FUNCTIONS FOR CHANGING STATE VARIABLES ==================
   const handleEmailChange = (event) => {
     setEmail(event.target.value)
   }
@@ -33,6 +37,7 @@ const SignUpForm = ({ navigate }) => {
   }
 
 
+  // JSX FOR THE UI OF THE COMPONENT =====================
     return (
       <form onSubmit={handleSubmit}>
           <input placeholder="Email" id="email" type='text' value={ email } onChange={handleEmailChange} />
