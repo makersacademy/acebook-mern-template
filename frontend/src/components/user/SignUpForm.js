@@ -38,6 +38,7 @@ const SignUpForm = ({ navigate }) => {
 
 
   // JSX FOR THE UI OF THE COMPONENT =====================
+    // currently shows two input fields and one button with no styling.
     return (
       <form onSubmit={handleSubmit}>
           <input placeholder="Email" id="email" type='text' value={ email } onChange={handleEmailChange} />

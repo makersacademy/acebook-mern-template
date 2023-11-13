@@ -10,7 +10,9 @@ import {
 } from "react-router-dom";
 
 const App = () => {
-    return (
+
+  // Routes for each page of the website
+  return (
         <Routes>
           <Route path='/posts'  element={<Feed navigate={ useNavigate() }/>}/>
           <Route path='/login'  element={<LoginForm  navigate={ useNavigate() }/>}/>
