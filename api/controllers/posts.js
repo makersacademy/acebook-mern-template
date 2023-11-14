@@ -11,17 +11,29 @@ const PostsController = {
       res.status(200).json({ posts: posts, token: token });
     });
   },
+  // Create needs to be updated to include pulling the user_id from authenticated user
   Create: (req, res) => {
     const post = new Post(req.body);
     post.save((err) => {
       if (err) {
         throw err;
       }
-
+      
       const token = TokenGenerator.jsonwebtoken(req.user_id)
       res.status(201).json({ message: 'OK', token: token });
     });
   },
-};
+  // method to get posts filtered by user_id
+  FindPostsByUserId: (req, res) => {
+    Post.find((err, posts) => {
+      if (err) {
+        throw err;
+      }
+      const token = TokenGenerator.jsonwebtoken(req.user_id)
+      res.status(200).json({ posts: posts, token: token });
+    });
+  }
+}
+
 
 module.exports = PostsController;
