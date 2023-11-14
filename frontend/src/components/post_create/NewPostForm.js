@@ -24,7 +24,9 @@ const NewPostForm = ({navigate}) => {
                     'Content-Type': 'application/json',
                     'Authorization': `Bearer ${token}` // necessary for requests that need login auth
                 },
-                body: JSON.stringify({ message: message }) // <===== BODY OF REQUEST: message
+                body: JSON.stringify({ 
+                    message: message
+                 }) // <===== BODY OF REQUEST: message
                 })
                 .then(response => {
                     if(response.status === 201) {
@@ -49,10 +51,6 @@ const NewPostForm = ({navigate}) => {
     // FUNCTIONS FOR CHANGING STATE VARIABLES 
     const handleMessageChange = (event) => {
         setMessage(event.target.value)
-    }
-
-    const handleTokenChange = (event) => {
-        setToken(event.target.value)
     }
 
 

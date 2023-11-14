@@ -1,0 +1,22 @@
+.post-container {
+    background-color: #f0f0f0; /* Light grey background */
+    border-radius: 10px; /* Rounded corners */
+    padding: 10px; /* Add padding for better spacing */
+    margin-bottom: 15px; /* Add margin between posts */
+    width: 500px
+  }
+  
+  .user-display-name {
+    font-weight: bold;
+    font-size: 1.2em; /* One size bigger than #post-message */
+  }
+  
+  .date-posted {
+    font-style: italic;
+    color: grey; /* Grey color */
+  }
+  
+  .message {
+    color: black;
+    font-size: 1em; /* Default font size for a p element */
+  }
