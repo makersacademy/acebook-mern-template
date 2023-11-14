@@ -3,13 +3,23 @@ const TokenGenerator = require("../lib/token_generator");
 
 const PostsController = {
   Index: (req, res) => {
-    Post.find((err, posts) => {
+    Post.find()
+    .populate('user_id', '-password') // Populate the 'user_id' field with the entire User document
+    .exec((err, posts) => {
       if (err) {
         throw err;
       }
       const token = TokenGenerator.jsonwebtoken(req.user_id)
       res.status(200).json({ posts: posts, token: token });
     });
+    // OLD:
+    // Post.find((err, posts) => {
+    //   if (err) {
+    //     throw err;
+    //   }
+    //   const token = TokenGenerator.jsonwebtoken(req.user_id)
+    //   res.status(200).json({ posts: posts, token: token });
+    // });
   },
   Create: (req, res) => {
     console.log("controllers/posts.js 15: getting user id:")
