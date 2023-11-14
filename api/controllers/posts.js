@@ -14,11 +14,14 @@ const PostsController = {
   Create: (req, res) => {
     console.log("controllers/posts.js 15: getting user id:")
     console.log(req.user_id);
+
     const post = new Post({
-      message: req.body.message,
-      user_id: req.user_id});
+      message: req.body.message, // necessary change from req.body to make this work.
+      user_id: req.user_id}); // adds the user_id from req to the new Post
+
     console.log("controllers/posts.js 20: getting post object:")
     console.log(post);
+
     post.save((err) => {
       if (err) {
         throw err;
