@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 
+
 // New Post Form:
 
 const NewPostForm = ({navigate}) => {
@@ -39,7 +40,7 @@ const NewPostForm = ({navigate}) => {
                     }
                 })
                 .then(async data => {
-                    // TODO: not sure how this works... Updates to a new token when the GET request is complete?
+                    // Updates to a new token when the GET request is complete
                     window.localStorage.setItem("token", data.token)
                     setToken(window.localStorage.getItem("token"))
                     console.log(token)
