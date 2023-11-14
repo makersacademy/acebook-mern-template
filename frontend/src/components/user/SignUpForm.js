@@ -14,7 +14,7 @@ const SignUpForm = ({ navigate }) => {
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({ email: email, password: password })
+      body: JSON.stringify({ displayName: displayName, email: email, password: password })
     })
       .then(response => {
         if(response.status === 201) {
