@@ -19,6 +19,8 @@ const Feed = ({ navigate }) => {
           setPosts(data.posts);
         })
     }
+    else {
+      navigate('/login')}
   }, [])
     
 
