@@ -17,7 +17,8 @@ const SignUpForm = ({ navigate }) => {
     })
       .then(response => {
         if(response.status === 201) {
-          navigate('/login')
+          // redirect to avatar choice page
+          navigate('/choose-avatar')
         } else {
           navigate('/signup')
         }
