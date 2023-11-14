@@ -26,26 +26,6 @@ const LogInForm = ({ navigate }) => {
           navigate('/login');
         }
       })
-
-    // let response = await fetch( '/tokens', {
-    //   method: 'post',
-    //   headers: {
-    //     'Content-Type': 'application/json',
-    //   },
-    //   body: JSON.stringify({ displayName: displayName, email: email, password: password })
-    // })
-
-    // if(response.status === 201) {
-    //   console.log("yay")
-    //   navigate('/posts')
-    // } else {
-    //   console.log("oop")
-    //   let data = response.json()
-    //   console.
-    //   //let data = await response.json()
-    //   window.localStorage.setItem("token", data.token)
-    //   navigate('/login');
-    // }
   }
 
   const handleDisplayNameChange = (event) => {
