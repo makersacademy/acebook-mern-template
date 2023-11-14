@@ -13,7 +13,7 @@ const LogInForm = ({ navigate }) => {
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({ email: email, password: password })
+      body: JSON.stringify({ displayName: displayName, email: email, password: password })
     })
 
     if(response.status !== 201) {
