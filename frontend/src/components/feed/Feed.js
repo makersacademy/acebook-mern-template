@@ -22,11 +22,16 @@ const Feed = ({ navigate }) => {
       })
         .then(response => response.json())
         .then(async data => {
-          // TODO: not sure how this works... Updates to a new token when the GET request is complete?
+          // Updates to a new token when the GET request is complete
           window.localStorage.setItem("token", data.token)
           setToken(window.localStorage.getItem("token"))
+
           // Updates posts with all posts retrieved
-          setPosts(data.posts);
+          // setPosts(data.posts); <=== change to below for posts sorted by date_posted in reverse order.
+
+          // Sort posts based on date_posted in descending order
+          const sortedPosts = data.posts.sort((a, b) => new Date(b.date_posted) - new Date(a.date_posted));
+          setPosts(sortedPosts);
         })
     }
   }, [])
