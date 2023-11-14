@@ -24,6 +24,15 @@ describe("/users", () => {
       let newUser = users[users.length - 1]
       expect(newUser.email).toEqual("scarlett@email.com")
     })
+
+    test("a user without avatar is created, default avatar added", async () => {
+      await request(app)
+        .post("/users")
+        .send({email: "scarlett@email.com", password: "1234"})
+      let users = await User.find()
+      let newUser = users[users.length - 1]
+      expect(newUser.avatar).toEqual("public/images/avatars/0.svg")
+    })
   })
 
   describe("POST, when password is missing", () => {
@@ -42,7 +51,7 @@ describe("/users", () => {
         expect(users.length).toEqual(0)
     });
   })
-  
+
   describe("POST, when email is missing", () => {
     test("response code is 400", async () => {
       let response = await request(app)

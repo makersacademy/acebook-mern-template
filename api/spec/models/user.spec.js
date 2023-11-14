@@ -34,7 +34,7 @@ describe("User model", () => {
       password: "password",
       avatar: "public/images/avatars/1.svg",
     });
-    expect(user.password).toEqual("password");
+    expect(user.avatar).toEqual("public/images/avatars/1.svg");
   });
 
   it("can list all users", (done) => {
@@ -67,4 +67,13 @@ describe("User model", () => {
       });
     });
   });
+
+  // it("default value when no avatar provided", async (done) => {
+  //   const user = new User({
+  //     email: "test@test.com",
+  //     password: "test",
+  //     avatar: null
+  //   });
+  //   expect(user.avatar).toEqual("public/images/avatars/0.svg");
+  // })
 });
