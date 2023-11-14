@@ -1,0 +1,32 @@
+.post-box {
+    padding: 2rem;
+    margin: 2rem 0;
+    border: 0.1rem solid #add8e6;
+    border-radius: 1rem;
+}
+
+.post-author {
+    font-weight: 700;
+    margin-bottom: 0.1rem;
+}
+
+.post-date {
+    opacity: 50%;
+    font-size: 14px;
+}
+
+.post-content {
+    margin: 1rem 0;
+    padding: 1rem 0;
+    border-top: 0.05rem solid lightgray;
+    border-bottom: 0.05rem solid lightgray;
+}
+
+.like-btn {
+    width: 1rem;
+    margin-right: 0.3rem;
+}
+
+.like-number {
+    font-size: 14px;
+}
