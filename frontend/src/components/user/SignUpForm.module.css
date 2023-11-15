@@ -1,0 +1,33 @@
+
+/* Style the body */
+.Middle {
+  font-family: Arial;
+  text-align: center;
+  margin: 0px;
+}
+/* Input Fields */
+.inputField {
+  width: 200px;
+  padding: 12px 20px;
+  margin: 8px 0;
+  box-sizing: border-box;
+  border: none;
+  outline: none;
+  border-bottom: 2px solid #4267B2;
+}
+
+/* Buttons */
+.Button {
+  width: 150px; /* Set your desired fixed width for the submit button */
+  background-color: #4267B2;
+  color: white;
+  padding: 14px 20px;
+  margin: 0 auto;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.Button:hover {
+  background-color: #5B7EC2;
+}

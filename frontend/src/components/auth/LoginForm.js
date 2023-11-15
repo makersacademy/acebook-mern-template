@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import styles from './LoginForm.module.css'
 
 // Login Page
 const LogInForm = ({ navigate }) => {
@@ -45,11 +46,19 @@ const LogInForm = ({ navigate }) => {
   // ========= JSX FOR THE UI OF THE COMPONENT =====================
     // currently shows two input fields and one button with no styling.
     return (
+      <div className={styles.Middle}>
       <form onSubmit={handleSubmit}>
-        <input placeholder='Email' id="email" type='text' value={ email } onChange={handleEmailChange} />
-        <input placeholder='Password' id="password" type='password' value={ password } onChange={handlePasswordChange} />
-        <input role='submit-button' id='submit' type="submit" value="Submit" />
+        <input placeholder='Email' id="email" type='text' value={ email } onChange={handleEmailChange}  className={styles.inputField}/><br/>
+        <input placeholder='Password' id="password" type='password' value={ password } onChange={handlePasswordChange} className={styles.inputField} /><br/>
+        <input  id='submit' type="submit" value="Submit" className={styles.Button}/>
       </form>
+      <br/>
+
+<font color="#505050 ">Don't have an account?</font>
+<br/>
+<a href="/signup" font color="#003163" className={styles.link}> Register</a>
+
+</div>
     );
 }
 
