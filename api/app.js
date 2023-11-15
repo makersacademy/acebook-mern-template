@@ -8,6 +8,7 @@ const postsRouter = require("./routes/posts");
 const authenticationRouter = require("./routes/authentication");
 const usersRouter = require("./routes/users");
 
+
 const app = express();
 
 // setup for receiving JSON
