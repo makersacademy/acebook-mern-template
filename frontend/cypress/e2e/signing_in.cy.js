@@ -5,19 +5,20 @@ describe("Signing in", () => {
   })
 
   it("with valid credentials, redirects to '/posts'", () => {
-    cy.visit("/login");
-    cy.get("#email").type("someone@example.com");
-    cy.get("#password").type("password");
-    cy.get("#submit").click();
-
-    cy.url().should("include", "/posts");
+    cy.visit("/login").debug();
+    cy.wait(2000)
+    cy.get("#email").type("someone@example.com").debug();
+    cy.get("#password").type("password").debug();
+    cy.get("#submit").click().debug();
+    cy.wait(7000).debug(); // wait for 5 seconds
+    cy.url().should("include", "/posts").debug();
   });
 
   it("with missing password, redirects to '/login'", () => {
     cy.visit("/login");
     cy.get("#email").type("someone@example.com");
     cy.get("#submit").click();
-
+    cy.wait(7000); // wait for 5 seconds
     cy.url().should("include", "/login");
   });
 
@@ -25,7 +26,7 @@ describe("Signing in", () => {
     cy.visit("/login");
     cy.get("#password").type("password");
     cy.get("#submit").click();
-
+    cy.wait(7000); // wait for 5 seconds
     cy.url().should("include", "/login");
   });
 });

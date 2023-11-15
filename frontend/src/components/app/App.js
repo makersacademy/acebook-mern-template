@@ -14,13 +14,26 @@ const App = () => {
   const navigate = useNavigate();
   useEffect(() => {
     const token = window.localStorage.getItem('token');
-    if (token) {
-      navigate('/posts');
-    } else {
-      navigate('/login');
+    const currentPath = window.location.pathname;
+
+    if (currentPath !== '/signup' && currentPath !== '/login') {
+      if (token) {
+        fetch('/verifyToken', {
+          headers: {
+            'Authorization': `Bearer ${token}`
+          }
+        })
+          .then(response => response.json())
+          .then(data => {
+            if (!data.valid) {
+              navigate('/login');
+            }
+          });
+      } else {
+        navigate('/login');
+      }
     }
-  }
-  );
+  }, []);
 
   // Routes for each page of the website
   return (

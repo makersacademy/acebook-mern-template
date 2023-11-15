@@ -2,8 +2,8 @@
 
 if (!process.env.JWT_SECRET) {
   console.error("\nThe JWT_SECRET environment variable wasn't set before running the server. Did you forget it?\n\n",
-              "Make sure you run the server like documented here: https://github.com/makersacademy/acebook-mern-template#start \n\n");
-  process.exit();            
+    "Make sure you run the server like documented here: https://github.com/makersacademy/acebook-mern-template#start \n\n");
+  process.exit();
 }
 
 /**
@@ -14,7 +14,7 @@ var app = require("../app");
 var debug = require("debug")("acebook:server");
 var http = require("http");
 var mongoose = require("mongoose");
-
+require("../models/db");
 /**
  * Get port from environment and store in Express.
  */
@@ -26,11 +26,11 @@ app.set("port", port);
  * Connect to MongoDB
  **/
 
-var mongoDbUrl = process.env.MONGODB_URL || "mongodb://0.0.0.0/acebook";
-mongoose.connect(mongoDbUrl, {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-});
+// var mongoDbUrl = process.env.MONGODB_URL || "mongodb://0.0.0.0/acebook";
+// mongoose.connect(mongoDbUrl, {
+//   useNewUrlParser: true,
+//   useUnifiedTopology: true,
+// });
 
 var db = mongoose.connection;
 db.on("error", console.error.bind(console, "MongoDB connection error:"));
@@ -85,11 +85,9 @@ function onError(error) {
     case "EACCES":
       console.error(bind + " requires elevated privileges");
       process.exit(1);
-      break;
     case "EADDRINUSE":
       console.error(bind + " is already in use");
       process.exit(1);
-      break;
     default:
       throw error;
   }

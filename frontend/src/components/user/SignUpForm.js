@@ -9,9 +9,9 @@ const SignUpForm = ({ navigate }) => {
 
   // FORM SUBMISSION FOR NEW USER ====================
   const handleSubmit = async (event) => {
-    event.preventDefault(); 
+    event.preventDefault();
     // Send POST request to '/users' endpoint
-    fetch( '/users', {
+    fetch('/users', {
       method: 'post',
       headers: {
         'Content-Type': 'application/json',
@@ -19,7 +19,7 @@ const SignUpForm = ({ navigate }) => {
       body: JSON.stringify({ email: email, password: password }) // <===== BODY OF REQUEST: email and password
     })
       .then(response => {
-        if(response.status === 201) {
+        if (response.status === 201) {
           navigate('/login') // If successful, navigate to login page
         } else {
           navigate('/signup') // If unsuccessful, stay on the signup page
@@ -38,14 +38,19 @@ const SignUpForm = ({ navigate }) => {
 
 
   // JSX FOR THE UI OF THE COMPONENT =====================
-    // currently shows two input fields and one button with no styling.
-    return (
+  // currently shows two input fields and one button with no styling.
+  // JSX FOR THE UI OF THE COMPONENT =====================
+  return (
+    <div>
+      <h1>Sign Up</h1>
+      <p>Please fill out the form below to create a new account.</p>
       <form onSubmit={handleSubmit}>
-          <input placeholder="Email" id="email" type='text' value={ email } onChange={handleEmailChange} />
-          <input placeholder="Password" id="password" type='password' value={ password } onChange={handlePasswordChange} />
+        <input placeholder="Email" id="email" type='text' value={email} onChange={handleEmailChange} />
+        <input placeholder="Password" id="password" type='password' value={password} onChange={handlePasswordChange} />
         <input id='submit' type="submit" value="Submit" />
       </form>
-    );
+    </div>
+  );
 }
 
 export default SignUpForm;
