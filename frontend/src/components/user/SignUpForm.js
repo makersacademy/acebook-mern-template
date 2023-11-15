@@ -1,4 +1,6 @@
 import React, { useState } from 'react';
+import styles from './SignUpForm.module.css';
+
 
 // Signup Page
 const SignUpForm = ({ navigate }) => {
@@ -45,14 +47,21 @@ const SignUpForm = ({ navigate }) => {
 
   // JSX FOR THE UI OF THE COMPONENT =====================
     // currently shows two input fields and one button with no styling.
-    return (
+    return (<div className={styles.Middle}>
       <form onSubmit={handleSubmit}>
-          <input placeholder="Email" id="email" type='text' value={ email } onChange={handleEmailChange} />
-          <input placeholder="Password" id="password" type='password' value={ password } onChange={handlePasswordChange} />
-        <input id='submit' type="submit" value="Submit" />
-        <h2>{errorMsg}</h2>
+
+          <input placeholder="Email" id="email" type='text' value={ email } className={styles.inputField} onChange={handleEmailChange} />
+          <br/>
+          <input placeholder="Password" id="password" type='password' value={ password } className={styles.inputField} onChange={handlePasswordChange} />
+          <br/>
+          <br/>
+        <input id='submit' type="submit" className={styles.Button} value="Submit"/>
+         <h2>{errorMsg}</h2>
+
       </form>
-    );
+    </div>
+);
 }
+
 
 export default SignUpForm;
