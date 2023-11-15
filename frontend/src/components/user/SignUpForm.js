@@ -6,7 +6,7 @@ const SignUpForm = ({ navigate }) => {
   // STATE VARIABLES ==========================
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-
+  const [errorMsg, setErrorMsg] = useState("")
   // FORM SUBMISSION FOR NEW USER ====================
   const handleSubmit = async (event) => {
     event.preventDefault(); 
@@ -18,11 +18,17 @@ const SignUpForm = ({ navigate }) => {
       },
       body: JSON.stringify({ email: email, password: password }) // <===== BODY OF REQUEST: email and password
     })
-      .then(response => {
+      .then(async response => {
+        
+        
         if(response.status === 201) {
           navigate('/login') // If successful, navigate to login page
+          
         } else {
+          const errorData = await response.json();
           navigate('/signup') // If unsuccessful, stay on the signup page
+          setErrorMsg(errorData.message)
+          console.log(errorData.message)
         }
       })
   }
@@ -44,6 +50,7 @@ const SignUpForm = ({ navigate }) => {
           <input placeholder="Email" id="email" type='text' value={ email } onChange={handleEmailChange} />
           <input placeholder="Password" id="password" type='password' value={ password } onChange={handlePasswordChange} />
         <input id='submit' type="submit" value="Submit" />
+        <h2>{errorMsg}</h2>
       </form>
     );
 }
