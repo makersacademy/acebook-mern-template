@@ -16,6 +16,7 @@ const Feed = ({ navigate }) => {
         .then(async data => {
           window.localStorage.setItem("token", data.token)
           setToken(window.localStorage.getItem("token"))
+          
           // Remove line below once backend for posts is set up
           data.posts = [
             {
