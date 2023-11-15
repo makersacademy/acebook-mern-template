@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 
 const SignUpForm = ({ navigate }) => {
-
+  // POST request with user email and password, empty avatar is added by default
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
@@ -17,13 +17,15 @@ const SignUpForm = ({ navigate }) => {
     })
       .then(response => {
         if(response.status === 201) {
-          navigate('/login')
+          // redirect to avatar choice page while passing history from this page (user email)
+          navigate('/choose-avatar', { state: { userEmail: email } });
         } else {
           navigate('/signup')
         }
       })
   }
 
+  // input change handlers
   const handleEmailChange = (event) => {
     setEmail(event.target.value)
   }
@@ -32,7 +34,7 @@ const SignUpForm = ({ navigate }) => {
     setPassword(event.target.value)
   }
 
-
+// render of html object
     return (
       <form onSubmit={handleSubmit}>
           <input placeholder="Email" id="email" type='text' value={ email } onChange={handleEmailChange} />
