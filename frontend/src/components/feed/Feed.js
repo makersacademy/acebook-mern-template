@@ -20,7 +20,7 @@ const Feed = ({ navigate }) => {
           // Remove line below once backend for posts is set up
           data.posts = [
             {
-              'id': 1,
+              '_id': 1,
               'content': 'This is my first post',
               'created_at': '13-10-23',
               'number_of_likes': 20,
@@ -28,7 +28,7 @@ const Feed = ({ navigate }) => {
               'comments': ['great post', 'interesting']
             },
             {
-              'id': 1,
+              '_id': 1,
               'content': 'This is my second post',
               'created_at': '13-10-23',
               'number_of_likes': 10,
