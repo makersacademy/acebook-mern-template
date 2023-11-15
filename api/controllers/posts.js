@@ -13,7 +13,11 @@ const PostsController = {
   },
   // Create needs to be updated to include pulling the user_id from authenticated user
   Create: (req, res) => {
-    const post = new Post(req.body);
+    const user_id = req.user_id;
+    const post = new Post({
+      ...req.body,
+      user_id: user_id,
+      });
     post.save((err) => {
       if (err) {
         throw err;
@@ -25,7 +29,7 @@ const PostsController = {
   },
   // method to get posts filtered by user_id
   FindPostsByUserId: (req, res) => {
-    Post.find((err, posts) => {
+    Post.findOne((err, posts) => {
       if (err) {
         throw err;
       }
