@@ -5,7 +5,7 @@ const mongoose = require("mongoose");
 const UserSchema = new mongoose.Schema({
   email: { type: String, required: true },
   password: { type: String, required: true },
-  username: {type: String, required: true},
+  username: {type: String, required: false},
   // Creating a one to many relationship to the same model
   followers: [{type: mongoose.Schema.Types.ObjectId, ref: "User", required: false}],
   photograph: {type: String},
