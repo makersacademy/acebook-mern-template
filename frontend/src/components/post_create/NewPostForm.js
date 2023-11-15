@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import styles from './newPostForm.module.css'
+
 // New Post Form:
 
 const NewPostForm = ({navigate}) => {
@@ -16,6 +17,7 @@ const NewPostForm = ({navigate}) => {
         if(token){ // if user is logged in
 
             event.preventDefault(); 
+            console.log(token);
             // Send POST request to '/posts' endpoint
             fetch( '/posts', {
                 method: 'post',
@@ -23,32 +25,33 @@ const NewPostForm = ({navigate}) => {
                     'Content-Type': 'application/json',
                     'Authorization': `Bearer ${token}` // necessary for requests that need login auth
                 },
-                body: JSON.stringify({ message: message }) // <===== BODY OF REQUEST: message
+                body: JSON.stringify({ 
+                    message: message
+                 }) // <===== BODY OF REQUEST: message
                 })
                 .then(response => {
                     if(response.status === 201) {
-                    console.log('successful')
+                    console.log('successful') 
                     navigate('/posts') // If successful, navigate to posts page
+                    return response.json()
                     } else {
                     console.log('not successful')
                     navigate('/signup') // If unsuccessful, stay on the signup page
                     }
                 })
-
+                .then(async data => {
+                    // Updates to a new token when the GET request is complete
+                    window.localStorage.setItem("token", data.token)
+                    setToken(window.localStorage.getItem("token"))
+                    console.log(token)
+                })
+            }
         }
-
-        }
-    
-
 
     // ------------ SUPPORTIVE FUNCTIONS: ----------------
     // FUNCTIONS FOR CHANGING STATE VARIABLES 
     const handleMessageChange = (event) => {
         setMessage(event.target.value)
-    }
-
-    const handleTokenChange = (event) => {
-        setToken(event.target.value)
     }
 
 
