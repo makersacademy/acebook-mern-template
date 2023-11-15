@@ -41,7 +41,7 @@ const tokenChecker = (req, res, next) => {
 app.use("/posts", tokenChecker, postsRouter);
 app.use("/tokens", authenticationRouter);
 app.use("/users", usersRouter);
-//new route for posting avatar change, do I need it here or only in users routes?
+//new route for posting avatar change
 app.use("/users/avatar", usersRouter);
 
 // catch 404 and forward to error handler
