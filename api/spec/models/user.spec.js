@@ -14,7 +14,7 @@ describe("User model", () => {
     const user = new User({
       email: "someone@example.com",
       password: "password",
-      avatar: "public/images/avatars/1.svg",
+      avatar: "1.svg",
     });
     expect(user.email).toEqual("someone@example.com");
   });
@@ -23,7 +23,7 @@ describe("User model", () => {
     const user = new User({
       email: "someone@example.com",
       password: "password",
-      avatar: "public/images/avatars/1.svg",
+      avatar: "1.svg",
     });
     expect(user.password).toEqual("password");
   });
@@ -32,9 +32,9 @@ describe("User model", () => {
     const user = new User({
       email: "someone@example.com",
       password: "password",
-      avatar: "public/images/avatars/1.svg",
+      avatar: "1.svg",
     });
-    expect(user.avatar).toEqual("public/images/avatars/1.svg");
+    expect(user.avatar).toEqual("1.svg");
   });
 
   it("can list all users", (done) => {
@@ -49,7 +49,7 @@ describe("User model", () => {
     const user = new User({
       email: "someone@example.com",
       password: "password",
-      avatar: "public/images/avatars/1.svg",
+      avatar: "1.svg",
     });
 
     user.save((err) => {
@@ -61,19 +61,10 @@ describe("User model", () => {
         expect(users[0]).toMatchObject({
           email: "someone@example.com",
           password: "password",
-          avatar: "public/images/avatars/1.svg",
+          avatar: "1.svg",
         });
         done();
       });
     });
   });
-
-  // it("default value when no avatar provided", async (done) => {
-  //   const user = new User({
-  //     email: "test@test.com",
-  //     password: "test",
-  //     avatar: null
-  //   });
-  //   expect(user.avatar).toEqual("public/images/avatars/0.svg");
-  // })
 });
