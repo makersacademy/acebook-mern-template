@@ -7,10 +7,11 @@ const JWT = require("jsonwebtoken");
 const secret = process.env.JWT_SECRET;
 
 let token;
+let user;
 
 describe("/posts", () => {
   beforeAll( async () => {
-    const user = new User({email: "test@test.com", password: "12345678"});
+    user = new User({email: "test@test.com", password: "12345678"});
     await user.save();
 
     token = JWT.sign({
@@ -44,10 +45,12 @@ describe("/posts", () => {
       await request(app)
         .post("/posts")
         .set("Authorization", `Bearer ${token}`)
-        .send({ message: "hello world", token: token });
+        .send({ message: "hello world", token: token })
+
       let posts = await Post.find();
       expect(posts.length).toEqual(1);
       expect(posts[0].message).toEqual("hello world");
+      expect(posts[0].user_id).toEqual(user._id)
     });
   
     test("returns a new token", async () => {
