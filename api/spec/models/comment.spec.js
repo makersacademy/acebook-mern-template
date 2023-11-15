@@ -72,7 +72,6 @@ describe("Comment model", () => {
 
       comment.save((err) => {
         expect(err).toBeNull;
-        console.log("AAAAAABBBBBBBSDHJDBGHDHSBDHBSDHDBHSAQJUHQHJWJDHBHW");
         Comment.find((err, comments) => {
         console.log(err)
           expect(err).toBeNull();
