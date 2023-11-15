@@ -8,7 +8,7 @@ const SignUpForm = ({ navigate }) => {
   // STATE VARIABLES ==========================
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-
+  const [errorMsg, setErrorMsg] = useState("")
   // FORM SUBMISSION FOR NEW USER ====================
   const handleSubmit = async (event) => {
     event.preventDefault(); 
@@ -20,11 +20,17 @@ const SignUpForm = ({ navigate }) => {
       },
       body: JSON.stringify({ email: email, password: password }) // <===== BODY OF REQUEST: email and password
     })
-      .then(response => {
+      .then(async response => {
+        
+        
         if(response.status === 201) {
           navigate('/login') // If successful, navigate to login page
+          
         } else {
+          const errorData = await response.json();
           navigate('/signup') // If unsuccessful, stay on the signup page
+          setErrorMsg(errorData.message)
+          console.log(errorData.message)
         }
       })
   }
@@ -43,12 +49,15 @@ const SignUpForm = ({ navigate }) => {
     // currently shows two input fields and one button with no styling.
     return (<div className={styles.Middle}>
       <form onSubmit={handleSubmit}>
+
           <input placeholder="Email" id="email" type='text' value={ email } className={styles.inputField} onChange={handleEmailChange} />
           <br/>
           <input placeholder="Password" id="password" type='password' value={ password } className={styles.inputField} onChange={handlePasswordChange} />
           <br/>
           <br/>
         <input id='submit' type="submit" className={styles.Button} value="Submit"/>
+         <h2>{errorMsg}</h2>
+
       </form>
     </div>
 );
