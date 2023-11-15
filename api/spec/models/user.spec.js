@@ -16,7 +16,7 @@ describe("User model", () => {
       email: "test@gmail.com",
       password: "password",
       username: "TestUser",
-      follwers: [],
+      followers: [],
       photograph: "",
       posts: [],
       comments: [],
@@ -45,7 +45,7 @@ describe("User model", () => {
         email: "test@gmail.com",
         password: "password",
         username: "TestUser",
-        follwers: [],
+        followers: [],
         photograph: "",
         posts: [],
         comments: []
@@ -56,15 +56,14 @@ describe("User model", () => {
         User.find((err, users) => {
           expect(err).toBeNull();
 
-        expect(users[0]).toMatchObject({
-          email: "test@gmail.com",
-          password: "password",
-          username: "TestUser",
-          follwers: [],
-          photograph: "",
-          posts: [],
-          comments: [] 
-        });
+          expect(users[0].username).toEqual('TestUser');
+          expect(users[0].email).toEqual('test@gmail.com');
+          expect(users[0].password).toEqual('password');
+          expect(users[0].followers.length).toEqual(0);
+          expect(users[0].photograph).toEqual("");
+          expect(users[0].posts.length).toEqual(0);
+          expect(users[0].comments.length).toEqual(0);
+          
         done();
         })
       })
@@ -76,64 +75,3 @@ describe("User model", () => {
     
 
 
-    // it("can save a user", (done) => {
-    //   const user = new User({
-    //     email: "test@gmail.com",
-    //     password: "password",
-    //     username: "TestUser",
-    //     follwers: [],
-    //     photograph: "",
-    //     posts: [],
-    //     comments: [],,
-    //       });
-    //       user.save((err) => {
-    //               expect(err).toBeNull();
-            
-    //               User.find((err, users) => {
-    //                 expect(err).toBeNull();
-            
-    //                 expect(users[0]).toMatchObject({
-    //                   email: "test@gmail.com",
-    //                   password: "password",
-    //                   username: "TestUser",
-    //                   follwers: [],
-    //                   photograph: "",
-    //                   posts: [],
-    //                   comments: [],
-    //                 });
-    //                 done();
-    //               });
-    //             });
-    //           });
-
-          
-
-
-
-
-
-
-
-
-
-//   it("can save a user", (done) => {
-//     const user = new User({
-//       email: "someone@example.com",
-//       password: "password",
-//     });
-
-//     user.save((err) => {
-//       expect(err).toBeNull();
-
-//       User.find((err, users) => {
-//         expect(err).toBeNull();
-
-//         expect(users[0]).toMatchObject({
-//           email: "someone@example.com",
-//           password: "password",
-//         });
-//         done();
-//       });
-//     });
-//   });
-// });
