@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-
+import styles from './newPostForm.module.css'
 
 // New Post Form:
 
@@ -59,10 +59,13 @@ const NewPostForm = ({navigate}) => {
     // one input field and a submit button
 
     return (
-        <form onSubmit={handleSubmit}>
-            <input id="message" type='text' value={ message } onChange={handleMessageChange} />
-            <input id='submit' type="submit" value="Submit" />
-        </form>
+        <form onSubmit={handleSubmit} className={styles.Middle}>
+
+          <textarea id="message" value={message} onChange={handleMessageChange} className={styles.textarea} placeholder="Share your Thoughts on acebook..."/>
+          <br/>
+          <input id="submit" type="submit" value="Submit" className={styles.Button}/>
+      </form>
+         
     )
 
 }
