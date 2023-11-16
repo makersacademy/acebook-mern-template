@@ -1,8 +1,10 @@
 const mongoose = require("mongoose");
 
 // modification of user Schema to include a path of chosen avatar
+//  further modification to include 'username' entry (note that unlike the email, this is not necessarily unique)
 // path public/images/avatars/<filename>
 const UserSchema = new mongoose.Schema({
+  username: { type: String, required: true},
   email: { type: String, required: true },
   password: { type: String, required: true },
   // avatar is not required because first user inputs only unersname and password
