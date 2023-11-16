@@ -10,5 +10,7 @@ router.post("/", UsersController.Create);
 
 router.get("/profile/:user_id", PostsController.FindPostsByUserId);
 
+// new router for backend users/avatar for POST request changing the chosen avatar
+router.post("/avatar", UsersController.ChangeAvatar);
 
 module.exports = router;
