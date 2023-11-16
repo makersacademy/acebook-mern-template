@@ -14,6 +14,7 @@ describe("/users", () => {
       let response = await request(app)
         .post("/users")
         .send({
+          username: "Poppy",
           email: "poppy@email.com",
           password: "1234",
           avatar: "public/images/avatars/1.svg",
@@ -25,6 +26,7 @@ describe("/users", () => {
       await request(app)
         .post("/users")
         .send({
+          username: "Scarlett",
           email: "scarlett@email.com",
           password: "1234",
           avatar: "public/images/avatars/1.svg",
@@ -37,7 +39,7 @@ describe("/users", () => {
     test("a user without avatar is created, default avatar added", async () => {
       await request(app)
         .post("/users")
-        .send({ email: "scarlett@email.com", password: "1234" });
+        .send({ username: "Scarlett", email: "scarlett@email.com", password: "1234" });
       let users = await User.find();
       let newUser = users[users.length - 1];
       expect(newUser.avatar).toEqual("0.svg");
@@ -48,12 +50,12 @@ describe("/users", () => {
     test("response code is 400", async () => {
       let response = await request(app)
         .post("/users")
-        .send({ email: "skye@email.com" });
+        .send({ username: "user", email: "skye@email.com" });
       expect(response.statusCode).toBe(400);
     });
 
     test("does not create a user", async () => {
-      await request(app).post("/users").send({ email: "skye@email.com" });
+      await request(app).post("/users").send({ username: "user", email: "skye@email.com" });
       let users = await User.find();
       expect(users.length).toEqual(0);
     });
@@ -63,7 +65,7 @@ describe("/users", () => {
     test("response code is 400", async () => {
       let response = await request(app)
         .post("/users")
-        .send({ password: "1234" });
+        .send({ username: "user", password: "1234" });
       expect(response.statusCode).toBe(400);
     });
 
@@ -74,25 +76,40 @@ describe("/users", () => {
     });
   });
 
+  describe("POST, when username is missing", () => {
+    test("response code is 400", async () => {
+      let response = await request(app)
+        .post("/users")
+        .send({ email: "skye@email.com", password: "1234" });
+      expect(response.statusCode).toBe(400);
+    });
+
+    test("does not create a user", async () => {
+      await request(app).post("/users").send({ email: "skye@email.com", password: "1234" });
+      let users = await User.find();
+      expect(users.length).toEqual(0);
+    });
+  });
+
   describe("POST avatar change", () => {
     test("the response code is 201 when avatar not posted", async () => {
       let response = await request(app)
         .post("/users")
-        .send({ email: "poppy@email.com", password: "1234" });
+        .send({ username: "Poppy", email: "poppy@email.com", password: "1234" });
       expect(response.statusCode).toBe(201);
     });
 
     test("the response code is 201 when avatr posted", async () => {
       let response = await request(app)
         .post("/users")
-        .send({ email: "poppy@email.com", password: "1234", avatar: "2.svg" });
+        .send({ username: "Poppy", email: "poppy@email.com", password: "1234", avatar: "2.svg" });
       expect(response.statusCode).toBe(201);
     });
 
     test("the response code is 201 when new avatar chosen", async () => {
       await request(app)
         .post("/users")
-        .send({ email: "poppy@email.com", password: "1234" });
+        .send({ username: "Poppy", email: "poppy@email.com", password: "1234" });
 
       let response = await request(app)
         .post("/users/avatar")
@@ -103,7 +120,7 @@ describe("/users", () => {
     test("when new avatar chosen it changes in database", async () => {
       await request(app)
         .post("/users")
-        .send({email: "test@email.com", password: "1234"})
+        .send({username: "test", email: "test@email.com", password: "1234"})
 
       let response = await request(app)
         .post("/users/avatar")
