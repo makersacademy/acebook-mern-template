@@ -38,22 +38,4 @@ img {
     border-radius: 8px;
 }
 
-.custom-btn {
-    padding: 10px 20px;
-    font-size: 16px;
-    color: #fff;
-    background-color: #4f4f4f;
-    border: 1px solid #4f4f4f;
-    border-radius: 4px;
-    cursor: pointer;
-    margin: 5px;
-    }
-    
-    /* Hover effect */
-.custom-btn:hover {
-        background-color: #000000;
-        border: 1px solid #000000;
-    }
-
-
 
