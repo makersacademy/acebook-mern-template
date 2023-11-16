@@ -2,6 +2,7 @@ import './App.css';
 import LoginForm from '../auth/LoginForm'
 import SignUpForm from '../user/SignUpForm'
 import NavBar from '../navBar/NavBar';
+import NewPost from '../newPost/NewPost';
 import React, { useState } from 'react';
 import Feed from '../feed/Feed'
 import {
@@ -10,6 +11,8 @@ import {
   Route,
 } from "react-router-dom";
 
+
+
 const App = () => {
     return (
         <Routes>
@@ -17,6 +20,7 @@ const App = () => {
           <Route path='/login'  element={<LoginForm  navigate={ useNavigate() }/>}/>
           <Route path='/signup' element={<SignUpForm navigate={ useNavigate() }/>}/>
           <Route path='/navbar' element={<NavBar navigate={ useNavigate() }/>}/>
+          <Route path='/profile' element={<NewPost navigate={ useNavigate() }/>}/>
         </Routes>
     );
 }

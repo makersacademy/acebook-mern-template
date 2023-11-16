@@ -1,0 +1,59 @@
+body {
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+}
+
+.new_post {
+    margin: 20px;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    display: inline-block;
+    text-align: left;
+    text-align: left;
+}
+
+label {
+    display: block;
+    margin-bottom: 10px;
+}
+
+.new-post-button {
+    width: 100%;
+    padding: 10px;
+    box-sizing: border-box;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+    margin-top: 10px;
+    border: 2px solid #ddd;
+    border-radius: 8px;
+}
+
+.custom-btn {
+    padding: 10px 20px;
+    font-size: 16px;
+    color: #fff;
+    background-color: #4f4f4f;
+    border: 1px solid #4f4f4f;
+    border-radius: 4px;
+    cursor: pointer;
+    margin: 5px;
+    }
+    
+    /* Hover effect */
+.custom-btn:hover {
+        background-color: #000000;
+        border: 1px solid #000000;
+    }
+
+
+
