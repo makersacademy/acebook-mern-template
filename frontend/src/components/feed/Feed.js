@@ -39,7 +39,7 @@ const Feed = ({ navigate }) => {
               .slice()
               .sort((a, b) => new Date(b.date) - new Date(a.date))
               .map((post) => (
-                  <Post post={ post } key={ post._id } /> )
+                  <p><Post post={ post } key={ post._id } /></p> )
               )}
           </div>
         </>
