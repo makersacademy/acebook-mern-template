@@ -15,10 +15,11 @@ const LogInForm = ({ navigate }) => {
       },
       body: JSON.stringify({ displayName: displayName, email: email, password: password })
     })
-      .then(response => {
-        if(response.status === 201) {
-          // GOOD NEWS.
-          let data = response.json();
+    .then(async response => {
+      if(response.status === 201) {
+        // GOOD NEWS.
+        console.log("token");
+        let data = await response.json();
           window.localStorage.setItem("token", data.token);
           navigate('/posts');
         } else {
