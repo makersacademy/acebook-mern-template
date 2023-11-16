@@ -110,6 +110,31 @@ describe("/comments", () => {
           });
         expect(response.status).toEqual(401);
       });
+
+      test("a comment is not created", async () => {
+        await request(app)
+          .post("/comments")
+          .send({
+            content: "Great comment",
+            author: user._id,
+            post_id: post._id,
+            token: token,
+          });
+        let comments = await Comment.find();
+        expect(comments.length).toEqual(0);
+      });
+
+      test("a token is not returned", async () => {
+        let response = await request(app)
+          .post("/comments")
+          .send({
+            content: "Great comment",
+            author: user._id,
+            post_id: post._id,
+            token: token,
+          });
+        expect(response.body.token).toEqual(undefined);
+      });
     })
   });
 });
