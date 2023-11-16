@@ -17,8 +17,8 @@ const log = {
 
 // Util function to generate random number.
 const randomIndex = (max) => {
-  return Math.floor(Math.random() * max );
-}
+  return Math.floor(Math.random() * max);
+};
 
 //Connect to db.
 mongoose.connect(mongoDbUrl, {
@@ -70,7 +70,7 @@ const addAuthors = async () => {
   const users = await findUsers();
 
   CONTENT.forEach((post, i) => {
-    const randomUser = randomIndex(USERS.length - 1)
+    const randomUser = randomIndex(USERS.length - 1);
     post.author = users[randomUser]._id;
     log.green(`${i} - Post Author added.`);
   });
@@ -82,8 +82,8 @@ const addAuthorPostIdtoComment = async () => {
   const posts = await findPosts();
 
   CONTENT.forEach((comment, i) => {
-    const randomUser = randomIndex(USERS.length - 1)
-    const randomPost  = randomIndex(CONTENT.length - 1)
+    const randomUser = randomIndex(USERS.length - 1);
+    const randomPost = randomIndex(CONTENT.length - 1);
 
     comment.author = users[randomUser]._id;
     log.green(`${i} - Comment author added.`);
