@@ -8,6 +8,7 @@ const postsRouter = require("./routes/posts");
 const authenticationRouter = require("./routes/authentication");
 const usersRouter = require("./routes/users");
 
+
 const app = express();
 
 // setup for receiving JSON
@@ -37,10 +38,12 @@ const tokenChecker = (req, res, next) => {
   });
 };
 
+
 // route setup
 app.use("/posts", tokenChecker, postsRouter);
 app.use("/tokens", authenticationRouter);
 app.use("/users", usersRouter);
+app.use("/users/profile/:user_id", tokenChecker, usersRouter);
 //new route for posting avatar change
 app.use("/users/avatar", usersRouter);
 
