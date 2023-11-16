@@ -11,7 +11,7 @@ let user;
 
 describe("/posts", () => {
   beforeAll(async () => {
-    const user = new User({
+    user = new User({
       username: "test",
       email: "test@test.com",
       password: "12345678",
@@ -58,6 +58,7 @@ describe("/posts", () => {
       let posts = await Post.find();
       expect(posts.length).toEqual(1);
       expect(posts[0].message).toEqual("hello world");
+
       expect(posts[0].user_id).toEqual(user._id)
     });
 

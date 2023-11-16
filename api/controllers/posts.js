@@ -29,6 +29,7 @@ const PostsController = {
     });
   },
 
+  // *************************METHOD IN PROGRESS*************************
   // method to get posts filtered by user_id
   FindPostsByUserId: async (req, res) => {
     const user_id = req.params.user_id
