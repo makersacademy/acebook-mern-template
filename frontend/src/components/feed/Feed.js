@@ -19,7 +19,7 @@ const Feed = ({ navigate }) => {
           setPosts(data.posts);
         })
     }
-  }, [])
+  }, [token])
 
 
   const logout = () => {
