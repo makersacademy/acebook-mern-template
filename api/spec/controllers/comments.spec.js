@@ -136,5 +136,68 @@ describe("/comments", () => {
         expect(response.body.token).toEqual(undefined);
       });
     })
+
+    describe("GET, when token is present", () => {
+      test("returns every comment in the collection", async () => {
+        let comment1 = new Comment({content: "Great comment",
+            author: user._id,
+            post_id: post._id,
+            token: token,});
+
+        let comment2 = new Comment({content: "Great comment",
+            author: user._id,
+            post_id: post._id,
+            token: token,});
+
+        await comment1.save();
+        await comment2.save();
+        let response = await request(app)
+          .get("/comments")
+          .set("Authorization", `Bearer ${token}`)
+          .send({token: token});
+        let messages = response.body.comments.map((comment) => ( comment.content ));
+        expect(messages).toEqual(["Great comment", "Great comment"]);
+      })
+
+      test("the response code is 200", async () => {
+        let comment1 = new Comment({content: "Great comment",
+        author: user._id,
+        post_id: post._id,});
+
+        let comment2 = new Comment({content: "Great comment",
+            author: user._id,
+            post_id: post._id,});
+
+        await comment1.save();
+        await comment2.save();
+        let response = await request(app)
+          .get("/comments")
+          .set("Authorization", `Bearer ${token}`)
+          .send({token: token});
+        expect(response.status).toEqual(200);
+      })
+
+      test("returns a new token", async () => {
+        let comment1 = new Comment({content: "Great comment",
+        author: user._id,
+        post_id: post._id,});
+
+        let comment2 = new Comment({content: "Great comment",
+        author: user._id,
+        post_id: post._id,});
+
+        await comment1.save();
+        await comment2.save();
+        let response = await request(app)
+          .get("/comments")
+          .set("Authorization", `Bearer ${token}`)
+          .send({token: token});
+        let newPayload = JWT.decode(response.body.token, process.env.JWT_SECRET);
+        let originalPayload = JWT.decode(token, process.env.JWT_SECRET);
+        expect(newPayload.iat > originalPayload.iat).toEqual(true);
+      })
+    })
+
+
   });
 });
