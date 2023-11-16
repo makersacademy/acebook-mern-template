@@ -101,11 +101,7 @@
     {
       "type": "text",
       "version": 140,
-<<<<<<< HEAD
-      "versionNonce": 283927482,
-=======
       "versionNonce": 1627703420,
->>>>>>> 2d08fd234803f4ac5b3ee35e4f3d70cbb1c50468
       "isDeleted": false,
       "id": "t9cajjIAbiUn-MR1istry",
       "fillStyle": "hachure",
@@ -125,11 +121,7 @@
       "frameId": null,
       "roundness": null,
       "boundElements": [],
-<<<<<<< HEAD
       "updated": 1699956446272,
-=======
-      "updated": 1699954763923,
->>>>>>> 2d08fd234803f4ac5b3ee35e4f3d70cbb1c50468
       "link": null,
       "locked": false,
       "fontSize": 20,
@@ -145,11 +137,7 @@
     {
       "type": "text",
       "version": 133,
-<<<<<<< HEAD
-      "versionNonce": 222842086,
-=======
       "versionNonce": 887557444,
->>>>>>> 2d08fd234803f4ac5b3ee35e4f3d70cbb1c50468
       "isDeleted": false,
       "id": "IccK7rkC9AvRQWiMhOy0c",
       "fillStyle": "hachure",
@@ -169,11 +157,7 @@
       "frameId": null,
       "roundness": null,
       "boundElements": [],
-<<<<<<< HEAD
-      "updated": 1699956446272,
-=======
       "updated": 1699954763923,
->>>>>>> 2d08fd234803f4ac5b3ee35e4f3d70cbb1c50468
       "link": null,
       "locked": false,
       "fontSize": 20,
@@ -189,11 +173,7 @@
     {
       "type": "text",
       "version": 124,
-<<<<<<< HEAD
-      "versionNonce": 64740474,
-=======
       "versionNonce": 986601724,
->>>>>>> 2d08fd234803f4ac5b3ee35e4f3d70cbb1c50468
       "isDeleted": false,
       "id": "4dv9GBcRXRTOvv4SKPkLN",
       "fillStyle": "hachure",
@@ -213,11 +193,7 @@
       "frameId": null,
       "roundness": null,
       "boundElements": [],
-<<<<<<< HEAD
-      "updated": 1699956446272,
-=======
       "updated": 1699954763923,
->>>>>>> 2d08fd234803f4ac5b3ee35e4f3d70cbb1c50468
       "link": null,
       "locked": false,
       "fontSize": 20,
@@ -720,11 +696,7 @@
     {
       "type": "text",
       "version": 154,
-<<<<<<< HEAD
-      "versionNonce": 498712614,
-=======
       "versionNonce": 1654441156,
->>>>>>> 2d08fd234803f4ac5b3ee35e4f3d70cbb1c50468
       "isDeleted": false,
       "id": "bn_fSdayLFzLU3bOcyspX",
       "fillStyle": "hachure",
@@ -744,11 +716,7 @@
       "frameId": null,
       "roundness": null,
       "boundElements": [],
-<<<<<<< HEAD
-      "updated": 1699956446275,
-=======
       "updated": 1699954763925,
->>>>>>> 2d08fd234803f4ac5b3ee35e4f3d70cbb1c50468
       "link": null,
       "locked": false,
       "fontSize": 20,
@@ -1002,8 +970,6 @@
       "baseline": 11
     },
     {
-<<<<<<< HEAD
-=======
       "type": "text",
       "version": 367,
       "versionNonce": 649574091,
@@ -1103,7 +1069,6 @@
       "baseline": 8
     },
     {
->>>>>>> 2d08fd234803f4ac5b3ee35e4f3d70cbb1c50468
       "type": "rectangle",
       "version": 352,
       "versionNonce": 510211722,
@@ -1646,11 +1611,7 @@
     {
       "type": "text",
       "version": 283,
-<<<<<<< HEAD
-      "versionNonce": 64896314,
-=======
       "versionNonce": 907139452,
->>>>>>> 2d08fd234803f4ac5b3ee35e4f3d70cbb1c50468
       "isDeleted": false,
       "id": "8QRvbYfAPK2muOs_XrN-n",
       "fillStyle": "hachure",
@@ -1670,11 +1631,7 @@
       "frameId": null,
       "roundness": null,
       "boundElements": [],
-<<<<<<< HEAD
-      "updated": 1699956446279,
-=======
       "updated": 1699954763927,
->>>>>>> 2d08fd234803f4ac5b3ee35e4f3d70cbb1c50468
       "link": null,
       "locked": false,
       "fontSize": 20,
@@ -2878,8 +2835,6 @@
       "baseline": 6
     },
     {
-<<<<<<< HEAD
-=======
       "type": "text",
       "version": 243,
       "versionNonce": 1525038667,
@@ -2916,7 +2871,6 @@
       "baseline": 6
     },
     {
->>>>>>> 2d08fd234803f4ac5b3ee35e4f3d70cbb1c50468
       "type": "arrow",
       "version": 38,
       "versionNonce": 458106710,
@@ -3303,11 +3257,7 @@
     {
       "type": "text",
       "version": 351,
-<<<<<<< HEAD
-      "versionNonce": 1578814310,
-=======
       "versionNonce": 1336904772,
->>>>>>> 2d08fd234803f4ac5b3ee35e4f3d70cbb1c50468
       "isDeleted": false,
       "id": "tJ8juxlcBVW2YgYeiTQ4T",
       "fillStyle": "hachure",
@@ -3327,11 +3277,7 @@
       "frameId": null,
       "roundness": null,
       "boundElements": [],
-<<<<<<< HEAD
-      "updated": 1699956446285,
-=======
       "updated": 1699954763930,
->>>>>>> 2d08fd234803f4ac5b3ee35e4f3d70cbb1c50468
       "link": null,
       "locked": false,
       "fontSize": 20,

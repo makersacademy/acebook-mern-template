@@ -18,10 +18,6 @@ const UsersController = {
 
     // Check if the request contains avatar filename and user id
     if (!filename || !user_email) {
-      console.log("ERROR 1")
-      console.log("FILENMAE", filename)
-      console.log("USER_EMAIL", user_email)
-      
       return res.status(400).json({ message: "Bad request" });
     }
 

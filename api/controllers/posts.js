@@ -33,14 +33,16 @@ const PostsController = {
   // method to get posts filtered by user_id
   FindPostsByUserId: async (req, res) => {
     const user_id = req.params.user_id
-    const userPosts = await Post.find(err, { user_id: user_id});
+
+    // finding posts with specific user_id
+    Post.find({user_id: user_id}), (err, posts) => {
       if (err) {
         throw err;
       }
       const token = TokenGenerator.jsonwebtoken(req.user_id)
-      res.status(200).json({ posts: userPosts, token: token });
-    }
-  }
+      res.status(200).json({ posts: posts, token: token });
+  };
+  }};
 
 
 module.exports = PostsController;
