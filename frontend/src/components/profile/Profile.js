@@ -1,5 +1,6 @@
 // import React, { useEffect, useState } from 'react';
 // import Post from '../post/Post'
+// import User from '../user/User'
 
 // const Feed = ({ navigate }) => {
 //   const [posts, setPosts] = useState([]);
