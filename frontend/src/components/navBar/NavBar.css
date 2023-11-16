@@ -1,0 +1,29 @@
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+  }
+  
+  .nav-left, .nav-right, .nav-center {
+    display: flex;
+    align-items: center;
+  }
+  
+  .nav-left {
+    justify-content: flex-start;
+  }
+  
+  .nav-center {
+    justify-content: center;
+    flex-grow: 1;
+  }
+  
+  .nav-right {
+    justify-content: flex-end;
+  }
+  
+  button {
+    margin: 0 5px;
+  }
+  
