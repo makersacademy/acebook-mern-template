@@ -198,6 +198,55 @@ describe("/comments", () => {
       })
     })
 
+    describe("GET, when token is missing", () => {
+      test("returns no comments", async () => {
+        let comment1 = new Comment({content: "Great comment",
+        author: user._id,
+        post_id: post._id,});
+
+        let comment2 = new Comment({content: "Great comment",
+        author: user._id,
+        post_id: post._id,});
+
+        await comment1.save();
+        await comment2.save();
+        let response = await request(app)
+          .get("/comments");
+        expect(response.body.posts).toEqual(undefined);
+      })
+
+      test("the response code is 401", async () => {
+        let comment1 = new  Comment({content: "Great comment",
+        author: user._id,
+        post_id: post._id,});
+
+        let comment2 = new Comment({content: "Great comment",
+        author: user._id,
+        post_id: post._id,});
+
+        await comment1.save();
+        await comment2.save();
+        let response = await request(app)
+          .get("/comments");
+        expect(response.status).toEqual(401);
+      })
+
+      test("does not return a new token", async () => {
+        let comment1 = new Comment({content: "Great comment",
+        author: user._id,
+        post_id: post._id,});
+
+        let comment2 = new Comment({content: "Great comment",
+        author: user._id,
+        post_id: post._id,});
+
+        await comment1.save();
+        await comment2.save();
+        let response = await request(app)
+          .get("/comments");
+        expect(response.body.token).toEqual(undefined);
+      })
+    })
 
   });
 });
