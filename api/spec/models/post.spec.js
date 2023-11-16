@@ -24,7 +24,7 @@ describe("Post model", () => {
   });
 
   it("can save a post", (done) => {
-    var post = new Post({ message: "some message" });
+    var post = new Post({ message: "some message", user_id: {$oid:"6554a91948a62d4e7c6a9b57"}});
 
     post.save((err) => {
       expect(err).toBeNull();
@@ -32,7 +32,7 @@ describe("Post model", () => {
       Post.find((err, posts) => {
         expect(err).toBeNull();
 
-        expect(posts[0]).toMatchObject({ message: "some message" });
+        expect(posts[0]).toMatchObject({ message: "some message", user_id: {$oid:"6554a91948a62d4e7c6a9b57"}});
         done();
       });
     });

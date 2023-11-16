@@ -16,6 +16,7 @@ const PostsController = {
     const user_id = req.user_id;
     const post = new Post({
       ...req.body,
+      // added a line to add and update user_id field
       user_id: user_id,
       });
     post.save((err) => {
@@ -27,17 +28,18 @@ const PostsController = {
       res.status(201).json({ message: 'OK', token: token });
     });
   },
+
   // method to get posts filtered by user_id
-  FindPostsByUserId: (req, res) => {
-    Post.findOne((err, posts) => {
+  FindPostsByUserId: async (req, res) => {
+    const user_id = req.params.user_id
+    const userPosts = await Post.find(err, { user_id: user_id});
       if (err) {
         throw err;
       }
       const token = TokenGenerator.jsonwebtoken(req.user_id)
-      res.status(200).json({ posts: posts, token: token });
-    });
+      res.status(200).json({ posts: userPosts, token: token });
+    }
   }
-}
 
 
 module.exports = PostsController;
