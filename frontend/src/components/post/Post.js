@@ -1,7 +1,8 @@
-import React from 'react';
+import React, {useState} from 'react';
 import './Post.css';
+import Comment from '../comment/Comment';
 
-const Post = ({post}) => {
+const Post = ({post, comment}) => {
   return(
     <div className='post-box'>
       <article data-cy="post-author" className='post-author'>{post.author}</article>
@@ -10,6 +11,13 @@ const Post = ({post}) => {
       <div style={{display: 'flex'}}>
         <img src='thumb-icon.png' className='like-btn' alt='thumb' />
         <article data-cy="post-likes" className='like-number'>{post.number_of_likes}</article>
+        <button data-cy="post-comment" className='comment-btn'>comment</button>
+          <div> 
+            <article data-cy="post-comments" className='post-comments' >
+              { post.comments.map (
+              (comment) => ( <Comment comment={ comment } /> ))
+          }</article>
+          </div>
       </div>
     </div>
   )

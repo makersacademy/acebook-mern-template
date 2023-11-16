@@ -30,3 +30,14 @@
 .like-number {
     font-size: 14px;
 }
+
+.comment-btn {
+  font-size: 14px;
+  background-color: #3498db;
+  color: #fff;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 0.5rem;
+  margin-left: 3rem;
+  cursor: pointer;
+}
