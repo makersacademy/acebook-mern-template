@@ -20,7 +20,7 @@ const Feed = ({ navigate }) => {
         })
     }
   }, [])
-    
+
 
   const logout = () => {
     window.localStorage.removeItem("token")
@@ -35,8 +35,11 @@ const Feed = ({ navigate }) => {
               Logout
             </button>
           <div id='feed' role="feed">
-              {posts.map(
-                (post) => ( <Post post={ post } key={ post._id } /> )
+              {posts
+              .slice()
+              .sort((a, b) => new Date(b.date) - new Date(a.date))
+              .map((post) => (
+                  <p><Post post={ post } key={ post._id } /></p> )
               )}
           </div>
         </>
