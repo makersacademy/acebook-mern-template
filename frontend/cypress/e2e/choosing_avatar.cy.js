@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 describe("Choosing avatar", () => {
     it("with choice made, redirects to '/login'", () => {
       cy.visit("/signup");
