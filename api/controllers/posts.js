@@ -23,6 +23,7 @@ const PostsController = {
       res.status(201).json({ message: 'OK', token: token });
     });
   },
+
   Comment: (req, res) => {
     console.log("COMMENTING")
     console.log(req.params.id)
@@ -44,6 +45,32 @@ const PostsController = {
           console.log('Comment added successfully');
           const token = TokenGenerator.jsonwebtoken(req.user_id)
           res.status(201).json({ message: 'Comment added successfully', token: token, updatedPost });
+        }
+      }
+    );
+  },
+
+  Likes: (req, res) => {
+    console.log("LIKED")
+    console.log(req.params.id)
+    // find the post using its id (req.params.id)
+    const newLike = req.body.likes;
+    console.log('newLike:', newLike);
+    
+    // add 1 to post.likes
+
+    Post.findOneAndUpdate(
+      { _id: req.params.id }, // Find the post by its ID
+      { $inc: { likes: newLike } }, 
+      { new: true }, 
+      (err, updatedPost) => {
+        if (err) {
+          console.error('Like not added:', err);
+          res.status(500).json({ message: 'Internal Server Error' });
+        } else {
+          console.log('Like added successfully');
+          const token = TokenGenerator.jsonwebtoken(req.user_id)
+          res.status(201).json({ message: 'Like added successfully', token: token, updatedPost });
         }
       }
     );

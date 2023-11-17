@@ -157,4 +157,173 @@ describe("/posts", () => {
       expect(response.body.token).toEqual(undefined);
     })
   })
+
+
+beforeEach(async () => {
+  await Post.deleteMany({});
+  await User.deleteMany({});
 });
+
+// Mock user data for JWT token creation
+const mockUserData = {
+  _id: 'mockUserId',
+  username: 'mockUser',
+};
+
+// Mock JWT token
+const mockToken = JWT.sign(mockUserData, process.env.JWT_SECRET);
+
+describe('Put Comment Route', () => {
+  describe('PUT /posts/:id', () => {
+    it('should add a comment to a post', async () => {
+      // Create a mock post in the database
+      const mockPost = new Post(
+        {message: "howdy!"}
+      );
+      await mockPost.save();
+
+      const commentData = {
+        comment: 'A new comment',
+      };
+
+      const response = await request(app)
+        .put(`/posts/${mockPost._id}`)
+        .set('Authorization', `Bearer ${mockToken}`)
+        .send(commentData)
+        .expect(201);
+
+      // Add assertions to check the response
+      expect(response.body.message).toBe('Comment added successfully');
+      expect(response.body.token).toBeDefined();
+      expect(response.body.updatedPost).toBeDefined();
+
+      // Check if the comment was added to the post in the database
+      const updatedPost = await Post.findById(mockPost._id);
+      expect(updatedPost.comments.length).toBe(1);
+      expect(updatedPost.comments[0].comment_message).toBe('A new comment');
+
+      // Add more assertions based on the expected behavior of your application
+    });
+  });
+});
+
+beforeEach(async () => {
+  await Post.deleteMany({});
+  await User.deleteMany({});
+});
+
+describe('Put Likes Route', () => {
+  describe('PUT /posts/:id/likes', () => {
+    it('should initiate at 0', async () => {
+      // Create a mock post in the database
+      const mockPost = new Post(
+        {message: "howdy!"},
+      );
+      await mockPost.save();
+
+      const likesData = {
+        likes: 0,
+      };
+
+      const response = await request(app)
+        .put(`/posts/${mockPost._id}/likes`)
+        .set('Authorization', `Bearer ${mockToken}`)
+        .send(likesData)
+        .expect(201);
+
+      // Add assertions to check the response
+      expect(response.body.message).toBe('Like added successfully');
+      expect(response.body.token).toBeDefined();
+      expect(response.body.updatedPost).toBeDefined();
+
+      // Check if the comment was added to the post in the database
+      const updatedPost = await Post.findById(mockPost._id);
+      expect(updatedPost.likes).toBe(0);
+    });
+  });
+});
+
+beforeEach(async () => {
+  await Post.deleteMany({});
+  await User.deleteMany({});
+});
+
+describe('Put Likes Route', () => {
+  describe('PUT /posts/:id/likes', () => {
+    it('should add a like to a post', async () => {
+      // Create a mock post in the database
+      const mockPost = new Post(
+        {message: "howdy!"},
+      );
+      await mockPost.save();
+
+      const likesData = {
+        likes: 1,
+      };
+
+      const response = await request(app)
+        .put(`/posts/${mockPost._id}/likes`)
+        .set('Authorization', `Bearer ${mockToken}`)
+        .send(likesData)
+        .expect(201);
+
+      // Add assertions to check the response
+      expect(response.body.message).toBe('Like added successfully');
+      expect(response.body.token).toBeDefined();
+      expect(response.body.updatedPost).toBeDefined();
+
+      // Check if the comment was added to the post in the database
+      const updatedPost = await Post.findById(mockPost._id);
+      expect(updatedPost.likes).toBe(1);
+    });
+  });
+});
+
+beforeEach(async () => {
+  await Post.deleteMany({});
+  await User.deleteMany({});
+});
+
+
+describe('Put Likes Route', () => {
+  describe('PUT /posts/:id/likes', () => {
+    it('should add a like to a post then remove it', async () => {
+      // Create a mock post in the database
+      const mockPost = new Post(
+        {message: "howdy!"},
+      );
+      await mockPost.save();
+
+      const likesData = {
+        likes: 1,
+      };
+      const antilikesData = {
+        likes: -1,
+      };
+
+      const response = await request(app)
+        .put(`/posts/${mockPost._id}/likes`)
+        .set('Authorization', `Bearer ${mockToken}`)
+        .send(likesData)
+        .expect(201);
+
+      const response2 = await request(app)
+        .put(`/posts/${mockPost._id}/likes`)
+        .set('Authorization', `Bearer ${mockToken}`)
+        .send(antilikesData)
+        .expect(201);
+      
+
+      // Add assertions to check the response
+      expect(response2.body.message).toBe('Like added successfully');
+      expect(response2.body.token).toBeDefined();
+      expect(response2.body.updatedPost).toBeDefined();
+
+      // Check if the comment was added to the post in the database
+      const updatedPost = await Post.findById(mockPost._id);
+      expect(updatedPost.likes).toBe(0);
+    });
+  });
+});
+});
+

@@ -23,6 +23,7 @@ const App = () => {
           <Route path='/navbar' element={<NavBar navigate={ useNavigate() }/>}/>
           <Route path='/newpost' element={<NewPost navigate={ useNavigate() }/>}/>
           <Route path="/posts/:postId" element={<Post />} /> 
+          {/* <Route path="/posts/:postId/likes" element={<Post />} />  */}
         </Routes>
     );
 }

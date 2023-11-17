@@ -6,5 +6,6 @@ const PostsController = require("../controllers/posts");
 router.get("/", PostsController.Index);
 router.post("/", PostsController.Create);
 router.put("/:id", PostsController.Comment);
+router.put("/:id/likes", PostsController.Likes);
 
 module.exports = router;
