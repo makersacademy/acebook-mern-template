@@ -22,6 +22,9 @@ const App = () => {
             element={<AvatarChoiceForm location={useLocation()} navigate={useNavigate()} />}
           />
           <Route path='/users/profile/:user_id' element={<UserProfileFeed navigate={ useNavigate() }/>}/>
+          
+          <Route path='/'  element={<HomePage navigate={ useNavigate() }/>}/>
+
         </Routes>
       </div>
     );
