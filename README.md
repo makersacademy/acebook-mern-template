@@ -48,7 +48,7 @@ REPLACE THIS TEXT WITH A LINK TO YOUR CARD WALL
    brew tap mongodb/brew
    brew install mongodb-community@5.0
    ```
-   *Note:* If you see a message that says `If you need to have mongodb-community@5.0 first in your PATH, run:`, follow the instruction. Restart your terminal after this.
+   _Note:_ If you see a message that says `If you need to have mongodb-community@5.0 first in your PATH, run:`, follow the instruction. Restart your terminal after this.
 7. Start MongoDB
    ```
    brew services start mongodb-community@5.0
@@ -58,20 +58,21 @@ REPLACE THIS TEXT WITH A LINK TO YOUR CARD WALL
 
 1. Start the server application (in the `api` directory)
 
-  **Note the use of an environment variable for the JWT secret**
+   **Note the use of an environment variable for the JWT secret**
 
    ```
    ; cd api
    ; JWT_SECRET=f6d278bb34e1d0e146a80b16ec254c05 npm start
    ```
+
 2. Start the front end application (in the `frontend` directory)
 
-  In a new terminal session...
+In a new terminal session...
 
-  ```
-  ; cd frontend
-  ; npm start
-  ```
+```
+; cd frontend
+; npm start
+```
 
 You should now be able to open your browser and go to `http://localhost:3000/signup` to create a new user.
 
@@ -94,7 +95,7 @@ The automated tests run by sending actual HTTP requests to the API. Therefore, b
 
 You should leave this running in a terminal.
 
-Then, you can either run tests for the backend or the frontend following the steps below. 
+Then, you can either run tests for the backend or the frontend following the steps below.
 
 #### Running tests for the backend
 
@@ -107,7 +108,7 @@ Run the tests in a new terminal session:
 ; JWT_SECRET=f6d278bb34e1d0e146a80b16ec254c05 npm run test
 ```
 
-####  Running tests for the frontend
+#### Running tests for the frontend
 
 Start the front end in a new terminal session
 
@@ -135,8 +136,6 @@ Some people occasionally experience MongoDB connection errors when running the t
 - Check that it's running using `brew services list`
 
 If you have issues that are not resolved by these tips, please reach out to a coach and, once the issue is resolved, we can add a new tip!
-
-
 
 <!-- BEGIN GENERATED SECTION DO NOT EDIT -->
 
