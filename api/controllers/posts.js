@@ -4,28 +4,8 @@ const TokenGenerator = require("../lib/token_generator");
 
 const PostsController = {
   Index: (req, res) => {
-    Post.find((err, posts) => {
-      if (err) {
-        throw err;
-      }
-      const token = TokenGenerator.jsonwebtoken(req.user_id)
-      res.status(200).json({ posts: posts, token: token });
-    });
-  },
-  Create: (req, res) => {
-    const post = new Post(req.body);
-    post.save((err) => {
-      if (err) {
-        throw err;
-      }
-
-      const token = TokenGenerator.jsonwebtoken(req.user_id)
-      res.status(201).json({ message: 'OK', token: token });
-    });
-  },
-  PostsByUser: (req, res) => {
-    const authorId = req.params["authorId"]
-    Post.find({author: authorId}).then(
+    const query = req.query
+    Post.find(query).then(
       (posts) => {
         const token = TokenGenerator.jsonwebtoken(req.user_id)
         res.status(200).json({ posts: posts, token: token});
@@ -33,6 +13,17 @@ const PostsController = {
     )
     .catch(err => {throw err});
   },
+  Create: (req, res) => {
+    const post = new Post(req.body);
+    post.save((err) => {
+      if (err) {
+        throw err;
+      }
+      const token = TokenGenerator.jsonwebtoken(req.user_id)
+      res.status(201).json({ message: 'OK', token: token });
+    });
+  },
+
    //Todo: Posts By followers endpoint: 
 };
 
