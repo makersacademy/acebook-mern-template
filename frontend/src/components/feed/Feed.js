@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from 'react';
-import Post from '../post/Post';
+import React, { useEffect, useState } from "react";
+import Post from "../post/Post";
 
 const Feed = ({ navigate }) => {
   const [posts, setPosts] = useState([]);
