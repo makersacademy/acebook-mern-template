@@ -10,7 +10,7 @@ describe("Feed", () => {
           statusCode: 200,
           body: { posts: [
             {_id: 1, message: "Hello, world", date: "2023-11-15T16:38:35.366Z" },
-            {_id: 2, message: "Hello again, world", date: "2023-10-15T16:38:35.366Z"}
+            {_id: 2, message: "Hello again, world", date: "2023-10-15T16:38:35.366Z" }
           ] }
         })
       }
@@ -21,9 +21,9 @@ describe("Feed", () => {
     cy.wait("@getPosts").then(() =>{
       cy.get('[data-cy="post"]')
       .should('contain.text', "Hello, world")
-      .should('contain.text', "2023-11-15T16:38:35.366Z")
+      .should('contain.text', "15/11/2023, 16:38")
       .and('contain.text', "Hello again, world")
-      .and('contain.text', "2023-10-15T16:38:35.366Z")
+      .and('contain.text', "15/10/2023, 17:38")
     })
   })
 })

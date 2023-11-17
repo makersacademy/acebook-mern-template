@@ -9,22 +9,21 @@ const SignUpForm = ({ navigate }) => {
   const handleSubmit = async (event) => {
     event.preventDefault();
 
-    fetch( '/users', {
+    let response = await fetch( '/users', {
       method: 'post',
       headers: {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({ displayName: displayName, email: email, password: password })
-    })
-      .then(response => {
-        if(response.status === 201) {
-          // GOOD NEWS.
-          navigate('/login')
-        } else {
-          // BAD NEWS.
-          navigate('/signup')
-        }
-      })
+    });
+
+    if (response.status === 201) {
+      // GOOD NEWS.
+      navigate('/login');
+    } else {
+      // BAD NEWS.
+      navigate('/signup');
+    }
   }
 
   const handleDisplayNameChange = (event) => {

@@ -4,7 +4,6 @@ const TokenGenerator = require("../lib/token_generator")
 const AuthenticationController = {
 
   Authenticate: (req, res) => {
-    // Authentication process does not care about `req.body.displayName`.
     const email = req.body.email;
     const password = req.body.password;
 

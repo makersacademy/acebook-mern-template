@@ -2,7 +2,7 @@ import './App.css';
 import LoginForm from '../auth/LoginForm'
 import SignUpForm from '../user/SignUpForm'
 import NavBar from '../navBar/NavBar';
-import React, { useState } from 'react';
+import NewPost from '../newPost/NewPost';
 import Feed from '../feed/Feed'
 import Profile from '../profile/Profile'
 import {
@@ -10,6 +10,8 @@ import {
   Routes,
   Route,
 } from "react-router-dom";
+
+
 
 const App = () => {
     return (
@@ -19,6 +21,7 @@ const App = () => {
           <Route path='/signup' element={<SignUpForm navigate={ useNavigate() }/>}/>
           <Route path='/navbar' element={<NavBar navigate={ useNavigate() }/>}/>
           <Route path='/profile' element={<Profile navigate={ useNavigate() }/>}/>
+          <Route path='/newpost' element={<NewPost navigate={ useNavigate() }/>}/>
         </Routes>
     );
 }
