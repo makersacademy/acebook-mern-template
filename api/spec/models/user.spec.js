@@ -10,20 +10,44 @@ describe("User model", () => {
     });
   });
 
-  it("has an email address", () => {
+  it("has an username", () => {
     const user = new User({
+      username: "James Bond",
       email: "someone@example.com",
       password: "password",
+      avatar: "1.svg",
+    });
+    expect(user.username).toEqual("James Bond");
+  });
+
+  it("has an email address", () => {
+    const user = new User({
+      username: "James Bond",
+      email: "someone@example.com",
+      password: "password",
+      avatar: "1.svg",
     });
     expect(user.email).toEqual("someone@example.com");
   });
 
   it("has a password", () => {
     const user = new User({
+      username: "James Bond",
       email: "someone@example.com",
       password: "password",
+      avatar: "1.svg",
     });
     expect(user.password).toEqual("password");
+  });
+
+  it("has a avatar", () => {
+    const user = new User({
+      username: "James Bond",
+      email: "someone@example.com",
+      password: "password",
+      avatar: "1.svg",
+    });
+    expect(user.avatar).toEqual("1.svg");
   });
 
   it("can list all users", (done) => {
@@ -36,8 +60,10 @@ describe("User model", () => {
 
   it("can save a user", (done) => {
     const user = new User({
+      username: "James Bond",
       email: "someone@example.com",
       password: "password",
+      avatar: "1.svg",
     });
 
     user.save((err) => {
@@ -47,8 +73,10 @@ describe("User model", () => {
         expect(err).toBeNull();
 
         expect(users[0]).toMatchObject({
+          username: "James Bond",
           email: "someone@example.com",
           password: "password",
+          avatar: "1.svg",
         });
         done();
       });

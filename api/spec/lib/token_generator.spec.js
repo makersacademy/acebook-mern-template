@@ -1,5 +1,5 @@
 const TokenGenerator = require("../../lib/token_generator");
-const JWT = require("jsonwebtoken")
+const JWT = require("jsonwebtoken");
 
 describe("TokenGenerator", () => {
   describe("jsonwebtoken", () => {
@@ -9,6 +9,6 @@ describe("TokenGenerator", () => {
       const payload = JWT.decode(token, process.env.JWT_SECRET);
       expect(payload.user_id).toEqual(user_id);
       expect(payload.exp - payload.iat).toEqual(600);
-    })
-  })
-})
+    });
+  });
+});
