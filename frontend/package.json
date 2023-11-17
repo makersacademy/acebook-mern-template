@@ -4,13 +4,16 @@
   "private": true,
   "proxy": "http://localhost:8080",
   "dependencies": {
-    "cypress": "^10.7.0",
+    "cy": "^0.0.1",
+    "cypress": "^13.5.0",
     "eslint": "^8.23.0",
+    "jsonwebtoken": "^9.0.2",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-router": "^6.3.0",
     "react-router-dom": "^6.3.0",
     "react-scripts": "^5.0.1",
+    "stream": "^0.0.2",
     "web-vitals": "^2.1.4"
   },
   "scripts": {

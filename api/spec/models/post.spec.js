@@ -24,7 +24,7 @@ describe("Post model", () => {
   });
 
   it("can save a post", (done) => {
-    var post = new Post({ message: "some message" });
+    var post = new Post({ message: "some message"})
 
     post.save((err) => {
       expect(err).toBeNull();
@@ -32,9 +32,26 @@ describe("Post model", () => {
       Post.find((err, posts) => {
         expect(err).toBeNull();
 
-        expect(posts[0]).toMatchObject({ message: "some message" });
+        expect(posts[0]).toMatchObject({ message: "some message"})
         done();
       });
     });
   });
+  // Adding a test to make sure a post has the default likes of 0, and has data stored in the date/time
+  it("can save a post with default likes and createdAt", (done) => {
+    const post = new Post({ message: "some message" });
+
+    post.save((err) => {
+      expect(err).toBeNull();
+
+      Post.find((err, posts) => {
+        expect(err).toBeNull();
+
+        expect(posts[0].likes).toEqual(0);
+        expect(posts[0].createdAt).not.toBeNull();
+        done();
+      });
+    });
+  });
+
 });
