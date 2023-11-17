@@ -24,26 +24,6 @@ const LogInForm = ({ navigate }) => {
       // BAD NEWS.
       navigate('/login');
     }
-
-    // fetch( '/tokens', {
-    //   method: 'post',
-    //   headers: {
-    //     'Content-Type': 'application/json',
-    //   },
-    //   body: JSON.stringify({ email: email, password: password })
-    // })
-    // .then(async response => {
-    //   if(response.status === 201) {
-    //     // GOOD NEWS.
-    //     console.log("token");
-    //     let data = await response.json();
-    //       window.localStorage.setItem("token", data.token);
-    //       navigate('/posts');
-    //     } else {
-    //       // BAD NEWS.
-    //       navigate('/login');
-    //     }
-    //   })
   }
 
   const handleEmailChange = (event) => {
