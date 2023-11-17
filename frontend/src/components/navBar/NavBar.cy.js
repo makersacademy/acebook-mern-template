@@ -14,7 +14,7 @@ describe('NavBar Component', () => {
   });
   it('homebutton click takes you to home', () => {
     cy.get('[data-cy="home-button"]').click();
-    cy.url().should('include', '/feed');
+    cy.url().should('include', '/posts');
   })
   it('profile button click takes you to profile', () => {
     cy.get('[data-cy="profile-button"]').click();

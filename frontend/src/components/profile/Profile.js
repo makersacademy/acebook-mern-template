@@ -1,50 +1,39 @@
-// import React, { useEffect, useState } from 'react';
-// import Post from '../post/Post'
+import React, { useEffect, useState } from 'react';
+import Post from '../post/Post'
 // import User from '../user/User'
+import Feed from '../feed/Feed'
+import NavBar from '../navBar/NavBar'
+import defaultProfile from '../../assets/defaultProfile.png';
 
-// const Feed = ({ navigate }) => {
-//   const [posts, setPosts] = useState([]);
-//   const [token, setToken] = useState(window.localStorage.getItem("token"));
+// Some logic required: If you're landing on your own profile, you see the update image. If you're landing on another person's profile, you don't. 
+// But do you see follow/unfollow instead? 
 
-//   useEffect(() => {
-//     if(token) {
-//       fetch("/posts", {
-//         headers: {
-//           'Authorization': `Bearer ${token}`
-//         }
-//       })
-//         .then(response => response.json())
-//         .then(async data => {
-//           window.localStorage.setItem("token", data.token)
-//           setToken(window.localStorage.getItem("token"))
-//           setPosts(data.posts);
-//         })
-//     }
-//   }, [])
-    
 
-//   const logout = () => {
-//     window.localStorage.removeItem("token")
-//     navigate('/login')
-//   }
-  
-//     if(token) {
-//       return(
-//         <>
-//           <h2>Profile</h2>
-//             <button onClick={logout}>
-//               Logout
-//             </button>
-//           <div id='feed' role="feed">
-//               {posts.map(
-//                 (post) => ( <Post post={ post } key={ post._id } /> )
-//               )}
-//           </div>
-//         </>
-//       )
-//     } else {
-//       navigate('/login')
-//     }
-// }
+// const Profile = ({ navigate, currentUserId, profileOwnerId }) => {
+//     const isOwnProfile = currentUserId === profileOwnerId;
 
-// export default Feed;
+const Profile = ({ navigate }) => {
+
+      return(
+        <>
+        <NavBar/>
+        <h2>Profile Name</h2>
+        <div>
+        <img src={defaultProfile} alt="Default Profile Image"/>
+        </div>
+        
+        {/* {isOwnProfile && (
+        <button>Update Profile Image</button>
+      )}
+       */}
+        <button>Update Profile Image</button>
+
+        {/* <h3>Post & Number</h3>
+        <h3>Followers & Number</h3>
+        <h3>Following & Number</h3> */}
+        <Feed navigate={navigate}/>
+        </>
+      )
+}
+
+export default Profile;
