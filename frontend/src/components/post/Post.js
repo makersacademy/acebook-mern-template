@@ -1,19 +1,113 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './Post.css'
 
-const Post = ({post}) => {
+// const Post = ({post}) => {
 
+//   const formatDate = (dateString) => {
+//     const options = { year: 'numeric', month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit', hour12: false, };
+//     const formattedDate = new Date(dateString).toLocaleDateString(undefined, options);
+//     return formattedDate;
+//   };
+
+//   return(
+//     <article data-cy="post" key={ post._id }>
+//       { post.message }<br />
+//       <small className="smallText">{formatDate(post.date)}</small></article>
+//   )
+// }
+
+
+const Post = ({ post }) => { 
+  const [comment, setComment] = useState('');
+  const [comments, setComments] = useState(post.comments);
+  const [token, setToken] = useState(window.localStorage.getItem("token"));
+
+  const handleCommentChange = (e) => {
+    setComment(e.target.value);
+  };
+
+  const handleSubmitComment = (e) => {
+    e.preventDefault();
+    if (comment.trim() !== '') {
+      setComments([...comments, {comment_message: comment}]);
+      setComment('');
+    }
+    fetch(`/posts/${post._id}`, {
+      method: 'put',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${token}`
+      },
+      body: JSON.stringify({ comment: comment })
+    })
+      .then(async response => {
+          let data = await response.json();
+          console.log("token", data)
+          window.localStorage.setItem("token", data.token);
+
+      })
+    
+      
+  };
   const formatDate = (dateString) => {
     const options = { year: 'numeric', month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit', hour12: false, };
     const formattedDate = new Date(dateString).toLocaleDateString(undefined, options);
     return formattedDate;
   };
 
-  return(
-    <article data-cy="post" key={ post._id }>
-      { post.message }<br />
+
+  return (
+    <div data-cy="post">
+      <article data-cy="post" key={ post._id }>
+        { post.message }<br />
       <small className="smallText">{formatDate(post.date)}</small></article>
-  )
-}
+      <div>
+        {comments.map((comment, index) => (
+          <div key={index}>{comment.comment_message}</div>
+        ))}
+      </div>
+
+      <form onSubmit={handleSubmitComment}>
+        <label>
+          Comment:
+          <input
+            type="text"
+            value={comment}
+            onChange={handleCommentChange}
+            placeholder="Add a comment..."
+          />
+        </label>
+        <button type="submit">-->></button>
+      </form>
+    </div>
+  );
+};
 
 export default Post;
+
+// return (
+//   <div data-cy="post">
+//     <h2>{post.message}</h2>
+
+//     <div>
+//       {comments.map((comment, index) => (
+//         <div key={index}>{comment}</div>
+//       ))}
+//     </div>
+
+//     <form onSubmit={handleSubmitComment}>
+//       <label>
+//         Comment:
+//         <input
+//           type="text"
+//           value={comment}
+//           onChange={handleCommentChange}
+//           placeholder="Add a comment..."
+//         />
+//       </label>
+//       <button type="submit">-->></button>
+//     </form>
+//   </div>
+// );
+
+

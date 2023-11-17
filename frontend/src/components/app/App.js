@@ -4,6 +4,8 @@ import SignUpForm from '../user/SignUpForm'
 import NavBar from '../navBar/NavBar';
 import NewPost from '../newPost/NewPost';
 import Feed from '../feed/Feed'
+import React, { useState } from 'react';
+import Post from '../post/Post';
 import {
   useNavigate,
   Routes,
@@ -20,6 +22,7 @@ const App = () => {
           <Route path='/signup' element={<SignUpForm navigate={ useNavigate() }/>}/>
           <Route path='/navbar' element={<NavBar navigate={ useNavigate() }/>}/>
           <Route path='/newpost' element={<NewPost navigate={ useNavigate() }/>}/>
+          <Route path="/posts/:postId" element={<Post />} /> 
         </Routes>
     );
 }

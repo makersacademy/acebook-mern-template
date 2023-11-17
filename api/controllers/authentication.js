@@ -16,6 +16,9 @@ const AuthenticationController = {
         res.status(401).json({ message: "auth error" });
       } else {
         const token = TokenGenerator.jsonwebtoken(user.id)
+        console.log("token");
+        console.log(token);
+
         res.status(201).json({ token: token, message: "OK" });
       }
     });

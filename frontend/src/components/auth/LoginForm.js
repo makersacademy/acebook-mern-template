@@ -12,6 +12,7 @@ const LogInForm = ({ navigate }) => {
       headers: {
         'Content-Type': 'application/json',
       },
+// <<<<<<< HEAD
       body: JSON.stringify({ email: email, password: password })
     });
     if (response.status === 201) {
@@ -24,6 +25,27 @@ const LogInForm = ({ navigate }) => {
       // BAD NEWS.
       navigate('/login');
     }
+
+//       body: JSON.stringify({ displayName: displayName, email: email, password: password })
+//     })
+//       .then(async response => {
+//         if(response.status === 201) {
+//           // GOOD NEWS.
+//           console.log("token");
+//           let data = await response.json();
+//           console.log(data);
+//           window.localStorage.setItem("token", data.token);
+//           navigate('/posts');
+//         } else {
+//           // BAD NEWS.
+//           navigate('/login');
+//         }
+//       })
+//   }
+
+//   const handleDisplayNameChange = (event) => {
+//     setDisplayName(event.target.value)
+// >>>>>>> 1532bdb (I added comments)
   }
 
   const handleEmailChange = (event) => {
