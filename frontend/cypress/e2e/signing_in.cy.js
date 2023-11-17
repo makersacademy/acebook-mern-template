@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 describe("Signing in", () => {
   before(() => {
     cy.signup("James Bond", "user@email.com", "12345678");

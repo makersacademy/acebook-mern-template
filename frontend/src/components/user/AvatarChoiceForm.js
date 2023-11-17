@@ -42,7 +42,7 @@ const AvatarChoiceForm = ({ navigate, location }) => {
 
       {/* each avatar has it's own value which is filename */}
       {/* type="radio" is type of a checkbox where user can choose only one */}
-      <div class="avatar-checkbox">
+      <div className="avatar-checkbox">
         <input
           type="radio"
           name="avatar"
@@ -51,12 +51,12 @@ const AvatarChoiceForm = ({ navigate, location }) => {
           value="1.svg"
           onChange={handleAvatarChange}
         />
-        <label for="avatar1" class="checkbox-avatar-image">
+        <label htmlFor="avatar1" className="checkbox-avatar-image">
           <img width="100px" src="../images/avatars/1.svg" alt=""></img>
         </label>
       </div>
 
-      <div class="avatar-checkbox">
+      <div className="avatar-checkbox">
         <input
           type="radio"
           name="avatar"
@@ -65,12 +65,12 @@ const AvatarChoiceForm = ({ navigate, location }) => {
           value="2.svg"
           onChange={handleAvatarChange}
         />
-        <label for="avatar2" class="checkbox-avatar-image">
+        <label htmlFor="avatar2" className="checkbox-avatar-image">
           <img width="100px" src="../images/avatars/2.svg" alt=""></img>
         </label>
       </div>
 
-      <div class="avatar-checkbox">
+      <div className="avatar-checkbox">
         <input
           type="radio"
           name="avatar"
@@ -79,12 +79,12 @@ const AvatarChoiceForm = ({ navigate, location }) => {
           value="3.svg"
           onChange={handleAvatarChange}
         />
-        <label for="avatar3" class="checkbox-avatar-image">
+        <label htmlFor="avatar3" className="checkbox-avatar-image">
           <img width="100px" src="../images/avatars/3.svg" alt=""></img>
         </label>
       </div>
 
-      <div class="avatar-checkbox">
+      <div className="avatar-checkbox">
         <input
           type="radio"
           name="avatar"
@@ -93,12 +93,12 @@ const AvatarChoiceForm = ({ navigate, location }) => {
           value="4.svg"
           onChange={handleAvatarChange}
         />
-        <label for="avatar4" class="checkbox-avatar-image">
+        <label htmlFor="avatar4" className="checkbox-avatar-image">
           <img width="100px" src="../images/avatars/4.svg" alt=""></img>
         </label>
       </div>
 
-      <div class="avatar-checkbox">
+      <div className="avatar-checkbox">
         <input
           type="radio"
           name="avatar"
@@ -107,12 +107,12 @@ const AvatarChoiceForm = ({ navigate, location }) => {
           value="5.svg"
           onChange={handleAvatarChange}
         />
-        <label for="avatar5" class="checkbox-avatar-image">
+        <label htmlFor="avatar5" className="checkbox-avatar-image">
           <img width="100px" src="../images/avatars/5.svg" alt=""></img>
         </label>
       </div>
 
-      <div class="avatar-checkbox">
+      <div className="avatar-checkbox">
         <input
           type="radio"
           name="avatar"
@@ -121,7 +121,7 @@ const AvatarChoiceForm = ({ navigate, location }) => {
           value="0.svg"
           onChange={handleAvatarChange}
         />
-        <label for="avatar0" class="checkbox-avatar-image">
+        <label htmlFor="avatar0" className="checkbox-avatar-image">
           <img width="100px" src="../images/avatars/0.svg" alt=""></img>No avatar
         </label>
       </div>

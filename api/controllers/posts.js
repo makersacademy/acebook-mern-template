@@ -29,18 +29,22 @@ const PostsController = {
     });
   },
 
-  // *************************METHOD IN PROGRESS*************************
   // method to get posts filtered by user_id
   FindPostsByUserId: async (req, res) => {
     const user_id = req.params.user_id
-    const userPosts = await Post.find(err, { user_id: user_id});
-      if (err) {
-        throw err;
-      }
-      const token = TokenGenerator.jsonwebtoken(req.user_id)
-      res.status(200).json({ posts: userPosts, token: token });
+
+    // finding posts with specific user_id
+    const result = await Post.find({user_id: user_id});
+    const token = TokenGenerator.jsonwebtoken(req.user_id)
+
+    if (!result) {
+      return res.status(400).json({ message: "No posts found" });
+    }
+    else {
+      res.status(200).json({ posts: result, token: token });
     }
   }
+  };
 
 
 module.exports = PostsController;
