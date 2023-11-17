@@ -31,4 +31,15 @@ describe("HomePage", () => {
 	cy.get('[id="signup-button"]').click();
 	cy.url().should('include', '/signup');
 });
+	it("redirects the user to /posts if they try to access / when logged in", () => {
+		// sets the token so user seems logged in
+		window.localStorage.setItem("token", "fakeToken");
+		cy.mount(
+			<Router>
+				<HomePage />
+			</Router>
+		);
+		cy.url().should('include', '/posts');
+		
+	})
 });
