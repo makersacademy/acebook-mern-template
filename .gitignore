@@ -64,6 +64,7 @@ typings/
 cypress/screenshots
 cypress/videos
 frontend/cypress/screenshots
-fronted/cypress/videos
+frontend/cypress/videos
 
 **/.DS_Store
+.DS_Store
