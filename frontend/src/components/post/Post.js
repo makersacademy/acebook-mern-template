@@ -1,20 +1,6 @@
 import React, { useState } from 'react';
 import './Post.css'
-
-// const Post = ({post}) => {
-
-//   const formatDate = (dateString) => {
-//     const options = { year: 'numeric', month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit', hour12: false, };
-//     const formattedDate = new Date(dateString).toLocaleDateString(undefined, options);
-//     return formattedDate;
-//   };
-
-//   return(
-//     <article data-cy="post" key={ post._id }>
-//       { post.message }<br />
-//       <small className="smallText">{formatDate(post.date)}</small></article>
-//   )
-// }
+import LikeButton from '../likeButton/likeButton';
 
 
 const Post = ({ post }) => { 
@@ -48,19 +34,19 @@ const Post = ({ post }) => {
       })
     
       
+    };
+    const formatDate = (dateString) => {
+      const options = { year: 'numeric', month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit', hour12: false, };
+      const formattedDate = new Date(dateString).toLocaleDateString(undefined, options);
+      return formattedDate;
   };
-  const formatDate = (dateString) => {
-    const options = { year: 'numeric', month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit', hour12: false, };
-    const formattedDate = new Date(dateString).toLocaleDateString(undefined, options);
-    return formattedDate;
-  };
-
 
   return (
     <div data-cy="post">
       <article data-cy="post" key={ post._id }>
         { post.message }<br />
-      <small className="smallText">{formatDate(post.date)}</small></article>
+      <small className="smallText">{formatDate(post.date)}</small><br />
+      <LikeButton post_id={ post._id }/></article>
       <div>
         {comments.map((comment, index) => (
           <div key={index}>{comment.comment_message}</div>
@@ -77,37 +63,10 @@ const Post = ({ post }) => {
             placeholder="Add a comment..."
           />
         </label>
-        <button type="submit">-->></button>
+        <button type="submit">Add Comment</button>
       </form>
     </div>
   );
 };
 
 export default Post;
-
-// return (
-//   <div data-cy="post">
-//     <h2>{post.message}</h2>
-
-//     <div>
-//       {comments.map((comment, index) => (
-//         <div key={index}>{comment}</div>
-//       ))}
-//     </div>
-
-//     <form onSubmit={handleSubmitComment}>
-//       <label>
-//         Comment:
-//         <input
-//           type="text"
-//           value={comment}
-//           onChange={handleCommentChange}
-//           placeholder="Add a comment..."
-//         />
-//       </label>
-//       <button type="submit">-->></button>
-//     </form>
-//   </div>
-// );
-
-
