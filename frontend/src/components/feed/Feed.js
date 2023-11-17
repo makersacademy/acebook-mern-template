@@ -74,7 +74,7 @@ const Feed = ({ navigate }) => {
         <h2>Posts</h2>
         <button onClick={logout}>Logout</button>
 
-        <form onSubmit={handlePostSubmit}>
+        <form onSubmit={handlePostSubmit} data-cy="post-form">
           <label>
             New Post:
             <input
@@ -82,6 +82,7 @@ const Feed = ({ navigate }) => {
               name="newPost"
               value={newPost}
               onChange={(e) => setNewPost(e.target.value)}
+              data-cy="new-post-input"
             />
           </label>
           <button type="submit">Create Post</button>

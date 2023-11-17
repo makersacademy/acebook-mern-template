@@ -18,14 +18,12 @@ describe("Creating a post", () => {
         // visit posts page
         cy.visit('/posts');
 
-        //check if no posts available displays when feed is empty
-        //cy.contains('No posts yet :(').should('be.visible');
 
         //enter a post in the input box
-        cy.get('input[type="text"]').type('This is a new post');
+        cy.get('[data-cy="new-post-input"]').type('This is a new post');
 
         //submit the form 
-        cy.get('form').submit();
+        cy.get('[data-cy="post-form"]').submit();
 
         //check the post appears in the feed
         cy.contains('This is a new post', { timeout: 10000}).should('be.visible');
