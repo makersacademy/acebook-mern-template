@@ -15,7 +15,7 @@ const Navbar = ({ navigate }) => {
                         <input type="text" placeholder="Search" />
                         <button type="submit">Search</button>
                     </form>
-                    <Link id="logout" to="logout" onClick={(e) => {e.preventDefault(); window.localStorage.removeItem("token");}}>Logout</Link>
+                    <Link id="logout" to="logout" onClick={(e) => {e.preventDefault(); window.localStorage.removeItem("token"); navigate("/login");}}>Logout</Link>
                     
         </nav>
     )
