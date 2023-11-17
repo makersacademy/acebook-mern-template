@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 
 const LogInForm = ({ navigate }) => {
-  const [displayName, setDisplayName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
@@ -13,7 +12,7 @@ const LogInForm = ({ navigate }) => {
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({ displayName: displayName, email: email, password: password })
+      body: JSON.stringify({ email: email, password: password })
     })
     .then(async response => {
       if(response.status === 201) {
@@ -29,10 +28,6 @@ const LogInForm = ({ navigate }) => {
       })
   }
 
-  const handleDisplayNameChange = (event) => {
-    setDisplayName(event.target.value)
-  }
-
   const handleEmailChange = (event) => {
     setEmail(event.target.value)
   }
@@ -44,7 +39,6 @@ const LogInForm = ({ navigate }) => {
 
     return (
       <form onSubmit={handleSubmit}>
-        <input placeholder='Name' id="displayName" type='text' value ={ displayName } onChange={handleDisplayNameChange} />
         <input placeholder='Email' id="email" type='text' value={ email } onChange={handleEmailChange} />
         <input placeholder='Password' id="password" type='password' value={ password } onChange={handlePasswordChange} />
         <input role='submit-button' id='submit' type="submit" value="Submit" />
