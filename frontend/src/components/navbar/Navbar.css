@@ -1,0 +1,17 @@
+nav {
+    display: flex;
+    justify-content: space-evenly;
+    background-color: #1877f2; /* Facebook blue color */
+    padding: 10px; 
+  }
+  
+nav a {
+    color: #fff; 
+    text-decoration: none;
+    padding: 8px 16px; 
+  }
+  
+nav a:hover {
+    
+    background-color: #214a7b; /* Darker blue on hover */
+  }
