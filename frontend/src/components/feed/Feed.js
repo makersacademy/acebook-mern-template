@@ -16,51 +16,22 @@ const Feed = ({ navigate }) => {
         .then(async data => {
           window.localStorage.setItem("token", data.token)
           setToken(window.localStorage.getItem("token"))
-          
-          // Remove line below once backend for posts is set up
-          data.posts = [
-            {
-              '_id': 1,
-              'content': 'This is my first post',
-              'created_at': '13-10-23',
-              'number_of_likes': 20,
-              'author': 1,
-              'comments': ['great post', 'interesting']
-            },
-            {
-              '_id': 1,
-              'content': 'This is my second post',
-              'created_at': '13-10-23',
-              'number_of_likes': 10,
-              'author': 1,
-              'comments': ['great post', 'interesting']
-            }
-          ]
           setPosts(data.posts);
         })
     }
     else {
       navigate('/login')}
   }, [])
-    
-
-  const logout = () => {
-    window.localStorage.removeItem("token")
-    navigate('/login')
-  }
   
-    if(token) {
+    if(token && posts) {
       return(
         <>
-          <h2>Posts</h2>
-          <div id='feed' role="feed">
+          <h1>Posts</h1>
+          <div id='feed' role="feed" className='flex-centre'>
               {posts.map(
                 (post) => ( <Post post={ post } key={ post._id } /> )
               )}
           </div>
-          <button onClick={logout}>
-              Logout
-          </button>
         </>
       )
     } else {

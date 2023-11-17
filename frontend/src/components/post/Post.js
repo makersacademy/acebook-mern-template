@@ -1,23 +1,40 @@
-import React, {useState} from 'react';
+import React from 'react';
 import './Post.css';
 import Comment from '../comment/Comment';
 
-const Post = ({post, comment}) => {
+const Post = ({post}) => {
+
+  // Format datetime of post
+  const date = new Date(post.created)
+  const dateFormat = { year: 'numeric', month: 'numeric', day: 'numeric' };
+  const formattedDate = new Intl.DateTimeFormat('en-UK', dateFormat).format(date);
+
   return(
     <div className='post-box'>
-      <article data-cy="post-author" className='post-author'>{post.author}</article>
-      <article data-cy="post-date" className='post-date'>{post.created_at}</article>
-      <article data-cy="post-content" key={ post._id } className='post-content'>{ post.content }</article>
-      <div style={{display: 'flex'}}>
-        <img src='thumb-icon.png' className='like-btn' alt='thumb' />
-        <article data-cy="post-likes" className='like-number'>{post.number_of_likes}</article>
-        <button data-cy="post-comment" className='comment-btn'>comment</button>
-          <div> 
-            <article data-cy="post-comments" className='post-comments' >
-              { post.comments.map (
-              (comment) => ( <Comment comment={ comment } /> ))
-          }</article>
-          </div>
+      <div className='post-row'>
+        <div className='flex-align-vertical post-avatar-gap'>
+          <img src="logo192.png" alt='avatar-image' className='avatar avatar-small'/>
+          <p data-cy="post-author" className='post-author'>{post.author.email}</p>
+        </div>
+        <p data-cy="post-date" className='post-date'>{formattedDate}</p>
+      </div>
+      <div className='post-content'>
+        <p data-cy="post-content" key={ post._id }>{ post.content }</p>
+      </div>
+      <div className='post-row'>
+        <div className='flex-align-vertical post-like-gap'>
+          <img src='thumb-icon.png' className='like-btn' alt='thumb' />
+          <p data-cy="post-likes" className='like-number'>{post.likes}20</p>
+        </div>
+        <div className='flex-align-vertical post-comments-gap'>
+          <a>View comments</a>
+          <button data-cy="post-comment" className='primary-btn'>Add comment</button>
+        </div>
+      </div>
+      <div data-cy="post-comments" className='post-comments' >
+        { post.comments.map (
+          (comment) => ( <Comment comment={ comment } /> ))
+        }
       </div>
     </div>
   )
