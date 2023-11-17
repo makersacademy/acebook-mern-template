@@ -93,7 +93,7 @@ const Feed = ({ navigate }) => {
               <Post post={post} key={post._id} />
             ))
           ) : (
-            <p>No posts yet :( </p>
+            <p data-cy="no-posts-message">No posts yet :( </p>
           )}
         </div>
       </>
