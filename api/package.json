@@ -7,12 +7,14 @@
   "scripts": {
     "start": "nodemon ./bin/www",
     "start:test": "MONGODB_URL='mongodb://0.0.0.0/acebook_test' npm start",
-    "test": "jest"
+    "test": "jest",
+    "seed": "node ./seeds/acebook.js"
   },
   "engines": {
     "node": ">=18.1.0"
   },
   "dependencies": {
+    "18": "^0.0.0",
     "cookie-parser": "~1.4.4",
     "debug": "~2.6.9",
     "express": "~4.16.1",
