@@ -172,44 +172,6 @@ describe("/posts", () => {
 
 describe("/users/profile/:user_id, postsController", () => {
   beforeAll(async () => {
-    // user = new User({
-    //   username: "test",
-    //   email: "test@test.com",
-    //   password: "test",
-    //   avatar: "1.svg",
-    // });
-    // await user.save();
-
-    // token = JWT.sign(
-    //   {
-    //     user_id: user.id,
-    //     // Backdate this token of 5 minutes
-    //     iat: Math.floor(Date.now() / 1000) - 5 * 60,
-    //     // Set the JWT token to expire in 10 minutes
-    //     exp: Math.floor(Date.now() / 1000) + 10 * 60,
-    //   },
-    //   secret,
-    // );
-
-    // // creating second user to post posts with different user id's
-    // user2 = new User({
-    //   username: "test2",
-    //   email: "test2@test.com",
-    //   password: "test2",
-    //   avatar: "2.svg",
-    // });
-    // await user2.save();
-
-    // token2 = JWT.sign(
-    //   {
-    //     user_id: user2.id,
-    //     // Backdate this token of 5 minutes
-    //     iat: Math.floor(Date.now() / 1000) - 5 * 60,
-    //     // Set the JWT token to expire in 10 minutes
-    //     exp: Math.floor(Date.now() / 1000) + 10 * 60,
-    //   },
-    //   secret,
-    // );
   });
 
   beforeEach(async () => {
