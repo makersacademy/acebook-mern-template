@@ -11,7 +11,7 @@ let token;
 let user;
 let post;
 
-describe("/comments", () => {
+describe("/api/comments", () => {
   beforeAll(async () => {
     user = new User({
       email: "test@gmail.com",
@@ -27,7 +27,6 @@ describe("/comments", () => {
 
     post = new Post({ content: "Hello World", author: user._id });
     await post.save();
-
 
     token = JWT.sign(
       {
@@ -46,15 +45,14 @@ describe("/comments", () => {
   afterAll(async () => {
     await User.deleteMany({});
     await Post.deleteMany({});
-    await Comment.deleteMany({})
+    await Comment.deleteMany({});
   });
 
-  describe("POST /comments", () => {
+  describe("POST /api/comments", () => {
     describe("When token is present", () => {
       test("responds with a 201", async () => {
-
         const response = await request(app)
-          .post("/comments")
+          .post("/api/comments")
           .set("Authorization", `Bearer ${token}`)
           .send({
             content: "Great comment",
@@ -62,13 +60,13 @@ describe("/comments", () => {
             post_id: post._id,
             token: token,
           });
-        console.log(response.body)
+        console.log(response.body);
         expect(response.status).toEqual(201);
       });
 
       test("create a new comment", async () => {
         await request(app)
-          .post("/comments")
+          .post("/api/comments")
           .set("Authorization", `Bearer ${token}`)
           .send({
             content: "Great comment",
@@ -79,12 +77,11 @@ describe("/comments", () => {
         let comments = await Comment.find();
         expect(comments.length).toEqual(1);
         expect(comments[0].content).toEqual("Great comment");
-      } )
+      });
 
       test("returns a new token", async () => {
-
         let response = await request(app)
-          .post("/comments")
+          .post("/api/comments")
           .set("Authorization", `Bearer ${token}`)
           .send({
             content: "Great comment",
@@ -92,7 +89,10 @@ describe("/comments", () => {
             post_id: post._id,
             token: token,
           });
-        let newPayload = JWT.decode(response.body.token, process.env.JWT_SECRET);
+        let newPayload = JWT.decode(
+          response.body.token,
+          process.env.JWT_SECRET
+        );
         let originalPayload = JWT.decode(token, process.env.JWT_SECRET);
         expect(newPayload.iat > originalPayload.iat).toEqual(true);
       });
@@ -100,153 +100,170 @@ describe("/comments", () => {
 
     describe("When token is missing", () => {
       test("responds with a 401", async () => {
-        let response = await request(app)
-          .post("/comments")
-          .send({
-            content: "Great comment",
-            author: user._id,
-            post_id: post._id,
-            token: token,
-          });
+        let response = await request(app).post("/api/comments").send({
+          content: "Great comment",
+          author: user._id,
+          post_id: post._id,
+          token: token,
+        });
         expect(response.status).toEqual(401);
       });
 
       test("a comment is not created", async () => {
-        await request(app)
-          .post("/comments")
-          .send({
-            content: "Great comment",
-            author: user._id,
-            post_id: post._id,
-            token: token,
-          });
+        await request(app).post("/api/comments").send({
+          content: "Great comment",
+          author: user._id,
+          post_id: post._id,
+          token: token,
+        });
         let comments = await Comment.find();
         expect(comments.length).toEqual(0);
       });
 
       test("a token is not returned", async () => {
-        let response = await request(app)
-          .post("/comments")
-          .send({
-            content: "Great comment",
-            author: user._id,
-            post_id: post._id,
-            token: token,
-          });
+        let response = await request(app).post("/api/comments").send({
+          content: "Great comment",
+          author: user._id,
+          post_id: post._id,
+          token: token,
+        });
         expect(response.body.token).toEqual(undefined);
       });
-    })
+    });
 
     describe("GET, when token is present", () => {
       test("returns every comment in the collection", async () => {
-        let comment1 = new Comment({content: "Great comment",
-            author: user._id,
-            post_id: post._id,
-            token: token,});
+        let comment1 = new Comment({
+          content: "Great comment",
+          author: user._id,
+          post_id: post._id,
+          token: token,
+        });
 
-        let comment2 = new Comment({content: "Great comment",
-            author: user._id,
-            post_id: post._id,
-            token: token,});
+        let comment2 = new Comment({
+          content: "Great comment",
+          author: user._id,
+          post_id: post._id,
+          token: token,
+        });
 
         await comment1.save();
         await comment2.save();
         let response = await request(app)
-          .get("/comments")
+          .get("/api/comments")
           .set("Authorization", `Bearer ${token}`)
-          .send({token: token});
-        let messages = response.body.comments.map((comment) => ( comment.content ));
+          .send({ token: token });
+        let messages = response.body.comments.map((comment) => comment.content);
         expect(messages).toEqual(["Great comment", "Great comment"]);
-      })
+      });
 
       test("the response code is 200", async () => {
-        let comment1 = new Comment({content: "Great comment",
-        author: user._id,
-        post_id: post._id,});
+        let comment1 = new Comment({
+          content: "Great comment",
+          author: user._id,
+          post_id: post._id,
+        });
 
-        let comment2 = new Comment({content: "Great comment",
-            author: user._id,
-            post_id: post._id,});
+        let comment2 = new Comment({
+          content: "Great comment",
+          author: user._id,
+          post_id: post._id,
+        });
 
         await comment1.save();
         await comment2.save();
         let response = await request(app)
-          .get("/comments")
+          .get("/api/comments")
           .set("Authorization", `Bearer ${token}`)
-          .send({token: token});
+          .send({ token: token });
         expect(response.status).toEqual(200);
-      })
+      });
 
       test("returns a new token", async () => {
-        let comment1 = new Comment({content: "Great comment",
-        author: user._id,
-        post_id: post._id,});
+        let comment1 = new Comment({
+          content: "Great comment",
+          author: user._id,
+          post_id: post._id,
+        });
 
-        let comment2 = new Comment({content: "Great comment",
-        author: user._id,
-        post_id: post._id,});
+        let comment2 = new Comment({
+          content: "Great comment",
+          author: user._id,
+          post_id: post._id,
+        });
 
         await comment1.save();
         await comment2.save();
         let response = await request(app)
-          .get("/comments")
+          .get("/api/comments")
           .set("Authorization", `Bearer ${token}`)
-          .send({token: token});
-        let newPayload = JWT.decode(response.body.token, process.env.JWT_SECRET);
+          .send({ token: token });
+        let newPayload = JWT.decode(
+          response.body.token,
+          process.env.JWT_SECRET
+        );
         let originalPayload = JWT.decode(token, process.env.JWT_SECRET);
         expect(newPayload.iat > originalPayload.iat).toEqual(true);
-      })
-    })
+      });
+    });
 
     describe("GET, when token is missing", () => {
       test("returns no comments", async () => {
-        let comment1 = new Comment({content: "Great comment",
-        author: user._id,
-        post_id: post._id,});
+        let comment1 = new Comment({
+          content: "Great comment",
+          author: user._id,
+          post_id: post._id,
+        });
 
-        let comment2 = new Comment({content: "Great comment",
-        author: user._id,
-        post_id: post._id,});
+        let comment2 = new Comment({
+          content: "Great comment",
+          author: user._id,
+          post_id: post._id,
+        });
 
         await comment1.save();
         await comment2.save();
-        let response = await request(app)
-          .get("/comments");
+        let response = await request(app).get("/api/comments");
         expect(response.body.posts).toEqual(undefined);
-      })
+      });
 
       test("the response code is 401", async () => {
-        let comment1 = new  Comment({content: "Great comment",
-        author: user._id,
-        post_id: post._id,});
+        let comment1 = new Comment({
+          content: "Great comment",
+          author: user._id,
+          post_id: post._id,
+        });
 
-        let comment2 = new Comment({content: "Great comment",
-        author: user._id,
-        post_id: post._id,});
+        let comment2 = new Comment({
+          content: "Great comment",
+          author: user._id,
+          post_id: post._id,
+        });
 
         await comment1.save();
         await comment2.save();
-        let response = await request(app)
-          .get("/comments");
+        let response = await request(app).get("/api/comments");
         expect(response.status).toEqual(401);
-      })
+      });
 
       test("does not return a new token", async () => {
-        let comment1 = new Comment({content: "Great comment",
-        author: user._id,
-        post_id: post._id,});
+        let comment1 = new Comment({
+          content: "Great comment",
+          author: user._id,
+          post_id: post._id,
+        });
 
-        let comment2 = new Comment({content: "Great comment",
-        author: user._id,
-        post_id: post._id,});
+        let comment2 = new Comment({
+          content: "Great comment",
+          author: user._id,
+          post_id: post._id,
+        });
 
         await comment1.save();
         await comment2.save();
-        let response = await request(app)
-          .get("/comments");
+        let response = await request(app).get("/api/comments");
         expect(response.body.token).toEqual(undefined);
-      })
-    })
-
+      });
+    });
   });
 });

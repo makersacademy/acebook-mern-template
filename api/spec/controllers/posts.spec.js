@@ -9,7 +9,7 @@ const secret = process.env.JWT_SECRET;
 let token;
 let user;
 
-describe("/posts", () => {
+describe("/api/posts", () => {
   beforeAll(async () => {
     user = new User({
       email: "test@gmail.com",
@@ -45,19 +45,16 @@ describe("/posts", () => {
 
   describe("POST, when token is present", () => {
     test("responds with a 201", async () => {
-
       let response = await request(app)
-        .post("/posts")
+        .post("/api/posts")
         .set("Authorization", `Bearer ${token}`)
         .send({ content: "hello world", author: user._id, token: token });
       expect(response.status).toEqual(201);
     });
 
     test("creates a new post", async () => {
-
-
       await request(app)
-        .post("/posts")
+        .post("/api/posts")
         .set("Authorization", `Bearer ${token}`)
         .send({ content: "hello world", author: user._id, token: token });
       let posts = await Post.find();
@@ -66,9 +63,8 @@ describe("/posts", () => {
     });
 
     test("returns a new token", async () => {
-
       let response = await request(app)
-        .post("/posts")
+        .post("/api/posts")
         .set("Authorization", `Bearer ${token}`)
         .send({ content: "hello world", author: user._id, token: token });
       let newPayload = JWT.decode(response.body.token, process.env.JWT_SECRET);
@@ -77,100 +73,97 @@ describe("/posts", () => {
     });
   });
 
-    describe("POST, when token is missing", () => {
-      test("responds with a 401", async () => {
-        let response = await request(app)
-          .post("/posts")
-          .send({ content: "hello world", author: user._id, token: token });
-        expect(response.status).toEqual(401);
-      });
+  describe("POST, when token is missing", () => {
+    test("responds with a 401", async () => {
+      let response = await request(app)
+        .post("/api/posts")
+        .send({ content: "hello world", author: user._id, token: token });
+      expect(response.status).toEqual(401);
+    });
 
-      test("a post is not created", async () => {
-        await request(app)
-          .post("/posts")
-          .send({ content: "hello world", author: user._id, token: token });
-        let posts = await Post.find();
-        expect(posts.length).toEqual(0);
-      });
+    test("a post is not created", async () => {
+      await request(app)
+        .post("/api/posts")
+        .send({ content: "hello world", author: user._id, token: token });
+      let posts = await Post.find();
+      expect(posts.length).toEqual(0);
+    });
 
-      test("a token is not returned", async () => {
-        let response = await request(app)
-          .post("/posts")
-          .send({ content: "hello world", author: user._id, token: token });
-        expect(response.body.token).toEqual(undefined);
-      });
-    })
+    test("a token is not returned", async () => {
+      let response = await request(app)
+        .post("/api/posts")
+        .send({ content: "hello world", author: user._id, token: token });
+      expect(response.body.token).toEqual(undefined);
+    });
+  });
 
-    describe("GET, when token is present", () => {
-      test("returns every post in the collection", async () => {
-        let post1 = new Post({content: "howdy!", author: user._id});
-        let post2 = new Post({content: "hola!", author: user._id});
-        await post1.save();
-        await post2.save();
-        let response = await request(app)
-          .get("/posts")
-          .set("Authorization", `Bearer ${token}`)
-          .send({token: token});
-        let messages = response.body.posts.map((post) => ( post.content ));
-        expect(messages).toEqual(["howdy!", "hola!"]);
-      })
+  describe("GET, when token is present", () => {
+    test("returns every post in the collection", async () => {
+      let post1 = new Post({ content: "howdy!", author: user._id });
+      let post2 = new Post({ content: "hola!", author: user._id });
+      await post1.save();
+      await post2.save();
+      let response = await request(app)
+        .get("/api/posts")
+        .set("Authorization", `Bearer ${token}`)
+        .send({ token: token });
+      let messages = response.body.posts.map((post) => post.content);
+      expect(messages).toEqual(["howdy!", "hola!"]);
+    });
 
-      test("the response code is 200", async () => {
-        let post1 = new Post({content: "howdy!", author: user._id});
-        let post2 = new Post({content: "hola!", author: user._id});
-        await post1.save();
-        await post2.save();
-        let response = await request(app)
-          .get("/posts")
-          .set("Authorization", `Bearer ${token}`)
-          .send({token: token});
-        expect(response.status).toEqual(200);
-      })
+    test("the response code is 200", async () => {
+      let post1 = new Post({ content: "howdy!", author: user._id });
+      let post2 = new Post({ content: "hola!", author: user._id });
+      await post1.save();
+      await post2.save();
+      let response = await request(app)
+        .get("/api/posts")
+        .set("Authorization", `Bearer ${token}`)
+        .send({ token: token });
+      expect(response.status).toEqual(200);
+    });
 
-      test("returns a new token", async () => {
-        let post1 = new Post({content: "howdy!", author: user._id});
-        let post2 = new Post({content: "hola!", author: user._id});
-        await post1.save();
-        await post2.save();
-        let response = await request(app)
-          .get("/posts")
-          .set("Authorization", `Bearer ${token}`)
-          .send({token: token});
-        let newPayload = JWT.decode(response.body.token, process.env.JWT_SECRET);
-        let originalPayload = JWT.decode(token, process.env.JWT_SECRET);
-        expect(newPayload.iat > originalPayload.iat).toEqual(true);
-      })
-    })
+    test("returns a new token", async () => {
+      let post1 = new Post({ content: "howdy!", author: user._id });
+      let post2 = new Post({ content: "hola!", author: user._id });
+      await post1.save();
+      await post2.save();
+      let response = await request(app)
+        .get("/api/posts")
+        .set("Authorization", `Bearer ${token}`)
+        .send({ token: token });
+      let newPayload = JWT.decode(response.body.token, process.env.JWT_SECRET);
+      let originalPayload = JWT.decode(token, process.env.JWT_SECRET);
+      expect(newPayload.iat > originalPayload.iat).toEqual(true);
+    });
+  });
 
-    describe("GET, when token is missing", () => {
-      test("returns no posts", async () => {
-        let post1 = new Post({content: "howdy!", author: user._id});
-        let post2 = new Post({content: "hola!", author: user._id});
-        await post1.save();
-        await post2.save();
-        let response = await request(app)
-          .get("/posts");
-        expect(response.body.posts).toEqual(undefined);
-      })
+  describe("GET, when token is missing", () => {
+    test("returns no posts", async () => {
+      let post1 = new Post({ content: "howdy!", author: user._id });
+      let post2 = new Post({ content: "hola!", author: user._id });
+      await post1.save();
+      await post2.save();
+      let response = await request(app).get("/api/posts");
+      expect(response.body.posts).toEqual(undefined);
+    });
 
-      test("the response code is 401", async () => {
-        let post1 = new Post({content: "howdy!", author: user._id});
-        let post2 = new Post({content: "hola!", author: user._id});
-        await post1.save();
-        await post2.save();
-        let response = await request(app)
-          .get("/posts");
-        expect(response.status).toEqual(401);
-      })
+    test("the response code is 401", async () => {
+      let post1 = new Post({ content: "howdy!", author: user._id });
+      let post2 = new Post({ content: "hola!", author: user._id });
+      await post1.save();
+      await post2.save();
+      let response = await request(app).get("/api/posts");
+      expect(response.status).toEqual(401);
+    });
 
-      test("does not return a new token", async () => {
-        let post1 = new Post({content: "howdy!", author: user._id});
-        let post2 = new Post({content: "hola!", author: user._id});
-        await post1.save();
-        await post2.save();
-        let response = await request(app)
-          .get("/posts");
-        expect(response.body.token).toEqual(undefined);
-      })
-    })
+    test("does not return a new token", async () => {
+      let post1 = new Post({ content: "howdy!", author: user._id });
+      let post2 = new Post({ content: "hola!", author: user._id });
+      await post1.save();
+      await post2.save();
+      let response = await request(app).get("/api/posts");
+      expect(response.body.token).toEqual(undefined);
+    });
+  });
 });

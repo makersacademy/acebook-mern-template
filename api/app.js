@@ -40,10 +40,10 @@ const tokenChecker = (req, res, next) => {
 };
 
 // route setup
-app.use("/posts", tokenChecker, postsRouter);
-app.use("/tokens", authenticationRouter);
-app.use("/users", usersRouter);
-app.use("/comments", tokenChecker, commentsRouter);
+app.use("/api/posts", tokenChecker, postsRouter);
+app.use("/api/tokens", authenticationRouter);
+app.use("/api/users", usersRouter);
+app.use("/api/comments", tokenChecker, commentsRouter)
 
 // catch 404 and forward to error handler
 app.use((req, res, next) => {
