@@ -2,6 +2,7 @@ import "./App.css";
 import LoginForm from "../auth/LoginForm";
 import SignUpForm from "../user/SignUpForm";
 import UserProfileFeed from '../userProfile/UserProfileFeed';
+import HomePage from '../homepage/HomePage'
 import React, { useState } from "react";
 import Feed from "../feed/Feed";
 import { useNavigate, useLocation, Routes, Route } from "react-router-dom";
@@ -22,6 +23,9 @@ const App = () => {
             element={<AvatarChoiceForm location={useLocation()} navigate={useNavigate()} />}
           />
           <Route path='/users/profile/:user_id' element={<UserProfileFeed navigate={ useNavigate() }/>}/>
+          
+          <Route path='/'  element={<HomePage navigate={ useNavigate() }/>}/>
+
         </Routes>
       </div>
     );
