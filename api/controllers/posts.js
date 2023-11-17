@@ -8,6 +8,9 @@ const PostsController = {
         throw err;
       }
       const token = TokenGenerator.jsonwebtoken(req.user_id);
+      // map posts objects list so it displays from the newest by it's date
+      // we're passing sorting function which calculates differences between two post objects
+      posts.sort((a, b) => b.createdAt - a.createdAt)
       res.status(200).json({ posts: posts, token: token });
     });
   },
@@ -41,6 +44,8 @@ const PostsController = {
       return res.status(400).json({ message: "No posts found" });
     }
     else {
+      // post sorted from the newest
+      result.sort((a, b) => b.createdAt - a.createdAt)
       res.status(200).json({ posts: result, token: token });
     }
   }

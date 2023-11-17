@@ -183,7 +183,7 @@ describe("/users/profile/:user_id, postsController", () => {
     await Post.deleteMany({});
   });
 
-  test("Filter and find posts by user_id", async () => {
+  test("Filter and find posts by user_id and displaying in order", async () => {
     // USER1
     user = new User({
       username: "test",
@@ -256,6 +256,6 @@ describe("/users/profile/:user_id, postsController", () => {
         .set("Authorization", `Bearer ${token2}`)
         .send({ token: token2 });
       // mapping messages from post objects in response body
-      expect(new_response.body.posts.map((post) => post.message)).toEqual(["post by user 2!", "hola! by user 2"]);
+      expect(new_response.body.posts.map((post) => post.message)).toEqual(["hola! by user 2", "post by user 2!"]);
   });
 });
