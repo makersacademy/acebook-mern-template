@@ -3,10 +3,6 @@ import React, { useState } from 'react';
 
 const SignUpForm = ({ navigate }) => {
   
-  // TODO: if both passwords match: progress with signupform
-  // if not: display popup
- 
-
   // POST request with username, email and password, (empty avatar is added by default)
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
