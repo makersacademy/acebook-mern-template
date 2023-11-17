@@ -21,8 +21,29 @@ describe("Feed", () => {
 
     cy.wait("@getPosts").then(() => {
       cy.get('[data-cy="post"]')
-        .should("contain.text", "Hello, world")
-        .and("contain.text", "Hello again, world");
+      .should('contain.text', "Hello, world")
+      .and('contain.text', "Hello again, world")
+    })
+  })
+})
+
+describe("Feed", () => {
+  beforeEach(() => {
+    cy.intercept('GET', '/posts', {
+      statusCode: 200,
+      body: { posts: [] },
+    }).as("getEmptyPosts");
+  });
+
+  it("Displays a message for no posts", () => {
+    window.localStorage.setItem("token", "fakeToken");
+
+    cy.mount(<Feed navigate={navigate} />);
+
+    cy.wait("@getEmptyPosts").then(() => {
+      cy.get('[data-cy="no-posts-message"]').should('contain.text', "No posts yet :(");
+      cy.get('[data-cy="post"]').should('not.exist'); // Ensure no posts are rendered
     });
   });
 });
+
