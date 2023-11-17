@@ -288,16 +288,12 @@ describe("/users/profile/:user_id, postsController", () => {
         .post("/posts")
         .set("Authorization", `Bearer ${token2}`)
         .send({ message: "hola! by user 2", token: token2 })
-      let posts2 = await Post.find()
-        console.log("USER 2 POSTS POSTED: ", posts2[2].message, posts2[3].message)
     
-    let response = await request(app)
-      .get("/users/profile/:user_id")
-
-    let posts = await Post.find();
-    expect(posts.length).toEqual(2);
-    expect(posts.message).toEqual(["post by user 2!", "hola! by user 2"]);
-    // expect(posts[0].user_id).toEqual(user._id)
-
-  })
+      let new_response = await request(app)
+        .get(`/users/profile/${user2._id}`)
+        .set("Authorization", `Bearer ${token2}`)
+        .send({ token: token2 });
+      // mapping messages from post objects in response body
+      expect(new_response.body.posts.map((post) => post.message)).toEqual(["post by user 2!", "hola! by user 2"]);
+  });
 });
