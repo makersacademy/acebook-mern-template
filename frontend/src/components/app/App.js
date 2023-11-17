@@ -2,6 +2,7 @@ import "./App.css";
 import LoginForm from "../auth/LoginForm";
 import SignUpForm from "../user/SignUpForm";
 import UserProfileFeed from '../userProfile/UserProfileFeed';
+import HomePage from '../homepage/HomePage'
 import React, { useState } from "react";
 import Feed from "../feed/Feed";
 import { useNavigate, useLocation, Routes, Route } from "react-router-dom";
