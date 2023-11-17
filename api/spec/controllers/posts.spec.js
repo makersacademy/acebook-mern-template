@@ -184,7 +184,6 @@ describe("GET api/post/:userId", () => {
     });
     await user.save();
 
-    // const userId = await User.find({email: "test@gmail.com"})[0]._id
     post1 = new Post({ content: "test1", author: user._id });
     post1.save();
     post2 = new Post({ content: "test2", author: user._id });
@@ -225,26 +224,24 @@ describe("GET api/post/:userId", () => {
 
     test("returns a new token", async () => {
       let response = await request(app)
-      .get(`/api/posts/${user._id}`)
-      .set("Authorization", `Bearer ${token}`)
-      .send({ token: token });
+        .get(`/api/posts/${user._id}`)
+        .set("Authorization", `Bearer ${token}`)
+        .send({ token: token });
       let newPayload = JWT.decode(response.body.token, process.env.JWT_SECRET);
       let originalPayload = JWT.decode(token, process.env.JWT_SECRET);
       expect(newPayload.iat > originalPayload.iat).toEqual(true);
-    })
+    });
   });
 
   describe("When the token is missing", () => {
     test("responds with 400", async () => {
-      let response = await request(app)
-        .get(`/api/posts/${user._id}`)
+      let response = await request(app).get(`/api/posts/${user._id}`);
       expect(response.status).toEqual(401);
     });
 
     test("doesn't return new token", async () => {
-      let response = await request(app)
-      .get(`/api/posts/${user._id}`);
+      let response = await request(app).get(`/api/posts/${user._id}`);
       expect(response.body.token).toEqual(undefined);
-    })
-  })
+    });
+  });
 });
