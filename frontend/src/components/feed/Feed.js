@@ -18,7 +18,8 @@ const Feed = ({ navigate }) => {
           setToken(window.localStorage.getItem("token"))
           setPosts(data.posts);
         })
-    }
+
+    } // TODO redirect to login page if token exists
   }, [token])
 
 
