@@ -1,5 +1,12 @@
 const User = require("../models/user");
 
+function isValidPassword(password) {
+  // Password must be 8 characters or more, contain a special character, and have at least 1 number
+  const passwordRegex = /^(?=.*[0-9])(?=.*[!@#$%^&*])(?=.{8,})/;
+  return passwordRegex.test(password);
+}
+
+
 const UsersController = {
   Create: async (req, res) => {
     const { email, password, retypePassword, firstName, lastName } = req.body;
@@ -14,6 +21,11 @@ const UsersController = {
       return res.status(400).json({ message: 'Email is already in use' });
     }
 
+    if (!isValidPassword(password)) {
+      return res.status(400).json({
+        message: 'Password must be 8 characters or more, contain a special character, and have at least 1 number',
+      });
+    }
 
 
     const user = new User(req.body);
@@ -27,9 +39,14 @@ const UsersController = {
   },
 };
 
-// stop user from signing up with existing email 
-// fill all fields to signup
-// password conditions, password match 
-// return 400 error
+
+
+// Email is already registered 
+// All fields must be filled
+// password conditions:
+    // passwords do not match
+    // Passwords do not match
+    // Password must be 8 characters or more, contain a special character, and have at least 1 number
+
 
 module.exports = UsersController;

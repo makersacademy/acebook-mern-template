@@ -43,6 +43,20 @@ input {
     background-color: #4CAF50;
 }
 
+.password-input-container {
+    position: relative;
+}
+
+.toggle-password-button {
+    position: absolute;
+    right: 10px; /* Adjust the value to your preference for the right margin */
+    top: 50%; /* Center vertically */
+    transform: translateY(-50%);
+    cursor: pointer;
+    background: none;
+    border: none;
+}
+
 p {
     text-align: center; 
     margin-top: 10px;
