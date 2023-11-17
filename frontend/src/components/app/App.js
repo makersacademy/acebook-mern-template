@@ -6,9 +6,12 @@ import React, { useState } from "react";
 import Feed from "../feed/Feed";
 import { useNavigate, useLocation, Routes, Route } from "react-router-dom";
 import AvatarChoiceForm from "../user/AvatarChoiceForm";
+import Navbar from "../navbar/Navbar";
 
 const App = () => {
     return (
+      <div className="App">
+        <Navbar navigate={ useNavigate() } />
         <Routes>
           <Route path='/posts'  element={<Feed navigate={ useNavigate() }/>}/>
           <Route path='/login'  element={<LoginForm  navigate={ useNavigate() }/>}/>
@@ -20,6 +23,7 @@ const App = () => {
           />
           <Route path='/users/profile/:user_id' element={<UserProfileFeed navigate={ useNavigate() }/>}/>
         </Routes>
+      </div>
     );
   }
 
