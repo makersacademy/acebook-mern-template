@@ -36,10 +36,12 @@ const LogInForm = ({ navigate }) => {
 
 
     return (
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit} className='column'>
+        <h2>Login</h2> 
         <input placeholder='Email' id="email" type='text' value={ email } onChange={handleEmailChange} />
         <input placeholder='Password' id="password" type='password' value={ password } onChange={handlePasswordChange} />
-        <input role='submit-button' id='submit' type="submit" value="Submit" />
+        <input role='submit' id='submit' className='primary-btn' type="submit" value="Login" />
+        <p>Don’t have an account? <a href="/signup">Sign up</a></p>
       </form>
     );
 }

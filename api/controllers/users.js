@@ -13,4 +13,9 @@ const UsersController = {
   },
 };
 
+// Check if user exists with email 
+// fill all fields to signup
+// password conditions, password match 
+// return 400 error
+
 module.exports = UsersController;
