@@ -42,6 +42,8 @@ const tokenChecker = (req, res, next) => {
 // route setup
 app.use("/posts", tokenChecker, postsRouter);
 app.use("/tokens", authenticationRouter);
+//new route to logged-in user's account
+app.use("/users/account", tokenChecker, usersRouter);
 app.use("/users", usersRouter);
 app.use("/users/profile/:user_id", tokenChecker, usersRouter);
 //new route for posting avatar change
