@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from 'react';
-import Post from '../post/Post'
+// import Post from '../post/Post'
 // import User from '../user/User'
-import Feed from '../feed/Feed'
+// import Feed from '../feed/Feed'
 import NavBar from '../navBar/NavBar'
 import defaultProfile from '../../assets/defaultProfile.png';
+import ProfileFeed from '../profileFeed/ProfileFeed';
 
 // Some logic required: If you're landing on your own profile, you see the update image. If you're landing on another person's profile, you don't. 
 // But do you see follow/unfollow instead? 
@@ -12,12 +13,13 @@ import defaultProfile from '../../assets/defaultProfile.png';
 // const Profile = ({ navigate, currentUserId, profileOwnerId }) => {
 //     const isOwnProfile = currentUserId === profileOwnerId;
 
-const Profile = ({ navigate }) => {
+const Profile = ({ navigate, user}) => {
+
 
       return(
         <>
         <NavBar/>
-        <h2>Profile Name</h2>
+        <h2>Profile Name </h2>
         <div>
         <img src={defaultProfile} alt="Default Profile Image"/>
         </div>
@@ -31,7 +33,7 @@ const Profile = ({ navigate }) => {
         {/* <h3>Post & Number</h3>
         <h3>Followers & Number</h3>
         <h3>Following & Number</h3> */}
-        <Feed navigate={navigate}/>
+        <ProfileFeed navigate={navigate}/>
         </>
       )
 }

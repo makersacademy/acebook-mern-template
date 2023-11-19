@@ -4,6 +4,7 @@ import SignUpForm from '../user/SignUpForm'
 import NavBar from '../navBar/NavBar';
 import NewPost from '../newPost/NewPost';
 import Feed from '../feed/Feed'
+import ProfileFeed from '../profileFeed/ProfileFeed';
 import Profile from '../profile/Profile'
 import React, { useState } from 'react';
 import Post from '../post/Post';
@@ -19,6 +20,7 @@ const App = () => {
     return (
         <Routes>
           <Route path='/posts'  element={<Feed navigate={ useNavigate() }/>}/>
+          <Route path='/posts/user'  element={<ProfileFeed navigate={ useNavigate() }/>}/>
           <Route path='/login'  element={<LoginForm  navigate={ useNavigate() }/>}/>
           <Route path='/signup' element={<SignUpForm navigate={ useNavigate() }/>}/>
           <Route path='/navbar' element={<NavBar navigate={ useNavigate() }/>}/>
