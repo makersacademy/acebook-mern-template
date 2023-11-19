@@ -1,6 +1,8 @@
 const Post = require("../models/post");
 const TokenGenerator = require("../lib/token_generator");
 
+
+
 const PostsController = {
   Index: (req, res) => {
     Post.find((err, posts) => {
@@ -13,7 +15,10 @@ const PostsController = {
     });
   },
   Create: (req, res) => {
-    const post = new Post(req.body);
+    const userId = req.user_id;
+    const post = new Post({
+      ...req.body,
+      userId: userId});
     post.save((err) => {
       if (err) {
         throw err;
