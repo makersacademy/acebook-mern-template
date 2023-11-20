@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
 import './Post.css'
-// import LikeButton from '../likeButton/likeButton';
+import LikeButton from '../likeButton/likeButton';
 
 
 const Post = ({ post }) => { 
   const [comment, setComment] = useState('');
-  const [comments, setComments] = useState(post.comments);
+  const [comments, setComments] = useState(post.comments || []);
   const [token, setToken] = useState(window.localStorage.getItem("token"));
 
   const handleCommentChange = (e) => {
@@ -46,10 +46,11 @@ const Post = ({ post }) => {
       <article data-cy="post" key={ post._id }>
         { post.message }<br />
       <small className="smallText">{formatDate(post.date)}</small><br />
-      {/* <LikeButton post_id={ post._id }/> */}
+      <LikeButton post_id={ post._id }/>
       </article>
       <div>
-        {comments.map((comment, index) => (
+        {comments && 
+        comments.map((comment, index) => (
           <div key={index}>{comment.comment_message}</div>
         ))}
       </div>
