@@ -107,7 +107,7 @@ const SignUpForm = ({ navigate }) => {
           <input placeholder="Password" id="password" type={showPassword ? 'text' : 'password'} value={ password } onChange={handlePasswordChange} />
           
           <button type="button" onClick={toggleShowPassword} className="toggle-password-button">
-          {showPassword ? '🙈' : '👁️'} 
+          {showPassword ? '🙈' : '👀'} 
           </button>
         </div>
 
@@ -115,7 +115,7 @@ const SignUpForm = ({ navigate }) => {
           <input placeholder="Retype Password" id="retypePassword" type={showRetypePassword ? 'text' : 'password'} value={ retypePassword } onChange={handleRetypePasswordChange} />
           
           <button type="button" onClick={toggleShowRetypePassword} className="toggle-password-button">
-        {showRetypePassword ? '🙈' : '👁️'}
+        {showRetypePassword ? '🙈' : '👀'}
       </button>
     </div>
           <input role='submit' id='submit' className='primary-btn' type="submit" value="Sign Up" />

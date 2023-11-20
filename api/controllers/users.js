@@ -1,7 +1,6 @@
 const User = require("../models/user");
 
 function isValidPassword(password) {
-  // Password must be 8 characters or more, contain a special character, and have at least 1 number
   const passwordRegex = /^(?=.*[0-9])(?=.*[!@#$%^&*])(?=.{8,})/;
   return passwordRegex.test(password);
 }
@@ -41,12 +40,7 @@ const UsersController = {
 
 
 
-// Email is already registered 
-// All fields must be filled
-// password conditions:
-    // passwords do not match
-    // Passwords do not match
-    // Password must be 8 characters or more, contain a special character, and have at least 1 number
-
 
 module.exports = UsersController;
+
+
