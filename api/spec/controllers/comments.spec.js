@@ -7,11 +7,14 @@ const User = require("../../models/user");
 const JWT = require("jsonwebtoken");
 const secret = process.env.JWT_SECRET;
 
-let token;
-let user;
 let post;
+let post2;
+let token;
+let token2;
+let user;
+let user2;
 
-describe("/posts", () => {
+describe("/comments - create", () => {
 	beforeAll(async () => {
 	// creates post to comment upon
 		post = new Post({
@@ -44,12 +47,10 @@ describe("/posts", () => {
     beforeEach(async () => {
       await Comment.deleteMany({});
     });
-  
-    afterAll(async () => {
-      await Comment.deleteMany({});
-      await User.deleteMany({});
-      await Post.deleteMany({});
-    });
+
+		afterAll(async () => {
+			await Comment.deleteMany({});
+		});
   
     describe("POST comment, when token is present", () => {
       test("responds with a 201", async () => {
@@ -83,7 +84,7 @@ describe("/posts", () => {
         let originalPayload = JWT.decode(token, process.env.JWT_SECRET);
         expect(newPayload.iat > originalPayload.iat).toEqual(true);
       });
-    // });
+
   
     describe("POST new comment, when token is missing", () => {
       test("responds with a 401", async () => {
@@ -107,75 +108,137 @@ describe("/posts", () => {
         expect(response.body.token).toEqual(undefined);
       });
     });
+});
+
+
+
+// // ***********************************************************************
+// // ***********************************************************************
+// // ***********************************************************************
+
+
+// sets up comments etc for testing findcomment by post_id
+
+describe("/comments - find by postid", () => {
+	beforeAll(async () => {
+	// creates post2 to differentiate when calling
+		post2 = new Post({
+			message: "test post numbero 2"
+		});
+		await post2.save();
+
+	// create and post by user 1- on post1
+		await request(app)
+			.post(`/comments/${post.id}`)
+			.set("Authorization", `Bearer ${token}`)
+			.send({ message: "post by user 1 on post1!", token: token });
+
+	// create and post by user 1- on post2
+		await request(app)
+			.post(`/comments/${post2.id}`)
+			.set("Authorization", `Bearer ${token}`)
+			.send({ message: "post by user 1 on post2!", token: token });
+	
+	// creates second user
+		user2 = new User({
+			username: "test2",
+			email: "test2@test.com",
+			password: "123456782",
+			avatar: "public/images/avatars/2.svg",
+			});
+		await user2.save();
+		token2 = JWT.sign(
+		{
+			user_id: user2._id,
+			// Backdate this token of 5 minutes
+			iat: Math.floor(Date.now() / 1000) - 5 * 60,
+			// Set the JWT token to expire in 10 minutes
+			exp: Math.floor(Date.now() / 1000) + 10 * 60,
+		},
+		secret,
+	);
+			
+		// create and post by user 2- on post1
+		await request(app)
+		.post(`/comments/${post.id}`)
+		.set("Authorization", `Bearer ${token2}`)
+		.send({ message: "post by user 2 on post1!", token: token2 })
+
+		// create and post by user 2- on post2
+
+		await request(app)
+		.post(`/comments/${post2.id}`)
+		.set("Authorization", `Bearer ${token2}`)
+		.send({ message: "post by user 2 on post2!", token: token2 })
+	});
+
+	afterAll(async () => {
+		await Comment.deleteMany({});
+		await User.deleteMany({});
+		await Post.deleteMany({});
+	});
+
+
+    describe("/comments - FindByPostId when token is present", () => {
+      test("returns every comment on post1, regardless of which user posted them", async () => {
+
+				let response = await request(app)
+					.get(`/comments/${post.id}`)
+					.set("Authorization", `Bearer ${token}`)
+					.send({ token: token });
+        let messages = response.body.comments.map((comment) => comment.message);
+
+        expect(messages).toEqual(["post by user 1 on post1!", "post by user 2 on post1!"]);
+        expect(messages.length).toEqual(2);
+			})
+
+			test("returns every comment on post2, regardless of which user posted them", async () => {
+
+				let response = await request(app)
+					.get(`/comments/${post2.id}`)
+					.set("Authorization", `Bearer ${token}`)
+					.send({ token: token });
+        let messages = response.body.comments.map((comment) => comment.message);
+
+        expect(messages).toEqual(["post by user 1 on post2!", "post by user 2 on post2!"]);
+        expect(messages.length).toEqual(2);
+
+			})
   
-    // describe("GET, when token is present", () => {
-    //   test("returns every post in the collection", async () => {
-    //     let post1 = new Post({ message: "howdy!" });
-    //     let post2 = new Post({ message: "hola!" });
-    //     await post1.save();
-    //     await post2.save();
-    //     let response = await request(app)
-    //       .get("/posts")
-    //       .set("Authorization", `Bearer ${token}`)
-    //       .send({ token: token });
-    //     let messages = response.body.posts.map((post) => post.message);
-    //     expect(messages).toEqual(["howdy!", "hola!"]);
-    //   });
+      test("the response code is 200", async () => {
+        let response = await request(app)
+          .get("/posts")
+          .set("Authorization", `Bearer ${token}`)
+          .send({ token: token });
+        expect(response.status).toEqual(200);
+      });
   
-  //     test("the response code is 200", async () => {
-  //       let post1 = new Post({ message: "howdy!" });
-  //       let post2 = new Post({ message: "hola!" });
-  //       await post1.save();
-  //       await post2.save();
-  //       let response = await request(app)
-  //         .get("/posts")
-  //         .set("Authorization", `Bearer ${token}`)
-  //         .send({ token: token });
-  //       expect(response.status).toEqual(200);
-  //     });
+      test("returns a new token", async () => {
+        let response = await request(app)
+					.get(`/comments/${post.id}`)
+
+          .set("Authorization", `Bearer ${token}`)
+          .send({ token: token });
+        let newPayload = JWT.decode(response.body.token, process.env.JWT_SECRET);
+        let originalPayload = JWT.decode(token, process.env.JWT_SECRET);
+        expect(newPayload.iat > originalPayload.iat).toEqual(true);
+      });
+    });
   
-  //     test("returns a new token", async () => {
-  //       let post1 = new Post({ message: "howdy!" });
-  //       let post2 = new Post({ message: "hola!" });
-  //       await post1.save();
-  //       await post2.save();
-  //       let response = await request(app)
-  //         .get("/posts")
-  //         .set("Authorization", `Bearer ${token}`)
-  //         .send({ token: token });
-  //       let newPayload = JWT.decode(response.body.token, process.env.JWT_SECRET);
-  //       let originalPayload = JWT.decode(token, process.env.JWT_SECRET);
-  //       expect(newPayload.iat > originalPayload.iat).toEqual(true);
-  //     });
-  //   });
+    describe("GET, when token is missing", () => {
+      test("returns no comments", async () => {
+        let response = await request(app).get(`/comments/${post.id}`);
+        expect(response.body.posts).toEqual(undefined);
+      });
   
-  //   describe("GET, when token is missing", () => {
-  //     test("returns no posts", async () => {
-  //       let post1 = new Post({ message: "howdy!" });
-  //       let post2 = new Post({ message: "hola!" });
-  //       await post1.save();
-  //       await post2.save();
-  //       let response = await request(app).get("/posts");
-  //       expect(response.body.posts).toEqual(undefined);
-  //     });
+      test("the response code is 401", async () => {
+        let response = await request(app).get(`/comments/${post2.id}`);
+        expect(response.status).toEqual(401);
+      });
   
-  //     test("the response code is 401", async () => {
-  //       let post1 = new Post({ message: "howdy!" });
-  //       let post2 = new Post({ message: "hola!" });
-  //       await post1.save();
-  //       await post2.save();
-  //       let response = await request(app).get("/posts");
-  //       expect(response.status).toEqual(401);
-  //     });
-  
-  //     test("does not return a new token", async () => {
-  //       let post1 = new Post({ message: "howdy!" });
-  //       let post2 = new Post({ message: "hola!" });
-  //       await post1.save();
-  //       await post2.save();
-  //       let response = await request(app).get("/posts");
-  //       expect(response.body.token).toEqual(undefined);
-  //     });
-  //   });
-  });
-  
+      test("does not return a new token", async () => {
+        let response = await request(app).get(`/comments/${post.id}`);
+        expect(response.body.token).toEqual(undefined);
+      });
+    });
+});

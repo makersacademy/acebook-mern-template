@@ -14,12 +14,12 @@ const PostsController = {
       res.status(200).json({ posts: posts, token: token });
     });
   },
-  // Create needs to be updated to include pulling the user_id from authenticated user
+
   Create: (req, res) => {
     const user_id = req.user_id;
     const post = new Post({
       ...req.body,
-      // added a line to add and update user_id field
+      // added a line to add/update user_id field
       user_id: user_id,
       });
     post.save((err) => {

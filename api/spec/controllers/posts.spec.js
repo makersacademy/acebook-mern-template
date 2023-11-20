@@ -204,8 +204,6 @@ describe("/users/profile/:user_id, postsController", () => {
       secret,
     );
 
-    console.log("USER 1 DONE")
-
     // User 1 creates a posts with their token
     await request(app)
         .post("/posts")
@@ -218,7 +216,6 @@ describe("/users/profile/:user_id, postsController", () => {
         .send({ message: "hola! by user 1", token: token })
 
     let posts1 = await Post.find()
-        console.log("USER 1 POSTS POSTED: ", posts1[0].message, posts1[1].message)
 
     // USER 2: creating second user to post posts with different user id's
     user2 = new User({
