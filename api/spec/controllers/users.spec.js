@@ -39,7 +39,7 @@ describe("/users", () => {
         displayName: "Scarlett Scala",
         email: "scarlett@email.com",
         password: "1234",
-      }
+      };
       await createTestUser(userInfo);
       let newUser = await getMostRecentlyCreatedUser();
       expect(newUser.displayName).toEqual("Scarlett Scala");
@@ -61,7 +61,7 @@ describe("/users", () => {
       const userInfo = {
         displayName: "Skye Swift",
         email: "skye@email.com",
-      }
+      };
       await createTestUser(userInfo);
       expect(await numberOfExistingUsers()).toEqual(0);
     });
@@ -69,41 +69,47 @@ describe("/users", () => {
 
   describe("POST, when display name is missing", () => {
     test("response code is 400", async () => {
-      let response = await request(app)
-        .post("/users")
-        .send({ email: "james@email.com", password: "1234" });
+      const userInfo = {
+        email: "james@email.com",
+        password: "1234",
+      };
+      let response = await createTestUser(userInfo);
       expect(response.statusCode).toBe(400);
     });
 
     test("does not create a user", async () => {
-      await request(app)
-        .post("/users")
-        .send({ email: "james@email.com", password: "1234" });
-      let users = await User.find();
-      expect(users.length).toEqual(0);
+      const userInfo = {
+        email: "james@email.com",
+        password: "1234",
+      };
+      await createTestUser(userInfo);
+      expect(await numberOfExistingUsers()).toEqual(0);
     });
   });
 
   describe("POST, when email is missing", () => {
     test("response code is 400", async () => {
-      let response = await request(app)
-        .post("/users")
-        .send({ displayName: "Emily Erlang", password: "1234" });
+      const userInfo = {
+        displayName: "Emily Erlang",
+        password: "1234",
+      };
+      let response = await createTestUser(userInfo);
       expect(response.statusCode).toBe(400);
     });
 
     test("does not create a user", async () => {
-      await request(app)
-        .post("/users")
-        .send({ displayName: "Emily Erlang", password: "1234" });
-      let users = await User.find();
-      expect(users.length).toEqual(0);
+      const userInfo = {
+        displayName: "Emily Erlang",
+        password: "1234",
+      };
+      await createTestUser(userInfo);
+      expect(await numberOfExistingUsers()).toEqual(0);
     });
   });
 
   describe("GET, when token is missing", () => {
     it("does not return a user", async () => {
-      
+
     });
   });
 });
