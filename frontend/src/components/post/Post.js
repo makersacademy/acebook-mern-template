@@ -1,22 +1,6 @@
 import React, { useState } from 'react';
 import './Post.css'
 
-// const Post = ({post}) => {
-
-//   const formatDate = (dateString) => {
-//     const options = { year: 'numeric', month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit', hour12: false, };
-//     const formattedDate = new Date(dateString).toLocaleDateString(undefined, options);
-//     return formattedDate;
-//   };
-
-//   return(
-//     <article data-cy="post" key={ post._id }>
-//       { post.message }<br />
-//       <small className="smallText">{formatDate(post.date)}</small></article>
-//   )
-// }
-
-
 const Post = ({ post }) => { 
   const [comment, setComment] = useState('');
   const [comments, setComments] = useState(post.comments);
@@ -61,10 +45,17 @@ const Post = ({ post }) => {
       <article data-cy="post" key={ post._id }>
         { post.message }<br />
       <small className="smallText">{formatDate(post.date)}</small></article>
+      <br />
       <div>
         {comments.map((comment, index) => (
-          <div key={index}>{comment.comment_message}</div>
+          <div key={index}>{comment.comment_message}
+          <br />
+          <small className="smallText">{formatDate(comment.date)}</small>
+          </div>
+          
         ))}
+          
+        
       </div>
 
       <form onSubmit={handleSubmitComment}>
