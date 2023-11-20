@@ -8,23 +8,22 @@ function isValidPassword(password) {
 
 const UsersController = {
   Create: async (req, res) => {
-    const { email, password, retypePassword, firstName, lastName } = req.body;
 
-    if (!firstName || !lastName || !email || !password || !retypePassword) {
-      return res.status(400).json({ message: 'All fields must be filled' });
-    }
+    // if (!firstName || !lastName || !email || !password || !retypePassword) {
+    //   return res.status(400).json({ message: 'All fields must be filled' });
+    // }
 
-    const existingUser = await User.findOne({ email });
+    // const existingUser = await User.findOne({ email });
 
-    if (existingUser) {
-      return res.status(400).json({ message: 'Email is already in use' });
-    }
+    // if (existingUser) {
+    //   return res.status(400).json({ message: 'Email is already in use' });
+    // }
 
-    if (!isValidPassword(password)) {
-      return res.status(400).json({
-        message: 'Password must be 8 characters or more, contain a special character, and have at least 1 number',
-      });
-    }
+    // if (!isValidPassword(password)) {
+    //   return res.status(400).json({
+    //     message: 'Password must be 8 characters or more, contain a special character, and have at least 1 number',
+    //   });
+    // }
 
 
     const user = new User(req.body);
