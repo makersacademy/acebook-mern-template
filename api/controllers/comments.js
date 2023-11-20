@@ -24,6 +24,7 @@ const CommentController = {
             res.status(201).json({ message: 'OK', token: token });
         });
     },
+    // Endpoint Comments by Post
 };
 
 module.exports = CommentController;
