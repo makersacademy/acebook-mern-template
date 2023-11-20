@@ -12,14 +12,14 @@ describe("/api/users", () => {
     test("the response code is 201", async () => {
       let response = await request(app)
         .post("/api/users")
-        .send({ email: "poppy@email.com", password: "1234" });
+        .send({ email: "poppy@email.com", password: "Password1!" });
       expect(response.statusCode).toBe(201);
     });
     it("", () => {});
     test("a user is created", async () => {
       await request(app)
         .post("/api/users")
-        .send({ email: "scarlett@email.com", password: "1234" });
+        .send({ email: "scarlett@email.com", password: "Password1!" });
       let users = await User.find();
       let newUser = users[users.length - 1];
       expect(newUser.email).toEqual("scarlett@email.com");

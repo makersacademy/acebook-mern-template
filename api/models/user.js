@@ -3,6 +3,8 @@ const mongoose = require("mongoose");
 
 // Designing a schema for the user model
 const UserSchema = new mongoose.Schema({
+  firstName: {type: String, required: false},
+  lastName: {type: String, required: false},
   email: { type: String, required: true },
   password: { type: String, required: true },
   username: {type: String, required: false},

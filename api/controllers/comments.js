@@ -7,7 +7,6 @@ const CommentController = {
             if (err) {
                 return res.status(500).json({ error: err.message });
             }
-
             const token = TokenGenerator.jsonwebtoken(req.user_id);
             res.status(200).json({ comments: comments, token: token });
         });
@@ -24,6 +23,7 @@ const CommentController = {
             res.status(201).json({ message: 'OK', token: token });
         });
     },
+    // Endpoint Comments by Post
 };
 
 module.exports = CommentController;
