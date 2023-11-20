@@ -36,6 +36,12 @@ import Like from "./Like";
 // The length of the 'listOfLikes' object
     // is assigned to the number displayed on the right of the thumb icon
 
+describe("Like", () => {
+    it('renders the correct number of likes', () => {
+        cy.mount(<Like post={{_id: 1, content: "This is my first post", likes: [1, 2, 3]}} />);
+        cy.get('[data-cy="post-likes"]').should('contain.text', 3)
+    })
+})
 
 
 // Test the colour of an 'unliked' Like
