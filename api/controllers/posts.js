@@ -1,9 +1,5 @@
 const Post = require("../models/post");
 const TokenGenerator = require("../lib/token_generator");
-// library to upload files into our server. Read more: https://www.npmjs.com/package/multer
-// run npm install --save multer
-const multer = require('multer');
-const upload = multer({ dest: 'uploads/' });
 
 const PostsController = {
   Index: (req, res) => {
@@ -18,7 +14,7 @@ const PostsController = {
       res.status(200).json({ posts: posts, token: token });
     });
   },
-
+  // Create needs to be updated to include pulling the user_id from authenticated user
   Create: (req, res) => {
     const user_id = req.user_id;
     const post = new Post({
@@ -52,14 +48,6 @@ const PostsController = {
       result.sort((a, b) => b.createdAt - a.createdAt)
       res.status(200).json({ posts: result, token: token });
     }
-  },
-  //method to add image file to uploads directory and store it in our server
-  AddImageFile: async (req, res) => {
-    const user_id = req.params.user_id
-    const imageFile = req.image_file
-
-  
-    const token = TokenGenerator.jsonwebtoken(req.user_id)
   }
   };
 
