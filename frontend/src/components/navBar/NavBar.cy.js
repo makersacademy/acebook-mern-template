@@ -2,8 +2,6 @@ import NavBar from "./NavBar";
 import React from "react";
 import { BrowserRouter as Router } from 'react-router-dom';
 
-
-
 describe('NavBar Component', () => {
   beforeEach(() =>
   cy.mount(
@@ -16,7 +14,7 @@ describe('NavBar Component', () => {
   });
   it('homebutton click takes you to home', () => {
     cy.get('[data-cy="home-button"]').click();
-    cy.url().should('include', '/feed');
+    cy.url().should('include', '/posts');
   })
   it('profile button click takes you to profile', () => {
     cy.get('[data-cy="profile-button"]').click();
@@ -33,32 +31,3 @@ describe('NavBar Component', () => {
 
 });
 
-
-
-
-
-// describe('Navbar', () => {
-//   it('should navigate to search page', () => {
-//     cy.visit('http://localhost:3000/navbar')
-//     cy.get('a[href*="search"]').click()
-//     cy.url().should('include', '/search')
-//   })
-// })  
-
-
-
-// describe('NavBar', () => {
-//   it('mounts', () => {
-//     cy.mount(<NavBar />);
-//     cy.get("#header").should('contains.text', "Acebook")
-//   });
-//   it("navigates to the Home page", () => {
-//     cy.mount(<NavBar />);
-//     cy.get("#homeButton").click();
-//     cy.url().should('include', '/feed');
-//     // should this be /home instead?
-//   });
-// });
-
-
-// }
