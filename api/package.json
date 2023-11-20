@@ -29,7 +29,8 @@
     "supertest": "^6.2.4"
   },
   "devDependencies": {
-    "jest": "^27.5.1"
+    "jest": "^27.5.1",
+    "mock-fs": "^5.2.0"
   },
   "nodemonConfig": {
     "ext": "js,hbs"

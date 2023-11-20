@@ -17,6 +17,10 @@ app.use(express.json());
 app.use(logger("dev"));
 app.use(express.json());
 app.use(express.static(path.join(__dirname, "public")));
+// TODO: creating static routes for all images uploaded by users to serve them later
+// each image can be accessed at http://localhost:8080/uploads/image.jpg
+// __dirname refers to the directory of the current module
+app.use('/posts', express.static(path.join(__dirname, "uploads")));
 
 // middleware function to check for valid tokens
 const tokenChecker = (req, res, next) => {

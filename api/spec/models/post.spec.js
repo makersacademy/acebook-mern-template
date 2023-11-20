@@ -54,4 +54,36 @@ describe("Post model", () => {
     });
   });
 
+  test("can save post with default image path: null", (done) => {
+    var post = new Post({ message: "some message"})
+
+    post.save((err) => {
+      expect(err).toBeNull();
+
+      Post.find((err, posts) => {
+        expect(err).toBeNull();
+
+        expect(posts[0]).toMatchObject({ message: "some message", image_path: null})
+        done();
+      });
+    });
+  }
+  )
+
+  test("can save post with image path", (done) => {
+    var post = new Post({ message: "some message", image_path: "/uploads/img1.jpg"})
+
+    post.save((err) => {
+      expect(err).toBeNull();
+
+      Post.find((err, posts) => {
+        expect(err).toBeNull();
+
+        expect(posts[0]).toMatchObject({ message: "some message", image_path: "/uploads/img1.jpg"})
+        done();
+      });
+    });
+  }
+  )
+
 });
