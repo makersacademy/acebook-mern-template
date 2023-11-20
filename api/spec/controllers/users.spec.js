@@ -2,6 +2,8 @@ const app = require("../../app");
 const request = require("supertest");
 require("../mongodb_helper");
 const User = require("../../models/user");
+const JWT = require("jsonwebtoken");
+const secret = process.env.JWT_SECRET;
 
 const createTestUser = async (testUserInfoObject) => {
   let response = await request(app).post("/users").send(testUserInfoObject);
@@ -16,7 +18,16 @@ const getMostRecentlyCreatedUser = async () => {
 const numberOfExistingUsers = async () => {
   let users = await User.find();
   return users.length;
-}
+};
+
+const logInAndGetTokenAs = (user) => {
+  // Returns a token backdated to 5 mins ago, valid for a further 10 mins.
+  return JWT.sign({
+    user_id: user.id,
+    iat: Math.floor(Date.now() / 1000) - (5 * 60),
+    exp: Math.floor(Date.now() / 1000) + (10 * 60),
+  }, secret);
+};
 
 describe("/users", () => {
   beforeEach(async () => {
@@ -29,7 +40,7 @@ describe("/users", () => {
         displayName: "Poppy Python",
         email: "poppy@email.com",
         password: "1234",
-      }
+      };
       let response = await createTestUser(userInfo);
       expect(response.statusCode).toBe(201);
     });
@@ -52,7 +63,7 @@ describe("/users", () => {
       const userInfo = {
         displayName: "Skye Swift",
         email: "skye@email.com",
-      }
+      };
       let response = await createTestUser(userInfo);
       expect(response.statusCode).toBe(400);
     });
@@ -109,7 +120,30 @@ describe("/users", () => {
 
   describe("GET, when token is missing", () => {
     it("does not return a user", async () => {
-
+      // Define info for two users.
+      const userInfo1 = {
+        displayName: "User One",
+        email: "user-one@example.com",
+        password: "11111111",
+      };
+      const userInfo2 = {
+        displayName: "User Two",
+        email: "user-two@example.com",
+        password: "22222222",
+      };
+      // Create the two users.
+      await createTestUser(userInfo1);
+      const user1 = await getMostRecentlyCreatedUser();
+      await createTestUser(userInfo2);
+      const user2 = await getMostRecentlyCreatedUser();
+      // Log in as User One.
+      let token = JWT.sign({
+        user_id: user.id,
+        // Backdate this token of 5 minutes
+        iat: Math.floor(Date.now() / 1000) - (5 * 60),
+        // Set the JWT token to expire in 10 minutes
+        exp: Math.floor(Date.now() / 1000) + (10 * 60)
+      }, secret);
     });
   });
 });
