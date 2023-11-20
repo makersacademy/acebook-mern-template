@@ -1,13 +1,32 @@
 .post-box {
-    padding: 2rem;
+    padding: 1rem 2rem;
     margin: 2rem 0;
-    border: 0.1rem solid #add8e6;
+    border: 0.1rem solid #A5C1EB;
     border-radius: 1rem;
+    max-width: 630px;
+}
+
+.post-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+}
+
+.post-avatar-gap {
+    gap: 0.8rem;
+}
+
+.post-like-gap {
+    gap: 0.3rem;
+}
+
+.post-comments-gap {
+    gap: 1rem;
 }
 
 .post-author {
     font-weight: 700;
-    margin-bottom: 0.1rem;
 }
 
 .post-date {
@@ -16,10 +35,10 @@
 }
 
 .post-content {
-    margin: 1rem 0;
     padding: 1rem 0;
-    border-top: 0.05rem solid lightgray;
-    border-bottom: 0.05rem solid lightgray;
+    margin: 0.3rem 0;
+    border-top: 0.05rem solid #A5C1EB;
+    border-bottom: 0.05rem solid #A5C1EB;
 }
 
 .like-btn {
@@ -29,15 +48,4 @@
 
 .like-number {
     font-size: 14px;
-}
-
-.comment-btn {
-  font-size: 14px;
-  background-color: #3498db;
-  color: #fff;
-  border: none;
-  padding: 0.5rem 1rem;
-  border-radius: 0.5rem;
-  margin-left: 3rem;
-  cursor: pointer;
 }
