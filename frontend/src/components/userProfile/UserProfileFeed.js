@@ -25,11 +25,6 @@ const UserProfileFeed = ({ navigate }) => {
       }
     }, [])
 
-    // logout button uncomment later
-  const logout = () => {
-    window.localStorage.removeItem("token")
-    navigate('/login')
-  }
     
   // Users posts: filter list of posts on the basis of user_id
 
@@ -37,7 +32,6 @@ const UserProfileFeed = ({ navigate }) => {
       return(
 				<>
 					<h2>USER PROFILE PAGE</h2>
-          <button onClick={logout}>Logout</button>
 					<div id='user-profile-feed' role="feed">
 							{posts.map(
 								(post) => ( <Post post={ post } key={ post._id } /> )
