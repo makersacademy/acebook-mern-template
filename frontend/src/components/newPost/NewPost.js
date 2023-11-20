@@ -12,7 +12,7 @@ const NewPost = ({ user_id }) => {
     const handleSubmit = async (event) => { 
         event.preventDefault(); // prevent default stops the page from reloading
         setMessage(""); //clears message once sent
-        setSelectedImage(null)
+        setSelectedImage(null) 
 
 
     fetch('/posts', {
@@ -21,7 +21,7 @@ const NewPost = ({ user_id }) => {
             'Content-Type': 'application/json',
             'Authorization': `Bearer ${token}`
         },
-        body: JSON.stringify({message, user_id}),//TODO image
+        body: JSON.stringify({message, user_id}),
     })
     .then(response => {
         if(response.status === 201) {
@@ -36,7 +36,7 @@ const NewPost = ({ user_id }) => {
     const handleMessageChange = (event) => {
         setMessage(event.target.value);
         const inputValue = event.target.value;
-        setCharacterCount(inputValue.length);
+        setCharacterCount(inputValue.length); //character count
 
     };
 
@@ -45,7 +45,7 @@ const NewPost = ({ user_id }) => {
     };
 
     const handleReset = () => { 
-        window.location.reload();
+        window.location.reload(); //reset page 
         };
 
 
