@@ -3,6 +3,16 @@ const request = require("supertest");
 require("../mongodb_helper");
 const User = require("../../models/user");
 
+const createTestUser = async (testUserInfoObject) => {
+  let response = await request(app).post("/users").send(testUserInfoObject);
+  return response;
+};
+
+const getMostRecentlyCreatedUser = async () => {
+  let users = await User.find();
+  return users[users.length - 1];
+}
+
 describe("/users", () => {
   beforeEach(async () => {
     await User.deleteMany({});
@@ -10,22 +20,23 @@ describe("/users", () => {
 
   describe("POST, when display name, email, and password are provided", () => {
     test("the response code is 201", async () => {
-      let response = await request(app).post("/users").send({
+      const userInfo = {
         displayName: "Poppy Python",
         email: "poppy@email.com",
         password: "1234",
-      });
+      }
+      let response = await createTestUser(userInfo);
       expect(response.statusCode).toBe(201);
     });
 
     test("a user is created", async () => {
-      await request(app).post("/users").send({
+      const userInfo = {
         displayName: "Scarlett Scala",
         email: "scarlett@email.com",
         password: "1234",
-      });
-      let users = await User.find();
-      let newUser = users[users.length - 1];
+      }
+      await createTestUser(userInfo);
+      let newUser = await getMostRecentlyCreatedUser();
       expect(newUser.displayName).toEqual("Scarlett Scala");
       expect(newUser.email).toEqual("scarlett@email.com");
     });
@@ -80,5 +91,12 @@ describe("/users", () => {
       let users = await User.find();
       expect(users.length).toEqual(0);
     });
+  });
+
+  describe("GET, when token is missing", () => {
+    it("does not return a user", async () => {
+      // Create a user
+      
+    })
   });
 });
