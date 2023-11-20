@@ -2,7 +2,6 @@ const Post = require("../models/post");
 const TokenGenerator = require("../lib/token_generator");
 
 
-
 const PostsController = {
   Index: (req, res) => {
     Post.find((err, posts) => {
@@ -69,13 +68,7 @@ const PostsController = {
   },
 
   Likes: (req, res) => {
-    console.log("LIKED")
-    console.log(req.params.id)
-    // find the post using its id (req.params.id)
     const newLike = req.body.likes;
-    console.log('newLike:', newLike);
-    
-    // add 1 to post.likes
 
     Post.findOneAndUpdate(
       { _id: req.params.id }, // Find the post by its ID
@@ -92,7 +85,26 @@ const PostsController = {
         }
       }
     );
-  }
+  },
+
+
+GetLikes: async (req, res) => {
+    try {
+        const postId = req.params.id;
+        const post = await Post.findById(postId);
+
+        if (!post) {
+            return res.status(404).json({ error: 'Post not found' });
+        }
+
+        const likes = post.likes;
+        const token = TokenGenerator.jsonwebtoken(req.user_id);
+        res.status(200).json({ likes, token });
+    } catch (err) {
+        console.error('Error retrieving post likes:', err);
+        res.status(500).json({ message: 'Internal Server Error' });
+    }
+  },
 };
 
 module.exports = PostsController;

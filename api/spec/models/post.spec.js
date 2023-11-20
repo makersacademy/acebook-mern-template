@@ -43,7 +43,7 @@ describe("Post model", () => {
   });
 
   it("can save a post", (done) => {
-    var post = new Post({ message: "some message" });
+    var post = new Post({ message: "some message", userId: '6555fb6dc0a21062095c4a2b' });
 
     post.save((err) => {
       expect(err).toBeNull();
