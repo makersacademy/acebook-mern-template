@@ -8,6 +8,10 @@ const postsRouter = require("./routes/posts");
 const authenticationRouter = require("./routes/authentication");
 const usersRouter = require("./routes/users");
 
+// library which saves files uploaded by the user on our server
+const multer = require("multer");
+
+
 
 const app = express();
 
@@ -20,7 +24,7 @@ app.use(express.static(path.join(__dirname, "public")));
 // TODO: creating static routes for all images uploaded by users to serve them later
 // each image can be accessed at http://localhost:8080/uploads/image.jpg
 // __dirname refers to the directory of the current module
-app.use('/posts', express.static(path.join(__dirname, "uploads")));
+app.use('/upload', express.static(path.join(__dirname, "uploads")));
 
 // middleware function to check for valid tokens
 const tokenChecker = (req, res, next) => {
@@ -45,12 +49,39 @@ const tokenChecker = (req, res, next) => {
 
 // route setup
 app.use("/posts", tokenChecker, postsRouter);
+app.use("/posts/image", tokenChecker, postsRouter);
 app.use("/tokens", authenticationRouter);
 app.use("/users", usersRouter);
 app.use("/users/profile/:user_id", tokenChecker, usersRouter);
 //new route for posting avatar change
 app.use("/users/avatar", usersRouter);
 
+//TODO: /UPLOAD ROUTING
+
+// define where images are stored
+const storage = multer.diskStorage({
+  destination: "../uploads",
+  filename: function (req, file, cb) {
+  cb(null, Date.now() + '-' +file.originalname )
+  }
+  })
+   
+// define route
+const upload = multer({ storage: storage }).single('file');
+app.post('/upload',function(req, res) {
+  
+upload(req, res, function (err) {
+        if (err instanceof multer.MulterError) {
+            return res.status(500).json(err)
+        } else if (err) {
+            return res.status(500).json(err)
+        }
+  const filename = req.file.filename
+  return res.status(200).send(filename)
+
+})
+});
+  
 // catch 404 and forward to error handler
 app.use((req, res, next) => {
   next(createError(404));

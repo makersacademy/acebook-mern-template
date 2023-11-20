@@ -28,7 +28,7 @@ const PostsController = {
       }
 
       const token = TokenGenerator.jsonwebtoken(req.user_id);
-      res.status(201).json({ message: "OK", token: token });
+      res.status(201).json({ message: "OK", token: token, post_id: post._id });
     });
   },
 
@@ -48,7 +48,30 @@ const PostsController = {
       result.sort((a, b) => b.createdAt - a.createdAt)
       res.status(200).json({ posts: result, token: token });
     }
+  },
+
+  AddImage: async (req, res) => {
+    //TODO: 
+    const filename = req.body.filename
+    const post_id = req.body.post_id
+    console.log("BACKEND RECIEVED DATA: ", filename, post_id)
+
+    //TODO: need post_id
+    // Check if the request contains filename and post id
+    if (!filename || !post_id) {
+      return res.status(400).json({ message: "Bad request" });
+    }
+
+    // Change filename: null with new filename
+    const result = await Post.findOneAndUpdate(
+      { _id: post_id },
+      { $set: { image_path: filename} },
+    );
+
+    res.status(200).json({ message: "GOT FILENAME - OK"});
+
   }
+
   };
 
 

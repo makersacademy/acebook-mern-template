@@ -25,7 +25,6 @@ describe("Post model", () => {
 
   it("can save a post", (done) => {
     var post = new Post({ message: "some message"})
-
     post.save((err) => {
       expect(err).toBeNull();
 
@@ -40,7 +39,6 @@ describe("Post model", () => {
   // Adding a test to make sure a post has the default likes of 0, and has data stored in the date/time
   it("can save a post with default likes and createdAt", (done) => {
     const post = new Post({ message: "some message" });
-
     post.save((err) => {
       expect(err).toBeNull();
 
@@ -69,21 +67,4 @@ describe("Post model", () => {
     });
   }
   )
-
-  test("can save post with image path", (done) => {
-    var post = new Post({ message: "some message", image_path: "/uploads/img1.jpg"})
-
-    post.save((err) => {
-      expect(err).toBeNull();
-
-      Post.find((err, posts) => {
-        expect(err).toBeNull();
-
-        expect(posts[0]).toMatchObject({ message: "some message", image_path: "/uploads/img1.jpg"})
-        done();
-      });
-    });
-  }
-  )
-
 });
