@@ -11,6 +11,11 @@ const createTestUser = async (testUserInfoObject) => {
 const getMostRecentlyCreatedUser = async () => {
   let users = await User.find();
   return users[users.length - 1];
+};
+
+const numberOfExistingUsers = async () => {
+  let users = await User.find();
+  return users.length;
 }
 
 describe("/users", () => {
@@ -44,18 +49,21 @@ describe("/users", () => {
 
   describe("POST, when password is missing", () => {
     test("response code is 400", async () => {
-      let response = await request(app)
-        .post("/users")
-        .send({ displayName: "Skye Swift", email: "skye@email.com" });
+      const userInfo = {
+        displayName: "Skye Swift",
+        email: "skye@email.com",
+      }
+      let response = await createTestUser(userInfo);
       expect(response.statusCode).toBe(400);
     });
 
     test("does not create a user", async () => {
-      await request(app)
-        .post("/users")
-        .send({ displayName: "Skye Swift", email: "skye@email.com" });
-      let users = await User.find();
-      expect(users.length).toEqual(0);
+      const userInfo = {
+        displayName: "Skye Swift",
+        email: "skye@email.com",
+      }
+      await createTestUser(userInfo);
+      expect(await numberOfExistingUsers()).toEqual(0);
     });
   });
 
@@ -95,8 +103,7 @@ describe("/users", () => {
 
   describe("GET, when token is missing", () => {
     it("does not return a user", async () => {
-      // Create a user
       
-    })
+    });
   });
 });
