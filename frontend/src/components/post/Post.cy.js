@@ -5,8 +5,9 @@ describe("Post", () => {
     cy.mount(<Post post={{ _id: 1, message: "Hello, world" }} />);
     cy.get('[data-cy="post"]').should("contain.text", "Hello, world");
   });
-  it("renders a post with a message and ima", () => {
-    cy.mount(<Post post={{ _id: 1, message: "Hello, world" }} />);
-    cy.get('[data-cy="post"]').should("contain.text", "Hello, world");
-  });
+  //TODO
+  // it("renders a post with a message and image", () => {
+  //   cy.mount(<Post post={{ _id: 1, message: "Hello, world" }} />);
+  //   cy.get('[data-cy="post"]').should("contain.text", "Hello, world");
+  // });
 });
