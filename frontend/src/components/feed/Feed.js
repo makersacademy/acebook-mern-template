@@ -6,7 +6,8 @@ const Feed = ({ navigate }) => {
   const [token, setToken] = useState(window.localStorage.getItem("token"));
   const [newPost, setNewPost] = useState("");
   const [newImage, setNewImage] = useState("");
-  //TODO: backend req name: imageFile = req.image_file
+  const [loading, setLoading] = useState(false); // Add loading state
+
 
   // Fetching posts for show on the feed
   const fetchData = async () => {
@@ -39,6 +40,7 @@ const Feed = ({ navigate }) => {
 
   const handlePostSubmit = async (e) => {
     e.preventDefault();
+    setLoading(true);
 
     let newPostId = "";
 
@@ -66,11 +68,12 @@ const Feed = ({ navigate }) => {
         setToken(window.localStorage.getItem("token"));
         setPosts(data.posts);
 
-        // POST REQUEST -> /UPLAD : SEND POST IMAGE if present
+        // POST REQUEST -> /UPLAD : SEND POST IMAGE & POST_ID if present
         // RESPONSE -> new generated unique filename
         if (newImage !== "") {
           const imageData = new FormData();
           imageData.append("file", newImage); // req.file in the backend
+          imageData.append("post_id", newPostId); // req.file in the backend
 
           const response2 = await fetch("/upload", {
             method: "POST",
@@ -80,25 +83,9 @@ const Feed = ({ navigate }) => {
             body: imageData,
           });
 
-          // POST REQUEST -> /POSTS/IMAGE : SEND FILENAME AND POST ID
-          // RESPONSE => 200
           if (response2.ok) {
-            const filename = await response2.text();
-
-            const response3 = await fetch("posts/image", {
-              method: "POST",
-              headers: {
-                Authorization: `Bearer ${token}`,
-                "Content-Type": "application/json",
-              },
-              body: JSON.stringify({ filename: filename, post_id: newPostId }),
-            });
-
-            if (!response3.ok) {
-              console.log("ERROR WHILE LOADING FILENAME");
-            }
-          } else if (!response2.ok) {
-            console.error("Error uploading file");
+            console.log("DATA SENT: ", imageData.filename, newPostId)
+            fetchData();
           }
         }
       } else {
@@ -106,6 +93,8 @@ const Feed = ({ navigate }) => {
       }
     } catch (error) {
       console.error("Error:", error);
+    } finally {
+      setLoading(false); // Set loading to false after the requests are completed
     }
   };
 
@@ -115,32 +104,36 @@ const Feed = ({ navigate }) => {
         <h2>Posts</h2>
 
         {/* add-post component start */}
+        
+        {loading ? (
+          <p>Loading...</p> // Display a loading message or spinner while loading
+        ) : (
+          <form onSubmit={handlePostSubmit} data-cy="post-form">
+            <div>
+              <label htmlFor="newPost">New Post:</label>
+              <input
+                type="text"
+                name="newPost"
+                value={newPost}
+                onChange={(e) => setNewPost(e.target.value)}
+                data-cy="new-post-input"
+              />
+            </div>
 
-        <form onSubmit={handlePostSubmit} data-cy="post-form">
-          <div>
-            <label htmlFor="newPost">New Post:</label>
-            <input
-              type="text"
-              name="newPost"
-              value={newPost}
-              onChange={(e) => setNewPost(e.target.value)}
-              data-cy="new-post-input"
-            />
-          </div>
-
-          {/* user can add image to their post */}
-          <div>
-            <label htmlFor="file"></label>
-            <input
-              type="file"
-              name="file"
-              accept=".jpg, .jpeg, .png, .gif" // only specific filetypes accepted
-              // value={ newImage }
-              onChange={(e) => setNewImage(e.target.files[0])}
-            />
-          </div>
-          <button type="submit">Create Post</button>
-        </form>
+            {/* user can add image to their post */}
+            <div>
+              <label htmlFor="file"></label>
+              <input
+                type="file"
+                name="file"
+                accept=".jpg, .jpeg, .png, .gif" // only specific filetypes accepted
+                onChange={(e) => setNewImage(e.target.files[0])}
+                data-cy="file-input"
+              />
+            </div>
+            <button type="submit">Create Post</button>
+          </form>
+        )}
 
         {/* add-post component finish */}
 

@@ -1,8 +1,12 @@
 {
   "dependencies": {
+    "cors": "^2.8.5",
     "eslint": "^8.53.0",
     "file": "^0.2.2",
     "form-data": "^4.0.0",
     "multer": "^1.4.5-lts.1"
+  },
+  "devDependencies": {
+    "cypress-file-upload": "^5.0.8"
   }
 }

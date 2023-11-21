@@ -9,7 +9,7 @@
 // ***********************************************
 //
 //
-
+import 'cypress-file-upload';
 import { mount } from "cypress/react18";
 import { MemoryRouter } from "react-router-dom";
 // -- This is a parent command --

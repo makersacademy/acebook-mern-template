@@ -22,6 +22,7 @@ const PostsController = {
       // added a line to add/update user_id field
       user_id: user_id,
     });
+    console.log("REQUEST BODY BE:", req.body)
     post.save((err) => {
       if (err) {
         throw err;
@@ -47,26 +48,27 @@ const PostsController = {
       result.sort((a, b) => b.createdAt - a.createdAt);
       res.status(200).json({ posts: result, token: token });
     }
-  },
+  }
 
-  AddImage: async (req, res) => {
-    const filename = req.body.filename;
-    const post_id = req.body.post_id;
-    console.log("BACKEND RECIEVED DATA: ", filename, post_id);
+  // AddImage: async (req, res) => {
+  //   const filename = req.body.filename;
+  //   const post_id = req.body.post_id;
+  //   console.log("BACKEND RECIEVED DATA: ", filename, post_id);
 
-    // Check if the request contains filename and post id
-    if (!filename || !post_id) {
-      return res.status(400).json({ message: "Bad request" });
-    }
+  //   // Check if the request contains filename and post id
+  //   if (!filename || !post_id) {
+  //     console.log()
+  //     return res.status(400).json({ message: "Bad request" });
+  //   }
 
-    // replace filename: null with new filename
-    const result = await Post.findOneAndUpdate(
-      { _id: post_id },
-      { $set: { image_path: filename } },
-    );
+  //   // replace filename: null with new filename
+  //   const result = await Post.findOneAndUpdate(
+  //     { _id: post_id },
+  //     { $set: { image_path: filename } },
+  //   );
 
-    res.status(200).json({ message: "GOT FILENAME - OK" });
-  },
+  //   res.status(200).json({ message: "GOT FILENAME - OK" });
+  // },
 };
 
 module.exports = PostsController;

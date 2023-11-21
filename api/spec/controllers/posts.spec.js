@@ -341,42 +341,40 @@ describe("/upload", () => {
       expect(postResponse.status).toEqual(200);
     });
 
-    // test("creates a new post with image", async () => {
-    //   const postResponse = await request(app)
-    //     .post("/posts")
-    //     .set("Authorization", `Bearer ${token}`)
-    //     .send({ message: "hello world", token: token });
-    //   // get post_id as response from /posts
-    //   const post_id = postResponse.body.post_id;
-    //   // console.log("POST ID: ", post_id)
+    test("creates a new post with image", async () => {
+      const postResponse = await request(app)
+        .post("/posts")
+        .set("Authorization", `Bearer ${token}`)
+        .send({ message: "hello world", token: token });
+      // get post_id as response from /posts
+      const post_id = postResponse.body.post_id;
+      // console.log("POST ID: ", post_id)
 
-    //   const uploadResponse = await request(app)
-    //     .post("/upload")
-    //     .set("Authorization", `Bearer ${token}`)
-    //     .attach("file", imagePath);
+      const uploadResponse = await request(app)
+        .post("/upload")
+        .set("Authorization", `Bearer ${token}`)
+        .attach("file", imagePath);
 
-    //   // get filename as response from /upload
-    //   const filename = uploadResponse.text;
+      // get filename as response from /upload
+      const filename = uploadResponse.text;
 
-    //   await new Promise((resolve) => setTimeout(resolve, 500));
+      const posts = await Post.find();
 
-    //   let posts = await Post.find();
-    //   console.log("FILENAME FROM RESPONSE: ", filename);
-    //   console.log("IMAGE_PATH FROM DB: ", posts[0].image_path);
-    //   console.log("POST DB DATA: ", posts[0]);
-    //   console.log("POST ID FROM DB: ", posts[0]._id);
-    //   console.log("POST ID FROM RESPONSE: ", post_id);
+      console.log("FILENAME FROM RESPONSE: ", filename);
+      console.log("IMAGE_PATH FROM DB: ", posts[0].image_path);
+      console.log("POST DB DATA: ", posts[0]);
+      console.log("POST ID FROM DB: ", posts[0]._id);
+      console.log("POST ID FROM RESPONSE: ", post_id);
 
-    //   expect(posts.length).toEqual(1);
-    //   expect(posts[0]._id).toEqual(mongoose.Types.ObjectId(post_id));
-    //   expect(posts[0].message).toEqual("hello world");
-    //   expect(posts[0].user_id).toEqual(user._id);
-    //   //BUG: image_path null
-    //   expect(posts[0].image_path).toEqual(filename);
+      expect(posts.length).toEqual(1);
+      expect(posts[0]._id).toEqual(mongoose.Types.ObjectId(post_id));
+      expect(posts[0].message).toEqual("hello world");
+      //BUG: image_path null
+      expect(posts[0].image_path).toEqual(filename);
 
-      ////TODO: expect to check filename in database when change implemented
-      ////TODO: expect to check post_id returned
-    // });
+      //TODO: expect to check filename in database when change implemented
+      //TODO: expect to check post_id returned
+    }, 10000);
 
     test("creates a new post with image and recieves filename response", async () => {
       const postResponse = await request(app)
