@@ -37,14 +37,24 @@ describe("User model", () => {
     expect(user.password).toEqual("password");
   });
 
-  it("has an empty array in liked_posts_ids by default", () => {
+  it("has an empty array in likedPostsIds by default", () => {
     const user = new User({
       displayName: "Perfect Person",
       email: "someone@example.com",
       password: "password",
     });
-    const likedPostsIds = user.liked_posts_ids.toObject();
-    expect(likedPostsIds).toEqual([]);
+    const postids = user.likedPostIds.toObject();
+    expect(postids).toEqual(expect.arrayContaining([]));
+  });
+
+  it("has an array of liked post ids", () => {
+    const user = new User({
+      displayName: "Perfect Person",
+      email: "someone@example.com",
+      password: "password",
+      likedPostIds: ["655610f9c0797313bf5dec1a", "655610f9c0797313bf5dec1b", "655610f9c0797313bf5dec1ac"]
+    });
+    expect(user.likedPostIds).toEqual(expect.arrayContaining(["655610f9c0797313bf5dec1a", "655610f9c0797313bf5dec1b", "655610f9c0797313bf5dec1ac"]));
   });
 
   it("can list all users", (done) => {

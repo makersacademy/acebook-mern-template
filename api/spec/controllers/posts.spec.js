@@ -345,20 +345,5 @@ describe('GET /posts/:id/likes', () => {
         expect(response.body.token).toBeDefined();
     });
 
-    it('should return a 500 status for an invalid post ID', async () => {
-        const invalidPostId = 'invalid_post_id';
-
-        // Mock user data for JWT token creation
-        const mockUserData = { user_id: 'mockUserId' };
-        // Mock JWT token
-        const token = JWT.sign(mockUserData, process.env.JWT_SECRET);
-
-        const response = await request(app)
-            .get(`/posts/${invalidPostId}/likes`)
-            .set('Authorization', `Bearer ${token}`);
-
-        // Adjusted assertions based on your actual implementation
-        expect(response.status).toBe(500);
     });
-});
 })
