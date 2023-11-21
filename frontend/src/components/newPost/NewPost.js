@@ -6,42 +6,43 @@ const NewPost = ({ user_id }) => {
     const [message, setMessage] = useState("");
     const [token, setToken] = useState(window.localStorage.getItem("token"));
     //ADDED
-    const [selectedImage, setSelectedImage] = useState(null); 
+    const [image, setImage] = useState(null); 
     const [characterCount, setCharacterCount] = useState(0);
 
     const handleSubmit = async (event) => { 
         event.preventDefault(); // prevent default stops the page from reloading
         setMessage(""); //clears message once sent
-        setSelectedImage(null) 
+        setImage(null) 
 
 
-    fetch('/posts', {
-        method: 'post',
-        headers: {
-            'Content-Type': 'application/json',
-            'Authorization': `Bearer ${token}`
-        },
-        body: JSON.stringify({message, user_id}),
-    })
-    .then(response => {
-        if(response.status === 201) {
-            console.log({message})
-        } else {
-            console.log("message not captured");
-            console.log(JSON.stringify(response))
-        }
-        })
-};
+    // Send data to the backend
+            fetch('/posts', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${token}`,
+            },
+            body: JSON.stringify({ message: message, image: image })
+            })
+            .then(response => {
+                if(response.status === 201) {
+                    console.log({message})
+                } else {
+                    console.log("message not captured");
+                    console.log(JSON.stringify(response))
+                }
+                })
+    };
 
     const handleMessageChange = (event) => {
-        setMessage(event.target.value);
         const inputValue = event.target.value;
+        setMessage(inputValue);
         setCharacterCount(inputValue.length); //character count
 
     };
 
     const handleImageChange = (event) => {
-        setSelectedImage(event.target.files[0]);
+        setImage(event.target.files[0]);
     };
 
     const handleReset = () => { 
@@ -54,13 +55,13 @@ const NewPost = ({ user_id }) => {
             <div className="new_post">
                 
             {/* IMAGE PREVIEW */}
-                {selectedImage && (
+                {image && (
                     <div class="image-preview">
                     <img
                         alt="not found"
                         width={"450px"}
                         height={"300px"}
-                        src={URL.createObjectURL(selectedImage)}
+                        src={URL.createObjectURL(image)}
                     />
                     </div>
                 )}
@@ -88,9 +89,13 @@ const NewPost = ({ user_id }) => {
                         onChange={handleImageChange} />
                 {/* IMAGE UPLOAD */}
                 <br />
-                    <button onClick={() => setSelectedImage(null)}>Remove</button>
+                    <button onClick={() => setImage(null)}>Clear all</button>
                 <br />
-                    <input id='submit' type="submit" value="Post" className='custom-btn' onClick={handleReset}/>
+                    <input id='submit' 
+                            type="submit" 
+                            value="Post" 
+                            className='custom-btn' 
+                            onClick={handleReset}/>
                 </form>
             </div>
         </>
@@ -102,3 +107,62 @@ const NewPost = ({ user_id }) => {
 
 export default NewPost;
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                               ///WORKING POST MESSAGE ONLY ///
+//         fetch('/posts', {
+//             method: 'post',
+//             headers: {
+//                 'Content-Type': 'application/json',
+//                 'Authorization': `Bearer ${token}`
+//             },
+//             body: JSON.stringify({message, image, user_id}),
+//         })
+//         .then(response => {
+//             if(response.status === 201) {
+//                 console.log({message})
+//             } else {
+//                 console.log("message not captured");
+//                 console.log(JSON.stringify(response))
+//             }
+//             })
+// };
+
+                              ///WORKING POST MESSAGE ONLY ///

@@ -1,4 +1,5 @@
 import SignUpForm from './SignUpForm'
+
 const navigate = () => {}
 
 describe("Signing up", () => {

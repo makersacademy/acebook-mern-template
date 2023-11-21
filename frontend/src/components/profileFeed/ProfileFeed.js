@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import Post from '../post/Post'
+import NewPost from '../newPost/NewPost';
 
 const ProfileFeed = ({ navigate }) => {
   const [posts, setPosts] = useState([]);
@@ -32,9 +33,7 @@ const ProfileFeed = ({ navigate }) => {
       return(
         <>
           <h2>Posts</h2>
-            <button onClick={logout}>
-              Logout
-            </button>
+          <NewPost />
           <div id='profilefeed' role="profilefeed">
               {posts
               .slice()
