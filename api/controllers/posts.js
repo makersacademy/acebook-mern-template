@@ -7,8 +7,8 @@ const PostsController = {
     try {
       const posts = await Post.find().populate('author', 'email');
       const token = TokenGenerator.jsonwebtoken(req.user_id);
-
-      res.status(200).json({ posts: posts, token: token });
+      const userID = req.user_id
+      res.status(200).json({ posts: posts, token: token, userID: userID});
     } catch (err) {
       console.error(err);
       res.status(500).json({ error: 'Internal Server Error' });
