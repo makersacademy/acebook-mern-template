@@ -1,9 +1,21 @@
 const Post = require("../models/post");
 const TokenGenerator = require("../lib/token_generator");
 
-
-
 const PostsController = {
+  Create: (req, res) => {
+    const userId = req.user_id;
+    const post = new Post({
+      ...req.body,
+      userId: userId});
+    post.save((err) => {
+      if (err) {
+        throw err;
+      }
+
+      const token = TokenGenerator.jsonwebtoken(req.user_id)
+      res.status(201).json({ message: 'OK', token: token });
+    });
+  },
   Index: (req, res) => {
     Post.find((err, posts) => {
       if (err) {
@@ -27,20 +39,7 @@ const PostsController = {
   },
 
 
-  Create: (req, res) => {
-    const userId = req.user_id;
-    const post = new Post({
-      ...req.body,
-      userId: userId});
-    post.save((err) => {
-      if (err) {
-        throw err;
-      }
 
-      const token = TokenGenerator.jsonwebtoken(req.user_id)
-      res.status(201).json({ message: 'OK', token: token });
-    });
-  },
   Comment: (req, res) => {
     console.log("COMMENTING")
     console.log(req.params.id)
