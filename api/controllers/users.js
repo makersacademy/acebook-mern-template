@@ -24,6 +24,7 @@ const UsersController = {
     const userId = req.params.userId;
     try {
       const user = await User.findById(userId);
+      delete user.password;
       const token = TokenGenerator.jsonwebtoken(req.user_id);
       res.status(200).json({ user: user, token: token });
     } catch (err) {
