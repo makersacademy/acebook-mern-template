@@ -26,7 +26,7 @@ const Post = ({ post }) => {
     })
       .then(async response => {
           let data = await response.json();
-          console.log("token", data)
+          // console.log("token", data)
           window.localStorage.setItem("token", data.token);
 
       })
@@ -41,7 +41,7 @@ const Post = ({ post }) => {
 
 
   return (
-    <div data-cy="post">
+    <div data-cy="post" className="post">
       <article data-cy="post" key={ post._id }>
         { post.message }<br />
       <small className="smallText">{formatDate(post.date)}</small></article>
@@ -50,7 +50,10 @@ const Post = ({ post }) => {
         {comments.map((comment, index) => (
           <div key={index}>{comment.comment_message}
           <br />
-          <small className="smallText">{formatDate(comment.date)}</small>
+          {comment.date && 
+            <small className="smallText">{formatDate(comment.date)}</small>
+          }
+          
           </div>
           
         ))}
@@ -75,30 +78,4 @@ const Post = ({ post }) => {
 };
 
 export default Post;
-
-// return (
-//   <div data-cy="post">
-//     <h2>{post.message}</h2>
-
-//     <div>
-//       {comments.map((comment, index) => (
-//         <div key={index}>{comment}</div>
-//       ))}
-//     </div>
-
-//     <form onSubmit={handleSubmitComment}>
-//       <label>
-//         Comment:
-//         <input
-//           type="text"
-//           value={comment}
-//           onChange={handleCommentChange}
-//           placeholder="Add a comment..."
-//         />
-//       </label>
-//       <button type="submit">-->></button>
-//     </form>
-//   </div>
-// );
-
 
