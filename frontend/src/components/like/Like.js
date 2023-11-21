@@ -15,8 +15,8 @@ const Like = ({post, userId}) => {
       // Display a button component (thumb) that handles the logic for liking and unliking
         // contains the logic of how we increment the number when clicked
     <div className="flex-align-vertical post-like-gap">
-      <LikeButton setUserIDList={setUserIDList} userIDList={userIDList} userId={userId}/>
-      <LikeNumber count={userIDList.length}/>
+      <LikeButton setUserIDList={setUserIDList} userIDList={userIDList} userId={userId} postId={post.id}/>
+      <LikeNumber userIDList={userIDList}/>
     </div>
 
 

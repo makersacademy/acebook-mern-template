@@ -25,6 +25,11 @@ const PostsController = {
     });
   },
 
+  Update: (req, res) => {
+    const post = post.find(req.body.id)
+    
+  }
+
    //Todo: Posts By followers endpoint: 
 
    // Todo: create method to update (and write tests for them)
