@@ -40,7 +40,7 @@ const ProfileFeed = ({ navigate }) => {
               .slice()
               .sort((a, b) => new Date(b.date) - new Date(a.date))
               .map((post) => (
-                  <p><Post post={ post } key={ post._id } /></p> )
+                  <Post post={ post } key={ post._id } /> )
               )}
           </div>
         </>

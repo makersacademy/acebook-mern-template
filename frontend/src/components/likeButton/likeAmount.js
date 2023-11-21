@@ -29,7 +29,7 @@ const LikeAmount = (props) => {
         };
 
         fetchData();
-    }, [token, props.post_id]);
+    }, [token, props.post_id, props.likes]);
 
     return (
         <div className='likes_amount'>
