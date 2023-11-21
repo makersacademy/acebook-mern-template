@@ -8,6 +8,9 @@ const NavBar = () => {
     navigate(path);
   };
 
+  // const userId = window.localStorage.getItem('userId');
+
+
   const logout = () => {
     window.localStorage.removeItem("token")
     navigate('/login')
