@@ -2,7 +2,7 @@ const User = require("../models/user");
 const TokenGenerator = require("../lib/token_generator")
 
 const AuthenticationController = {
-
+  
   Authenticate: (req, res) => {
     const email = req.body.email;
     const password = req.body.password;
@@ -16,7 +16,7 @@ const AuthenticationController = {
         res.status(401).json({ message: "auth error" });
       } else {
         const token = TokenGenerator.jsonwebtoken(user.id)
-        res.status(201).json({ token: token, message: "OK" });
+        res.status(201).json({ token: token, message: "OK", currentUserId: user._id });
       }
     });
   }

@@ -1,4 +1,5 @@
 const User = require("../models/user");
+const TokenGenerator = require("../lib/token_generator");
 
 const UsersController = {
   Create: async (req, res) => {
@@ -17,6 +18,18 @@ const UsersController = {
         res.status(201).json({ message: "OK" });
       }
     });
+  },
+
+  GetOne: async (req, res) => {
+    const userId = req.params.userId;
+    try {
+      const user = await User.findById(userId);
+      const token = TokenGenerator.jsonwebtoken(req.user_id);
+      res.status(200).json({ user: user, token: token });
+    } catch (err) {
+      console.error(err);
+      res.status(500).json({ error: "Internal Server Error" });
+    }
   },
 };
 

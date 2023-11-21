@@ -35,3 +35,21 @@ h1 {
 .avatar-small {
     width: 35px;
 }
+.primary-btn {
+    width: 150px;
+    border-radius: 5px;
+    border: none;
+    background-color: #28a745;
+    background: #A5C1EB;
+    color: #ffffff;
+    padding: 10px 20px; 
+    cursor: pointer; 
+    display: block; 
+    margin: 10px auto; 
+    position: relative;
+    transition: background-color 0.3s;
+}
+
+.primary-btn:hover {
+    background-color: #4CAF50;
+}
