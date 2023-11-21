@@ -24,14 +24,14 @@ describe("Post model", () => {
   });
 
   it("can save a post", (done) => {
-    var post = new Post({ message: "some message"})
+    var post = new Post({ message: "some message" });
     post.save((err) => {
       expect(err).toBeNull();
 
       Post.find((err, posts) => {
         expect(err).toBeNull();
 
-        expect(posts[0]).toMatchObject({ message: "some message"})
+        expect(posts[0]).toMatchObject({ message: "some message" });
         done();
       });
     });
@@ -53,7 +53,7 @@ describe("Post model", () => {
   });
 
   test("can save post with default image path: null", (done) => {
-    var post = new Post({ message: "some message"})
+    var post = new Post({ message: "some message" });
 
     post.save((err) => {
       expect(err).toBeNull();
@@ -61,10 +61,12 @@ describe("Post model", () => {
       Post.find((err, posts) => {
         expect(err).toBeNull();
 
-        expect(posts[0]).toMatchObject({ message: "some message", image_path: null})
+        expect(posts[0]).toMatchObject({
+          message: "some message",
+          image_path: null,
+        });
         done();
       });
     });
-  }
-  )
+  });
 });

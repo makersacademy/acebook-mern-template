@@ -6,7 +6,7 @@ describe("Signing in", () => {
 
   it("with valid credentials, redirects to '/posts'", () => {
     cy.visit("/login");
-    
+
     cy.get("#email").type("someone@example.com");
     cy.get("#password").type("password");
     cy.get("#submit").click();
@@ -29,6 +29,5 @@ describe("Signing in", () => {
 
     cy.url().should("include", "/login");
   });
-  //Note username is not required for authentication 
-  
+  //Note username is not required for authentication
 });

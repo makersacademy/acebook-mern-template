@@ -1,14 +1,15 @@
 const app = require("../../app");
 const request = require("supertest");
 require("../mongodb_helper");
+const mongoose = require("mongoose");
 const Post = require("../../models/post");
 const User = require("../../models/user");
 const JWT = require("jsonwebtoken");
 const secret = process.env.JWT_SECRET;
 // for mocking the image file
-const fs = require('fs');
-const path = require('path');
-
+const fs = require("fs");
+const path = require("path");
+const { afterEach } = require("@jest/globals");
 
 let token;
 let user;
@@ -60,13 +61,13 @@ describe("/posts", () => {
       await request(app)
         .post("/posts")
         .set("Authorization", `Bearer ${token}`)
-        .send({ message: "hello world", token: token })
+        .send({ message: "hello world", token: token });
 
       let posts = await Post.find();
       expect(posts.length).toEqual(1);
       expect(posts[0].message).toEqual("hello world");
 
-      expect(posts[0].user_id).toEqual(user._id)
+      expect(posts[0].user_id).toEqual(user._id);
     });
 
     test("returns a new token", async () => {
@@ -173,10 +174,8 @@ describe("/posts", () => {
   });
 });
 
-
 describe("/users/profile/:user_id, postsController", () => {
-  beforeAll(async () => {
-  });
+  beforeAll(async () => {});
 
   beforeEach(async () => {
     await Post.deleteMany({});
@@ -210,16 +209,16 @@ describe("/users/profile/:user_id, postsController", () => {
 
     // User 1 creates a posts with their token
     await request(app)
-        .post("/posts")
-        .set("Authorization", `Bearer ${token}`)
-        .send({ message: "post by user 1!", token: token })
+      .post("/posts")
+      .set("Authorization", `Bearer ${token}`)
+      .send({ message: "post by user 1!", token: token });
 
     await request(app)
-        .post("/posts")
-        .set("Authorization", `Bearer ${token}`)
-        .send({ message: "hola! by user 1", token: token })
+      .post("/posts")
+      .set("Authorization", `Bearer ${token}`)
+      .send({ message: "hola! by user 1", token: token });
 
-    let posts1 = await Post.find()
+    let posts1 = await Post.find();
 
     // USER 2: creating second user to post posts with different user id's
     user2 = new User({
@@ -241,26 +240,46 @@ describe("/users/profile/:user_id, postsController", () => {
       secret,
     );
 
-      // User 2 creates a posts with their token
-      await request(app)
-        .post("/posts")
-        .set("Authorization", `Bearer ${token2}`)
-        .send({ message: "post by user 2!", token: token2 })
-        
+    // User 2 creates a posts with their token
     await request(app)
-        .post("/posts")
-        .set("Authorization", `Bearer ${token2}`)
-        .send({ message: "hola! by user 2", token: token2 })
-    
-      let new_response = await request(app)
-        .get(`/users/profile/${user2._id}`)
-        .set("Authorization", `Bearer ${token2}`)
-        .send({ token: token2 });
-      // mapping messages from post objects in response body
-      expect(new_response.body.posts.map((post) => post.message)).toEqual(["hola! by user 2", "post by user 2!"]);
+      .post("/posts")
+      .set("Authorization", `Bearer ${token2}`)
+      .send({ message: "post by user 2!", token: token2 });
+
+    await request(app)
+      .post("/posts")
+      .set("Authorization", `Bearer ${token2}`)
+      .send({ message: "hola! by user 2", token: token2 });
+
+    let new_response = await request(app)
+      .get(`/users/profile/${user2._id}`)
+      .set("Authorization", `Bearer ${token2}`)
+      .send({ token: token2 });
+    // mapping messages from post objects in response body
+    expect(new_response.body.posts.map((post) => post.message)).toEqual([
+      "hola! by user 2",
+      "post by user 2!",
+    ]);
   });
 });
 
+// function for deleting test files
+async function deleteFilesInFolder(folderPath, fileNamePattern) {
+  try {
+    const files = await fs.promises.readdir(folderPath);
+
+    const deletePromises = files
+      .filter((file) => fileNamePattern.test(file))
+      .map((file) => {
+        const filePath = path.join(folderPath, file);
+        return fs.promises.unlink(filePath);
+      });
+
+    await Promise.all(deletePromises);
+  } catch (error) {
+    console.error("Error deleting files:", error.message);
+  }
+}
 
 describe("/upload", () => {
   beforeAll(async () => {
@@ -291,59 +310,80 @@ describe("/upload", () => {
   afterAll(async () => {
     await User.deleteMany({});
     await Post.deleteMany({});
+
+    // delete all test images from uploads directory
+    const folderPath =
+      "/Users/ami/Desktop/MakersCode/JavaSriptCode/acebook/uploads";
+    const fileNamePattern = /\d{13}-fake-test-image/;
+
+    deleteFilesInFolder(folderPath, fileNamePattern);
   });
 
   // mocking fake file to test the routes and requests
-  // BUG: make test images delete after each test set
   describe("POST, when token is present", () => {
-    const imagePath = path.resolve('../../../fake-test-image');
-    fs.writeFileSync(imagePath, 'fake-image-content');
+    // placing an image file
+    const imagePath = path.resolve("../../../fake-test-image");
+    // writing fake content on image file
+    fs.writeFileSync(imagePath, "fake-image-content");
 
     test("responds with a 201", async () => {
-      const postResponse = await request(app)
-        .post('/upload')
-        .set('Authorization', `Bearer ${token}`)
-        .attach('file', imagePath);
-      
-      const filename = postResponse.text;
       let response = await request(app)
         .post("/posts")
         .set("Authorization", `Bearer ${token}`)
         .send({ message: "hello world", token: token });
-    
-        expect(response.status).toEqual(201);
+
+      const postResponse = await request(app)
+        .post("/upload")
+        .set("Authorization", `Bearer ${token}`)
+        .attach("file", imagePath);
+
+      expect(response.status).toEqual(201);
+      expect(postResponse.status).toEqual(200);
     });
 
     // test("creates a new post with image", async () => {
-    //   let response = await request(app)
+    //   const postResponse = await request(app)
     //     .post("/posts")
     //     .set("Authorization", `Bearer ${token}`)
     //     .send({ message: "hello world", token: token });
+    //   // get post_id as response from /posts
+    //   const post_id = postResponse.body.post_id;
+    //   // console.log("POST ID: ", post_id)
 
-    //   const postResponse = await request(app)
-    //     .post('/upload')
-    //     .set('Authorization', `Bearer ${token}`)
-    //     .attach('file', imagePath);
+    //   const uploadResponse = await request(app)
+    //     .post("/upload")
+    //     .set("Authorization", `Bearer ${token}`)
+    //     .attach("file", imagePath);
 
-    //   const filename = postResponse.text;
-        
+    //   // get filename as response from /upload
+    //   const filename = uploadResponse.text;
+
+    //   await new Promise((resolve) => setTimeout(resolve, 500));
+
     //   let posts = await Post.find();
+    //   console.log("FILENAME FROM RESPONSE: ", filename);
+    //   console.log("IMAGE_PATH FROM DB: ", posts[0].image_path);
+    //   console.log("POST DB DATA: ", posts[0]);
+    //   console.log("POST ID FROM DB: ", posts[0]._id);
+    //   console.log("POST ID FROM RESPONSE: ", post_id);
+
     //   expect(posts.length).toEqual(1);
-    //   expect(posts[0].message).toEqual('hello world');
+    //   expect(posts[0]._id).toEqual(mongoose.Types.ObjectId(post_id));
+    //   expect(posts[0].message).toEqual("hello world");
     //   expect(posts[0].user_id).toEqual(user._id);
-    //   console.log(posts[0].image_path)
     //   //BUG: image_path null
-    //   expect((posts[0].image_path).substring(13)).toEqual("-fake-test-image")
-      
-    //   //TODO: ass expect to check filename in database when change implemented
+    //   expect(posts[0].image_path).toEqual(filename);
+
+      ////TODO: expect to check filename in database when change implemented
+      ////TODO: expect to check post_id returned
     // });
 
     test("creates a new post with image and recieves filename response", async () => {
       const postResponse = await request(app)
-        .post('/upload')
-        .set('Authorization', `Bearer ${token}`)
-        .attach('file', imagePath);
-      
+        .post("/upload")
+        .set("Authorization", `Bearer ${token}`)
+        .attach("file", imagePath);
+
       const filename = postResponse.text;
       let response = await request(app)
         .post("/posts")
@@ -352,7 +392,7 @@ describe("/upload", () => {
 
       // due to real date time added to name of the file, we're testing for
       // filename with "-" before it so we're sure that custon naming is applied
-      expect(filename.substring(13)).toEqual("-fake-test-image")
+      expect(filename.substring(13)).toEqual("-fake-test-image");
     });
   });
-  });
+});
