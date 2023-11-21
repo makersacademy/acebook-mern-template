@@ -49,3 +49,22 @@
 .like-number {
     font-size: 14px;
 }
+
+.new-post-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.post-textarea {
+    width: 100%;
+    max-width: 400px; /* Adjust the maximum width as needed */
+    margin-bottom: 10px;
+}
+
+.new-comment-form textarea {
+    width: 100%;
+    height: 100%;
+    box-sizing: border-box;
+}
+

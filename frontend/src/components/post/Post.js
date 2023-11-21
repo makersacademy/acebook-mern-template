@@ -5,7 +5,7 @@ import NewComment from '../comment/NewComment';
 
 const Post = ({ post }) => {
   const [showCommentForm, setShowCommentForm] = useState(false);
-
+  
   // Format datetime of post
   const date = new Date(post.created);
   const dateFormat = { year: 'numeric', month: 'numeric', day: 'numeric' };

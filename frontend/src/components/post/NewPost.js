@@ -43,7 +43,9 @@ const NewPost = ({ navigate, posts, setPosts, setReRender }) => {
     return (
       <form onSubmit={handleSubmit}>
         <h2>New Post</h2> 
-          <input placeholder="Content" id="content" type='text' value={ content } onChange={handleContentChange} />
+        <div style={{ width: '100%', maxWidth: '400px', margin: '0 auto' }}>
+          <textarea placeholder="Content" id="content" type='text' value={ content } onChange={handleContentChange} rows="4" style={{width: '100%' }}/>
+          </div>
           <input role='submit' id='submit' className='primary-btn' type="submit" value="Submit" />
           {emptyFieldsError && <p style={{ color: 'red' }}>{emptyFieldsError}</p>}
           {errorMessage && <p style={{ color: 'red' }}>{errorMessage}</p>}
