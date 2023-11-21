@@ -1,40 +1,34 @@
 import React from "react";
+import { useState } from "react";
 
 const LikeButton = (props) => {
-    const handleLike = () => {
-    
-    props.count     // update the original array - push(userID) 
-    props.setCount  // update the count number
+  const [isLiked, setIsLiked] = useState(false)
 
-    
-    console.log(props.post.likes)
+
+
+  const handleLike = () => {
+    if (isLiked === true) {
+      console.log("alreadyLiked");
+      const index = props.userIDList.indexOf(props.userId);
+      if (index > -1) { // only splice array when item is found
+        props.userIDList.splice(index, 1); // 2nd parameter means remove one item only
+      }
+      setIsLiked(false)
+    } else {
+      console.log("notLiked");
+      props.userIDList.push(props.userId)
+      setIsLiked(true)
+    }
+    console.log("before setUserIDList: " + props.userIDList);
+    props.setUserIDList(props.userIDList);
+    console.log("after setUserIDList: " + props.userIDList);
   }
+
+  
     return (
         <img src='thumb-icon.png' className='like-btn' alt='thumb' onClick={handleLike}/>
     )
 }
  
 
-
-// const CountDisplay = (props) => {
-//     return <h1>{props.count}</h1>;
-// };
-
-// const CountButton = (props) => {
-// const incrementCounter = () => {
-//     props.setCount(props.count + 1);
-// };
-
-// return <button onClick={incrementCounter}>Increment the counter</button>;
-// };
-
-// const Counter = () => {     
-// const [count, setCount] = useState(0);
-
-// return (
-//     <div>
-//     <CountDisplay count={count} />
-//     <CountButton setCount={setCount} count={count} />
-//     </div>
-// );
-// };
+export default LikeButton;

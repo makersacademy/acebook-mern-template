@@ -3,8 +3,7 @@ import './Post.css';
 import Comment from '../comment/Comment';
 import Like from '../like/Like';
 
-const Post = ({post}) => {
-
+const Post = ({post, userId}) => {
   // Format datetime of post
   const date = new Date(post.created)
   const dateFormat = { year: 'numeric', month: 'numeric', day: 'numeric' };
@@ -23,7 +22,7 @@ const Post = ({post}) => {
         <p data-cy="post-content" key={ post._id }>{ post.content }</p>
       </div>
       <div className='post-row'>
-        <Like post={post}/>
+        <Like post={post} userId={ userId }/>
         <div className='flex-align-vertical post-comments-gap'>
           <a>View comments</a>
           <button data-cy="post-comment" className='primary-btn'>Add comment</button>
@@ -31,7 +30,7 @@ const Post = ({post}) => {
       </div>
       <div data-cy="post-comments" className='post-comments' >
         { post.comments.map (
-          (comment) => ( <Comment comment={ comment } /> ))
+          (comment) => ( <Comment comment={ comment } userId={ userId }/> ))
         }
       </div>
     </div>
