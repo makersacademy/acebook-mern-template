@@ -46,13 +46,14 @@ const PostsController = {
     console.log(req.params.id)
     // find the post using its id (req.params.id)
     const newComment = req.body.comment;
+    const username = req.user.username;
     
     // add the comment to post.comments
     // you *might* need a mongoose method called findOneAndUpdate
 
     Post.findOneAndUpdate(
       { _id: req.params.id }, // Find the post by its ID
-      { $push: { comments: { comment_message: newComment } } }, // Add the new comment to the comments array
+      { $push: { comments: { comment_message: newComment, username: req.username, userId: req.user_id},} }, // Add the new comment to the comments array
       { new: true }, // Return the updated post
       (err, updatedPost) => {
         if (err) {
@@ -61,6 +62,10 @@ const PostsController = {
         } else {
           console.log('Comment added successfully');
           const token = TokenGenerator.jsonwebtoken(req.user_id)
+          updatedPost.comments.forEach(comment => {
+            comment.userId = comment.username;
+          });
+          console.log(updatedPost);
           res.status(201).json({ message: 'Comment added successfully', token: token, updatedPost });
         }
       }

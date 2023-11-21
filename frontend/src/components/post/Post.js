@@ -13,8 +13,9 @@ const Post = ({ post }) => {
   const handleSubmitComment = (e) => {
     e.preventDefault();
     if (comment.trim() !== '') {
-      setComments([...comments, {comment_message: comment}]);
-      setComment('');
+      console.log(comments);
+      setComments([...comments, {comment_message: comment, date: Date.now()}]);
+      setComment('')
     }
     fetch(`/posts/${post._id}`, {
       method: 'put',
@@ -53,6 +54,7 @@ const Post = ({ post }) => {
           {comment.date && 
             <small className="smallText">{formatDate(comment.date)}</small>
           }
+          <small className="smallText">{comment.username}</small>
           
           </div>
           
