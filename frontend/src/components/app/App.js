@@ -6,7 +6,6 @@ import NewPost from '../newPost/NewPost';
 import Feed from '../feed/Feed'
 import ProfileFeed from '../profileFeed/ProfileFeed';
 import Profile from '../profile/Profile'
-import React, { useState } from 'react';
 import Post from '../post/Post';
 import {
   useNavigate,
@@ -27,6 +26,7 @@ const App = () => {
           <Route path='/profile' element={<Profile navigate={ useNavigate() }/>}/>
           <Route path='/newpost' element={<NewPost navigate={ useNavigate() }/>}/>
           <Route path="/posts/:postId" element={<Post />} /> 
+          <Route path="/posts/:postId/likes" element={<Post />} /> 
         </Routes>
     );
 }

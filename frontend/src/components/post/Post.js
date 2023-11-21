@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
 import './Post.css'
+import LikeButton from '../likeButton/likeButton';
 
 const Post = ({ post }) => { 
   const [comment, setComment] = useState('');
-  const [comments, setComments] = useState(post.comments);
+  const [comments, setComments] = useState(post.comments || []);
   const [token, setToken] = useState(window.localStorage.getItem("token"));
 
   const handleCommentChange = (e) => {
@@ -31,21 +32,20 @@ const Post = ({ post }) => {
           window.localStorage.setItem("token", data.token);
 
       })
-    
-      
+    };
+    const formatDate = (dateString) => {
+      const options = { year: 'numeric', month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit', hour12: false, };
+      const formattedDate = new Date(dateString).toLocaleDateString(undefined, options);
+      return formattedDate;
   };
-  const formatDate = (dateString) => {
-    const options = { year: 'numeric', month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit', hour12: false, };
-    const formattedDate = new Date(dateString).toLocaleDateString(undefined, options);
-    return formattedDate;
-  };
-
 
   return (
     <div data-cy="post" className="post">
       <article data-cy="post" key={ post._id }>
         { post.message }<br />
-      <small className="smallText">{formatDate(post.date)}</small></article>
+      <small className="smallText">{formatDate(post.date)}</small><br />
+      <LikeButton post_id={ post._id }/>
+      </article>
       <br />
       <div>
         {comments.map((comment, index) => (
@@ -58,6 +58,7 @@ const Post = ({ post }) => {
           
           </div>
           
+
         ))}
           
         
@@ -73,7 +74,7 @@ const Post = ({ post }) => {
             placeholder="Add a comment..."
           />
         </label>
-        <button type="submit">-->></button>
+        <button type="submit">Add Comment</button>
       </form>
     </div>
   );
