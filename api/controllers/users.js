@@ -1,4 +1,5 @@
 const User = require("../models/user");
+const TokenGenerator = require("../lib/token_generator")
 
 const UsersController = {
   Create: (req, res) => {
@@ -35,6 +36,18 @@ const UsersController = {
     // Send a 201 response indicating success
     res.status(201).json({ message: "OK" });
   },
+
+  // Obtain user data based on user_id passed in backend route
+  DisplayUserData: (req, res) => {
+    const user_id = req.params.user_id
+
+    User.findById(user_id, (err, user) => {
+      if (err) {
+        throw err;
+      }
+      const token = TokenGenerator.jsonwebtoken(req.user_id);
+      res.status(200).json({user: user, token: token});
+
   GetUserEmails: async (req, res) => {
     User.find({}, 'email', (err, users) => {
       if (err){
@@ -43,6 +56,7 @@ const UsersController = {
       else{
         res.status(200).json(users);
       }
+
     });
   },
 };
