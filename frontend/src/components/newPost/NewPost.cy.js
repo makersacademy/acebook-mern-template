@@ -8,6 +8,7 @@ describe('NewPost', () => {
         const postAlt = "image alt text"
         //assertions
         cy.mount(<NewPost post_text={postText} post_img={postImg} post_alt={postAlt} />);
+        cy.wait(500);
         cy.get('.new_post img').should('have.attr', 'src', postImg);
         cy.get('.new_post img').should('have.attr', 'alt', postAlt);
     });
