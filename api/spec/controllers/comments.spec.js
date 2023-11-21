@@ -14,6 +14,8 @@ let token2;
 let user;
 let user2;
 
+// Testing the create function for comments
+
 describe("/comments - create", () => {
 	beforeAll(async () => {
 	// creates post to comment upon
@@ -113,9 +115,6 @@ describe("/comments - create", () => {
 
 
 // // ***********************************************************************
-// // ***********************************************************************
-// // ***********************************************************************
-
 
 // sets up comments etc for testing findcomment by post_id
 
@@ -193,7 +192,6 @@ describe("/comments - find by postid", () => {
 			})
 
 			test("returns every comment on post2, regardless of which user posted them", async () => {
-
 				let response = await request(app)
 					.get(`/comments/${post2.id}`)
 					.set("Authorization", `Bearer ${token}`)
@@ -202,7 +200,6 @@ describe("/comments - find by postid", () => {
 
         expect(messages).toEqual(["post by user 1 on post2!", "post by user 2 on post2!"]);
         expect(messages.length).toEqual(2);
-
 			})
   
       test("the response code is 200", async () => {
