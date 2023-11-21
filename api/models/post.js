@@ -10,7 +10,14 @@ const PostSchema = new mongoose.Schema({
     ref:'User',
     required: true
   },
-  likes: { type: Number, default: 0 }
+
+  likes: { type: Number, default: 0 },
+  comments: [{ comment_message: String, date: { type: Date, default: Date.now }, 
+    userId: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref:'User',
+    required: true
+  }, }],
 });
 
 const Post = mongoose.model("Post", PostSchema);
