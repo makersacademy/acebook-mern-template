@@ -28,7 +28,7 @@ const UsersController = {
       const token = TokenGenerator.jsonwebtoken(req.user_id);
       res.status(200).json({ user: user, token: token });
     } catch (err) {
-      console.error(err);
+      //console.error(err);
       res.status(500).json({ error: "Internal Server Error" });
     }
   },
