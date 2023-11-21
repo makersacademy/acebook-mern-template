@@ -59,7 +59,7 @@ const LikeButton = (props) => {
             </button>
         </label>
         </form>
-        <small><LikeAmount post_id={ props.post_id } /></small>
+        <small><LikeAmount likes={ likes } post_id={ props.post_id } /></small>
     </div>
     );
 };
