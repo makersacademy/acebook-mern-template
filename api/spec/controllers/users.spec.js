@@ -32,9 +32,9 @@ const logInAndGetTokenAs = (user) => {
 describe("/users", () => {
   beforeEach(async () => {
     await User.deleteMany({});
-  });
+    });
 
-  describe("POST, when display name, email, and password are provided", () => {
+    describe("POST, when display name, email, and password are provided", () => {
     test("the response code is 201", async () => {
       const userInfo = {
         displayName: "Poppy Python",
@@ -58,7 +58,7 @@ describe("/users", () => {
     });
   });
 
-  describe("POST, when password is missing", () => {
+    describe("POST, when password is missing", () => {
     test("response code is 400", async () => {
       const userInfo = {
         displayName: "Skye Swift",
@@ -78,7 +78,7 @@ describe("/users", () => {
     });
   });
 
-  describe("POST, when display name is missing", () => {
+    describe("POST, when display name is missing", () => {
     test("response code is 400", async () => {
       const userInfo = {
         email: "james@email.com",

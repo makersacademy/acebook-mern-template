@@ -2,7 +2,6 @@ const Post = require("../models/post");
 const TokenGenerator = require("../lib/token_generator");
 
 
-
 const PostsController = {
   Index: (req, res) => {
     Post.find((err, posts) => {
@@ -41,6 +40,7 @@ const PostsController = {
       res.status(201).json({ message: 'OK', token: token });
     });
   },
+
   Comment: (req, res) => {
     console.log("COMMENTING")
     console.log(req.params.id)
@@ -65,7 +65,46 @@ const PostsController = {
         }
       }
     );
-  }
+  },
+
+  Likes: (req, res) => {
+    const newLike = req.body.likes;
+
+    Post.findOneAndUpdate(
+      { _id: req.params.id }, // Find the post by its ID
+      { $inc: { likes: newLike } }, 
+      { new: true }, 
+      (err, updatedPost) => {
+        if (err) {
+          console.error('Like not added:', err);
+          res.status(500).json({ message: 'Internal Server Error' });
+        } else {
+          console.log('Like added successfully');
+          const token = TokenGenerator.jsonwebtoken(req.user_id)
+          res.status(201).json({ message: 'Like added successfully', token: token, updatedPost });
+        }
+      }
+    );
+  },
+
+
+GetLikes: async (req, res) => {
+    try {
+        const postId = req.params.id;
+        const post = await Post.findById(postId);
+
+        if (!post) {
+            return res.status(404).json({ error: 'Post not found' });
+        }
+
+        const likes = post.likes;
+        const token = TokenGenerator.jsonwebtoken(req.user_id);
+        res.status(200).json({ likes, token });
+    } catch (err) {
+        console.error('Error retrieving post likes:', err);
+        res.status(500).json({ message: 'Internal Server Error' });
+    }
+  },
 };
 
 module.exports = PostsController;

@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import Post from '../post/Post'
+import './Feed.css'
 
 const Feed = ({ navigate }) => {
   const [posts, setPosts] = useState([]);
@@ -16,6 +17,7 @@ const Feed = ({ navigate }) => {
         .then(async data => {
           window.localStorage.setItem("token", data.token)
           setToken(window.localStorage.getItem("token"))
+
           setPosts(data.posts);
         })
 
@@ -30,7 +32,7 @@ const Feed = ({ navigate }) => {
   
     if(token) {
       return(
-        <>
+        <div className='container'>
           <h2>Posts</h2>
             <button onClick={logout}>
               Logout
@@ -40,10 +42,10 @@ const Feed = ({ navigate }) => {
               .slice()
               .sort((a, b) => new Date(b.date) - new Date(a.date))
               .map((post) => (
-                  <p><Post post={ post } key={ post._id } /></p> )
+                  <article key={ post._id }><Post post={ post } /></article> )
               )}
           </div>
-        </>
+        </div>
       )
     } else {
       navigate('/login')
