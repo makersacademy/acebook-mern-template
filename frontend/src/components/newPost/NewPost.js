@@ -67,7 +67,7 @@ const NewPost = ({ user_id }) => {
                 )}
             {/* IMAGE PREVIEW */}
 
-                <form onSubmit={handleSubmit}>
+                <form onSubmit={handleSubmit} enctype="multipart/form-data">
                     <textarea 
                     placeholder="write your post"
                     className="new-post-message"

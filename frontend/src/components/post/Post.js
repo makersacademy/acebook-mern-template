@@ -42,6 +42,7 @@ const Post = ({ post }) => {
   return (
     <div data-cy="post">
       <article data-cy="post" key={ post._id }>
+        <div>Show Image:</div>
         <div>{ post.message }</div>
         <br />
       <small className="smallText">{formatDate(post.date)}</small><br />
