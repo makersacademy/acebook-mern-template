@@ -33,7 +33,6 @@ const ProfileFeed = ({ navigate }) => {
       return(
         <>
           <h2>Posts</h2>
-          <NewPost />
           <div id='profilefeed' role="profilefeed">
               {posts
               .slice()

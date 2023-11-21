@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import './NewPost.css';
 
 
-const NewPost = ({ user_id }) => {
+const NewPost = () => {
     const [message, setMessage] = useState("");
     const [token, setToken] = useState(window.localStorage.getItem("token"));
     //ADDED
@@ -22,7 +22,7 @@ const NewPost = ({ user_id }) => {
                 'Content-Type': 'application/json',
                 'Authorization': `Bearer ${token}`,
             },
-            body: JSON.stringify({ message: message, image: image })
+            body: JSON.stringify({ message, image})
             })
             .then(response => {
                 if(response.status === 201) {
