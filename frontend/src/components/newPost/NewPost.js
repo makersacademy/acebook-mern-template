@@ -58,11 +58,10 @@ const NewPost = ({ user_id }) => {
                     <div class="image-preview">
                     <img
                         alt="not found"
-                        width={"250px"}
+                        width={"450px"}
+                        height={"300px"}
                         src={URL.createObjectURL(selectedImage)}
                     />
-                    <br />
-                    <button onClick={() => setSelectedImage(null)}>Remove</button>
                     </div>
                 )}
             {/* IMAGE PREVIEW */}
@@ -71,23 +70,25 @@ const NewPost = ({ user_id }) => {
                     <textarea 
                     placeholder="write your post"
                     className="new-post-message"
-                    maxlength="300"
-                    rows="4" cols="50"
+                    maxlength="250" //MAX post length 
+                    rows="4" cols="52"
                     value={message} 
                     onChange={handleMessageChange}
                     />
                 <br />
                 <div id="the-count">
                     <span id="current">{characterCount}</span>
-                    <span id="maximum">/ 300</span>
+                    <span id="maximum">/ 250</span>
                 </div>
 
                 {/* IMAGE UPLOAD */}
                 <input type="file" 
                         id="postImage" 
-                        name="post-image" 
-                        onChange={handleImageChange}/>
+                        name="post-image"
+                        onChange={handleImageChange} />
                 {/* IMAGE UPLOAD */}
+                <br />
+                    <button onClick={() => setSelectedImage(null)}>Remove</button>
                 <br />
                     <input id='submit' type="submit" value="Post" className='custom-btn' onClick={handleReset}/>
                 </form>

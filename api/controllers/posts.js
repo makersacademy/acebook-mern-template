@@ -119,6 +119,9 @@ GetLikes: async (req, res) => {
         res.status(500).json({ message: 'Internal Server Error' });
     }
   },
+  UploadImage: (req, res) => {
+      //INSERT HERE 
+  }
 };
 
 module.exports = PostsController;
