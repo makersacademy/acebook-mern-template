@@ -37,8 +37,10 @@ const UsersController = {
     res.status(201).json({ message: "OK" });
   },
 
-  Display: (req, res) => {
-    const user_id = req.user_id;
+  // Obtain user data based on user_id passed in backend route
+  DisplayUserData: (req, res) => {
+    const user_id = req.params.user_id
+
     User.findById(user_id, (err, user) => {
       if (err) {
         throw err;

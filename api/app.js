@@ -42,13 +42,12 @@ const tokenChecker = (req, res, next) => {
 // route setup
 app.use("/posts", tokenChecker, postsRouter);
 app.use("/tokens", authenticationRouter);
-//new route to logged-in user's account
-app.use("/users/account", tokenChecker, usersRouter);
+//new route for obtaining user data based on user_id
+app.use("/users/data/:user_id", tokenChecker, usersRouter);
 app.use("/users", usersRouter);
 app.use("/users/profile/:user_id", tokenChecker, usersRouter);
 //new route for posting avatar change
 app.use("/users/avatar", usersRouter);
-
 // catch 404 and forward to error handler
 app.use((req, res, next) => {
   next(createError(404));

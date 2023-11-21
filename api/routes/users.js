@@ -8,8 +8,8 @@ const PostsController = require("../controllers/posts");
 
 router.post("/", UsersController.Create);
 
-// new router for backend users/account for GET request to view logged-in user's details
-router.get("/account", UsersController.Display);
+// new router for backend of frontend users/my_account and users/userProfileFeed for GET request to obtain user data based on user_id
+router.get("/data/:user_id", UsersController.DisplayUserData);
 
 router.get("/profile/:user_id", PostsController.FindPostsByUserId);
 
