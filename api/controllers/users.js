@@ -47,6 +47,16 @@ const UsersController = {
       }
       const token = TokenGenerator.jsonwebtoken(req.user_id);
       res.status(200).json({user: user, token: token});
+
+  GetUserEmails: async (req, res) => {
+    User.find({}, 'email', (err, users) => {
+      if (err){
+        throw err;
+      }
+      else{
+        res.status(200).json(users);
+      }
+
     });
   },
 };

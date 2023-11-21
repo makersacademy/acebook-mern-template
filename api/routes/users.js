@@ -7,6 +7,7 @@ const UsersController = require("../controllers/users");
 const PostsController = require("../controllers/posts");
 
 router.post("/", UsersController.Create);
+router.get("/", UsersController.GetUserEmails);
 
 // new router for backend of frontend users/my_account and users/userProfileFeed for GET request to obtain user data based on user_id
 router.get("/data/:user_id", UsersController.DisplayUserData);
