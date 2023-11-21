@@ -7,6 +7,7 @@ const JWT = require("jsonwebtoken");
 const postsRouter = require("./routes/posts");
 const authenticationRouter = require("./routes/authentication");
 const usersRouter = require("./routes/users");
+const commentsRouter = require("./routes/comments")
 
 // library which saves files uploaded by the user on our server
 const multer = require("multer");
@@ -52,6 +53,8 @@ app.use("/users", usersRouter);
 app.use("/users/profile/:user_id", tokenChecker, usersRouter);
 //new route for posting avatar change
 app.use("/users/avatar", usersRouter);
+// new route for comments
+app.use("/comments", tokenChecker, commentsRouter)
 
 //TODO: /UPLOAD ROUTING
 
