@@ -31,6 +31,7 @@ const NewPost = ({ navigate, posts, setPosts, setReRender }) => {
             let data = await response.json()
             setToken(data.token)
             setReRender(true)
+            setContent("");
         }
       })
   };

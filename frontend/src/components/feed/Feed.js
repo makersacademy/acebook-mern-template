@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import Post from '../post/Post'
 import NewPost from '../post/NewPost';
+import NewComment from '../comment/NewComment';
 
 const Feed = ({ navigate }) => {
   const [posts, setPosts] = useState([]);
@@ -25,6 +26,14 @@ const Feed = ({ navigate }) => {
     else {
       navigate('/login')}
   }, [reRender])
+
+  const updateComments = (postId, newComments) => {
+    setPosts((prevPosts) =>
+      prevPosts.map((post) =>
+        post._id === postId ? { ...post, comments: newComments } : post
+      )
+    );
+  };
   
     if(token && posts) {
       console.log("posts", posts)
