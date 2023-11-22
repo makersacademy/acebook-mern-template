@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import './Post.css'
 import LikeButton from '../likeButton/likeButton';
 
-
 const Post = ({ post }) => { 
   const [comment, setComment] = useState('');
   const [comments, setComments] = useState(post.comments || []);
@@ -15,8 +14,9 @@ const Post = ({ post }) => {
   const handleSubmitComment = (e) => {
     e.preventDefault();
     if (comment.trim() !== '') {
-      setComments([...comments, {comment_message: comment}]);
-      setComment('');
+      console.log(comments);
+      setComments([...comments, {comment_message: comment, date: Date.now()}]);
+      setComment('')
     }
     fetch(`/posts/${post._id}`, {
       method: 'put',
@@ -28,7 +28,7 @@ const Post = ({ post }) => {
     })
       .then(async response => {
           let data = await response.json();
-          console.log("token", data)
+          // console.log("token", data)
           window.localStorage.setItem("token", data.token);
 
       })
@@ -40,17 +40,28 @@ const Post = ({ post }) => {
   };
 
   return (
-    <div data-cy="post">
+    <div data-cy="post" className="post">
       <article data-cy="post" key={ post._id }>
         { post.message }<br />
       <small className="smallText">{formatDate(post.date)}</small><br />
       <LikeButton post_id={ post._id }/>
       </article>
+      <br />
       <div>
-        {comments && 
-        comments.map((comment, index) => (
-          <div key={index}>{comment.comment_message}</div>
+        {comments.map((comment, index) => (
+          <div key={index}>{comment.comment_message}
+          <br />
+          {comment.date && 
+            <small className="smallText">{formatDate(comment.date)}</small>
+          }
+          <small className="smallText">{comment.username}</small>
+          
+          </div>
+          
+
         ))}
+          
+        
       </div>
 
       <form onSubmit={handleSubmitComment}>
@@ -69,4 +80,7 @@ const Post = ({ post }) => {
   );
 };
 
+
 export default Post;
+
+

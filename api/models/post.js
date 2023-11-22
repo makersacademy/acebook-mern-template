@@ -10,6 +10,12 @@ const PostSchema = new mongoose.Schema({
     ref:'User',
     required: true
   },
+  comments: [{ comment_message: String, date: { type: Date, default: Date.now }, 
+    userId: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref:'User',
+    required: true
+  }, username: String }],
   likes: { type: Number, default: 0 }
 });
 
