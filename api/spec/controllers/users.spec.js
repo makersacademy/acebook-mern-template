@@ -138,4 +138,10 @@ describe("/users", () => {
       expect(response.statusCode).toBe(400)
     });
   });
+  describe("GET /users", () => {
+    it('the response code is 200 when user emails are retrieved from the database', async () => {
+    let response = await request(app).get("/users");
+    expect(response.statusCode).toBe(200);
+    });
+  });
 });
