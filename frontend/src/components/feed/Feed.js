@@ -84,7 +84,6 @@ const Feed = ({ navigate }) => {
           });
 
           if (response2.ok) {
-            console.log("DATA SENT: ", imageData.filename, newPostId)
             fetchData();
           }
         }
