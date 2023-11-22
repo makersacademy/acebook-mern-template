@@ -65,7 +65,7 @@ const PostsController = {
         if (err) {
           throw err;
         }
-      );
+      });
 
       const token = TokenGenerator.jsonwebtoken(req.user_id);
       res.status(201).json({ message: 'OK', token });
