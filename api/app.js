@@ -40,10 +40,22 @@ const tokenChecker = (req, res, next) => {
   });
 };
 
+// middleware function specifically for /users
+// which allows creating a new user without a valid token
+// but disallows other actions without a valid token
+
+const usersTokenChecker = (req, res, next) => {
+  if (req.method == "POST") {
+    next();
+  } else {
+    tokenChecker(req, res, next);
+  }
+}
+
 // route setup
 app.use("/posts", tokenChecker, postsRouter);
 app.use("/tokens", authenticationRouter);
-app.use("/users", tokenChecker, usersRouter);
+app.use("/users", usersTokenChecker, usersRouter);
 
 // catch 404 and forward to error handler
 app.use((req, res, next) => {
