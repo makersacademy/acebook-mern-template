@@ -8,50 +8,41 @@ const Feed = ({ navigate }) => {
   const [newImage, setNewImage] = useState("");
   const [loading, setLoading] = useState(false); // Add loading state
 
-
-  // Fetching posts for show on the feed
+  // Fetching posts to show on the feed
   const fetchData = async () => {
     if (token) {
-      try {
-        const response = await fetch("/posts", {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        });
+      const GetPostsResponse = await fetch("/posts", {
+        headers: { Authorization: `Bearer ${token}` },
+      });
 
-        if (response.ok) {
-          const data = await response.json();
-          window.localStorage.setItem("token", data.token);
-          setToken(window.localStorage.getItem("token"));
-          setPosts(data.posts);
-        } else {
-          console.error("Error fetching posts");
-        }
-      } catch (error) {
-        console.error("Error fetching posts:", error);
+      if (GetPostsResponse.ok) {
+        const postsData = await GetPostsResponse.json();
+        window.localStorage.setItem("token", postsData.token);
+        setToken(window.localStorage.getItem("token"));
+        setPosts(postsData.posts);
+      } else {
+        console.error("Error fetching posts");
       }
-    }
-  };
+    }};
 
-  // adding new post with or without the image
-  useEffect(() => {
-    fetchData(); // Initial fetch when the component mounts
-  }, [token]); // Only fetch data when token changes
+  // Adding new post with or without the image
+  useEffect(() => { fetchData() }, [token]);
 
   const handlePostSubmit = async (e) => {
     e.preventDefault();
-    setLoading(true);
+    setLoading(true); // loading state while feed is fetching
 
     let newPostId = "";
+    let newPostImage = null;
 
     // POST REQUEST -> /POSTS : SEND POST MESSAGE
     // RESPONSE => new post id
     if (!newPost.trim()) {
-      console.error("You cannot create an empty post");
-      return;
+      alert("You cannot create an empty post");
+      return setLoading(false)
     }
     try {
-      const response = await fetch("/posts", {
+      const PostPostResponse = await fetch("/posts", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -60,35 +51,35 @@ const Feed = ({ navigate }) => {
         body: JSON.stringify({ message: newPost }),
       });
 
-      if (response.ok) {
-        // If post creation is successful, proceed to file upload
-        const data = await response.json();
+      // If post creation is successful, proceed to file upload
+      if (PostPostResponse.ok) {
+        const data = await PostPostResponse.json();
         newPostId = data.post_id;
         window.localStorage.setItem("token", data.token);
         setToken(window.localStorage.getItem("token"));
         setPosts(data.posts);
 
+        // if newImage uploaded
         // POST REQUEST -> /UPLAD : SEND POST IMAGE & POST_ID if present
         // RESPONSE -> new generated unique filename
-        if (newImage !== "") {
-          const imageData = new FormData();
-          imageData.append("file", newImage); // req.file in the backend
-          imageData.append("post_id", newPostId); // req.file in the backend
+        if (newImage) {
+          newPostImage = new FormData();
+          newPostImage.append("file", newImage); // req.file in the backend
+          newPostImage.append("post_id", newPostId); // req.file in the backend
 
-          const response2 = await fetch("/upload", {
+          const PostImageResponse = await fetch("/upload", {
             method: "POST",
             headers: {
               Authorization: `Bearer ${token}`,
             },
-            body: imageData,
+            body: newPostImage,
           });
 
-          if (response2.ok) {
+          // refresh and fetch all data 
+          if (PostImageResponse.ok) {
             fetchData();
           }
         }
-      } else {
-        console.error("Error creating post");
       }
     } catch (error) {
       console.error("Error:", error);
@@ -103,7 +94,7 @@ const Feed = ({ navigate }) => {
         <h2>Posts</h2>
 
         {/* add-post component start */}
-        
+
         {loading ? (
           <p>Loading...</p> // Display a loading message or spinner while loading
         ) : (

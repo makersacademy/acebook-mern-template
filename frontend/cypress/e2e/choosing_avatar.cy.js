@@ -9,10 +9,8 @@ describe("Choosing avatar", () => {
     // cy.get("#password").type("password1!");
     // cy.get("#password_confirmation").type("password1!");
     // cy.get("#submit").click();
-
     // cy.get("#avatar1").click();
     // cy.get("#submit").click();
-
     // cy.url().should("include", "/login");
   });
 
@@ -23,9 +21,7 @@ describe("Choosing avatar", () => {
     // cy.get("#password").type("password1!");
     // cy.get("#password_confirmation").type("password1!");
     // cy.get("#submit").click();
-
     // cy.get("#submit").click();
-
     // cy.url().should("include", "/choose-avatar");
   });
 });

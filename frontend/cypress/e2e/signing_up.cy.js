@@ -7,7 +7,6 @@ describe("Signing up", () => {
     // cy.get("#password").type("password1!");
     // cy.get("#password_confirmation").type("password1!");
     // cy.get("#submit").click();
-
     // cy.url().should("include", "/choose-avatar");
   });
 
@@ -16,7 +15,6 @@ describe("Signing up", () => {
     // cy.get("#username").type("James Bond");
     // cy.get("#email").type("someone@example.com");
     // cy.get("#submit").click();
-
     // cy.url().should("include", "/signup");
   });
 
@@ -25,7 +23,6 @@ describe("Signing up", () => {
     // cy.get("#username").type("James Bond");
     // cy.get("#password").type("password");
     // cy.get("#submit").click();
-
     // cy.url().should("include", "/signup");
   });
   it("with missing username, redirects to '/signup'", () => {
@@ -33,7 +30,6 @@ describe("Signing up", () => {
     // cy.get("#email").type("someone@example.com");
     // cy.get("#password").type("password");
     // cy.get("#submit").click();
-
     // cy.url().should("include", "/signup");
   });
 
@@ -43,7 +39,6 @@ describe("Signing up", () => {
     // cy.get("#password").type("password");
     // cy.get("#password_confirmation").type("password");
     // cy.get("#submit").click();
-
     // cy.on("window:confirm", (message) => {
     //   expect(message).t.equal(
     //     "Password must be at least 8 characters long\nPassword must contain at least one number and special sign\n",

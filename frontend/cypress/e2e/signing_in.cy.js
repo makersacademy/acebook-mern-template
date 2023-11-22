@@ -7,11 +7,9 @@ describe("Signing in", () => {
 
   it("with valid credentials, redirects to '/posts'", () => {
     // cy.visit("/login");
-
     // cy.get("#email").type("someone@example.com");
     // cy.get("#password").type("password1!");
     // cy.get("#submit").click();
-
     // cy.url().should("include", "/posts");
   });
 
@@ -19,7 +17,6 @@ describe("Signing in", () => {
     // cy.visit("/login");
     // cy.get("#email").type("someone@example.com");
     // cy.get("#submit").click();
-
     // cy.url().should("include", "/login");
   });
 
@@ -27,9 +24,7 @@ describe("Signing in", () => {
     // cy.visit("/login");
     // cy.get("#password").type("password1!");
     // cy.get("#submit").click();
-
     // cy.url().should("include", "/login");
   });
   //Note username is not required for authentication
 });
-
