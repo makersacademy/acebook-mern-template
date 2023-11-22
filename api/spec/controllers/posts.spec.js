@@ -11,7 +11,6 @@ const fs = require("fs");
 const path = require("path");
 const { afterEach } = require("@jest/globals");
 
-
 let token;
 let user;
 
@@ -263,4 +262,3 @@ describe("/users/profile/:user_id, postsController", () => {
     ]);
   });
 });
-

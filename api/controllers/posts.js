@@ -22,7 +22,7 @@ const PostsController = {
       // added a line to add/update user_id field
       user_id: user_id,
     });
-    console.log("REQUEST BODY BE:", req.body)
+    console.log("REQUEST BODY BE:", req.body);
     post.save((err) => {
       if (err) {
         throw err;
@@ -48,7 +48,7 @@ const PostsController = {
       result.sort((a, b) => b.createdAt - a.createdAt);
       res.status(200).json({ posts: result, token: token });
     }
-  }
+  },
 };
 
 module.exports = PostsController;

@@ -4,12 +4,12 @@ const path = require("path");
 const logger = require("morgan");
 const JWT = require("jsonwebtoken");
 //so browser can access images stored in port 8080 where server runs
-const cors = require("cors"); 
+const cors = require("cors");
 
 const postsRouter = require("./routes/posts");
 const authenticationRouter = require("./routes/authentication");
 const usersRouter = require("./routes/users");
-const uploadsRouter = require("./routes/uploads")
+const uploadsRouter = require("./routes/uploads");
 
 // library which saves files uploaded by the user on our server
 const multer = require("multer");

@@ -5,5 +5,4 @@ const UploadsController = require("../controllers/uploads");
 
 router.post("/", UploadsController.AddImage);
 
-
 module.exports = router;
