@@ -36,7 +36,6 @@ const Profile = ({ navigate }) => {
         <>
         <NavBar/>
         <h2>Profile Name: {profile && profile?.displayName}</h2>
-        <h2>DEBUG {profile}</h2>
         <div>
         <img src={defaultProfile} alt="Default Profile Image"/>
         </div>
