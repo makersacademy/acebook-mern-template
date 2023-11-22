@@ -31,7 +31,12 @@ const PostsController = {
     });
   },
 
-  IndexByUserId: (req, res) => {
+  IndexLoggedInUser: (req, res) => {
+    // req.user_id is ALWAYS the id of the *logged in user*.
+    // Therefore this function ALWAYS finds the posts
+    // of the *logged in user*.
+    // Therefore I have renamed this function
+    // from `IndexByUserId` to `IndexLoggedInUser`.
     const userId = req.user_id;
     Post.find({ userId: userId }, (err, posts) => {
       if (err) {
