@@ -32,6 +32,34 @@ const UsersController = {
       res.status(500).json({ error: "Internal Server Error" });
     }
   },
+
+  Find: async (req, res) => {
+
+    try {
+      const user = await User.findOne(req.query);
+      delete user.password;
+      const token = TokenGenerator.jsonwebtoken(req.user_id);
+      res.status(200).json({ user: user, token: token });
+    } catch (err) {
+      //console.error(err);
+      res.status(500).json({ error: "Internal Server Error" });
+    }
+  },
+
+  Update: async (req, res) => {
+    try {
+      const user = await User.findById(req.body.userId);
+      const newFollowers = req.body.followers
+      console.log(newFollowers)
+      user.followers = newFollowers
+      user.save()
+      //User.findOneAndUpdate(req.body.userId, {followers:req.body.followers});
+    
+    } catch (err) {
+      //console.error(err);
+      res.status(500).json({ error: "Internal Server Error" });
+    }
+  },
 };
 
 module.exports = UsersController;
