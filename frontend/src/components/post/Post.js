@@ -3,13 +3,13 @@ import './Post.css';
 import Comment from '../comment/Comment';
 import NewComment from '../comment/NewComment';
 
-const Post = ({ post }) => {
+const Post = ({ post, fetchPosts }) => {
   const [showCommentForm, setShowCommentForm] = useState(false);
   
-  // Format datetime of post
+  // Format datetime of post. 
   const date = new Date(post.created);
   const dateFormat = { year: 'numeric', month: 'numeric', day: 'numeric' };
-  const formattedDate = new Intl.DateTimeFormat('en-UK', dateFormat).format(date);
+  const formattedDate = new Intl.DateTimeFormat('en-GB', dateFormat).format(date);
 
   const toggleCommentForm = () => {
     setShowCommentForm((prev) => !prev);
@@ -39,7 +39,7 @@ const Post = ({ post }) => {
           </button>
         </div>
       </div>
-      {showCommentForm && <NewComment postId={post._id} />}
+      {showCommentForm && <NewComment postId={post._id} fetchPosts={fetchPosts} />}
       <div data-cy="post-comments" className='post-comments'>
         {post.comments.map((comment) => <Comment comment={comment} key={comment._id} />)}
       </div>

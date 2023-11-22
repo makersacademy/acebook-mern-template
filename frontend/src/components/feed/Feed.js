@@ -8,20 +8,23 @@ const Feed = ({ navigate }) => {
   const [token, setToken] = useState(window.localStorage.getItem("token"));
   const [reRender, setReRender] = useState(false);
 
+  const fetchPosts = () => {
+    fetch("/api/posts", {
+      headers: {
+        'Authorization': `Bearer ${token}`
+      }
+    })
+      .then(response => response.json())
+      .then(async data => {
+        window.localStorage.setItem("token", data.token)
+        setToken(window.localStorage.getItem("token"))
+        setPosts(data.posts.reverse());
+        setReRender(false)
+      })
+  }
   useEffect(() => {
     if(token) {
-      fetch("/api/posts", {
-        headers: {
-          'Authorization': `Bearer ${token}`
-        }
-      })
-        .then(response => response.json())
-        .then(async data => {
-          window.localStorage.setItem("token", data.token)
-          setToken(window.localStorage.getItem("token"))
-          setPosts(data.posts.reverse());
-          setReRender(false)
-        })
+      fetchPosts()
     }
     else {
       navigate('/login')}
@@ -43,7 +46,7 @@ const Feed = ({ navigate }) => {
           <h1>Posts</h1>
           <div id='feed' role="feed" className='flex-centre'>
               {posts.map(
-                (post) => ( <Post post={ post } key={ post._id } /> )
+                (post) => ( <Post post={ post } key={ post._id } fetchPosts={ fetchPosts}/> )
               )}
           </div>
         </>

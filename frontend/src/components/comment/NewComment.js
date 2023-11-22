@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 
-const NewComment = ({ postId }) => {
+const NewComment = ({ postId, fetchPosts }) => {
   // State variables
   const [content, setComment] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
@@ -50,7 +50,7 @@ const NewComment = ({ postId }) => {
         let data = await response.json();
         setToken(data.token);
         setComment("");
-        fetchUpdatedComments(postId);
+        fetchPosts();
       } else {
         setErrorMessage('Error creating comment. Please try again.');
       }
