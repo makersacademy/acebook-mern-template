@@ -43,6 +43,10 @@ const Post = ({ post }) => {
         displayName: (author.displayName ? author.displayName : "Loading...")
       }]);
       setComment('');
+    } else {
+      console.log("User tried to leave a blank comment");
+      setComment('');
+      return;
     }
     fetch(`/posts/${post._id}`, {
       method: 'put',
@@ -56,7 +60,6 @@ const Post = ({ post }) => {
           let data = await response.json();
           // console.log("token", data)
           window.localStorage.setItem("token", data.token);
-
       })
     };
     const formatDate = (dateString) => {
