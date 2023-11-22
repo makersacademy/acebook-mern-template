@@ -30,7 +30,7 @@ describe("Testing data is returned for already existant users (account and profi
                 .send({token: token});
             expect(response.status).toEqual(200);
         })
- 
+
         test("returns user data (username, email address, password, avatar and id) for user based on user_id in URL", async () => {
             let response = await request (app)
             .get(`/users/data/${user._id}`)
@@ -42,25 +42,5 @@ describe("Testing data is returned for already existant users (account and profi
             expect(response.body.user.avatar).toEqual("0.svg");
             expect(response.body.user._id).toEqual(String(user._id)); 
         })
-    });
-
-    // // Tests to check route for Account works - currently no function.    
-    // describe("GET, using using users/my_account route", () => {
-    //     test("response code is 200", async () => {
-    //         let response = await request(app)
-    //             .get("/users/my_account")
-    //             .set("Authorization", `Bearer ${token}`)
-    //             .send({token: token});
-    //         expect(response.status).toEqual(200);
-    //     })
-
-
-    //     test("returns correct user_id for logged-in user", async () => {
-    //         let response = await request (app)
-    //             .get("/users/my_account")
-    //             .set("Authorization", `Bearer ${token}`)
-    //             .send({token: token});
-    //         expect(response.body.user_id).toEqual(String(user._id)); 
-    //     })    
-    // });
+    }); 
 });
