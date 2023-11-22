@@ -16,8 +16,10 @@ import {
 
 
 const App = () => {
+
     return (
         <Routes>
+          <Route path="/" element={<LoginForm navigate={ useNavigate("/login")} />}/>
           <Route path='/posts'  element={<Feed navigate={ useNavigate() }/>}/>
           <Route path='/posts/user'  element={<ProfileFeed navigate={ useNavigate() }/>}/>
           <Route path='/login'  element={<LoginForm  navigate={ useNavigate() }/>}/>

@@ -1,8 +1,14 @@
 import React, { useState } from 'react';
+import './LoginForm.css';
+import Acebook from './static/Acebook.png';
 
 const LogInForm = ({ navigate }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+
+  const urlTo = (path) => {
+    navigate(path);
+  };
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -57,11 +63,23 @@ const LogInForm = ({ navigate }) => {
 
 
     return (
-      <form onSubmit={handleSubmit}>
-        <input placeholder='Email' id="email" type='text' value={ email } onChange={handleEmailChange} />
-        <input placeholder='Password' id="password" type='password' value={ password } onChange={handlePasswordChange} />
-        <input role='submit-button' id='submit' type="submit" value="Submit" />
-      </form>
+      <>
+        <div className='split left'>
+          <div className='centred'>
+            <div className='left' ><form  onSubmit={handleSubmit}>
+                <input  placeholder='Email' id="email" type='text' value={ email } onChange={handleEmailChange} />
+                <input placeholder='Password' id="password" type='password' value={ password } onChange={handlePasswordChange} />
+                <input className='submit' role='submit-button' id='submit' type="submit" value="Login" />
+                </form>
+                <button className='submit' data-cy="submit-button" onClick={() => urlTo('/signup')}>Sign Up</button>
+          </div></div></div>
+
+          <div className='split right'>
+            <div className='centred'>
+              <div className='right' >
+                <img  className='logo' src={Acebook} alt="logo" />
+          </div></div></div>
+      </>
     );
 }
 
