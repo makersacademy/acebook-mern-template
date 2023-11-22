@@ -140,9 +140,9 @@ describe("/users", () => {
       let token1 = logInAndGetTokenAs(user1);
       // As User One, search for User Two.
       let response = await request(app)
-        .get("/users")
+        .get(`/users/${user2.id}`)
         .set("Authorization", `Bearer ${token1}`)
-        .send({ token: token1, userId: user2.id });
+        .send({ token: token1 });
       let userFound = response.body.user;
       expect(userFound.displayName).toEqual("User Two");
       expect(userFound.email).toEqual("user-two@example.com");
@@ -173,10 +173,10 @@ describe("/users", () => {
       let token1 = logInAndGetTokenAs(user1);
       // As User One, search for User Two.
       let response = await request(app)
-        .get("/users")
+        .get(`/users/${user2.id}`)
         // "Forget" to set token:
         /*.set("Authorization", `Bearer ${token1}`)*/
-        .send({ token: token1, userId: user2.id });
+        .send({ token: token1 });
       let userFound = response.body.user;
       expect(userFound).toEqual(undefined);
     })

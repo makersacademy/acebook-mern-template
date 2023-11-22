@@ -35,8 +35,9 @@ const UsersController = {
   },
 
   IndexById: (req, res) => {
-    const userId = req.params.userId;
+    const userId = req.params.id;
     User.findById(userId).exec((err, user) => {
+      //res.status(500).json({ message: `Searching for user with id ${userId}`});
       if (err) {
         res.status(500).json({ error: "Internal Server Error" });
       } else if (!user) {

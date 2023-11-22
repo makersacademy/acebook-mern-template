@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import './Post.css'
 import LikeButton from '../likeButton/likeButton';
+import ProfileImageThumbnail from '../profileImageThumbnail/ProfileImageThumbnail';
 
 const Post = ({ post }) => {
   const [author, setAuthor] = useState(null);
@@ -10,15 +11,19 @@ const Post = ({ post }) => {
 
   useEffect(() => {
     if (token) {
-      // NOTE: This may have to be changed to ${post.author.id}
+      //console.log("Using effect");
+      //console.log(post.author);
       fetch(`/users/${post.author}`, {
+        // NOTE: This may have to be changed to post.author.id
         headers: {
           'Authorization': `Bearer ${token}`
         }
       })
       .then(res => res.json())
       .then(async result => {
-        setAuthor(result.user)
+        //console.log("Setting author");
+        //console.log(result);
+        setAuthor(result.user);
       })
       .catch(err => console.error(err));
     } else {
@@ -60,8 +65,14 @@ const Post = ({ post }) => {
 
   return (
     <div data-cy="post" className="post">
-      <div>
-        <p>{ author ? `Post by ${author.name}`: "Loading..."}</p>
+      <div data-cy="author-info" className="author-info">
+        { author ? (
+          <>
+            <ProfileImageThumbnail user={ author }/>
+            <p>{`Posted by ${author.displayName} on ${ "<<Date/time goes here>>" }`}</p>
+          </>
+        ) : "Loading..."
+        }
       </div>
       <article data-cy="post" key={ post._id }>
         <div>Show Image:</div>
