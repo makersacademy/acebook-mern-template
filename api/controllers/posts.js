@@ -101,8 +101,8 @@ const PostsController = {
           $push: {
             comments: {
               comment_message: newComment,
-              // TODO: Change this as this is incorrect logic if the user is able
-              // to change their displayName
+              // TODO: Change this if the user is able
+              // to change their displayName? Or add name updating logic?
               // (The user could change their displayName but the comment would
               // retain the previous displayName)
               displayName: user.displayName, // Assuming displayName is the user's username
