@@ -14,10 +14,9 @@ const UsersController = {
   },
 
   AddOrRemovePostIdtoUserifLikedOrUnliked: async (req, res) => {
+    const userId = req.user_id;
     const postId = req.body.postId;
-    const userId = req.params.id;
-    console.log(`POSTID ${postId}`)
-    console.log(`USERID ${userId}`)
+
     try{
       // Find the user by ID
       const user = await User.findById(userId);
@@ -34,6 +33,7 @@ const UsersController = {
                 const token = TokenGenerator.jsonwebtoken(userId);
                 return res.status(201).json({
                   message: 'PostId added successfully',
+                  postIsLiked: true,
                   token: token,
                   likedPostIds: user.likedPostIds,
                 });
@@ -46,6 +46,7 @@ const UsersController = {
               const token = TokenGenerator.jsonwebtoken(userId);
               return res.status(201).json({
                 message: 'PostId removed successfully',
+                postIsLiked: false,
                 token: token,
                 likedPostIds: user.likedPostIds
               });

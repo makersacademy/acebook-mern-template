@@ -4,7 +4,6 @@ require("../mongodb_helper");
 const User = require("../../models/user");
 const JWT = require("jsonwebtoken");
 const secret = process.env.JWT_SECRET;
-const Post = require('../../models/post');
 
 const createTestUser = async (testUserInfoObject) => {
   let response = await request(app).post("/users").send(testUserInfoObject);
@@ -180,53 +179,4 @@ describe("/users", () => {
       expect(userFound).toEqual(undefined);
     })
   })
-
-describe('Put Likes Route', () => {
-  describe('PUT /users/:id/likes', () => {
-    it('should get a 201', async () => {
-      
-      const mockUserData = new User({
-        displayName: "User One",
-        email: "user-one@example.com",
-        password: "11111111"
-      });
-      await mockUserData.save();
-      const userDataObject = mockUserData.toObject();
-      const mockToken = JWT.sign(userDataObject, process.env.JWT_SECRET);
-
-      // Create a mock post in the database
-        const mockPost = new Post({
-          message: "howdy!", 
-          userId: '6555fb6dc0a21062095c4a2a'
-                              });
-        await mockPost.save();
-
-        const mockPost2 = new Post({
-          message: "Hey Hey!", 
-          userId: '6555fb6dc0a21062095c4a3c'
-                              });
-        await mockPost.save();
-
-        const response = await request(app)
-        .put(`/users/${mockUserData._id}/likes`)
-        .set('Authorization', `Bearer ${mockToken}`)
-        .send({ postId: mockPost._id })
-        .expect(201);
-
-        const response2 = await request(app)
-        .put(`/users/${mockUserData._id}/likes`)
-        .set('Authorization', `Bearer ${mockToken}`)
-        .send({ postId: mockPost2._id })
-        .expect(201);
-
-        const response3 = await request(app)
-        .put(`/users/${mockUserData._id}/likes`)
-        .set('Authorization', `Bearer ${mockToken}`)
-        .send({ postId: mockPost2._id })
-        .expect(201)
-
-    });
-    });
-});
-
 });

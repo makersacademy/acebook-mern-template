@@ -22,8 +22,7 @@ const PostsController = {
       if (err) {
         throw err;
       }
-      const token = TokenGenerator.jsonwebtoken(req.user_id)
-      console.log(posts);
+      const token = TokenGenerator.jsonwebtoken(req.user_id);
       res.status(200).json({ posts: posts, token: token });
     });
   },
@@ -56,8 +55,6 @@ const PostsController = {
   },
 
   Comment: (req, res) => {
-    console.log("COMMENTING")
-    console.log(req.params.id)
     // find the post using its id (req.params.id)
     const newComment = req.body.comment;
     
@@ -73,7 +70,6 @@ const PostsController = {
           console.error('Error adding comment:', err);
           res.status(500).json({ message: 'Internal Server Error' });
         } else {
-          console.log('Comment added successfully');
           const token = TokenGenerator.jsonwebtoken(req.user_id)
           res.status(201).json({ message: 'Comment added successfully', token: token, updatedPost });
         }
@@ -93,7 +89,6 @@ const PostsController = {
           console.error('Like not added:', err);
           res.status(500).json({ message: 'Internal Server Error' });
         } else {
-          console.log('Like added successfully');
           const token = TokenGenerator.jsonwebtoken(req.user_id)
           res.status(201).json({ message: 'Like added successfully', token: token, updatedPost });
         }
