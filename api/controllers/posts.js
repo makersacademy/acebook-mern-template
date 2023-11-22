@@ -1,8 +1,10 @@
 const Post = require("../models/post");
+const User = require("../models/user");
 const TokenGenerator = require("../lib/token_generator");
 
-
 const PostsController = {
+  // Older version
+  /*
   Create: (req, res) => {
     const userId = req.user_id;
     const post = new Post({
@@ -17,82 +19,106 @@ const PostsController = {
       res.status(201).json({ message: 'OK', token: token });
     });
   },
+  */
   Index: (req, res) => {
     Post.find((err, posts) => {
       if (err) {
         throw err;
       }
-      const token = TokenGenerator.jsonwebtoken(req.user_id)
+      const token = TokenGenerator.jsonwebtoken(req.user_id);
       console.log(posts);
       res.status(200).json({ posts: posts, token: token });
     });
   },
 
   IndexByUserId: (req, res) => {
-    const userId = req.user_id; 
+    const userId = req.user_id;
     Post.find({ userId: userId }, (err, posts) => {
       if (err) {
         return res.status(500).json({ error: err.message });
       }
-      const token = TokenGenerator.jsonwebtoken(req.user_id)
-      res.status(200).json({ posts: posts,  token: token });
+      const token = TokenGenerator.jsonwebtoken(req.user_id);
+      res.status(200).json({ posts: posts, token: token });
     });
   },
 
-    Create: (req, res) => {
-      try {
-        const userId = req.user_id; //takes user_id from Schema
-        const { message } = req.body;
-        const imageBuffer = req.file ? req.file.buffer : null //check image added
+  Create: (req, res) => {
+    try {
+      const userId = req.user_id; //takes user_id from Schema
+      const { message } = req.body;
+      const imageBuffer = req.file ? req.file.buffer : null //check image added
 
-        let imageUrl = null;
-        if (imageBuffer) {
-          const base64Image = imageBuffer.toString('base64'); // save image as bas64 string
-          imageUrl = base64Image;
-        }
-
-        const post = new Post({
-          ...req.body,
-          message,
-          image: imageUrl,
-          userId: userId
-        });
-
-        post.save();
-
-        const token = TokenGenerator.jsonwebtoken(req.user_id);
-        res.status(201).json({ message: 'OK', token });
-      } catch (error) {
-        console.error('Error creating post:', error);
-        res.status(500).json({ error: 'Internal Server Error' });
-        };
-      },
-
-
-  Comment: (req, res) => {
-    console.log("COMMENTING")
-    console.log(req.params.id)
-    // find the post using its id (req.params.id)
-    const newComment = req.body.comment;
-    
-    // add the comment to post.comments
-    // you *might* need a mongoose method called findOneAndUpdate
-
-    Post.findOneAndUpdate(
-      { _id: req.params.id }, // Find the post by its ID
-      { $push: { comments: { comment_message: newComment } } }, // Add the new comment to the comments array
-      { new: true }, // Return the updated post
-      (err, updatedPost) => {
-        if (err) {
-          console.error('Error adding comment:', err);
-          res.status(500).json({ message: 'Internal Server Error' });
-        } else {
-          console.log('Comment added successfully');
-          const token = TokenGenerator.jsonwebtoken(req.user_id)
-          res.status(201).json({ message: 'Comment added successfully', token: token, updatedPost });
-        }
+      let imageUrl = null;
+      if (imageBuffer) {
+        const base64Image = imageBuffer.toString('base64'); // save image as bas64 string
+        imageUrl = base64Image;
       }
-    );
+
+      const post = new Post({
+        ...req.body,
+        message,
+        image: imageUrl,
+        userId: userId
+      });
+
+      post.save((err) => {
+        if (err) {
+          throw err;
+        }
+      );
+
+      const token = TokenGenerator.jsonwebtoken(req.user_id);
+      res.status(201).json({ message: 'OK', token });
+    } catch (error) {
+      console.error('Error creating post:', error);
+      res.status(500).json({ error: 'Internal Server Error' });
+    };
+  },
+
+  Comment: async (req, res) => {
+    console.log("COMMENTING");
+    console.log(req.params.id);
+    const newComment = req.body.comment;
+
+    try {
+      // Fetch user information based on userId
+      const user = await User.findById(req.user_id);
+      if (!user) {
+        throw new Error("User not found");
+      }
+
+      // Add the comment to post.comments with the fetched username
+      Post.findOneAndUpdate(
+        { _id: req.params.id },
+        {
+          $push: {
+            comments: {
+              comment_message: newComment,
+              username: user.displayName, // Assuming displayName is the user's username
+              userId: req.user_id
+            },
+          },
+        },
+        { new: true },
+        (err, updatedPost) => {
+          if (err) {
+            console.error('Error adding comment:', err);
+            res.status(500).json({ message: 'Internal Server Error' });
+          } else {
+            console.log('Comment added successfully');
+            const token = TokenGenerator.jsonwebtoken(req.user_id);
+            updatedPost.comments.forEach(comment => {
+              comment.userId = comment.username;
+            });
+            console.log(updatedPost);
+            res.status(201).json({ message: 'Comment added successfully', token: token, updatedPost });
+          }
+        }
+      );
+    } catch (error) {
+      console.error("Error fetching user information:", error);
+      res.status(500).json({ message: 'Internal Server Error' });
+    }
   },
 
   Likes: (req, res) => {
