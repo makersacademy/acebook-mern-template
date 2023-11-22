@@ -1,5 +1,6 @@
 const Post = require("../models/post");
 const TokenGenerator = require("../lib/token_generator");
+const { ObjectID } = require("mongodb");
 
 
 const PostsController = {
@@ -25,14 +26,24 @@ const PostsController = {
     });
   },
 
-  Update: (req, res) => {
-    const post = post.find(req.body.id)
-    
+  Update: async (req, res) => {
+
+    const postId = req.params.id
+    const posts = Post.find()
+    const newLikes = req.body.likes
+    try {
+      posts.updateOne({ _id: ObjectID(postId) }, { $set: { likes: newLikes } });
+      res.status(201).json({ message: 'Successfully updated' });
+      
+    } catch (err) {
+      throw err;
+    }
   }
+}
 
    //Todo: Posts By followers endpoint: 
 
    // Todo: create method to update (and write tests for them)
-};
+
 
 module.exports = PostsController;

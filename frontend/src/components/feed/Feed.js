@@ -23,7 +23,7 @@ const Feed = ({ navigate }) => {
     }
     else {
       navigate('/login')}
-  }, [userId])
+  }, [userId, posts])
     if(token && posts) {
       return(
         <>

@@ -2,12 +2,17 @@ import React from "react";
 import { useState } from "react";
 
 const LikeButton = (props) => {
+  const [token, setToken] = useState(window.localStorage.getItem("token"));
 
   const handleSubmit = (event) => {
     event.preventDefault()
     console.log(props.postId)
-    fetch(`/api/post/${props.postId}`, {
+    fetch(`/api/posts/${props.postId}`, {
       method: "PUT",
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${token}`
+      },
       body: JSON.stringify({ likes: props.userIDList }),
     });
 
