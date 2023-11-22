@@ -34,8 +34,8 @@ const UsersController = {
     });
   },
 
-  FindUserById: (req, res) => {
-    const userId = req.params.id;
+  Index: (req, res) => {
+    const userId = req.params.userId;
     User.findById(userId).exec((err, user) => {
       if (err) {
         res.status(500).json({ error: "Internal Server Error" });

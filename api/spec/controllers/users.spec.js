@@ -142,7 +142,7 @@ describe("/users", () => {
       let response = await request(app)
         .get("/users")
         .set("Authorization", `Bearer ${token1}`)
-        .send({ token: token1, userIdToFind: user2.id });
+        .send({ token: token1, userId: user2.id });
       let userFound = response.body.user;
       expect(userFound.displayName).toEqual("User Two");
       expect(userFound.email).toEqual("user-two@example.com");
@@ -176,7 +176,7 @@ describe("/users", () => {
         .get("/users")
         // "Forget" to set token:
         /*.set("Authorization", `Bearer ${token1}`)*/
-        .send({ token: token1, userIdToFind: user2.id });
+        .send({ token: token1, userId: user2.id });
       let userFound = response.body.user;
       expect(userFound).toEqual(undefined);
     })
