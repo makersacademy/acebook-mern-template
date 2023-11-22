@@ -4,7 +4,8 @@ describe("Choosing avatar", () => {
       cy.visit("/signup");
       cy.get("#username").type("James Bond");
       cy.get("#email").type("someone@example.com");
-      cy.get("#password").type("password");
+      cy.get("#password").type("password1!");
+      cy.get("#password_confirmation").type("password1!");
       cy.get("#submit").click();
     
 
@@ -19,7 +20,8 @@ describe("Choosing avatar", () => {
         cy.visit("/signup");
         cy.get("#username").type("James Bond");
         cy.get("#email").type("someone@example.com");
-        cy.get("#password").type("password");
+        cy.get("#password").type("password1!");
+        cy.get("#password_confirmation").type("password1!");
         cy.get("#submit").click();
       
         cy.get("#submit").click();

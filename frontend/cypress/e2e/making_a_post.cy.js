@@ -4,11 +4,11 @@ describe("Creating a post", () => {
 
     before(() => {
         // Create a new user through signup
-        cy.signup("someuser", "someone@example.com", "password");
+        cy.signup("someuser", "someone@example.com", "password1!");
         // Visit the login page and sign in
         cy.visit('/login');
         cy.get("#email").type("someone@example.com");
-        cy.get("#password").type("password");
+        cy.get("#password").type("password1!");
         cy.get("#submit").click();
         cy.url().should("include", "/posts");
     });

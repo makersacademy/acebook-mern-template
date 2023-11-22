@@ -183,7 +183,7 @@ describe("/users/profile/:user_id, postsController", () => {
     await Post.deleteMany({});
   });
 
-  test("Filter and find posts by user_id", async () => {
+  test("Filter and find posts by user_id and displaying in order", async () => {
     // USER1
     user = new User({
       username: "test",
@@ -204,8 +204,6 @@ describe("/users/profile/:user_id, postsController", () => {
       secret,
     );
 
-    console.log("USER 1 DONE")
-
     // User 1 creates a posts with their token
     await request(app)
         .post("/posts")
@@ -218,7 +216,6 @@ describe("/users/profile/:user_id, postsController", () => {
         .send({ message: "hola! by user 1", token: token })
 
     let posts1 = await Post.find()
-        console.log("USER 1 POSTS POSTED: ", posts1[0].message, posts1[1].message)
 
     // USER 2: creating second user to post posts with different user id's
     user2 = new User({
@@ -256,6 +253,6 @@ describe("/users/profile/:user_id, postsController", () => {
         .set("Authorization", `Bearer ${token2}`)
         .send({ token: token2 });
       // mapping messages from post objects in response body
-      expect(new_response.body.posts.map((post) => post.message)).toEqual(["post by user 2!", "hola! by user 2"]);
+      expect(new_response.body.posts.map((post) => post.message)).toEqual(["hola! by user 2", "post by user 2!"]);
   });
 });

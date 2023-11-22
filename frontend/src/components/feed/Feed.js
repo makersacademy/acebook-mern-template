@@ -34,11 +34,6 @@ const Feed = ({ navigate }) => {
     fetchData(); // Initial fetch when the component mounts
   }, [token]); // Only fetch data when token changes
 
-  const logout = () => {
-    window.localStorage.removeItem("token");
-    navigate('/login');
-  };
-
   const handlePostSubmit = async (e) => {
     e.preventDefault();
 
@@ -72,8 +67,7 @@ const Feed = ({ navigate }) => {
     return (
       <>
         <h2>Posts</h2>
-        <button onClick={logout}>Logout</button>
-
+        
         <form onSubmit={handlePostSubmit} data-cy="post-form">
           <label>
             New Post:
