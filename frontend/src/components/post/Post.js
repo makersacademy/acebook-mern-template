@@ -39,8 +39,10 @@ const Post = ({ post }) => {
     e.preventDefault();
     if (comment.trim() !== '') {
       console.log(comments);
-      setComments([...comments, {comment_message: comment, date: Date.now()}]);
-      setComment('')
+      setComments([...comments, {comment_message: comment, date: Date.now(),
+        displayName: (author.displayName ? author.displayName : "Loading...")
+      }]);
+      setComment('');
     }
     fetch(`/posts/${post._id}`, {
       method: 'put',
