@@ -87,8 +87,8 @@ describe("/posts", () => {
 
 describe("GET, when token is present", () => {
     test("returns every post in the collection", async () => {
-        let post1 = new Post({message: "howdy!", userId: '6555fb6dc0a21062095c4a2b'});
-        let post2 = new Post({message: "hola!", userId: '6555fb6dc0a21062095c4a2c'});
+        let post1 = new Post({message: "howdy!", author: '6555fb6dc0a21062095c4a2b'});
+        let post2 = new Post({message: "hola!", author: '6555fb6dc0a21062095c4a2c'});
         await post1.save();
         await post2.save();
         let response = await request(app)
@@ -100,8 +100,8 @@ describe("GET, when token is present", () => {
     })
 
     test("the response code is 200", async () => {
-        let post1 = new Post({message: "howdy!", userId: '6555fb6dc0a21062095c4a2b'});
-        let post2 = new Post({message: "hola!", userId: '6555fb6dc0a21062095c4a2c'});
+        let post1 = new Post({message: "howdy!", author: '6555fb6dc0a21062095c4a2b'});
+        let post2 = new Post({message: "hola!", author: '6555fb6dc0a21062095c4a2c'});
         await post1.save();
         await post2.save();
         let response = await request(app)
@@ -112,8 +112,8 @@ describe("GET, when token is present", () => {
     })
 
     test("returns a new token", async () => {
-        let post1 = new Post({message: "howdy!", userId: '6555fb6dc0a21062095c4a2b'});
-        let post2 = new Post({message: "hola!", userId: '6555fb6dc0a21062095c4a2c'});
+        let post1 = new Post({message: "howdy!", author: '6555fb6dc0a21062095c4a2b'});
+        let post2 = new Post({message: "hola!", author: '6555fb6dc0a21062095c4a2c'});
         await post1.save();
         await post2.save();
         let response = await request(app)
@@ -128,8 +128,8 @@ describe("GET, when token is present", () => {
 
     describe("GET, when token is missing", () => {
     test("returns no posts", async () => {
-        let post1 = new Post({message: "howdy!", userId: '6555fb6dc0a21062095c4a2b'});
-        let post2 = new Post({message: "hola!", userId: '6555fb6dc0a21062095c4a2c'});
+        let post1 = new Post({message: "howdy!", author: '6555fb6dc0a21062095c4a2b'});
+        let post2 = new Post({message: "hola!", author: '6555fb6dc0a21062095c4a2c'});
         await post1.save();
         await post2.save();
         let response = await request(app)
@@ -138,8 +138,8 @@ describe("GET, when token is present", () => {
     })
 
     test("the response code is 401", async () => {
-        let post1 = new Post({message: "howdy!", userId: '6555fb6dc0a21062095c4a2b'});
-        let post2 = new Post({message: "hola!", userId: '6555fb6dc0a21062095c4a2c'});
+        let post1 = new Post({message: "howdy!", author: '6555fb6dc0a21062095c4a2b'});
+        let post2 = new Post({message: "hola!", author: '6555fb6dc0a21062095c4a2c'});
         await post1.save();
         await post2.save();
         let response = await request(app)
@@ -148,8 +148,8 @@ describe("GET, when token is present", () => {
     })
 
     test("does not return a new token", async () => {
-        let post1 = new Post({message: "howdy!", userId: '6555fb6dc0a21062095c4a2b'});
-        let post2 = new Post({message: "hola!", userId: '6555fb6dc0a21062095c4a2c'});
+        let post1 = new Post({message: "howdy!", author: '6555fb6dc0a21062095c4a2b'});
+        let post2 = new Post({message: "hola!", author: '6555fb6dc0a21062095c4a2c'});
         await post1.save();
         await post2.save();
         let response = await request(app)
@@ -177,7 +177,7 @@ describe('Put Comment Route', () => {
 describe('PUT /posts/:id', () => {
     it('should add a comment to a post', async () => {
       // Create a mock post in the database
-        const mockPost = new Post({message: "howdy!", userId: '6555fb6dc0a21062095c4a2b'});
+        const mockPost = new Post({message: "howdy!", author: '6555fb6dc0a21062095c4a2b'});
         await mockPost.save();
 
         const commentData = {
@@ -214,7 +214,7 @@ describe('Put Likes Route', () => {
 describe('PUT /posts/:id/likes', () => {
     it('should initiate at 0', async () => {
       // Create a mock post in the database
-        const mockPost = new Post({message: "howdy!", userId: '6555fb6dc0a21062095c4a2b'});
+        const mockPost = new Post({message: "howdy!", author: '6555fb6dc0a21062095c4a2b'});
         await mockPost.save();
 
         const likesData = {
@@ -248,7 +248,7 @@ describe('Put Likes Route', () => {
     describe('PUT /posts/:id/likes', () => {
     it('should add a like to a post', async () => {
       // Create a mock post in the database
-        const mockPost = new Post({message: "howdy!", userId: '6555fb6dc0a21062095c4a2b'});
+        const mockPost = new Post({message: "howdy!", author: '6555fb6dc0a21062095c4a2b'});
         await mockPost.save();
 
         const likesData = {
@@ -283,7 +283,7 @@ describe('Put Likes Route', () => {
     describe('PUT /posts/:id/likes', () => {
     it('should add a like to a post then remove it', async () => {
       // Create a mock post in the database
-        const mockPost = new Post({message: "howdy!", userId: '6555fb6dc0a21062095c4a2b'});
+        const mockPost = new Post({message: "howdy!", author: '6555fb6dc0a21062095c4a2b'});
         await mockPost.save();
 
         const likesData = {
@@ -327,7 +327,7 @@ describe('GET /posts/:id/likes', () => {
 
     it('should return post likes and token for a valid post ID', async () => {
         // Create a mock post in the database
-        const mockPost = new Post({ message: "howdy!", userId: '6555fb6dc0a21062095c4a2b', likes: 341 });
+        const mockPost = new Post({ message: "howdy!", author: '6555fb6dc0a21062095c4a2b', likes: 341 });
         await mockPost.save();
 
         // Mock user data for JWT token creation
