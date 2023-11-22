@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const multer = require('multer'); //for image upload 
+const multer = require('multer'); 
 
 const PostsController = require("../controllers/posts");
 

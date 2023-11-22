@@ -78,6 +78,7 @@ const Post = ({ post }) => {
       </div>
       <article data-cy="post" key={ post._id }>
         <div>Show Image:</div>
+        <img src={`data:image/png;base64, ${post.image}`} alt="Post" />
         <div>{ post.message }</div>
         <br />
       <small className="smallText">{formatDate(post.date)}</small><br />
