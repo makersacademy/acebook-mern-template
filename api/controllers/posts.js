@@ -105,7 +105,7 @@ const PostsController = {
               // to change their displayName? Or add name updating logic?
               // (The user could change their displayName but the comment would
               // retain the previous displayName)
-              displayName: user.displayName, // Assuming displayName is the user's username
+              displayName: activeUser.displayName, // Assuming displayName is the user's username
               commenter: req.user_id
             },
           },
