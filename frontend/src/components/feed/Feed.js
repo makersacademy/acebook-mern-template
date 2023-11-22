@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import Post from '../post/Post'
 import './Feed.css'
+import NavBar from '../navBar/NavBar';
 
 const Feed = ({ navigate }) => {
   const [posts, setPosts] = useState([]);
@@ -33,6 +34,7 @@ const Feed = ({ navigate }) => {
     if(token) {
       return(
         <div className='container'>
+          <div class="feed-nav"><NavBar /></div>
           <h2>Posts</h2>
             <button onClick={logout}>
               Logout

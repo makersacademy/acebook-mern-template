@@ -12,12 +12,11 @@ const LogInForm = ({ navigate }) => {
       headers: {
         'Content-Type': 'application/json',
       },
-// <<<<<<< HEAD
       body: JSON.stringify({ email: email, password: password })
     });
     if (response.status === 201) {
       // GOOD NEWS.
-      console.log("token");
+      // console.log("token");
       let data = await response.json();
       window.localStorage.setItem("token", data.token);
       navigate('/posts');
@@ -45,7 +44,7 @@ const LogInForm = ({ navigate }) => {
 
 //   const handleDisplayNameChange = (event) => {
 //     setDisplayName(event.target.value)
-// >>>>>>> 1532bdb (I added comments)
+
   }
 
   const handleEmailChange = (event) => {

@@ -16,7 +16,7 @@ const Profile = ({ navigate }) => {
 
   useEffect(() => {
     if (token) {
-      fetch('/users/user', {
+      fetch('/users/display-name', {
         headers: { 
           'Authorization': `Bearer ${token}` 
       }

@@ -131,21 +131,21 @@ describe("/users", () => {
         email: "user-two@example.com",
         password: "22222222",
       };
-  //     // Create the two users.
-  //     await createTestUser(userInfo1);
-  //     const user1 = await getMostRecentlyCreatedUser();
-  //     await createTestUser(userInfo2);
-  //     const user2 = await getMostRecentlyCreatedUser();
-  //     // Log in as User One.
-  //     let token1 = logInAndGetTokenAs(user1);
-  //     // As User One, search for User Two.
-  //     let response = await request(app)
-  //       .get("/users")
-  //       .set("Authorization", `Bearer ${token1}`)
-  //       .send({ token: token1, userIdToFind: user2.id });
-  //     let userFound = response.body.user;
-  //     expect(userFound.displayName).toEqual("User Two");
-  //     expect(userFound.email).toEqual("user-two@example.com");
+      // Create the two users.
+      await createTestUser(userInfo1);
+      const user1 = await getMostRecentlyCreatedUser();
+      await createTestUser(userInfo2);
+      const user2 = await getMostRecentlyCreatedUser();
+      // Log in as User One.
+      let token1 = logInAndGetTokenAs(user1);
+      // As User One, search for User Two.
+      let response = await request(app)
+        .get(`/users/${user2.id}`)
+        .set("Authorization", `Bearer ${token1}`)
+        .send({ token: token1 });
+      let userFound = response.body.user;
+      expect(userFound.displayName).toEqual("User Two");
+      expect(userFound.email).toEqual("user-two@example.com");
     });
   });
 
@@ -165,16 +165,18 @@ describe("/users", () => {
       // Create the two users.
       await createTestUser(userInfo1);
       const user1 = await getMostRecentlyCreatedUser();
+      //console.log(`USER 1: ${user1}`);
       await createTestUser(userInfo2);
       const user2 = await getMostRecentlyCreatedUser();
+      //console.log(`USER 2: ${user2}`);
       // Log in as User One.
       let token1 = logInAndGetTokenAs(user1);
       // As User One, search for User Two.
       let response = await request(app)
-        .get("/users")
+        .get(`/users/${user2.id}`)
         // "Forget" to set token:
         /*.set("Authorization", `Bearer ${token1}`)*/
-        .send({ token: token1, userIdToFind: user2.id });
+        .send({ token: token1 });
       let userFound = response.body.user;
       expect(userFound).toEqual(undefined);
     })

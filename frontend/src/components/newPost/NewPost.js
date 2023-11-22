@@ -2,56 +2,100 @@ import React, { useState } from 'react';
 import './NewPost.css';
 
 
-const NewPost = ({ user_id }) => {
+const NewPost = () => {
     const [message, setMessage] = useState("");
     const [token, setToken] = useState(window.localStorage.getItem("token"));
-    // TODO  const [image, setImage] = useState("");
+    //ADDED
+    const [image, setImage] = useState(null); 
+    const [characterCount, setCharacterCount] = useState(0);
 
     const handleSubmit = async (event) => { 
         event.preventDefault(); // prevent default stops the page from reloading
         setMessage(""); //clears message once sent
+        setImage(null) 
 
-    fetch('/posts', {
-        method: 'post',
-        headers: {
-            'Content-Type': 'application/json',
-            'Authorization': `Bearer ${token}`
-        },
-        body: JSON.stringify({message, user_id}),//TODO image
-    })
-    .then(response => {
-        if(response.status === 201) {
-            console.log({message})
-        } else {
-            console.log("message not captured");
-            console.log(JSON.stringify(response))
-        }
-        })
-};
+
+    // Send data to the backend
+            fetch('/posts', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${token}`,
+            },
+            body: JSON.stringify({ message, image})
+            })
+            .then(response => {
+                if(response.status === 201) {
+                    console.log({message})
+                } else {
+                    console.log("message not captured");
+                    console.log(JSON.stringify(response))
+                }
+                })
+    };
 
     const handleMessageChange = (event) => {
-        setMessage(event.target.value);
+        const inputValue = event.target.value;
+        setMessage(inputValue);
+        setCharacterCount(inputValue.length); //character count
 
     };
 
-    // const handleImageChange = (event) => {
-    //     setImage(event.target.value);
-    // };
+    const handleImageChange = (event) => {
+        setImage(event.target.files[0]);
+    };
+
+    const handleReset = () => { 
+        window.location.reload(); //reset page 
+        };
+
 
     return(
         <>
             <div className="new_post">
-                <form onSubmit={handleSubmit}>
-                <textarea placeholder="write your post"
-                className="new-post-message" 
-                rows="4" cols="50"
-                value={message} 
-                onChange={handleMessageChange}
-                />
+                
+            {/* IMAGE PREVIEW */}
+                {image && (
+                    <div class="image-preview">
+                    <img
+                        alt="not found"
+                        width={"450px"}
+                        height={"300px"}
+                        src={URL.createObjectURL(image)}
+                    />
+                    </div>
+                )}
+            {/* IMAGE PREVIEW */}
+
+                <form onSubmit={handleSubmit} enctype="multipart/form-data">
+                    <textarea 
+                    placeholder="write your post"
+                    className="new-post-message"
+                    maxlength="250" //MAX post length 
+                    rows="4" cols="52"
+                    value={message} 
+                    onChange={handleMessageChange}
+                    />
                 <br />
-                <input type="url" id="post-image" name="post-image" placeholder="add image" />
+                <div id="the-count">
+                    <span id="current">{characterCount}</span>
+                    <span id="maximum">/ 250</span>
+                </div>
+
+                {/* IMAGE UPLOAD */}
+                <input type="file" 
+                        id="postImage" 
+                        name="post-image"
+                        onChange={handleImageChange} />
+                {/* IMAGE UPLOAD */}
                 <br />
-                <input id='submit' type="submit" value="Post" className='custom-btn'/>
+                    <button onClick={() => setImage(null)}>Clear all</button>
+                <br />
+                    <input id='submit' 
+                            type="submit" 
+                            value="Post" 
+                            className='custom-btn' 
+                            onClick={handleReset}/>
                 </form>
             </div>
         </>
@@ -62,3 +106,63 @@ const NewPost = ({ user_id }) => {
 
 
 export default NewPost;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                               ///WORKING POST MESSAGE ONLY ///
+//         fetch('/posts', {
+//             method: 'post',
+//             headers: {
+//                 'Content-Type': 'application/json',
+//                 'Authorization': `Bearer ${token}`
+//             },
+//             body: JSON.stringify({message, image, user_id}),
+//         })
+//         .then(response => {
+//             if(response.status === 201) {
+//                 console.log({message})
+//             } else {
+//                 console.log("message not captured");
+//                 console.log(JSON.stringify(response))
+//             }
+//             })
+// };
+
+                              ///WORKING POST MESSAGE ONLY ///
