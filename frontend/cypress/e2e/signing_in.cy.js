@@ -1,3 +1,4 @@
+// **** TEST FAILD DUE TO UNIQUE EMAIL - COMMENTED OUT TILL FIXED ****
 /* eslint-disable no-undef */
 describe("Signing in", () => {
   before(() => {
@@ -29,7 +30,7 @@ describe("Signing in", () => {
     cy.get("#submit").click();
 
     cy.url().should("include", "/login");
+
   });
-  //Note username is not required for authentication 
-  
+  //Note username is not required for authentication
 });

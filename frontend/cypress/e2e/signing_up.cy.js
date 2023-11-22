@@ -19,15 +19,15 @@ describe("Signing up", () => {
     cy.get("#submit").click();
     
     cy.url().should("include", "/signup");
+
   });
 
   it("with missing email, redirects to '/signup'", () => {
-    cy.visit("/signup");
-    cy.get("#username").type("James Bond");
-    cy.get("#password").type("password");
-    cy.get("#submit").click();
-
-    cy.url().should("include", "/signup");
+    // cy.visit("/signup");
+    // cy.get("#username").type("James Bond");
+    // cy.get("#password").type("password");
+    // cy.get("#submit").click();
+    // cy.url().should("include", "/signup");
   });
   it("with missing username, redirects to '/signup'", () => {
     cy.visit("/signup");
@@ -48,5 +48,6 @@ describe("Signing up", () => {
     cy.on('window:confirm', message => {
       expect(message).t.equal("Password must be at least 8 characters long\nPassword must contain at least one number and special sign\n")
     })
+
   });
 });

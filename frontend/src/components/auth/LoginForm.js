@@ -26,7 +26,6 @@ const LogInForm = ({ navigate }) => {
     }
   };
 
-  
   const handleEmailChange = (event) => {
     setEmail(event.target.value);
   };

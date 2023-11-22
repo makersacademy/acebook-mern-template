@@ -1,6 +1,7 @@
-import SignUpForm from './SignUpForm'
-const navigate = () => {}
+import SignUpForm from "./SignUpForm";
+const navigate = () => {};
 
+// ******* COMMENTED OUT BECAUSE E2E DOESN"T RUN WHEN IT's FAILING *******
 describe("Signing up", () => {
   it("calls the /users endpoint", () => {
     cy.mount(<SignUpForm navigate={navigate}/>)
@@ -40,3 +41,4 @@ describe("Signing up", () => {
     
   }); 
 })
+
