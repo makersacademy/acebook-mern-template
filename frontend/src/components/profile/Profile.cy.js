@@ -4,7 +4,7 @@ import { BrowserRouter as Router } from 'react-router-dom';
 describe("Profile", () => {
   beforeEach(() => {
     window.localStorage.setItem("token", "fakeToken");
-    cy.intercept('GET', '/users/user', {
+    cy.intercept('GET', '/users/display-name', {
       statusCode: 200,
       body: { 
         displayName: "John Doe"
