@@ -1,4 +1,3 @@
-
 import Comment from "./Comment";
 
 describe("Comment", () => {

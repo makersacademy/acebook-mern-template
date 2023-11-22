@@ -122,7 +122,8 @@ const AvatarChoiceForm = ({ navigate, location }) => {
           onChange={handleAvatarChange}
         />
         <label htmlFor="avatar0" className="checkbox-avatar-image">
-          <img width="100px" src="../images/avatars/0.svg" alt=""></img>No avatar
+          <img width="100px" src="../images/avatars/0.svg" alt=""></img>No
+          avatar
         </label>
       </div>
 

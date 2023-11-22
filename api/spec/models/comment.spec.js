@@ -24,7 +24,7 @@ describe("Comment model", () => {
   });
 
   it("can save a comment", (done) => {
-    var comment = new Comment({ message: "great post!"})
+    var comment = new Comment({ message: "great post!" });
 
     comment.save((err) => {
       expect(err).toBeNull();
@@ -32,7 +32,7 @@ describe("Comment model", () => {
       Comment.find((err, comments) => {
         expect(err).toBeNull();
 
-        expect(comments[0]).toMatchObject({ message: "great post!"})
+        expect(comments[0]).toMatchObject({ message: "great post!" });
         done();
       });
     });
@@ -53,5 +53,4 @@ describe("Comment model", () => {
       });
     });
   });
-
 });
