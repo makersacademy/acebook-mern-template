@@ -167,7 +167,7 @@ beforeEach(async () => {
 // Mock user data for JWT token creation
 const mockUserData = {
     _id: 'mockUserId',
-    username: 'mockUser',
+    displayName: 'mockUser',
 };
 
 // Mock JWT token

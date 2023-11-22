@@ -105,7 +105,7 @@ const PostsController = {
               // to change their displayName
               // (The user could change their displayName but the comment would
               // retain the previous displayName)
-              username: user.displayName, // Assuming displayName is the user's username
+              displayName: user.displayName, // Assuming displayName is the user's username
               commenter: req.user_id
             },
           },
@@ -118,18 +118,9 @@ const PostsController = {
           } else {
             console.log('Comment added successfully');
             const token = TokenGenerator.jsonwebtoken(req.user_id);
-            // What is this code intented to do?
-            //   Currently it is setting a field which is meant to contain a user's id
-            //   to a username, which is a string. The types don't match so this can't
-            //   be correctly implemented in the current form.
-            //   If it's meant to solve the above issue with username.displayName,
-            //   then it should be setting comment.username instead.
-            // - Perran
-            /*
             updatedPost.comments.forEach(comment => {
-              comment.commenter = comment.username;
+              comment.commenter = comment.displayName;
             });
-            */
             console.log(updatedPost);
             res.status(201).json({ message: 'Comment added successfully', token: token, updatedPost });
           }

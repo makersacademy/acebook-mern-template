@@ -89,7 +89,7 @@ const Post = ({ post }) => {
           {comment.date && 
             <small className="smallText">{formatDate(comment.date)}</small>
           }
-          <small className="smallText">{comment.username}</small>
+          <small className="smallText">{comment.displayName}</small>
           
           </div>
           
