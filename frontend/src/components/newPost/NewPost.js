@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import './NewPost.css';
 
 
-const NewPost = () => {
+const NewPost = ({ user_id }) => {
     const [message, setMessage] = useState("");
     const [token, setToken] = useState(window.localStorage.getItem("token"));
     //ADDED
@@ -13,25 +13,28 @@ const NewPost = () => {
         event.preventDefault(); // prevent default stops the page from reloading
         setMessage(""); //clears message once sent
         setImage(null) 
+    
+    const formData = new FormData();
+    formData.append('message', message);
+    formData.append('image', image);
 
+    console.log(`Bearer ${token}`);
 
-    // Send data to the backend
-            fetch('/posts', {
+        const response = await fetch('/posts', {
             method: 'POST',
             headers: {
-                'Content-Type': 'application/json',
                 'Authorization': `Bearer ${token}`,
             },
-            body: JSON.stringify({ message, image})
-            })
-            .then(response => {
-                if(response.status === 201) {
-                    console.log({message})
-                } else {
-                    console.log("message not captured");
-                    console.log(JSON.stringify(response))
+            body: formData,
+            });
+
+            if (response.status === 201) {
+            const responseData = await response.json(); // Await the json() method
+            console.log(responseData);
+            } else {
+            console.log("Message not captured");
+            console.log(JSON.stringify(response));
                 }
-                })
     };
 
     const handleMessageChange = (event) => {
@@ -67,11 +70,11 @@ const NewPost = () => {
                 )}
             {/* IMAGE PREVIEW */}
 
-                <form onSubmit={handleSubmit} enctype="multipart/form-data">
+                <form onSubmit={handleSubmit} encType="multipart/form-data">
                     <textarea 
                     placeholder="write your post"
                     className="new-post-message"
-                    maxlength="250" //MAX post length 
+                    maxLength="250" //MAX post length 
                     rows="4" cols="52"
                     value={message} 
                     onChange={handleMessageChange}
@@ -85,7 +88,6 @@ const NewPost = () => {
                 {/* IMAGE UPLOAD */}
                 <input type="file" 
                         id="postImage" 
-                        name="post-image"
                         onChange={handleImageChange} />
                 {/* IMAGE UPLOAD */}
                 <br />
@@ -95,7 +97,8 @@ const NewPost = () => {
                             type="submit" 
                             value="Post" 
                             className='custom-btn' 
-                            onClick={handleReset}/>
+                            onClick={handleReset}
+                            />
                 </form>
             </div>
         </>

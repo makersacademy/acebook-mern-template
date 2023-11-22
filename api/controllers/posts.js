@@ -3,23 +3,7 @@ const User = require("../models/user");
 const TokenGenerator = require("../lib/token_generator");
 
 const PostsController = {
-  // Older version
-  /*
-  Create: (req, res) => {
-    const userId = req.user_id;
-    const post = new Post({
-      ...req.body,
-      userId: userId});
-    post.save((err) => {
-      if (err) {
-        throw err;
-      }
 
-      const token = TokenGenerator.jsonwebtoken(req.user_id)
-      res.status(201).json({ message: 'OK', token: token });
-    });
-  },
-  */
   Index: (req, res) => {
     Post.find((err, posts) => {
       if (err) {
@@ -53,7 +37,7 @@ const PostsController = {
       // the middleware function tokenChecker sets this on the request.
       const author = req.user_id; //takes user_id from Schema
       const { message } = req.body;
-      const imageBuffer = req.file ? req.file.buffer : null //check image added
+      const imageBuffer = req.file ? req.file.buffer : null;  //check image added
 
       let imageUrl = null;
       if (imageBuffer) {
@@ -68,19 +52,15 @@ const PostsController = {
         author: author
       });
 
-      post.save((err) => {
-        if (err) {
-          throw err;
-        }
-      });
+      post.save();
 
       const token = TokenGenerator.jsonwebtoken(req.user_id);
       res.status(201).json({ message: 'OK', token });
     } catch (error) {
       console.error('Error creating post:', error);
       res.status(500).json({ error: 'Internal Server Error' });
-    };
-  },
+      };
+    },
 
   Comment: async (req, res) => {
     console.log("COMMENTING");

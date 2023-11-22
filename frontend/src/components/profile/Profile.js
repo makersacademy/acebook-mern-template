@@ -3,6 +3,7 @@ import NavBar from '../navBar/NavBar'
 import defaultProfile from '../../assets/defaultProfile.png';
 import ProfileFeed from '../profileFeed/ProfileFeed';
 import NewPost from '../newPost/NewPost';
+import './Profile.css'
 
 // Some logic required: If you're landing on your own profile, you see the update image. If you're landing on another person's profile, you don't. 
 // But do you see follow/unfollow instead? 
