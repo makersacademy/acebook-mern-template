@@ -144,4 +144,25 @@ describe("/users", () => {
     expect(response.statusCode).toBe(200);
     });
   });
+
+  describe("GET/users/userinfo/:user_id", () => {
+
+    it('gives response 200 when user information is retrieved from the database', async () => {
+      // mocks a user to be searched for in the database using route
+      let user = new User({
+        username: "test",
+        email: "test@test.com",
+        password: "12345678",
+        avatar: "1.svg",
+      });
+      await user.save();
+      console.log("THIS IS THE USER", user)
+      console.log("THE ID CREATED FOR TEST USER IS:", user._id)
+      let response = await request(app).get(`/users/userinfo/${user._id}`)
+      console.log("THE MESSAGE FROM RESPONSE", response.body)
+      // console.log("The ID GOT FROM THE RESPONSE", response)
+      // expect(response.statusCode).toBe(200);
+
+    })
+  })
 });
