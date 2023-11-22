@@ -16,7 +16,7 @@ describe("Creating a comment", () => {
         cy.contains('Post 1 for test', { timeout: 10000}).should('be.visible');
     });
 
-    it.only('should display a message when there is no comment on a post', () => {
+    it('should display a message when there is no comment on a post', () => {
         cy.visit('/posts');
         cy.url().should("include", "/posts");
         cy.contains('No one has commented yet - be the first!', { timeout: 10000}).should('be.visible');
