@@ -8,8 +8,6 @@ import Feed from "../feed/Feed";
 import { useNavigate, useLocation, Routes, Route } from "react-router-dom";
 import AvatarChoiceForm from "../user/AvatarChoiceForm";
 import Navbar from "../navbar/Navbar";
-import UserAccount from "../user/UserAccount";
-import Header from "../user/header/Header";
 
 const App = () => {
     return (
@@ -24,8 +22,6 @@ const App = () => {
             path="/choose-avatar"
             element={<AvatarChoiceForm location={useLocation()} navigate={useNavigate()} />}
           />
-          <Route path='/users/my_account' element={<UserAccount navigate={ useNavigate() }/>}/>
-          <Route path='/users/data/:user_id' element={<Header navigate={ useNavigate() }/>}/>
           <Route path='/users/profile/:user_id' element={<UserProfileFeed navigate={ useNavigate() }/>}/>
           
           <Route path='/'  element={<HomePage navigate={ useNavigate() }/>}/>
