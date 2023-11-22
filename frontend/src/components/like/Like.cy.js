@@ -6,13 +6,6 @@ import Like from "./Like";
 //          initially the numberOfLikes will be an empty list/object
 
 
-// Test that the Like thumb icon exits
-// describe("Like", () => {
-//     it("renders a button in a thumb icon", () => {
-//         cy.mount
-//     })
-// })
-
 
 
 // Test that the Like component has a number 
@@ -32,14 +25,28 @@ import Like from "./Like";
     // the user's id is removed from the 'listOfLikes' object
 
 
-// Test numberOfLikes
-// The length of the 'listOfLikes' object
-    // is assigned to the number displayed on the right of the thumb icon
 
 describe("Like", () => {
-    it('renders the correct number of likes', () => {
+    it('renders 3 likes when there are 3 items in the likes array', () => {
         cy.mount(<Like post={{_id: 1, content: "This is my first post", likes: [1, 2, 3]}} />);
         cy.get('[data-cy="post-likes"]').should('contain.text', 3)
+    })
+})
+
+
+describe("Like", () => {
+    it('renders 0 likes when the post has 0 items in the likes array', () => {
+        cy.mount(<Like post={{_id: 1, content: "This is my first post", likes: []}} />);
+        cy.get('[data-cy="post-likes"]').should('contain.text', 0)
+    })
+})
+
+
+describe("Like", () => {
+    it('increases the number of likes by 1 when Like button is clicked', () => {
+        cy.mount(<Like post={{_id: 1, content: "This is my first post", likes: []}} />);
+        cy.get('[data-cy="post-button"]').click()
+        cy.get('[data-cy="post-likes"]').should('contain.text', 1)
     })
 })
 

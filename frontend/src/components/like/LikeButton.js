@@ -31,7 +31,7 @@ const LikeButton = (props) => {
   
     return (
       <form onSubmit={handleSubmit}>
-        <button type='submit'><img src='thumb-icon.png' className='like-btn' alt='thumb' /></button>
+        <button type='submit' data-cy='like-button'><img src='thumb-icon.png' className='like-btn' alt='thumb' /></button>
       </form>
     )
 }

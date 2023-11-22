@@ -43,7 +43,6 @@ const PostsController = {
 
    //Todo: Posts By followers endpoint: 
 
-   // Todo: create method to update (and write tests for them)
 
 
 module.exports = PostsController;
