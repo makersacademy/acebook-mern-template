@@ -6,13 +6,13 @@ const PostSchema = new mongoose.Schema({
   date: { type: Date, default: Date.now },
   comments: [{ comment_message: String, date: { type: Date, default: Date.now }}],
   likes: { type: Number, default: 0 },
-  userId: {
+  author: {
     type: mongoose.Schema.Types.ObjectId,
     ref:'User',
     required: true
   },
   comments: [{ comment_message: String, date: { type: Date, default: Date.now }, 
-    userId: {
+    commenter: {
     type: mongoose.Schema.Types.ObjectId,
     ref:'User',
     required: true

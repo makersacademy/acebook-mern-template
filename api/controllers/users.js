@@ -13,21 +13,24 @@ const UsersController = {
     });
   },
 
-FindSingleUserById: (req, res) => {
-  const userId = req.user_id; 
-  User.findById(userId).select('displayName').exec((err, user) => {
-    if (err) {
-      // Handle error
-      res.status(500).json({ error: 'Internal Server Error' });
-    } else if (!user) {
-      // Handle case where user is not found
-      res.status(404).json({ error: 'User not found' });
-    } else {
-      // User found, send back the displayName
-      const token = TokenGenerator.jsonwebtoken(req.user_id)
-      res.status(200).json({ displayName: user.displayName });
-    }
-  });
-},
+  // This function returns a *displayName*, not a user object,
+  // so I've renamed it
+  // - Perran
+  FindSingleDisplayNameById: (req, res) => {
+    const userId = req.user_id; 
+    User.findById(userId).select('displayName').exec((err, user) => {
+      if (err) {
+        // Handle error
+        res.status(500).json({ error: 'Internal Server Error' });
+      } else if (!user) {
+        // Handle case where user is not found
+        res.status(404).json({ error: 'User not found' });
+      } else {
+        // User found, send back the displayName
+        const token = TokenGenerator.jsonwebtoken(req.user_id)
+        res.status(200).json({ displayName: user.displayName });
+      }
+    });
+  },
 };
 module.exports = UsersController;

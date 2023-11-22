@@ -26,14 +26,19 @@ const PostsController = {
         throw err;
       }
       const token = TokenGenerator.jsonwebtoken(req.user_id);
-      console.log(posts);
+      //console.log(posts);
       res.status(200).json({ posts: posts, token: token });
     });
   },
 
-  IndexByUserId: (req, res) => {
-    const userId = req.user_id;
-    Post.find({ userId: userId }, (err, posts) => {
+  IndexLoggedInUser: (req, res) => {
+    // req.user_id is ALWAYS the id of the *logged in user*.
+    // Therefore this function ALWAYS finds the posts
+    // of the *logged in user*.
+    // Therefore I have renamed this function
+    // from `IndexByUserId` to `IndexLoggedInUser`.
+    const author = req.user_id;
+    Post.find({ author: author }, (err, posts) => {
       if (err) {
         return res.status(500).json({ error: err.message });
       }
@@ -44,7 +49,9 @@ const PostsController = {
 
   Create: (req, res) => {
     try {
-      const userId = req.user_id; //takes user_id from Schema
+      // req.user_id is the id of the currently logged in user.
+      // the middleware function tokenChecker sets this on the request.
+      const author = req.user_id; //takes user_id from Schema
       const { message } = req.body;
       const imageBuffer = req.file ? req.file.buffer : null //check image added
 
@@ -58,7 +65,7 @@ const PostsController = {
         ...req.body,
         message,
         image: imageUrl,
-        userId: userId
+        author: author
       });
 
       post.save((err) => {
@@ -81,9 +88,9 @@ const PostsController = {
     const newComment = req.body.comment;
 
     try {
-      // Fetch user information based on userId
-      const user = await User.findById(req.user_id);
-      if (!user) {
+      // Fetch user information based on user_id
+      const activeUser = await User.findById(req.user_id);
+      if (!activeUser) {
         throw new Error("User not found");
       }
 
@@ -94,8 +101,12 @@ const PostsController = {
           $push: {
             comments: {
               comment_message: newComment,
+              // TODO: Change this as this is incorrect logic if the user is able
+              // to change their displayName
+              // (The user could change their displayName but the comment would
+              // retain the previous displayName)
               username: user.displayName, // Assuming displayName is the user's username
-              userId: req.user_id
+              commenter: req.user_id
             },
           },
         },
@@ -107,9 +118,18 @@ const PostsController = {
           } else {
             console.log('Comment added successfully');
             const token = TokenGenerator.jsonwebtoken(req.user_id);
+            // What is this code intented to do?
+            //   Currently it is setting a field which is meant to contain a user's id
+            //   to a username, which is a string. The types don't match so this can't
+            //   be correctly implemented in the current form.
+            //   If it's meant to solve the above issue with username.displayName,
+            //   then it should be setting comment.username instead.
+            // - Perran
+            /*
             updatedPost.comments.forEach(comment => {
-              comment.userId = comment.username;
+              comment.commenter = comment.username;
             });
+            */
             console.log(updatedPost);
             res.status(201).json({ message: 'Comment added successfully', token: token, updatedPost });
           }

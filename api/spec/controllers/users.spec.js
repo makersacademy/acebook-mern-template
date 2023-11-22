@@ -165,8 +165,10 @@ describe("/users", () => {
       // Create the two users.
       await createTestUser(userInfo1);
       const user1 = await getMostRecentlyCreatedUser();
+      //console.log(`USER 1: ${user1}`);
       await createTestUser(userInfo2);
       const user2 = await getMostRecentlyCreatedUser();
+      //console.log(`USER 2: ${user2}`);
       // Log in as User One.
       let token1 = logInAndGetTokenAs(user1);
       // As User One, search for User Two.
