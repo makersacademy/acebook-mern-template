@@ -85,7 +85,7 @@ const NewComment = ({ postId, fetchPosts }) => {
 
   return (
     <div>
-      <h2>New Comment</h2>
+      <h2>Add Comment</h2>
       <input
         placeholder="Comment"
         id="comment"

@@ -56,7 +56,3 @@ const NewPost = ({ navigate, posts, setPosts, setReRender }) => {
 
 export default NewPost;
 
-// rendering comments automatically- Done
-// only show first 3 comments the have the option to "load more"
-// change format of date
-// show author first and last name

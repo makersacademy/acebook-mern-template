@@ -6,8 +6,11 @@ const PostsController = {
     try {
       const posts = await Post.find()
         .populate('author', 'email')
-        .populate('comments');
-      console.log(posts)
+        .populate({
+          path:'comments',
+          populate: {path: 'author'}
+        });
+      console.log('populate: posts', posts)
       const token = TokenGenerator.jsonwebtoken(req.user_id);
 
       res.status(200).json({ posts: posts, token: token });

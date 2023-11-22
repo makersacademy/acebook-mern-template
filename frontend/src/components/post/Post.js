@@ -5,6 +5,8 @@ import NewComment from '../comment/NewComment';
 
 const Post = ({ post, fetchPosts }) => {
   const [showCommentForm, setShowCommentForm] = useState(false);
+  const [visibleComments, setVisibleComments] = useState(2);
+  
   
   // Format datetime of post. 
   const date = new Date(post.created);
@@ -13,6 +15,10 @@ const Post = ({ post, fetchPosts }) => {
 
   const toggleCommentForm = () => {
     setShowCommentForm((prev) => !prev);
+  };
+
+  const loadMoreComments = () => {
+    setVisibleComments(visibleComments + 2); // Increase the number of visible comments
   };
 
   return (
@@ -41,7 +47,14 @@ const Post = ({ post, fetchPosts }) => {
       </div>
       {showCommentForm && <NewComment postId={post._id} fetchPosts={fetchPosts} />}
       <div data-cy="post-comments" className='post-comments'>
-        {post.comments.map((comment) => <Comment comment={comment} key={comment._id} />)}
+        {post.comments.slice(0, visibleComments).map((comment) => (
+          <Comment comment={comment} key={comment._id} />
+        ))}
+        {visibleComments < post.comments.length && (
+          <button className='load-more-btn' onClick={loadMoreComments}>
+            Load More Comments
+          </button>
+        )}
       </div>
     </div>
   );
