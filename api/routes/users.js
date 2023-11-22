@@ -4,6 +4,8 @@ const router = express.Router();
 const UsersController = require("../controllers/users");
 
 router.post("/", UsersController.Create);
+router.get("/user", UsersController.FindSingleUserById);
+router.put('/likes', UsersController.AddOrRemovePostIdtoUserifLikedOrUnliked);
 router.get("/display-name", UsersController.FindSingleDisplayNameById);
 router.get("/:id", UsersController.IndexById);
 

@@ -144,7 +144,6 @@ const PostsController = {
           console.error('Like not added:', err);
           res.status(500).json({ message: 'Internal Server Error' });
         } else {
-          console.log('Like added successfully');
           const token = TokenGenerator.jsonwebtoken(req.user_id)
           res.status(201).json({ message: 'Like added successfully', token: token, updatedPost });
         }
