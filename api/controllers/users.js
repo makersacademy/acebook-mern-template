@@ -1,5 +1,6 @@
 const User = require("../models/user");
 const TokenGenerator = require("../lib/token_generator");
+const Post = require("../models/post");
 
 const UsersController = {
   Create: (req, res) => {
@@ -32,5 +33,20 @@ const UsersController = {
       }
     });
   },
+
+  IndexById: (req, res) => {
+    const userId = req.params.id;
+    User.findById(userId).exec((err, user) => {
+      //res.status(500).json({ message: `Searching for user with id ${userId}`});
+      if (err) {
+        res.status(500).json({ error: "Internal Server Error" });
+      } else if (!user) {
+        res.status(404).json({ error: "User not found" });
+      } else {
+        const token = TokenGenerator.jsonwebtoken(req.user_id)
+        res.status(200).json({ message: "OK", user: user, token: token })
+      }
+    });
+  }
 };
 module.exports = UsersController;
