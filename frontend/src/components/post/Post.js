@@ -42,7 +42,9 @@ const Post = ({ post }) => {
   return (
     <div data-cy="post" className="post">
       <article data-cy="post" key={ post._id }>
-        { post.message }<br />
+        <div>Show Image:</div>
+        <div>{ post.message }</div>
+        <br />
       <small className="smallText">{formatDate(post.date)}</small><br />
       <LikeButton post_id={ post._id }/>
       </article>

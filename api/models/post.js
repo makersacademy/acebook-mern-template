@@ -2,6 +2,7 @@ const mongoose = require("mongoose");
 
 const PostSchema = new mongoose.Schema({
   message: String,
+  image: String, // Store the base64-encoded
   date: { type: Date, default: Date.now },
   comments: [{ comment_message: String, date: { type: Date, default: Date.now }}],
   likes: { type: Number, default: 0 },

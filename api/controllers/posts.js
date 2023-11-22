@@ -3,6 +3,8 @@ const User = require("../models/user");
 const TokenGenerator = require("../lib/token_generator");
 
 const PostsController = {
+  // Older version
+  /*
   Create: (req, res) => {
     const userId = req.user_id;
     const post = new Post({
@@ -17,6 +19,7 @@ const PostsController = {
       res.status(201).json({ message: 'OK', token: token });
     });
   },
+  */
   Index: (req, res) => {
     Post.find((err, posts) => {
       if (err) {
@@ -40,19 +43,36 @@ const PostsController = {
   },
 
   Create: (req, res) => {
-    const userId = req.user_id;
-    const post = new Post({
-      ...req.body,
-      userId: userId
-    });
-    post.save((err) => {
-      if (err) {
-        throw err;
+    try {
+      const userId = req.user_id; //takes user_id from Schema
+      const { message } = req.body;
+      const imageBuffer = req.file ? req.file.buffer : null //check image added
+
+      let imageUrl = null;
+      if (imageBuffer) {
+        const base64Image = imageBuffer.toString('base64'); // save image as bas64 string
+        imageUrl = base64Image;
       }
 
+      const post = new Post({
+        ...req.body,
+        message,
+        image: imageUrl,
+        userId: userId
+      });
+
+      post.save((err) => {
+        if (err) {
+          throw err;
+        }
+      );
+
       const token = TokenGenerator.jsonwebtoken(req.user_id);
-      res.status(201).json({ message: 'OK', token: token });
-    });
+      res.status(201).json({ message: 'OK', token });
+    } catch (error) {
+      console.error('Error creating post:', error);
+      res.status(500).json({ error: 'Internal Server Error' });
+    };
   },
 
   Comment: async (req, res) => {
@@ -138,7 +158,65 @@ GetLikes: async (req, res) => {
         console.error('Error retrieving post likes:', err);
         res.status(500).json({ message: 'Internal Server Error' });
     }
-  },
+  }
+
+
 };
 
+
+
 module.exports = PostsController;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//                                        Original code that WORKS 
+  // Create: (req, res) => {
+  //   const userId = req.user_id;
+  //   const post = new Post({
+  //     ...req.body,
+  //     userId: userId});
+  //   post.save((err) => {
+  //     if (err) {
+  //       throw err;
+  //     }
+
+  //     const token = TokenGenerator.jsonwebtoken(req.user_id)
+  //     res.status(201).json({ message: 'OK', token: token });
+  //   });
+  // },
+  
+// UploadImage
+// try {
+//   // Process the image (save to storage, if using a cloud service)
+//   const imageBuffer = req.file.buffer; // Access image data as a Buffer
+//   const base64Image = imageBuffer.toString('base64'); // Convert Buffer to base64 string
+
+//   // Create a new post in the database with the base64-encoded image
+//   const newPost = new Post({
+//     message: req.body.message,
+//     image: base64Image,
+//     userId: req.body.userId, // Make sure to adjust this based on your actual request structure
+//   });
+
+//   // Save the new post to the database
+//   const savedPost = await newPost.save();
+
+//   // Respond with the saved post data
+//   res.json(savedPost);
+// } catch (error) {
+//   // Handle errors and respond with an error message
+//   res.status(500).json({ error: error.message });
+// }
