@@ -9,6 +9,7 @@ const cors = require("cors");
 const postsRouter = require("./routes/posts");
 const authenticationRouter = require("./routes/authentication");
 const usersRouter = require("./routes/users");
+const commentsRouter = require("./routes/comments")
 const uploadsRouter = require("./routes/uploads");
 
 // library which saves files uploaded by the user on our server
@@ -22,7 +23,6 @@ app.use(express.json());
 app.use(logger("dev"));
 app.use(express.json());
 app.use(express.static(path.join(__dirname, "public")));
-// TODO: creating static routes for all images uploaded by users to serve them later
 // each image can be accessed at http://localhost:8080/uploads/image.jpg
 // __dirname refers to the directory of the current module
 app.use("/uploads", express.static(path.join(__dirname, "../uploads")));
@@ -56,6 +56,8 @@ app.use("/users/profile/:user_id", tokenChecker, usersRouter);
 //new route for posting avatar change
 app.use("/users/avatar", usersRouter);
 app.use("/upload", uploadsRouter);
+// new route for comments
+app.use("/comments", tokenChecker, commentsRouter)
 
 // catch 404 and forward to error handler
 app.use((req, res, next) => {
