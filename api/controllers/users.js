@@ -34,7 +34,7 @@ const UsersController = {
     });
   },
 
-  Index: (req, res) => {
+  IndexById: (req, res) => {
     const userId = req.params.userId;
     User.findById(userId).exec((err, user) => {
       if (err) {

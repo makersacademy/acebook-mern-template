@@ -1,11 +1,30 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import './Post.css'
 import LikeButton from '../likeButton/likeButton';
 
-const Post = ({ post }) => { 
+const Post = ({ post }) => {
+  const [author, setAuthor] = useState(null);
   const [comment, setComment] = useState('');
   const [comments, setComments] = useState(post.comments || []);
   const [token, setToken] = useState(window.localStorage.getItem("token"));
+
+  useEffect(() => {
+    if (token) {
+      // NOTE: This may have to be changed to ${post.author.id}
+      fetch(`/users/${post.author}`, {
+        headers: {
+          'Authorization': `Bearer ${token}`
+        }
+      })
+      .then(res => res.json())
+      .then(async result => {
+        setAuthor(result.user)
+      })
+      .catch(err => console.error(err));
+    } else {
+      console.log("No token set (in Post component)");
+    }
+  }, [token, post.author]);
 
   const handleCommentChange = (e) => {
     setComment(e.target.value);
@@ -41,6 +60,9 @@ const Post = ({ post }) => {
 
   return (
     <div data-cy="post" className="post">
+      <div>
+        <p>{ author ? `Post by ${author.name}`: "Loading..."}</p>
+      </div>
       <article data-cy="post" key={ post._id }>
         <div>Show Image:</div>
         <div>{ post.message }</div>
