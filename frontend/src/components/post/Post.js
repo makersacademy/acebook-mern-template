@@ -5,6 +5,7 @@ import Like from '../like/Like';
 
 const Post = ({post, userId}) => {
   // Format datetime of post
+  console.log(post)
   const date = new Date(post.created)
   const dateFormat = { year: 'numeric', month: 'numeric', day: 'numeric' };
   const formattedDate = new Intl.DateTimeFormat('en-UK', dateFormat).format(date);

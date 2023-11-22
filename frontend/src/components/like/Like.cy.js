@@ -45,10 +45,11 @@ describe("Like", () => {
 describe("Like", () => {
     it('increases the number of likes by 1 when Like button is clicked', () => {
         cy.mount(<Like post={{_id: 1, content: "This is my first post", likes: []}} />);
-        cy.get('[data-cy="post-button"]').click()
+        cy.get('[data-cy="like-button"]').click() // api call - need to intercept and write cy.intercept
         cy.get('[data-cy="post-likes"]').should('contain.text', 1)
     })
 })
+
 
 
 // Test the colour of an 'unliked' Like
