@@ -259,3 +259,38 @@ describe("/users/profile/:user_id, postsController", () => {
       expect(new_response.body.posts.map((post) => post.message)).toEqual(["hola! by user 2", "post by user 2!"]);
   });
 });
+
+
+
+describe("likePost", () => {
+  beforeEach(async () => {
+    await Post.deleteMany({});
+  });
+
+  test("user can like a post", async () => {
+    // Create a post
+    const postResponse = await request(app)
+      .post("/posts")
+      .set("Authorization", `Bearer ${token}`)
+      .send({ message: "Some message", token: token });
+
+    // Like the post
+    const likeResponse = await request(app)
+      .post(`/posts/${postResponse.body._id}/like/${user.id}`)  
+      .set("Authorization", `Bearer ${token}`)
+      .send();
+  
+    // Check the response
+    expect(likeResponse.status).toEqual(200);
+    expect(likeResponse.body.message).toEqual("Post liked");
+    expect(likeResponse.body.token).toBeDefined();
+  
+    // Check if the post in the database has the user in the likes array
+    // const likedPost = await Post.findById(postResponse.body._id);
+    
+
+    // expect(likedPost.likes).toContain([user.id]);
+  });
+});
+
+
