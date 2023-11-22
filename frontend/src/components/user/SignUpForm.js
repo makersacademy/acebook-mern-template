@@ -18,22 +18,16 @@ const SignUpForm = ({ navigate }) => {
 
     if (password.length < 8) {
       errorMessages += "Password must be at least 8 characters long\n";
-    }
-    if (
-      !/\d/.test(password) ||
-      !/[!@#$%^&*()_+{}\[\]:;<>,.?~\\/-]/.test(password)
-    ) {
-      errorMessages +=
-        "Password must contain at least one number and special sign\n";
-    }
-    if (password !== password_confirmation) {
+    } if ((!/\d/.test(password)) || (!/[!@#$%^&*()_+{}\[\]:;<>,.?~\\/-]/.test(password))) {
+      errorMessages += "Password must contain at least one number and special sign\n";
+    } if (password !== password_confirmation) {
       errorMessages += "The entered passwords do not match.";
-    }
-    if (users.some((user) => user.email === email)) {
-      //Check if users contains some entry with 'email': email
+    } if (users.some(user => user.email === email)) { //Check if users contains some entry with 'email': email
       errorMessages += "Email must be unique!";
-    }
-    if (errorMessages !== "") {
+    } if (username === "") {
+      errorMessages += "Please enter a username";
+    } if (errorMessages !== "") {
+
       alert(errorMessages);
     } else {
       fetch("/users", {
