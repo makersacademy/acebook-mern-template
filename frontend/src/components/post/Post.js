@@ -39,7 +39,6 @@ const Post = ({ post }) => {
 
 
   const handleLikeClick = async () => {
-      console.log("token:", token)
       const response = await fetch(`/posts/like/${post._id}`, {
         method: 'POST',
         headers: {
