@@ -7,7 +7,7 @@ const Comment = ({ comment }) => {
   return (
     <article data-cy="comment" key={comment._id}>
       <div id="comment-msg-header">
-        {/* <MessageHeader user_id={comment.user_id}/> */}
+        <MessageHeader user_id={comment.user_id}/>
       </div>
       <div id="comment-msg-content">
         {comment.message}
