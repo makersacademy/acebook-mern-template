@@ -47,7 +47,7 @@ app.use("/users/profile/:user_id", tokenChecker, usersRouter);
 //new route for posting avatar change
 app.use("/users/avatar", usersRouter);
 //new route to handle liking a post
-app.use("/posts/:_id/like/:user_id", tokenChecker, postsRouter);
+app.use("/posts/like/:_id", tokenChecker, postsRouter);
 
 // catch 404 and forward to error handler
 app.use((req, res, next) => {

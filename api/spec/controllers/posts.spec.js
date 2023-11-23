@@ -276,7 +276,7 @@ describe("likePost", () => {
 
     // Like the post
     const likeResponse = await request(app)
-      .post(`/posts/${postResponse.body._id}/like/${user.id}`)  
+      .post(`/posts/like/${postResponse.body._id}`)  
       .set("Authorization", `Bearer ${token}`)
       .send();
   

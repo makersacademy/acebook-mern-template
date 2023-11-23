@@ -54,7 +54,8 @@ const PostsController = {
   likePost: async (req, res) => {
     console.log("Controller - postId:", req.params._id);
     const postId = req.params._id;
-    const user_id = req.params.user_id;   
+    const user_id = req.user_id;   
+    console.log("user_id:" , user_id)
     console.log("postId:", postId);
 
     try {
@@ -76,7 +77,7 @@ const PostsController = {
       await post.save();
 
       const token = TokenGenerator.jsonwebtoken(req.user_id);
-      res.status(200).json({ message: "Post liked", token: token });
+      res.status(200).json({ message: "Post liked", token: token, likes: post.likes.length });
     } catch (error) {
       console.error("Error liking post:", error);
       res.status(500).json({ message: "Internal server error" });
