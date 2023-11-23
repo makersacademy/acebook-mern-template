@@ -30,16 +30,16 @@ const Navbar = ({ navigate }) => {
           Posts
         </Link>
 
-        {/* UNCOMMENT WHEN IMPLEMENTING MY ACCOUNT */}
-        {/* <Link
+        <Link
           id="account"
           to="account"
           onClick={(e) => {
             e.preventDefault();
+            navigate("/users/my_account");
           }}
         >
           My Account
-        </Link> */}
+        </Link>
 
         {/*  UNCOMMENT WHEN IMPLEMENTING SEARCH BAR */}
         {/* <form

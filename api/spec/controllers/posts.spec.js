@@ -174,8 +174,9 @@ describe("/posts", () => {
   });
 });
 
-describe("/users/profile/:user_id, postsController", () => {
-  beforeAll(async () => {});
+describe("/profile/:user_id, postsController", () => {
+  beforeAll(async () => {
+  });
 
   beforeEach(async () => {
     await Post.deleteMany({});
@@ -247,18 +248,15 @@ describe("/users/profile/:user_id, postsController", () => {
       .send({ message: "post by user 2!", token: token2 });
 
     await request(app)
-      .post("/posts")
-      .set("Authorization", `Bearer ${token2}`)
-      .send({ message: "hola! by user 2", token: token2 });
-
-    let new_response = await request(app)
-      .get(`/users/profile/${user2._id}`)
-      .set("Authorization", `Bearer ${token2}`)
-      .send({ token: token2 });
-    // mapping messages from post objects in response body
-    expect(new_response.body.posts.map((post) => post.message)).toEqual([
-      "hola! by user 2",
-      "post by user 2!",
-    ]);
+        .post("/posts")
+        .set("Authorization", `Bearer ${token2}`)
+        .send({ message: "hola! by user 2", token: token2 })
+    
+      let new_response = await request(app)
+        .get(`/profile/${user2._id}`)
+        .set("Authorization", `Bearer ${token2}`)
+        .send({ token: token2 });
+      // mapping messages from post objects in response body
+      expect(new_response.body.posts.map((post) => post.message)).toEqual(["hola! by user 2", "post by user 2!"]);
   });
 });
