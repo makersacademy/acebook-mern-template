@@ -32,9 +32,11 @@ const UserProfileFeed = ({ navigate }) => {
       <>
         <h2>USER PROFILE PAGE</h2>
         <div id="user-profile-feed" role="feed">
-          {posts.map((post) => (
-            <Post post={post} key={post._id} />
-          ))}
+        {Array.isArray(posts) && posts.length > 0 ? (
+            posts.map((post) => <Post post={post} key={post._id} />)
+          ) : (
+            <p data-cy="no-posts-message">No posts yet :( </p>
+          )}
         </div>
       </>
     );
