@@ -2,6 +2,7 @@ const Comment = require("../models/comment");
 const TokenGenerator = require("../lib/token_generator");
 const Post = require("../models/post")
 
+
 const CommentController = {
     Index: async (req, res) => {
       try {
@@ -49,6 +50,7 @@ const CommentController = {
           res.status(400).json({ message: 'Bad request' });
         }
       },
+
   };
   
   module.exports = CommentController;

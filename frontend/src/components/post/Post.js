@@ -8,9 +8,10 @@ import Like from '../like/Like';
 const Post = ({post, userId, fetchPosts}) => {
   const [showCommentForm, setShowCommentForm] = useState(false);
   const [visibleComments, setVisibleComments] = useState(2);
+  const [commentsButtonLabel, setCommentsButtonLabel] = useState("Hide comments");
+
   
   // Format datetime of post
-  console.log(post)
   const date = new Date(post.created)
   const dateFormat = { year: 'numeric', month: 'numeric', day: 'numeric' };
   const formattedDate = new Intl.DateTimeFormat('en-GB', dateFormat).format(date);
@@ -19,9 +20,14 @@ const Post = ({post, userId, fetchPosts}) => {
     setShowCommentForm((prev) => !prev);
   };
 
-  const loadMoreComments = () => {
-    setVisibleComments(visibleComments + 2); // Increase the number of visible comments
+  const toggleVisibleComments = () => {
+    // Toggle the visibility 
+    setVisibleComments((prev) => (prev === 0 ? 2 : 0));
+    setCommentsButtonLabel((prevLabel) =>
+      prevLabel === "Hide comments" ? "View comments" : "Hide comments"
+    );
   };
+
 
   return (
     <div className='post-box'>
@@ -38,8 +44,8 @@ const Post = ({post, userId, fetchPosts}) => {
       <div className='post-row'>
         <Like post={post} userId={ userId }/>
         <div className='flex-align-vertical post-comments-gap'>
-          <a onClick={toggleCommentForm}>View comments</a>
-          <button data-cy="post-comment" className='primary-btn' onClick={toggleCommentForm}>
+        <a onClick={toggleVisibleComments} style={{ cursor: 'pointer' }}>{commentsButtonLabel}</a>
+          <button data-cy="post-comment" className='primary-btn' onClick={toggleCommentForm} style={{ cursor: 'pointer' }}>
             Add comment
           </button>
         </div>
@@ -49,15 +55,10 @@ const Post = ({post, userId, fetchPosts}) => {
         {post.comments.slice(0, visibleComments).map((comment) => (
           <Comment comment={comment} key={comment._id} />
         ))}
-        {visibleComments < post.comments.length && (
-          <button className='load-more-btn' onClick={loadMoreComments}>
-            Load More Comments
-          </button>
-        )}
-      </div>
+        </div>
     </div>
-  );
-};
+    );
+  };
 
 export default Post;
 

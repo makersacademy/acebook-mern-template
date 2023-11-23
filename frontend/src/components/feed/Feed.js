@@ -54,15 +54,14 @@ const Feed = ({ navigate }) => {
     );
   };
   
-      
+  console.log(posts)
     if(token && posts) {
-      console.log("posts", posts)
       return(
         <>
           <NewPost posts={posts} setPosts={setPosts} setReRender={ setReRender }/>
           <h1>Posts</h1>
           <div id='feed' role="feed" className='flex-centre'>
-              {posts.map(
+              {posts.reverse().map(
                 (post) => ( <Post post={ post } key={ post._id } fetchPosts={ fetchPosts} userId={userId}/> )
               )}
           </div>

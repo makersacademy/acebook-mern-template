@@ -11,8 +11,10 @@ const PostsController = {
         .populate({
           path:'comments',
           populate: {path: 'author'}
-        });
-      console.log('populate: posts', posts)
+        })
+        .sort({ created: -1 });
+
+      
       const token = TokenGenerator.jsonwebtoken(req.user_id);
       const userID = req.user_id
       res.status(200).json({ posts: posts, token: token, userID: userID});
@@ -48,9 +50,7 @@ const PostsController = {
       throw err;
     }
   }
-}
-
-   //Todo: Posts By followers endpoint: 
+} 
 
 
 
