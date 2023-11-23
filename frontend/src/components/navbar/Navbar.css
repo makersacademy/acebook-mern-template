@@ -1,23 +1,22 @@
 nav {
-    display: flex;
-    justify-content: space-between;
-    background-color: #1877f2; /* Facebook blue color */
-    padding: 10px; 
-  }
-  
-nav a {
-    color: #fff; 
-    text-decoration: none;
-    padding: 8px 16px; 
-  }
-  
-nav a:hover {
-    
-    background-color: #214a7b; /* Darker blue on hover */
-  }
+  display: flex;
+  justify-content: space-between;
+  background-color: #1877f2; /* Facebook blue color */
+  padding: 10px;
+}
 
-  .logo {
-    font-size: 1.5rem;
-    font-weight: bold;
-    color: #fff;
-  }
+nav a {
+  color: #fff;
+  text-decoration: none;
+  padding: 8px 16px;
+}
+
+nav a:hover {
+  background-color: #214a7b; /* Darker blue on hover */
+}
+
+.logo {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #fff;
+}

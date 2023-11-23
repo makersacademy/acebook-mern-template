@@ -37,11 +37,10 @@ const UsersController = {
     res.status(201).json({ message: "OK" });
   },
   GetUserEmails: async (req, res) => {
-    User.find({}, 'email', (err, users) => {
-      if (err){
+    User.find({}, "email", (err, users) => {
+      if (err) {
         throw err;
-      }
-      else{
+      } else {
         res.status(200).json(users);
       }
     });

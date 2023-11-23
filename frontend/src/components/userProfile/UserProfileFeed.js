@@ -1,10 +1,10 @@
-import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
-import Post from '../post/Post'
+import React, { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
+import Post from "../post/Post";
 
 const UserProfileFeed = ({ navigate }) => {
-	const [posts, setPosts] = useState([]);
-	const [token, setToken] = useState(window.localStorage.getItem("token"));
+  const [posts, setPosts] = useState([]);
+  const [token, setToken] = useState(window.localStorage.getItem("token"));
   const user_id = useParams();
 
   // authentication
@@ -28,20 +28,19 @@ const UserProfileFeed = ({ navigate }) => {
     
   // Users posts: filter list of posts on the basis of user_id
 
-    if(token) {
-      return(
-				<>
-					<h2>USER PROFILE PAGE</h2>
-					<div id='user-profile-feed' role="feed">
-							{posts.map(
-								(post) => ( <Post post={ post } key={ post._id } /> )
-							)}
-					</div>
-				</>
-			)
-		} else {
-			navigate('/login')
-		}
-	}
-  export default UserProfileFeed;
-  
+  if (token) {
+    return (
+      <>
+        <h2>USER PROFILE PAGE</h2>
+        <div id="user-profile-feed" role="feed">
+          {posts.map((post) => (
+            <Post post={post} key={post._id} />
+          ))}
+        </div>
+      </>
+    );
+  } else {
+    navigate("/login");
+  }
+};
+export default UserProfileFeed;
