@@ -11,7 +11,6 @@ const commentsRouter = require("./routes/comments");
 const dataRouter = require("./routes/data");
 const profilesRouter = require("./routes/profiles");
 
-
 const app = express();
 
 // setup for receiving JSON
@@ -25,7 +24,6 @@ app.use(express.static(path.join(__dirname, "public")));
 const tokenChecker = (req, res, next) => {
   let token;
   const authHeader = req.get("Authorization");
-  console.log("from Token_generator - authHeader = " + authHeader)
 
   if (authHeader) {
     token = authHeader.slice(7);
@@ -33,7 +31,6 @@ const tokenChecker = (req, res, next) => {
 
   JWT.verify(token, process.env.JWT_SECRET, (err, payload) => {
     if (err) {
-      console.log("app.js error = " + err)
       console.log(err);
       res.status(401).json({ message: "auth error" });
     } else {
@@ -43,28 +40,13 @@ const tokenChecker = (req, res, next) => {
   });
 };
 
-
-// route setup
-// try {
-//   app.use("/users", tokenChecker, usersRouter);
-// } catch (err) {
-//   console.log("Caught error********************************* " + err)
-// } finally {
-//   app.use("/users", usersRouter);
-// }
-
-//new route for posting avatar change
-//app.use("/users/avatar", usersRouter);
 app.use("/users", usersRouter);
-
-
 app.use("/posts", tokenChecker, postsRouter);
 app.use("/tokens", authenticationRouter);
-// new route for comments
 app.use("/comments", tokenChecker, commentsRouter);
-
 //new route for obtaining user data based on user_id
 app.use("/data", tokenChecker, dataRouter);
+// new route for fetching user profile posts
 app.use("/profile", tokenChecker, profilesRouter);
 
 // catch 404 and forward to error handler
