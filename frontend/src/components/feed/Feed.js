@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import Post from '../post/Post'
 import './Feed.css'
 import NavBar from '../navBar/NavBar';
+import NewPost from '../newPost/NewPost'
 
 const Feed = ({ navigate }) => {
   const [posts, setPosts] = useState([]);
@@ -26,10 +27,10 @@ const Feed = ({ navigate }) => {
   }, [token])
 
 
-  const logout = () => {
-    window.localStorage.removeItem("token")
-    navigate('/login')
-  }
+  // const logout = () => {
+  //   window.localStorage.removeItem("token")
+  //   navigate('/login')
+  // }
   
     if(token) {
       return(

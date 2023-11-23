@@ -81,8 +81,9 @@ const Post = ({ post }) => {
       </div>
 
       <div className='postcontentandlikebutton'>
-          <article data-cy="postcontent" key={ post._id }>
+          <article data-cy="post" key={ post._id }>
                 <div className='post'><div>Show Image:</div>
+                <img src={`data:image/png;base64, ${post.image}`} alt="Post" />
             <br />
                 <div>{ post.message }</div>
               <small className="smallText">{formatDate(post.date)}</small></div>
@@ -125,5 +126,3 @@ const Post = ({ post }) => {
 
 
 export default Post;
-
-

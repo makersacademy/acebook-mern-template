@@ -3,23 +3,7 @@ const User = require("../models/user");
 const TokenGenerator = require("../lib/token_generator");
 
 const PostsController = {
-  // Older version
-  /*
-  Create: (req, res) => {
-    const userId = req.user_id;
-    const post = new Post({
-      ...req.body,
-      userId: userId});
-    post.save((err) => {
-      if (err) {
-        throw err;
-      }
 
-      const token = TokenGenerator.jsonwebtoken(req.user_id)
-      res.status(201).json({ message: 'OK', token: token });
-    });
-  },
-  */
   Index: (req, res) => {
     Post.find((err, posts) => {
       if (err) {
@@ -27,6 +11,17 @@ const PostsController = {
       }
       const token = TokenGenerator.jsonwebtoken(req.user_id);
       //console.log(posts);
+      res.status(200).json({ posts: posts, token: token });
+    });
+  },
+
+  IndexByAuthorId: (req, res) => {
+    const author = req.authorId;
+    Post.find({ author: author }, (err, posts) => {
+      if (err) {
+        return res.status(500).json({ error: err.message });
+      }
+      const token = TokenGenerator.jsonwebtoken(req.user_id);
       res.status(200).json({ posts: posts, token: token });
     });
   },
@@ -49,15 +44,13 @@ const PostsController = {
 
   Create: (req, res) => {
     try {
-      // req.user_id is the id of the currently logged in user.
-      // the middleware function tokenChecker sets this on the request.
-      const author = req.user_id; //takes user_id from Schema
+      const author = req.user_id; 
       const { message } = req.body;
-      const imageBuffer = req.file ? req.file.buffer : null //check image added
+      const imageBuffer = req.file ? req.file.buffer : null;  
 
       let imageUrl = null;
       if (imageBuffer) {
-        const base64Image = imageBuffer.toString('base64'); // save image as bas64 string
+        const base64Image = imageBuffer.toString('base64'); 
         imageUrl = base64Image;
       }
 
@@ -68,19 +61,15 @@ const PostsController = {
         author: author
       });
 
-      post.save((err) => {
-        if (err) {
-          throw err;
-        }
-      });
+      post.save();
 
       const token = TokenGenerator.jsonwebtoken(req.user_id);
       res.status(201).json({ message: 'OK', token });
     } catch (error) {
       console.error('Error creating post:', error);
       res.status(500).json({ error: 'Internal Server Error' });
-    };
-  },
+      };
+    },
 
   Comment: async (req, res) => {
     console.log("COMMENTING");
@@ -88,24 +77,18 @@ const PostsController = {
     const newComment = req.body.comment;
 
     try {
-      // Fetch user information based on user_id
       const activeUser = await User.findById(req.user_id);
       if (!activeUser) {
         throw new Error("User not found");
       }
 
-      // Add the comment to post.comments with the fetched username
       Post.findOneAndUpdate(
         { _id: req.params.id },
         {
           $push: {
             comments: {
               comment_message: newComment,
-              // TODO: Change this if the user is able
-              // to change their displayName? Or add name updating logic?
-              // (The user could change their displayName but the comment would
-              // retain the previous displayName)
-              displayName: activeUser.displayName, // Assuming displayName is the user's username
+              displayName: activeUser.displayName, 
               commenter: req.user_id
             },
           },
@@ -136,7 +119,7 @@ const PostsController = {
     const newLike = req.body.likes;
 
     Post.findOneAndUpdate(
-      { _id: req.params.id }, // Find the post by its ID
+      { _id: req.params.id }, 
       { $inc: { likes: newLike } }, 
       { new: true }, 
       (err, updatedPost) => {
@@ -176,57 +159,3 @@ GetLikes: async (req, res) => {
 
 
 module.exports = PostsController;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-//                                        Original code that WORKS 
-  // Create: (req, res) => {
-  //   const userId = req.user_id;
-  //   const post = new Post({
-  //     ...req.body,
-  //     userId: userId});
-  //   post.save((err) => {
-  //     if (err) {
-  //       throw err;
-  //     }
-
-  //     const token = TokenGenerator.jsonwebtoken(req.user_id)
-  //     res.status(201).json({ message: 'OK', token: token });
-  //   });
-  // },
-  
-// UploadImage
-// try {
-//   // Process the image (save to storage, if using a cloud service)
-//   const imageBuffer = req.file.buffer; // Access image data as a Buffer
-//   const base64Image = imageBuffer.toString('base64'); // Convert Buffer to base64 string
-
-//   // Create a new post in the database with the base64-encoded image
-//   const newPost = new Post({
-//     message: req.body.message,
-//     image: base64Image,
-//     userId: req.body.userId, // Make sure to adjust this based on your actual request structure
-//   });
-
-//   // Save the new post to the database
-//   const savedPost = await newPost.save();
-
-//   // Respond with the saved post data
-//   res.json(savedPost);
-// } catch (error) {
-//   // Handle errors and respond with an error message
-//   res.status(500).json({ error: error.message });
-// }

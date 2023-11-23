@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const multer = require('multer'); //for image upload 
+const multer = require('multer'); 
 
 const PostsController = require("../controllers/posts");
 
@@ -13,6 +13,7 @@ router.post("/", PostsController.Create);
 // PostsController.IndexLoggedInUser gets the posts
 // of the *currently logged in* user.
 router.get("/user", PostsController.IndexLoggedInUser);
+router.get("/user/:authorId", PostsController.IndexByAuthorId);
 router.put("/:id", PostsController.Comment);
 router.put("/:id/likes", PostsController.Likes);
 router.get("/:id/likes", PostsController.GetLikes);

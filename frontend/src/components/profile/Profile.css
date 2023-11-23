@@ -43,4 +43,64 @@
     }
 }
 
+
+
+
+
+
+
+
 /* Add any additional styling as needed */
+.smallText {
+    font-size: 0.7em; /* Adjust the size as needed */
+}
+/* img {
+    width: 300px;
+    height: 250px;
+    object-fit: cover;
+} */
+
+.post-container {
+    margin: auto;
+    padding: 10px;
+    width: 75%;
+}
+
+.image-box {
+    padding: 40px;
+}
+
+article {
+    position: relative;
+}
+
+article img {
+    display: flex;
+}
+
+small.smallText {
+    display: block;
+    margin-top: 5px;
+}
+
+.likes-comments-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 10px;
+}
+
+.comments {
+    margin-left: 10px;
+}
+
+.comment-input {
+    margin-top: 10px;
+}
+
+.post-message {
+    font-size: 18px;
+    padding-top: 20px;
+
+}
+
