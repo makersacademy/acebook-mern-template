@@ -5,28 +5,42 @@ body {
     background-color: #f4f4f4;
 }
 
-.new_post {
+.new-post {
     margin: 20px;
     padding: 20px;
-    border: 1px solid #ccc;
+    border: 1px solid black;
     border-radius: 8px;
     display: inline-block;
     text-align: left;
-    text-align: left;
+}
+
+.newpostform {
+    border: 1px solid black;
+    border-radius: 8px;
+    padding: 20px;
+}
+
+.new-post-message {
+    width: 100%;
+    padding: 10px;
+    box-sizing: border-box;
+    font-size: 16px;
+    border: 1px solid black;
+    border-radius: 4px;
+    margin-bottom: 10px;
+}
+
+.file-input {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    margin-left: 60px;
 }
 
 label {
     display: block;
     margin-bottom: 10px;
-}
-
-.new-post-button {
-    width: 100%;
-    padding: 10px;
-    box-sizing: border-box;
-    font-size: 16px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
 }
 
 img {
@@ -36,6 +50,23 @@ img {
     margin-top: 10px;
     border: 2px solid #ddd;
     border-radius: 8px;
+}
+
+.newpostbutton {
+    background-color: #87CEEB;
+    margin-left: 2px; /* Adjust margin between buttons if needed */
+    border: 2px solid lightblue;
+    padding: 8px 16px; /* Add padding for better visual appearance */
+    color: #ffffff;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    width: 90%;
+    border-radius: 5px;
+    margin-top: 10px;
+
+    &:hover {
+    background-color: #4682b4;
+    }
 }
 
 

@@ -3,6 +3,7 @@ import NavBar from '../navBar/NavBar'
 import defaultProfile from '../../assets/defaultProfile.png';
 import ProfileFeed from '../profileFeed/ProfileFeed';
 import NewPost from '../newPost/NewPost';
+import './Profile.css';
 
 // Some logic required: If you're landing on your own profile, you see the update image. If you're landing on another person's profile, you don't. 
 // But do you see follow/unfollow instead? 
@@ -33,10 +34,11 @@ const Profile = ({ navigate }) => {
   console.log('This is my console print of', profile);
 
         return(
-        <>
+          <>
         <NavBar/>
+        <div className='profilecontainer'>
         <h2>Profile Name: {profile && profile?.displayName}</h2>
-        <div>
+        <div className='profilepic'>
         <img src={defaultProfile} alt="Default Profile Image"/>
         </div>
         
@@ -44,7 +46,8 @@ const Profile = ({ navigate }) => {
         <button>Update Profile Image</button>
       )}
        */}
-        <button>Update Profile Image</button>
+        <br />
+        <button className='submitbutton'>Update Profile Image</button>
         <div>
         <NewPost />
 
@@ -54,6 +57,7 @@ const Profile = ({ navigate }) => {
         <h3>Followers & Number</h3>
         <h3>Following & Number</h3> */}
         <ProfileFeed navigate={navigate}/>
+        </div>
         </>
       )
 }

@@ -33,12 +33,11 @@ const Feed = ({ navigate }) => {
   
     if(token) {
       return(
-        <div className='container'>
-          <div class="feed-nav"><NavBar /></div>
-          <h2>Posts</h2>
-            <button onClick={logout}>
-              Logout
-            </button>
+        <>
+        <div><NavBar /></div>
+        <div className='feedcontainer'>
+          <h2>Home</h2>
+          <h3>All Posts</h3>
           <div id='feed' role="feed">
               {posts
               .slice()
@@ -48,6 +47,7 @@ const Feed = ({ navigate }) => {
               )}
           </div>
         </div>
+        </>
       )
     } else {
       navigate('/login')

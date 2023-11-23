@@ -72,21 +72,18 @@ useEffect(() => {
     };
 
     return (
-    <div>
+    <>
         <form onSubmit={handleSubmitLikes}>
-        <label>
-            Likes:
             <button
             className='likeButton'
             type='submit'
             onClick={handleSubmitLikes}
             >
             <img src={likebutton} alt='Like' />
-            </button>
-        </label>
+            </button><br />
+            <LikeAmount likes={ likes } post_id={ props.post_id } />
         </form>
-        <small><LikeAmount likes={ likes } post_id={ props.post_id } /></small>
-    </div>
+    </>
     );
 };
 

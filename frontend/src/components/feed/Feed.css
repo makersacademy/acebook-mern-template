@@ -1,37 +1,31 @@
-
-.container {
-    max-width: 800px;
+.feedcontainer {
+    max-width: 850px;
     margin: 0 auto;
     padding: 20px;
 }
 
 h2 {
-    color: #333;
+    color: darkblue;
+    text-align: center; /* Center the text */
+    font-size: 2em; /* Increase the font size for emphasis */
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3); /* Add a subtle text shadow */
+
 }
 
-button {
-    color: green;
-    padding: 10px 15px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-}
-
-button:hover {
-    transform: scale(1.1);
-}
-
-#feed {
-    margin-top: 20px;
-}
+h3 {
+    color: dodgerblue;
+    text-align: center; /* Center the text */
+    font-size: 1.5em; /* Increase the font size for emphasis */
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2); /* Add a subtle text shadow */
+    }
 
 article {
-    border: 1px solid #ddd;
+    border: 2px solid #ddd;
     border-radius: 8px;
-    padding: 10px;
-    margin-bottom: 15px;
+    padding: 20px;
+    margin-bottom: 10px;
     background-color: #fff;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 6px 8px rgba(0, 0, 0, 0.1);
 }
 
 .smallText {

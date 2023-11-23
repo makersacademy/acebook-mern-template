@@ -67,34 +67,33 @@ const NewPost = () => {
                 )}
             {/* IMAGE PREVIEW */}
 
-                <form onSubmit={handleSubmit} enctype="multipart/form-data">
+                <form className='newpostform' onSubmit={handleSubmit} enctype="multipart/form-data">
                     <textarea 
-                    placeholder="write your post"
+                    placeholder="Enter new post here..."
                     className="new-post-message"
                     maxlength="250" //MAX post length 
                     rows="4" cols="52"
                     value={message} 
                     onChange={handleMessageChange}
                     />
-                <br />
                 <div id="the-count">
                     <span id="current">{characterCount}</span>
                     <span id="maximum">/ 250</span>
                 </div>
 
                 {/* IMAGE UPLOAD */}
-                <input type="file" 
+                <div className="file-input">
+                    <input type="file" 
                         id="postImage" 
                         name="post-image"
                         onChange={handleImageChange} />
+                </div>
                 {/* IMAGE UPLOAD */}
-                <br />
-                    <button onClick={() => setImage(null)}>Clear all</button>
-                <br />
+                    <button className="newpostbutton" onClick={() => setImage(null)}>Clear all</button>
                     <input id='submit' 
                             type="submit" 
                             value="Post" 
-                            className='custom-btn' 
+                            className="newpostbutton" 
                             onClick={handleReset}/>
                 </form>
             </div>

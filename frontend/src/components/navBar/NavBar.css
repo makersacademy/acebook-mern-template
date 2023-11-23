@@ -1,29 +1,47 @@
-nav {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 10px;
-  }
-  
-  .nav-left, .nav-right, .nav-center {
+.navbarcontainer {
+    height: 60px;
+    width: 100%;
     display: flex;
     align-items: center;
-  }
-  
-  .nav-left {
-    justify-content: flex-start;
-  }
-  
-  .nav-center {
-    justify-content: center;
-    flex-grow: 1;
-  }
-  
-  .nav-right {
-    justify-content: flex-end;
-  }
-  
-  button {
-    margin: 0 5px;
-  }
-  
+    position: relative;
+    padding: 0.5rem 0rem;
+    background-color: #87CEEB;
+    color: #87CEEB;
+    box-shadow: 0 2px 2px 2px rgba(9, 9, 9, 0.23);
+
+}
+
+.logo {
+    max-width: 200px; /* Set a maximum width for the logo */
+    height: auto; /* Maintain the aspect ratio */
+    margin-left: 30px; /* Adjust margin as needed for spacing */
+    border: none;
+    margin-bottom: 20px;
+
+}
+
+.buttoncontainer {
+    position: fixed; /* Fixed position to keep it in place while scrolling */
+    top: 0; /* Align it to the top of the viewport */
+    right: 0; /* Align it to the right edge of the viewport */
+    padding: 10px; /* Add padding for better visual appearance */
+    display: flex; /* Make the container a flex container */
+}
+
+.buttoncontainer button {
+    background-color: #87CEEB;
+    margin-left: 2px; /* Adjust margin between buttons if needed */
+    border: 2px solid lightblue;
+    padding: 8px 16px; /* Add padding for better visual appearance */
+    color: #ffffff;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    width: 50%;
+    border-radius: 5px;
+    margin-top: 10px;
+
+    &:hover {
+    background-color: #4682b4;
+    }
+}
+

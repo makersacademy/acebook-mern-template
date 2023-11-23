@@ -45,7 +45,7 @@ const SignUpForm = ({ navigate }) => {
 
 
     return (
-      <>
+      <div className='container'>
       <div className='split left'>
           <div className='centred'>
             <div className='left' >
@@ -54,8 +54,8 @@ const SignUpForm = ({ navigate }) => {
                   <input placeholder="Email" id="email" type='text' value={ email } onChange={handleEmailChange} />
                   <input placeholder="Password" id="password" type='password' value={ password } onChange={handlePasswordChange} />
                   <input className='submit' id='submit' type="submit" value="Submit" />
-                  </form>
                   <button className='submit' data-cy="submit-button" onClick={() => urlTo('/login')}>Go to Login</button>
+                  </form>
         </div></div></div>
 
         <div className='split right'>
@@ -63,7 +63,7 @@ const SignUpForm = ({ navigate }) => {
               <div className='right' >
                 <img  className='logo' src={Acebook} alt="logo" />
         </div></div></div>
-    </>
+    </div>
     );
 }
 
