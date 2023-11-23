@@ -21,11 +21,14 @@
     border-radius: 50%;
 }
 
-.m-btn {
-    margin-right: 20px;
-}
-
 .row {
     width: 100%;
 }
 
+.unfollow-btn{
+    background-color: red;
+}
+
+.m-btn {
+    margin-right: 20px;
+}

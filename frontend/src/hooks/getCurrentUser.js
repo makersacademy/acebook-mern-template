@@ -7,7 +7,7 @@ const useGetCurrentUser = (currentUserId) => {
     (Current User Id is available in ***'window.localStorage'***)
 
     params:
-        -currentUserId
+        - currentUserId
     
     returns:
         - Current User Object

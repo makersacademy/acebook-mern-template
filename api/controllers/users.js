@@ -51,8 +51,6 @@ const UsersController = {
       const newFollowing = req.body.following
       user.following = newFollowing
       user.save()
-      //User.findOneAndUpdate(req.body.userId, {followers:req.body.followers});
-    
     } catch (err) {
       //console.error(err);
       res.status(500).json({ error: "Internal Server Error" });

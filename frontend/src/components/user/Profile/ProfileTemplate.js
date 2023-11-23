@@ -1,22 +1,48 @@
 import Feed from "../../feed/Feed";
+import React, { useEffect, useState } from "react";
 
 const ProfileTemplate = (props) => {
+  /*
+    Contains  presentational logic for Profile Component.
+    Handles following/followers updates.
+    
+    Parents:
+        - Profile component.
+    Children:
+        ...
+    */
+  // Array following users by currently logged user
   const following = props.following;
   const setFollowing = props.setFollowing;
-  let newFollowing = props.following;
-  console.log(newFollowing);
 
+  let newFollowing = props.following;
+
+  //Var to load following state of viewed profile.
+  const [isFollowing, setIsFollowing] = useState(null);
+
+  //On Init comppnent sets is Following by checking if current User Id is in following.
+  useEffect(() => {
+    if (following) {
+      if (following.includes(props.user._id)) {
+        setIsFollowing(true);
+      } else {
+        setIsFollowing(false);
+      }
+    }
+  });
+  //Handle follow funciton.
   const handleFollow = (event) => {
     event.preventDefault();
-    if (newFollowing.includes(props.currentUserId)) {
-      const idIndex = following.indexOf(props.currentUserId);
+    if (newFollowing.includes(props.user._id)) {
+      const idIndex = following.indexOf(props.user_id);
       newFollowing.splice(idIndex, 1);
       setFollowing(newFollowing);
+      setIsFollowing(false);
     } else {
-      newFollowing.push(props.currentUserId)
+      newFollowing.push(props.user._id);
+      setIsFollowing(true);
     }
     console.log(newFollowing);
-
 
     fetch(`/api/users/update`, {
       method: "POST",
@@ -46,8 +72,13 @@ const ProfileTemplate = (props) => {
           <button className="primary-btn m-btn">Edit Profile</button>
         ) : (
           <form onSubmit={handleFollow}>
-            <button className="primary-btn m-btn" type="submit">
-              Follow
+            <button
+              className={`m-btn primary-btn ${
+                isFollowing ? "unfollow-btn" : ""
+              }`}
+              type="submit"
+            >
+              {isFollowing ? <>Unfollow</> : <>Follow</>}
             </button>
           </form>
         )}
@@ -70,7 +101,6 @@ const ProfileTemplate = (props) => {
         </div>
         <div className="col">
           <span>
-            {/* TODO: Change to followers when Model Updated */}
             <strong>{props.user.following.length}</strong>
           </span>
           <span>Following</span>

@@ -4,6 +4,7 @@ import useGetCurrentUser from "../../../hooks/getCurrentUser";
 import "./Profile.css";
 import { useSearchParams } from "react-router-dom";
 import ProfileTemplate from "./ProfileTemplate";
+
 const Profile = ({ navigate }) => {
   /*
     Contains Single User Profile Details.
@@ -12,6 +13,8 @@ const Profile = ({ navigate }) => {
 
     @Children:
         - Feed
+        - Profile Template ** takes current user/profile user in props, and array
+            of current user following users if other users are viewes **.
     */
 
   //Access query param by hook.
@@ -29,6 +32,7 @@ const Profile = ({ navigate }) => {
   const [currentUser, setCurrentUser, following, setFollowing] =
     useGetCurrentUser(currentUserId);
 
+  //Sets Viewed Profile to user with first Name and last Name from query params.
   useEffect(() => {
     if (firstName && lastName) {
       fetch(`/api/users?firstName=${firstName}&lastName=${lastName}`, {
