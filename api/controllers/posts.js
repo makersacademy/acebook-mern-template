@@ -22,7 +22,6 @@ const PostsController = {
       // added a line to add/update user_id field
       user_id: user_id,
     });
-    console.log("REQUEST BODY BE:", req.body);
     post.save((err) => {
       if (err) {
         throw err;
@@ -40,6 +39,7 @@ const PostsController = {
     // finding posts with specific user_id
     const result = await Post.find({ user_id: user_id });
     const token = TokenGenerator.jsonwebtoken(req.user_id);
+    console.log("HERE ARE THE POSTS:", result)
 
     if (!result) {
       return res.status(400).json({ message: "No posts found" });

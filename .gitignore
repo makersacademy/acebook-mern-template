@@ -64,3 +64,5 @@ typings/
 cypress/screenshots
 cypress/videos
 
+# misc
+.DS_Store

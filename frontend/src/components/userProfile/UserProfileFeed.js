@@ -7,24 +7,31 @@ const UserProfileFeed = ({ navigate }) => {
   const [token, setToken] = useState(window.localStorage.getItem("token"));
   const user_id = useParams();
 
+
+
+
+
+
   // authentication
   useEffect(() => {
-    if (token) {
-      fetch(`/users/profile/${user_id.user_id}`, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      })
-        .then((response) => response.json())
-        .then(async (data) => {
-          window.localStorage.setItem("token", data.token);
-          setToken(window.localStorage.getItem("token"));
-          setPosts(data.posts);
+      if(token) {
+        fetch(`${user_id.user_id}`, {
+          headers: {
+            Authorization: `Bearer ${token}`
+          }
         })
-        .catch((error) => console.error("Error fetching user profile:", error));
-    }
-  }, []);
+          .then(response => response.json())
+          .then(async data => {
+            window.localStorage.setItem("token", data.token)
+            setToken(window.localStorage.getItem("token"))
+            setPosts(data.posts);
+            console.log("POSTS ARE: ", posts)
+          })
+          .catch(error => console.error('Error fetching user profile:', error))
+      }
+    }, [token, user_id])
 
+    
   // Users posts: filter list of posts on the basis of user_id
 
   if (token) {

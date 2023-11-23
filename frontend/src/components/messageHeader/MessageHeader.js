@@ -7,9 +7,6 @@ const MessageHeader = ({ user_id, navigate }) => {
 
 	const getData = async () => {
 		const GetUserInfo = await fetch(`users/userinfo/${user_id}`)
-		console.log("THE USER ID IS: ", {user_id})
-			// let info = await response.json
-			// console.log(info)
 
 		if (GetUserInfo.ok) {
 			const response = await GetUserInfo.json();

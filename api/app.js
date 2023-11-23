@@ -9,8 +9,9 @@ const cors = require("cors");
 const postsRouter = require("./routes/posts");
 const authenticationRouter = require("./routes/authentication");
 const usersRouter = require("./routes/users");
-const commentsRouter = require("./routes/comments")
-const uploadsRouter = require("./routes/uploads");
+const commentsRouter = require("./routes/comments");
+const dataRouter = require("./routes/data");
+const profilesRouter = require("./routes/profiles");const uploadsRouter = require("./routes/uploads");
 
 // library which saves files uploaded by the user on our server
 const multer = require("multer");
@@ -47,16 +48,16 @@ const tokenChecker = (req, res, next) => {
   });
 };
 
-// route setup
-// removed excess routes which were causing errors
-app.use("/posts", tokenChecker, postsRouter);
-app.use("/posts/image", tokenChecker, postsRouter);
-app.use("/tokens", authenticationRouter);
-app.use("/users/profile/:user_id", tokenChecker, usersRouter);
-app.use("/upload", uploadsRouter);
-// new route for comments
-app.use("/comments", tokenChecker, commentsRouter)
 app.use("/users", usersRouter);
+app.use("/posts", tokenChecker, postsRouter);
+app.use("/tokens", authenticationRouter);
+app.use("/comments", tokenChecker, commentsRouter)
+//new route for obtaining user data based on user_id
+app.use("/data", tokenChecker, dataRouter);
+// new route for fetching user profile posts
+app.use("/profile", tokenChecker, profilesRouter);
+//new route for posting avatar change
+app.use("/upload", uploadsRouter);
 
 // catch 404 and forward to error handler
 app.use((req, res, next) => {
