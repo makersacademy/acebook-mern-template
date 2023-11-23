@@ -58,8 +58,6 @@ app.use("/data", tokenChecker, dataRouter);
 // new route for fetching user profile posts
 app.use("/profile", tokenChecker, profilesRouter);
 app.use("/upload", uploadsRouter);
-//new route to handle liking a post
-app.use("/posts/like/:_id", tokenChecker, postsRouter);
 
 // catch 404 and forward to error handler
 app.use((req, res, next) => {
