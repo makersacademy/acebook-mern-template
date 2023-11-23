@@ -1,4 +1,5 @@
 import Profile from "./Profile";
+
 const navigate = () => {};
 
 describe("Profile", () => {

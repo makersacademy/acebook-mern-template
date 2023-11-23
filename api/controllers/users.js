@@ -34,7 +34,6 @@ const UsersController = {
   },
 
   Find: async (req, res) => {
-
     try {
       const user = await User.findOne(req.query);
       delete user.password;
@@ -49,9 +48,8 @@ const UsersController = {
   Update: async (req, res) => {
     try {
       const user = await User.findById(req.body.userId);
-      const newFollowers = req.body.followers
-      console.log(newFollowers)
-      user.followers = newFollowers
+      const newFollowing = req.body.following
+      user.following = newFollowing
       user.save()
       //User.findOneAndUpdate(req.body.userId, {followers:req.body.followers});
     

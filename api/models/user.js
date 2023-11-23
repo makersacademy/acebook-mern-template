@@ -10,6 +10,7 @@ const UserSchema = new mongoose.Schema({
   username: {type: String, required: false},
   // Creating a one to many relationship to the same model
   followers: [{type: mongoose.Schema.Types.ObjectId, ref: "User", required: false}],
+  following: [{type: mongoose.Schema.Types.ObjectId, ref: "User", required: false}],
   photograph: {type: String},
   posts: [{type: mongoose.Schema.Types.ObjectId, ref: "Post"}],
   comments: [{type: mongoose.Schema.Types.ObjectId, ref: "Comment"}]
