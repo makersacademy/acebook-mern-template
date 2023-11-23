@@ -38,6 +38,8 @@ const UserPublicPage = ({ navigate }) => {
         .then(async data => {
           //window.localStorage.setItem("token", data.token);
           //setToken(window.localStorage.getItem("token"));
+          console.log("Printing what will be written to postsList");
+          console.log(data.posts);
           setPostsList(data.posts);
         })
         .catch(err => console.error(err));
