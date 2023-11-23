@@ -1,13 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import Post from "../post/Post";
+import Header from "../user/header/Header"
 
 const UserProfileFeed = ({ navigate }) => {
   const [posts, setPosts] = useState([]);
   const [token, setToken] = useState(window.localStorage.getItem("token"));
   const user_id = useParams();
-
-
 
 
 
@@ -25,7 +24,7 @@ const UserProfileFeed = ({ navigate }) => {
             window.localStorage.setItem("token", data.token)
             setToken(window.localStorage.getItem("token"))
             setPosts(data.posts);
-            console.log("POSTS ARE: ", posts)
+            console.log("THIS IS USER ID", {user_id})
           })
           .catch(error => console.error('Error fetching user profile:', error))
       }
@@ -37,8 +36,9 @@ const UserProfileFeed = ({ navigate }) => {
   if (token) {
     return (
       <>
-        <h2>USER PROFILE PAGE</h2>
+        <Header user_id={ user_id.user_id } />
         <div id="user-profile-feed" role="feed">
+          <h3> Recent Posts: </h3>
         {Array.isArray(posts) && posts.length > 0 ? (
             posts.map((post) => <Post post={post} key={post._id} />)
           ) : (
