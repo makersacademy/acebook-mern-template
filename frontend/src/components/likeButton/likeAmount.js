@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import './likeAmount.css';
 
 const LikeAmount = (props) => {
     const [token, setToken] = useState(window.localStorage.getItem('token'));
@@ -33,7 +34,11 @@ const LikeAmount = (props) => {
 
     return (
         <div className='likes_amount'>
-            {likes}
+            <small>
+                <strong>
+                        {likes} likes
+                </strong>
+            </small>
         </div>
     );
 };

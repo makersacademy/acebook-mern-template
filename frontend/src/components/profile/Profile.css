@@ -1,3 +1,56 @@
+/* styles.css */
+.profilecontainer {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.profilepic {
+    width: 200px; /* Set the desired width for the image */
+    height: 200px; /* Set the desired height for the image */
+    object-fit: cover; /* Maintain the aspect ratio and cover the container */
+    border: 3px solid #87CEEB; /* Add a 3px solid outline with a nice blue color */
+    border-radius: 50%; /* Make the border a circle */
+    margin-top: 20px; /* Add spacing between profile name and image */
+}
+
+.profilepic img {
+    width: 100%;
+    height: 95%;
+    object-fit: cover;
+    border-radius: 50%;
+    border: none;
+}
+
+.submitbutton {
+    background-color: #87CEEB;
+    margin-left: 2px; /* Adjust margin between buttons if needed */
+    border: 2px solid lightblue;
+    padding: 8px 16px; /* Add padding for better visual appearance */
+    color: #ffffff;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    width: 30%;
+    border-radius: 5px;
+    margin-top: 10px;
+
+    &:hover {
+    background-color: #4682b4;
+    }
+}
+
+
+
+
+
+
+
+
+/* Add any additional styling as needed */
 .smallText {
     font-size: 0.7em; /* Adjust the size as needed */
 }

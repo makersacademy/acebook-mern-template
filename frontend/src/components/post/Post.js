@@ -69,59 +69,60 @@ const Post = ({ post }) => {
   };
 
   return (
-    <div data-cy="post" className="post">
+    <div className='postcontainer' data-cy="post">
       <div data-cy="author-info" className="author-info">
-        { author ? (
-          <>
-            <ProfileImageThumbnail user={ author }/>
-            <p>{`Posted by ${author.displayName} on ${ "<<Date/time goes here>>" }`}</p>
-          </>
-        ) : "Loading..."
-        }
-      </div>
-      <article data-cy="post" key={ post._id }>
-        <div>Show Image:</div>
-        <img src={`data:image/png;base64, ${post.image}`} alt="Post" />
-        <div>{ post.message }</div>
-        <br />
-      <small className="smallText">{formatDate(post.date)}</small><br />
-      <LikeButton post_id={ post._id }/>
-      </article>
-      <br />
-      <div>
-        {comments.map((comment, index) => (
-          <div key={index}>{comment.comment_message}
-          <br />
-          {comment.date && 
-            <small className="smallText">{formatDate(comment.date)}</small>
-          }
-          <small className="smallText">{comment.displayName}</small>
-          
-          </div>
-          
-
-        ))}
-          
-        
+              { author ? (
+                <>
+                  <ProfileImageThumbnail user={ author }/>
+                  <p>{`Posted by ${author.displayName} on ${ "<<Date/time goes here>>" }`}</p>
+                </>
+              ) : "Loading..."
+              }
       </div>
 
-      <form onSubmit={handleSubmitComment}>
-        <label>
-          Comment:
-          <input
-            type="text"
-            value={comment}
-            onChange={handleCommentChange}
-            placeholder="Add a comment..."
-          />
-        </label>
-        <button type="submit">Add Comment</button>
-      </form>
+      <div className='postcontentandlikebutton'>
+          <article data-cy="post" key={ post._id }>
+                <div className='post'><div>Show Image:</div>
+                <img src={`data:image/png;base64, ${post.image}`} alt="Post" />
+            <br />
+                <div>{ post.message }</div>
+              <small className="smallText">{formatDate(post.date)}</small></div>
+            <div className='likebutton'>
+              <LikeButton post_id={ post._id }/>
+            </div>
+          </article>
+      </div>
+
+    
+      <div className='comments' >
+            {comments.map((comment, index) => (
+              <div key={index}>{comment.comment_message}
+              <br />
+              {comment.date && 
+                <small className="smallText">{formatDate(comment.date)}</small>
+              }
+              <small className="smallText">{comment.displayName}</small>    
+              </div>
+            ))}
+
+              <form onSubmit={handleSubmitComment}>
+                <p>
+                  Comment:
+                </p>
+                  <input
+                    type="text"
+                    value={comment}
+                    onChange={handleCommentChange}
+                    placeholder="Add a comment..."
+                    />
+                
+                <button className='commentbutton' type="submit">Add Comment</button>
+              </form>
+      </div>
+
     </div>
   );
 };
 
 
 export default Post;
-
-

@@ -2,6 +2,58 @@
     font-size: 0.7em; /* Adjust the size as needed */
 }
 
+.commentbutton {
+        background-color: #87CEEB;
+        margin-left: 2px; /* Adjust margin between buttons if needed */
+        border: 2px solid lightblue;
+        padding: 8px 16px; /* Add padding for better visual appearance */
+        color: #ffffff;
+        cursor: pointer;
+        transition: background-color 0.3s;
+        width: 60%;
+        border-radius: 5px;
+        margin-top: 10px;
+    
+        &:hover {
+        background-color: #4682b4;
+        }
+    }
+
+.author-info {
+        padding: 5px;
+}
+
+.comments {
+    text-align: center;
+    margin-left: 250px;
+    margin-right: 250px;
+    max-width: 800px;
+}
+
+.likebutton {
+    text-align: center;
+    margin-left: 250px;
+    margin-right: 250px;
+    max-width: 800px;
+}
+
+.post {
+    background: lightcyan;
+    padding: 10px;
+    border: 1px solid black; /* Added 'solid' as the border style */
+    border-radius: 5px;
+}
+
+
+
+
+
+
+
+
+
+
+
 .post-container {
     margin: auto;
     padding: 10px;
