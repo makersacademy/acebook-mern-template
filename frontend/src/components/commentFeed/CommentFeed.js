@@ -1,9 +1,9 @@
-import React, { useEffect, useState } from 'react';
-import Comment from '../comment/Comment'
+import React, { useEffect, useState } from "react";
+import Comment from "../comment/Comment";
 
 const CommentFeed = ({ post_id, navigate }) => {
   const [comments, setComments] = useState([]);
-	const [token, setToken] = useState(window.localStorage.getItem("token"));
+  const [token, setToken] = useState(window.localStorage.getItem("token"));
   const [newComment, setNewComment] = useState("");
 
   // Declare fetchData function
@@ -12,8 +12,8 @@ const CommentFeed = ({ post_id, navigate }) => {
       try {
         const response = await fetch(`/comments/${post_id}`, {
           headers: {
-            'Authorization': `Bearer ${token}`
-          }
+            Authorization: `Bearer ${token}`,
+          },
         });
 
         if (response.ok) {
@@ -29,70 +29,72 @@ const CommentFeed = ({ post_id, navigate }) => {
       }
     }
   };
-useEffect(() => {
-    fetchData() // Initial fetch when the component mounts
-      }, [token]); // Only fetch data when token changes to avoid issues with frequent rendering
+  useEffect(() => {
+    fetchData(); // Initial fetch when the component mounts
+  }, [token]); // Only fetch data when token changes to avoid issues with frequent rendering
 
-      const handleCommentSubmit = async (e) => {
-        e.preventDefault();
+  const handleCommentSubmit = async (e) => {
+    e.preventDefault();
 
-        if (!newComment.trim()) {
-          console.error("You cannot create an empty comment");
-          return;
-        }
+    if (!newComment.trim()) {
+      console.error("You cannot create an empty comment");
+      return;
+    }
 
-        const response = await fetch(`/comments/${post_id}`, {
-          method: "POST",
-          headers: {
-            'Content-Type': 'application/json',
-            'Authorization': `Bearer ${token}`,
-          },
-          body: JSON.stringify({ message: newComment}),
-          post_id: post_id,
-        });
-    
-        if (response.ok) {
-          const data = await response.json();
-          window.localStorage.setItem("token", data.token);
-          setToken(window.localStorage.getItem("token"));
-          // setComments(data.comments);
-          setNewComment("");
-          fetchData(); // Fetch data after updating the state
-        } else {
-          console.error("Error creating comment");
-        }
-      };
+    const response = await fetch(`/comments/${post_id}`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+      body: JSON.stringify({ message: newComment }),
+      post_id: post_id,
+    });
 
-  return(
+    if (response.ok) {
+      const data = await response.json();
+      window.localStorage.setItem("token", data.token);
+      setToken(window.localStorage.getItem("token"));
+      // setComments(data.comments);
+      setNewComment("");
+      fetchData(); // Fetch data after updating the state
+    } else {
+      console.error("Error creating comment");
+    }
+  };
+
+  return (
     <>
-      <div id='comment-feed' role="feed">
-      Comments:
+      <div id="comment-feed" role="feed">
+        Comments:
         {Array.isArray(comments) && comments.length > 0 ? (
           comments.map((comment) => (
-          <Comment comment={ comment } key={ comment._id } />
+            <Comment comment={comment} key={comment._id} />
           ))
-          ) : (
-            <p data-cy="no-comments-message">No one has commented yet - be the first!</p>
-          )}
+        ) : (
+          <p data-cy="no-comments-message">
+            No one has commented yet - be the first!
+          </p>
+        )}
       </div>
 
-{/* new comment section */}
-      <div id='new-comment'>
+      {/* new comment section */}
+      <div id="new-comment">
         <form onSubmit={handleCommentSubmit} data-cy="comment-form">
-            <label>
-              New comment:
-              <input
-                type="text"
-                name="newComment"
-                value={newComment}
-                onChange={(e) => setNewComment(e.target.value)}
-                data-cy="new-comment-input"
-              />
-            </label>
-            <button type="submit">💬</button>
-          </form>
+          <label>
+            New comment:
+            <input
+              type="text"
+              name="newComment"
+              value={newComment}
+              onChange={(e) => setNewComment(e.target.value)}
+              data-cy="new-comment-input"
+            />
+          </label>
+          <button type="submit">💬</button>
+        </form>
       </div>
     </>
-  )
-}
+  );
+};
 export default CommentFeed;
