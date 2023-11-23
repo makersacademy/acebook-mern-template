@@ -54,6 +54,7 @@ const NewPost = ({ user_id }) => {
 
     return(
         <>
+        <h2>Compose</h2>
             <div className="new_post">
                 {image && (
                     <div class="image-preview">
