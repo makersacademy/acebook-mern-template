@@ -1,6 +1,7 @@
 const Post = require("../models/post");
 const TokenGenerator = require("../lib/token_generator");
 
+
 const PostsController = {
   Index: async (req, res) => {
     try {
@@ -28,11 +29,12 @@ const PostsController = {
       if (err) {
         throw err;
       }
-
       const token = TokenGenerator.jsonwebtoken(req.user_id)
       res.status(201).json({ message: 'OK', token: token });
     });
   },
+
+   //Todo: Posts By followers endpoint: 
 };
 
 module.exports = PostsController;

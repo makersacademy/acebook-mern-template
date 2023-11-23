@@ -1,5 +1,6 @@
-.content-box {
-    margin: 20px 20px;
+.main-container {
+    margin: 20px auto;
+    width: 50%;
     display: flex;
     flex-direction: column;
     justify-content: center;

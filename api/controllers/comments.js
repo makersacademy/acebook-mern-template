@@ -22,6 +22,7 @@ const CommentController = {
         res.status(500).json({ error: 'Internal Server Error' });
       }
     },
+<<<<<<< HEAD
     Create: async (req, res) => {
         try {
           const comment = new Comment(req.body);
@@ -83,4 +84,8 @@ const CommentController = {
 
 
 
+=======
+    // Endpoint Comments by Post
+};
+>>>>>>> main
 
