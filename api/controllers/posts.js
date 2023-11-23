@@ -17,7 +17,7 @@ const PostsController = {
 
   IndexByAuthorId: (req, res) => {
     const author = req.authorId;
-    Post.find({ author }, (err, posts) => {
+    Post.find({ author: author }, (err, posts) => {
       if (err) {
         return res.status(500).json({ error: err.message });
       }
