@@ -2,9 +2,16 @@ import React, { useEffect, useState } from 'react';
 import Post from '../post/Post'
 import './Feed.css'
 import NavBar from '../navBar/NavBar';
+import Find from '../find/Find';
+import { useContext } from 'react';
+import { FindContext } from '../findContext/FindContext.js';
+
+
+
 
 const Feed = ({ navigate }) => {
   const [posts, setPosts] = useState([]);
+  // const [comments, setPosts] = useState([]);
   const [token, setToken] = useState(window.localStorage.getItem("token"));
 
   useEffect(() => {
@@ -35,6 +42,7 @@ const Feed = ({ navigate }) => {
       return(
         <div className='container'>
           <div class="feed-nav"><NavBar /></div>
+          <div><Find posts={ posts } navigate={navigate} /></div>
           <h2>Posts</h2>
             <button onClick={logout}>
               Logout
