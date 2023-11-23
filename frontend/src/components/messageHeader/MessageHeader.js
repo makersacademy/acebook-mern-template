@@ -2,6 +2,8 @@ import React, { useEffect, useState } from "react";
 
 const MessageHeader = ({ user_id, navigate }) => {
 	const [userData, setUserData] = useState(null);
+	const userProfileUrl = `/users/profile/${user_id}`
+
 
 	const getData = async () => {
 		const GetUserInfo = await fetch(`users/userinfo/${user_id}`)
@@ -12,6 +14,7 @@ const MessageHeader = ({ user_id, navigate }) => {
 		if (GetUserInfo.ok) {
 			const response = await GetUserInfo.json();
 			setUserData(response.user)
+			
 			} else {
 				console.error(`Error fetching user data`)
 			}
@@ -25,7 +28,7 @@ const MessageHeader = ({ user_id, navigate }) => {
       {userData ? (
         <>
           <img width="50px" src={"../images/avatars/"+userData.avatar} alt="User Avatar" id="profile-pic"></img>
-          <a> {userData.username} </a>
+          <a href={userProfileUrl} id="header-username"> {userData.username} </a>
         </>
       ) : (
         <p>Loading...</p>
