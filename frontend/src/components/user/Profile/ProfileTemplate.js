@@ -21,8 +21,6 @@ const ProfileTemplate = (props) => {
   //Var to load following state of viewed profile.
   const [isFollowing, setIsFollowing] = useState(null);
 
-  const [refresh, setRefresh] = useState(0);
-
   //On Init comppnent sets is Following by checking if current User Id is in following.
   useEffect(() => {
     if (following) {
