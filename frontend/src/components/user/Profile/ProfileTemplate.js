@@ -5,11 +5,7 @@ const ProfileTemplate = (props) => {
   const setFollowing = props.setFollowing;
   let newFollowing = props.following;
   console.log(newFollowing);
-  // if (following.includes(props.currentUserId)) {
-  //     console.log("Peter")
-  // } else {
-  //     console.log("Anto")
-  // }
+
   const handleFollow = (event) => {
     event.preventDefault();
     if (newFollowing.includes(props.currentUserId)) {
@@ -20,12 +16,7 @@ const ProfileTemplate = (props) => {
       newFollowing.push(props.currentUserId)
     }
     console.log(newFollowing);
-    // TODO:
-    // If profileUserId in followers:
-    // Remove from followers
-    // Else
-    //Add to followers
-    // Fetch Update
+
 
     fetch(`/api/users/update`, {
       method: "POST",

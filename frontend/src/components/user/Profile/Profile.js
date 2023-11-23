@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from "react";
-import "./Profile.css";
+import useGetCurrentUser from "../../../hooks/getCurrentUser";
 
-import {useSearchParams } from "react-router-dom";
+import "./Profile.css";
+import { useSearchParams } from "react-router-dom";
 import ProfileTemplate from "./ProfileTemplate";
 const Profile = ({ navigate }) => {
   /*
@@ -22,30 +23,11 @@ const Profile = ({ navigate }) => {
   const [currentUserId, setCurrentUserId] = useState(
     window.localStorage.getItem("currentUserID")
   );
-  const [currentUser, setCurrentUser] = useState("");
+  // useEffect sets up profile User if query params are present.
   const [profileUser, setProfileUser] = useState("");
-
-  const [following, setFollowing] = useState([]);
-
-
-  useEffect(() => {
-    if (token) {
-      fetch(`/api/users/${currentUserId}`, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      })
-        .then((response) => response.json())
-        .then(async (data) => {
-          window.localStorage.setItem("token", data.token);
-          setToken(window.localStorage.getItem("token"));
-          setCurrentUser(data.user);
-          setFollowing(data.user.following)
-        });
-    } else {
-      navigate("/login");
-    }
-  }, [currentUserId]);
+  //getUserHook returns curent user and hes followers togheter with its set up functions
+  const [currentUser, setCurrentUser, following, setFollowing] =
+    useGetCurrentUser(currentUserId);
 
   useEffect(() => {
     if (firstName && lastName) {
