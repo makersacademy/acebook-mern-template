@@ -9,22 +9,23 @@ const UserProfileFeed = ({ navigate }) => {
 
   // authentication
   useEffect(() => {
-    if (token) {
-      fetch(`/users/profile/${user_id.user_id}`, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      })
-        .then((response) => response.json())
-        .then(async (data) => {
-          window.localStorage.setItem("token", data.token);
-          setToken(window.localStorage.getItem("token"));
-          setPosts(data.posts);
+      if(token) {
+        fetch(`/profile/${user_id.user_id}`, {
+          headers: {
+            Authorization: `Bearer ${token}`
+          }
         })
-        .catch((error) => console.error("Error fetching user profile:", error));
-    }
-  }, []);
+          .then(response => response.json())
+          .then(async data => {
+            window.localStorage.setItem("token", data.token)
+            setToken(window.localStorage.getItem("token"))
+            setPosts(data.posts);
+          })
+          .catch(error => console.error('Error fetching user profile:', error))
+      }
+    }, [])
 
+    
   // Users posts: filter list of posts on the basis of user_id
 
   if (token) {

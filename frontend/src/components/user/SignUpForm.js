@@ -15,6 +15,9 @@ const SignUpForm = ({ navigate }) => {
     // generate error messages. If none: continue with handling submit
     let response = await fetch("/users");
     const users = await response.json();
+    console.log("users in SignUpForm = " + users);
+    console.log("users[0]= " + users[0]);
+  
 
     if (password.length < 8) {
       errorMessages += "Password must be at least 8 characters long\n";
