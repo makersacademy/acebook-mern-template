@@ -48,22 +48,14 @@ const tokenChecker = (req, res, next) => {
 };
 
 // route setup
+// removed excess routes which were causing errors
 app.use("/posts", tokenChecker, postsRouter);
 app.use("/posts/image", tokenChecker, postsRouter);
 app.use("/tokens", authenticationRouter);
 app.use("/users/profile/:user_id", tokenChecker, usersRouter);
-app.use("/users/userinfo/:user_id", usersRouter);
-
-//new route for posting avatar change
-app.use("/users/avatar", usersRouter);
-
-// route to get the emails
-app.use("/users/emails", usersRouter);
-
 app.use("/upload", uploadsRouter);
 // new route for comments
 app.use("/comments", tokenChecker, commentsRouter)
-
 app.use("/users", usersRouter);
 
 // catch 404 and forward to error handler

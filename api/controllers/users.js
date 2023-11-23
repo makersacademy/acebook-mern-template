@@ -45,7 +45,6 @@ const UsersController = {
     });
   },
 // method to get the username, avatar and email for a given user_id
-// email technically not necessary for message header but may be useful for other pages
   FindInfoByUserId: async (req, res) => {
     const user_id = req.params.user_id
     const user = await User.findOne({_id: user_id});
