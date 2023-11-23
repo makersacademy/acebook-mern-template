@@ -12,7 +12,7 @@ const Post = ({ post }) => {
   return (
     <article data-cy="post" key={post._id}>
       <div id="post-msg-header">
-        <MessageHeader user_id={post.user_id}/>
+        {/* <MessageHeader user_id={post.user_id}/> */}
       </div>
       <div id="post-msg-content">
         {post.message}
