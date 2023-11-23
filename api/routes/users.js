@@ -7,6 +7,7 @@ const UsersController = require("../controllers/users");
 const PostsController = require("../controllers/posts");
 
 router.post("/", UsersController.Create);
+router.get("/", UsersController.GetUserEmails);
 
 router.get("/profile/:user_id", PostsController.FindPostsByUserId);
 

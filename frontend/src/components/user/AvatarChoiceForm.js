@@ -38,7 +38,7 @@ const AvatarChoiceForm = ({ navigate, location }) => {
 
   return (
     <form onSubmit={handleSubmit}>
-      <label for="avatar">Choose avatar:</label>
+      <label htmlFor="avatar">Choose avatar:</label>
 
       {/* each avatar has it's own value which is filename */}
       {/* type="radio" is type of a checkbox where user can choose only one */}
@@ -122,7 +122,8 @@ const AvatarChoiceForm = ({ navigate, location }) => {
           onChange={handleAvatarChange}
         />
         <label htmlFor="avatar0" className="checkbox-avatar-image">
-          <img width="100px" src="../images/avatars/0.svg" alt=""></img>No avatar
+          <img width="100px" src="../images/avatars/0.svg" alt=""></img>No
+          avatar
         </label>
       </div>
 

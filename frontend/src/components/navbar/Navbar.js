@@ -2,7 +2,6 @@ import React from "react";
 import { Link } from "react-router-dom";
 import "./Navbar.css";
 
-
 const Navbar = ({ navigate }) => {
     if(window.localStorage.getItem("token") != null) //checks if token exists/logged in
     {
@@ -32,4 +31,3 @@ const Navbar = ({ navigate }) => {
 
 
 export default Navbar;
-
