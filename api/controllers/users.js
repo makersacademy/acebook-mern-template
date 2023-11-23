@@ -45,12 +45,25 @@ const UsersController = {
     }
   },
 
-  Update: async (req, res) => {
+  Follow: async (req, res) => {
     try {
       const user = await User.findById(req.body.userId);
-      const newFollowing = req.body.following
-      user.following = newFollowing
-      user.save()
+      const newFollowing = req.body.following;
+
+      const updateFollowersUser = await User.findById(req.body.profileUserId);
+
+      if (newFollowing.length > user.following.length) {
+        updateFollowersUser.followers.push(req.body.userId);
+        updateFollowersUser.save();
+      } else {
+        const idIndex = updateFollowersUser.followers.indexOf(req.body.userId);
+        updateFollowersUser.followers.splice(idIndex, 1);
+        updateFollowersUser.save();
+      }
+
+      user.following = newFollowing;
+      user.save();
+      res.status(200).json({ user: updateFollowersUser });
     } catch (err) {
       //console.error(err);
       res.status(500).json({ error: "Internal Server Error" });

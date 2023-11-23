@@ -11,6 +11,7 @@ const ProfileTemplate = (props) => {
     Children:
         ...
     */
+
   // Array following users by currently logged user
   const following = props.following;
   const setFollowing = props.setFollowing;
@@ -19,6 +20,8 @@ const ProfileTemplate = (props) => {
 
   //Var to load following state of viewed profile.
   const [isFollowing, setIsFollowing] = useState(null);
+
+  const [refresh, setRefresh] = useState(0);
 
   //On Init comppnent sets is Following by checking if current User Id is in following.
   useEffect(() => {
@@ -42,9 +45,8 @@ const ProfileTemplate = (props) => {
       newFollowing.push(props.user._id);
       setIsFollowing(true);
     }
-    console.log(newFollowing);
 
-    fetch(`/api/users/update`, {
+    fetch(`/api/users/follow`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -52,8 +54,11 @@ const ProfileTemplate = (props) => {
       body: JSON.stringify({
         following: newFollowing,
         userId: props.currentUserId,
+        profileUserId: props.user._id
       }),
-    });
+    }).then((response) => response.json()).then((data => {
+        props.setProfileUser(data.user)
+    }))
   };
 
   return (

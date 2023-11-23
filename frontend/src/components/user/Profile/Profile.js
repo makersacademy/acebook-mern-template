@@ -53,6 +53,7 @@ const Profile = ({ navigate }) => {
     return (
       <ProfileTemplate
         user={profileUser}
+        setProfileUser={setProfileUser}
         currentUserId={currentUserId}
         following={following}
         setFollowing={setFollowing}
