@@ -6,7 +6,15 @@ const { ObjectID } = require("mongodb");
 const PostsController = {
   Index: async (req, res) => {
     try {
-      const posts = await Post.find().populate('author', 'email');
+      const posts = await Post.find()
+        .populate('author', 'email')
+        .populate({
+          path:'comments',
+          populate: {path: 'author'}
+        })
+        .sort({ created: -1 });
+
+      
       const token = TokenGenerator.jsonwebtoken(req.user_id);
       const userID = req.user_id
       res.status(200).json({ posts: posts, token: token, userID: userID});
@@ -16,7 +24,10 @@ const PostsController = {
     }
   },
   Create: (req, res) => {
+
     const post = new Post(req.body);
+    post.author = req.user_id
+    console.log(post)
     post.save((err) => {
       if (err) {
         throw err;
@@ -39,9 +50,7 @@ const PostsController = {
       throw err;
     }
   }
-}
-
-   //Todo: Posts By followers endpoint: 
+} 
 
 
 
