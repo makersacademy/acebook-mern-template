@@ -1,7 +1,8 @@
-var mongoose = require("mongoose");
-
+const mongoose = require("mongoose");
 require("../mongodb_helper");
-var Post = require("../../models/post");
+const Post = require("../../models/post");
+const User = require("../../models/user");
+const Comment = require("../../models/comment");
 
 describe("Post model", () => {
   beforeEach((done) => {
@@ -10,9 +11,9 @@ describe("Post model", () => {
     });
   });
 
-  it("has a message", () => {
-    var post = new Post({ message: "some message" });
-    expect(post.message).toEqual("some message");
+  it("has content", () => {
+    const post = new Post({ content: "some message" });
+    expect(post.content).toEqual("some message");
   });
 
   it("can list all posts", (done) => {
@@ -24,7 +25,22 @@ describe("Post model", () => {
   });
 
   it("can save a post", (done) => {
-    var post = new Post({ message: "some message" });
+    const user = new User({
+      email: "test@gmail.com",
+      password: "password",
+      username: "TestUser",
+      followers: [],
+      photograph: "",
+      posts: [],
+      comments: []
+    });
+
+    const created = new Date()
+    const post = new Post({ 
+      content: "some message",
+      created: created,
+      author: user._id,
+    });
 
     post.save((err) => {
       expect(err).toBeNull();
@@ -32,9 +48,20 @@ describe("Post model", () => {
       Post.find((err, posts) => {
         expect(err).toBeNull();
 
-        expect(posts[0]).toMatchObject({ message: "some message" });
+        expect(posts[0]).toMatchObject({ content: "some message" });
         done();
+
       });
     });
   });
+
 });
+
+
+
+
+
+
+
+
+

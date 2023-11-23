@@ -1,0 +1,38 @@
+.main-container {
+    margin: 20px auto;
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+h1 {
+    text-align: center;
+}
+
+.flex {
+    display: flex;
+}
+
+.flex-align-vertical {
+    display: flex;
+    align-items: center;
+}
+
+.flex-centre {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.avatar {
+    border-radius: 50%;
+}
+
+.avatar-medium {
+    width: 60px;
+}
+
+.avatar-small {
+    width: 35px;
+}

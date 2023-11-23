@@ -1,0 +1,41 @@
+.comments-box {
+    max-width: 600px;
+    margin: 20px auto;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    background-color: #f9f9f9;
+}
+
+h2 {
+    color: #333;
+}
+
+.comment {
+    margin-top: 15px;
+}
+
+.comment-author {
+    font-weight: bold;
+    color: #007bff;
+}
+
+.comment-text {
+    margin-top: 5px;
+    color: #333;
+}
+
+.like-btn {
+  width: 1rem;
+  margin-right: 0.3rem;
+}
+
+.like-number {
+  font-size: 14px;
+}
+
+.post-date {
+    text-align: right; /* Align the text to the right for comments */
+    font-size: 14px;
+    color: #555;
+}
