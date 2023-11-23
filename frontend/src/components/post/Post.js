@@ -74,7 +74,7 @@ const Post = ({ post }) => {
               { author ? (
                 <>
                   <ProfileImageThumbnail user={ author }/>
-                  <p>{`Posted by ${author.displayName} on ${ "<<Date/time goes here>>" }`}</p>
+                  <p className='authorline'><strong>{`Posted by ${author.displayName} on ${ formatDate(post.date) }`}</strong></p>
                 </>
               ) : "Loading..."
               }
@@ -82,8 +82,8 @@ const Post = ({ post }) => {
 
       <div className='postcontentandlikebutton'>
           <article data-cy="post" key={ post._id }>
-                <div className='post'><div>Show Image:</div>
-                <img src={`data:image/png;base64, ${post.image}`} alt="Post" />
+                <div className='post'>
+                {post.image && <img src={`data:image/png;base64, ${post.image}`} alt="Post" />}
             <br />
                 <div>{ post.message }</div>
               <small className="smallText">{formatDate(post.date)}</small></div>

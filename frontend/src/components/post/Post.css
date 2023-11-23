@@ -37,22 +37,16 @@
     max-width: 800px;
 }
 
+.authorline {
+    text-align: left;
+}
+
 .post {
     background: lightcyan;
     padding: 10px;
     border: 1px solid black; /* Added 'solid' as the border style */
     border-radius: 5px;
 }
-
-
-
-
-
-
-
-
-
-
 
 .post-container {
     margin: auto;
@@ -75,26 +69,11 @@ article img {
 small.smallText {
     display: block;
     margin-top: 5px;
-}
-
-.likes-comments-container {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-top: 10px;
-}
-
-.comments {
-    margin-left: 10px;
-}
-
-.comment-input {
-    margin-top: 10px;
+    margin-bottom: 10px;
 }
 
 .post-message {
     font-size: 18px;
     padding-top: 20px;
-
 }
 
