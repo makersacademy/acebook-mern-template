@@ -21,15 +21,14 @@ const PostsController = {
       ...req.body,
       // added a line to add/update user_id field
       user_id: user_id,
-    });
-    console.log("REQUEST BODY BE:", req.body);
-    post.save((err) => {
+      });
+    post.save((err, post) => {
       if (err) {
         throw err;
       }
 
       const token = TokenGenerator.jsonwebtoken(req.user_id);
-      res.status(201).json({ message: "OK", token: token, post_id: post._id });
+      res.status(201).json({ message: "OK", token: token, _id: post._id });
     });
   },
 
@@ -49,6 +48,40 @@ const PostsController = {
       res.status(200).json({ posts: result, token: token });
     }
   },
-};
+
+  //method to like a post
+  likePost: async (req, res) => {
+    console.log("Controller - postId:", req.params._id);
+    const postId = req.params._id;
+    const user_id = req.user_id;   
+    console.log("user_id:" , user_id)
+    console.log("postId:", postId);
+
+    try {
+      const post = await Post.findById(postId);
+
+      if (!post) {
+        return res.status(404).json({ message: "Post not found" });
+      }
+
+      // Check if the user has already liked the post
+      if (post.likes.includes(user_id)) {
+        return res.status(400).json({ message: "You have already liked this post" });
+      }
+
+      // Add user_id to the likes array
+      post.likes.push(user_id);
+
+      // Save the updated post
+      await post.save();
+
+      const token = TokenGenerator.jsonwebtoken(req.user_id);
+      res.status(200).json({ message: "Post liked", token: token, likes: post.likes.length });
+    } catch (error) {
+      console.error("Error liking post:", error);
+      res.status(500).json({ message: "Internal server error" });
+    }
+  }
+  };
 
 module.exports = PostsController;
