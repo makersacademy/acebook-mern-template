@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from "react";
 import Post from "../post/Post";
 
-const Feed = ({ navigate }) => {
+const Feed = ({ navigate, openPopup }) => {
   const [posts, setPosts] = useState([]);
   const [token, setToken] = useState(window.localStorage.getItem("token"));
   const [newPost, setNewPost] = useState("");
   const [newImage, setNewImage] = useState("");
   const [loading, setLoading] = useState(false); // Add loading state
-
+  
   // Fetching posts to show on the feed
   const fetchData = async () => {
     if (token) {
@@ -22,6 +22,20 @@ const Feed = ({ navigate }) => {
         setPosts(postsData.posts);
       } else {
         console.error("Error fetching posts");
+        const Swal = require('sweetalert2')
+        Swal.fire({
+          icon: "error",
+          title: "Oops...",
+          text: "Something went wrong!",
+          showConfirmButton: false,
+          allowOutsideClick: false,
+          backdrop: true,
+          html: `
+              Your session expired.
+              Please
+              <a href="../login">Login</a>
+            `
+        });
       }
     }};
 
@@ -136,8 +150,6 @@ const Feed = ({ navigate }) => {
         </div>
       </>
     );
-  } else {
-    navigate("/login");
   }
 };
 

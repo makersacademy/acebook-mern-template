@@ -24,7 +24,7 @@ const UserAccount = ({ navigate }) => {
                 setToken(data.token)
                 setUser(data.user);
                 })
-                .catch(error => console.error('Error fetching user data:', error))
+                .catch(error => {console.error('Error fetching user data:', error)})
             }
         }, []);
 
