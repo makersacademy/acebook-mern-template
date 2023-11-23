@@ -6,9 +6,12 @@ import React from "react";
 const Comment = ({ comment }) => {
   return (
     <article data-cy="comment" key={comment._id}>
-      <MessageHeader user_id={comment.user_id}/>
-
-      {comment.message}
+      <div id="comment-msg-header">
+        <MessageHeader user_id={comment.user_id}/>
+      </div>
+      <div id="comment-msg-content">
+        {comment.message}
+      </div>
     </article>
   );
 };
