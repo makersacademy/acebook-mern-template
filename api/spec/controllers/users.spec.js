@@ -163,12 +163,14 @@ describe("/users", () => {
         avatar: "1.svg",
       });
       await user.save();
-      console.log("THIS IS THE USER", user)
       console.log("THE ID CREATED FOR TEST USER IS:", user._id)
+      console.log("THIS IS THE USER that has been saved", user)
+      const checking = await User.findOne({_id: user._id})
+      console.log("CHECKING:", checking)
       let response = await request(app).get(`/users/userinfo/${user._id}`)
-      console.log("THE MESSAGE FROM RESPONSE", response.body)
-      // console.log("The ID GOT FROM THE RESPONSE", response)
-      // expect(response.statusCode).toBe(200);
+      console.log("retrieved user in response body: ", response.body)
+
+      expect(response.statusCode).toBe(200);
 
     })
   })

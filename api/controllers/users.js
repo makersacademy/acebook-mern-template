@@ -48,13 +48,12 @@ const UsersController = {
 // email technically not necessary for message header but may be useful for other pages
   FindInfoByUserId: async (req, res) => {
     const user_id = req.params.user_id
-
-    const user = await User.findOne({_id: user_id})
+    const user = await User.findOne({_id: user_id});
     if (!user) {
       return res.status(400).json({ message: "no user found" })
     }
     else {
-      res.status(200).json({ user: user })
+      return res.status(200).json({ user: user })
     }
   },
 
