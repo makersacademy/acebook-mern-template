@@ -1,41 +1,37 @@
 import React, { useEffect, useState } from "react";
 
 const MessageHeader = ({ user_id, navigate }) => {
-    const [token, setToken] = useState(window.localStorage.getItem("token"));
-    
-    // Fetching user data from backend using user_id passed in prop
-    
-    useEffect(() => {
-        if(token) {
-            console.log("THE USER ID IS:::: ", {user_id})
-            fetch(`/users/data/${user_id}`, {
-                headers: {
-                Authorization: `Bearer ${token}`
-                }
-            })
-                .then(response => response.json())
-                .then(async data => {
-                window.localStorage.setItem("token", data.token)
-                setToken(data.token)
-                // setUser(data.user);
-                })
-                .catch(error => console.error('Error fetching user data:', error))
-            }
-        }, [])
-    
-        if(token) {
-            return (
-                    <header>
-                            Avatar picture will go here :D {/* <img width="100px" src={"../images/avatars/"+user.avatar} alt="User Avatar"></img> */}
-                            <br/>
-                            User Usernaame will go here {/*user.username*/}
-                    </header>
-            )
-        } 
-        else {
-            navigate('/../login')
-        }
-    }
+	const [userData, setUserData] = useState(null);
 
+	const getData = async () => {
+		const GetUserInfo = await fetch(`users/userinfo/${user_id}`)
+		console.log("THE USER ID IS: ", {user_id})
+			// let info = await response.json
+			// console.log(info)
+
+		if (GetUserInfo.ok) {
+			const response = await GetUserInfo.json();
+			setUserData(response.user)
+			} else {
+				console.error(`Error fetching user data`)
+			}
+		}
+  useEffect(() => {
+		getData();
+	}, [user_id]);
+	
+	return (
+    <header>
+      {userData ? (
+        <>
+          <img width="50px" src={"../images/avatars/"+userData.avatar} alt="User Avatar" id="profile-pic"></img>
+          <a> {userData.username} </a>
+        </>
+      ) : (
+        <p>Loading...</p>
+      )}
+    </header>
+  );
+};
 
 export default MessageHeader;

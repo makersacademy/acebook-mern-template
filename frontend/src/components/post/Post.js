@@ -12,8 +12,9 @@ const Post = ({ post }) => {
   return (
     <article data-cy="post" key={post._id}>
       <MessageHeader user_id={post.user_id}/>
+      
       {post.message}
-      The post id is {post.user_id}
+
       <br />
       {/* if image exists display it */}
       {post.image_path && (
