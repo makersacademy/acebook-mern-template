@@ -1,10 +1,14 @@
 import React, { useState, useEffect } from "react";
+import CommentFeed from "../commentFeed/CommentFeed";
 
 const Post = ({ post }) => {
   const [likeCount, setLikeCount] = useState(post.likes.length);
   const [token, setToken] = useState(window.localStorage.getItem("token"));
 
-
+ // generating image path
+  // **** NOTICE: change to different url when app deployed ****
+  let imageSource = `http://localhost:8080/uploads/${post.image_path}`;
+  // console.log("POST COMPONENT:", post._id)
 
   // Fetch initial like count when the component mounts
   
@@ -58,12 +62,30 @@ const Post = ({ post }) => {
   };
 
 
+
   return (
     <article data-cy="post" key={post._id}>
       <p>{post.message}</p>
+      <br />
+      {/* if image exists display it */}
+      {post.image_path && (
+        <img
+          src={imageSource}
+          alt={imageSource}
+          width={"700px"}
+          data-cy="post-image"
+        />
+      )}
+      <br />
       <button onClick={handleLikeClick}>
         Like ({likeCount})
       </button>
+      <br />
+      <article data-cy="comment">
+        <CommentFeed post_id={post._id} />
+      </article>
+      {/* line added for visibility, remove later when working on CSS */}
+      <hr />
     </article>
   );
 };

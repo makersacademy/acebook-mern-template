@@ -1,10 +1,15 @@
 const app = require("../../app");
 const request = require("supertest");
 require("../mongodb_helper");
+const mongoose = require("mongoose");
 const Post = require("../../models/post");
 const User = require("../../models/user");
 const JWT = require("jsonwebtoken");
 const secret = process.env.JWT_SECRET;
+// for mocking the image file
+const fs = require("fs");
+const path = require("path");
+const { afterEach } = require("@jest/globals");
 
 let token;
 let user;
@@ -56,13 +61,13 @@ describe("/posts", () => {
       await request(app)
         .post("/posts")
         .set("Authorization", `Bearer ${token}`)
-        .send({ message: "hello world", token: token })
+        .send({ message: "hello world", token: token });
 
       let posts = await Post.find();
       expect(posts.length).toEqual(1);
       expect(posts[0].message).toEqual("hello world");
 
-      expect(posts[0].user_id).toEqual(user._id)
+      expect(posts[0].user_id).toEqual(user._id);
     });
 
     test("returns a new token", async () => {
@@ -169,8 +174,7 @@ describe("/posts", () => {
   });
 });
 
-
-describe("/users/profile/:user_id, postsController", () => {
+describe("/profile/:user_id, postsController", () => {
   beforeAll(async () => {
   });
 
@@ -204,21 +208,18 @@ describe("/users/profile/:user_id, postsController", () => {
       secret,
     );
 
-    console.log("USER 1 DONE")
-
     // User 1 creates a posts with their token
     await request(app)
-        .post("/posts")
-        .set("Authorization", `Bearer ${token}`)
-        .send({ message: "post by user 1!", token: token })
+      .post("/posts")
+      .set("Authorization", `Bearer ${token}`)
+      .send({ message: "post by user 1!", token: token });
 
     await request(app)
-        .post("/posts")
-        .set("Authorization", `Bearer ${token}`)
-        .send({ message: "hola! by user 1", token: token })
+      .post("/posts")
+      .set("Authorization", `Bearer ${token}`)
+      .send({ message: "hola! by user 1", token: token });
 
-    let posts1 = await Post.find()
-        console.log("USER 1 POSTS POSTED: ", posts1[0].message, posts1[1].message)
+    let posts1 = await Post.find();
 
     // USER 2: creating second user to post posts with different user id's
     user2 = new User({
@@ -240,19 +241,19 @@ describe("/users/profile/:user_id, postsController", () => {
       secret,
     );
 
-      // User 2 creates a posts with their token
-      await request(app)
-        .post("/posts")
-        .set("Authorization", `Bearer ${token2}`)
-        .send({ message: "post by user 2!", token: token2 })
-        
+    // User 2 creates a posts with their token
+    await request(app)
+      .post("/posts")
+      .set("Authorization", `Bearer ${token2}`)
+      .send({ message: "post by user 2!", token: token2 });
+
     await request(app)
         .post("/posts")
         .set("Authorization", `Bearer ${token2}`)
         .send({ message: "hola! by user 2", token: token2 })
     
       let new_response = await request(app)
-        .get(`/users/profile/${user2._id}`)
+        .get(`/profile/${user2._id}`)
         .set("Authorization", `Bearer ${token2}`)
         .send({ token: token2 });
       // mapping messages from post objects in response body

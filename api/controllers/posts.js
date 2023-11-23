@@ -10,16 +10,16 @@ const PostsController = {
       const token = TokenGenerator.jsonwebtoken(req.user_id);
       // map posts objects list so it displays from the newest by it's date
       // we're passing sorting function which calculates differences between two post objects
-      posts.sort((a, b) => b.createdAt - a.createdAt)
+      posts.sort((a, b) => b.createdAt - a.createdAt);
       res.status(200).json({ posts: posts, token: token });
     });
   },
-  // Create needs to be updated to include pulling the user_id from authenticated user
+
   Create: (req, res) => {
     const user_id = req.user_id;
     const post = new Post({
       ...req.body,
-      // added a line to add and update user_id field
+      // added a line to add/update user_id field
       user_id: user_id,
       });
     post.save((err, post) => {
@@ -34,18 +34,17 @@ const PostsController = {
 
   // method to get posts filtered by user_id
   FindPostsByUserId: async (req, res) => {
-    const user_id = req.params.user_id
+    const user_id = req.params.user_id;
 
     // finding posts with specific user_id
-    const result = await Post.find({user_id: user_id});
-    const token = TokenGenerator.jsonwebtoken(req.user_id)
+    const result = await Post.find({ user_id: user_id });
+    const token = TokenGenerator.jsonwebtoken(req.user_id);
 
     if (!result) {
       return res.status(400).json({ message: "No posts found" });
-    }
-    else {
+    } else {
       // post sorted from the newest
-      result.sort((a, b) => b.createdAt - a.createdAt)
+      result.sort((a, b) => b.createdAt - a.createdAt);
       res.status(200).json({ posts: result, token: token });
     }
   },
@@ -84,6 +83,5 @@ const PostsController = {
     }
   }
   };
-
 
 module.exports = PostsController;
