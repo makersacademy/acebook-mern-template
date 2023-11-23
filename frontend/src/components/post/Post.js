@@ -2,14 +2,16 @@ import React, { useState } from 'react';
 import './Post.css';
 import Comment from '../comment/Comment';
 import NewComment from '../comment/NewComment';
+import Like from '../like/Like';
 
-const Post = ({ post, fetchPosts }) => {
+
+const Post = ({post, userId, fetchPosts}) => {
   const [showCommentForm, setShowCommentForm] = useState(false);
   const [visibleComments, setVisibleComments] = useState(2);
   
-  
-  // Format datetime of post. 
-  const date = new Date(post.created);
+  // Format datetime of post
+  console.log(post)
+  const date = new Date(post.created)
   const dateFormat = { year: 'numeric', month: 'numeric', day: 'numeric' };
   const formattedDate = new Intl.DateTimeFormat('en-GB', dateFormat).format(date);
 
@@ -34,10 +36,7 @@ const Post = ({ post, fetchPosts }) => {
         <p data-cy="post-content" key={post._id}>{post.content}</p>
       </div>
       <div className='post-row'>
-        <div className='flex-align-vertical post-like-gap'>
-          <img src='thumb-icon.png' className='like-btn' alt='thumb' />
-          <p data-cy="post-likes" className='like-number'>{post.likes}20</p>
-        </div>
+        <Like post={post} userId={ userId }/>
         <div className='flex-align-vertical post-comments-gap'>
           <a onClick={toggleCommentForm}>View comments</a>
           <button data-cy="post-comment" className='primary-btn' onClick={toggleCommentForm}>
