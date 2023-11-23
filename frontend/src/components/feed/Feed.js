@@ -54,7 +54,7 @@ const Feed = ({ navigate }) => {
       // If post creation is successful, proceed to file upload
       if (PostPostResponse.ok) {
         const data = await PostPostResponse.json();
-        newPostId = data.post_id;
+        newPostId = data._id;
         window.localStorage.setItem("token", data.token);
         setToken(window.localStorage.getItem("token"));
         setPosts(data.posts);
