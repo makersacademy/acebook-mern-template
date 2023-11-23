@@ -24,7 +24,6 @@ const UserProfileFeed = ({ navigate }) => {
             window.localStorage.setItem("token", data.token)
             setToken(window.localStorage.getItem("token"))
             setPosts(data.posts);
-            console.log("THIS IS USER ID", {user_id})
           })
           .catch(error => console.error('Error fetching user profile:', error))
       }

@@ -49,6 +49,8 @@ const tokenChecker = (req, res, next) => {
 };
 
 app.use("/users", usersRouter);
+// Because of the user profile page, we need this route to get info for msgHeaders
+app.use("/profile", profilesRouter);
 app.use("/posts", tokenChecker, postsRouter);
 app.use("/tokens", authenticationRouter);
 app.use("/comments", tokenChecker, commentsRouter)
