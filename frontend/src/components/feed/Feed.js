@@ -3,15 +3,10 @@ import Post from '../post/Post'
 import './Feed.css'
 import NavBar from '../navBar/NavBar';
 import Find from '../find/Find';
-import { useContext } from 'react';
-import { FindContext } from '../findContext/FindContext.js';
-
-
 
 
 const Feed = ({ navigate }) => {
   const [posts, setPosts] = useState([]);
-  // const [comments, setPosts] = useState([]);
   const [token, setToken] = useState(window.localStorage.getItem("token"));
 
   useEffect(() => {

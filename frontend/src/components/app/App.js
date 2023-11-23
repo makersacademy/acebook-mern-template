@@ -7,7 +7,6 @@ import Feed from '../feed/Feed'
 import ProfileFeed from '../profileFeed/ProfileFeed';
 import Profile from '../profile/Profile';
 import Post from '../post/Post';
-import Find from '../find/Find';
 import { useNavigate, Routes, Route } from "react-router-dom";
 import { FindContext } from '../findContext/FindContext.js';
 import {useState} from 'react';
