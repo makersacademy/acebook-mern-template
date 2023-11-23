@@ -1,0 +1,18 @@
+.profilefeed{
+    max-width: 850px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+article {
+    border: 2px solid #ddd;
+    border-radius: 8px;
+    padding: 20px;
+    margin-bottom: 10px;
+    background-color: #fff;
+    box-shadow: 0 6px 8px rgba(0, 0, 0, 0.1);
+}
+
+.smallText {
+    color: #888;
+}

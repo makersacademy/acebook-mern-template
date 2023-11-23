@@ -37,7 +37,8 @@ const Profile = ({ navigate }) => {
           <>
         <NavBar/>
         <div className='profilecontainer'>
-        <h2>Profile Name: {profile && profile?.displayName}</h2>
+        <h2>Profile Name: <strong className='username'>{profile && profile?.displayName}</strong></h2>
+        
         <div className='profilepic'>
         <img src={defaultProfile} alt="Default Profile Image"/>
         </div>
@@ -48,9 +49,9 @@ const Profile = ({ navigate }) => {
        */}
         <br />
         <button className='submitbutton'>Update Profile Image</button>
+        
         <div>
         <NewPost />
-
         </div>
         
         {/* <h3>Post & Number</h3>

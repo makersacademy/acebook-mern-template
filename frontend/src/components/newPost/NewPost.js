@@ -54,7 +54,6 @@ const NewPost = ({ user_id }) => {
 
     return(
         <>
-        <h2>Compose</h2>
             <div className="new_post">
                 {image && (
                     <div class="image-preview">
@@ -63,11 +62,12 @@ const NewPost = ({ user_id }) => {
                         width={"450px"}
                         height={"300px"}
                         src={URL.createObjectURL(image)}
-                    />
+                        />
                     </div>
                 )}
 
                 <form className='newpostform' onSubmit={handleSubmit} enctype="multipart/form-data">
+                    <h4 className='newposttitle'>Add a new post</h4>
                     <textarea 
                     placeholder="Enter new post here..."
                     className="new-post-message"
