@@ -70,7 +70,7 @@ const UsersController = {
             } else {
               // User found, send back the displayName
               const token = TokenGenerator.jsonwebtoken(req.user_id)
-              res.status(200).json({ displayName: user.displayName });
+              res.status(200).json({ token: token, displayName: user.displayName });
             }
           });
         },
@@ -90,7 +90,7 @@ const UsersController = {
             } else {
               // User found, send back the displayName
               const token = TokenGenerator.jsonwebtoken(req.user_id)
-              res.status(200).json({ displayName: user.displayName });
+              res.status(200).json({ token: token, displayName: user.displayName });
             }
           });
         },

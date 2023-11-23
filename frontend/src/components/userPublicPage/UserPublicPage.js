@@ -11,33 +11,39 @@ const UserPublicPage = ({ navigate }) => {
   const [token, setToken] = useState(window.localStorage.getItem("token"));
 
   useEffect(() => {
+    if (userInfo && postsList) {
+      return;
+    }
     if (token) {
       // Get user info
-      fetch(`/users/user?id=${userId}`, {
+      fetch(`/users/${userId}`, {
         headers: { 
           'Authorization': `Bearer ${token}` 
       }
       })
       .then(res => res.json())
       .then(async data => {
-        window.localStorage.setItem("token", data.token);
-        setToken(window.localStorage.getItem("token"));
+        //window.localStorage.setItem("token", data.token);
+        //setToken(window.localStorage.getItem("token"));
         setUserInfo(data.user);
       })
-      .catch(err => console.error(err));
-      // Get posts info (simultaneously)
-      fetch(`/posts/user/${userId}`, {
-        headers: {
-          'Authorization': `Bearer ${token}`
-        }
+      .then(() => {
+        // Afterwards; get posts list
+        fetch(`/posts/user/${userId}`, {
+          headers: {
+            'Authorization': `Bearer ${token}`
+          }
+        })
+        .then(res => res.json())
+        .then(async data => {
+          //window.localStorage.setItem("token", data.token);
+          //setToken(window.localStorage.getItem("token"));
+          setPostsList(data.posts);
+        })
+        .catch(err => console.error(err));
       })
-      .then(res => res.json())
-      .then(async data => {
-        window.localStorage.setItem("token", data.token);
-        setToken(window.localStorage.getItem("token"));
-        setPostsList(data.posts);
-      })
       .catch(err => console.error(err));
+
     } else {
       navigate('/login');
     }
@@ -60,12 +66,12 @@ const UserPublicPage = ({ navigate }) => {
         <div className="posts">
           {
             postsList ?
-            postsList
+            (postsList
             .slice()
             .sort((a, b) => new Date(b.date) - new Date(a.date))
             .map((post) =>
               (<Post post={ post } key={ post._id }/>)
-            )
+            ))
             : "Loading posts..."
           }
         </div>
