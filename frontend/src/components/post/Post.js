@@ -1,10 +1,11 @@
 import React from 'react';
 import './Post.css';
 import Comment from '../comment/Comment';
+import Like from '../like/Like';
 
-const Post = ({post}) => {
-
+const Post = ({post, userId}) => {
   // Format datetime of post
+  console.log(post)
   const date = new Date(post.created)
   const dateFormat = { year: 'numeric', month: 'numeric', day: 'numeric' };
   const formattedDate = new Intl.DateTimeFormat('en-UK', dateFormat).format(date);
@@ -22,10 +23,7 @@ const Post = ({post}) => {
         <p data-cy="post-content" key={ post._id }>{ post.content }</p>
       </div>
       <div className='post-row'>
-        <div className='flex-align-vertical post-like-gap'>
-          <img src='thumb-icon.png' className='like-btn' alt='thumb' />
-          <p data-cy="post-likes" className='like-number'>{post.likes}20</p>
-        </div>
+        <Like post={post} userId={ userId }/>
         <div className='flex-align-vertical post-comments-gap'>
           <a>View comments</a>
           <button data-cy="post-comment" className='primary-btn'>Add comment</button>
@@ -33,7 +31,7 @@ const Post = ({post}) => {
       </div>
       <div data-cy="post-comments" className='post-comments' >
         { post.comments.map (
-          (comment) => ( <Comment comment={ comment } /> ))
+          (comment) => ( <Comment comment={ comment } userId={ userId }/> ))
         }
       </div>
     </div>
