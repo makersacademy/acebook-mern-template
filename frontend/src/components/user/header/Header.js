@@ -33,7 +33,6 @@ const Header = ({ user_id, navigate }) => {
             )
         } 
         else {
-            navigate('/../login')
         }
     }
 

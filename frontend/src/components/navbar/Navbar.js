@@ -14,7 +14,7 @@ const Navbar = ({ navigate }) => {
           to="acebook"
           onClick={(e) => {
             e.preventDefault();
-            navigate("/")
+            navigate("/../")
           }}>
             Acebook
             </Link>

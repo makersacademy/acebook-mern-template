@@ -48,7 +48,7 @@ const UserProfileFeed = ({ navigate }) => {
       </>
     );
   } else {
-    navigate("/login");
+    navigate("/../login");
   }
 };
 export default UserProfileFeed;

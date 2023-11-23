@@ -62,8 +62,8 @@ describe("/upload", () => {
     await Post.deleteMany({});
 
     // delete all test images from uploads directory
-    const folderPath =
-      "/Users/ami/Desktop/MakersCode/JavaSriptCode/acebook/uploads";
+    // adjucted path so it deleted test images after running tests
+    const folderPath = path.join(__dirname, '../../../uploads');
     const fileNamePattern = /\d{13}-test/;
 
     deleteFilesInFolder(folderPath, fileNamePattern);

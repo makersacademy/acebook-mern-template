@@ -7,7 +7,7 @@
     "formdata-node": "^6.0.3",
     "jwt-decode": "^4.0.0",
     "multer": "^1.4.5-lts.1",
-    "react-router-dom": "^6.19.0"
+    "sweetalert2": "^11.10.1"
   },
   "devDependencies": {
     "@faker-js/faker": "^8.3.1",
