@@ -3,11 +3,22 @@ import { Link } from "react-router-dom";
 import "./Navbar.css";
 
 const Navbar = ({ navigate }) => {
-  if (window.localStorage.getItem("token") != null) {
+
+  if (window.localStorage.getItem("token")) {
     //checks if token exists/logged in
     return (
       <nav>
-        <div className="logo">Acebook</div>
+        <div className="logo">
+          <Link
+          id="acebook"
+          to="acebook"
+          onClick={(e) => {
+            e.preventDefault();
+            navigate("/")
+          }}>
+            Acebook
+            </Link>
+          </div>
         <Link
           id="posts"
           to="posts"
@@ -18,7 +29,9 @@ const Navbar = ({ navigate }) => {
         >
           Posts
         </Link>
-        <Link
+
+        {/* UNCOMMENT WHEN IMPLEMENTING MY ACCOUNT */}
+        {/* <Link
           id="account"
           to="account"
           onClick={(e) => {
@@ -26,22 +39,24 @@ const Navbar = ({ navigate }) => {
           }}
         >
           My Account
-        </Link>
-        <form
+        </Link> */}
+
+        {/*  UNCOMMENT WHEN IMPLEMENTING SEARCH BAR */}
+        {/* <form
           onSubmit={(e) => {
             e.preventDefault();
           }}
         >
           <input type="text" placeholder="Search" />
           <button type="submit">Search</button>
-        </form>
+        </form> */}
         <Link
           id="logout"
           to="logout"
           onClick={(e) => {
             e.preventDefault();
             window.localStorage.removeItem("token");
-            navigate("/login");
+            navigate("/");
           }}
         >
           Logout
@@ -51,10 +66,19 @@ const Navbar = ({ navigate }) => {
   } else {
     return (
       <nav>
-        <div className="logo">Acebook</div>
+        <div className="logo">
+          <Link
+          id="acebook"
+          to="acebook"
+          onClick={(e) => {
+            e.preventDefault();
+            navigate("/")
+          }}>Acebook</Link>
+          </div>
       </nav>
     );
   }
 };
+
 
 export default Navbar;
