@@ -22,10 +22,10 @@ describe("Testing data is returned for already existant users (account and profi
     })
 
     //Testing route used by UserHeader component (used in Account and UserProfileFeed pages) to obtain username and avatar data
-    describe("GET using route '/users/data/:user_id'", () => {
+    describe("GET using route '/data/:user_id'", () => {
         test("response code is 200", async () => {
             let response = await request(app)
-                .get(`/users/data/${user._id}`)
+                .get(`/data/${user._id}`)
                 .set("Authorization", `Bearer ${token}`)
                 .send({token: token});
             expect(response.status).toEqual(200);
@@ -33,7 +33,7 @@ describe("Testing data is returned for already existant users (account and profi
 
         test("returns user data (username, email address, password, avatar and id) for user based on user_id in URL", async () => {
             let response = await request (app)
-            .get(`/users/data/${user._id}`)
+            .get(`/data/${user._id}`)
             .set("Authorization", `Bearer ${token}`)
             .send({token: token});
             expect(response.body.user.username).toEqual("Test Name");

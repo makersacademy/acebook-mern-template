@@ -6,11 +6,9 @@ const Header = ({ user_id, navigate }) => {
 
     // Fetching user data from backend using user_id passed in prop
 
-    console.log("token at start of Header = " + token)
-
     useEffect(() => {
         if(token) {
-            fetch(`/users/data/${user_id}`, {
+            fetch(`/data/${user_id}`, {
                 headers: {
                 Authorization: `Bearer ${token}`
                 }

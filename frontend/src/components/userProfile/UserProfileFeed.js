@@ -10,7 +10,7 @@ const UserProfileFeed = ({ navigate }) => {
   // authentication
   useEffect(() => {
       if(token) {
-        fetch(`/users/profile/${user_id.user_id}`, {
+        fetch(`/profile/${user_id.user_id}`, {
           headers: {
             Authorization: `Bearer ${token}`
           }

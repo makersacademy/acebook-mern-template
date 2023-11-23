@@ -7,7 +7,9 @@ const JWT = require("jsonwebtoken");
 const postsRouter = require("./routes/posts");
 const authenticationRouter = require("./routes/authentication");
 const usersRouter = require("./routes/users");
-const commentsRouter = require("./routes/comments")
+const commentsRouter = require("./routes/comments");
+const dataRouter = require("./routes/data");
+const profilesRouter = require("./routes/profiles");
 
 
 const app = express();
@@ -23,6 +25,7 @@ app.use(express.static(path.join(__dirname, "public")));
 const tokenChecker = (req, res, next) => {
   let token;
   const authHeader = req.get("Authorization");
+  console.log("from Token_generator - authHeader = " + authHeader)
 
   if (authHeader) {
     token = authHeader.slice(7);
@@ -30,6 +33,7 @@ const tokenChecker = (req, res, next) => {
 
   JWT.verify(token, process.env.JWT_SECRET, (err, payload) => {
     if (err) {
+      console.log("app.js error = " + err)
       console.log(err);
       res.status(401).json({ message: "auth error" });
     } else {
@@ -41,14 +45,27 @@ const tokenChecker = (req, res, next) => {
 
 
 // route setup
+// try {
+//   app.use("/users", tokenChecker, usersRouter);
+// } catch (err) {
+//   console.log("Caught error********************************* " + err)
+// } finally {
+//   app.use("/users", usersRouter);
+// }
+
+//new route for posting avatar change
+//app.use("/users/avatar", usersRouter);
+app.use("/users", usersRouter);
+
+
 app.use("/posts", tokenChecker, postsRouter);
 app.use("/tokens", authenticationRouter);
-app.use("/users", usersRouter);
-app.use("/users/profile/:user_id", tokenChecker, usersRouter);
-//new route for posting avatar change
-app.use("/users/avatar", usersRouter);
 // new route for comments
-app.use("/comments", tokenChecker, commentsRouter)
+app.use("/comments", tokenChecker, commentsRouter);
+
+//new route for obtaining user data based on user_id
+app.use("/data", tokenChecker, dataRouter);
+app.use("/profile", tokenChecker, profilesRouter);
 
 // catch 404 and forward to error handler
 app.use((req, res, next) => {

@@ -170,7 +170,7 @@ describe("/posts", () => {
 });
 
 
-describe("/users/profile/:user_id, postsController", () => {
+describe("/profile/:user_id, postsController", () => {
   beforeAll(async () => {
   });
 
@@ -249,7 +249,7 @@ describe("/users/profile/:user_id, postsController", () => {
         .send({ message: "hola! by user 2", token: token2 })
     
       let new_response = await request(app)
-        .get(`/users/profile/${user2._id}`)
+        .get(`/profile/${user2._id}`)
         .set("Authorization", `Bearer ${token2}`)
         .send({ token: token2 });
       // mapping messages from post objects in response body
