@@ -15,6 +15,17 @@ const PostsController = {
     });
   },
 
+  IndexByAuthorId: (req, res) => {
+    const author = req.authorId;
+    Post.find({ author: author }, (err, posts) => {
+      if (err) {
+        return res.status(500).json({ error: err.message });
+      }
+      const token = TokenGenerator.jsonwebtoken(req.user_id);
+      res.status(200).json({ posts: posts, token: token });
+    });
+  },
+
   IndexLoggedInUser: (req, res) => {
     // req.user_id is ALWAYS the id of the *logged in user*.
     // Therefore this function ALWAYS finds the posts
