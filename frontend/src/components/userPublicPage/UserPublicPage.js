@@ -69,18 +69,6 @@ const UserPublicPage = ({ navigate }) => {
         <div className="profile-picture">
           <img src={defaultProfile} alt="Default Profile"/>
         </div>
-        {/* <div className="posts">
-          {
-            postsList ?
-            (postsList
-            .slice()
-            .sort((a, b) => new Date(b.date) - new Date(a.date))
-            .map((post) =>
-              (<Post post={ post } key={ post._id }/>)
-            ))
-            : <h2>Loading posts...</h2>
-          }
-        </div> */}
         {
           postsList ?
           <ChronologicalPosts posts={ postsList }/>
