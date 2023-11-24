@@ -36,7 +36,7 @@ const CommentFeed = ({ post_id, navigate }) => {
 
   const handleCommentSubmit = async (e) => {
     e.preventDefault();
-
+  
     if (!newComment.trim()) {
       console.error("You cannot create an empty comment");
       return;
@@ -67,7 +67,6 @@ const CommentFeed = ({ post_id, navigate }) => {
   return (
     <>
       <div className="comments-section" id="comment-feed" role="feed">
-        Comments:
         {Array.isArray(comments) && comments.length > 0 ? (
           comments.map((comment) => (
             <Comment comment={comment} key={comment._id} />
