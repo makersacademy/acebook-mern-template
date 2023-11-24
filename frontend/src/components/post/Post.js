@@ -7,14 +7,19 @@ import "./Post.css"
 const Post = ({ post }) => {
   const [likeCount, setLikeCount] = useState(post.likes.length);
   const [token, setToken] = useState(window.localStorage.getItem("token"));
+  const [areCommentsVisibile, setAreCommentsVisibile] = useState(false)
+
 
  // generating image path
   // **** NOTICE: change to different url when app deployed ****
   let imageSource = `http://localhost:8080/uploads/${post.image_path}`;
   // console.log("POST COMPONENT:", post._id)
 
+  const toggleCommentVisibility = () => {
+    setAreCommentsVisibile(!areCommentsVisibile);
+  }
+
   // Fetch initial like count when the component mounts
-  
     const fetchLikeCount = async () => {
       try {
         const response = await fetch(`/posts/like/${post._id}`, {
@@ -85,15 +90,19 @@ const Post = ({ post }) => {
         />
       )}
       <br />
+      
       <button className="button-7" onClick={handleLikeClick}>
         Like ({likeCount})
       </button>
-      <br />
-      <article data-cy="comment">
+      <button className="button-7" id="show-comments-button" onClick={toggleCommentVisibility}>{areCommentsVisibile ? 'Hide comments' : 'Comments 💬'}</button>
+      {areCommentsVisibile && (
+
         <CommentFeed post_id={post._id} />
+
+        )}
       </article>
-    </article>
-  );
-};
+    );
+  };
+
 
 export default Post;
