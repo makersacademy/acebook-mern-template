@@ -90,10 +90,10 @@ const Post = ({ post }) => {
         />
       )}
       <br />
+      
       <button className="button-7" onClick={handleLikeClick}>
         Like ({likeCount})
       </button>
-      <br />
       <button className="button-7" id="show-comments-button" onClick={toggleCommentVisibility}>{areCommentsVisibile ? 'Hide comments' : 'Comments 💬'}</button>
       {areCommentsVisibile && (
 
