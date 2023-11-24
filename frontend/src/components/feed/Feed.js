@@ -114,7 +114,7 @@ const Feed = ({ navigate, openPopup }) => {
         ) : (
           <form className="new-post-form" onSubmit={handlePostSubmit} data-cy="post-form">
             <div>
-              <label htmlFor="newPost">New Post:</label>
+              
               <input
                 type="text"
                 placeholder="What's on your mind?"
