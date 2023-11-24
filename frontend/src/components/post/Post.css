@@ -11,10 +11,9 @@
   
   #post-msg-header {
     margin-bottom: 10px;
-    
-}
+  }
 
-#header-username {
+  #header-username {
     margin-bottom: 10px;
     font-size: 18px !important;
     font-weight: bold !important;
@@ -25,6 +24,9 @@
   }
 
 
+  #post-msg-content {
+    margin-bottom: 10px;
+  }
   #post-msg-header img {
     width: 100px; /* Adjust the size of the profile picture */
     height: 100px; /* Adjust the size of the profile picture */
@@ -32,10 +34,7 @@
     margin-right: 10px; /* Add some spacing between the picture and name */
   }
 
-  #post-msg-content {
-    margin-bottom: 10px;
-  }
-  
+
   .post-image {
     display: block;
     margin: 0 auto; /* Center the image */
@@ -45,7 +44,7 @@
   }
   
   .button-7 {
-    background-color: #4267B2;
+    background-color: #1877f2;
     color: #fff;
     border: none;
     padding: 8px 16px;

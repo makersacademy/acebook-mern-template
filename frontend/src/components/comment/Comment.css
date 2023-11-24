@@ -11,3 +11,9 @@
     font-size: medium;
     /* font-family: 'Helvetica Neue', Arial, sans-serif; */
 }
+#comment-msg-header img {
+    width: 50px; /* Adjust the size of the profile picture */
+    height: 50px; /* Adjust the size of the profile picture */
+    border-radius: 50%; /* Make the profile picture round */
+    margin-right: 10px; /* Add some spacing between the picture and name */
+  }
