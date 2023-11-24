@@ -30,7 +30,7 @@ const Profile = ({ navigate }) => {
   const [profileUser, setProfileUser] = useState("");
   //getUserHook returns curent user and hes followers togheter with its set up functions
   const [currentUser, setCurrentUser, following, setFollowing] =
-    useGetCurrentUser(currentUserId);
+    useGetCurrentUser(currentUserId, token);
 
   //Sets Viewed Profile to user with first Name and last Name from query params.
   useEffect(() => {
