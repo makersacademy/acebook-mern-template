@@ -1,0 +1,7 @@
+.comment-text {
+    background-color: #f2f2f2; /* Light grey background color */
+    border-radius: 10px; /* Rounded corners */
+    padding: 7px; /* Add padding for content inside the box */
+    margin-bottom: 10px; /* Optional margin to separate comments */
+    display: inline-block;
+  }

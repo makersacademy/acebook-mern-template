@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import Comment from "../comment/Comment";
+import "./CommentFeed.css"
 
 const CommentFeed = ({ post_id, navigate }) => {
   const [comments, setComments] = useState([]);
@@ -65,7 +66,7 @@ const CommentFeed = ({ post_id, navigate }) => {
 
   return (
     <>
-      <div id="comment-feed" role="feed">
+      <div className="comments-section" id="comment-feed" role="feed">
         Comments:
         {Array.isArray(comments) && comments.length > 0 ? (
           comments.map((comment) => (
@@ -79,7 +80,7 @@ const CommentFeed = ({ post_id, navigate }) => {
       </div>
 
       {/* new comment section */}
-      <div id="new-comment">
+      <div className="new-comment-section" id="new-comment">
         <form onSubmit={handleCommentSubmit} data-cy="comment-form">
           <label>
             New comment:
