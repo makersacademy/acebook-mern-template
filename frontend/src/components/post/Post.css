@@ -11,7 +11,19 @@
   
   #post-msg-header {
     margin-bottom: 10px;
+    
+}
+
+#header-username {
+    margin-bottom: 10px;
+    font-size: 18px !important;
+    font-weight: bold !important;
+    font-family: 'Your Preferred Font', sans-serif !important;
+    color: #333 !important;
+    text-decoration: none !important;
+    display: block; /* Ensure it's treated as a block element */
   }
+
 
   #post-msg-header img {
     width: 100px; /* Adjust the size of the profile picture */
