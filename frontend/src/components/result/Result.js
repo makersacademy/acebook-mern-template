@@ -10,7 +10,8 @@ const Result = () => {
             {searchResults.map(result => (
                 <div>
                     <h2>{result.message}</h2>
-                    <p>{result.author} - {new Date(result.date).toLocaleString()}</p>
+                    {/* <p>{result.author} - {new Date(result.date).toLocaleString()}</p> */}
+                    <p>{new Date(result.date).toLocaleString()}</p>
                     <p>Likes: {result.likes}</p>
                     <p>Comments:</p>
                     <ul className="comment-list">
