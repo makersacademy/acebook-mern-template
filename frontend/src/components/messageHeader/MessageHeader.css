@@ -1,0 +1,13 @@
+.profile-picture {
+    border-radius: 50%; /* Make it a circle, adjust as needed */
+    margin-right: 10px; /* Add some space between the picture and text */
+  }
+
+.message-container {
+    display: flex;
+    align-items: center; /* Center items vertically */
+  }
+
+.profile-username {
+    align-self: center;
+  }

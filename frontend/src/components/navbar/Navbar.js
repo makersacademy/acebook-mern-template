@@ -41,7 +41,7 @@ useEffect(() => {
     //checks if token exists/logged in
     return (
       <nav>
-        <div className="logo">
+        <div className="navbar-logo">
           <Link
           id="acebook"
           to="acebook"

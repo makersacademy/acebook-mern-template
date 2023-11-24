@@ -1,18 +1,24 @@
 import React, { useState, useEffect } from "react";
 import MessageHeader from "../messageHeader/MessageHeader";
 import CommentFeed from "../commentFeed/CommentFeed";
+import "./Post.css"
 
 
 const Post = ({ post }) => {
   const [likeCount, setLikeCount] = useState(post.likes.length);
   const [token, setToken] = useState(window.localStorage.getItem("token"));
+  const [areCommentsVisibile, setAreCommentsVisibile] = useState(false)
+
 
  // generating image path
   // **** NOTICE: change to different url when app deployed ****
   let imageSource = `http://localhost:8080/uploads/${post.image_path}`;
 
+  const toggleCommentVisibility = () => {
+    setAreCommentsVisibile(!areCommentsVisibile);
+  }
+
   // Fetch initial like count when the component mounts
-  
     const fetchLikeCount = async () => {
       try {
         const response = await fetch(`/posts/like/${post._id}`, {
@@ -63,7 +69,7 @@ const Post = ({ post }) => {
 
 
   return (
-    <article data-cy="post" key={post._id}>
+    <article className="post-section" data-cy="post" key={post._id}>
       <div id="post-msg-header">
         <MessageHeader user_id={post.user_id}/>
       </div>
@@ -74,7 +80,7 @@ const Post = ({ post }) => {
       <br />
       {/* if image exists display it */}
       {post.image_path && (
-        <img
+        <img className="post-image"
           src={imageSource}
           alt={imageSource}
           width={"700px"}
@@ -82,17 +88,19 @@ const Post = ({ post }) => {
         />
       )}
       <br />
-      <button onClick={handleLikeClick}>
+      
+      <button className="button-7" onClick={handleLikeClick}>
         Like ({likeCount})
       </button>
-      <br />
-      <article data-cy="comment">
+      <button className="button-7" id="show-comments-button" onClick={toggleCommentVisibility}>{areCommentsVisibile ? 'Hide comments' : 'Comments 💬'}</button>
+      {areCommentsVisibile && (
+
         <CommentFeed post_id={post._id} />
+
+        )}
       </article>
-      {/* line added for visibility, remove later when working on CSS */}
-      <hr />
-    </article>
-  );
-};
+    );
+  };
+
 
 export default Post;

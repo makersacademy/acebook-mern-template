@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import Comment from "../comment/Comment";
+import "./CommentFeed.css"
 
 const CommentFeed = ({ post_id, navigate }) => {
   const [comments, setComments] = useState([]);
@@ -35,7 +36,7 @@ const CommentFeed = ({ post_id, navigate }) => {
 
   const handleCommentSubmit = async (e) => {
     e.preventDefault();
-
+  
     if (!newComment.trim()) {
       console.error("You cannot create an empty comment");
       return;
@@ -65,33 +66,33 @@ const CommentFeed = ({ post_id, navigate }) => {
 
   return (
     <>
-      <div id="comment-feed" role="feed">
-        Comments:
+      <div className="comments-section" id="comment-feed" role="feed">
         {Array.isArray(comments) && comments.length > 0 ? (
           comments.map((comment) => (
             <Comment comment={comment} key={comment._id} />
           ))
         ) : (
-          <p data-cy="no-comments-message">
+          <p className="no-comments" data-cy="no-comments-message">
             No one has commented yet - be the first!
           </p>
         )}
       </div>
 
       {/* new comment section */}
-      <div id="new-comment">
+      <div className="new-comment-section" id="new-comment">
         <form onSubmit={handleCommentSubmit} data-cy="comment-form">
           <label>
-            New comment:
             <input
+              className="input-box"
               type="text"
               name="newComment"
+              placeholder="Write a comment..."
               value={newComment}
               onChange={(e) => setNewComment(e.target.value)}
               data-cy="new-comment-input"
             />
           </label>
-          <button type="submit">💬</button>
+          <button className="submit-button" type="submit">💬</button>
         </form>
       </div>
     </>

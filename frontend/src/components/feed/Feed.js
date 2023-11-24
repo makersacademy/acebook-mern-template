@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import Post from "../post/Post";
+import "./Feed.css"
 
 const Feed = ({ navigate, openPopup }) => {
   const [posts, setPosts] = useState([]);
@@ -113,11 +114,12 @@ const Feed = ({ navigate, openPopup }) => {
         {loading ? (
           <p>Loading...</p> // Display a loading message or spinner while loading
         ) : (
-          <form onSubmit={handlePostSubmit} data-cy="post-form">
+          <form className="new-post-form" onSubmit={handlePostSubmit} data-cy="post-form">
             <div>
               <label htmlFor="newPost">New Post:</label>
               <input
                 type="text"
+                className="new-post-input"
                 name="newPost"
                 value={newPost}
                 onChange={(e) => setNewPost(e.target.value)}

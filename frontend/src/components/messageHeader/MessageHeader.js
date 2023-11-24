@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import "./MessageHeader.css"
 
 const MessageHeader = ({ user_id, navigate }) => {
 	const [userData, setUserData] = useState(null);
@@ -29,11 +30,11 @@ const MessageHeader = ({ user_id, navigate }) => {
 	}, [user_id]);
 	
 	return (
-    <header>
+    <header className="message-container">
       {userData ? (
         <>
-          <img width="50px" src={"../images/avatars/"+userData.avatar} alt="User Avatar" id="profile-pic"></img>
-          <a href={userProfileUrl} id="header-username"> {userData.username} </a>
+          <img className="profile-picture" width="50px" src={"../images/avatars/"+userData.avatar} alt="User Avatar" id="profile-pic"></img>
+          <a href={userProfileUrl} className="profile-username" id="header-username"> {userData.username} </a>
         </>
       ) : (
         <p>Loading...</p>
