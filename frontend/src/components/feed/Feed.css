@@ -4,6 +4,17 @@
     padding: 20px;
 }
 
+.newPostcontainer {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+
 h2 {
     color: darkblue;
     text-align: center; /* Center the text */
