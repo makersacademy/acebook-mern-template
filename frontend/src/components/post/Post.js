@@ -77,7 +77,7 @@ const Post = ({ post }) => {
       <br />
       {/* if image exists display it */}
       {post.image_path && (
-        <img
+        <img className="post-image"
           src={imageSource}
           alt={imageSource}
           width={"700px"}
@@ -92,8 +92,6 @@ const Post = ({ post }) => {
       <article data-cy="comment">
         <CommentFeed post_id={post._id} />
       </article>
-      {/* line added for visibility, remove later when working on CSS */}
-      <hr />
     </article>
   );
 };
