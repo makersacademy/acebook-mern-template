@@ -45,6 +45,18 @@ const UsersController = {
       }
     });
   },
+  GetUsernames: async (req, res) => {
+    const query = req.query.q;
+    const regex = new RegExp(query, 'i');
+
+    User.find({ username: regex }, "_id username", (err, users) => {
+      if (err) {
+        throw err;
+      } else {
+        res.status(200).json(users);
+      }
+    });
+  },
 
   // Obtain user data based on user_id passed in backend route
   DisplayUserData: (req, res) => {

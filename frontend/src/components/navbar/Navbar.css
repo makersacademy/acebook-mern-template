@@ -20,3 +20,32 @@ nav a:hover {
   font-weight: bold;
   color: #fff;
 }
+
+.dropdown {
+  position: relative;
+  margin-top: 10px; /* Adjust the margin as needed */
+}
+
+.dropdown ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  background-color: #fff; /* White background for the dropdown menu */
+  box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.1); /* Optional: Add box shadow for a subtle lift */
+  border-radius: 4px; /* Optional: Add border radius for rounded corners */
+  position: absolute; /* Use absolute positioning */
+  top: 100%; /* Position it below the dropdown container */
+}
+
+.dropdown li {
+  padding: 10px;
+}
+
+.dropdown li a {
+  color: #333; /* Adjust the color as needed */
+  text-decoration: none;
+}
+
+.dropdown li a:hover {
+  background-color: #f0f0f0; /* Light gray on hover */
+}
