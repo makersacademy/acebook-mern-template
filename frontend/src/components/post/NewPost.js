@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-const NewPost = ({ navigate, posts, setPosts, setReRender }) => {
+const NewPost = ({ navigate, posts, setPosts, setReRender, fetchPosts }) => {
 
   const [content, setContent] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
@@ -32,6 +32,7 @@ const NewPost = ({ navigate, posts, setPosts, setReRender }) => {
             setToken(data.token)
             setReRender(true)
             setContent("");
+            fetchPosts();
         }
       })
   };
