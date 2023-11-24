@@ -61,3 +61,26 @@ nav a:hover {
   display: block;
   margin: 20px auto 100px; /* Center the logo */
 }
+
+.search-form {
+  display: flex;
+  align-items: center; /* Align form items vertically in the center */
+}
+
+.search-input {
+  flex-grow: 1; /* Allow the input to grow and take available space */
+  padding: 8px;
+}
+
+.search-button {
+  background-color: #1877f2;
+  color: #fff;
+  border: none;
+  padding: 8px 16px;
+  cursor: pointer;
+  margin-left: 8px; /* Add margin to separate the input and button */
+}
+
+.search-button:hover {
+  background-color: #0e5a8a;
+}
