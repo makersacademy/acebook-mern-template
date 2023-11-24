@@ -13,6 +13,9 @@
     margin-bottom: 10px;
   }
 
+  #post-msg-content {
+    margin-bottom: 10px;
+  }
   #post-msg-header img {
     width: 100px; /* Adjust the size of the profile picture */
     height: 100px; /* Adjust the size of the profile picture */
@@ -20,10 +23,7 @@
     margin-right: 10px; /* Add some spacing between the picture and name */
   }
 
-  #post-msg-content {
-    margin-bottom: 10px;
-  }
-  
+
   .post-image {
     display: block;
     margin: 0 auto; /* Center the image */
