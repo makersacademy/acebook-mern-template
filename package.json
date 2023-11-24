@@ -1,0 +1,16 @@
+{
+  "dependencies": {
+    "cors": "^2.8.5",
+    "eslint": "^8.53.0",
+    "file": "^0.2.2",
+    "form-data": "^4.0.0",
+    "formdata-node": "^6.0.3",
+    "jwt-decode": "^4.0.0",
+    "multer": "^1.4.5-lts.1",
+    "sweetalert2": "^11.10.1"
+  },
+  "devDependencies": {
+    "@faker-js/faker": "^8.3.1",
+    "cypress-file-upload": "^5.0.8"
+  }
+}
