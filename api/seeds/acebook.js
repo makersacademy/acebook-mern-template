@@ -76,6 +76,8 @@ const addAuthors = async () => {
   });
 };
 
+
+
 //Adds author and post id to comments
 const addAuthorPostIdtoComment = async () => {
   const users = await findUsers();
