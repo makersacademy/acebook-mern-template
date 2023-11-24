@@ -58,11 +58,29 @@ const UsersController = {
     });
   },
 
-  // Obtain user data based on user_id passed in backend route
+  // Obtain user data based on user_id passed FROM TOKEN
   DisplayUserData: (req, res) => {
-    const user_id = req.params.user_id
+    const user_id = req.user_id
 
     User.findById(user_id, (err, user) => {
+      if (err) {
+        throw err;
+      }
+      const token = TokenGenerator.jsonwebtoken(req.user_id);
+      res.status(200).json({user: user, token: token});
+    });
+  },   
+
+  // Obtain user data based on user_id passed FROM USER_ID IN REQ.BODY
+  DisplayUserDataById: (req, res) => {
+    const header_user_id = req.body.user_id
+    console.log("*********************************")
+    console.log("USER ID2!!!!!!!!!!!!!: ", req.user_id)
+    console.log("USER ID BODY!!!!!!!!!!!!!: ", req.body.user_id)
+    console.log("*********************************")
+    
+
+    User.findById(header_user_id, (err, user) => {
       if (err) {
         throw err;
       }
@@ -74,13 +92,14 @@ const UsersController = {
   
   // method to get the username, avatar and email for a given user_id
   FindInfoByUserId: async (req, res) => {
-    const user_id = req.params.user_id
-    const user = await User.findOne({_id: user_id});
+    const info_user_id = req.params.user_id
+    const user = await User.findOne({_id: info_user_id});
     if (!user) {
       return res.status(400).json({ message: "no user found" })
     }
     else {
-      return res.status(200).json({ user: user })
+      const token = TokenGenerator.jsonwebtoken(req.user_id);
+      return res.status(200).json({ user: user, token: token })
     }
   }
   
