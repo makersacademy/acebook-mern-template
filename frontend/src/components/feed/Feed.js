@@ -100,6 +100,7 @@ const Feed = ({ navigate, openPopup }) => {
       console.error("Error:", error);
     } finally {
       setLoading(false); // Set loading to false after the requests are completed
+      setNewPost(""); // clear the input field
     }
   };
 
