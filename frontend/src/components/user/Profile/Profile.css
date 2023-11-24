@@ -1,0 +1,37 @@
+.profile-container, .button-container, .row, .col {
+    display: flex;
+}
+
+.profile-container, .col {
+    flex-direction: column;
+}
+
+.button-container, .row {
+    justify-content: space-between;
+}
+.feed-container, .profile-info, .row {
+    margin-top: 50px;
+}
+.profile-container, .col {  
+    align-items: center;
+}
+
+.profilePic {
+    width: 200px;
+    border-radius: 50%;
+}
+
+.row {
+    width: 100%;
+}
+
+.unfollow-btn{
+    background-color: red;
+}
+
+.m-btn {
+    margin-right: 20px;
+}
+.profile-info {
+    width: 50%;
+}

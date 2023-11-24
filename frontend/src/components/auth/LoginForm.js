@@ -24,6 +24,7 @@ const LogInForm = ({ navigate }) => {
       setError(null);
       let data = await response.json()
       window.localStorage.setItem("token", data.token)
+      window.localStorage.setItem("currentUserID", data.currentUserId)
       navigate('/posts');
     }
   }

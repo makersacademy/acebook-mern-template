@@ -3,6 +3,8 @@ const request = require("supertest");
 require("../mongodb_helper");
 const User = require("../../models/user");
 
+let user;
+
 describe("/api/users", () => {
   beforeEach(async () => {
     await User.deleteMany({});
@@ -55,4 +57,46 @@ describe("/api/users", () => {
       expect(users.length).toEqual(0);
     });
   });
+});
+
+describe("/api/users/:userId", () => {
+  beforeAll(async () => {
+    user = new User({
+      email: "test@gmail.com",
+      password: "password",
+      username: "TestUser",
+      followers: [],
+      photograph: "",
+      posts: [],
+      comments: [],
+    });
+    await user.save();
+  });
+  describe("With valid user id.", () => {
+    test("the response code is 200", async () => {
+      let response = await request(app)
+        .get(`/api/users/${user._id}`)
+      expect(response.statusCode).toBe(200);
+    });
+
+    test("User data match", async () => {
+      let response = await request(app)
+        .get(`/api/users/${user._id}`)
+      expect(response.body.user.username).toEqual("TestUser");
+    });
+  })
+
+  describe("With invalid user id.", () => {
+    test("the response code is 500", async () => {
+      let response = await request(app)
+        .get("/api/users/ab567")
+      expect(response.statusCode).toBe(500);
+    });
+
+    test("User is not returned", async () => {
+      let response = await request(app)
+        .get("/api/users/${ab567}")
+      expect(response.body.user).toEqual(undefined);
+    });
+  })
 });

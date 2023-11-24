@@ -3,7 +3,7 @@ import LoginForm from '../auth/LoginForm'
 import SignUpForm from '../user/SignUpForm'
 import React, { useState } from 'react';
 import Feed from '../feed/Feed'
-import Profile from '../user/Profile';
+import Profile from '../user/Profile/Profile';
 import LoggedIn from '../navbar/LoggedIn';
 import Navbar from '../navbar/Navbar';
 import NotAuthNavbar from '../navbar/NotAuthNavbar'; 
