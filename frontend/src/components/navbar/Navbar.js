@@ -1,8 +1,41 @@
-import React from "react";
+import { React, useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import "./Navbar.css";
 
 const Navbar = ({ navigate }) => {
+const [input, setInput] = useState("");
+const [searchResults, setSearchResults] = useState([]);
+
+
+const handleSearch = async (e) => {
+  e.preventDefault();
+  try {
+    const response = await fetch(`/users/usernames?q=${input}`);
+    const data = await response.json();
+    
+    // Limit the number of results to 6
+    const limitedResults = data.slice(0, 6);
+
+    setSearchResults(limitedResults);
+  } catch (error) {
+    console.error("Error fetching usernames:", error);
+  }
+}
+const handleInput = async (e) => {
+  e.preventDefault();
+  setInput(e.target.value);
+  
+}
+
+useEffect(() => {
+  // TODO: Fetch data from the database based on the input value
+  // Update setSearchResults with the matching usernames
+  if (input === "") {
+    setSearchResults([]);
+  }
+}, [input]);
+
+
 
   if (window.localStorage.getItem("token")) {
     //checks if token exists/logged in
@@ -41,15 +74,25 @@ const Navbar = ({ navigate }) => {
           My Account
         </Link>
 
-        {/*  UNCOMMENT WHEN IMPLEMENTING SEARCH BAR */}
-        {/* <form
-          onSubmit={(e) => {
-            e.preventDefault();
-          }}
+        
+        <form
+          onSubmit={handleSearch}
+          
         >
-          <input type="text" placeholder="Search" />
+          <input type="text" placeholder="Search" value={input} onChange={handleInput} />
           <button type="submit">Search</button>
-        </form> */}
+          {searchResults.length > 0 && input.length > 0 && (
+            <div className="dropdown">
+              <ul>
+                {searchResults.map((result) => (
+                  <li key={result._id}>
+                    <Link to={`/profile/${result._id}`}>{result.username}</Link>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )}
+        </form>
         <Link
           id="logout"
           to="logout"
