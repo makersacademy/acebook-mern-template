@@ -1,7 +1,32 @@
 .comments-section {
     margin-left: 40px; /* Adjust the margin as needed to create the desired spacing */
+    font-size: small;
   }
 
-.new-comment-section {
-    margin-left: 80px;
+
+.input-box {
+    border: none;
+    background-color: #f2f2f2; /* Light grey background color */
+    border-radius: 10px; /* Rounded corners */
+    padding: 10px; /* Adjust padding as needed */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Add a subtle box shadow */
+    width: 91%; 
+    color: #413b3b;
+    font-size: medium;
+  }
+
+  
+  .submit-button {
+    padding: 10px;
+    background-color: #f2f2f2; /* Match the background color of the input box */
+    border: none;
+    border-radius: 0 10px 10px 0; /* Adjust the border-radius to match the input box */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Add a subtle box shadow */
+    cursor: pointer;
+  }
+
+.no-comments {
+    font-style: italic;
+    color: #413b3b;
+
 }

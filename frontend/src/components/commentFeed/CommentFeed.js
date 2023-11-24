@@ -72,7 +72,7 @@ const CommentFeed = ({ post_id, navigate }) => {
             <Comment comment={comment} key={comment._id} />
           ))
         ) : (
-          <p data-cy="no-comments-message">
+          <p className="no-comments" data-cy="no-comments-message">
             No one has commented yet - be the first!
           </p>
         )}
@@ -82,16 +82,17 @@ const CommentFeed = ({ post_id, navigate }) => {
       <div className="new-comment-section" id="new-comment">
         <form onSubmit={handleCommentSubmit} data-cy="comment-form">
           <label>
-            New comment:
             <input
+              className="input-box"
               type="text"
               name="newComment"
+              placeholder="Write a comment..."
               value={newComment}
               onChange={(e) => setNewComment(e.target.value)}
               data-cy="new-comment-input"
             />
           </label>
-          <button type="submit">💬</button>
+          <button className="submit-button" type="submit">💬</button>
         </form>
       </div>
     </>

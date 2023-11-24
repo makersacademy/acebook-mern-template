@@ -4,4 +4,16 @@
     padding: 7px; /* Add padding for content inside the box */
     margin-bottom: 10px; /* Optional margin to separate comments */
     display: inline-block;
+    margin-left: 60px
+  }
+
+.comment-message-header {
+    font-size: medium;
+    /* font-family: 'Helvetica Neue', Arial, sans-serif; */
+}
+#comment-msg-header img {
+    width: 50px; /* Adjust the size of the profile picture */
+    height: 50px; /* Adjust the size of the profile picture */
+    border-radius: 50%; /* Make the profile picture round */
+    margin-right: 10px; /* Add some spacing between the picture and name */
   }
