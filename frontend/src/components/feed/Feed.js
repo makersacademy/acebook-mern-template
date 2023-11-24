@@ -107,10 +107,8 @@ const Feed = ({ navigate, openPopup }) => {
   if (token) {
     return (
       <>
-        <h2>Posts</h2>
-
         {/* add-post component start */}
-
+        <div className="new-post-form">
         {loading ? (
           <p>Loading...</p> // Display a loading message or spinner while loading
         ) : (
@@ -119,28 +117,30 @@ const Feed = ({ navigate, openPopup }) => {
               <label htmlFor="newPost">New Post:</label>
               <input
                 type="text"
-                className="new-post-input"
+                placeholder="What's on your mind?"
+                className="new-post-input-box"
                 name="newPost"
                 value={newPost}
                 onChange={(e) => setNewPost(e.target.value)}
                 data-cy="new-post-input"
               />
             </div>
-
             {/* user can add image to their post */}
             <div>
               <label htmlFor="file"></label>
               <input
+                className="button-7"
                 type="file"
                 name="file"
                 accept=".jpg, .jpeg, .png, .gif" // only specific filetypes accepted
                 onChange={(e) => setNewImage(e.target.files[0])}
                 data-cy="file-input"
-              />
+                />
             </div>
-            <button type="submit">Create Post</button>
+            <button className="button-8" type="submit">Create Post</button>
           </form>
         )}
+        </div>
 
         {/* add-post component finish */}
 
