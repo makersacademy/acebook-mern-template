@@ -66,9 +66,7 @@ const Profile = ({ navigate }) => {
         currentUserId={currentUserId}
       ></ProfileTemplate>
     );
-  } else {
-    navigate("/login");
-  }
+  } 
 };
 
 export default Profile;
