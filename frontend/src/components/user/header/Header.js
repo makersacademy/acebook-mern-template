@@ -5,13 +5,16 @@ const Header = ({ user_id, navigate }) => {
     const [token, setToken] = useState(window.localStorage.getItem("token"));
 
     // Fetching user data from backend using user_id passed in prop
-
+    console.log("USER_ID FROM FRONTEND:", user_id)
     useEffect(() => {
         if(token) {
-            fetch(`/data/${user_id}`, {
+            fetch(`/data/user`, {
+                method: "post",
                 headers: {
-                Authorization: `Bearer ${token}`
-                }
+                    "Content-Type": "application/json",
+                    Authorization: `Bearer ${token}`,
+                },
+                body: JSON.stringify({ user_id : user_id}),
             })
                 .then(response => response.json())
                 .then(async data => {

@@ -60,6 +60,7 @@ app.use("/data", tokenChecker, dataRouter);
 app.use("/profile", tokenChecker, profilesRouter);
 //new route for posting avatar change
 app.use("/upload", uploadsRouter);
+// TODO: 
 
 // catch 404 and forward to error handler
 app.use((req, res, next) => {

@@ -6,14 +6,13 @@ import Header from "../user/header/Header"
 const UserProfileFeed = ({ navigate }) => {
   const [posts, setPosts] = useState([]);
   const [token, setToken] = useState(window.localStorage.getItem("token"));
-  const user_id = useParams();
-
-
+  const user_id = useParams(); //`${user_id.user_id}`
 
 
   // authentication
   useEffect(() => {
       if(token) {
+        // built on top of present frontend url
         fetch(`${user_id.user_id}`, {
           headers: {
             Authorization: `Bearer ${token}`
