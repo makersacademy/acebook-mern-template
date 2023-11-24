@@ -13,7 +13,7 @@ const SignUpForm = ({ navigate }) => {
     errorMessages = "";
 
     // generate error messages. If none: continue with handling submit
-    let response = await fetch("/users");
+    let response = await fetch("/users/emails");
     const users = await response.json();
     console.log("users in SignUpForm = " + users);
     console.log("users[0]= " + users[0]);

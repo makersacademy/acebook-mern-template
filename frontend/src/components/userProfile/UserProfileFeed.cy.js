@@ -12,7 +12,7 @@
 
 //     cy.mount(<UserProfileFeed navigate={navigate} />)
 
-//     cy.intercept("GET", `/users/profile/65573aad98d46e203728b1d2`, (req) => {
+//     cy.intercept("GET", `/profile/65573aad98d46e203728b1d2`, (req) => {
 //       req.reply({
 //         statusCode: 200,
 //         body: {

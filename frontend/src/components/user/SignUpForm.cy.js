@@ -6,7 +6,7 @@ describe("Signing up", () => {
   it("calls the /users endpoint", () => {
     cy.mount(<SignUpForm navigate={navigate}/>)
 
-    cy.intercept('GET', '/users', { statusCode: 200, body: [{email: 'other@example.com'}]}).as('getUsersRequest');
+    cy.intercept('GET', '/users/emails', { statusCode: 200, body: [{email: 'other@example.com'}]}).as('getUsersRequest');
     cy.intercept('POST', '/users', { message: "OK" }).as("signUpRequest")
     
     cy.get("#username").type("James Bond")
@@ -14,7 +14,7 @@ describe("Signing up", () => {
     cy.get("#password").type("password1!");
     cy.get("#password_confirmation").type("password1!");
     cy.get("#submit").click();
-   
+
     cy.wait('@signUpRequest').then(interception => {
       expect(interception.response.body.message).to.eq("OK");
     })

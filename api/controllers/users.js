@@ -70,6 +70,20 @@ const UsersController = {
       res.status(200).json({user: user, token: token});
     });
   },    
+  
+  
+  // method to get the username, avatar and email for a given user_id
+  FindInfoByUserId: async (req, res) => {
+    const user_id = req.params.user_id
+    const user = await User.findOne({_id: user_id});
+    if (!user) {
+      return res.status(400).json({ message: "no user found" })
+    }
+    else {
+      return res.status(200).json({ user: user })
+    }
+  }
+  
 };
 
 module.exports = UsersController;

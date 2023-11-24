@@ -7,7 +7,12 @@ const PostsController = require("../controllers/posts");
 router.get("/usernames", UsersController.GetUsernames);
 
 router.post("/", UsersController.Create);
-router.get("/", UsersController.GetUserEmails);
+
+router.get("/emails", UsersController.GetUserEmails);
+
+router.get("/userinfo/:user_id", UsersController.FindInfoByUserId);
+
+
 // new router for backend users/avatar for POST request changing the chosen avatar
 router.post("/avatar", UsersController.ChangeAvatar);
 

@@ -49,14 +49,16 @@ const tokenChecker = (req, res, next) => {
 };
 
 app.use("/users", usersRouter);
+// Because of the user profile page, we need this route to get info for msgHeaders
+app.use("/profile", profilesRouter);
 app.use("/posts", tokenChecker, postsRouter);
-app.use("/posts/image", tokenChecker, postsRouter);
 app.use("/tokens", authenticationRouter);
-app.use("/comments", tokenChecker, commentsRouter);
+app.use("/comments", tokenChecker, commentsRouter)
 //new route for obtaining user data based on user_id
 app.use("/data", tokenChecker, dataRouter);
 // new route for fetching user profile posts
 app.use("/profile", tokenChecker, profilesRouter);
+//new route for posting avatar change
 app.use("/upload", uploadsRouter);
 
 // catch 404 and forward to error handler

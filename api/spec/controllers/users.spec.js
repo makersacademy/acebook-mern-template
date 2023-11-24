@@ -145,10 +145,45 @@ describe("/users", () => {
       expect(response.statusCode).toBe(400);
     });
   });
-  describe("GET /users", () => {
+  describe("GET /users/emails", () => {
     it("the response code is 200 when user emails are retrieved from the database", async () => {
-      let response = await request(app).get("/users");
+      let response = await request(app).get("/users/emails");
       expect(response.statusCode).toBe(200);
     });
+  });
+
+  describe("GET/users/userinfo/:user_id", () => {
+
+    it('gives response 200 when user information is retrieved from the database', async () => {
+      // mocks a user to be searched for in the database using route
+      let user = new User({
+        username: "test",
+        email: "test@test.com",
+        password: "12345678",
+        avatar: "1.svg",
+      });
+      await user.save();
+      let response = await request(app).get(`/users/userinfo/${user._id}`)
+      expect(response.statusCode).toBe(200);
+    });
+
+    // it('returns user information of selected user', async () => {
+    //   // mocks a user to be searched for in the database using route
+    //   let user = new User({
+    //     username: "test",
+    //     email: "test@test.com",
+    //     password: "12345678",
+    //     avatar: "1.svg",
+    //   });
+    //   await user.save();
+    //   let response = await request(app).get(`/users/userinfo/${user._id}`)
+    //   expect(response.body).toBe({
+    //     _id: {user._id},
+    //     username: "test",
+    //     email: "test@test.com",
+    //     password: "12345678",
+    //     avatar: "1.svg",});
+    // });
+
   });
 });

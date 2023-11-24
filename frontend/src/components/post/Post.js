@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from "react";
+import MessageHeader from "../messageHeader/MessageHeader";
 import CommentFeed from "../commentFeed/CommentFeed";
+
 
 const Post = ({ post }) => {
   const [likeCount, setLikeCount] = useState(post.likes.length);
@@ -64,7 +66,13 @@ const Post = ({ post }) => {
 
   return (
     <article data-cy="post" key={post._id}>
-      <p>{post.message}</p>
+      <div id="post-msg-header">
+        <MessageHeader user_id={post.user_id}/>
+      </div>
+      <div id="post-msg-content">
+        {post.message}
+      </div>      
+
       <br />
       {/* if image exists display it */}
       {post.image_path && (
