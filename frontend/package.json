@@ -1,8 +1,8 @@
 {
   "name": "frontend",
   "version": "0.1.0",
-  "private": true,
   "proxy": "http://localhost:8080",
+  "private": true,
   "dependencies": {
     "cypress": "^10.7.0",
     "eslint": "^8.23.0",

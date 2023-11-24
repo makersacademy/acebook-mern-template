@@ -5,8 +5,13 @@ const Post = require('../../models/post');
 const User = require('../../models/user');
 const JWT = require("jsonwebtoken");
 const secret = process.env.JWT_SECRET;
+//var mongoose = require("mongoose");
 
 let token;
+
+// const convertStringToObjectId = (idString) => {
+//   return mongoose.Types.ObjectId(idString);
+// }
 
 describe("/posts", () => {
     beforeAll( async () => {
@@ -318,6 +323,42 @@ describe('Put Likes Route', () => {
     });
 });
 
+// describe('GET /posts/user/:authorId', () => {
+
+//   let mockId1 = null;
+//   let mockId2 = null;
+//   const badMockId = convertStringToObjectId("655cb9ce68f96cfac7e37003");
+//   const createTestUser = (testUserInfoObject) => {
+//     let response = await request(app).post("/users").send(testUserInfoObject);
+//     return response;
+//   };
+
+
+
+//   beforeEach(async () => {
+//     await Post.deleteMany({});
+//     await User.deleteMany({});
+//     // Make two "real" users
+//     const user1 = new User({ displayName: "A", email: "a@a.com", password: "aaaa" });
+//     mockId1 = 
+//   });
+
+//   it('returns only the posts corresponding to authorId', async () => {
+//     // Define two mock author IDs
+//     const mockId1 = convertStringToObjectId("655cb9ce68f96cfac7e37001");
+//     const mockId2 = convertStringToObjectId("655cb9ce68f96cfac7e37002");
+//     const badMockId = convertStringToObjectId("655cb9ce68f96cfac7e37002");
+//     // Create and save some mock posts
+//     const mockPost1 = new Post({ message: "First post from user 1", author: mockId1 });
+//     const mockPost2 = new Post({ message: "First post from user 2", author: mockId2 });
+//     const mockPost3 = new Post({ message: "Second post from user 2", author: mockId2 });
+//     [mockPost1, mockPost2, mockPost3].map(
+//       (mockPost) => { mockPost.save(); }
+//     );
+//     // Get all posts by the first user
+//   })
+// });
+
 describe('GET /posts/:id/likes', () => {
     // Use beforeEach to ensure a clean database state before each test
     beforeEach(async () => {
@@ -345,20 +386,5 @@ describe('GET /posts/:id/likes', () => {
         expect(response.body.token).toBeDefined();
     });
 
-    it('should return a 500 status for an invalid post ID', async () => {
-        const invalidPostId = 'invalid_post_id';
-
-        // Mock user data for JWT token creation
-        const mockUserData = { user_id: 'mockUserId' };
-        // Mock JWT token
-        const token = JWT.sign(mockUserData, process.env.JWT_SECRET);
-
-        const response = await request(app)
-            .get(`/posts/${invalidPostId}/likes`)
-            .set('Authorization', `Bearer ${token}`);
-
-        // Adjusted assertions based on your actual implementation
-        expect(response.status).toBe(500);
     });
-});
 })

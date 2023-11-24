@@ -18,5 +18,5 @@
 }
 
 .likeButton:active {
-    transform: scale(2); /* Increase the scale when the button is active (clicked) */
+    transform: scale(1.1); /* Increase the scale when the button is active (clicked) */
 }

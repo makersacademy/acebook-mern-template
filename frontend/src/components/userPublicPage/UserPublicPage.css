@@ -1,23 +1,9 @@
-.feedcontainer {
-    max-width: 850px;
-    margin: 0 auto;
-    padding: 20px;
-}
-
 h2 {
     color: darkblue;
     text-align: center; /* Center the text */
     font-size: 2em; /* Increase the font size for emphasis */
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3); /* Add a subtle text shadow */
-
 }
-
-h3 {
-    color: dodgerblue;
-    text-align: center; /* Center the text */
-    font-size: 1.5em; /* Increase the font size for emphasis */
-    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2); /* Add a subtle text shadow */
-    }
 
 article {
     border: 2px solid #ddd;
@@ -26,8 +12,4 @@ article {
     margin-bottom: 10px;
     background-color: #fff;
     box-shadow: 0 6px 8px rgba(0, 0, 0, 0.1);
-}
-
-.smallText {
-    color: #888;
 }

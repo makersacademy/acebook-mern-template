@@ -1,6 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import Post from '../post/Post'
 import NewPost from '../newPost/NewPost';
+import './ProfileFeed.css';
+
+
 
 const ProfileFeed = ({ navigate }) => {
   const [posts, setPosts] = useState([]);
@@ -32,7 +35,8 @@ const ProfileFeed = ({ navigate }) => {
     if(token) {
       return(
         <>
-          <h2>Posts</h2>
+          <h2>Your Posts</h2>
+          <article>
           <div id='profilefeed' role="profilefeed">
               {posts
               .slice()
@@ -40,7 +44,8 @@ const ProfileFeed = ({ navigate }) => {
               .map((post) => (
                   <Post post={ post } key={ post._id } /> )
               )}
-          </div>
+              
+          </div></article>
         </>
       )
     } else {

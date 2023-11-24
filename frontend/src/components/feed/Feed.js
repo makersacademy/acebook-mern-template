@@ -3,7 +3,7 @@ import Post from '../post/Post'
 import './Feed.css'
 import NavBar from '../navBar/NavBar';
 import Find from '../find/Find';
-
+import NewPost from '../newPost/NewPost'
 
 const Feed = ({ navigate }) => {
   const [posts, setPosts] = useState([]);
@@ -28,29 +28,29 @@ const Feed = ({ navigate }) => {
   }, [token])
 
 
-  const logout = () => {
-    window.localStorage.removeItem("token")
-    navigate('/login')
-  }
+  // const logout = () => {
+  //   window.localStorage.removeItem("token")
+  //   navigate('/login')
+  // }
   
     if(token) {
       return(
-        <div className='container'>
-          <div class="feed-nav"><NavBar /></div>
+        <>
+          <div><NavBar /></div>
           <div><Find posts={ posts } navigate={navigate} /></div>
-          <h2>Posts</h2>
-            <button onClick={logout}>
-              Logout
-            </button>
-          <div id='feed' role="feed">
+          <div className='feedcontainer'>
+            <h2>Home</h2>
+            <h3>All Posts</h3>
+            <div id='feed' role="feed">
               {posts
               .slice()
               .sort((a, b) => new Date(b.date) - new Date(a.date))
               .map((post) => (
                   <article key={ post._id }><Post post={ post } /></article> )
               )}
+            </div>
           </div>
-        </div>
+        </>
       )
     } else {
       navigate('/login')
