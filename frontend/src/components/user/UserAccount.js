@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import Header from "./header/Header";
-import { jwtDecode } from "jwt-decode";
 
 const UserAccount = ({ navigate }) => {
     const [user, setUser] = useState({});
@@ -13,39 +12,44 @@ const UserAccount = ({ navigate }) => {
     // access to other user data).
     useEffect(() => {
         if(token) {
-            console.log("THIS IS BEFORE THE FE$TCH: ", user_id)
-            console.log("THIS IS THE USER:", user)
-            fetch(`/data/${user_id}`, {
+            // get user_id from backend
+            // console.log("THIS IS BEFORE THE FE$TCH: ", user_id)
+            // console.log("THIS IS THE USER:", user)
+            fetch(`/data`, {
                 headers: {
                 Authorization: `Bearer ${token}`
                 }
             })
                 .then(response => response.json())
                 .then(async data => {
+                    console.log("DATA WHEN FETCH: ", data)
+                    console.log("DATA WHEN FETCH: ", data.token)
+                    console.log("DATA WHEN FETCH: ", data.user)
                 window.localStorage.setItem("token", data.token)
                 setToken(data.token)
                 setUser(data.user);
+                
                 })
                 .catch(error => {console.error('Error fetching user data:', error)})
             }
+            else {
+                console.log("NO TOKEN")
+            }
         }, []);
 
-        const decoded = jwtDecode(token);
-        const user_id = decoded.user_id;
-        console.log("MY DECODED =", decoded)
-        console.log("MY ACCOUNT USERID=", user_id)
-
-
-
     // Obtaining user_id for logged in user from token
-
+        console.log("USER ID FROM USERACCOUNT COMPONENT: ", user._id)
     // Returns page with header component containing username and avatar based on logged-in user's user_id.
     if(token) {     
         return(
             <>
                 <h2> {user.username}'s Account</h2>
                     <div id='user-account-page' role="main">
-                        <Header user_id={ user_id } />
+                        <header>
+                            <img width="100px" src={"../images/avatars/"+user.avatar} alt="User Avatar"></img>
+                            <br/>
+                            {user.username}
+                    </header>
                     </div>
             </>
         )
