@@ -21,7 +21,7 @@ const useGetCurrentUser = (currentUserId, token) => {
   const navigate = useNavigate()
 
   useEffect(() => {
-    if (token) {
+    if (token && currentUserId) {
       fetch(`/api/users/${currentUserId}`, {})
         .then((response) => response.json())
         .then(async (data) => {

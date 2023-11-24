@@ -4,6 +4,7 @@ import React from 'react';
 
 const Navbar = ({navigate}) => {
   const logout = () => { 
+    window.localStorage.clear();
     window.localStorage.removeItem("token");
     window.localStorage.removeItem("token");
   };

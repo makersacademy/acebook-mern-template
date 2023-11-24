@@ -6,6 +6,9 @@ import NewComment from '../comment/NewComment';
 const Feed = ({ navigate }) => {
   const [posts, setPosts] = useState([]);
   const [token, setToken] = useState(window.localStorage.getItem("token"));
+  const [currentUserId, setCurrentUserId] = useState(
+    window.localStorage.getItem("currentUserID")
+  );
   const [reRender, setReRender] = useState(false);
   const [userId, setUserId] = useState();
 
