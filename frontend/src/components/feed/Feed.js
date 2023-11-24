@@ -6,11 +6,14 @@ import NewComment from '../comment/NewComment';
 const Feed = ({ navigate }) => {
   const [posts, setPosts] = useState([]);
   const [token, setToken] = useState(window.localStorage.getItem("token"));
+  const [currentUserId, setCurrentUserId] = useState(
+    window.localStorage.getItem("currentUserID")
+  );
   const [reRender, setReRender] = useState(false);
   const [userId, setUserId] = useState();
 
   const fetchPosts = () => {
-    fetch("/api/posts", {
+    fetch("/api/posts/following", {
       headers: {
         'Authorization': `Bearer ${token}`
       }
@@ -24,8 +27,8 @@ const Feed = ({ navigate }) => {
       })
   }
   useEffect(() => {
-    if(token) {
-      fetch("/api/posts", {
+    if(token && currentUserId) {
+      fetch("/api/posts/following", {
         headers: {
           'Authorization': `Bearer ${token}`
         }
