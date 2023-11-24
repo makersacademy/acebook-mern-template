@@ -74,11 +74,6 @@ const UsersController = {
   // Obtain user data based on user_id passed FROM USER_ID IN REQ.BODY
   DisplayUserDataById: (req, res) => {
     const header_user_id = req.body.user_id
-    console.log("*********************************")
-    console.log("USER ID2!!!!!!!!!!!!!: ", req.user_id)
-    console.log("USER ID BODY!!!!!!!!!!!!!: ", req.body.user_id)
-    console.log("*********************************")
-    
 
     User.findById(header_user_id, (err, user) => {
       if (err) {

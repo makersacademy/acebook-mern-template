@@ -5,7 +5,6 @@ const Header = ({ user_id, navigate }) => {
     const [token, setToken] = useState(window.localStorage.getItem("token"));
 
     // Fetching user data from backend using user_id passed in prop
-    console.log("USER_ID FROM FRONTEND:", user_id)
     useEffect(() => {
         if(token) {
             fetch(`/data/user`, {

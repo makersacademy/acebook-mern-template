@@ -10,7 +10,6 @@ const Post = ({ post }) => {
  // generating image path
   // **** NOTICE: change to different url when app deployed ****
   let imageSource = `http://localhost:8080/uploads/${post.image_path}`;
-  // console.log("POST COMPONENT:", post._id)
 
   // Fetch initial like count when the component mounts
   
@@ -61,7 +60,6 @@ const Post = ({ post }) => {
       // console.error('Error creating like:', error);
     //}
   };
-
 
 
   return (
