@@ -22,9 +22,6 @@ const UserAccount = ({ navigate }) => {
             })
                 .then(response => response.json())
                 .then(async data => {
-                    console.log("DATA WHEN FETCH: ", data)
-                    console.log("DATA WHEN FETCH: ", data.token)
-                    console.log("DATA WHEN FETCH: ", data.user)
                 window.localStorage.setItem("token", data.token)
                 setToken(data.token)
                 setUser(data.user);
@@ -38,7 +35,6 @@ const UserAccount = ({ navigate }) => {
         }, []);
 
     // Obtaining user_id for logged in user from token
-        console.log("USER ID FROM USERACCOUNT COMPONENT: ", user._id)
     // Returns page with header component containing username and avatar based on logged-in user's user_id.
     if(token) {     
         return(
