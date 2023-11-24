@@ -1,14 +1,14 @@
 const USERS = [
-    { email: "Alice", password: "P@ssw0rd" },
-    { email: "Bob", password: "Secret123" },
-    { email: "Charlie", password: "SecurePwd" },
-    { email: "David", password: "Passw0rd!123" },
-    { email: "Eve", password: "EvePwd@2023" },
-    { email: "Frank", password: "Frankie123" },
-    { email: "Grace", password: "GracePass" },
-    { email: "Henry", password: "H@nk789" },
-    { email: "Ivy", password: "IvyPassword" },
-    { email: "Jack", password: "J@ckPass456" },
+    { email: "Alice@email.com", password: "P@ssw0rd" },
+    { email: "Bob@email.com", password: "Secret123" },
+    { email: "Charlie@email.com", password: "SecurePwd" },
+    { email: "David@email.com", password: "Passw0rd!123" },
+    { email: "Eve@email.com", password: "EvePwd@2023" },
+    { email: "Frank@email.com", password: "Frankie123" },
+    { email: "Grace@email.com", password: "GracePass" },
+    { email: "Henry@email.com", password: "H@nk789" },
+    { email: "Ivy@email.com", password: "IvyPassword" },
+    { email: "Jack@email.com", password: "J@ckPass456" },
   ];
 
   module.exports = USERS;

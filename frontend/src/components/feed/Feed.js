@@ -13,7 +13,7 @@ const Feed = ({ navigate }) => {
   const [userId, setUserId] = useState();
 
   const fetchPosts = () => {
-    fetch("/api/posts", {
+    fetch("/api/posts/following", {
       headers: {
         'Authorization': `Bearer ${token}`
       }
@@ -28,7 +28,7 @@ const Feed = ({ navigate }) => {
   }
   useEffect(() => {
     if(token && currentUserId) {
-      fetch("/api/posts", {
+      fetch("/api/posts/following", {
         headers: {
           'Authorization': `Bearer ${token}`
         }
