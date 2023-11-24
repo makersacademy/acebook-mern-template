@@ -1,0 +1,86 @@
+nav {
+  display: flex;
+  justify-content: space-between;
+  background-color: #1877f2; /* Facebook blue color */
+  padding: 10px;
+}
+
+nav a {
+  color: #fff;
+  text-decoration: none;
+  padding: 8px 16px;
+}
+
+nav a:hover {
+  background-color: #214a7b; /* Darker blue on hover */
+}
+
+.logo {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #fff;
+}
+
+.dropdown {
+  position: relative;
+  margin-top: 10px; 
+}
+
+.dropdown ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  background-color: #fff; /* White background for the dropdown menu */
+  box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.1); /* Optional: Add box shadow for a subtle lift */
+  border-radius: 4px; /* Optional: Add border radius for rounded corners */
+  position: absolute; /* Use absolute positioning */
+  top: 100%; /* Position it below the dropdown container */
+}
+
+.dropdown li {
+  padding: 10px;
+}
+
+.dropdown li a {
+  color: #333; /* Adjust the color as needed */
+  text-decoration: none;
+}
+
+.dropdown li a:hover {
+  background-color: #f0f0f0; /* Light gray on hover */
+}
+
+.navbar-logo {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #fff;
+}
+
+
+.homepage-logo {
+  display: block;
+  margin: 20px auto 100px; /* Center the logo */
+}
+
+.search-form {
+  display: flex;
+  align-items: center; /* Align form items vertically in the center */
+}
+
+.search-input {
+  flex-grow: 1; /* Allow the input to grow and take available space */
+  padding: 8px;
+}
+
+.search-button {
+  background-color: #1877f2;
+  color: #fff;
+  border: none;
+  padding: 8px 16px;
+  cursor: pointer;
+  margin-left: 8px; /* Add margin to separate the input and button */
+}
+
+.search-button:hover {
+  background-color: #0e5a8a;
+}

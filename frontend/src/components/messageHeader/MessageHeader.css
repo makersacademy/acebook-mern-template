@@ -1,0 +1,8 @@
+.message-container {
+    display: flex;
+    align-items: center; /* Center items vertically */
+  }
+
+.profile-username {
+    align-self: center;
+  }

@@ -1,0 +1,35 @@
+.signup-container {
+    width: 300px;
+    margin: auto;
+    text-align: center;
+  }
+  
+  .form-group {
+    margin-bottom: 15px;
+  }
+  
+  label {
+    display: block;
+    text-align: left; /* Align labels to the left */
+  }
+  
+  input {
+    width: calc(100% - 16px); /* Adjust the width of the input fields */
+    padding: 8px;
+    margin-top: 5px;
+    box-sizing: border-box;
+  }
+  
+  #submit {
+    width: 100%;
+    padding: 10px;
+    background-color: #1877f2;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  #submit:hover {
+    background-color: #0e5a8a;
+  }

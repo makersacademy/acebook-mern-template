@@ -1,0 +1,24 @@
+.welcome-banner {
+    text-align: center;
+  }
+
+
+.button-container {
+    text-align: center;
+    margin-top: 20px;
+  }
+  
+  .button {
+    background-color: #1877f2;
+    color: #fff;
+    padding: 12px 20px;
+    font-size: 18px;
+    cursor: pointer;
+    border: none;
+    border-radius: 8px;
+    margin: 10px;
+  }
+  
+  .button:hover {
+    background-color: #0e5a8a; /* Darker blue on hover */
+  }
