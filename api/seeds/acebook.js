@@ -65,6 +65,23 @@ const findPosts = async () => {
   return posts;
 };
 
+//Adds Following/Followers
+const addFollowingFollower = async () => {
+  const users = await User.find();
+  users.forEach(async (user, i) => {
+    const randomFollowingUser = users[randomIndex(users.length - 1)];
+    user.following.push(randomFollowingUser._id);
+    randomFollowingUser.followers.push(user._id);
+
+    //await user.save();
+    //await randomFollowingUser.save();
+  });
+  users.forEach(async (user) => {
+    await user.save();
+    log.blue("Following/Follower added")
+  })
+};
+
 //Adds random author to list of posts
 const addAuthors = async () => {
   const users = await findUsers();
@@ -75,8 +92,6 @@ const addAuthors = async () => {
     log.green(`${i} - Post Author added.`);
   });
 };
-
-
 
 //Adds author and post id to comments
 const addAuthorPostIdtoComment = async () => {
@@ -98,6 +113,7 @@ const addAuthorPostIdtoComment = async () => {
 const seedDB = async () => {
   await resetDB();
   await insertUsers();
+  await addFollowingFollower();
   await addAuthors();
   await insertPosts();
   await addAuthorPostIdtoComment();
