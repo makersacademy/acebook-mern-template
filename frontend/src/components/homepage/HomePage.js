@@ -26,7 +26,7 @@ const HomePage = () => {
         Welcome to AceBook
       </h1>
       <div>
-        <button onClick={handleLoginClick} id="login-button">
+        <button className="button-7" onClick={handleLoginClick} id="login-button">
           Log in
         </button>{" "}
         <br></br>

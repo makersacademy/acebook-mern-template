@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import MessageHeader from "../messageHeader/MessageHeader";
 import CommentFeed from "../commentFeed/CommentFeed";
+import "./Post.css"
 
 
 const Post = ({ post }) => {
@@ -65,7 +66,7 @@ const Post = ({ post }) => {
 
 
   return (
-    <article data-cy="post" key={post._id}>
+    <article className="post-section" data-cy="post" key={post._id}>
       <div id="post-msg-header">
         <MessageHeader user_id={post.user_id}/>
       </div>
@@ -84,7 +85,7 @@ const Post = ({ post }) => {
         />
       )}
       <br />
-      <button onClick={handleLikeClick}>
+      <button className="button-7" onClick={handleLikeClick}>
         Like ({likeCount})
       </button>
       <br />
