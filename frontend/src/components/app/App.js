@@ -9,7 +9,7 @@ import { useNavigate, useLocation, Routes, Route } from "react-router-dom";
 import AvatarChoiceForm from "../user/AvatarChoiceForm";
 import Navbar from "../navbar/Navbar";
 import UserAccount from "../user/UserAccount";
-import Header from "../user/header/Header";
+
 
 const App = () => {
     return (

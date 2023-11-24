@@ -33,6 +33,7 @@ const UserProfileFeed = ({ navigate }) => {
   // Users posts: filter list of posts on the basis of user_id
 
   if (token) {
+    console.log("PROLE PAGE USER ID=", user_id)
     return (
       <>
         <Header user_id={ user_id.user_id } />

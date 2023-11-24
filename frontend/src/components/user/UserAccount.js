@@ -13,6 +13,8 @@ const UserAccount = ({ navigate }) => {
     // access to other user data).
     useEffect(() => {
         if(token) {
+            console.log("THIS IS BEFORE THE FE$TCH: ", user_id)
+            console.log("THIS IS THE USER:", user)
             fetch(`/data/${user_id}`, {
                 headers: {
                 Authorization: `Bearer ${token}`
@@ -30,6 +32,9 @@ const UserAccount = ({ navigate }) => {
 
         const decoded = jwtDecode(token);
         const user_id = decoded.user_id;
+        console.log("MY DECODED =", decoded)
+        console.log("MY ACCOUNT USERID=", user_id)
+
 
 
     // Obtaining user_id for logged in user from token
