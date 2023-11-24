@@ -1,0 +1,33 @@
+.like-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    background-color: white;
+    border-radius: 50%;
+    cursor: pointer;
+  }
+  
+  .like-container:hover {
+    background-color: #007bff;
+    color: white;
+  }
+  
+  .like-btn-box {
+    background-color: white;
+    border: none;
+  }
+    
+
+  .like-btn {
+    width: 24px;
+    height: 24px;
+  }
+  
+  .like-count {
+    font-size: 14px;
+    margin-left: 8px;
+  }
+  
+  

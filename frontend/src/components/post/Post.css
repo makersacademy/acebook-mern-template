@@ -3,7 +3,7 @@
     margin: 2rem 0;
     border: 0.1rem solid #A5C1EB;
     border-radius: 1rem;
-    max-width: 630px;
+    width: 630px;
 }
 
 .post-row {
@@ -49,3 +49,22 @@
 .like-number {
     font-size: 14px;
 }
+
+.new-post-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.post-textarea {
+    width: 100%;
+    max-width: 400px; /* Adjust the maximum width as needed */
+    margin-bottom: 10px;
+}
+
+.new-comment-form textarea {
+    width: 100%;
+    height: 100%;
+    box-sizing: border-box;
+}
+

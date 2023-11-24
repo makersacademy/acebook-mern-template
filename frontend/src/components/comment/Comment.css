@@ -33,3 +33,9 @@ h2 {
 .like-number {
   font-size: 14px;
 }
+
+.post-date {
+    text-align: right; /* Align the text to the right for comments */
+    font-size: 14px;
+    color: #555;
+}
