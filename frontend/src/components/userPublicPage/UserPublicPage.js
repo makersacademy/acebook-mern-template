@@ -8,7 +8,7 @@ import ChronologicalPosts from '../chronologicalPosts/ChronologicalPosts';
 const UserPublicPage = ({ navigate }) => {
   const { userId } = useParams();
   const [userInfo, setUserInfo] = useState(null);
-  const [postsList, setPostsList] = useState([]);
+  const [postsList, setPostsList] = useState(null);
   const [token, setToken] = useState(window.localStorage.getItem("token"));
 
   useEffect(() => {
@@ -52,6 +52,9 @@ const UserPublicPage = ({ navigate }) => {
     }
   }, [token, navigate, userInfo, postsList, userId]);
 
+  if (!token) {
+    navigate('/login');
+  }
   return(
     <>
       <NavBar/>
