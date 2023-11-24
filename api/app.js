@@ -50,7 +50,7 @@ const tokenChecker = (req, res, next) => {
 
 app.use("/users", usersRouter);
 // Because of the user profile page, we need this route to get info for msgHeaders
-app.use("/profile", profilesRouter);
+// app.use("/profile", profilesRouter);
 app.use("/posts", tokenChecker, postsRouter);
 app.use("/tokens", authenticationRouter);
 app.use("/comments", tokenChecker, commentsRouter)
@@ -60,6 +60,7 @@ app.use("/data", tokenChecker, dataRouter);
 app.use("/profile", tokenChecker, profilesRouter);
 //new route for posting avatar change
 app.use("/upload", uploadsRouter);
+// TODO: 
 
 // catch 404 and forward to error handler
 app.use((req, res, next) => {

@@ -32,23 +32,22 @@ const PostsController = {
     });
   },
 
-  // method to get posts filtered by user_id
-  FindPostsByUserId: async (req, res) => {
-    const user_id = req.params.user_id;
+ // method to get posts filtered by user_id
+ FindPostsByUserId: async (req, res) => {
+  const profile_user_id = req.params.user_id;
 
-    // finding posts with specific user_id
-    const result = await Post.find({ user_id: user_id });
-    const token = TokenGenerator.jsonwebtoken(req.user_id);
-    console.log("HERE ARE THE POSTS:", result)
+  // finding posts with specific user_id
+  const result = await Post.find({ user_id: profile_user_id });
+  const token = TokenGenerator.jsonwebtoken(req.user_id);
 
-    if (!result) {
-      return res.status(400).json({ message: "No posts found" });
-    } else {
-      // post sorted from the newest
-      result.sort((a, b) => b.createdAt - a.createdAt);
-      res.status(200).json({ posts: result, token: token });
-    }
-  },
+  if (!result) {
+    return res.status(400).json({ message: "No posts found" });
+  } else {
+    // post sorted from the newest
+    result.sort((a, b) => b.createdAt - a.createdAt);
+    res.status(200).json({ posts: result, token: token });
+  }
+},
 
   //method to like a post
   likePost: async (req, res) => {
