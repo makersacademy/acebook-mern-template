@@ -12,7 +12,7 @@ const UserProfileFeed = ({ navigate }) => {
   // authentication
   useEffect(() => {
       if(token) {
-        // built on top of present frontend url
+        // built on top of present frontend url /profile/:user_id 
         fetch(`${user_id.user_id}`, {
           headers: {
             Authorization: `Bearer ${token}`

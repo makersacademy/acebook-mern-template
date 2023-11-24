@@ -20,6 +20,8 @@ const Header = ({ user_id, navigate }) => {
                 .then(async data => {
                 window.localStorage.setItem("token", data.token)
                 setToken(data.token)
+                console.log("USER DATA WE SEND: ", user_id)
+                console.log("USER DATA WE RECIEVE: ", data.user)
                 setUser(data.user);
                 })
                 .catch(error => console.error('Error fetching user data:', error))

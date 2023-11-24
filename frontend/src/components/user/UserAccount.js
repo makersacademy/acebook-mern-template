@@ -45,7 +45,11 @@ const UserAccount = ({ navigate }) => {
             <>
                 <h2> {user.username}'s Account</h2>
                     <div id='user-account-page' role="main">
-                        <Header user_id={ user._id } />
+                        <header>
+                            <img width="100px" src={"../images/avatars/"+user.avatar} alt="User Avatar"></img>
+                            <br/>
+                            {user.username}
+                    </header>
                     </div>
             </>
         )
