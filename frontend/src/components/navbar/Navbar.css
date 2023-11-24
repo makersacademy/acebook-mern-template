@@ -23,7 +23,7 @@ nav a:hover {
 
 .dropdown {
   position: relative;
-  margin-top: 10px; /* Adjust the margin as needed */
+  margin-top: 10px; 
 }
 
 .dropdown ul {
@@ -48,4 +48,16 @@ nav a:hover {
 
 .dropdown li a:hover {
   background-color: #f0f0f0; /* Light gray on hover */
+}
+
+.navbar-logo {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #fff;
+}
+
+
+.homepage-logo {
+  display: block;
+  margin: 20px auto 100px; /* Center the logo */
 }

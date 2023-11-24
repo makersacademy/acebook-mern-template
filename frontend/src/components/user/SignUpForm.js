@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import './SignUpForm.css'
 
 const SignUpForm = ({ navigate }) => {
   // POST request with username, email and password, (empty avatar is added by default)
@@ -73,41 +74,52 @@ const SignUpForm = ({ navigate }) => {
 
   // render of html object
   return (
-    <form onSubmit={handleSubmit}>
-      <input
-        placeholder="Username"
-        id="username"
-        type="text"
-        value={username}
-        onChange={handleUsernameChange}
-      />
-
-      <input
-        placeholder="Email"
-        id="email"
-        type="text"
-        value={email}
-        onChange={handleEmailChange}
-      />
-
-      <input
-        placeholder="Password"
-        id="password"
-        type="password"
-        value={password}
-        onChange={handlePasswordChange}
-      />
-
-      <input
-        placeholder="Password_confirmation"
-        id="password_confirmation"
-        type="password"
-        value={password_confirmation}
-        onChange={handleComparePasswords}
-      />
-
-      <input id="submit" type="submit" value="Submit" />
-    </form>
+    <div className="signup-container">
+      <h2>Sign Up</h2>
+      <form onSubmit={handleSubmit}>
+        <div className="form-group">
+        
+          <input
+            placeholder="Username"
+            id="username"
+            type="text"
+            value={username}
+            onChange={handleUsernameChange}
+          />
+        </div>
+        <div className="form-group">
+          
+          <input
+            placeholder="Email"
+            id="email"
+            type="text"
+            value={email}
+            onChange={handleEmailChange}
+          />
+        </div>
+        <div className="form-group">
+          
+          <input
+            placeholder="Password"
+            id="password"
+            type="password"
+            value={password}
+            onChange={handlePasswordChange}
+          />
+        </div>
+        <div className="form-group">
+          
+          <input
+            placeholder="Confirm your password"
+            id="password_confirmation"
+            type="password"
+            value={password_confirmation}
+            onChange={handleComparePasswords}
+          />
+        </div>
+        <input id="submit" type="submit" value="Submit" />
+      </form>
+    </div>
   );
 };
 

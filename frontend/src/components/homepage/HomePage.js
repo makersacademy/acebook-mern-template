@@ -1,6 +1,8 @@
 // import React from "react";
+import "./HomePage.css"
 import { useNavigate } from "react-router-dom";
 import React, { useEffect } from "react";
+import logo from './assets/download.png'
 
 const HomePage = () => {
   const navigate = useNavigate();
@@ -21,16 +23,13 @@ const HomePage = () => {
 
   return (
     <>
-      <h1 className="welcome-banner" style={{ textAlign: "center" }}>
-        {" "}
-        Welcome to AceBook
-      </h1>
-      <div>
-        <button className="button-7" onClick={handleLoginClick} id="login-button">
+      <img src={logo} alt="AceBook Logo" className="homepage-logo" />
+      <div className="button-container">
+        <button onClick={handleLoginClick} className="button" id="login-button">
           Log in
-        </button>{" "}
-        <br></br>
-        <button onClick={handleSignUpClick} id="signup-button">
+        </button>
+        <br />
+        <button onClick={handleSignUpClick} className="button" id="signup-button">
           Create an account
         </button>
       </div>
