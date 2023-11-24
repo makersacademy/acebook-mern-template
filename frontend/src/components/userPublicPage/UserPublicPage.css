@@ -1,0 +1,15 @@
+h2 {
+    color: darkblue;
+    text-align: center; /* Center the text */
+    font-size: 2em; /* Increase the font size for emphasis */
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3); /* Add a subtle text shadow */
+}
+
+article {
+    border: 2px solid #ddd;
+    border-radius: 8px;
+    padding: 20px;
+    margin-bottom: 10px;
+    background-color: #fff;
+    box-shadow: 0 6px 8px rgba(0, 0, 0, 0.1);
+}

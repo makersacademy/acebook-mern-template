@@ -6,7 +6,7 @@ const ProfileImageThumbnail = ({ user }) => {
 
   return(
     <div data-cy="profileImageThumbnail">
-      <a href={ `/profile/${user._id}` /* TODO: confirm this can work */ }>
+      <a href={ `/posts/user/${user._id}` }>
         <img
           className="smallProfileImage"
           src={ defaultProfileImage /* TODO: change this to point at the user's actual profile image */}

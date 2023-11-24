@@ -11,8 +11,10 @@ const Post = ({ post }) => {
 
   useEffect(() => {
     if (token) {
-      //console.log("Using effect");
-      //console.log(post.author);
+      console.log("Displaying post");
+      console.log(post);
+      console.log("Using effect");
+      console.log(post.author);
       fetch(`/users/${post.author}`, {
         // NOTE: This may have to be changed to post.author.id
         headers: {
@@ -21,15 +23,15 @@ const Post = ({ post }) => {
       })
       .then(res => res.json())
       .then(async result => {
-        //console.log("Setting author");
-        //console.log(result);
+        console.log("Setting author");
+        console.log(result);
         setAuthor(result.user);
       })
       .catch(err => console.error(err));
     } else {
       console.log("No token set (in Post component)");
     }
-  }, [token, post.author]);
+  }, [token, post, post.author]);
 
   const handleCommentChange = (e) => {
     setComment(e.target.value);
