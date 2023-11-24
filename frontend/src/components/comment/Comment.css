@@ -4,4 +4,10 @@
     padding: 7px; /* Add padding for content inside the box */
     margin-bottom: 10px; /* Optional margin to separate comments */
     display: inline-block;
+    margin-left: 60px
   }
+
+.comment-message-header {
+    font-size: medium;
+    /* font-family: 'Helvetica Neue', Arial, sans-serif; */
+}

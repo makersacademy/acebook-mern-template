@@ -7,7 +7,7 @@ import React from "react";
 const Comment = ({ comment }) => {
   return (
     <article className="comment-box" data-cy="comment" key={comment._id}>
-      <div id="comment-msg-header">
+      <div className="comment-message-header" id="comment-msg-header">
         <MessageHeader user_id={comment.user_id}/>
       </div>
       <div className="comment-text" id="comment-msg-content">
